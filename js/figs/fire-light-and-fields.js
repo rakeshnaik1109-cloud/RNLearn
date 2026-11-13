@@ -55,12 +55,12 @@
 
     ctrlRow.innerHTML =
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>Hot Reservoir ($T_H$):</strong>' +
+      '<strong>Hot side ($T_H$):</strong>' +
       '<input type="range" id="carnot-th" min="400" max="800" step="10" value="600" style="width:110px;">' +
       '<span id="carnot-th-val">600 K</span>' +
       '</label>' +
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>Cold Reservoir ($T_C$):</strong>' +
+      '<strong>Cold side ($T_C$):</strong>' +
       '<input type="range" id="carnot-tc" min="200" max="400" step="10" value="300" style="width:110px;">' +
       '<span id="carnot-tc-val">300 K</span>' +
       '</label>' +
@@ -360,12 +360,12 @@
 
     ctrlRow.innerHTML =
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>Falling Mass ($2m$):</strong>' +
+      '<strong>Weight of the falling masses:</strong>' +
       '<input type="range" id="joule-mass" min="5" max="30" step="1" value="15" style="width:100px;">' +
       '<span id="joule-mass-val">15 kg</span>' +
       '</label>' +
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>Fall Height ($h$):</strong>' +
+      '<strong>Height they fall:</strong>' +
       '<input type="range" id="joule-height" min="1" max="5" step="0.5" value="2.5" style="width:90px;">' +
       '<span id="joule-height-val">2.5 m</span>' +
       '</label>' +
@@ -393,10 +393,10 @@
     readouts.style.border = '1px solid var(--color-border, #eee)';
 
     readouts.innerHTML =
-      '<div><strong>Gravitational Work ($W = 2mgh$):</strong> <span id="joule-w-disp">367.9 J</span></div>' +
-      '<div><strong>Equivalent Heat ($Q = W / J$):</strong> <span id="joule-q-disp">87.9 cal</span></div>' +
-      '<div><strong>Water Temp Rise ($\\Delta T = Q / C$):</strong> <span id="joule-dt-disp" style="color:var(--color-hot, #dc2626); font-weight:bold;">0.000 °C</span></div>' +
-      '<div><strong>Mechanical Equivalent ($J$):</strong> <span>4.184 J / calorie</span></div>';
+      '<div><strong>Work done by the falling weights:</strong> <span id="joule-w-disp">367.9 J</span></div>' +
+      '<div><strong>Heat produced:</strong> <span id="joule-q-disp">87.9 cal</span></div>' +
+      '<div><strong>Rise in water temperature:</strong> <span id="joule-dt-disp" style="color:var(--color-hot, #dc2626); font-weight:bold;">0.000 °C</span></div>' +
+      '<div><strong>Exchange rate:</strong> <span>4.184 J / calorie</span></div>';
     wrapper.appendChild(readouts);
 
     container.appendChild(wrapper);
@@ -666,7 +666,7 @@
 
     ctrlRow.innerHTML =
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>Gas Molecules ($N$):</strong>' +
+      '<strong>Number of molecules:</strong>' +
       '<input type="range" id="entropy-n" min="20" max="200" step="10" value="80" style="width:100px;">' +
       '<span id="entropy-n-val">80</span>' +
       '</label>' +
@@ -693,10 +693,10 @@
     statsRow.style.border = '1px solid var(--color-border, #eee)';
 
     statsRow.innerHTML =
-      '<div><strong>Left Chamber ($N_L$):</strong> <span id="n-left-disp" style="font-weight:bold; color:var(--color-primary, #2160c4);">80</span></div>' +
-      '<div><strong>Right Chamber ($N_R$):</strong> <span id="n-right-disp" style="font-weight:bold; color:var(--color-accent, #d97706);">0</span></div>' +
-      '<div><strong>Microstate Multiplicity ($\\Omega = \\frac{N!}{N_L! N_R!}$):</strong> <span id="omega-disp" style="font-weight:bold;">1</span></div>' +
-      '<div><strong>Entropy ($S = k_B \\ln \\Omega$):</strong> <span id="entropy-disp" style="font-weight:bold; color:var(--color-hot, #dc2626);">0.00 $k_B$</span></div>';
+      '<div><strong>In the left half:</strong> <span id="n-left-disp" style="font-weight:bold; color:var(--color-primary, #2160c4);">80</span></div>' +
+      '<div><strong>In the right half:</strong> <span id="n-right-disp" style="font-weight:bold; color:var(--color-accent, #d97706);">0</span></div>' +
+      '<div><strong>Number of possible arrangements:</strong> <span id="omega-disp" style="font-weight:bold;">1</span></div>' +
+      '<div><strong>Entropy:</strong> <span id="entropy-disp" style="font-weight:bold; color:var(--color-hot, #dc2626);">0.00 $k_B$</span></div>';
 
     wrapper.appendChild(statsRow);
     container.appendChild(wrapper);
@@ -904,7 +904,7 @@
 
     ctrlRow.innerHTML =
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>Current in Wire ($I$):</strong>' +
+      '<strong>Current in the wire:</strong>' +
       '<input type="range" id="oersted-current" min="-10" max="10" step="0.5" value="0" style="width:130px;">' +
       '<span id="oersted-current-val">0.0 A (Off)</span>' +
       '</label>' +
@@ -1197,7 +1197,7 @@
 
     ctrlRow.innerHTML =
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>Coil Turns ($N$):</strong>' +
+      '<strong>Turns of wire in the coil:</strong>' +
       '<input type="range" id="faraday-turns" min="2" max="10" step="1" value="6" style="width:90px;">' +
       '<span id="faraday-turns-val">6 turns</span>' +
       '</label>' +
@@ -1225,9 +1225,9 @@
     meterRow.style.border = '1px solid var(--color-border, #eee)';
 
     meterRow.innerHTML =
-      '<div><strong>Magnetic Flux ($\\Phi_B$):</strong> <span id="flux-disp" style="font-weight:bold;">0.00 Wb</span></div>' +
-      '<div><strong>Flux Rate of Change ($-\\frac{d\\Phi_B}{dt}$):</strong> <span id="dflux-disp" style="font-weight:bold; color:var(--color-accent, #d97706);">0.00 Wb/s</span></div>' +
-      '<div><strong>Induced Electromotive Force ($\\mathcal{E}$):</strong> <span id="emf-disp" style="font-weight:bold; color:var(--color-hot, #dc2626);">0.00 V</span></div>';
+      '<div><strong>Magnetism through the coil:</strong> <span id="flux-disp" style="font-weight:bold;">0.00 Wb</span></div>' +
+      '<div><strong>How fast it is changing:</strong> <span id="dflux-disp" style="font-weight:bold; color:var(--color-accent, #d97706);">0.00 Wb/s</span></div>' +
+      '<div><strong>Voltage produced:</strong> <span id="emf-disp" style="font-weight:bold; color:var(--color-hot, #dc2626);">0.00 V</span></div>';
 
     wrapper.appendChild(meterRow);
     container.appendChild(wrapper);
@@ -1767,7 +1767,7 @@
 
     ctrlRow.innerHTML =
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>Receiver Distance ($d$):</strong>' +
+      '<strong>Distance to the receiver:</strong>' +
       '<input type="range" id="hertz-dist" min="200" max="440" step="10" value="320" style="width:110px;">' +
       '<span id="hertz-dist-val">3.2 m</span>' +
       '</label>' +
@@ -2003,114 +2003,114 @@
 
     var questions = [
       {
-        q: '1. What fundamental physical insight did Count Rumford deduce from his observations of boring brass cannons in Munich (1798)?',
+        q: '1. What did Count Rumford conclude from drilling cannons in Munich (1798)?',
         options: [
-          'Heat is an imponderable material fluid called caloric that is squeezed out of metal pores.',
-          'Heat cannot be a conserved material substance because a dull borer generates an inexhaustible quantity of heat through continuous mechanical friction.',
-          'Heat travels faster through dense brass than through water.',
-          'Mechanical work can only generate heat if chemical combustion occurs simultaneously.'
+          'Heat is a fluid called caloric, squeezed out of the metal by the drill.',
+          'Heat can\'t be a fixed substance stored in matter, because a blunt drill kept making heat for as long as it turned: heat must be a kind of motion.',
+          'Heat travels faster through metal than through water.',
+          'Work can only make heat if something is burning.'
         ],
         answer: 1,
-        expl: 'Rumford observed that as long as horses kept turning the dull borer inside the brass cylinder, heat was produced indefinitely without any loss of metal mass. An inexhaustible quantity could not be a material fluid residing inside the metal; heat had to be a mode of mechanical motion.'
+        expl: 'As long as the horse kept turning the borer, heat kept coming. Something that can be produced without limit can\'t be a fixed amount of fluid inside the metal.'
       },
       {
-        q: '2. Sadi Carnot’s 1824 treatise established that the maximum theoretical efficiency of any heat engine operating between hot ($T_H$) and cold ($T_C$) reservoirs depends strictly on:',
+        q: '2. What did Sadi Carnot show about the best possible efficiency of a heat engine?',
         options: [
-          'The absolute temperatures of the two thermal reservoirs: $\\eta = 1 - T_C / T_H$.',
-          'The chemical composition of the working substance (steam vs. alcohol vs. air).',
-          'The pressure difference inside the piston cylinders.',
-          'The mechanical friction of the engine crankshaft.'
+          'It depends only on the temperatures of the hot source and the cold sink.',
+          'It depends on what gas is inside the engine.',
+          'It can reach 100% with a well-made engine.',
+          'It depends on the size of the boiler.'
         ],
         answer: 0,
-        expl: 'Carnot proved that the maximum thermodynamic efficiency of a reversible cycle is independent of the working substance and depends solely on the temperature drop between the heat source and sink: $\\eta = 1 - T_C / T_H$.'
+        expl: 'In modern form, the maximum efficiency is 1 − (cold temperature ÷ hot temperature), using absolute temperatures. Between 600 K and 300 K, no engine can beat 50%.'
       },
       {
-        q: '3. What did James Prescott Joule’s meticulous paddle-wheel calorimeter experiments (1840s) definitively measure?',
+        q: '3. What did Joule\'s paddle-wheel experiments measure?',
         options: [
-          'The speed of sound in liquid water.',
-          'The exact quantitative conversion factor (mechanical equivalent) between mechanical work and thermal energy ($J \\approx 4.18\\text{ J/cal}$).',
-          'The electrical conductivity of copper wire coils.',
-          'The chemical enthalpy of combustion of coal.'
+          'The speed of light.',
+          'How much work produces a given amount of heat (about 4.18 joules per calorie).',
+          'The weight of caloric.',
+          'The temperature of the Sun.'
         ],
         answer: 1,
-        expl: 'Joule measured the mechanical work performed by calibrated falling weights driving rotating brass paddles in water and recorded the exact minute temperature rise of the water, establishing the First Law of Thermodynamics and the constant $J \\approx 4.184\\text{ Joules per calorie}$.'
+        expl: 'Falling weights turned paddles that warmed water slightly. The fixed rate of exchange between work and heat was key evidence for conservation of energy.'
       },
       {
-        q: '4. Rudolf Clausius formulated the Second Law of Thermodynamics and introduced the state function Entropy ($S$). For an isolated system undergoing any spontaneous process:',
+        q: '4. What does the second law of thermodynamics say about entropy in a closed-off system?',
         options: [
-          'Entropy can never decrease: $\\Delta S \\ge 0$, reaching its maximum at thermodynamic equilibrium.',
-          'Entropy is always conserved: $\\Delta S = 0$.',
-          'Entropy continuously decreases toward zero: $\\Delta S < 0$.',
-          'Entropy oscillates sinusoidally with temperature.'
+          'It goes up in every real process (or stays the same in a perfect, reversible one), and never goes down.',
+          'It always stays exactly the same.',
+          'It always goes down.',
+          'It goes up and down at random.'
         ],
         answer: 0,
-        expl: 'Clausius famously summarized the laws of the universe: "The energy of the universe is constant; the entropy of the universe tends to a maximum." In any isolated system, entropy never decreases ($dS \\ge 0$).'
+        expl: 'That is why heat flows from hot to cold, why broken cups don\'t reassemble, and why no engine can be 100% efficient.'
       },
       {
-        q: '5. What was Alessandro Volta’s crucial counter-argument to Luigi Galvani’s claim of "animal electricity" in twitching frog legs?',
+        q: '5. How did Volta argue against Galvani\'s "animal electricity"?',
         options: [
-          'Frogs have no nerves and cannot conduct electric fluids.',
-          'Electric shocks in animals are strictly caused by static atmospheric electricity.',
-          'The electrical current was generated not by the animal tissue, but by the contact between two dissimilar metals (copper and zinc) separated by a moist electrolyte.',
-          'Frog legs twitch only when exposed to strong magnetic lodestones.'
+          'He showed frogs have no nerves.',
+          'He showed electricity only comes from lightning.',
+          'He showed the legs twitched strongly only when touched by two different metals, so the electricity came from the metals and the frog\'s leg was just a detector.',
+          'He showed the twitching was caused by heat.'
         ],
         answer: 2,
-        expl: 'Volta realized that the frog’s leg served merely as an exquisitely sensitive biological galvanometer. The true source of the continuous electric potential was the bimetallic contact of zinc and copper immersed in a moist conductor, leading directly to the invention of the Voltaic pile (1800).'
+        expl: 'Volta built the first battery from two metals and wet card to prove it. (Galvani was also partly right: nerves and muscles do use electricity.)'
       },
       {
-        q: '6. Hans Christian Ørsted’s 1820 experiment was revolutionary because it demonstrated for the first time that:',
+        q: '6. Why was Ørsted\'s experiment of 1820 so important?',
         options: [
-          'Magnets can conduct electric currents without wires.',
-          'Electric current generates a circular magnetic field that deflects compass needles perpendicular to the wire.',
-          'Light travels in transverse electromagnetic waves.',
-          'Iron loses its magnetism when heated past its Curie point.'
+          'It showed magnets can be made of wood.',
+          'It showed for the first time that an electric current makes magnetism, which goes round the wire.',
+          'It measured the speed of light.',
+          'It produced the first battery.'
         ],
         answer: 1,
-        expl: 'Before Ørsted, electricity and magnetism were considered entirely distinct forces. By demonstrating that a steady direct current deflecting a compass needle placed parallel to a wire, Ørsted unveiled the electromagnetic connection.'
+        expl: 'A compass needle near a wire swung when the current was switched on. Electricity and magnetism were connected, and the force went round in circles.'
       },
       {
-        q: '7. According to Michael Faraday’s Law of Electromagnetic Induction, what produces an induced electromotive force (voltage) in a closed conducting loop?',
+        q: '7. According to Faraday, what makes a voltage in a coil of wire?',
         options: [
-          'A stationary, unchanging magnetic field of high intensity.',
-          'The absolute electrostatic charge on the surrounding air.',
-          'Heating the copper wire above room temperature.',
-          'A time-varying magnetic flux passing through the loop: $\\mathcal{E} = -d\\Phi_B / dt$.'
+          'A magnet sitting still inside the coil.',
+          'A steady current in a nearby wire.',
+          'Heating the wire.',
+          'A change in the magnetism passing through the coil, such as pushing a magnet in or pulling it out.'
         ],
         answer: 3,
-        expl: 'Faraday discovered in 1831 that an electromotive force is induced only when the magnetic flux passing through the circuit changes over time ($\\mathcal{E} = -d\\Phi_B / dt$), laying the foundation for all modern electric dynamos, motors, and transformers.'
+        expl: 'Only change matters: moving the magnet makes a current, holding it still does not. Every power-station generator works this way.'
       },
       {
-        q: '8. What crucial mathematical term did James Clerk Maxwell add to Ampère’s Law to ensure conservation of electric charge in time-varying fields?',
+        q: '8. What did Maxwell add to the laws of electricity and magnetism?',
         options: [
-          'The Lorentz force term ($q\\vec{v} \\times \\vec{B}$).',
-          'The gravitational constant ($G$).',
-          'The quantum Planck constant ($h$).',
-          'The displacement current density ($J_D = \\epsilon_0 \\frac{\\partial \\vec{E}}{\\partial t}$).'
+          'The idea that magnets have only one pole.',
+          'The law of gravity.',
+          'The idea of the battery.',
+          'The idea that a changing electric field makes a magnetic field (the "displacement current"), even in empty space.'
         ],
         answer: 3,
-        expl: 'Maxwell introduced the displacement current $\\epsilon_0 \\frac{\\partial \\vec{E}}{\\partial t}$ to Ampère’s circuital law. This term completed the symmetry of the field equations, predicting that changing electric fields generate magnetic fields, and enabling propagating wave solutions in free space.'
+        expl: 'With this, changing electric and magnetic fields keep making each other, and the result is a wave travelling through space.'
       },
       {
-        q: '9. When Maxwell calculated the theoretical propagation velocity of electromagnetic waves from purely electrostatic and magnetostatic laboratory constants ($c = 1 / \\sqrt{\\epsilon_0 \\mu_0}$), what did he discover?',
+        q: '9. What did Maxwell find when he worked out how fast electromagnetic waves travel?',
         options: [
-          'The velocity was infinite, proving instantaneous action-at-a-distance.',
-          'The velocity matched the speed of sound in air ($340\\text{ m/s}$).',
-          'The velocity was approximately $310,740\\text{ km/s}$, matching the independently measured speed of light, proving light is an electromagnetic wave.',
-          'The velocity was zero, indicating standing waves only.'
+          'They travel at the speed of sound.',
+          'They travel infinitely fast.',
+          'They travel at about the speed of light, so light must be an electromagnetic wave.',
+          'They don\'t travel at all.'
         ],
         answer: 2,
-        expl: 'Maxwell noted: "We can scarcely avoid the inference that light consists in the transverse undulations of the same medium which is the cause of electric and magnetic phenomena." The calculated velocity $1/\\sqrt{\\epsilon_0 \\mu_0}$ matched the speed of light measured by Fizeau and Foucault.'
+        expl: 'The speed came out of electrical and magnetic measurements that had nothing to do with light, yet it matched the measured speed of light.'
       },
       {
-        q: '10. Ludwig Boltzmann’s famous formula $S = k_B \\ln \\Omega$ provided a revolutionary statistical interpretation of entropy by connecting it to:',
+        q: '10. What did Boltzmann\'s formula S = k log W explain?',
         options: [
-          'The number of microscopic configurations (microstates $\\Omega$) compatible with a given macroscopic thermodynamic state.',
-          'The macroscopic volume occupied by an ideal gas.',
-          'The chemical bond energy between atoms.',
-          'The total gravitational potential of a closed box.'
+          'That entropy measures how many ways the molecules can be arranged, so things move towards more likely, more disordered states.',
+          'That entropy is a kind of fluid.',
+          'That time can run backwards easily.',
+          'That gases have no molecules.'
         ],
         answer: 0,
-        expl: 'Boltzmann showed that macroscopic thermodynamic states correspond to staggering numbers of microscopic permutations (microstates $\\Omega$). Thermodynamic irreversibility is not a mechanical impossibility, but an overwhelming statistical certainty: systems spontaneously evolve toward states with exponentially larger $\\Omega$.'
+        expl: 'Spread-out arrangements vastly outnumber tidy ones, so gas spreads out and never gathers back on one side. The arrow of time comes from probability.'
       }
     ];
 
