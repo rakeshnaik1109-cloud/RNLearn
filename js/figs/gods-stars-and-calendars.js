@@ -34,9 +34,9 @@
     var currentNum = 4283; // Default test number
 
     var readouts = FIG.readouts(container, [
-      { id: "sexag-repr", label: "Sexagesimal Positional Form", value: "1, 11, 23" },
-      { id: "expanded-math", label: "Polynomial Decomposition", value: "1×3600 + 11×60 + 23" },
-      { id: "divisors-count", label: "Base 60 Divisors", value: "12 distinct factors" }
+      { id: "sexag-repr", label: "Written in base 60", value: "1, 11, 23" },
+      { id: "expanded-math", label: "What the columns mean", value: "1×3600 + 11×60 + 23" },
+      { id: "divisors-count", label: "Numbers that divide 60", value: "12 distinct factors" }
     ]);
 
     function renderCuneiform() {
@@ -63,9 +63,9 @@
 
       // 3 Clay Tablet Column Sections
       var cols = [
-        { title: "60² Place (×3,600)", val: p2, x: 80, show: (p2 > 0) },
-        { title: "60¹ Place (×60)", val: p1, x: 280, show: true },
-        { title: "60⁰ Place (Units)", val: p0, x: 480, show: true }
+        { title: "3,600s column", val: p2, x: 80, show: (p2 > 0) },
+        { title: "60s column", val: p1, x: 280, show: true },
+        { title: "Units column", val: p0, x: 480, show: true }
       ];
 
       cols.forEach(function (col) {
@@ -149,13 +149,13 @@
       botNote.setAttribute('font-size', '11');
       botNote.setAttribute('font-family', FIG.getCSSVar('--font-sans'));
       botNote.setAttribute('fill', textCol);
-      botNote.textContent = "Corner chevrons (<) represent 10; vertical downward wedges (v) represent 1.";
+      botNote.textContent = "Corner wedges (<) stand for 10; upright wedges (v) stand for 1.";
       svg.appendChild(botNote);
     }
 
     FIG.slider(controls, {
       id: "number-input",
-      label: "Decimal Integer Value to Convert to Base 60:",
+      label: "Number to write in base 60:",
       min: 1,
       max: 25000,
       step: 1,
@@ -187,9 +187,9 @@
     var currentSunAltitude = -12; // Degrees below horizon (-20 to 0)
 
     var readouts = FIG.readouts(container, [
-      { id: "twilight-state", label: "Twilight Regime", value: "Nautical Twilight (-12°)" },
-      { id: "sirius-visibility", label: "Sirius Visibility", value: "EMERGING (First Glimpse at Dawn Horizon)" },
-      { id: "nile-flood-alert", label: "Egyptian Calendar Event", value: "Wep Ronpet (New Year & Annual Flood)" }
+      { id: "twilight-state", label: "Sky at dawn", value: "Getting light (Sun 12° below the horizon)" },
+      { id: "sirius-visibility", label: "Can you see Sirius?", value: "Just appearing low in the east" },
+      { id: "nile-flood-alert", label: "What it meant", value: "New Year (Wep Ronpet): the flood is coming" }
     ]);
 
     function renderHorizon() {
@@ -198,14 +198,14 @@
 
       var isVisible = (alt <= -10 && alt >= -15);
       var stateText = "Astronomical Darkness";
-      if (alt > -6) stateText = "Civil Twilight (Sky too bright; washed out)";
-      else if (alt > -12) stateText = "Nautical Twilight (Optimal Heliacal Window: -11° to -14°)";
-      else if (alt > -18) stateText = "Astronomical Twilight (Stars bright, sun deep)";
+      if (alt > -6) stateText = "Sky too bright: Sirius is washed out";
+      else if (alt > -12) stateText = "Getting light: the best moment to spot Sirius (Sun 11–14° below)";
+      else if (alt > -18) stateText = "Still dark: stars bright, Sun well below";
       else stateText = "Full Night";
 
       readouts.update("twilight-state", stateText + " (" + alt + "°)");
-      readouts.update("sirius-visibility", isVisible ? "VISIBLE: Heliacal Rising Confirmed (Sopdet spotted!)" : (alt > -10 ? "WASHED OUT: Solar glare overpowers Sirius" : "TOO EARLY: Horizon obstructed by pre-dawn haze"));
-      readouts.update("nile-flood-alert", isVisible ? "Heralds Akhet Inundation & Sothic New Year (I Akhet 1)" : "Awaiting seasonal heliacal conjunction");
+      readouts.update("sirius-visibility", isVisible ? "Yes: Sirius (Sopdet) is visible before sunrise" : (alt > -10 ? "No: the brightening sky drowns it out" : "Not yet: Sirius is still below the horizon haze"));
+      readouts.update("nile-flood-alert", isVisible ? "New Year: the flood season (Akhet) begins" : "Waiting for Sirius to reappear");
 
       var w = 680, h = 320;
       var svg = FIG.createSVG(svgWrap, w, h, "Heliacal rising of Sirius at dawn over Egypt");
@@ -286,7 +286,7 @@
           label.setAttribute('x', "455"); label.setAttribute('y', siriusY - 8);
           label.setAttribute('font-size', "12"); label.setAttribute('font-weight', "700");
           label.setAttribute('fill', "#ffffff");
-          label.textContent = "Sirius (Sopdet) Rising!";
+          label.textContent = "Sirius (Sopdet) appears!";
           svg.appendChild(label);
         }
       }
@@ -296,13 +296,13 @@
       eastTxt.setAttribute('x', "480"); eastTxt.setAttribute('y', "240");
       eastTxt.setAttribute('font-size', "12"); eastTxt.setAttribute('font-weight', "700");
       eastTxt.setAttribute('fill', "#f59e0b");
-      eastTxt.textContent = "Eastern Horizon (Dawn)";
+      eastTxt.textContent = "Eastern horizon at dawn";
       svg.appendChild(eastTxt);
     }
 
     FIG.slider(controls, {
       id: "solar-altitude",
-      label: "Solar Altitude Angle (Degrees below eastern horizon):",
+      label: "How far the Sun is below the horizon (degrees):",
       min: -20,
       max: -2,
       step: 0.5,
@@ -354,9 +354,9 @@
     var selectedIdx = 0;
 
     var readouts = FIG.readouts(container, [
-      { id: "pythag-identity", label: "Pythagorean Equation Verified", value: "119² + 120² = 169² (14161 + 14400 = 28561)" },
-      { id: "generator-pair", label: "Sexagesimal Reciprocal Generators (p, q)", value: "p = 12, q = 5" },
-      { id: "diag-angle", label: "Triangle Angle (arctan b / l)", value: "44.76°" }
+      { id: "pythag-identity", label: "Check: width² + length² = diagonal²", value: "119² + 120² = 169² (14161 + 14400 = 28561)" },
+      { id: "generator-pair", label: "Starting numbers (p, q)", value: "p = 12, q = 5" },
+      { id: "diag-angle", label: "Angle of the triangle", value: "44.76°" }
     ]);
 
     function renderTriangle() {
@@ -370,7 +370,7 @@
 
       readouts.update("pythag-identity", r.b + "² + " + r.l + "² = " + r.d + "² (" + bSquared + " + " + lSquared + " = " + dSquared + ")");
       readouts.update("generator-pair", "p = " + r.p + ", q = " + r.q + " (b = p² - q², l = 2pq, d = p² + q²)");
-      readouts.update("diag-angle", angle + "° (Col 1 Ratio: " + r.sexagRatio + ")");
+      readouts.update("diag-angle", angle + "° (column 1 of the tablet: " + r.sexagRatio + ")");
 
       var w = 680, h = 300;
       var svg = FIG.createSVG(dispWrap, w, h, "Babylonian tablet Plimpton 322 right-triangle geometry");
@@ -442,13 +442,13 @@
       var note3 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
       note3.setAttribute('x', "450"); note3.setAttribute('y', "130");
       note3.setAttribute('font-size', "11"); note3.setAttribute('fill', accentCol);
-      note3.textContent = "Generated via regular reciprocal pairs!";
+      note3.textContent = "Built from a pair of starting numbers";
       svg.appendChild(note3);
     }
 
     FIG.select(controls, {
       id: "plimpton-row-select",
-      label: "Select Row from Tablet Plimpton 322:",
+      label: "Pick a row of Plimpton 322:",
       options: rows.map(function (r, idx) {
         return {
           value: String(idx),
@@ -484,9 +484,9 @@
     var currentMultiplier = 16; // Standard trade unit = 16 (13.71 grams)
 
     var readouts = FIG.readouts(container, [
-      { id: "nominal-mass", label: "Indus Standard Mass", value: "13.71 grams" },
-      { id: "binary-ratio", label: "Metrological Class", value: "Unit 16 (Standard Commercial Weight)" },
-      { id: "inter-city-error", label: "Harappa vs Mohenjo-daro Tolerance", value: "< 1.2% analytical error" }
+      { id: "nominal-mass", label: "Mass", value: "13.71 grams" },
+      { id: "binary-ratio", label: "Which weight", value: "16 units (the everyday standard)" },
+      { id: "inter-city-error", label: "How closely cities agree", value: "Within about 1–2%" }
     ]);
 
     function renderBalance() {
@@ -494,7 +494,7 @@
       var mass = (currentMultiplier * unitWeight).toFixed(2);
       var className = currentMultiplier <= 64 ? "Binary Ratio (" + currentMultiplier + "× base)" : "Decimal Ratio (" + (currentMultiplier / 16) + "× decade of Unit 16)";
 
-      readouts.update("nominal-mass", mass + " grams (" + (mass * 15.432).toFixed(1) + " grains)");
+      readouts.update("nominal-mass", mass + " grams (" + (mass * 15.432).toFixed(1) + " grains, an old unit)");
       readouts.update("binary-ratio", className);
 
       var w = 680, h = 300;
@@ -586,30 +586,30 @@
       cap.setAttribute('x', "160"); cap.setAttribute('y', "225");
       cap.setAttribute('text-anchor', 'middle'); cap.setAttribute('font-size', '12'); cap.setAttribute('font-weight', '700');
       cap.setAttribute('fill', strokeCol);
-      cap.textContent = "Chert Weight: " + mass + " g";
+      cap.textContent = "Stone weight: " + mass + " g";
       svg.appendChild(cap);
 
       var capR = document.createElementNS('http://www.w3.org/2000/svg', 'text');
       capR.setAttribute('x', "520"); capR.setAttribute('y', "225");
       capR.setAttribute('text-anchor', 'middle'); capR.setAttribute('font-size', '12'); capR.setAttribute('font-weight', '700');
       capR.setAttribute('fill', "#dc2626");
-      capR.textContent = "Harappan Trade Commodities";
+      capR.textContent = "Goods being weighed";
       svg.appendChild(capR);
     }
 
     FIG.select(controls, {
       id: "indus-weight-ratio",
-      label: "Select Standard Indus Chert Weight Unit:",
+      label: "Pick a weight:",
       options: [
-        { value: "1", label: "Ratio 1 (Base Unit = 0.86 g — Fine Gold/Gems)" },
-        { value: "2", label: "Ratio 2 (1.71 g)" },
-        { value: "4", label: "Ratio 4 (3.43 g)" },
-        { value: "8", label: "Ratio 8 (6.86 g)" },
-        { value: "16", label: "Ratio 16 (13.71 g — Standard Commercial Benchmark)" },
-        { value: "32", label: "Ratio 32 (27.42 g)" },
-        { value: "64", label: "Ratio 64 (54.85 g)" },
-        { value: "160", label: "Ratio 160 (137.1 g — Decimal 10× of Unit 16)" },
-        { value: "320", label: "Ratio 320 (274.2 g — Decimal 20× of Unit 16)" }
+        { value: "1", label: "1 unit (0.86 g, for gold and gems)" },
+        { value: "2", label: "2 units (1.71 g)" },
+        { value: "4", label: "4 units (3.43 g)" },
+        { value: "8", label: "8 units (6.86 g)" },
+        { value: "16", label: "16 units (13.71 g, the everyday standard)" },
+        { value: "32", label: "32 units (27.42 g)" },
+        { value: "64", label: "64 units (54.85 g)" },
+        { value: "160", label: "160 units (137.1 g, ten 16-unit weights)" },
+        { value: "320", label: "320 units (274.2 g, twenty 16-unit weights)" }
       ],
       value: "16",
       onChange: function (val) {
@@ -639,9 +639,9 @@
     var currentHeight = 280; // Royal Cubits (Great Pyramid Khufu height)
 
     var readouts = FIG.readouts(container, [
-      { id: "seked-result", label: "Calculated Seked", value: "5 palms, 2 fingers per cubit rise" },
-      { id: "slope-angle", label: "Face Incline Angle", value: "51.84° (51° 50')" },
-      { id: "royal-metrology", label: "Egyptian Royal Metrology", value: "1 Royal Cubit = 7 Palms = 28 Fingers" }
+      { id: "seked-result", label: "Seked (step-in per cubit of height)", value: "5 palms, 2 fingers per cubit rise" },
+      { id: "slope-angle", label: "Slope of the face", value: "51.84° (51° 50')" },
+      { id: "royal-metrology", label: "Egyptian units", value: "1 Royal Cubit = 7 Palms = 28 Fingers" }
     ]);
 
     function renderPyramid() {
@@ -659,7 +659,7 @@
       var angleRad = Math.atan(currentHeight / halfBase);
       var angleDeg = (angleRad * 180 / Math.PI).toFixed(2);
 
-      readouts.update("seked-result", wholePalms + " palms" + (fingers > 0 ? ", " + fingers + " fingers" : "") + " per cubit rise (" + sekedPalmsTotal.toFixed(2) + " palms)");
+      readouts.update("seked-result", wholePalms + " palms" + (fingers > 0 ? ", " + fingers + " fingers" : "") + " per cubit of height (" + sekedPalmsTotal.toFixed(2) + " palms)");
       readouts.update("slope-angle", angleDeg + "° inclination");
 
       var w = 680, h = 300;
@@ -739,7 +739,7 @@
 
     FIG.slider(controls, {
       id: "pyramid-base",
-      label: "Pyramid Base Width (Royal Cubits):",
+      label: "Base width (cubits):",
       min: 100,
       max: 500,
       step: 10,
@@ -753,7 +753,7 @@
 
     FIG.slider(controls, {
       id: "pyramid-height",
-      label: "Pyramid Vertical Height (Royal Cubits):",
+      label: "Height (cubits):",
       min: 50,
       max: 300,
       step: 5,
@@ -789,9 +789,9 @@
     var leapYears = [3, 6, 8, 11, 14, 17, 19];
 
     var readouts = FIG.readouts(container, [
-      { id: "cycle-year", label: "Metonic Year in 19-Year Cycle", value: "Year 1 of 19" },
-      { id: "intercalation-action", label: "Calendar Action", value: "Standard Year (12 lunar months = 354 days)" },
-      { id: "cumulative-drift", label: "Cumulative Solar Drift Offset", value: "-11.24 days" }
+      { id: "cycle-year", label: "Year of the 19-year cycle", value: "Year 1 of 19" },
+      { id: "intercalation-action", label: "This year", value: "Ordinary year (12 Moon months = 354 days)" },
+      { id: "cumulative-drift", label: "How far the calendar has drifted", value: "-11.24 days" }
     ]);
 
     function renderCycle() {
@@ -809,7 +809,7 @@
       }
 
       readouts.update("cycle-year", "Year " + yr + " of 19");
-      readouts.update("intercalation-action", isLeap ? "LEAP YEAR: Intercalary 13th month (Addaru II or Ululu II) added" : "Regular Year (12 lunar months)");
+      readouts.update("intercalation-action", isLeap ? "Leap year: a 13th month is added" : "Ordinary year (12 Moon months)");
       readouts.update("cumulative-drift", (drift >= 0 ? "+" : "") + drift.toFixed(1) + " days relative to Solar Equinox");
 
       var w = 680, h = 320;
@@ -831,7 +831,7 @@
       hubTxt.setAttribute('x', cx); hubTxt.setAttribute('y', cy + 4);
       hubTxt.setAttribute('text-anchor', 'middle'); hubTxt.setAttribute('font-size', '11'); hubTxt.setAttribute('font-weight', '700');
       hubTxt.setAttribute('fill', accentCol);
-      hubTxt.textContent = "19 Solar Yrs";
+      hubTxt.textContent = "19 years";
       svg.appendChild(hubTxt);
 
       // 19 Outer Year Nodes
@@ -880,13 +880,13 @@
       eqNote.setAttribute('font-size', '11');
       eqNote.setAttribute('font-family', FIG.getCSSVar('--font-mono'));
       eqNote.setAttribute('fill', strokeCol);
-      eqNote.textContent = "235 Synodic Months = 6,939.69 Days ≈ 19 Tropical Years (6,939.60 Days). Difference: 2.1 Hours!";
+      eqNote.textContent = "235 Moon months = 6,939.69 days ≈ 19 years (6,939.60 days): only about 2 hours apart";
       svg.appendChild(eqNote);
     }
 
     FIG.slider(controls, {
       id: "metonic-year",
-      label: "Advance Year in the 19-Year Cycle:",
+      label: "Year in the 19-year cycle:",
       min: 1,
       max: 19,
       step: 1,
@@ -921,9 +921,9 @@
     var haabMonths = ["Pop", "Wo'", "Sip", "Sotz'", "Sek", "Xul", "Yaxk'in", "Mol", "Ch'en", "Yax", "Sak'", "Keh", "Mak", "K'ank'in", "Muwan", "Pax", "K'ayab", "Kumk'u", "Wayeb'"];
 
     var readouts = FIG.readouts(container, [
-      { id: "tzolkin-date", label: "260-day Sacred Date (Tzolk'in)", value: "4 Ajaw" },
-      { id: "haab-date", label: "365-day Civil Date (Haab')", value: "8 Kumk'u" },
-      { id: "calendar-round-cycle", label: "Calendar Round Cycle", value: "Day 0 of 18,980 (52 Solar Years)" }
+      { id: "tzolkin-date", label: "260-day sacred count (Tzolk'in)", value: "4 Ajaw" },
+      { id: "haab-date", label: "365-day year (Haab')", value: "8 Kumk'u" },
+      { id: "calendar-round-cycle", label: "Calendar Round", value: "Day 0 of 18,980 (52 years)" }
     ]);
 
     function renderGears() {
@@ -1010,13 +1010,13 @@
       lcmNote.setAttribute('font-size', '11');
       lcmNote.setAttribute('font-family', FIG.getCSSVar('--font-mono'));
       lcmNote.setAttribute('fill', strokeCol);
-      lcmNote.textContent = "LCM(260, 365) = 18,980 Days = Exactly 52 Solar Years (Calendar Round)";
+      lcmNote.textContent = "Both counts line up again after 18,980 days = 52 years (the Calendar Round)";
       svg.appendChild(lcmNote);
     }
 
     FIG.slider(controls, {
       id: "calendar-step-day",
-      label: "Advance Calendar Date (Days elapsed):",
+      label: "Days passed:",
       min: 0,
       max: 18980,
       step: 10,
@@ -1040,114 +1040,114 @@
 
     var questions = [
       {
-        question: "Why did Mesopotamian scribes adopt a sexagesimal (base 60) numeral system rather than decimal (base 10)?",
+        question: "Why did Mesopotamian scribes count in sixties instead of tens?",
         options: [
-          "They possessed six fingers on each hand according to temple reliefs.",
-          "It was mandated by a royal decree of Hammurabi to prevent counterfeit accounts.",
-          "Base 60 was the only number system permitted by astrological omen treatises.",
-          "60 is divisible by 1, 2, 3, 4, 5, 6, 10, 12, 15, 20, and 30, eliminating recurring fractional remainders in commercial and grain division."
+          "Temple carvings show people with six fingers on each hand.",
+          "King Hammurabi ordered it to stop fraud.",
+          "Religious rules allowed no other system.",
+          "60 divides evenly by 2, 3, 4, 5, 6, 10, 12, 15, 20 and 30, so sharing things out rarely leaves awkward fractions."
         ],
         answer: 3,
-        explanation: "The high divisibility of 60 vastly simplifies fractional arithmetic, making grain distribution, wages, and trade divisions cleanly terminating values without infinite fractions."
+        explanation: "Because 60 has so many divisors, halves, thirds, quarters, fifths and sixths all come out as neat, finished numbers. That made sharing out grain, wages and silver much easier."
       },
       {
-        question: "What celestial event served as the benchmark for the ancient Egyptian agricultural new year and the Nile flood?",
+        question: "What sign in the sky told the ancient Egyptians that the new year and the Nile flood were coming?",
         options: [
-          "The winter solstice sunset behind the Western Desert cliffs.",
-          "The transit of the full moon across the constellation Orion.",
-          "The heliacal rising of Sirius (Sopdet), reappearing on the eastern horizon just before sunrise after 70 days of invisibility.",
-          "A total solar eclipse occurring every four years."
+          "The midwinter sunset behind the desert cliffs.",
+          "The full Moon passing through Orion.",
+          "Sirius reappearing low in the east just before sunrise, after about 70 days hidden in the Sun's glare.",
+          "A total solar eclipse every four years."
         ],
         answer: 2,
-        explanation: "The reappearance of Sirius at dawn in mid-July after its 70-day absence coincided with the arrival of the life-giving Nile inundation (Akhet)."
+        explanation: "Sirius (the goddess Sopdet) came back into view at dawn in mid-July, just as the flood was due. This first dawn sighting is called its heliacal rising."
       },
       {
-        question: "What did Eleanor Robson's 2001 reassessment argue about Babylonian tablet Plimpton 322 (~1800 BCE)?",
+        question: "What did Eleanor Robson argue in 2001 about the tablet Plimpton 322?",
         options: [
-          "It is a magical incantation table used for exorcising demons.",
-          "It is a school text of regular reciprocal pairs generating integer Pythagorean triples, not anachronistic trigonometry or secret astronomy.",
-          "It was carved by Greek philosophers visiting Babylon during the reign of Alexander.",
-          "It proves the Babylonians possessed telescopes capable of seeing Jupiter's moons."
+          "It is a magic spell for driving out demons.",
+          "It is most likely a school list, built with a standard recipe for whole-number right triangles, not trigonometry or secret astronomy.",
+          "It was carved by Greek visitors in Alexander's time.",
+          "It shows the Babylonians had telescopes."
         ],
         answer: 1,
-        explanation: "Robson argued, from the tablet's context and arithmetic, that the tablet was generated by standard Old Babylonian scribal school algebra using reciprocal pairs (x, 1/x) to construct right triangles."
+        explanation: "Looking at how Babylonian scribes were taught, Robson argued that the rows were made from pairs of numbers that multiply to 1, a standard school method for making right triangles with whole-number sides."
       },
       {
-        question: "What remarkable characteristic defines the cubic chert weights excavated across Indus Valley cities (Mohenjo-daro, Harappa, Lothal)?",
+        question: "What is remarkable about the stone weights found across Indus Valley cities?",
         options: [
-          "Every city had an entirely different weight standard to tax foreign merchants.",
-          "They were manufactured from hollow bronze filled with varying amounts of sand.",
-          "Weights were calibrated solely by measuring the volume of barley seeds.",
-          "They followed an invariant binary ratio (1, 2, 4, 8, 16, 32...) transitioning into decimal decades, kept remarkably consistent across a vast region."
+          "Every city used a different standard to tax outsiders.",
+          "They were hollow bronze filled with sand.",
+          "They were checked only by counting barley seeds.",
+          "They follow one system (doubling 1, 2, 4, 8, 16, 32... and then going up in tens) that matches closely across a huge region."
         ],
         answer: 3,
-        explanation: "Indus metrology was astonishingly uniform across thousands of kilometres, combining binary doubling for small commercial transactions with decimal multiples for bulk goods."
+        explanation: "The small weights double each time; the bigger ones are multiples of the 16-unit standard. Weights from cities thousands of kilometres apart agree remarkably well."
       },
       {
-        question: "In Egyptian architectural mathematics (Rhind Papyrus Problem 56), what is the 'seked'?",
+        question: "In Egyptian building (Rhind Papyrus Problem 56), what is a 'seked'?",
         options: [
-          "The total volume of stone blocks quarried from Aswan.",
-          "The daily grain ration awarded to pyramid masons.",
-          "The horizontal run measured in palms and fingers per vertical royal cubit rise (governing pyramid slope).",
-          "The astrological alignment angle relative to true magnetic north."
+          "The amount of stone quarried at Aswan.",
+          "A pyramid builder's daily grain ration.",
+          "How far a sloping face steps in, in palms and fingers, for every cubit it rises: a way of giving the slope.",
+          "The angle to magnetic north."
         ],
         answer: 2,
-        explanation: "The seked measures the slope of an inclined face: how many palms (1 cubit = 7 palms) and fingers (1 palm = 4 fingers) the face retreats horizontally for each royal cubit of vertical rise."
+        explanation: "The seked gives a slope as 'so many palms in per cubit up' (a cubit is 7 palms and a palm is 4 fingers). Khufu's pyramid has a seked of 5½ palms."
       },
       {
-        question: "Why was the 19-year Metonic cycle (used by Babylonian astronomers and later named after Meton of Athens) so vital to ancient states?",
+        question: "Why was the 19-year cycle so useful?",
         options: [
-          "235 synodic lunar months equal almost exactly 19 tropical solar years (differing by only 2 hours), allowing 7 intercalary months to prevent lunar calendar seasons from drifting.",
-          "It predicted the exact year of the Roman Republic's founding.",
-          "It was used exclusively to calculate the precession of the equinoxes.",
-          "It dictated the 19-year reign of Babylonian kings."
+          "235 Moon months come to almost exactly 19 years (only about 2 hours apart), so adding 7 extra months over 19 years keeps a Moon calendar in step with the seasons.",
+          "It predicted the year Rome was founded.",
+          "It was used only to study the slow wobble of the Earth's axis.",
+          "Babylonian kings ruled for 19 years each."
         ],
         answer: 0,
-        explanation: "By inserting 7 leap months across 19 years, agrarian civilizations kept their 354-day lunar calendar synchronized with the 365.24-day solar agricultural seasons."
+        explanation: "Twelve Moon months fall about 11 days short of a year. Adding a 13th month in 7 years out of every 19 brings the calendar back into line with the seasons."
       },
       {
-        question: "How did Egyptian water clocks (clepsydrae), such as the 1400 BCE specimen from Karnak, solve the physical problem of changing hydrostatic pressure?",
+        question: "How did Egyptian water clocks, such as the one from Karnak (about 1400 BCE), keep the hours even?",
         options: [
-          "By using boiling water to maintain constant viscosity.",
-          "By employing mechanical bronze gears to regulate the outflow siphon.",
-          "By constructing the vessel with inward-sloping conical walls (~70°), so that the water level fell at a roughly steady rate even as the pressure decreased.",
-          "By floating an oil layer on top to prevent evaporation."
+          "They used boiling water.",
+          "Bronze gears controlled the flow.",
+          "The pot was wider at the top, with sides sloping at about 70°, so the water level fell at a roughly steady rate even though the flow slowed as it emptied.",
+          "A layer of oil stopped evaporation."
         ],
         answer: 2,
-        explanation: "As water drains, hydrostatic pressure falls ($P = \rho g h$). The conical cross-section compensates: smaller water volumes near the bottom take the same time to drain as larger volumes at the top."
+        explanation: "Water runs out faster when the pot is full. In a pot that is wide at the top, that fast early flow lowers the level only slowly; lower down the pot narrows, which makes up for the slower flow."
       },
       {
-        question: "How long is the Mesoamerican 'Calendar Round' cycle formed by intertwining the 260-day Tzolk'in and 365-day Haab'?",
+        question: "How long is the Maya 'Calendar Round', when the 260-day and 365-day counts come back to the same pairing?",
         options: [
-          "100 solar years.",
-          "365 lunar months.",
+          "100 years.",
+          "365 Moon months.",
           "1,000 days.",
-          "52 years of 365 days (18,980 days), after which the combination of day name and month day repeats identically."
+          "52 years of 365 days (18,980 days)."
         ],
         answer: 3,
-        explanation: "The least common multiple of 260 and 365 is 18,980 days, corresponding to exactly 52 Haab' years (365 days each) or 73 Tzolk'in cycles."
+        explanation: "18,980 is the smallest number of days that both 260 and 365 divide into exactly: 52 years of 365 days, or 73 rounds of the 260-day count."
       },
       {
-        question: "What was discovered in 2013 at Wadi al-Jarf on the Red Sea coast regarding the construction of the Great Pyramid of Giza?",
+        question: "What was found in 2013 at Wadi al-Jarf, an ancient harbour on the Red Sea?",
         options: [
-          "Alien hieroglyphs describing acoustic levitation machines.",
-          "A steel chisel proving the Egyptians had iron technology in the Old Kingdom.",
-          "The Diary of Merer, a 4th-Dynasty papyrus logbook recording the daily transport of limestone blocks by boat from Tura to Khufu's pyramid.",
-          "A map of the solar system showing Neptune and Pluto."
+          "Alien writing about levitation machines.",
+          "A steel chisel from the age of the pyramids.",
+          "The Diary of Merer: an official's work log describing how limestone was shipped by boat from the Tura quarries to Khufu's pyramid.",
+          "A map of the solar system showing Neptune."
         ],
         answer: 2,
-        explanation: "Tallet's discovery of the Diary of Merer provided firsthand documentary proof of Old Kingdom administrative logistics, boat transport, and harbor infrastructure."
+        explanation: "Pierre Tallet's team found Merer's diary, which shows the ordinary, well-organised work behind the pyramid: boats, canals, harbours and grain rations."
       },
       {
-        question: "In the history of science, why is it incorrect to view ancient Babylonian omen astrology as purely anti-scientific superstition?",
+        question: "Why is it wrong to dismiss Babylonian sky omens as nothing but superstition?",
         options: [
-          "Because the religious imperative to detect divine portents motivated state scribes to maintain continuous, empirical observational diaries of celestial positions for over six centuries.",
-          "Because the astrology was completely accurate in predicting personal fortunes.",
+          "Because the need to read messages from the gods led the state to keep careful, regular records of the sky for more than six hundred years.",
+          "Because the omens predicted people's futures correctly.",
           "Because the Babylonians did not believe in gods.",
-          "Because Greek philosophy borrowed nothing from Mesopotamia."
+          "Because the Greeks learned nothing from Babylon."
         ],
         answer: 0,
-        explanation: "The belief that celestial bodies conveyed divine messages provided the institutional justification for centuries of meticulous, unbroken empirical astronomy, yielding some of the first mathematical tables of celestial cycles."
+        explanation: "Belief that the sky carried messages from the gods paid for centuries of careful observation, and those records revealed the regular cycles of the Moon, planets and eclipses."
       }
     ];
 
