@@ -16,14 +16,14 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label for="fig-incom-step">Geometric Reciprocal Subtraction Step: ' +
-            '<span id="fig-incom-step-val" class="fig-readout">Step 0 (Initial Square)</span>' +
+          '<label for="fig-incom-step">Step: ' +
+            '<span id="fig-incom-step-val" class="fig-readout">Step 0 (the square)</span>' +
           '</label>' +
           '<input type="range" id="fig-incom-step" min="0" max="4" step="1" value="0">' +
         '</div>' +
         '<div class="fig-control-group">' +
           '<button type="button" id="fig-incom-btn-reset" class="fig-btn">Reset</button>' +
-          '<button type="button" id="fig-incom-btn-next" class="fig-btn">Next Subtraction Step →</button>' +
+          '<button type="button" id="fig-incom-btn-next" class="fig-btn">Next step →</button>' +
         '</div>' +
       '</div>' +
       '<div class="fig-canvas-container" style="position:relative; min-height:360px;">' +
@@ -39,11 +39,11 @@
     var explain = container.querySelector('#fig-incom-explain');
 
     var stepNames = [
-      'Step 0: Unit Square & Diagonal d = s√2',
-      'Step 1: First Subtraction (Cut side s from diagonal d)',
-      'Step 2: Construct Perpendicular (New smaller square created)',
-      'Step 3: Repeat Reciprocal Subtraction (Scale factor √2 - 1)',
-      'Step 4: The Infinite Descent (Never Terminates)'
+      'Step 0: A square with side 1 and diagonal √2',
+      'Step 1: Mark the side off along the diagonal',
+      'Step 2: The leftover piece makes a smaller square',
+      'Step 3: Do the same again on the smaller square',
+      'Step 4: It never stops, so there is no common unit'
     ];
 
     var explanations = [
@@ -180,8 +180,8 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label for="fig-i47-phase">Shear & Proof Animation Step: ' +
-            '<span id="fig-i47-phase-val" class="fig-readout">Step 1: The Windmill Figure</span>' +
+          '<label for="fig-i47-phase">Step of the proof: ' +
+            '<span id="fig-i47-phase-val" class="fig-readout">Step 1: The windmill figure</span>' +
           '</label>' +
           '<input type="range" id="fig-i47-phase" min="1" max="5" step="1" value="1">' +
         '</div>' +
@@ -204,11 +204,11 @@
 
     var phases = [
       '',
-      'Step 1: The Classic Windmill Scaffolding (Book I Prop 47)',
-      'Step 2: Triangle △ABD and Parallels (Shear to Base BD)',
-      'Step 3: Rotation (△ABD ≅ △FBC by SAS Congruence)',
-      'Step 4: Shear on Square ABFG (△FBC = Half of Square ABFG)',
-      'Step 5: Completion (Both Squares Equal Rectangles of Hypotenuse Square)'
+      'Step 1: The windmill figure (Book I, Proposition 47)',
+      'Step 2: Triangle ABD is half of the left rectangle',
+      'Step 3: Triangle ABD is identical to triangle FBC',
+      'Step 4: Triangle FBC is half of the small square',
+      'Step 5: So each small square equals one rectangle'
     ];
 
     var explanations = [
@@ -388,14 +388,14 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label for="fig-pi-n">Number of Polygon Sides (n): ' +
+          '<label for="fig-pi-n">Number of sides: ' +
             '<span id="fig-pi-n-val" class="fig-readout">n = 6 (Hexagon)</span>' +
           '</label>' +
           '<input type="range" id="fig-pi-n" min="0" max="4" step="1" value="0">' +
         '</div>' +
         '<div class="fig-control-group">' +
-          '<label><input type="checkbox" id="fig-pi-show-in" checked> Show Inscribed Polygon</label>' +
-          '<label style="margin-left:1rem;"><input type="checkbox" id="fig-pi-show-circ" checked> Show Circumscribed Polygon</label>' +
+          '<label><input type="checkbox" id="fig-pi-show-in" checked> Show the shape inside</label>' +
+          '<label style="margin-left:1rem;"><input type="checkbox" id="fig-pi-show-circ" checked> Show the shape outside</label>' +
         '</div>' +
       '</div>' +
       '<div class="fig-canvas-container" style="min-height:360px;">' +
@@ -415,7 +415,7 @@
     function draw() {
       var idx = parseInt(nSlider.value, 10);
       var n = sides[idx];
-      nVal.textContent = 'n = ' + n + ' sides' + (n === 96 ? ' (Archimedes’ Final Bound)' : '');
+      nVal.textContent = 'n = ' + n + ' sides' + (n === 96 ? ' (where Archimedes stopped)' : '');
 
       var showIn = checkIn.checked;
       var showCirc = checkCirc.checked;
@@ -533,7 +533,7 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label for="fig-conic-angle">Cutting Plane Angle (θ): ' +
+          '<label for="fig-conic-angle">Angle of the cut: ' +
             '<span id="fig-conic-angle-val" class="fig-readout">θ = 25° (Ellipse)</span>' +
           '</label>' +
           '<input type="range" id="fig-conic-angle" min="0" max="80" step="1" value="25">' +
@@ -713,7 +713,7 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label for="fig-radix-input">Enter a Number to Compare (1 to 9999): ' +
+          '<label for="fig-radix-input">Type a number (1 to 9999): ' +
             '<span id="fig-radix-val" class="fig-readout">2024</span>' +
           '</label>' +
           '<input type="range" id="fig-radix-input" min="1" max="9999" step="1" value="2024">' +
@@ -857,14 +857,14 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label for="fig-sine-angle">Central Angle Arc (2θ): ' +
+          '<label for="fig-sine-angle">Angle at the centre (2θ): ' +
             '<span id="fig-sine-angle-val" class="fig-readout">2θ = 60° (θ = 30°)</span>' +
           '</label>' +
           '<input type="range" id="fig-sine-angle" min="10" max="170" step="2" value="60">' +
         '</div>' +
         '<div class="fig-control-group">' +
-          '<label><input type="radio" name="fig-sine-mode" value="ptolemy"> Ptolemy’s Full Chord (crd 2θ)</label>' +
-          '<label style="margin-left:1.5rem;"><input type="radio" name="fig-sine-mode" value="aryabhata" checked> Āryabhaṭa’s Half-Chord (ardha-jyā = R sin θ)</label>' +
+          '<label><input type="radio" name="fig-sine-mode" value="ptolemy"> Ptolemy’s whole chord</label>' +
+          '<label style="margin-left:1.5rem;"><input type="radio" name="fig-sine-mode" value="aryabhata" checked> Āryabhaṭa’s half-chord (the sine)</label>' +
         '</div>' +
       '</div>' +
       '<div class="fig-canvas-container" style="min-height:360px;">' +
@@ -1015,7 +1015,7 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label for="fig-alg-x">Value of Unknown Root (x): ' +
+          '<label for="fig-alg-x">Try a value for the unknown (x): ' +
             '<span id="fig-alg-x-val" class="fig-readout">x = 3.0</span>' +
           '</label>' +
           '<input type="range" id="fig-alg-x" min="1" max="6" step="0.5" value="3">' +
@@ -1043,7 +1043,7 @@
 
     function draw() {
       var x = parseFloat(slider.value);
-      xVal.textContent = 'x = ' + x.toFixed(1) + (x === 3.0 ? ' (Exact True Solution!)' : '');
+      xVal.textContent = 'x = ' + x.toFixed(1) + (x === 3.0 ? ' (the answer!)' : '');
 
       var b = 10; // 10x
       var targetArea = 39; // x^2 + 10x = 39
@@ -1160,114 +1160,114 @@
   FIG['fig-quiz-part4'] = function (container) {
     var questions = [
       {
-        question: "What did the Pythagoreans discover about the diagonal of a unit square that shook their worldview?",
+        question: "What did the Pythagoreans find out about the diagonal of a square with sides of 1?",
         options: [
-          "It can be expressed as the ratio 7/5",
-          "It is strictly incommensurable with the side (cannot be expressed as a ratio of integers)",
-          "It violates the law of the lever",
-          "It can only be drawn using a compass but not a straightedge"
+          "It is exactly 7/5.",
+          "It can't be written as a fraction of two whole numbers: there is no common unit for the side and the diagonal.",
+          "It breaks the law of the lever.",
+          "It can be drawn with a compass but not a ruler."
         ],
         answer: 1,
-        explanation: "The discovery that the diagonal d = √2 cannot be measured by any common unit divisor of the side s = 1 proved the existence of incommensurable (irrational) magnitudes, shattering the Pythagorean dogma that all cosmic relationships are ratios of whole integers."
+        explanation: "The diagonal is √2, and the proof by contradiction shows √2 is not a fraction. That broke the Pythagorean belief that every length is a ratio of whole numbers."
       },
       {
-        question: "In Book I of Euclid’s Elements, how is the fifth postulate (the Parallel Postulate) distinct from the first four?",
+        question: "How is Euclid's fifth postulate (the parallel postulate) different from the first four?",
         options: [
-          "It was proved directly from Common Notion 1",
-          "It is a conditional statement about two lines intersected by a transversal whose interior angles sum to less than two right angles",
-          "It applies only to spherical triangles",
-          "It explicitly introduces the numerical value of π"
+          "It was proved from one of the common notions.",
+          "It is a long statement about what happens when two lines are extended forever, unlike the short, obvious first four.",
+          "It applies only to triangles on a sphere.",
+          "It gives the value of π."
         ],
         answer: 1,
-        explanation: "Euclid's Postulate 5 states that if a straight line falling on two straight lines makes interior angles on the same side less than two right angles, the two lines, if produced indefinitely, will meet on that side. Its complexity led mathematicians for two millennia to attempt (unsuccessfully) to prove it from the first four."
+        explanation: "Mathematicians tried for two thousand years to prove it from the other four. In the 1800s they discovered that geometries without it make perfect sense too."
       },
       {
-        question: "How did Euclid structure his proof of the infinitude of prime numbers (Book IX Proposition 20)?",
+        question: "How did Euclid show that the prime numbers never run out?",
         options: [
-          "By multiplying all existing primes together and asserting that P = (p₁p₂...pₙ) + 1 is always prime",
-          "By using mathematical induction on the Peano axioms",
-          "By showing that any finite set of primes {p₁, p₂, ..., pₙ} cannot be exhaustive, because the prime factors of (p₁p₂...pₙ) + 1 cannot be in that set",
-          "By calculating prime density using logarithmic integrals"
+          "By saying that multiplying all the primes and adding 1 always gives a prime.",
+          "By using modern rules about counting.",
+          "By showing that for any list of primes, the number 'all of them multiplied, plus 1' has a prime factor that isn't on the list.",
+          "By estimating how many primes there are."
         ],
         answer: 2,
-        explanation: "Euclid did not claim that N = (p₁p₂...pₙ) + 1 is itself prime. He proved that N is either prime or must have a prime factor; and since dividing N by any of the listed primes leaves a remainder of 1, its prime factor must be a new prime not in the original collection. Thus primes exceed any assigned multitude."
+        explanation: "Dividing that number by any prime on the list leaves a remainder of 1, so whatever prime divides it must be a new one. (It is not always prime itself: 2×3×5×7×11×13 + 1 = 59 × 509.)"
       },
       {
-        question: "In 'Measurement of a Circle', what polygon did Archimedes use to trap the value of π?",
+        question: "What shapes did Archimedes use to trap the value of π?",
         options: [
-          "A 64-sided polygon",
-          "Inscribed and circumscribed regular polygons of 96 sides",
-          "A circle inscribed within an equilateral triangle",
-          "A 360-sided polygon based on Babylonian degrees"
+          "A 64-sided shape.",
+          "Regular 96-sided shapes, one inside the circle and one outside.",
+          "A triangle around a circle.",
+          "A 360-sided shape."
         ],
         answer: 1,
-        explanation: "Starting from a regular hexagon (6 sides) and repeatedly doubling four times (12, 24, 48, 96 sides), Archimedes proved that 3 10/71 < π < 3 1/7 (223/71 < π < 22/7)."
+        explanation: "Starting from hexagons and doubling the sides four times (12, 24, 48, 96), he showed π lies between 223/71 and 22/7."
       },
       {
-        question: "What single geometric family did Apollonius of Perga demonstrate generates the circle, ellipse, parabola, and hyperbola?",
+        question: "What did Apollonius show produces the circle, ellipse, parabola and hyperbola?",
         options: [
-          "Intersections of concentric spheres",
-          "Planar slices through a single double circular cone at varying angles",
-          "Rolling circles along a straight line (cycloids)",
-          "Shadows cast by gnomons at varying latitudes"
+          "Spheres inside spheres.",
+          "Slicing one double cone with a flat plane at different angles.",
+          "A rolling circle.",
+          "Shadows of sticks at different places on Earth."
         ],
         answer: 1,
-        explanation: "In his treatise 'Conics', Apollonius showed that a single oblique or right circular cone with two nappes produces all four curves simply by altering the inclination angle of the cutting plane relative to the generator."
+        explanation: "One double cone gives all four curves; only the angle of the cut changes."
       },
       {
-        question: "Which Indian text contains the earliest systematic mathematical rules treating zero and negative numbers as algebraic entities?",
+        question: "Which Indian book first gave full rules for calculating with zero and negative numbers?",
         options: [
-          "The Rigveda (c. 1200 BCE)",
-          "The Sulba Sūtras by Baudhāyana (c. 600 BCE)",
-          "The Lilāvatī by Bhāskara II (1150 CE)",
-          "The Brāhmasphuṭasiddhānta by Brahmagupta (628 CE)"
+          "The Rigveda (about 1200 BCE).",
+          "The Śulba Sūtras (about 600 BCE).",
+          "Bhāskara II's Līlāvatī (1150 CE).",
+          "Brahmagupta's Brāhmasphuṭasiddhānta (628 CE)."
         ],
         answer: 3,
-        explanation: "In Chapter 18 of the Brāhmasphuṭasiddhānta (628 CE), Brahmagupta defined operational arithmetic rules for positive numbers (dhana / fortune), negative numbers (ṛṇa / debt), and zero (kha / śūnya), including rules like (-a) × (-b) = +ab and a + 0 = a."
+        explanation: "Brahmagupta treated positive numbers as 'fortunes', negatives as 'debts' and zero as a number, with rules such as 'negative times negative is positive' and 'a number plus zero is unchanged'."
       },
       {
-        question: "How did the Indian trigonometric function 'jyā' differ conceptually from Ptolemy’s 'chord' (crd)?",
+        question: "How was the Indian 'jyā' different from Ptolemy's chord?",
         options: [
-          "Jyā was measured only in degrees rather than sexagesimal minutes",
-          "Jyā was applied exclusively to hyperbolic geometry",
-          "Jyā is the half-chord corresponding to half the central angle (modern R sin θ), creating an immediate right triangle with the radius",
-          "Jyā eliminated the need for circles"
+          "It was measured only in degrees.",
+          "It was used only for curved geometry.",
+          "It used half the chord (for half the angle), which makes a right-angled triangle with the radius: what we now call the sine.",
+          "It did away with circles."
         ],
         answer: 2,
-        explanation: "Ptolemy used chords subtending the entire arc 2θ. Āryabhaṭa and Indian astronomers adopted the half-chord (ardha-jyā, later jyā) for arc θ, making it the vertical leg of a right triangle of hypotenuse R, establishing the foundation of modern sine."
+        explanation: "Ptolemy tabulated whole chords. Indian astronomers used the half-chord, which is far easier to work with. Through Arabic and a Latin mistranslation, 'jyā' became our word 'sine'."
       },
       {
-        question: "What do the Arabic terms 'al-jabr' and 'al-muqābala' literally mean in al-Khwārizmī’s algebra?",
+        question: "What do 'al-jabr' and 'al-muqābala' mean in al-Khwārizmī's algebra?",
         options: [
-          "Multiplication and division",
-          "Restoration (adding subtracted quantities to both sides) and balancing (canceling identical terms from both sides)",
-          "Square root and cube root",
-          "Proof by contradiction and direct deduction"
+          "Multiplying and dividing.",
+          "Restoring (adding a subtracted amount to both sides) and balancing (cancelling the same amount from both sides).",
+          "Square roots and cube roots.",
+          "Proof by contradiction and direct proof."
         ],
         answer: 1,
-        explanation: "Al-jabr ('restoration' or 'setting of bones') referred to removing negative subtractions by adding equal amounts to both sides (e.g. converting x² = 40 - 4x into x² + 4x = 40). Al-muqābala ('balancing') referred to subtracting equal positive terms from both sides."
+        explanation: "For example, al-jabr turns x² = 40 − 4x into x² + 4x = 40, and al-muqābala turns x² + 5x = x + 20 into x² + 4x = 20. 'Al-jabr' gave us the word 'algebra'."
       },
       {
-        question: "How did Omar Khayyam solve general cubic equations in eleventh-century Persia?",
+        question: "How did Omar Khayyam solve cubic equations?",
         options: [
-          "Using modern Tartaglia-Cardano algebraic radical formulas",
-          "By claiming that cubic equations have no real solutions",
-          "Through the geometric intersection of conic sections (e.g. parabolas and circles/hyperbolas)",
-          "By employing matrix determinants"
+          "With the formulas found later in Italy.",
+          "He said they had no solutions.",
+          "By drawing two curves, such as a parabola and a circle, and finding where they cross.",
+          "With matrices."
         ],
         answer: 2,
-        explanation: "Centuries before sixteenth-century Italian algebraists found radical formulas, Omar Khayyam systematically classified and solved cubic equations geometrically by constructing the intersections of conic sections such as a parabola and a circle."
+        explanation: "Four centuries before Italian mathematicians found formulas for cubics, Khayyam solved them geometrically, using Apollonius's curves."
       },
       {
-        question: "What was the significance of Leonardo Fibonacci’s 'Liber Abaci' (1202) for European mathematics?",
+        question: "Why does Fibonacci's Liber Abaci (1202) matter?",
         options: [
-          "It invented the calculus of fluxions",
-          "It introduced Hindu-Arabic positional numerals (0–9) and their practical arithmetic algorithms to European commerce and scholarship",
-          "It translated Euclid directly into vernacular Italian for the first time",
-          "It proved that the Earth orbits the Sun"
+          "It invented calculus.",
+          "It taught European merchants and scholars the digits 0–9 and how to calculate with place value.",
+          "It was the first Italian translation of Euclid.",
+          "It proved the Earth goes round the Sun."
         ],
         answer: 1,
-        explanation: "Having learned the 'modus Indorum' (the method of the Indians) in North Africa, Fibonacci demonstrated in Liber Abaci how positional decimal arithmetic with zero vastly outperformed the abacus and Roman numerals for merchant bookkeeping, currency exchange, and geometry."
+        explanation: "Fibonacci learned the 'method of the Indians' in North Africa and showed how much easier it made bookkeeping, currency exchange and measurement than Roman numerals and counting boards."
       }
     ];
 
