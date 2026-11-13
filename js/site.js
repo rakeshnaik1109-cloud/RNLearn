@@ -65,21 +65,49 @@
   function initNav() {
     var navToggle = document.querySelector('.nav-toggle');
     var navMenu = document.querySelector('.nav-menu');
-    if (navToggle && navMenu) {
-      navToggle.addEventListener('click', function () {
-        var expanded = navToggle.getAttribute('aria-expanded') === 'true';
-        navToggle.setAttribute('aria-expanded', String(!expanded));
-        navMenu.classList.toggle('is-open');
-      });
-      // Close on escape or outside click
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && navMenu.classList.contains('is-open')) {
-          navMenu.classList.remove('is-open');
-          navToggle.setAttribute('aria-expanded', 'false');
-          navToggle.focus();
-        }
-      });
+    if (!navToggle || !navMenu) return;
+
+    var hamburgerSvg = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+    var closeSvg = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+
+    function closeNav() {
+      if (navMenu.classList.contains('is-open')) {
+        navMenu.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.innerHTML = hamburgerSvg;
+      }
     }
+
+    navToggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var expanded = navToggle.getAttribute('aria-expanded') === 'true';
+      var nextState = !expanded;
+      navToggle.setAttribute('aria-expanded', String(nextState));
+      navMenu.classList.toggle('is-open', nextState);
+      navToggle.innerHTML = nextState ? closeSvg : hamburgerSvg;
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && navMenu.classList.contains('is-open')) {
+        closeNav();
+        navToggle.focus();
+      }
+    });
+
+    // Close on outside click
+    document.addEventListener('click', function (e) {
+      if (navMenu.classList.contains('is-open') && !navMenu.contains(e.target) && !navToggle.contains(e.target)) {
+        closeNav();
+      }
+    });
+
+    // Close when tapping any nav-link on mobile
+    navMenu.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A' || e.target.closest('a')) {
+        closeNav();
+      }
+    });
   }
 
   /* -------------------------------------------------------------------------
@@ -168,6 +196,81 @@
     headings.forEach(function (h) {
       observer.observe(h);
     });
+  }
+
+  /* -------------------------------------------------------------------------
+     Mobile Table of Contents Collapsible Drawer
+     ------------------------------------------------------------------------- */
+  function initMobileTOC() {
+    var toc = document.querySelector('.article-toc');
+    var tocTitle = document.querySelector('.toc-title');
+    var tocLinks = document.querySelectorAll('.toc-link');
+    if (!toc || !tocTitle) return;
+
+    function isMobile() {
+      return window.innerWidth < 1100;
+    }
+
+    // Set initial collapsed state on mobile screens (<768px start collapsed)
+    if (window.innerWidth < 768) {
+      toc.classList.add('is-collapsed');
+    }
+
+    tocTitle.addEventListener('click', function () {
+      if (isMobile()) {
+        toc.classList.toggle('is-collapsed');
+      }
+    });
+
+    // Auto-collapse when tapping a TOC link on mobile
+    for (var i = 0; i < tocLinks.length; i++) {
+      tocLinks[i].addEventListener('click', function () {
+        if (isMobile()) {
+          toc.classList.add('is-collapsed');
+        }
+      });
+    }
+
+    // Reset state on viewport resize
+    window.addEventListener('resize', function () {
+      if (!isMobile()) {
+        toc.classList.remove('is-collapsed');
+      }
+    });
+  }
+
+  /* -------------------------------------------------------------------------
+     Floating Back-to-Top Button
+     ------------------------------------------------------------------------- */
+  function initBackToTop() {
+    var btn = document.querySelector('.back-to-top');
+    if (!btn) {
+      btn = document.createElement('button');
+      btn.className = 'back-to-top';
+      btn.setAttribute('aria-label', 'Back to top');
+      btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>';
+      document.body.appendChild(btn);
+    }
+
+    btn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        window.requestAnimationFrame(function () {
+          var y = window.pageYOffset || document.documentElement.scrollTop;
+          if (y > 450) {
+            btn.classList.add('is-visible');
+          } else {
+            btn.classList.remove('is-visible');
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
   }
 
   /* -------------------------------------------------------------------------
@@ -296,6 +399,8 @@
       initReadingProgress();
       initHeadingAnchors();
       initTocSpy();
+      initMobileTOC();
+      initBackToTop();
       initKaTeXEngine();
     });
   } else {
@@ -304,6 +409,8 @@
     initReadingProgress();
     initHeadingAnchors();
     initTocSpy();
+    initMobileTOC();
+    initBackToTop();
     initKaTeXEngine();
   }
 })();

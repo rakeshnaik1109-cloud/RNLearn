@@ -1130,6 +1130,20 @@
       });
     });
 
+    canvas.addEventListener('touchstart', function (evt) {
+      if (evt.touches && evt.touches.length === 1) {
+        var pos = getMousePos(evt);
+        compasses.forEach(function (cmp, idx) {
+          var dx = cmp.x - pos.x;
+          var dy = cmp.y - pos.y;
+          if (Math.sqrt(dx * dx + dy * dy) < 25) {
+            draggingIdx = idx;
+            evt.preventDefault();
+          }
+        });
+      }
+    }, { passive: false });
+
     window.addEventListener('mousemove', function (evt) {
       if (draggingIdx >= 0) {
         var pos = getMousePos(evt);
@@ -1139,7 +1153,21 @@
       }
     });
 
+    window.addEventListener('touchmove', function (evt) {
+      if (draggingIdx >= 0 && evt.touches && evt.touches.length === 1) {
+        evt.preventDefault();
+        var pos = getMousePos(evt);
+        compasses[draggingIdx].x = Math.max(30, Math.min(canvas.width - 30, pos.x));
+        compasses[draggingIdx].y = Math.max(30, Math.min(canvas.height - 30, pos.y));
+        render();
+      }
+    }, { passive: false });
+
     window.addEventListener('mouseup', function () {
+      draggingIdx = -1;
+    });
+
+    window.addEventListener('touchend', function () {
       draggingIdx = -1;
     });
 
@@ -1420,6 +1448,17 @@
       }
     });
 
+    canvas.addEventListener('touchstart', function (evt) {
+      if (evt.touches && evt.touches.length === 1) {
+        var pos = getMousePos(evt);
+        if (Math.abs(pos.x - magnetX) < 65 && Math.abs(pos.y - magnetY) < 30) {
+          isDraggingMagnet = true;
+          lastMagnetX = pos.x;
+          evt.preventDefault();
+        }
+      }
+    }, { passive: false });
+
     window.addEventListener('mousemove', function (evt) {
       if (isDraggingMagnet) {
         var pos = getMousePos(evt);
@@ -1430,7 +1469,26 @@
       }
     });
 
+    window.addEventListener('touchmove', function (evt) {
+      if (isDraggingMagnet && evt.touches && evt.touches.length === 1) {
+        evt.preventDefault();
+        var pos = getMousePos(evt);
+        magnetVelocity = pos.x - lastMagnetX;
+        lastMagnetX = pos.x;
+        magnetX = Math.max(80, Math.min(500, pos.x));
+        render();
+      }
+    }, { passive: false });
+
     window.addEventListener('mouseup', function () {
+      if (isDraggingMagnet) {
+        isDraggingMagnet = false;
+        magnetVelocity = 0;
+        render();
+      }
+    });
+
+    window.addEventListener('touchend', function () {
       if (isDraggingMagnet) {
         isDraggingMagnet = false;
         magnetVelocity = 0;

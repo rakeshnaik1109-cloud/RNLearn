@@ -424,8 +424,9 @@
     var dpr = window.devicePixelRatio || 1;
     canvas.width = width * dpr;
     canvas.height = height * dpr;
+    canvas.style.maxWidth = '100%';
     canvas.style.width = width + 'px';
-    canvas.style.height = height + 'px';
+    canvas.style.height = 'auto';
     canvas.style.display = 'block';
 
     var ctx = canvas.getContext('2d');
