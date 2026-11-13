@@ -16,14 +16,14 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label for="fig-retro-angle">Orbital Progress (Earth Angle): ' +
+          '<label for="fig-retro-angle">How far Earth has moved round the Sun: ' +
             '<span id="fig-retro-angle-val" class="fig-readout">0°</span>' +
           '</label>' +
           '<input type="range" id="fig-retro-angle" min="0" max="360" step="2" value="0">' +
         '</div>' +
         '<div class="fig-control-group">' +
-          '<label><input type="radio" name="fig-retro-mode" value="copernican" checked> Copernican Perspective (Heliocentric)</label>' +
-          '<label style="margin-left:1.2rem;"><input type="radio" name="fig-retro-mode" value="ptolemaic"> Ptolemaic Epicycle (Geocentric)</label>' +
+          '<label><input type="radio" name="fig-retro-mode" value="copernican" checked> Sun-centred (Copernicus)</label>' +
+          '<label style="margin-left:1.2rem;"><input type="radio" name="fig-retro-mode" value="ptolemaic"> Earth-centred, with an epicycle (Ptolemy)</label>' +
         '</div>' +
       '</div>' +
       '<div class="fig-canvas-container" style="min-height:360px;">' +
@@ -195,13 +195,13 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label for="fig-kepler-ecc">Orbit Eccentricity (e): ' +
+          '<label for="fig-kepler-ecc">How oval the orbit is (e): ' +
             '<span id="fig-kepler-ecc-val" class="fig-readout">e = 0.50</span>' +
           '</label>' +
           '<input type="range" id="fig-kepler-ecc" min="0" max="75" step="5" value="50">' +
         '</div>' +
         '<div class="fig-control-group">' +
-          '<label for="fig-kepler-time">Orbital True Anomaly (θ): ' +
+          '<label for="fig-kepler-time">Position round the orbit (θ): ' +
             '<span id="fig-kepler-time-val" class="fig-readout">θ = 30°</span>' +
           '</label>' +
           '<input type="range" id="fig-kepler-time" min="0" max="360" step="5" value="30">' +
@@ -308,7 +308,7 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label>Select Telescopic Observation (1609–1610): ' +
+          '<label>Pick a discovery (1609–1610): ' +
             '<span id="fig-tele-target-val" class="fig-readout">Moons of Jupiter</span>' +
           '</label>' +
         '</div>' +
@@ -483,13 +483,13 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label for="fig-ramp-angle">Incline Angle (θ): ' +
-            '<span id="fig-ramp-angle-val" class="fig-readout">θ = 15° (Diluted Gravity a = 2.54 m/s²)</span>' +
+          '<label for="fig-ramp-angle">Slope of the ramp (θ): ' +
+            '<span id="fig-ramp-angle-val" class="fig-readout">θ = 15° (gravity slowed to 2.54 m/s²)</span>' +
           '</label>' +
           '<input type="range" id="fig-ramp-angle" min="5" max="30" step="5" value="15">' +
         '</div>' +
         '<div class="fig-control-group">' +
-          '<label for="fig-ramp-time">Elapsed Time Pulses (t): ' +
+          '<label for="fig-ramp-time">Time (in equal steps): ' +
             '<span id="fig-ramp-time-val" class="fig-readout">t = 3 units</span>' +
           '</label>' +
           '<input type="range" id="fig-ramp-time" min="0" max="4" step="1" value="3">' +
@@ -601,13 +601,13 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label for="fig-snell-theta">Angle of Incidence (θ₁): ' +
+          '<label for="fig-snell-theta">Angle of the light coming in (θ₁): ' +
             '<span id="fig-snell-theta-val" class="fig-readout">θ₁ = 45°</span>' +
           '</label>' +
           '<input type="range" id="fig-snell-theta" min="0" max="80" step="1" value="45">' +
         '</div>' +
         '<div class="fig-control-group">' +
-          '<label for="fig-snell-medium">Lower Medium: </label>' +
+          '<label for="fig-snell-medium">Lower material: </label>' +
           '<select id="fig-snell-medium" class="fig-select">' +
             '<option value="1.33">Water (n = 1.33)</option>' +
             '<option value="1.52" selected>Crown Glass (n = 1.52)</option>' +
@@ -728,8 +728,8 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label for="fig-cannon-v">Muzzle Velocity (v): ' +
-            '<span id="fig-cannon-v-val" class="fig-readout">v = 7.9 km/s (Circular Orbital Velocity)</span>' +
+          '<label for="fig-cannon-v">Launch speed (v): ' +
+            '<span id="fig-cannon-v-val" class="fig-readout">v = 7.9 km/s (just fast enough to orbit)</span>' +
           '</label>' +
           '<input type="range" id="fig-cannon-v" min="30" max="120" step="5" value="79">' +
         '</div>' +
@@ -853,7 +853,7 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label for="fig-prism-slit">Movable Slit Selection: ' +
+          '<label for="fig-prism-slit">Colour picked out by the slit: ' +
             '<span id="fig-prism-slit-val" class="fig-readout">Pure Red Ray Selected</span>' +
           '</label>' +
           '<input type="range" id="fig-prism-slit" min="0" max="4" step="1" value="0">' +
@@ -961,114 +961,114 @@
   FIG['fig-quiz-part6'] = function (container) {
     var questions = [
       {
-        question: "Why did Copernicus propose a heliocentric model in 'De revolutionibus' (1543)?",
+        question: "Why did Copernicus put the Sun at the centre in his book of 1543?",
         options: [
-          "He proved that the Sun's gravity is stronger than Earth's",
-          "It naturally explained planetary retrograde loops as optical perspective effects and eliminated arbitrary planetary epicycle periods",
-          "He had observed craters on the Moon through a telescope",
-          "He wanted to confirm Johannes Kepler's elliptical orbit equations"
+          "Because he had seen the Earth move through a telescope.",
+          "To get rid of Ptolemy's 'equant' and go back to steady circular motions, and because it explained the backward loops of the planets neatly.",
+          "Because the Church asked him to.",
+          "Because he had measured the distances to the stars."
         ],
         answer: 1,
-        explanation: "Copernicus showed that retrograde motion is an optical perspective illusion caused by Earth overtaking slower outer planets, naturally explaining why retrograde loops only occur at opposition without needing Ptolemy's ad-hoc epicycle gear synchronizations."
+        explanation: "Copernicus was in some ways a traditionalist: he disliked Ptolemy's equant. Putting the Sun in the middle also explained retrograde motion as an effect of the Earth overtaking the outer planets."
       },
       {
-        question: "What observational discovery by Tycho Brahe in 1572 shattered Aristotle's doctrine of immutable heavenly spheres?",
+        question: "What did Tycho Brahe's study of the new star of 1572 show?",
         options: [
-          "A 'New Star' (Supernova 1572) that displayed zero measurable daily parallax, proving it lay far beyond the Moon in the supposedly changeless stellar sphere",
-          "The moons of Jupiter",
-          "The rings of Saturn",
-          "The phases of Mercury"
+          "It didn't shift against the other stars, so it was far beyond the Moon: the heavens could change.",
+          "It was a planet that had been hidden behind the Sun.",
+          "It was a cloud in the Earth's air.",
+          "It proved the Earth goes round the Sun."
         ],
         answer: 0,
-        explanation: "Tycho Brahe's rigorous triangulation showed that the 1572 supernova displayed no diurnal parallax relative to nearby stars, proving it was situated far beyond the Moon in the celestial realm, disproving the Aristotelian dogma that the heavens are eternal and unalterable."
+        explanation: "Anything in our air would shift as seen from different places or times. The new star didn't, so it was among the stars, which Aristotle said never change. (It was a supernova.)"
       },
       {
-        question: "What stubborn numerical discrepancy forced Johannes Kepler to abandon circular orbits for Mars?",
+        question: "What small difference made Kepler give up circular orbits?",
         options: [
-          "A 45-degree error in solar eclipse calculations",
-          "A 3-day error in the Martian calendar",
-          "The discovery of Martian moons",
-          "An 8-arcminute discrepancy between Tycho Brahe's observations and the best possible circular orbit"
+          "A whole degree.",
+          "Half a degree.",
+          "One minute of arc.",
+          "Eight minutes of arc between his best circle-based model and Tycho's observations of Mars."
         ],
         answer: 3,
-        explanation: "In 'Astronomia Nova' (1609), Kepler wrote that if he had believed he could ignore 8 arcminutes of error, he would have patched up the hypothesis; but because Tycho's observations were accurate to within 2 arcminutes, those 8 arcminutes alone paved the way for a total reformation of astronomy (ellipses)."
+        explanation: "Kepler trusted Tycho's accuracy (1–2 minutes of arc), so he refused to ignore an error of 8 minutes. That led him to elliptical orbits."
       },
       {
-        question: "How did Galileo’s observation of the phases of Venus in 1610 decisively disprove Ptolemaic geocentrism?",
+        question: "Why did Galileo's discovery that Venus has phases matter?",
         options: [
-          "Venus exhibited a complete cycle of phases (from crescent to gibbous and full), proving it orbits the Sun, which was geometrically impossible in Ptolemy's model",
-          "It showed that Venus emits its own light",
-          "It revealed oceans and continents on Venus",
-          "It proved Venus has four orbiting moons"
+          "It showed Venus goes round the Sun, ruling out Ptolemy's arrangement of the planets (though not Tycho's system).",
+          "It proved the Earth spins on its axis.",
+          "It showed Venus has moons.",
+          "It showed Venus is made of fire."
         ],
         answer: 0,
-        explanation: "In Ptolemy's system, Venus is permanently tethered between the Earth and the Sun and could never appear more than half illuminated. Galileo observed a full cycle of phases from crescent to gibbous, proving Venus passes behind the Sun as it orbits."
+        explanation: "In Ptolemy's scheme Venus always stays between us and the Sun, so it could never look nearly full. Galileo saw it nearly full, which means it goes round the Sun."
       },
       {
-        question: "What did Galileo demonstrate using his inclined plane experiments in the 'Two New Sciences' (1638)?",
+        question: "What did Galileo find by rolling balls down ramps?",
         options: [
-          "The total distance traveled by an accelerating body is proportional to the square of the elapsed time (s ∝ t²), with distance increments following the odd numbers",
-          "Heavier objects fall significantly faster than lighter ones in proportion to their weight",
-          "Friction can be completely eliminated by applying olive oil",
-          "Pendulum frequency depends strictly on the bob's mass"
+          "Distance grows with the square of the time: in twice the time, four times as far.",
+          "Heavy balls roll ten times faster than light ones.",
+          "Balls roll at a steady speed.",
+          "Steeper ramps make balls lighter."
         ],
         answer: 0,
-        explanation: "By diluting gravity down an inclined plane, Galileo proved that uniform acceleration produces distance proportional to time squared (s ∝ t²), and that successive distances traversed in equal time intervals follow the sequence of odd numbers (1, 3, 5, 7, ...)."
+        explanation: "The ramp slowed the motion down enough to time it with a water clock. Distances in equal time steps went 1, 3, 5, 7..., adding up to 1, 4, 9, 16..."
       },
       {
-        question: "What was the core epistemological argument of Francis Bacon’s 'Novum Organum' (1620)?",
+        question: "What was Francis Bacon's main idea about gaining knowledge?",
         options: [
-          "All knowledge can be derived through pure Cartesian mathematical deduction",
-          "Ancient scholastic authority is superior to modern observation",
-          "Physics should be subordinated to astrology",
-          "Scientific truth must be built systematically from structured empirical observations and experiments using inductive tables, clearing away 'Idols of the Mind'"
+          "Truth comes from reading ancient books.",
+          "Pure reasoning, without observation, is enough.",
+          "Only the king can decide what is true.",
+          "Careful, organised observation and experiment, watching out for the mind's traps (the 'idols'), with knowledge used to improve life."
         ],
         answer: 3,
-        explanation: "Bacon rejected blind reliance on traditional syllogisms and scholastic authority, arguing that true natural knowledge must be built from the ground up through systematic inductive observation, experimental tables, and elimination of cognitive biases ('Idols')."
+        explanation: "Bacon wanted science built from observation and experiment, and famously linked knowledge with power to improve human life."
       },
       {
-        question: "What was the primary scientific motto of the Royal Society of London, founded in 1660?",
+        question: "What was the motto of the Royal Society?",
         options: [
-          "'Cogito, ergo sum' (I think, therefore I am)",
-          "'Nullius in verba' (Take nobody's word for it)",
-          "'Panta arithmos' (All is number)",
-          "'E pur si muove' (And yet it moves)"
+          "Knowledge is power.",
+          "Nullius in verba: take nobody's word for it.",
+          "I think, therefore I am.",
+          "Eppur si muove: and yet it moves."
         ],
         answer: 1,
-        explanation: "The Royal Society adopted the motto 'Nullius in verba' (roughly 'Take nobody's word for it'), declaring its determination to establish scientific facts through verified collaborative experiment rather than deference to authority."
+        explanation: "Claims were to be settled by experiments that others could watch and repeat, not by appeals to authority."
       },
       {
-        question: "What did Antoni van Leeuwenhoek discover using his handcrafted single-lens microscopes in Delft?",
+        question: "What did Antoni van Leeuwenhoek discover with his home-made microscopes?",
         options: [
-          "The atomic lattice of silicon crystals",
-          "Living single-celled protozoa and bacteria ('animalcules') in pond water and dental plaque",
-          "The cellular structure of cork which he named 'cells'",
-          "The wave nature of X-rays"
+          "The moons of Jupiter.",
+          "A hidden world of tiny living things, including bacteria and single-celled creatures.",
+          "The structure of DNA.",
+          "That cork is made of cells (that was Hooke)."
         ],
         answer: 1,
-        explanation: "Using tiny, exquisitely ground spherical glass beads achieving 270x magnification, Leeuwenhoek discovered the microscopic living world of bacteria and protozoa, reporting his findings to the Royal Society of London in 1674–1676."
+        explanation: "His tiny single-lens microscopes magnified more than 250 times, revealing bacteria, blood cells and sperm cells."
       },
       {
-        question: "What did Newton’s 'experimentum crucis' (crucial experiment) with two prisms demonstrate about white light?",
+        question: "What did Newton's crucial experiment with two prisms show?",
         options: [
-          "Glass prisms physically tint and stain pure light into rainbow colors",
-          "Light travels faster in glass than in air",
-          "Colors exist only in the human eye and have no physical wavelength",
-          "White light is a heterogeneous mixture of rays with differing innate refrangibilities; once isolated, monochromatic colors cannot be altered by further refraction"
+          "Glass creates colours by spoiling white light.",
+          "Light travels in curves.",
+          "Prisms make light brighter.",
+          "White light is a mixture of colours, and a single colour picked out by one prism stays the same colour through a second prism."
         ],
         answer: 3,
-        explanation: "Newton showed that isolating a single color (like red) with a slit and passing it through a second prism bent the ray but did not change its color, proving that white sunlight is a composite of rays with immutable refrangibilities rather than altered light."
+        explanation: "If glass created colours, the second prism would have changed the red light. It only bent it, so the colours must already be in white light."
       },
       {
-        question: "What is the physical meaning of Newton’s Universal Law of Gravitation (F = G · m₁m₂ / r²)?",
+        question: "What does Newton's law of gravitation say?",
         options: [
-          "Planets are pushed along their orbits by swirling Cartesian ether vortexes",
-          "The exact same mathematical inverse-square attractive force that causes an apple to fall on Earth governs the orbital motion of the Moon, planets, and comets",
-          "Gravity only exists within Earth's atmosphere and stops at the Moon",
-          "Mass and energy are interchangeable via E = mc²"
+          "Only the Earth has gravity.",
+          "Every piece of matter pulls on every other, with a force that grows with their masses and weakens with the square of the distance.",
+          "Gravity gets stronger the farther away you go.",
+          "Heavy objects fall faster than light ones."
         ],
         answer: 1,
-        explanation: "Newton's triumph in the 'Principia' (1687) was proving that terrestrial gravity (the falling apple) and celestial mechanics (the Moon orbiting Earth and planets orbiting the Sun) are governed by the exact same universal inverse-square mathematical force."
+        explanation: "One law explained falling objects, the tides, comets and Kepler's laws. The same physics rules the Earth and the heavens."
       }
     ];
 
