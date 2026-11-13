@@ -585,6 +585,7 @@ figure[data-fig] figcaption,
   padding: 0.35rem 0.7rem;
   font-size: 0.82rem;
   background: var(--surface-raised);
+  color: var(--ink);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   cursor: pointer;
@@ -1060,3 +1061,67 @@ a.cite { text-decoration: none; font-weight: 600; padding: 0 0.05em; }
 a.cite:hover, a.cite:focus-visible { text-decoration: underline; }
 .references-list li, .article-references li { scroll-margin-top: 90px; }
 .references-list li:target, .article-references li:target { background: var(--accent-light); border-radius: 6px; outline: 2px solid var(--accent-border); outline-offset: 2px; }
+
+/* --------------------------------------------------------------------------
+   Keep each interactive figure within one screen height: the drawing is
+   capped so that controls, drawing and caption fit together on a laptop.
+   -------------------------------------------------------------------------- */
+.fig svg {
+  max-height: min(50vh, 440px);
+}
+.fig canvas {
+  width: auto !important;
+  height: auto !important;
+  max-width: 100%;
+  max-height: min(50vh, 440px);
+  display: block;
+  margin: 0 auto;
+}
+figure.fig,
+figure[data-fig] {
+  padding: 1rem 1.1rem;
+}
+.fig-controls {
+  gap: 0.6rem 1rem;
+  margin-top: 0.6rem;
+  margin-bottom: 0.6rem;
+  padding: 0.7rem 0.85rem;
+}
+figure.fig figcaption,
+figure[data-fig] figcaption,
+.fig-caption {
+  margin-top: 0.6rem;
+  padding-top: 0.55rem;
+}
+@media (max-width: 720px) {
+  .fig svg, .fig canvas { max-height: 62vh; }
+}
+/* Groups of buttons sit side by side and wrap, instead of stacking one per line */
+.fig-control-group:has(> .fig-btn + .fig-btn) {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 0.4rem;
+}
+.fig-control-group:has(> .fig-btn + .fig-btn) > .fig-btn {
+  width: auto;
+  flex: 1 1 auto;
+}
+
+/* Human timeline (Part 1): details panel under the drawing */
+.timeline-panel {
+  margin-top: 0.6rem;
+  padding: 0.7rem 0.9rem;
+  border-left: 4px solid var(--accent);
+  background: var(--surface-raised);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  min-height: 6.2rem;
+}
+.timeline-panel-title { font-weight: 700; color: var(--ink); }
+.timeline-panel-date { font-size: 0.82rem; color: var(--accent); font-weight: 600; margin: 0.1rem 0 0.3rem; }
+.timeline-panel p { margin: 0 0 0.3rem; color: var(--ink-secondary, var(--ink)); line-height: 1.5; }
+.timeline-panel a { font-size: 0.84rem; }
+figure[data-fig="fig-human-timeline"] g[role="button"]:focus { outline: none; }
+figure[data-fig="fig-human-timeline"] g[role="button"]:focus-visible circle { stroke-width: 3; }

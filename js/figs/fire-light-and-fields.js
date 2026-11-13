@@ -282,7 +282,7 @@
       } else if (stage === 1) { // B -> C (Adiabatic Expansion)
         statePV = { x: pB.x + (pC.x - pB.x) * frac, y: pB.y + (pC.y - pB.y) * frac };
         stateTS = { x: tsB.x, y: tsB.y + (tsC.y - tsB.y) * frac };
-        stepDesc = '<strong>Stroke 2 (B → C):</strong> Adiabatic Expansion. Insulated from reservoirs; gas cools from $' + TH + '$ K to $' + TC + '$ K while expanding.';
+        stepDesc = '<strong>Stroke 2 (B → C):</strong> Adiabatic Expansion. Insulated from reservoirs; gas cools from ' + TH + ' K to ' + TC + ' K while expanding.';
       } else if (stage === 2) { // C -> D (Isothermal Compression)
         statePV = { x: pC.x + (pD.x - pC.x) * frac, y: pC.y + (pD.y - pC.y) * frac - Math.sin(frac * Math.PI) * 10 };
         stateTS = { x: tsC.x + (tsD.x - tsC.x) * frac, y: tsC.y };
@@ -290,7 +290,7 @@
       } else { // D -> A (Adiabatic Compression)
         statePV = { x: pD.x + (pA.x - pD.x) * frac, y: pD.y + (pA.y - pD.y) * frac };
         stateTS = { x: tsD.x, y: tsD.y + (tsA.y - tsD.y) * frac };
-        stepDesc = '<strong>Stroke 4 (D → A):</strong> Adiabatic Compression. Insulated from reservoirs; compression heats gas back up from $' + TC + '$ K to $' + TH + '$ K.';
+        stepDesc = '<strong>Stroke 4 (D → A):</strong> Adiabatic Compression. Insulated from reservoirs; compression heats gas back up from ' + TC + ' K to ' + TH + ' K.';
       }
 
       infoBox.innerHTML = stepDesc;
