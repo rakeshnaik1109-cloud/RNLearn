@@ -395,7 +395,7 @@
     readouts.innerHTML =
       '<div><strong>Gravitational Work ($W = 2mgh$):</strong> <span id="joule-w-disp">367.9 J</span></div>' +
       '<div><strong>Equivalent Heat ($Q = W / J$):</strong> <span id="joule-q-disp">87.9 cal</span></div>' +
-      '<div><strong>Water Temp Rise ($\Delta T = Q / C$):</strong> <span id="joule-dt-disp" style="color:var(--color-hot, #dc2626); font-weight:bold;">0.000 °C</span></div>' +
+      '<div><strong>Water Temp Rise ($\\Delta T = Q / C$):</strong> <span id="joule-dt-disp" style="color:var(--color-hot, #dc2626); font-weight:bold;">0.000 °C</span></div>' +
       '<div><strong>Mechanical Equivalent ($J$):</strong> <span>4.184 J / calorie</span></div>';
     wrapper.appendChild(readouts);
 
@@ -598,7 +598,7 @@
       ctx.fillText('Insulated Water Bath (1.0 kg)', vx + 10, vy + vh + 24);
       ctx.fillStyle = colors.muted;
       ctx.font = '11px sans-serif';
-      ctx.fillText('Falling masses turn paddle wheel → fluid friction converts work to heat', 170, 350);
+      ctx.fillText('Falling masses turn paddle wheel → fluid friction converts work to heat', 170, 16);
     }
 
     function animateDrop() {
@@ -695,7 +695,7 @@
     statsRow.innerHTML =
       '<div><strong>Left Chamber ($N_L$):</strong> <span id="n-left-disp" style="font-weight:bold; color:var(--color-primary, #2160c4);">80</span></div>' +
       '<div><strong>Right Chamber ($N_R$):</strong> <span id="n-right-disp" style="font-weight:bold; color:var(--color-accent, #d97706);">0</span></div>' +
-      '<div><strong>Microstate Multiplicity ($\Omega = \\frac{N!}{N_L! N_R!}$):</strong> <span id="omega-disp" style="font-weight:bold;">1</span></div>' +
+      '<div><strong>Microstate Multiplicity ($\\Omega = \\frac{N!}{N_L! N_R!}$):</strong> <span id="omega-disp" style="font-weight:bold;">1</span></div>' +
       '<div><strong>Entropy ($S = k_B \\ln \\Omega$):</strong> <span id="entropy-disp" style="font-weight:bold; color:var(--color-hot, #dc2626);">0.00 $k_B$</span></div>';
 
     wrapper.appendChild(statsRow);
@@ -792,7 +792,7 @@
 
         ctx.fillStyle = colors.hot;
         ctx.font = 'bold 11px sans-serif';
-        ctx.fillText('Removable Partition', midX - 55, boxTop - 10);
+        ctx.fillText('Removable Partition', midX - 55, boxTop - 5);
       } else {
         ctx.strokeStyle = isDark() ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.15)';
         ctx.lineWidth = 1;
@@ -849,7 +849,7 @@
       // Epistemic note at top
       ctx.fillStyle = colors.muted;
       ctx.font = '11px sans-serif';
-      ctx.fillText('Microstate distribution: free expansion spontaneously maximizes Ω; spontaneous reversal probability ≈ (1/2)^N ≈ 10^(-' + Math.round(totalN * 0.301) + ')', 60, 24);
+      ctx.fillText('Microstate distribution: free expansion spontaneously maximizes Ω; spontaneous reversal probability ≈ (1/2)^N ≈ 10^(-' + Math.round(totalN * 0.301) + ')', 60, 16);
     }
 
     function loop() {
@@ -1608,7 +1608,7 @@
       ctx.lineTo(xEnd.x + 16, xEnd.y - 5);
       ctx.lineTo(xEnd.x + 16, xEnd.y + 5);
       ctx.fill();
-      ctx.fillText('Direction of Wave (c)', xEnd.x - 70, xEnd.y + 20);
+      ctx.fillText('Direction of wave (c)', xEnd.x - 110, xEnd.y + 62);
 
       // Y-axis (E field axis)
       var yTop = project3D(0, 110, 0);

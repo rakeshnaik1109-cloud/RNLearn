@@ -98,19 +98,37 @@
       var xScale = plotObj.xScale;
       var yScale = plotObj.yScale;
 
-      filtered.forEach(function (d) {
-        var px = xScale(d.age);
-        var py = yScale(d.cc);
-
-        var txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        txt.setAttribute('x', px + 7);
-        txt.setAttribute('y', py - 4);
-        txt.setAttribute('font-size', '9.5');
-        txt.setAttribute('font-family', FIG.getCSSVar('--font-sans'));
-        txt.setAttribute('fill', FIG.getCSSVar('--ink-secondary', '#4a4d57'));
-        txt.textContent = d.name.split(' ')[0] + ' ' + (d.name.split(' ')[1] || '') + ' (' + d.cc + ' cc)';
-        svg.appendChild(txt);
+      var labelOf = function (d) {
+        var parts = d.name.split(' ');
+        var site = (d.name.match(/\(([^)]+)\)/) || [])[1];
+        var sp = parts[0].replace('Australopithecus', 'Australop.') + ' ' + (parts[1] || '');
+        return sp + (site && d.age <= 0.6 && d.age > 0 ? ', ' + site : '') + ' (' + d.cc + ' cc)';
+      };
+      // The crowded last 400,000 years: a stacked column of labels with leader lines
+      var colBoxes = [];
+      var recent = filtered.filter(function (d) { return d.age <= 0.6; }).sort(function (a, b) { return b.cc - a.cc; });
+      var colX = xScale(0.75), step = 12.5, ys = recent.map(function (d) { return yScale(d.cc); });
+      for (var i = 1; i < ys.length; i++) ys[i] = Math.max(ys[i], ys[i - 1] + step);
+      var over = ys.length ? ys[ys.length - 1] - 318 : 0;
+      if (over > 0) for (var j = ys.length - 1; j >= 0; j--) { ys[j] -= over; if (j > 0 && ys[j - 1] > ys[j] - step) ys[j - 1] = ys[j] - step; }
+      recent.forEach(function (d, k) {
+        var px = xScale(d.age), py = yScale(d.cc), ly = ys[k];
+        var ln = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        ln.setAttribute('x1', colX + 3); ln.setAttribute('y1', ly - 3); ln.setAttribute('x2', px - 4); ln.setAttribute('y2', py);
+        ln.setAttribute('stroke', FIG.getCSSVar('--ink-faint', '#a2a6b4')); ln.setAttribute('stroke-width', '0.7');
+        svg.appendChild(ln);
+        var tx = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        tx.setAttribute('x', colX); tx.setAttribute('y', ly); tx.setAttribute('text-anchor', 'end');
+        tx.setAttribute('font-size', '9'); tx.setAttribute('font-family', FIG.getCSSVar('--font-sans'));
+        tx.setAttribute('fill', FIG.getCSSVar('--ink-secondary', '#4a4d57'));
+        tx.textContent = labelOf(d);
+        svg.appendChild(tx);
+        var bb = tx.getBBox(); colBoxes.push({ x0: bb.x - 2, y0: bb.y - 2, x1: bb.x + bb.width + 2, y1: bb.y + bb.height + 2 });
       });
+      // Older, well-spread specimens: automatic placement
+      FIG.placeLabels(svg, filtered.filter(function (d) { return d.age > 0.6; }).map(function (d) {
+        return { x: xScale(d.age), y: yScale(d.cc), text: labelOf(d) };
+      }), { fontSize: 9, bounds: [70, 22, 712, 322], avoid: colBoxes });
     }
 
     FIG.select(controlsWrap, {
@@ -255,8 +273,8 @@
 
       // Labels
       var lbl1 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      lbl1.setAttribute('x', fromX - 25);
-      lbl1.setAttribute('y', fromY - 10);
+      lbl1.setAttribute('x', fromX + 12);
+      lbl1.setAttribute('y', Math.max(fromY + 12, 18));
       lbl1.setAttribute('font-size', '12');
       lbl1.setAttribute('font-weight', '700');
       lbl1.setAttribute('fill', warnCol);
@@ -470,14 +488,14 @@
     var misStage = 5; // MIS 5 (Eemian interglacial ~120 ka, Green Sahara)
 
     var sites = [
-      { name: "Jebel Irhoud", x: 230, y: 75, date: "315 ka", desc: "Oldest known Homo sapiens crania & Mousterian points" },
-      { name: "Taforalt", x: 260, y: 70, date: "82 ka", desc: "Nassarius shell beads pierced for personal adornment" },
+      { name: "Jebel Irhoud", x: 230, y: 75, align: "left", date: "315 ka", desc: "Oldest known Homo sapiens crania & Mousterian points" },
+      { name: "Taforalt", x: 260, y: 70, dy: -8, date: "82 ka", desc: "Nassarius shell beads pierced for personal adornment" },
       { name: "Gona", x: 395, y: 175, date: "2.6 Ma", desc: "Earliest Mode 1 Oldowan knapped cores" },
       { name: "Lomekwi 3", x: 380, y: 195, date: "3.3 Ma", desc: "Oldest discovered stone tools (flaked cores)" },
       { name: "Olduvai Gorge", x: 385, y: 220, date: "1.9 Ma", desc: "Louis & Mary Leakey Oldowan and Acheulean sequence" },
       { name: "Wonderwerk Cave", x: 320, y: 310, date: "1.0 Ma", desc: "FTIR evidence of in situ burned bone and plant ash" },
       { name: "Klasies River", x: 330, y: 350, date: "115 ka", desc: "Middle Stone Age marine foraging & shell middens" },
-      { name: "Blombos Cave", x: 300, y: 345, date: "77 ka", desc: "Engraved geometric ochre & silcrete drawing" },
+      { name: "Blombos Cave", x: 300, y: 345, align: "left", date: "77 ka", desc: "Engraved geometric ochre & silcrete drawing" },
       { name: "Qafzeh / Skhul", x: 390, y: 90, date: "100 ka", desc: "Levantine early Homo sapiens burials with ochre" }
     ];
 
@@ -519,6 +537,8 @@
             x: s.x,
             y: s.y,
             label: s.name + " (" + s.date + ")",
+            align: s.align,
+            dy: s.dy,
             color: FIG.getCSSVar('--accent', '#1b4965')
           };
         })

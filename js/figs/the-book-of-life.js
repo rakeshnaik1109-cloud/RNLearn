@@ -86,7 +86,7 @@
           '<text x="12" y="24" font-size="12" font-weight="bold" fill="currentColor">Faunal Succession</text>' +
           '<line x1="12" y1="34" x2="173" y2="34" stroke="var(--color-border, #eee)"/>' +
           '<text x="12" y="52" font-size="11" font-weight="bold" fill="#3b82f6">' + current.name.split(' ')[0] + '</text>' +
-          '<text x="12" y="70" font-size="11" fill="currentColor">Age: <strong>' + current.age + '</strong></text>' +
+          '<text x="12" y="70" font-size="11" fill="currentColor">Age: <tspan font-weight="bold">' + current.age + '</tspan></text>' +
           '<line x1="12" y1="84" x2="173" y2="84" stroke="var(--color-border, #eee)"/>' +
           '<text x="12" y="104" font-size="11" font-weight="bold" fill="#ef4444">Key Index Fossil:</text>' +
           '<text x="12" y="122" font-size="10" fill="currentColor">' + current.fossil + '</text>' +
@@ -205,9 +205,10 @@
           '<text x="12" y="24" font-size="12" font-weight="bold" fill="#3b82f6">Adaptive Radiation</text>' +
           '<line x1="12" y1="34" x2="173" y2="34" stroke="var(--color-border, #eee)"/>' +
           '<text x="12" y="52" font-size="11" font-weight="bold" fill="currentColor">Species:</text>' +
-          '<text x="12" y="68" font-size="10" font-style="italic" fill="currentColor">' + currentNiche.name + '</text>' +
-          '<line x1="12" y1="82" x2="173" y2="82" stroke="var(--color-border, #eee)"/>' +
-          '<text x="12" y="102" font-size="11" font-weight="bold" fill="#ef4444">Food Niche:</text>' +
+          '<text x="12" y="66" font-size="10" fill="currentColor">' + currentNiche.name.replace(/\s*\(.*$/, '') + '</text>' +
+          '<text x="12" y="78" font-size="10" font-style="italic" fill="currentColor">' + ((currentNiche.name.match(/\(([^)]*)\)/) || ['', ''])[1]) + '</text>' +
+          '<line x1="12" y1="86" x2="173" y2="86" stroke="var(--color-border, #eee)"/>' +
+          '<text x="12" y="104" font-size="11" font-weight="bold" fill="#ef4444">Food Niche:</text>' +
           '<text x="12" y="118" font-size="10" fill="currentColor">' + currentNiche.food + '</text>' +
           '<line x1="12" y1="132" x2="173" y2="132" stroke="var(--color-border, #eee)"/>' +
           '<text x="12" y="152" font-size="11" font-weight="bold" fill="#10b981">Beak Adaptation:</text>' +
@@ -314,8 +315,8 @@
           '<text x="12" y="24" font-size="12" font-weight="bold" fill="currentColor">Natural Selection</text>' +
           '<line x1="12" y1="34" x2="163" y2="34" stroke="var(--color-border, #eee)"/>' +
           '<text x="12" y="52" font-size="11" font-weight="bold" fill="#3b82f6">Population Frequencies:</text>' +
-          '<text x="12" y="74" font-size="11" fill="currentColor">Light Form: <strong>' + Math.round(lightMothFreq) + '%</strong></text>' +
-          '<text x="12" y="94" font-size="11" fill="currentColor">Dark Form: <strong>' + Math.round(darkMothFreq) + '%</strong></text>' +
+          '<text x="12" y="74" font-size="11" fill="currentColor">Light Form: <tspan font-weight="bold">' + Math.round(lightMothFreq) + '%</tspan></text>' +
+          '<text x="12" y="94" font-size="11" fill="currentColor">Dark Form: <tspan font-weight="bold">' + Math.round(darkMothFreq) + '%</tspan></text>' +
           '<line x1="12" y1="110" x2="163" y2="110" stroke="var(--color-border, #eee)"/>' +
           '<text x="12" y="130" font-size="11" font-weight="bold" fill="#ef4444">Selective Mechanism:</text>' +
           '<text x="12" y="148" font-size="10" fill="currentColor">Predatory birds visually</text>' +
@@ -407,11 +408,11 @@
 
           '<!-- Dust Specks Trapped in Bottom Bend of S-curve -->' +
           '<circle cx="218" cy="165" r="2" fill="#78350f"/><circle cx="223" cy="167" r="2.5" fill="#78350f"/><circle cx="227" cy="164" r="2" fill="#78350f"/>' +
-          '<text x="240" y="195" font-size="10" font-weight="bold" fill="#78350f">Airborne Dust Trapped Here</text>' +
+          '<text x="225" y="192" font-size="10" font-weight="bold" fill="#78350f" text-anchor="middle">Airborne dust trapped here</text>' +
 
           '<!-- Clean Air Exchange Arrow -->' +
           '<path d="M 295 105 Q 290 145 260 155 Q 235 155 225 125" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-dasharray="3 3"/>' +
-          '<text x="295" y="90" font-size="10" font-weight="bold" fill="#3b82f6">Air Enters Freely</text>';
+          '<text x="285" y="92" font-size="10" font-weight="bold" fill="#3b82f6" text-anchor="middle">Air enters freely</text>';
       } else {
         // Broken neck
         svgContent +=
@@ -432,7 +433,7 @@
           '<rect x="0" y="0" width="185" height="280" rx="6" fill="var(--color-surface, #fff)" stroke="var(--color-border, #ddd)" stroke-width="1"/>' +
           '<text x="12" y="24" font-size="12" font-weight="bold" fill="currentColor">Louis Pasteur (1861)</text>' +
           '<line x1="12" y1="34" x2="173" y2="34" stroke="var(--color-border, #eee)"/>' +
-          '<text x="12" y="52" font-size="11" font-weight="bold" fill="#3b82f6">Spontaneous Generation Defeated:</text>' +
+          '<text x="12" y="52" font-size="11" font-weight="bold" fill="#3b82f6">Spontaneous generation?</text>' +
           '<text x="12" y="70" font-size="10" fill="currentColor">Opponents claimed life</text>' +
           '<text x="12" y="84" font-size="10" fill="currentColor">needed a "vital force"</text>' +
           '<text x="12" y="98" font-size="10" fill="currentColor">in fresh air.</text>' +

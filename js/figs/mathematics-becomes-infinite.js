@@ -483,7 +483,7 @@
     metrics.innerHTML =
       '<div><strong>Gaussian Curvature ($K$):</strong> <span id="geom-k" style="font-weight:bold;">-1 (Constant Negative)</span></div>' +
       '<div><strong>Fifth Postulate (Parallel Lines):</strong> <span id="geom-par" style="font-weight:bold; color:var(--color-hot, #dc2626);">Infinitely Many Parallels</span></div>' +
-      '<div><strong>Triangle Angle Sum ($\alpha+\beta+\gamma$):</strong> <span id="geom-sum" style="font-weight:bold; color:var(--color-primary, #2160c4);">< 180°</span></div>';
+      '<div><strong>Triangle Angle Sum ($\\alpha+\\beta+\\gamma$):</strong> <span id="geom-sum" style="font-weight:bold; color:var(--color-primary, #2160c4);">< 180°</span></div>';
 
     wrapper.appendChild(metrics);
     container.appendChild(wrapper);
@@ -1130,7 +1130,10 @@
       var dY = startY + 7 * rowH + 34;
       ctx.fillStyle = colors.primary;
       ctx.font = 'bold 13px sans-serif';
-      ctx.fillText('New Number D = 0.', startX - 70, dY);
+      ctx.save();
+      ctx.textAlign = 'right';
+      ctx.fillText('D = 0.', startX - 10, dY);
+      ctx.restore();
 
       for (var k = 0; k < 7; k++) {
         var kx = startX + k * colW;

@@ -432,24 +432,18 @@
       ctx.fillText('Visible', (visX1 + visX2) / 2 - 15, oy - ph + 15);
       ctx.fillText('Infrared (IR)', visX2 + 40, oy - ph + 15);
 
-      // Max scale normalization based on T = 7000 K peak
-      var normMax = (Math.pow(7000, 5) * 1.5e-17);
-
-      // 1. Draw Planck's Radiation Curve: u(lambda) = (8*pi*h*c / lambda^5) / (exp(hc / lambda*k*T) - 1)
-      var c1 = 1.191e8; // arbitrary scaling constants for plotting
-      var c2 = 1.439e4;
+      // Planck's law in wavelength form, u(λ) ∝ λ^-5 / (exp(hc/λkT) − 1), with hc/k = 1.4388e7 nm·K.
+      // Both curves share one scale, normalised to the height of the 7000 K peak, so the slider shows
+      // the real growth of the peak with temperature and the classical curve meets Planck's at long λ.
+      var HCK = 1.4388e7;
+      function planck(lam, temp) { return Math.pow(lam, -5) / (Math.exp(HCK / (lam * temp)) - 1); }
+      var normMax = planck(2.8978e6 / 7000, 7000);
 
       ctx.beginPath();
       var peakY = 0, peakX = 0;
       for (var l = minLambda; l <= maxLambda; l += 5) {
         var x = mapX(l);
-        // Planck formula in terms of wavelength
-        var exponent = c2 / (l * (T / 1000.0) * 0.1);
-        var val = 0;
-        if (exponent < 80) {
-          val = (c1 / Math.pow(l, 5)) / (Math.exp(c2 / (l * (T / 1000))) - 1);
-        }
-        var scaleY = (val / 0.00035) * ph;
+        var scaleY = (planck(l, T) / normMax) * ph * 0.92;
         var y = oy - Math.min(ph, scaleY);
         if (scaleY > peakY) { peakY = scaleY; peakX = x; }
 
@@ -473,8 +467,8 @@
         ctx.beginPath();
         for (var rjL = 250; rjL <= maxLambda; rjL += 5) {
           var rjX = mapX(rjL);
-          var rjVal = (T / 1000.0) * 45000000.0 / Math.pow(rjL, 4);
-          var rjY = oy - Math.min(ph + 20, (rjVal / 0.00035) * ph);
+          var rjVal = T / (HCK * Math.pow(rjL, 4));   // long-wavelength limit of Planck's law
+          var rjY = oy - Math.min(ph, (rjVal / normMax) * ph * 0.92);
 
           if (rjL === 250) ctx.moveTo(rjX, rjY);
           else ctx.lineTo(rjX, rjY);
@@ -488,7 +482,7 @@
         // Label UV Catastrophe
         ctx.fillStyle = colors.hot;
         ctx.font = 'bold 11px sans-serif';
-        ctx.fillText('Rayleigh-Jeans (Ultraviolet Catastrophe u → ∞)', mapX(260), oy - ph + 35);
+        ctx.fillText('Rayleigh–Jeans: u → ∞ at short λ (ultraviolet catastrophe)', mapX(900), oy - ph + 40);
       }
 
       // Mark Wien peak
@@ -507,7 +501,7 @@
         ctx.fill();
 
         ctx.font = 'bold 11px sans-serif';
-        ctx.fillText('λ_max = ' + peakLambdaNm + ' nm', peakMapX + 8, oy - peakY + 4);
+        ctx.fillText('λ_max = ' + peakLambdaNm + ' nm', peakMapX + 8, oy - peakY - 12);
       }
 
       // Legend
@@ -1357,7 +1351,7 @@
     infoRow.innerHTML =
       '<div><strong>Transition:</strong> <span id="bohr-trans-disp" style="font-weight:bold;">3 → 2</span></div>' +
       '<div><strong>Emitted Photon Energy ($\Delta E$):</strong> <span id="bohr-de-disp" style="font-weight:bold; color:var(--color-hot, #dc2626);">1.89 eV</span></div>' +
-      '<div><strong>Wavelength ($\lambda = hc/\Delta E$):</strong> <span id="bohr-lambda-disp" style="font-weight:bold; color:var(--color-accent, #d97706);">656.3 nm (Hα Red)</span></div>' +
+      '<div><strong>Wavelength ($\\lambda = hc/\\Delta E$):</strong> <span id="bohr-lambda-disp" style="font-weight:bold; color:var(--color-accent, #d97706);">656.3 nm (Hα Red)</span></div>' +
       '<div><strong>Spectral Series:</strong> <span id="bohr-series-disp">Balmer Series</span></div>';
 
     wrapper.appendChild(infoRow);
@@ -1477,7 +1471,7 @@
       }
 
       // --- Right: Energy Level Diagram ---
-      var ex = 450, ey = 310, ew = 220, eh = 260;
+      var ex = 450, ey = 310, ew = 130, eh = 260, prevLabelY = Infinity;
 
       ctx.fillStyle = colors.text;
       ctx.font = 'bold 12px sans-serif';
@@ -1495,9 +1489,20 @@
         ctx.lineTo(ex + ew, yPos);
         ctx.stroke();
 
+        // The upper levels crowd together, so push their labels apart and add a short leader line
+        var labelY = Math.min(yPos, prevLabelY - 13);
+        prevLabelY = labelY;
+        if (labelY !== yPos) {
+          ctx.strokeStyle = colors.border;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(ex + ew, yPos);
+          ctx.lineTo(ex + ew + 8, labelY);
+          ctx.stroke();
+        }
         ctx.fillStyle = colors.text;
         ctx.font = '11px sans-serif';
-        ctx.fillText('n = ' + k + ' (' + en.toFixed(2) + ' eV)', ex + ew + 10, yPos + 4);
+        ctx.fillText('n = ' + k + ' (' + en.toFixed(2) + ' eV)', ex + ew + 10, labelY + 4);
       }
 
       // Transition arrow between ni and nf

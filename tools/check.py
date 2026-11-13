@@ -202,7 +202,7 @@ def check_figures_registry(root_dir, html_files, errors):
                 for m_tuple in matches:
                     m = m_tuple[0] or m_tuple[1]
                     # Ignore core built-ins
-                    if m not in ["plot", "slider", "select", "button", "readouts", "createCanvas", "animate", "quiz", "timeline", "map", "table", "initAll", "getCSSVar", "formatNumber", "createSVG", "createLinearScale", "createLogScale"]:
+                    if m not in ["plot", "slider", "select", "button", "readouts", "createCanvas", "animate", "quiz", "timeline", "map", "table", "initAll", "getCSSVar", "formatNumber", "createSVG", "createLinearScale", "createLogScale", "placeLabels"]:
                         registered_figs.add(m)
 
     # Collect data-fig usages

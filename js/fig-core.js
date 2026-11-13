@@ -652,7 +652,7 @@
         if (m.label) {
           var lbl = document.createElementNS(SVG_NS, 'text');
           lbl.setAttribute('x', m.x + (m.align === 'left' ? -8 : 8));
-          lbl.setAttribute('y', m.y + 4);
+          lbl.setAttribute('y', m.y + 4 + (m.dy || 0));
           lbl.setAttribute('text-anchor', m.align === 'left' ? 'end' : 'start');
           lbl.setAttribute('font-size', '11');
           lbl.setAttribute('font-weight', '600');
@@ -754,6 +754,64 @@
     table.appendChild(tbody);
     wrap.appendChild(table);
     container.appendChild(wrap);
+  };
+
+
+  /* --- Point-label placement without overlaps ---
+     labels: [{x, y, text}] in SVG user units. Tries positions around each point
+     (right, left, above, below, then further away) and keeps the first that
+     stays inside the viewBox and clears earlier labels and all points.
+     A thin leader line is drawn when a label ends up far from its point. */
+  FIG.placeLabels = function (svg, labels, opts) {
+    opts = opts || {};
+    var NS = 'http://www.w3.org/2000/svg';
+    var vb = (svg.getAttribute('viewBox') || '0 0 720 400').split(/[\s,]+/).map(Number);
+    var minX = vb[0] + 2, minY = vb[1] + 2, maxX = vb[0] + vb[2] - 2, maxY = vb[1] + vb[3] - 2;
+    if (opts.bounds) { minX = opts.bounds[0]; minY = opts.bounds[1]; maxX = opts.bounds[2]; maxY = opts.bounds[3]; }
+    var size = opts.fontSize || 9.5, gap = 6, lineH = size + 3;
+    var placed = (opts.avoid || []).slice();
+    var pts = labels.map(function (l) { return { x0: l.x - 6, y0: l.y - 6, x1: l.x + 6, y1: l.y + 6 }; });
+    var hit = function (a, b) { return a.x0 < b.x1 && a.x1 > b.x0 && a.y0 < b.y1 && a.y1 > b.y0; };
+    labels.forEach(function (l) {
+      var t = document.createElementNS(NS, 'text');
+      t.setAttribute('font-size', size);
+      t.setAttribute('font-family', opts.fontFamily || FIG.getCSSVar('--font-sans'));
+      t.setAttribute('fill', opts.color || FIG.getCSSVar('--ink-secondary', '#4a4d57'));
+      t.textContent = l.text;
+      svg.appendChild(t);
+      var w = t.getComputedTextLength ? t.getComputedTextLength() : l.text.length * size * 0.55;
+      var cands = [];
+      for (var k = 0; k <= 24; k++) {
+        var dy = (k % 2 ? -1 : 1) * Math.ceil(k / 2) * lineH;
+        cands.push({ x: l.x + gap, y: l.y + size * 0.35 + dy, a: 'start' });
+        cands.push({ x: l.x - gap, y: l.y + size * 0.35 + dy, a: 'end' });
+      }
+      cands.push({ x: l.x, y: l.y - gap - 2, a: 'middle' }, { x: l.x, y: l.y + gap + size, a: 'middle' });
+      var chosen = null;
+      for (var i = 0; i < cands.length && !chosen; i++) {
+        var c = cands[i];
+        var x0 = c.a === 'start' ? c.x : c.a === 'end' ? c.x - w : c.x - w / 2;
+        var box = { x0: x0 - 1, y0: c.y - size, x1: x0 + w + 1, y1: c.y + 2 };
+        if (box.x0 < minX || box.x1 > maxX || box.y0 < minY || box.y1 > maxY) continue;
+        var clash = placed.some(function (p) { return hit(p, box); }) || pts.some(function (p) { return hit(p, box); });
+        if (!clash) chosen = { c: c, box: box };
+      }
+      if (!chosen) { var c0 = cands[1]; var bx = c0.x - w; chosen = { c: { x: Math.max(minX + w, c0.x), y: c0.y, a: 'end' }, box: { x0: bx, y0: c0.y - size, x1: c0.x, y1: c0.y + 2 } }; }
+      t.setAttribute('x', chosen.c.x.toFixed(1));
+      t.setAttribute('y', chosen.c.y.toFixed(1));
+      t.setAttribute('text-anchor', chosen.c.a);
+      placed.push(chosen.box);
+      if (Math.abs(chosen.c.y - (l.y + size * 0.35)) > lineH * 0.9) {
+        var ln = document.createElementNS(NS, 'line');
+        var lx = chosen.c.a === 'start' ? chosen.box.x0 : chosen.c.a === 'end' ? chosen.box.x1 : (chosen.box.x0 + chosen.box.x1) / 2;
+        ln.setAttribute('x1', l.x); ln.setAttribute('y1', l.y);
+        ln.setAttribute('x2', lx); ln.setAttribute('y2', chosen.c.y - size * 0.35);
+        ln.setAttribute('stroke', opts.color || FIG.getCSSVar('--ink-faint', '#a2a6b4'));
+        ln.setAttribute('stroke-width', '0.7');
+        svg.insertBefore(ln, t);
+      }
+    });
+    return placed;
   };
 
   /* --- Global Initializer for <figure class="fig" data-fig="name"> --- */

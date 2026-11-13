@@ -783,7 +783,14 @@
 
         ctx.fillStyle = colors.text;
         ctx.font = (nd.core ? 'bold ' : '') + '11px sans-serif';
-        ctx.fillText(nd.name, nx + 12, ny + 4);
+        if (nd.core === false) {
+          // Middle-ring labels sit under their node so they keep clear of the outer-ring labels
+          ctx.textAlign = 'center';
+          ctx.fillText(nd.name, nx, ny + 22);
+          ctx.textAlign = 'left';
+        } else {
+          ctx.fillText(nd.name, nx + 12, ny + 4);
+        }
       });
 
       // Sensory boundary annotation
@@ -845,7 +852,7 @@
       '<span id="bayes-peh-val">0.90</span>' +
       '</label>' +
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>False Positive $P(E|\neg H)$:</strong>' +
+      '<strong>False Positive $P(E|\\neg H)$:</strong>' +
       '<input type="range" id="bayes-penoth" min="0.01" max="0.30" step="0.01" value="0.05" style="width:80px;">' +
       '<span id="bayes-penoth-val">0.05</span>' +
       '</label>';

@@ -432,10 +432,12 @@
             '<text x="15" y="28" font-size="13" font-weight="bold" fill="currentColor">Carbon Monoxide (CO)</text>' +
             '<!-- Carbon atom -->' +
             '<circle cx="60" cy="62" r="18" fill="#1e293b"/>' +
-            '<text x="60" y="66" font-size="11" font-weight="bold" fill="#fff" text-anchor="middle">C (12g)</text>' +
+            '<text x="60" y="67" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">C</text>' +
+            '<text x="60" y="93" font-size="9" fill="currentColor" text-anchor="middle">12 g</text>' +
             '<!-- Oxygen atom -->' +
             '<circle cx="105" cy="62" r="18" fill="#ef4444"/>' +
-            '<text x="105" y="66" font-size="11" font-weight="bold" fill="#fff" text-anchor="middle">O (16g)</text>' +
+            '<text x="105" y="67" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">O</text>' +
+            '<text x="105" y="93" font-size="9" fill="currentColor" text-anchor="middle">16 g</text>' +
             '<!-- Stoichiometry ratio -->' +
             '<text x="145" y="66" font-size="12" fill="#3b82f6" font-weight="bold">Ratio: 12g C : 16g O</text>' +
           '</g>' +
@@ -446,13 +448,16 @@
             '<text x="15" y="28" font-size="13" font-weight="bold" fill="currentColor">Carbon Dioxide (CO₂)</text>' +
             '<!-- Oxygen atom 1 -->' +
             '<circle cx="45" cy="62" r="18" fill="#ef4444"/>' +
-            '<text x="45" y="66" font-size="11" font-weight="bold" fill="#fff" text-anchor="middle">O (16g)</text>' +
+            '<text x="45" y="67" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">O</text>' +
+            '<text x="45" y="93" font-size="9" fill="currentColor" text-anchor="middle">16 g</text>' +
             '<!-- Carbon atom -->' +
             '<circle cx="85" cy="62" r="18" fill="#1e293b"/>' +
-            '<text x="85" y="66" font-size="11" font-weight="bold" fill="#fff" text-anchor="middle">C (12g)</text>' +
+            '<text x="85" y="67" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">C</text>' +
+            '<text x="85" y="93" font-size="9" fill="currentColor" text-anchor="middle">12 g</text>' +
             '<!-- Oxygen atom 2 -->' +
             '<circle cx="125" cy="62" r="18" fill="#ef4444"/>' +
-            '<text x="125" y="66" font-size="11" font-weight="bold" fill="#fff" text-anchor="middle">O (16g)</text>' +
+            '<text x="125" y="67" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">O</text>' +
+            '<text x="125" y="93" font-size="9" fill="currentColor" text-anchor="middle">16 g</text>' +
             '<!-- Stoichiometry ratio -->' +
             '<text x="155" y="66" font-size="12" fill="#10b981" font-weight="bold">Ratio: 12g C : 32g O</text>' +
           '</g>' +
@@ -466,18 +471,18 @@
             '<text x="12" y="70" font-size="10" fill="currentColor">For a fixed mass of C</text>' +
             '<text x="12" y="84" font-size="10" fill="currentColor">(12 grams):</text>' +
             '<line x1="12" y1="98" x2="153" y2="98" stroke="var(--color-border, #eee)"/>' +
-            '<text x="12" y="118" font-size="11" fill="#3b82f6">CO has: <strong>16g Oxygen</strong></text>' +
-            '<text x="12" y="136" font-size="11" fill="#10b981">CO₂ has: <strong>32g Oxygen</strong></text>' +
+            '<text x="12" y="118" font-size="11" fill="#3b82f6">CO has: <tspan font-weight="bold">16 g oxygen</tspan></text>' +
+            '<text x="12" y="136" font-size="11" fill="#10b981">CO₂ has: <tspan font-weight="bold">32 g oxygen</tspan></text>' +
             '<line x1="12" y1="152" x2="153" y2="152" stroke="var(--color-border, #eee)"/>' +
             '<text x="12" y="172" font-size="11" font-weight="bold" fill="#ef4444">Ratio of Oxygen:</text>' +
             '<text x="12" y="196" font-size="16" font-weight="800" fill="#ef4444">16 : 32 = 1 : 2</text>' +
             '<line x1="12" y1="210" x2="153" y2="210" stroke="var(--color-border, #eee)"/>' +
             '<text x="12" y="228" font-size="10" fill="var(--color-text-muted, #666)">Small whole numbers!</text>' +
-            '<text x="12" y="242" font-size="10" font-weight="bold" fill="#10b981">Proves discrete atoms!</text>' +
+            '<text x="12" y="242" font-size="10" font-weight="bold" fill="#10b981">Strong evidence for atoms</text>' +
           '</g>';
 
         explain.innerHTML =
-          '<strong>Dalton’s Law of Multiple Proportions (1803):</strong> When two elements combine to form more than one compound, the masses of one element that combine with a fixed mass of the other stand in <strong>small whole-number ratios</strong> ($1:2$). There are no fractional atoms (no $1.5$ atoms of oxygen). This integer stepping could only occur if matter was composed of discrete, indestructible particles—atoms.';
+          '<strong>Dalton’s Law of Multiple Proportions (1803):</strong> When two elements combine to form more than one compound, the masses of one element that combine with a fixed mass of the other stand in <strong>small whole-number ratios</strong> ($1:2$). There are no fractional atoms (no $1.5$ atoms of oxygen). This integer stepping is exactly what you expect if matter is made of discrete particles — atoms.';
       } else {
         pairVal.textContent = "Nitrogen Oxides (N₂O vs NO vs NO₂)";
 
@@ -516,11 +521,11 @@
             '<line x1="12" y1="200" x2="153" y2="200" stroke="var(--color-border, #eee)"/>' +
             '<text x="12" y="220" font-size="10" fill="var(--color-text-muted, #666)">A continuous fluid</text>' +
             '<text x="12" y="234" font-size="10" fill="var(--color-text-muted, #666)">cannot explain integer</text>' +
-            '<text x="12" y="248" font-size="10" font-weight="bold" fill="#ef4444">multiples. Atoms must exist.</text>' +
+            '<text x="12" y="248" font-size="10" font-weight="bold" fill="#ef4444">multiples: evidence for atoms.</text>' +
           '</g>';
 
         explain.innerHTML =
-          '<strong>The Nitrogen Series (1:2:4 Ratio):</strong> For a fixed 28 grams of nitrogen, the masses of oxygen in nitrous oxide, nitric oxide, and nitrogen dioxide are 16g, 32g, and 64g—an exact mathematical ratio of $1:2:4$. Dalton proved that chemical reactions are combinations of discrete, whole units of matter.';
+          '<strong>The Nitrogen Series (1:2:4 Ratio):</strong> For a fixed 28 grams of nitrogen, the masses of oxygen in nitrous oxide, nitric oxide, and nitrogen dioxide are 16g, 32g, and 64g—an exact mathematical ratio of $1:2:4$. Dalton read this as strong evidence that compounds are built from discrete, whole units of matter.';
       }
 
       svg.innerHTML = svgContent;
@@ -897,10 +902,10 @@
       if (isDiscovered) {
         svgContent +=
           '<text x="12" y="150" font-size="10" font-weight="bold" fill="#10b981">Actual Discovery: Gallium (1875)</text>' +
-          '<text x="12" y="166" font-size="10" fill="currentColor">• Atomic weight: <strong>69.72</strong></text>' +
-          '<text x="12" y="182" font-size="10" fill="currentColor">• Density: <strong>5.91 g/cm³</strong></text>' +
-          '<text x="12" y="198" font-size="10" fill="currentColor">• Melting point: <strong>29.8°C</strong></text>' +
-          '<text x="12" y="214" font-size="10" fill="currentColor">• Oxide formula: <strong>Ga₂O₃</strong></text>' +
+          '<text x="12" y="166" font-size="10" fill="currentColor">• Atomic weight: <tspan font-weight="bold">69.72</tspan></text>' +
+          '<text x="12" y="182" font-size="10" fill="currentColor">• Density: <tspan font-weight="bold">5.91 g/cm³</tspan></text>' +
+          '<text x="12" y="198" font-size="10" fill="currentColor">• Melting point: <tspan font-weight="bold">29.8°C</tspan></text>' +
+          '<text x="12" y="214" font-size="10" fill="currentColor">• Oxide formula: <tspan font-weight="bold">Ga₂O₃</tspan></text>' +
           '<line x1="12" y1="228" x2="203" y2="228" stroke="var(--color-border, #eee)"/>' +
           '<text x="12" y="248" font-size="10" font-weight="bold" fill="#10b981">Astonishing Accuracy! (&lt; 1% err)</text>';
       } else {

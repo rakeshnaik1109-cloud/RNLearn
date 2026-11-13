@@ -1,0 +1,2077 @@
+[
+  {
+    "term": "Hominin",
+    "definition": "Humans and their extinct relatives after the split from the chimpanzee line, such as Australopithecus and Homo erectus.",
+    "forms": [
+      "hominins"
+    ]
+  },
+  {
+    "term": "Knapping",
+    "definition": "Shaping stone, such as flint, by striking it so that sharp flakes break off.",
+    "forms": [
+      "knapped",
+      "knapper",
+      "knappers"
+    ]
+  },
+  {
+    "term": "Conchoidal fracture",
+    "definition": "A smooth, shell-shaped break typical of glassy stones like flint and obsidian; it gives very sharp edges.",
+    "forms": [
+      "conchoidal"
+    ]
+  },
+  {
+    "term": "Hertzian cone",
+    "definition": "The cone-shaped crack that spreads into a brittle material from the point where it is struck.",
+    "forms": [
+      "Hertzian cones"
+    ]
+  },
+  {
+    "term": "Isotropic",
+    "definition": "Having the same properties in every direction, with no grain or cleavage planes.",
+    "forms": []
+  },
+  {
+    "term": "Oldowan",
+    "definition": "The oldest well-known stone-tool tradition (from about 2.6 million years ago): simple flakes and choppers.",
+    "forms": []
+  },
+  {
+    "term": "Acheulean",
+    "definition": "A stone-tool tradition (from about 1.76 million years ago) known for symmetrical, two-sided handaxes.",
+    "forms": [
+      "Acheulian"
+    ]
+  },
+  {
+    "term": "Levallois",
+    "definition": "A stone-tool method in which a core is carefully prepared so that one final blow removes a flake of planned shape.",
+    "forms": []
+  },
+  {
+    "term": "Encephalisation quotient",
+    "definition": "How large an animal's brain is compared with the size expected for an animal of its body mass.",
+    "forms": [
+      "encephalisation",
+      "EQ"
+    ]
+  },
+  {
+    "term": "Basal metabolic rate",
+    "definition": "The energy the body uses at complete rest just to stay alive.",
+    "forms": [
+      "BMR"
+    ]
+  },
+  {
+    "term": "Gelatinisation",
+    "definition": "The swelling and breakdown of starch grains in hot water, which makes them easy to digest.",
+    "forms": []
+  },
+  {
+    "term": "Middle Stone Age",
+    "definition": "The period of African prehistory from roughly 300,000 to 40,000 years ago, when Homo sapiens appeared.",
+    "forms": [
+      "MSA"
+    ]
+  },
+  {
+    "term": "Ochre",
+    "definition": "Natural earth rich in iron oxide, ground into red or yellow pigment.",
+    "forms": []
+  },
+  {
+    "term": "Pleistocene",
+    "definition": "The geological epoch from about 2.6 million to 11,700 years ago, the era of the ice ages.",
+    "forms": []
+  },
+  {
+    "term": "Radiocarbon dating",
+    "definition": "Dating once-living material by how much radioactive carbon-14 is left in it; works back to about 50,000 years.",
+    "forms": [
+      "radiocarbon",
+      "carbon-14"
+    ]
+  },
+  {
+    "term": "Half-life",
+    "definition": "The time it takes for half of the atoms of a radioactive substance to decay.",
+    "forms": [
+      "half-lives"
+    ]
+  },
+  {
+    "term": "Luminescence dating",
+    "definition": "Dating buried sediment or burnt stone by measuring the light released from energy stored in its crystals since it was last heated or exposed to sunlight.",
+    "forms": [
+      "thermoluminescence",
+      "optically stimulated luminescence"
+    ]
+  },
+  {
+    "term": "Argon–argon dating",
+    "definition": "Dating volcanic rock from the ratio of argon isotopes produced by the decay of potassium-40.",
+    "forms": [
+      "argon-argon"
+    ]
+  },
+  {
+    "term": "Marine Isotope Stage",
+    "definition": "A numbered warm or cold phase of past climate, identified from oxygen isotopes in sea-floor sediments.",
+    "forms": [
+      "Marine Isotope Stages"
+    ]
+  },
+  {
+    "term": "Taphonomy",
+    "definition": "The study of what happens to remains after death: decay, burial and disturbance.",
+    "forms": [
+      "taphonomic"
+    ]
+  },
+  {
+    "term": "Synodic month",
+    "definition": "The time from one new Moon to the next: about 29.5 days.",
+    "forms": [
+      "synodic"
+    ]
+  },
+  {
+    "term": "Chaîne opératoire",
+    "definition": "The sequence of steps a maker follows, from raw material to finished tool.",
+    "forms": [
+      "chaine operatoire"
+    ]
+  },
+  {
+    "term": "Cuneiform",
+    "definition": "Mesopotamian writing made by pressing a wedge-shaped reed into clay.",
+    "forms": []
+  },
+  {
+    "term": "Sexagesimal",
+    "definition": "Counting in base 60, as the Babylonians did; we still use it for minutes, seconds and degrees.",
+    "forms": [
+      "base 60",
+      "base-60"
+    ]
+  },
+  {
+    "term": "Place-value",
+    "definition": "A way of writing numbers in which a digit's value depends on its position, as in 205 versus 250.",
+    "forms": [
+      "place value",
+      "positional notation",
+      "positional system"
+    ]
+  },
+  {
+    "term": "Vigesimal",
+    "definition": "Counting in base 20, as the Maya did.",
+    "forms": [
+      "base 20"
+    ]
+  },
+  {
+    "term": "Heliacal rising",
+    "definition": "The first morning a star becomes visible again just before sunrise, after weeks hidden in the Sun's glare.",
+    "forms": []
+  },
+  {
+    "term": "Epagomenal days",
+    "definition": "Extra days added outside the regular months to make a 365-day year.",
+    "forms": [
+      "epagomenal"
+    ]
+  },
+  {
+    "term": "Sothic cycle",
+    "definition": "The 1,460-year period over which the Egyptian 365-day calendar drifted all the way round the seasons.",
+    "forms": []
+  },
+  {
+    "term": "Seked",
+    "definition": "The Egyptian measure of a slope: horizontal run, in palms and fingers, for each cubit of height.",
+    "forms": []
+  },
+  {
+    "term": "Pythagorean triple",
+    "definition": "Three whole numbers a, b, c with a² + b² = c², such as 3, 4, 5.",
+    "forms": [
+      "Pythagorean triples"
+    ]
+  },
+  {
+    "term": "Reciprocal",
+    "definition": "The number that multiplies with another to give 1; the reciprocal of 4 is 1/4.",
+    "forms": [
+      "reciprocals",
+      "reciprocal pairs"
+    ]
+  },
+  {
+    "term": "Metrology",
+    "definition": "The science of measurement and of standard units such as weights and lengths.",
+    "forms": [
+      "metrological"
+    ]
+  },
+  {
+    "term": "Gnomon",
+    "definition": "An upright stick or pillar whose shadow is used to tell the time or the season.",
+    "forms": []
+  },
+  {
+    "term": "Clepsydra",
+    "definition": "A water clock: time is measured by water flowing into or out of a vessel.",
+    "forms": [
+      "clepsydrae",
+      "water clock"
+    ]
+  },
+  {
+    "term": "Intercalation",
+    "definition": "Inserting an extra day or month into a calendar to keep it in step with the seasons.",
+    "forms": [
+      "intercalary",
+      "leap month",
+      "leap months"
+    ]
+  },
+  {
+    "term": "Metonic cycle",
+    "definition": "The 19-year period after which the Moon's phases fall on almost the same dates of the solar year (19 years ≈ 235 lunar months).",
+    "forms": [
+      "Metonic"
+    ]
+  },
+  {
+    "term": "Saros",
+    "definition": "An eclipse cycle of about 18 years 11 days, after which similar eclipses repeat.",
+    "forms": [
+      "Saros cycle"
+    ]
+  },
+  {
+    "term": "Hieratic",
+    "definition": "A flowing, handwritten form of Egyptian hieroglyphs used on papyrus.",
+    "forms": []
+  },
+  {
+    "term": "Ziggurat",
+    "definition": "A stepped temple tower of ancient Mesopotamia.",
+    "forms": [
+      "ziggurats"
+    ]
+  },
+  {
+    "term": "Calendar Round",
+    "definition": "The 52-year cycle formed when the Maya 260-day and 365-day calendars come back into step.",
+    "forms": []
+  },
+  {
+    "term": "Long Count",
+    "definition": "The Mesoamerican calendar that counts days from a fixed starting date far in the past.",
+    "forms": []
+  },
+  {
+    "term": "Omen",
+    "definition": "An event believed to foretell the future, such as an eclipse read as a sign from the gods.",
+    "forms": [
+      "omens"
+    ]
+  },
+  {
+    "term": "Arche",
+    "definition": "For early Greek thinkers, the basic stuff or first principle from which everything comes.",
+    "forms": []
+  },
+  {
+    "term": "Apeiron",
+    "definition": "Anaximander's \"boundless\": an endless, undefined source from which all things arise.",
+    "forms": []
+  },
+  {
+    "term": "Logos",
+    "definition": "For Heraclitus, the rational order or law behind constant change.",
+    "forms": []
+  },
+  {
+    "term": "Atomism",
+    "definition": "The idea that matter is made of tiny, indivisible particles moving in empty space.",
+    "forms": [
+      "atomist",
+      "atomists"
+    ]
+  },
+  {
+    "term": "Void",
+    "definition": "Completely empty space.",
+    "forms": []
+  },
+  {
+    "term": "Plenum",
+    "definition": "Space completely filled with matter, leaving no empty space.",
+    "forms": []
+  },
+  {
+    "term": "Vaiśeṣika",
+    "definition": "A classical Indian school of philosophy known for its theory of atoms and categories of reality.",
+    "forms": [
+      "Vaisesika",
+      "Vaiseshika"
+    ]
+  },
+  {
+    "term": "Paramāṇu",
+    "definition": "In Indian philosophy, the ultimate indivisible particle of matter.",
+    "forms": [
+      "paramanu"
+    ]
+  },
+  {
+    "term": "Nyāya",
+    "definition": "A classical Indian school of logic and theory of knowledge.",
+    "forms": [
+      "Nyaya"
+    ]
+  },
+  {
+    "term": "Pramāṇa",
+    "definition": "In Indian philosophy, a valid means of gaining knowledge, such as perception or inference.",
+    "forms": [
+      "pramāṇas",
+      "pramana"
+    ]
+  },
+  {
+    "term": "Vyāpti",
+    "definition": "The invariable connection between a sign and what it indicates, as between smoke and fire.",
+    "forms": [
+      "vyapti"
+    ]
+  },
+  {
+    "term": "Syllogism",
+    "definition": "A form of argument in which a conclusion follows from two premises.",
+    "forms": [
+      "syllogisms"
+    ]
+  },
+  {
+    "term": "Camera obscura",
+    "definition": "A dark room or box with a small hole; light through the hole forms an upside-down image on the opposite wall.",
+    "forms": []
+  },
+  {
+    "term": "Wuxing",
+    "definition": "The Chinese \"Five Phases\" — wood, fire, earth, metal and water — understood as stages of continual change.",
+    "forms": [
+      "Five Phases"
+    ]
+  },
+  {
+    "term": "Sublunary",
+    "definition": "In Aristotle's cosmos, the changeable region below the Moon, made of earth, water, air and fire.",
+    "forms": [
+      "sublunar"
+    ]
+  },
+  {
+    "term": "Superlunary",
+    "definition": "In Aristotle's cosmos, the unchanging heavens above the Moon.",
+    "forms": []
+  },
+  {
+    "term": "Aether",
+    "definition": "In ancient cosmology, the fifth element that made up the heavens.",
+    "forms": [
+      "quintessence"
+    ]
+  },
+  {
+    "term": "Teleology",
+    "definition": "Explaining things by their purpose or goal: \"the eye exists in order to see\".",
+    "forms": [
+      "teleological"
+    ]
+  },
+  {
+    "term": "Four causes",
+    "definition": "Aristotle's four kinds of explanation: what a thing is made of, its form, what produced it, and its purpose.",
+    "forms": []
+  },
+  {
+    "term": "Methodological naturalism",
+    "definition": "The working rule of science: explain natural events only by natural causes.",
+    "forms": [
+      "naturalism"
+    ]
+  },
+  {
+    "term": "Stadion",
+    "definition": "An ancient Greek unit of length, roughly 160–185 metres; its exact value varied.",
+    "forms": [
+      "stadia",
+      "stadium"
+    ]
+  },
+  {
+    "term": "Buoyancy",
+    "definition": "The upward push of a fluid on an object in it, equal to the weight of fluid the object displaces.",
+    "forms": [
+      "buoyant"
+    ]
+  },
+  {
+    "term": "Principle of sufficient reason",
+    "definition": "The idea that nothing happens without a reason why it is so and not otherwise.",
+    "forms": []
+  },
+  {
+    "term": "Reductio ad absurdum",
+    "definition": "Proving something by showing that its opposite leads to a contradiction.",
+    "forms": [
+      "proof by contradiction"
+    ]
+  },
+  {
+    "term": "Axiom",
+    "definition": "A starting statement accepted without proof, from which other results are deduced.",
+    "forms": [
+      "axioms",
+      "axiomatic"
+    ]
+  },
+  {
+    "term": "Postulate",
+    "definition": "A basic assumption accepted without proof, especially in geometry.",
+    "forms": [
+      "postulates"
+    ]
+  },
+  {
+    "term": "Theorem",
+    "definition": "A statement that has been proved from axioms or earlier results.",
+    "forms": [
+      "theorems"
+    ]
+  },
+  {
+    "term": "Incommensurable",
+    "definition": "Two lengths are incommensurable when no common unit measures both exactly, like the side and diagonal of a square.",
+    "forms": [
+      "incommensurable magnitudes"
+    ]
+  },
+  {
+    "term": "Irrational number",
+    "definition": "A number that cannot be written as a fraction of whole numbers, such as √2 or π.",
+    "forms": [
+      "irrational numbers"
+    ]
+  },
+  {
+    "term": "Prime number",
+    "definition": "A whole number greater than 1 that can be divided exactly only by 1 and itself.",
+    "forms": [
+      "prime numbers",
+      "primes"
+    ]
+  },
+  {
+    "term": "Method of exhaustion",
+    "definition": "A Greek technique for finding areas and volumes by squeezing them between ever-closer inner and outer shapes.",
+    "forms": []
+  },
+  {
+    "term": "Conic section",
+    "definition": "A curve made by slicing a cone with a plane: circle, ellipse, parabola or hyperbola.",
+    "forms": [
+      "conic sections",
+      "conics"
+    ]
+  },
+  {
+    "term": "Ellipse",
+    "definition": "A closed oval curve; planets move in ellipses with the Sun at one focus.",
+    "forms": [
+      "ellipses",
+      "elliptical"
+    ]
+  },
+  {
+    "term": "Parabola",
+    "definition": "The U-shaped curve followed by a thrown object, ignoring air resistance.",
+    "forms": [
+      "parabolic"
+    ]
+  },
+  {
+    "term": "Hyperbola",
+    "definition": "An open curve with two branches, made by slicing a double cone steeply.",
+    "forms": [
+      "hyperbolic path"
+    ]
+  },
+  {
+    "term": "Sine",
+    "definition": "In a right triangle, the ratio of the side opposite an angle to the longest side; first tabulated as half-chords in India.",
+    "forms": [
+      "jyā"
+    ]
+  },
+  {
+    "term": "Śūnya",
+    "definition": "Sanskrit for \"empty\": the Indian name for zero.",
+    "forms": [
+      "sunya",
+      "śūnya-bindu"
+    ]
+  },
+  {
+    "term": "Algorithm",
+    "definition": "A step-by-step procedure for solving a problem.",
+    "forms": [
+      "algorithms",
+      "algorithmic"
+    ]
+  },
+  {
+    "term": "Algebra",
+    "definition": "The branch of mathematics that uses symbols for unknown quantities and the rules for working with them.",
+    "forms": [
+      "al-jabr"
+    ]
+  },
+  {
+    "term": "Diophantine equation",
+    "definition": "An equation for which only whole-number solutions are wanted.",
+    "forms": [
+      "Diophantine equations"
+    ]
+  },
+  {
+    "term": "Pell's equation",
+    "definition": "An equation of the form Nx² + 1 = y², to be solved in whole numbers.",
+    "forms": [
+      "Pell equation"
+    ]
+  },
+  {
+    "term": "Cakravāla",
+    "definition": "The cyclic method of Indian mathematicians for solving Pell's equation.",
+    "forms": [
+      "cakravala",
+      "chakravala"
+    ]
+  },
+  {
+    "term": "Mathematical induction",
+    "definition": "A proof that a statement holds for 1, and that if it holds for one number it holds for the next — so it holds for all.",
+    "forms": [
+      "induction proof"
+    ]
+  },
+  {
+    "term": "Fundamental Theorem of Arithmetic",
+    "definition": "Every whole number above 1 can be written as a product of primes in only one way.",
+    "forms": []
+  },
+  {
+    "term": "Infinite series",
+    "definition": "A sum with infinitely many terms that can still add up to a finite value, such as 1/2 + 1/4 + 1/8 + ….",
+    "forms": [
+      "power series"
+    ]
+  },
+  {
+    "term": "Calculus",
+    "definition": "The mathematics of continuous change: rates of change (derivatives) and accumulated totals (integrals).",
+    "forms": []
+  },
+  {
+    "term": "Infinitesimal",
+    "definition": "An imagined quantity smaller than any positive number yet not zero; used informally in early calculus.",
+    "forms": [
+      "infinitesimals"
+    ]
+  },
+  {
+    "term": "Derivative",
+    "definition": "The instantaneous rate of change of a quantity; the slope of a curve at a point.",
+    "forms": [
+      "derivatives",
+      "differentiation"
+    ]
+  },
+  {
+    "term": "Integral",
+    "definition": "The total accumulated by a varying quantity; the area under a curve.",
+    "forms": [
+      "integrals",
+      "integration"
+    ]
+  },
+  {
+    "term": "Epsilon–delta",
+    "definition": "The precise definition of a limit: for any tolerance ε you can find a closeness δ that guarantees it.",
+    "forms": [
+      "epsilon-delta"
+    ]
+  },
+  {
+    "term": "Continuous function",
+    "definition": "A function whose graph has no breaks or jumps.",
+    "forms": []
+  },
+  {
+    "term": "Real numbers",
+    "definition": "All numbers on the number line, rational and irrational, with no gaps.",
+    "forms": [
+      "real number",
+      "real continuum"
+    ]
+  },
+  {
+    "term": "Dedekind cut",
+    "definition": "A way of defining a real number as a split of the fractions into a lower and an upper set.",
+    "forms": [
+      "Dedekind cuts"
+    ]
+  },
+  {
+    "term": "Non-Euclidean geometry",
+    "definition": "A consistent geometry in which Euclid's parallel postulate is false.",
+    "forms": [
+      "non-Euclidean"
+    ]
+  },
+  {
+    "term": "Hyperbolic geometry",
+    "definition": "A non-Euclidean geometry in which many parallels pass through a point and triangle angles add to less than 180°.",
+    "forms": []
+  },
+  {
+    "term": "Parallel postulate",
+    "definition": "Euclid's fifth postulate: through a point there is exactly one line parallel to a given line.",
+    "forms": [
+      "Fifth Postulate"
+    ]
+  },
+  {
+    "term": "Manifold",
+    "definition": "A space that looks flat close up but may be curved overall, like the surface of the Earth.",
+    "forms": [
+      "manifolds"
+    ]
+  },
+  {
+    "term": "Metric tensor",
+    "definition": "The mathematical rule that gives distances in a curved space.",
+    "forms": []
+  },
+  {
+    "term": "Set theory",
+    "definition": "The branch of mathematics that studies collections of objects (sets), now the usual foundation of mathematics.",
+    "forms": []
+  },
+  {
+    "term": "Cardinality",
+    "definition": "The size of a set; two sets have the same cardinality if their members can be paired off exactly.",
+    "forms": []
+  },
+  {
+    "term": "Bijection",
+    "definition": "A perfect one-to-one pairing between the members of two sets.",
+    "forms": [
+      "one-to-one correspondence"
+    ]
+  },
+  {
+    "term": "Countable",
+    "definition": "A set is countable if its members can be listed 1, 2, 3, … (even if the list never ends).",
+    "forms": [
+      "countably infinite"
+    ]
+  },
+  {
+    "term": "Uncountable",
+    "definition": "Too large to be listed even in an endless list; the real numbers are uncountable.",
+    "forms": []
+  },
+  {
+    "term": "Aleph-null",
+    "definition": "The size of the set of counting numbers, the smallest infinity.",
+    "forms": [
+      "ℵ₀"
+    ]
+  },
+  {
+    "term": "Diagonal argument",
+    "definition": "Cantor's proof that any list of real numbers misses some, by building a number that differs from each entry.",
+    "forms": [
+      "diagonalization",
+      "diagonalisation"
+    ]
+  },
+  {
+    "term": "Power set",
+    "definition": "The set of all subsets of a set.",
+    "forms": []
+  },
+  {
+    "term": "Continuum hypothesis",
+    "definition": "Cantor's conjecture that no infinity lies between the counting numbers and the real numbers; it can be neither proved nor disproved from the usual axioms.",
+    "forms": []
+  },
+  {
+    "term": "Russell's paradox",
+    "definition": "The contradiction arising from \"the set of all sets that do not contain themselves\".",
+    "forms": []
+  },
+  {
+    "term": "Logicism",
+    "definition": "The programme of deriving all of mathematics from pure logic.",
+    "forms": []
+  },
+  {
+    "term": "Formalism",
+    "definition": "The view of mathematics as the manipulation of symbols by fixed rules.",
+    "forms": [
+      "formalist",
+      "formalists"
+    ]
+  },
+  {
+    "term": "Intuitionism",
+    "definition": "The view that mathematical objects exist only if they can be constructed; it rejects some classical proofs.",
+    "forms": [
+      "intuitionist",
+      "intuitionists"
+    ]
+  },
+  {
+    "term": "ZFC",
+    "definition": "Zermelo–Fraenkel set theory with the axiom of choice: the standard foundation of modern mathematics.",
+    "forms": []
+  },
+  {
+    "term": "Incompleteness theorem",
+    "definition": "Gödel's result that any consistent system able to do arithmetic contains true statements it cannot prove.",
+    "forms": [
+      "incompleteness theorems",
+      "incompleteness"
+    ]
+  },
+  {
+    "term": "Consistency",
+    "definition": "A system is consistent if it never proves both a statement and its opposite.",
+    "forms": [
+      "consistent system"
+    ]
+  },
+  {
+    "term": "Decidability",
+    "definition": "Whether there is a mechanical procedure that always gives a yes-or-no answer to a question.",
+    "forms": [
+      "undecidable",
+      "decidable"
+    ]
+  },
+  {
+    "term": "Entscheidungsproblem",
+    "definition": "German for \"decision problem\": is there an algorithm that decides whether any logical statement is valid?",
+    "forms": []
+  },
+  {
+    "term": "Turing machine",
+    "definition": "An imaginary device that reads and writes symbols on a tape by fixed rules: the theoretical model of every computer.",
+    "forms": [
+      "Turing machines",
+      "Universal Turing Machine"
+    ]
+  },
+  {
+    "term": "Halting problem",
+    "definition": "The question of whether a program will ever stop; Turing proved no program can answer it for every case.",
+    "forms": []
+  },
+  {
+    "term": "Translation movement",
+    "definition": "The large-scale translation of Greek, Persian and Indian works into Arabic in Abbasid Baghdad (8th–10th centuries).",
+    "forms": []
+  },
+  {
+    "term": "Emission theory",
+    "definition": "The ancient idea that the eye sees by sending out rays to objects.",
+    "forms": [
+      "extramission"
+    ]
+  },
+  {
+    "term": "Intromission",
+    "definition": "The idea that we see because light or images travel from objects into the eye.",
+    "forms": []
+  },
+  {
+    "term": "Astrolabe",
+    "definition": "A hand-held instrument for measuring the height of stars and the Sun and solving astronomical problems.",
+    "forms": [
+      "astrolabes"
+    ]
+  },
+  {
+    "term": "Horizon dip",
+    "definition": "The small angle by which the visible horizon lies below the true horizontal when seen from a height.",
+    "forms": [
+      "dip angle"
+    ]
+  },
+  {
+    "term": "Bīmāristān",
+    "definition": "A hospital in the medieval Islamic world.",
+    "forms": [
+      "bimaristan",
+      "bīmāristāns"
+    ]
+  },
+  {
+    "term": "Escapement",
+    "definition": "The part of a clock that releases its driving power in small, regular steps.",
+    "forms": []
+  },
+  {
+    "term": "Armillary sphere",
+    "definition": "A model of the heavens made of rings for the main circles of the sky.",
+    "forms": []
+  },
+  {
+    "term": "Magnetic declination",
+    "definition": "The angle between the direction a compass points and true north.",
+    "forms": [
+      "declination"
+    ]
+  },
+  {
+    "term": "Trivium",
+    "definition": "The three language arts of the medieval curriculum: grammar, rhetoric and logic.",
+    "forms": []
+  },
+  {
+    "term": "Quadrivium",
+    "definition": "The four mathematical arts of the medieval curriculum: arithmetic, geometry, music and astronomy.",
+    "forms": []
+  },
+  {
+    "term": "Disputation",
+    "definition": "A formal medieval debate in which a question was argued for and against before a master resolved it.",
+    "forms": [
+      "quaestio disputata",
+      "disputations"
+    ]
+  },
+  {
+    "term": "Mean speed theorem",
+    "definition": "A body accelerating evenly from rest covers the same distance as one moving all the time at its average speed.",
+    "forms": [
+      "Merton Rule"
+    ]
+  },
+  {
+    "term": "Epicycle",
+    "definition": "In old astronomy, a small circle whose centre moves round a larger circle (the deferent), used to model planetary motion.",
+    "forms": [
+      "epicycles",
+      "epicyclets"
+    ]
+  },
+  {
+    "term": "Deferent",
+    "definition": "In old astronomy, the large circle that carries a planet's epicycle.",
+    "forms": []
+  },
+  {
+    "term": "Equant",
+    "definition": "In Ptolemy's astronomy, an off-centre point about which a planet moves at a steady angular rate.",
+    "forms": []
+  },
+  {
+    "term": "Ṭūsī couple",
+    "definition": "Two circles, one rolling inside another twice its size, that turn circular motion into straight-line motion.",
+    "forms": [
+      "Tusi couple"
+    ]
+  },
+  {
+    "term": "Kerala school",
+    "definition": "A line of Indian astronomer-mathematicians (14th–16th centuries) who found infinite series for π and trigonometric functions.",
+    "forms": []
+  },
+  {
+    "term": "Heliocentric",
+    "definition": "With the Sun at the centre.",
+    "forms": [
+      "heliocentrism"
+    ]
+  },
+  {
+    "term": "Geocentric",
+    "definition": "With the Earth at the centre.",
+    "forms": []
+  },
+  {
+    "term": "Retrograde motion",
+    "definition": "The apparent backward loop of a planet across the stars, caused by the Earth overtaking it.",
+    "forms": [
+      "retrograde"
+    ]
+  },
+  {
+    "term": "Parallax",
+    "definition": "The apparent shift of an object against its background when seen from two different places.",
+    "forms": []
+  },
+  {
+    "term": "Supernova",
+    "definition": "The explosion of a star, which can briefly outshine a whole galaxy.",
+    "forms": [
+      "supernovae"
+    ]
+  },
+  {
+    "term": "Tychonic system",
+    "definition": "Tycho Brahe's model: the Sun and Moon circle the Earth, while the other planets circle the Sun.",
+    "forms": []
+  },
+  {
+    "term": "Inertia",
+    "definition": "The tendency of a body to keep doing what it is doing — stay at rest or keep moving in a straight line.",
+    "forms": []
+  },
+  {
+    "term": "Mechanical philosophy",
+    "definition": "The 17th-century view of nature as matter in motion, like a machine.",
+    "forms": []
+  },
+  {
+    "term": "Experimentum crucis",
+    "definition": "A \"crucial experiment\" that decides between rival theories.",
+    "forms": [
+      "crucial experiment"
+    ]
+  },
+  {
+    "term": "Refrangibility",
+    "definition": "How strongly a ray of light is bent (refracted) when it passes into another material.",
+    "forms": []
+  },
+  {
+    "term": "Refraction",
+    "definition": "The bending of light as it passes from one material into another.",
+    "forms": [
+      "refracted",
+      "refracting"
+    ]
+  },
+  {
+    "term": "Fluxion",
+    "definition": "Newton's name for the rate of change of a flowing quantity — what we call a derivative.",
+    "forms": [
+      "fluxions",
+      "fluents"
+    ]
+  },
+  {
+    "term": "Universal gravitation",
+    "definition": "Newton's law that every mass attracts every other mass with a force proportional to their masses and inversely to the square of their distance.",
+    "forms": [
+      "inverse-square"
+    ]
+  },
+  {
+    "term": "Primary qualities",
+    "definition": "Properties thought to belong to objects themselves, such as size, shape and motion.",
+    "forms": []
+  },
+  {
+    "term": "Secondary qualities",
+    "definition": "Properties that exist in our perception, such as colour, taste and warmth.",
+    "forms": []
+  },
+  {
+    "term": "Alchemy",
+    "definition": "The pre-modern art of transforming matter, including attempts to turn base metals into gold.",
+    "forms": [
+      "alchemical",
+      "alchemists",
+      "alchemist",
+      "chymistry"
+    ]
+  },
+  {
+    "term": "Transmutation",
+    "definition": "The change of one substance — or, in biology, one species — into another.",
+    "forms": [
+      "transmuting",
+      "transmute"
+    ]
+  },
+  {
+    "term": "Alembic",
+    "definition": "A still-head used in distillation to collect and cool vapour.",
+    "forms": [
+      "alembics"
+    ]
+  },
+  {
+    "term": "Distillation",
+    "definition": "Separating liquids by boiling them and condensing the vapour.",
+    "forms": [
+      "distilled",
+      "distilling"
+    ]
+  },
+  {
+    "term": "Calx",
+    "definition": "The powdery residue left after heating a metal in air — what we now call a metal oxide.",
+    "forms": [
+      "calces"
+    ]
+  },
+  {
+    "term": "Phlogiston",
+    "definition": "An imagined substance once thought to be released when things burn.",
+    "forms": [
+      "phlogistonists"
+    ]
+  },
+  {
+    "term": "Tria prima",
+    "definition": "Paracelsus's three principles of matter: sulfur, mercury and salt.",
+    "forms": []
+  },
+  {
+    "term": "Iatrochemistry",
+    "definition": "Medicine based on chemistry, as promoted by Paracelsus.",
+    "forms": []
+  },
+  {
+    "term": "Pneumatic chemistry",
+    "definition": "The 18th-century study of gases.",
+    "forms": []
+  },
+  {
+    "term": "Fixed air",
+    "definition": "The old name for carbon dioxide.",
+    "forms": []
+  },
+  {
+    "term": "Dephlogisticated air",
+    "definition": "Priestley's name for oxygen.",
+    "forms": []
+  },
+  {
+    "term": "Conservation of mass",
+    "definition": "In a chemical reaction, the total mass of what you start with equals the total mass of what you end with.",
+    "forms": []
+  },
+  {
+    "term": "Chemical element",
+    "definition": "A substance that cannot be broken down into simpler substances by chemical means.",
+    "forms": [
+      "chemical elements"
+    ]
+  },
+  {
+    "term": "Law of multiple proportions",
+    "definition": "When two elements form more than one compound, the masses of one that combine with a fixed mass of the other are in small whole-number ratios.",
+    "forms": [
+      "multiple proportions"
+    ]
+  },
+  {
+    "term": "Atomic weight",
+    "definition": "The mass of an atom of an element compared with a standard, such as hydrogen = 1.",
+    "forms": [
+      "atomic weights"
+    ]
+  },
+  {
+    "term": "Equivalent weight",
+    "definition": "The mass of a substance that combines with a fixed mass of a standard, such as 8 grams of oxygen.",
+    "forms": [
+      "equivalent weights"
+    ]
+  },
+  {
+    "term": "Avogadro's hypothesis",
+    "definition": "Equal volumes of gases at the same temperature and pressure contain equal numbers of molecules.",
+    "forms": []
+  },
+  {
+    "term": "Molecule",
+    "definition": "Two or more atoms bonded together; the smallest unit of a compound.",
+    "forms": [
+      "molecules",
+      "molecular"
+    ]
+  },
+  {
+    "term": "Diatomic",
+    "definition": "Made of two atoms, as in the oxygen molecule O₂.",
+    "forms": []
+  },
+  {
+    "term": "Electrolysis",
+    "definition": "Breaking down a compound by passing an electric current through it.",
+    "forms": [
+      "electrolytic"
+    ]
+  },
+  {
+    "term": "Electrochemical dualism",
+    "definition": "Berzelius's theory that compounds are made of a positively and a negatively charged part.",
+    "forms": []
+  },
+  {
+    "term": "Periodic law",
+    "definition": "The properties of the elements repeat regularly when they are arranged in order — now known to be by atomic number.",
+    "forms": [
+      "Periodic Table"
+    ]
+  },
+  {
+    "term": "Atomic number",
+    "definition": "The number of protons in an atom's nucleus, which fixes its place in the periodic table.",
+    "forms": []
+  },
+  {
+    "term": "Reductionism",
+    "definition": "The idea that complex things can be fully explained by their simpler parts.",
+    "forms": [
+      "reductionist"
+    ]
+  },
+  {
+    "term": "Emergence",
+    "definition": "Properties of a whole that its parts do not have on their own, such as the wetness of water.",
+    "forms": [
+      "emergent"
+    ]
+  },
+  {
+    "term": "Great Chain of Being",
+    "definition": "The old idea that all things form a fixed ladder from minerals up through plants and animals to humans, angels and God.",
+    "forms": [
+      "Scala Naturae"
+    ]
+  },
+  {
+    "term": "Natural theology",
+    "definition": "Finding evidence for God's design in the natural world.",
+    "forms": []
+  },
+  {
+    "term": "Binomial nomenclature",
+    "definition": "Naming each species with two Latin words — genus and species — as in Homo sapiens.",
+    "forms": []
+  },
+  {
+    "term": "Taxonomy",
+    "definition": "The science of naming and classifying living things.",
+    "forms": [
+      "taxonomic"
+    ]
+  },
+  {
+    "term": "Catastrophism",
+    "definition": "The idea that the Earth's history was shaped mainly by sudden, violent events.",
+    "forms": []
+  },
+  {
+    "term": "Uniformitarianism",
+    "definition": "The idea that the Earth was shaped by the same slow processes we see today, acting over long times.",
+    "forms": []
+  },
+  {
+    "term": "Deep time",
+    "definition": "The immense age of the Earth, measured in millions and billions of years.",
+    "forms": []
+  },
+  {
+    "term": "Faunal succession",
+    "definition": "Rock layers contain fossils in a reliable order, so fossils can be used to match and date layers.",
+    "forms": []
+  },
+  {
+    "term": "Index fossil",
+    "definition": "A fossil typical of a particular age, used to identify rock layers.",
+    "forms": [
+      "index fossils"
+    ]
+  },
+  {
+    "term": "Cell theory",
+    "definition": "All living things are made of cells, and all cells come from other cells.",
+    "forms": []
+  },
+  {
+    "term": "Vitalism",
+    "definition": "The idea that living things contain a special life force not found in non-living matter.",
+    "forms": [
+      "vitalist",
+      "vitalists"
+    ]
+  },
+  {
+    "term": "Natural selection",
+    "definition": "The process by which inherited traits that help survival and reproduction become more common over generations.",
+    "forms": []
+  },
+  {
+    "term": "Adaptive radiation",
+    "definition": "The rapid branching of one ancestral species into many, each suited to a different way of life.",
+    "forms": []
+  },
+  {
+    "term": "Common descent",
+    "definition": "The idea that all living things share ancestors, forming one branching tree of life.",
+    "forms": [
+      "descent with modification"
+    ]
+  },
+  {
+    "term": "Lamarckism",
+    "definition": "The idea that characteristics acquired during life can be passed to offspring.",
+    "forms": [
+      "Lamarckian",
+      "acquired characteristics"
+    ]
+  },
+  {
+    "term": "Blending inheritance",
+    "definition": "The old idea that offspring traits are a mixture of the parents', like mixing paints.",
+    "forms": []
+  },
+  {
+    "term": "Pangenesis",
+    "definition": "Darwin's mistaken theory that particles from every part of the body gather in the reproductive cells.",
+    "forms": []
+  },
+  {
+    "term": "Spontaneous generation",
+    "definition": "The old idea that living things can arise directly from non-living matter.",
+    "forms": []
+  },
+  {
+    "term": "Germ theory",
+    "definition": "The theory that many diseases are caused by microorganisms.",
+    "forms": [
+      "germ theory of disease"
+    ]
+  },
+  {
+    "term": "Koch's postulates",
+    "definition": "Four criteria for showing that a particular microbe causes a particular disease.",
+    "forms": []
+  },
+  {
+    "term": "Gene",
+    "definition": "A unit of heredity: a stretch of DNA that carries information for a trait.",
+    "forms": [
+      "genes",
+      "genetic"
+    ]
+  },
+  {
+    "term": "Allele",
+    "definition": "One of the different versions of a gene.",
+    "forms": [
+      "alleles"
+    ]
+  },
+  {
+    "term": "Dominant allele",
+    "definition": "An allele whose effect shows even when only one copy is present.",
+    "forms": [
+      "dominant trait",
+      "dominant allele"
+    ]
+  },
+  {
+    "term": "Recessive allele",
+    "definition": "An allele whose effect shows only when two copies are present.",
+    "forms": [
+      "recessive trait",
+      "recessive allele"
+    ]
+  },
+  {
+    "term": "Genotype",
+    "definition": "The particular set of alleles an organism carries.",
+    "forms": [
+      "genotypic"
+    ]
+  },
+  {
+    "term": "Phenotype",
+    "definition": "The observable characteristics of an organism.",
+    "forms": [
+      "phenotypic",
+      "phenotypically"
+    ]
+  },
+  {
+    "term": "Law of segregation",
+    "definition": "Mendel's rule that the two copies of a gene separate when reproductive cells form.",
+    "forms": [
+      "segregation"
+    ]
+  },
+  {
+    "term": "Independent assortment",
+    "definition": "Mendel's rule that different genes are inherited independently of one another (when on different chromosomes).",
+    "forms": []
+  },
+  {
+    "term": "Chromosome",
+    "definition": "A thread-like structure in the cell nucleus made of DNA and protein, carrying many genes.",
+    "forms": [
+      "chromosomes"
+    ]
+  },
+  {
+    "term": "Mitosis",
+    "definition": "Cell division that produces two identical cells.",
+    "forms": []
+  },
+  {
+    "term": "Meiosis",
+    "definition": "Cell division that halves the number of chromosomes, producing eggs or sperm.",
+    "forms": []
+  },
+  {
+    "term": "Linkage",
+    "definition": "The tendency of genes close together on a chromosome to be inherited together.",
+    "forms": [
+      "genetic linkage"
+    ]
+  },
+  {
+    "term": "Crossing over",
+    "definition": "The exchange of segments between paired chromosomes during meiosis.",
+    "forms": [
+      "crossed over"
+    ]
+  },
+  {
+    "term": "Bacteriophage",
+    "definition": "A virus that infects bacteria.",
+    "forms": [
+      "phage",
+      "phages"
+    ]
+  },
+  {
+    "term": "X-ray diffraction",
+    "definition": "Working out a structure from the pattern X-rays make when they scatter off it.",
+    "forms": [
+      "diffraction pattern"
+    ]
+  },
+  {
+    "term": "Base pairing",
+    "definition": "The matching of DNA bases across the double helix: A with T, and G with C.",
+    "forms": [
+      "complementary base pairing"
+    ]
+  },
+  {
+    "term": "Semiconservative replication",
+    "definition": "DNA copying in which each new double helix keeps one old strand and gains one new one.",
+    "forms": [
+      "semiconservative"
+    ]
+  },
+  {
+    "term": "Codon",
+    "definition": "A group of three DNA or RNA bases that codes for one amino acid or a stop signal.",
+    "forms": [
+      "codons"
+    ]
+  },
+  {
+    "term": "Central dogma",
+    "definition": "Crick's rule that genetic information flows from DNA to RNA to protein, not back from protein.",
+    "forms": []
+  },
+  {
+    "term": "Reverse transcriptase",
+    "definition": "An enzyme that copies RNA into DNA, used by retroviruses such as HIV.",
+    "forms": []
+  },
+  {
+    "term": "Molecular clock",
+    "definition": "Using the roughly steady build-up of mutations to estimate when species diverged.",
+    "forms": []
+  },
+  {
+    "term": "Teleonomy",
+    "definition": "Apparent purpose in living things that results from natural selection rather than conscious design.",
+    "forms": []
+  },
+  {
+    "term": "Apomixis",
+    "definition": "Reproduction of seeds without fertilisation, giving offspring identical to the parent.",
+    "forms": []
+  },
+  {
+    "term": "Abiogenesis",
+    "definition": "The origin of life from non-living matter.",
+    "forms": []
+  },
+  {
+    "term": "Caloric",
+    "definition": "An imagined weightless fluid once thought to be heat itself.",
+    "forms": []
+  },
+  {
+    "term": "Imponderable fluids",
+    "definition": "Weightless substances once used to explain heat, light, electricity and magnetism.",
+    "forms": [
+      "imponderable"
+    ]
+  },
+  {
+    "term": "Thermodynamics",
+    "definition": "The science of heat, work, energy and their transformations.",
+    "forms": [
+      "thermodynamic"
+    ]
+  },
+  {
+    "term": "Carnot cycle",
+    "definition": "An ideal heat-engine cycle with the highest possible efficiency between two temperatures.",
+    "forms": []
+  },
+  {
+    "term": "Reversible process",
+    "definition": "An idealised, infinitely slow process that could be run backwards without any loss.",
+    "forms": [
+      "reversible"
+    ]
+  },
+  {
+    "term": "Isothermal",
+    "definition": "Taking place at constant temperature.",
+    "forms": []
+  },
+  {
+    "term": "Adiabatic",
+    "definition": "Taking place with no heat flowing in or out.",
+    "forms": []
+  },
+  {
+    "term": "Thermal efficiency",
+    "definition": "The fraction of heat put into an engine that comes out as useful work.",
+    "forms": []
+  },
+  {
+    "term": "Mechanical equivalent of heat",
+    "definition": "The amount of work that produces a given amount of heat; about 4.18 joules per calorie.",
+    "forms": []
+  },
+  {
+    "term": "Conservation of energy",
+    "definition": "Energy can change form but is never created or destroyed: the First Law of Thermodynamics.",
+    "forms": [
+      "First Law of Thermodynamics",
+      "First Law"
+    ]
+  },
+  {
+    "term": "Entropy",
+    "definition": "A measure of disorder — of how many microscopic arrangements match what we see — which tends to increase.",
+    "forms": []
+  },
+  {
+    "term": "Second Law of Thermodynamics",
+    "definition": "In an isolated system, entropy never decreases; heat flows from hot to cold by itself.",
+    "forms": [
+      "Second Law"
+    ]
+  },
+  {
+    "term": "Absolute temperature",
+    "definition": "Temperature measured from absolute zero (−273.15 °C), in kelvins.",
+    "forms": [
+      "absolute zero"
+    ]
+  },
+  {
+    "term": "Leyden jar",
+    "definition": "An early device for storing electric charge: a glass jar coated with metal inside and out.",
+    "forms": [
+      "Leyden jars"
+    ]
+  },
+  {
+    "term": "Voltaic pile",
+    "definition": "The first battery: a stack of metal discs separated by brine-soaked card.",
+    "forms": []
+  },
+  {
+    "term": "Electrolyte",
+    "definition": "A liquid or paste that conducts electricity by the movement of ions.",
+    "forms": []
+  },
+  {
+    "term": "Electromagnetism",
+    "definition": "The interconnected phenomena of electricity and magnetism.",
+    "forms": [
+      "electromagnetic"
+    ]
+  },
+  {
+    "term": "Solenoid",
+    "definition": "A coil of wire that acts like a bar magnet when current flows through it.",
+    "forms": []
+  },
+  {
+    "term": "Electromagnetic induction",
+    "definition": "Producing an electric current by changing the magnetic field through a circuit.",
+    "forms": [
+      "induction coil"
+    ]
+  },
+  {
+    "term": "Lenz's law",
+    "definition": "An induced current always flows so as to oppose the change that produced it.",
+    "forms": []
+  },
+  {
+    "term": "Dynamo",
+    "definition": "A machine that turns motion into electric current.",
+    "forms": [
+      "electrical generator"
+    ]
+  },
+  {
+    "term": "Field (physics)",
+    "definition": "A physical quantity spread through space, such as the electric or magnetic field.",
+    "forms": [
+      "electric field",
+      "magnetic field",
+      "electromagnetic field",
+      "field theory"
+    ]
+  },
+  {
+    "term": "Lines of force",
+    "definition": "Faraday's picture of a field as lines showing the direction of the force at each point.",
+    "forms": []
+  },
+  {
+    "term": "Displacement current",
+    "definition": "Maxwell's term for the effect of a changing electric field, which produces a magnetic field just as a current does.",
+    "forms": []
+  },
+  {
+    "term": "Luminiferous ether",
+    "definition": "An imagined invisible medium once thought to fill space and carry light waves.",
+    "forms": [
+      "ether",
+      "aether drift"
+    ]
+  },
+  {
+    "term": "Electromagnetic wave",
+    "definition": "A wave of electric and magnetic fields travelling at the speed of light; light and radio are examples.",
+    "forms": [
+      "electromagnetic waves"
+    ]
+  },
+  {
+    "term": "Maxwell's equations",
+    "definition": "The four equations that describe all of classical electricity, magnetism and light.",
+    "forms": []
+  },
+  {
+    "term": "Statistical mechanics",
+    "definition": "Explaining heat and the behaviour of matter from the statistics of huge numbers of molecules.",
+    "forms": []
+  },
+  {
+    "term": "Microstate",
+    "definition": "One exact arrangement of all the molecules in a system.",
+    "forms": [
+      "microstates"
+    ]
+  },
+  {
+    "term": "Kinetic theory",
+    "definition": "The theory that gases are made of moving molecules whose collisions produce pressure and temperature.",
+    "forms": []
+  },
+  {
+    "term": "Blackbody",
+    "definition": "An ideal object that absorbs all light falling on it; it glows with a spectrum that depends only on its temperature.",
+    "forms": [
+      "black body",
+      "blackbody radiation"
+    ]
+  },
+  {
+    "term": "Ultraviolet catastrophe",
+    "definition": "The absurd classical prediction that a hot object should radiate infinite energy at short wavelengths.",
+    "forms": []
+  },
+  {
+    "term": "Equipartition",
+    "definition": "The classical rule that energy is shared equally among all the ways a system can move.",
+    "forms": [
+      "equipartition theorem"
+    ]
+  },
+  {
+    "term": "Quantum",
+    "definition": "The smallest possible packet of something, such as energy in light.",
+    "forms": [
+      "quanta",
+      "quantized",
+      "quantised",
+      "quantization"
+    ]
+  },
+  {
+    "term": "Planck's constant",
+    "definition": "The fundamental constant h that links the energy of a light quantum to its frequency: E = hν.",
+    "forms": [
+      "Planck constant"
+    ]
+  },
+  {
+    "term": "Photon",
+    "definition": "A particle, or quantum, of light.",
+    "forms": [
+      "photons"
+    ]
+  },
+  {
+    "term": "Photoelectric effect",
+    "definition": "The release of electrons from a metal when light shines on it.",
+    "forms": []
+  },
+  {
+    "term": "Work function",
+    "definition": "The minimum energy needed to pull an electron out of a metal.",
+    "forms": []
+  },
+  {
+    "term": "Special relativity",
+    "definition": "Einstein's 1905 theory: the laws of physics and the speed of light are the same for all steadily moving observers.",
+    "forms": [
+      "Special Theory of Relativity"
+    ]
+  },
+  {
+    "term": "Inertial frame",
+    "definition": "A viewpoint that is not accelerating, in which objects with no force on them move in straight lines.",
+    "forms": [
+      "inertial frames"
+    ]
+  },
+  {
+    "term": "Time dilation",
+    "definition": "The slowing of moving clocks, as seen by an observer they are moving past.",
+    "forms": []
+  },
+  {
+    "term": "Length contraction",
+    "definition": "The shortening of moving objects along their direction of motion.",
+    "forms": []
+  },
+  {
+    "term": "Lorentz factor",
+    "definition": "The quantity γ = 1/√(1 − v²/c²) that sets how much time slows and lengths shrink.",
+    "forms": []
+  },
+  {
+    "term": "Spacetime",
+    "definition": "Space and time combined into one four-dimensional whole.",
+    "forms": []
+  },
+  {
+    "term": "Mass–energy equivalence",
+    "definition": "Einstein's E = mc²: mass is a form of energy.",
+    "forms": [
+      "mass-energy"
+    ]
+  },
+  {
+    "term": "Atomic nucleus",
+    "definition": "The tiny, dense, positively charged centre of an atom.",
+    "forms": [
+      "helium nuclei"
+    ]
+  },
+  {
+    "term": "Alpha particle",
+    "definition": "A helium nucleus — two protons and two neutrons — given off by some radioactive atoms.",
+    "forms": [
+      "alpha particles"
+    ]
+  },
+  {
+    "term": "Spectral line",
+    "definition": "A sharp, bright or dark line in a spectrum at a wavelength characteristic of an element.",
+    "forms": [
+      "spectral lines"
+    ]
+  },
+  {
+    "term": "Rydberg constant",
+    "definition": "The constant in the formula for the wavelengths of hydrogen's spectral lines.",
+    "forms": []
+  },
+  {
+    "term": "Quantum jump",
+    "definition": "An electron's sudden change from one energy level to another, emitting or absorbing a photon.",
+    "forms": [
+      "quantum leap",
+      "quantum jumps"
+    ]
+  },
+  {
+    "term": "Wave–particle duality",
+    "definition": "The fact that light and matter behave both as waves and as particles.",
+    "forms": [
+      "wave-particle duality"
+    ]
+  },
+  {
+    "term": "De Broglie wavelength",
+    "definition": "The wavelength of a moving particle: Planck's constant divided by its momentum.",
+    "forms": []
+  },
+  {
+    "term": "Wavefunction",
+    "definition": "The mathematical description of a quantum system; its square gives the probability of each outcome.",
+    "forms": [
+      "wave function",
+      "wavefunctions"
+    ]
+  },
+  {
+    "term": "Born rule",
+    "definition": "The rule that the square of the wavefunction gives the probability of finding a particle at a place.",
+    "forms": []
+  },
+  {
+    "term": "Uncertainty principle",
+    "definition": "Heisenberg's principle that position and momentum cannot both be known exactly at once.",
+    "forms": []
+  },
+  {
+    "term": "Equivalence principle",
+    "definition": "The effects of gravity cannot be told apart from the effects of acceleration.",
+    "forms": []
+  },
+  {
+    "term": "General relativity",
+    "definition": "Einstein's 1915 theory of gravity as the curvature of spacetime.",
+    "forms": [
+      "General Theory of Relativity"
+    ]
+  },
+  {
+    "term": "Copenhagen interpretation",
+    "definition": "Bohr and Heisenberg's view that a quantum system has no definite properties until it is measured.",
+    "forms": []
+  },
+  {
+    "term": "Superposition",
+    "definition": "A quantum state that is a combination of several possible states at once.",
+    "forms": [
+      "superpositions"
+    ]
+  },
+  {
+    "term": "Entanglement",
+    "definition": "A link between quantum particles so that measuring one instantly fixes what will be found for the other.",
+    "forms": [
+      "entangled"
+    ]
+  },
+  {
+    "term": "Hidden variables",
+    "definition": "Proposed extra quantities that would fix the results of quantum measurements in advance.",
+    "forms": [
+      "local hidden variables"
+    ]
+  },
+  {
+    "term": "Bell's theorem",
+    "definition": "Bell's proof that no theory of local hidden variables can reproduce all predictions of quantum mechanics.",
+    "forms": []
+  },
+  {
+    "term": "Decoherence",
+    "definition": "The loss of quantum behaviour when a system interacts with its surroundings.",
+    "forms": []
+  },
+  {
+    "term": "Interferometer",
+    "definition": "An instrument that splits light into two beams and recombines them, so tiny differences in path show up as interference fringes.",
+    "forms": [
+      "interferometers"
+    ]
+  },
+  {
+    "term": "Epistemology",
+    "definition": "The branch of philosophy that studies knowledge: what it is and how we get it.",
+    "forms": [
+      "epistemological",
+      "epistemic"
+    ]
+  },
+  {
+    "term": "Ontology",
+    "definition": "The branch of philosophy that studies what exists.",
+    "forms": [
+      "ontological"
+    ]
+  },
+  {
+    "term": "Empiricism",
+    "definition": "The view that knowledge comes mainly from experience and observation.",
+    "forms": [
+      "empirical",
+      "empiricist"
+    ]
+  },
+  {
+    "term": "Induction",
+    "definition": "Reasoning from particular observations to a general rule.",
+    "forms": [
+      "inductive"
+    ]
+  },
+  {
+    "term": "Deduction",
+    "definition": "Reasoning in which the conclusion follows necessarily from the premises.",
+    "forms": [
+      "deductive"
+    ]
+  },
+  {
+    "term": "Problem of induction",
+    "definition": "Hume's puzzle: past experience cannot logically guarantee that the future will be like the past.",
+    "forms": []
+  },
+  {
+    "term": "Logical positivism",
+    "definition": "The 1920s–30s movement holding that only logically or empirically checkable statements are meaningful.",
+    "forms": [
+      "logical empiricism"
+    ]
+  },
+  {
+    "term": "Verification principle",
+    "definition": "The positivist rule that a statement is meaningful only if it can be checked by logic or experience.",
+    "forms": [
+      "Verification Criterion"
+    ]
+  },
+  {
+    "term": "Falsifiability",
+    "definition": "Popper's test of a scientific theory: it must say what observations could prove it wrong.",
+    "forms": [
+      "falsifiable",
+      "falsificationism",
+      "falsification"
+    ]
+  },
+  {
+    "term": "Demarcation problem",
+    "definition": "The question of how to tell science from non-science.",
+    "forms": [
+      "demarcation"
+    ]
+  },
+  {
+    "term": "Modus tollens",
+    "definition": "The valid argument: if H, then E; not E; therefore not H.",
+    "forms": []
+  },
+  {
+    "term": "Paradigm",
+    "definition": "In Kuhn's sense, the shared theories, methods and examples that guide a scientific community.",
+    "forms": [
+      "paradigms"
+    ]
+  },
+  {
+    "term": "Normal science",
+    "definition": "Kuhn's term for everyday research that solves puzzles within an accepted paradigm.",
+    "forms": []
+  },
+  {
+    "term": "Anomaly",
+    "definition": "An observation that does not fit the accepted theory.",
+    "forms": [
+      "anomalies"
+    ]
+  },
+  {
+    "term": "Paradigm shift",
+    "definition": "A scientific revolution in which one paradigm replaces another.",
+    "forms": [
+      "paradigm shifts"
+    ]
+  },
+  {
+    "term": "Research programme",
+    "definition": "Lakatos's term for a series of developing theories sharing a common core.",
+    "forms": [
+      "research programmes"
+    ]
+  },
+  {
+    "term": "Hard core",
+    "definition": "In Lakatos's account, the central assumptions of a research programme that scientists protect.",
+    "forms": []
+  },
+  {
+    "term": "Protective belt",
+    "definition": "In Lakatos's account, the adjustable auxiliary assumptions around a programme's hard core.",
+    "forms": []
+  },
+  {
+    "term": "Auxiliary hypothesis",
+    "definition": "An extra assumption needed to connect a theory to an observation.",
+    "forms": [
+      "auxiliary hypotheses",
+      "auxiliary assumptions"
+    ]
+  },
+  {
+    "term": "Epistemological anarchism",
+    "definition": "Feyerabend's view that no single fixed method governs scientific progress.",
+    "forms": []
+  },
+  {
+    "term": "Duhem–Quine thesis",
+    "definition": "A hypothesis is never tested alone but together with many background assumptions, so a failed test does not show which one is wrong.",
+    "forms": [
+      "Duhem-Quine"
+    ]
+  },
+  {
+    "term": "Underdetermination",
+    "definition": "When the available evidence is not enough to decide between rival theories.",
+    "forms": [
+      "underdetermined"
+    ]
+  },
+  {
+    "term": "Holism",
+    "definition": "The view that our beliefs face experience as a connected whole, not one at a time.",
+    "forms": []
+  },
+  {
+    "term": "Bayesian",
+    "definition": "Treating degrees of belief as probabilities and updating them with Bayes' theorem as evidence comes in.",
+    "forms": [
+      "Bayesianism",
+      "Bayes' Theorem"
+    ]
+  },
+  {
+    "term": "Prior probability",
+    "definition": "How likely a hypothesis seems before the new evidence is considered.",
+    "forms": []
+  },
+  {
+    "term": "Posterior probability",
+    "definition": "How likely a hypothesis seems after taking the new evidence into account.",
+    "forms": []
+  },
+  {
+    "term": "Scientific realism",
+    "definition": "The view that successful scientific theories are at least approximately true, including about unobservable things.",
+    "forms": [
+      "realism",
+      "realist"
+    ]
+  },
+  {
+    "term": "Instrumentalism",
+    "definition": "The view that theories are tools for prediction, not literal descriptions of reality.",
+    "forms": [
+      "instrumentalist"
+    ]
+  },
+  {
+    "term": "No-miracles argument",
+    "definition": "The argument that the success of science would be a miracle unless its theories were roughly true.",
+    "forms": [
+      "No Miracles"
+    ]
+  },
+  {
+    "term": "Pessimistic meta-induction",
+    "definition": "The argument that because many successful past theories proved false, today's may too.",
+    "forms": []
+  },
+  {
+    "term": "Structural realism",
+    "definition": "The view that science reliably captures the mathematical structure of the world, even if not its underlying nature.",
+    "forms": []
+  },
+  {
+    "term": "Constructive empiricism",
+    "definition": "Van Fraassen's view that science aims only at theories that are correct about what can be observed.",
+    "forms": []
+  },
+  {
+    "term": "Replication crisis",
+    "definition": "The discovery, in the 2010s, that many published findings could not be reproduced.",
+    "forms": []
+  },
+  {
+    "term": "P-hacking",
+    "definition": "Trying many analyses until one gives a \"statistically significant\" result.",
+    "forms": [
+      "p-value"
+    ]
+  },
+  {
+    "term": "Publication bias",
+    "definition": "The tendency for positive results to be published while null results go unpublished.",
+    "forms": [
+      "file-drawer effect"
+    ]
+  },
+  {
+    "term": "Statistical power",
+    "definition": "The chance that a study will detect a real effect of a given size.",
+    "forms": []
+  },
+  {
+    "term": "Pre-registration",
+    "definition": "Publicly recording a study's hypotheses and analysis plan before collecting the data.",
+    "forms": []
+  },
+  {
+    "term": "Incommensurability",
+    "definition": "Kuhn's claim that rival paradigms lack a fully shared standard or vocabulary for comparing them.",
+    "forms": [
+      "incommensurable paradigms"
+    ]
+  }
+]

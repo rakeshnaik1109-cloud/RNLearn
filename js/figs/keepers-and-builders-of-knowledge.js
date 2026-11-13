@@ -112,7 +112,7 @@
         '<!-- Lamp 1 Flame -->' +
         '<circle cx="' + l1x + '" cy="' + l1y + '" r="16" fill="url(#lamp1Glow)"/>' +
         '<circle cx="' + l1x + '" cy="' + l1y + '" r="4" fill="#fff"/>' +
-        '<text x="' + (l1x - 12) + '" y="' + (l1y + 4) + '" font-size="11" font-weight="bold" fill="#f59e0b" text-anchor="end">Lamp 1 (Amber)</text>';
+        '<text x="' + (l1x - 12) + '" y="' + (l1y + 4) + '" font-size="11" font-weight="bold" fill="#f59e0b" text-anchor="end">Lamp 1</text>';
 
       // Ray 1
       if (!isBlocked) {
@@ -134,7 +134,7 @@
         '<!-- Lamp 2 Flame -->' +
         '<circle cx="' + l2x + '" cy="' + l2y + '" r="16" fill="url(#lamp2Glow)"/>' +
         '<circle cx="' + l2x + '" cy="' + l2y + '" r="4" fill="#fff"/>' +
-        '<text x="' + (l2x - 12) + '" y="' + (l2y + 4) + '" font-size="11" font-weight="bold" fill="#38bdf8" text-anchor="end">Lamp 2 (Cyan)</text>' +
+        '<text x="' + (l2x - 12) + '" y="' + (l2y + 4) + '" font-size="11" font-weight="bold" fill="#38bdf8" text-anchor="end">Lamp 2</text>' +
         '<!-- Light Rays from Lamp 2 through pinhole -->' +
         '<line x1="' + l2x + '" y1="' + l2y + '" x2="' + pinX + '" y2="' + pinY + '" stroke="#38bdf8" stroke-width="2" stroke-opacity="0.9"/>' +
         '<line x1="' + pinX + '" y1="' + pinY + '" x2="' + screenX + '" y2="' + screen2Y.toFixed(1) + '" stroke="#38bdf8" stroke-width="2" stroke-opacity="0.9"/>' +
@@ -227,17 +227,16 @@
             '</div>' +
           '</div>' +
         '</div>' +
-        '<strong>Al-Bīrūnī’s Geodesic Triumph (Nandana Fort, 1021 CE):</strong> ' +
-        'Instead of requiring two distant observers measuring camel caravan paces across blistering desert flatlands (the Caliph al-Ma’mūn expedition method), al-Bīrūnī climbed a solitary mountain overlooking a flat horizon. With a large astrolabe, he measured the tiny dip angle $\\alpha$ below true astronomical horizontal to the sea/plains horizon. Using the exact trigonometric formula $R = \\frac{h \\cos \\alpha}{1 - \\cos \\alpha}$, a single astronomer calculated the size of the planet before lunch.';
+        '<strong>Al-Bīrūnī’s method (Nandana Fort, c. 1020s):</strong> ' +
+        'Instead of surveying a long north–south baseline, as al-Ma’mūn’s teams had done, al-Bīrūnī used a mountain of known height overlooking a flat plain and measured the tiny dip angle $\\alpha$ of the horizon below the true horizontal. The formula $R = \\frac{h \\cos \\alpha}{1 - \\cos \\alpha}$ then gives the Earth’s radius. Try the slider: a dip of 34′ with this height gives about 7,000 km, while al-Bīrūnī’s own figures convert to about 6,340 km — the angle is so small that tiny measurement errors and atmospheric refraction change the answer a great deal.';
 
       // SVG schematic
       var cx = 160, cy = 480, R_pix = 340;
       var peakX = cx, peakY = cy - R_pix - 45; // mountain peak
       var horizX2 = 480, horizY2 = peakY; // astronomical horizontal line
-      // Horizon tangent line from peak: angle below horizontal is exaggerated for visual clarity
-      var vizDipDeg = 24; // exaggerated visual angle
-      var vizRad = vizDipDeg * Math.PI / 180;
-      var tangLen = 330;
+      // Line of sight from the peak, drawn as a true tangent to the circle (the dip is exaggerated by the tall mountain)
+      var vizRad = Math.acos(R_pix / (cy - peakY));
+      var tangLen = Math.sqrt(Math.pow(cy - peakY, 2) - R_pix * R_pix);
       var tx = peakX + tangLen * Math.cos(vizRad);
       var ty = peakY + tangLen * Math.sin(vizRad);
 
@@ -252,21 +251,21 @@
         '<circle cx="' + cx + '" cy="' + cy + '" r="' + R_pix + '" fill="url(#earthGrad)" stroke="#10b981" stroke-width="2.5"/>' +
         '<!-- Earth Center Point O -->' +
         '<circle cx="' + cx + '" cy="' + cy + '" r="4" fill="currentColor"/>' +
-        '<text x="' + (cx - 16) + '" y="' + (cy - 8) + '" font-size="12" font-weight="600" fill="currentColor">O (Earth Center)</text>' +
+        '<text x="' + (cx - 8) + '" y="352" font-size="11" font-weight="600" fill="currentColor" text-anchor="end">↓ to Earth’s centre, O</text>' +
         '<!-- Mountain Triangle at top -->' +
         '<polygon points="' + (peakX - 18) + ',' + (cy - R_pix) + ' ' + (peakX + 18) + ',' + (cy - R_pix) + ' ' + peakX + ',' + peakY + '" ' +
                  'fill="#d97706" stroke="#92400e" stroke-width="1.5"/>' +
-        '<text x="' + (peakX + 12) + '" y="' + (peakY + 22) + '" font-size="11" font-weight="bold" fill="#b45309">Mountain (h)</text>' +
+        '<text x="' + (peakX - 16) + '" y="' + (peakY + 30) + '" font-size="11" font-weight="bold" fill="#b45309" text-anchor="end">Mountain (h)</text>' +
         '<!-- Radius line from center to mountain base -->' +
         '<line x1="' + cx + '" y1="' + cy + '" x2="' + peakX + '" y2="' + (cy - R_pix) + '" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3"/>' +
         '<text x="' + (cx - 16) + '" y="' + (cy - R_pix/2) + '" font-size="12" fill="currentColor" font-weight="600">R</text>' +
         '<!-- Astronomical horizontal line from peak -->' +
         '<line x1="' + peakX + '" y1="' + peakY + '" x2="' + horizX2 + '" y2="' + horizY2 + '" stroke="#71717a" stroke-width="1.5" stroke-dasharray="4 4"/>' +
-        '<text x="' + (horizX2 - 10) + '" y="' + (horizY2 - 8) + '" font-size="11" fill="#71717a">True Astronomical Horizon</text>' +
+        '<text x="' + horizX2 + '" y="' + (horizY2 - 8) + '" font-size="11" fill="#71717a" text-anchor="end">True horizontal</text>' +
         '<!-- Line of sight tangent to Earth curvature -->' +
         '<line x1="' + peakX + '" y1="' + peakY + '" x2="' + tx.toFixed(1) + '" y2="' + ty.toFixed(1) + '" stroke="#ef4444" stroke-width="2.5"/>' +
         '<circle cx="' + tx.toFixed(1) + '" cy="' + ty.toFixed(1) + '" r="4" fill="#ef4444"/>' +
-        '<text x="' + (tx + 8).toFixed(1) + '" y="' + (ty + 4).toFixed(1) + '" font-size="11" font-weight="bold" fill="#ef4444">Horizon Tangent Point (T)</text>' +
+        '<text x="' + (tx + 14).toFixed(1) + '" y="' + (ty + 4).toFixed(1) + '" font-size="11" font-weight="bold" fill="#ef4444">Visible horizon (T)</text>' +
         '<!-- Radius line from center to tangent point T -->' +
         '<line x1="' + cx + '" y1="' + cy + '" x2="' + tx.toFixed(1) + '" y2="' + ty.toFixed(1) + '" stroke="#10b981" stroke-width="1.8" stroke-dasharray="3 3"/>' +
         '<text x="' + (cx + (tx - cx)/2 + 10).toFixed(1) + '" y="' + (cy + (ty - cy)/2).toFixed(1) + '" font-size="12" fill="#10b981" font-weight="600">R</text>' +
@@ -277,7 +276,7 @@
               'fill="none" stroke="#ef4444" stroke-width="2"/>' +
         '<text x="' + (peakX + 54) + '" y="' + (peakY + 16) + '" font-size="13" font-weight="bold" fill="#ef4444">α (Dip Angle)</text>' +
         '<!-- Mathematical formula panel on right -->' +
-        '<g transform="translate(350, 180)">' +
+        '<g transform="translate(350, 205)">' +
           '<rect x="0" y="0" width="175" height="110" rx="6" fill="var(--color-surface, #fff)" stroke="var(--color-border, #ddd)" stroke-width="1"/>' +
           '<text x="12" y="24" font-size="11" font-weight="bold" fill="currentColor">Triangle OTP is Right-Angled:</text>' +
           '<text x="12" y="44" font-size="11" fill="currentColor">cos(α) = OT / OP = R / (R + h)</text>' +
@@ -357,7 +356,7 @@
         '<rect x="0" y="0" width="540" height="360" fill="transparent"/>' +
         '<!-- True Pi reference line (y = 3.14159) -->' +
         '<line x1="50" y1="180" x2="510" y2="180" stroke="#10b981" stroke-width="2" stroke-dasharray="4 4"/>' +
-        '<text x="515" y="184" font-size="11" fill="#10b981" font-weight="bold">True π ≈ 3.14159</text>' +
+        '<text x="508" y="172" font-size="11" fill="#10b981" font-weight="bold" text-anchor="end">True π ≈ 3.14159</text>' +
         '<!-- Axes -->' +
         '<line x1="50" y1="20" x2="50" y2="330" stroke="var(--color-border, #ccc)" stroke-width="1.5"/>' +
         '<line x1="50" y1="330" x2="510" y2="330" stroke="var(--color-border, #ccc)" stroke-width="1.5"/>' +
@@ -372,7 +371,7 @@
       function mapY(v) { return 180 - (v - truePi) * 260; }
 
       // Y-ticks
-      var yTicks = [4.0, 3.6, 3.14159, 2.8, 2.5];
+      var yTicks = [3.6, 3.14159, 2.8];
       for (var t = 0; t < yTicks.length; t++) {
         var yVal = yTicks[t];
         var yPix = mapY(yVal);

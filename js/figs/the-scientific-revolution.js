@@ -37,6 +37,21 @@
     var svg = container.querySelector('#fig-retro-svg');
     var explain = container.querySelector('#fig-retro-explain');
 
+    // Place the "Apparent Position" label next to the point on the star vault, inside the vault,
+    // choosing the first spot that keeps clear of the Earth, Mars and Sun labels.
+    function apparentLabel(px, py, avoid) {
+      var w = 86, h = 12, inward = px > 190 ? -1 : 1;
+      var tries = [[inward * 10, -6], [inward * 10, 14], [inward * 10, -20], [inward * 10, 28], [inward * 10, -34], [inward * 10, 42]];
+      for (var i = 0; i < tries.length; i++) {
+        var x0 = inward < 0 ? px + tries[i][0] - w : px + tries[i][0];
+        var y0 = py + tries[i][1] - h + 2;
+        var hit = avoid.some(function (b) { return x0 < b[2] && x0 + w > b[0] && y0 < b[3] && y0 + h > b[1]; });
+        if (!hit && y0 > 2 && y0 + h < 358) break;
+      }
+      if (i === tries.length) i = 0;
+      return '<text x="' + (px + tries[i][0]).toFixed(1) + '" y="' + (py + tries[i][1]).toFixed(1) + '" font-size="10" font-weight="600" fill="#10b981" text-anchor="' + (inward < 0 ? 'end' : 'start') + '">Apparent Position</text>';
+    }
+
     function draw() {
       var angleDeg = parseInt(slider.value, 10);
       valReadout.textContent = angleDeg + '°';
@@ -61,9 +76,12 @@
         var dx = mx - ex;
         var dy = my - ey;
         var dist = Math.sqrt(dx * dx + dy * dy);
-        var sightLen = 220;
-        var sx = ex + (dx / dist) * sightLen;
-        var sy = ey + (dy / dist) * sightLen;
+        // Extend the sight line until it meets the star vault (radius 165)
+        var ux = dx / dist, uy = dy / dist, fx = ex - cx, fy = ey - cy;
+        var bq = fx * ux + fy * uy;
+        var sightLen = -bq + Math.sqrt(bq * bq - (fx * fx + fy * fy - 165 * 165));
+        var sx = ex + ux * sightLen;
+        var sy = ey + uy * sightLen;
 
         var svgContent =
           '<!-- Background star sphere circle -->' +
@@ -85,7 +103,7 @@
           '<!-- Line of Sight from Earth through Mars -->' +
           '<line x1="' + ex.toFixed(1) + '" y1="' + ey.toFixed(1) + '" x2="' + sx.toFixed(1) + '" y2="' + sy.toFixed(1) + '" stroke="#10b981" stroke-width="1.8"/>' +
           '<circle cx="' + sx.toFixed(1) + '" cy="' + sy.toFixed(1) + '" r="4" fill="#10b981"/>' +
-          '<text x="' + (sx + 6).toFixed(1) + '" y="' + (sy + 4).toFixed(1) + '" font-size="10" font-weight="600" fill="#10b981">Apparent Position</text>' +
+          apparentLabel(sx, sy, [[ex - 10, ey - 22, ex + 42, ey + 12], [mx - 10, my - 22, mx + 38, my + 12], [cx - 20, cy - 14, cx + 20, cy + 30]]) +
 
           '<!-- Explanatory card on right -->' +
           '<g transform="translate(370, 40)">' +
@@ -552,8 +570,8 @@
           '<line x1="12" y1="34" x2="153" y2="34" stroke="var(--color-border, #eee)"/>' +
           '<text x="12" y="54" font-size="11" font-weight="bold" fill="#3b82f6">s ∝ t² (Distance squared)</text>' +
           '<line x1="12" y1="68" x2="153" y2="68" stroke="var(--color-border, #eee)"/>' +
-          '<text x="12" y="88" font-size="11" fill="currentColor">Current time: <strong>t = ' + t + '</strong></text>' +
-          '<text x="12" y="106" font-size="11" fill="currentColor">Total distance: <strong>s = ' + (t * t) + ' units</strong></text>' +
+          '<text x="12" y="88" font-size="11" fill="currentColor">Current time: <tspan font-weight="bold">t = ' + t + '</tspan></text>' +
+          '<text x="12" y="106" font-size="11" fill="currentColor">Total distance: <tspan font-weight="bold">s = ' + (t * t) + ' units</tspan></text>' +
           '<line x1="12" y1="122" x2="153" y2="122" stroke="var(--color-border, #eee)"/>' +
           '<text x="12" y="142" font-size="11" font-weight="bold" fill="#f59e0b">The Odd-Number Rule:</text>' +
           '<text x="12" y="160" font-size="10" fill="currentColor">t=0→1: distance = 1 unit</text>' +
@@ -680,11 +698,11 @@
           '<line x1="12" y1="34" x2="153" y2="34" stroke="var(--color-border, #eee)"/>' +
           '<text x="12" y="54" font-size="12" font-weight="bold" fill="#3b82f6">n₁ sin θ₁ = n₂ sin θ₂</text>' +
           '<line x1="12" y1="68" x2="153" y2="68" stroke="var(--color-border, #eee)"/>' +
-          '<text x="12" y="88" font-size="11" fill="currentColor">Incident θ₁: <strong>' + theta1Deg + '°</strong></text>' +
-          '<text x="12" y="106" font-size="11" fill="currentColor">sin(θ₁): <strong>' + Math.sin(theta1Rad).toFixed(4) + '</strong></text>' +
+          '<text x="12" y="88" font-size="11" fill="currentColor">Incident θ₁: <tspan font-weight="bold">' + theta1Deg + '°</tspan></text>' +
+          '<text x="12" y="106" font-size="11" fill="currentColor">sin(θ₁): <tspan font-weight="bold">' + Math.sin(theta1Rad).toFixed(4) + '</tspan></text>' +
           '<line x1="12" y1="120" x2="153" y2="120" stroke="var(--color-border, #eee)"/>' +
-          '<text x="12" y="140" font-size="11" fill="currentColor">Refracted θ₂: <strong>' + theta2Deg + '°</strong></text>' +
-          '<text x="12" y="158" font-size="11" fill="currentColor">sin(θ₂): <strong>' + sinTheta2.toFixed(4) + '</strong></text>' +
+          '<text x="12" y="140" font-size="11" fill="currentColor">Refracted θ₂: <tspan font-weight="bold">' + theta2Deg + '°</tspan></text>' +
+          '<text x="12" y="158" font-size="11" fill="currentColor">sin(θ₂): <tspan font-weight="bold">' + sinTheta2.toFixed(4) + '</tspan></text>' +
           '<line x1="12" y1="174" x2="153" y2="174" stroke="var(--color-border, #eee)"/>' +
           '<text x="12" y="194" font-size="10" fill="var(--color-text-muted, #666)">Discovered by Willebrord</text>' +
           '<text x="12" y="208" font-size="10" fill="var(--color-text-muted, #666)">Snell (1621) and</text>' +
@@ -891,7 +909,7 @@
         '<!-- Incoming White Sunlight Beam -->' +
         '<line x1="20" y1="' + p1y + '" x2="' + p1x + '" y2="' + p1y + '" stroke="#fff" stroke-width="5"/>' +
         '<line x1="20" y1="' + p1y + '" x2="' + p1x + '" y2="' + p1y + '" stroke="#e4e4e7" stroke-width="3"/>' +
-        '<text x="25" y="' + (p1y - 12) + '" font-size="11" font-weight="bold" fill="currentColor">White Sunlight</text>' +
+        '<text x="12" y="' + (p1y - 12) + '" font-size="11" font-weight="bold" fill="currentColor">White light</text>' +
 
         '<!-- First Glass Prism (Prism 1) -->' +
         '<polygon points="' + (p1x - 20) + ',' + (p1y + 50) + ' ' + (p1x + 20) + ',' + (p1y + 50) + ' ' + p1x + ',' + (p1y - 50) + '" ' +
@@ -919,7 +937,7 @@
         '<!-- Target Screen -->' +
         '<line x1="' + screenX + '" y1="80" x2="' + screenX + '" y2="280" stroke="#f4f4f5" stroke-width="5"/>' +
         '<circle cx="' + screenX + '" cy="' + (c.slitY + c.bend) + '" r="6" fill="' + c.hex + '"/>' +
-        '<text x="' + (screenX + 12) + '" y="' + (c.slitY + c.bend + 4) + '" font-size="11" font-weight="bold" fill="' + c.hex + '">Remains ' + c.name + '!</text>';
+        '<text x="' + (screenX - 10) + '" y="' + (c.slitY + c.bend - 12) + '" font-size="11" font-weight="bold" fill="' + c.hex + '" text-anchor="end">Still ' + c.name.toLowerCase() + '</text>';
 
       svg.innerHTML = svgContent;
 

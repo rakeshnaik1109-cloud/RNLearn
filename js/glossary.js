@@ -30,6 +30,9 @@
   var RE = new RegExp('(^|[^' + LETTER + '])(' + forms.map(esc).join('|') + ')(?![' + LETTER + '])', 'gi');
 
   var pop = null, current = null, hideTimer = null, uid = 0;
+  var me = document.querySelector('script[src*="glossary.js"]');
+  var BASE = me ? me.getAttribute('src').replace(/js\/glossary\.js.*$/, '') : '../';
+  function termSlug(t) { return (t.normalize ? t.normalize('NFD').replace(/[\u0300-\u036f]/g, '') : t).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
 
   function buildPopup() {
     pop = document.createElement('div');
@@ -37,7 +40,7 @@
     pop.className = 'gloss-pop';
     pop.setAttribute('role', 'tooltip');
     pop.hidden = true;
-    pop.innerHTML = '<div class="gloss-pop-term"></div><div class="gloss-pop-def"></div>';
+    pop.innerHTML = '<div class="gloss-pop-term"></div><div class="gloss-pop-def"></div><a class="gloss-pop-more" href="#">All terms in the glossary →</a>';
     pop.addEventListener('mouseenter', function () { clearTimeout(hideTimer); });
     pop.addEventListener('mouseleave', function () { if (current && !current._pinned) scheduleHide(); });
     document.body.appendChild(pop);
@@ -64,6 +67,7 @@
     var e = entries[+el.getAttribute('data-gloss')];
     pop.querySelector('.gloss-pop-term').textContent = e.term;
     pop.querySelector('.gloss-pop-def').textContent = e.def;
+    pop.querySelector('.gloss-pop-more').href = BASE + 'glossary.html#' + termSlug(e.term);
     pop.hidden = false;
     current = el;
     el._pinned = !!pinned || el._pinned;
