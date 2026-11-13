@@ -71,12 +71,12 @@
         height: 380,
         xDomain: [7.5, 0], // Inverted geological time: millions of years ago
         yDomain: [200, 1800],
-        xLabel: "Geological Age (Millions of Years Ago — Ma)",
-        yLabel: "Endocranial Volume (cm³)",
+        xLabel: "Age (millions of years ago)",
+        yLabel: "Brain size (cm³)",
         padding: { top: 30, right: 30, bottom: 55, left: 65 },
         xTicks: 7,
         yTicks: 5,
-        title: "Hominin Cranial Capacity Expansion over 7 Million Years",
+        title: "Brain size of human ancestors over 7 million years",
         bands: [
           { x0: 3.3, x1: 1.76, color: "rgba(11, 102, 195, 0.06)" }, // Oldowan era
           { x0: 1.76, x1: 0.3, color: "rgba(180, 83, 9, 0.06)" },   // Acheulean era
@@ -88,7 +88,7 @@
             data: points,
             color: FIG.getCSSVar('--accent', '#1b4965'),
             radius: 5.5,
-            label: "Fossil Specimen"
+            label: "Fossil skull"
           }
         ]
       });
@@ -133,9 +133,9 @@
 
     FIG.select(controlsWrap, {
       id: "region-filter",
-      label: "Filter by Geographical Region:",
+      label: "Show region:",
       options: [
-        { value: "All", label: "All Regions (Global)" },
+        { value: "All", label: "All regions" },
         { value: "East Africa", label: "East Africa (Turkana, Olduvai, Afar)" },
         { value: "South Africa", label: "South Africa (Sterkfontein, Swartkrans)" },
         { value: "North Africa", label: "North Africa (Jebel Irhoud)" },
@@ -171,9 +171,9 @@
     var currentForce = 350; // Newtons
 
     var readouts = FIG.readouts(container, [
-      { id: "flake-type", label: "Termination Type", value: "Feather (Optimal)" },
-      { id: "cone-angle", label: "Hertzian Cone Ingress", value: "58°" },
-      { id: "effective-length", label: "Detached Flake Length", value: "72 mm" }
+      { id: "flake-type", label: "Kind of break", value: "Feather (clean flake)" },
+      { id: "cone-angle", label: "Angle of the crack cone", value: "58°" },
+      { id: "effective-length", label: "Flake length", value: "72 mm" }
     ]);
 
     function updatePhysics() {
@@ -182,18 +182,18 @@
       var svg = FIG.createSVG(svgWrap, w, h, "Conchoidal fracture geometry diagram");
 
       // Physics outcome logic
-      var termination = "Feather (Clean cutting edge)";
+      var termination = "Feather (clean cutting edge)";
       var length = Math.round(currentForce * 0.18 + (90 - currentAngle) * 0.6);
       var coneHalfAngle = Math.round(currentAngle * 0.85);
 
       if (currentAngle > 80) {
-        termination = "Step / Crush (Impact angle too steep; energy dissipates in core)";
+        termination = "Step or crush (blow too steep; the crack stops inside the stone)";
         length = Math.round(length * 0.35);
       } else if (currentAngle < 48) {
-        termination = "Hinge (Angle too shallow; crack curls inward prematurely)";
+        termination = "Hinge (blow too shallow; the crack curls back out too early)";
         length = Math.round(length * 0.55);
       } else {
-        termination = "Feather (Sharp terminal margin; successful Mode 1/2 flake)";
+        termination = "Feather (sharp, thin edge: a good flake)";
       }
 
       readouts.update("flake-type", termination);
@@ -278,7 +278,7 @@
       lbl1.setAttribute('font-size', '12');
       lbl1.setAttribute('font-weight', '700');
       lbl1.setAttribute('fill', warnCol);
-      lbl1.textContent = "Hammerstone Blow (" + currentForce + " N @ " + currentAngle + "°)";
+      lbl1.textContent = "Hammerstone blow (" + currentForce + " N @ " + currentAngle + "°)";
       svg.appendChild(lbl1);
 
       var lbl2 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
@@ -287,7 +287,7 @@
       lbl2.setAttribute('font-size', '11');
       lbl2.setAttribute('font-family', FIG.getCSSVar('--font-mono'));
       lbl2.setAttribute('fill', strokeCol);
-      lbl2.textContent = "Striking Platform Surface";
+      lbl2.textContent = "Striking platform (the surface you hit)";
       svg.appendChild(lbl2);
 
       var lbl3 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
@@ -296,13 +296,13 @@
       lbl3.setAttribute('font-size', '11');
       lbl3.setAttribute('font-family', FIG.getCSSVar('--font-mono'));
       lbl3.setAttribute('fill', accentCol);
-      lbl3.textContent = "Hertzian Cone Fracture Front";
+      lbl3.textContent = "Crack spreading as a cone";
       svg.appendChild(lbl3);
     }
 
     FIG.slider(controls, {
       id: "knap-angle",
-      label: "Striking Angle (Degrees from horizontal):",
+      label: "Angle of the blow (degrees from horizontal):",
       min: 40,
       max: 90,
       step: 1,
@@ -316,7 +316,7 @@
 
     FIG.slider(controls, {
       id: "knap-force",
-      label: "Hammerstone Impact Force (Newtons):",
+      label: "Strength of the blow (newtons):",
       min: 150,
       max: 600,
       step: 10,
@@ -355,9 +355,9 @@
     var remainingPct = 50.0; // percent of parent remaining
 
     var readouts = FIG.readouts(container, [
-      { id: "elapsed-time", label: "Calculated Sample Age", value: "5,730 years" },
-      { id: "half-lives-elapsed", label: "Half-lives Elapsed", value: "1.00" },
-      { id: "parent-daughter-ratio", label: "Parent / Daughter Ratio", value: "1.000" }
+      { id: "elapsed-time", label: "Age of the sample", value: "5,730 years" },
+      { id: "half-lives-elapsed", label: "Number of halvings", value: "1.00" },
+      { id: "parent-daughter-ratio", label: "Original atoms left ÷ new atoms made", value: "1.000" }
     ]);
 
     function renderDecay() {
@@ -388,12 +388,12 @@
         height: 350,
         xDomain: [0, 6],
         yDomain: [0, 100],
-        xLabel: "Elapsed Time (Number of Half-Lives, t / t₁/₂)",
-        yLabel: "Parent Isotope Remaining (%)",
+        xLabel: "Time passed (number of half-lives)",
+        yLabel: "Radioactive atoms left (%)",
         padding: { top: 30, right: 30, bottom: 50, left: 60 },
         xTicks: 6,
         yTicks: 5,
-        title: "Exponential Radioactive Decay: N(t) = N₀ · 2^(-t / t₁/₂)",
+        title: "Radioactive decay: half the atoms disappear every half-life",
         series: [
           {
             type: 'area',
@@ -409,7 +409,7 @@
             data: [[numHalfLives, remainingPct]],
             color: FIG.getCSSVar('--callout-warn', '#b45309'),
             radius: 7,
-            label: "Sample Measurement"
+            label: "Your sample"
           }
         ]
       });
@@ -441,11 +441,11 @@
 
     FIG.select(controls, {
       id: "isotope-select",
-      label: "Radioactive Isotope System:",
+      label: "Dating method:",
       options: [
-        { value: "c14", label: "Carbon-14 (t₁/₂ = 5,730 yr; Bone, Charcoal, Wood < 50 ka)" },
-        { value: "k_ar", label: "Potassium-Argon / ⁴⁰Ar-³⁹Ar (t₁/₂ = 1.25 Ga; Volcanic Tuff > 100 ka)" },
-        { value: "u_pb", label: "Uranium-Lead (t₁/₂ = 4.47 Ga; Zircon crystals, Deep time)" }
+        { value: "c14", label: "Carbon-14 (half-life 5,730 years; bone, charcoal, wood; up to about 50,000 years)" },
+        { value: "k_ar", label: "Potassium–argon (half-life 1.25 billion years; volcanic ash; older than about 100,000 years)" },
+        { value: "u_pb", label: "Uranium–lead (half-life 4.47 billion years; zircon crystals; the age of rocks and the Earth)" }
       ],
       value: "c14",
       onChange: function (val) {
@@ -456,7 +456,7 @@
 
     FIG.slider(controls, {
       id: "remaining-pct",
-      label: "Parent Isotope Remaining (% of initial concentration N₀):",
+      label: "Radioactive atoms left (% of the original amount):",
       min: 1.5,
       max: 98.0,
       step: 0.5,
@@ -488,28 +488,28 @@
     var misStage = 5; // MIS 5 (Eemian interglacial ~120 ka, Green Sahara)
 
     var sites = [
-      { name: "Jebel Irhoud", x: 230, y: 75, align: "left", date: "315 ka", desc: "Oldest known Homo sapiens crania & Mousterian points" },
-      { name: "Taforalt", x: 260, y: 70, dy: -8, date: "82 ka", desc: "Nassarius shell beads pierced for personal adornment" },
-      { name: "Gona", x: 395, y: 175, date: "2.6 Ma", desc: "Earliest Mode 1 Oldowan knapped cores" },
-      { name: "Lomekwi 3", x: 380, y: 195, date: "3.3 Ma", desc: "Oldest discovered stone tools (flaked cores)" },
-      { name: "Olduvai Gorge", x: 385, y: 220, date: "1.9 Ma", desc: "Louis & Mary Leakey Oldowan and Acheulean sequence" },
-      { name: "Wonderwerk Cave", x: 320, y: 310, date: "1.0 Ma", desc: "FTIR evidence of in situ burned bone and plant ash" },
-      { name: "Klasies River", x: 330, y: 350, date: "115 ka", desc: "Middle Stone Age marine foraging & shell middens" },
-      { name: "Blombos Cave", x: 300, y: 345, align: "left", date: "77 ka", desc: "Engraved geometric ochre & silcrete drawing" },
-      { name: "Qafzeh / Skhul", x: 390, y: 90, date: "100 ka", desc: "Levantine early Homo sapiens burials with ochre" }
+      { name: "Jebel Irhoud", x: 230, y: 75, align: "left", date: "315 ka", desc: "Oldest known Homo sapiens fossils, with stone points" },
+      { name: "Taforalt", x: 260, y: 70, dy: -8, date: "82 ka", desc: "Pierced shell beads worn as ornaments" },
+      { name: "Gona", x: 395, y: 175, date: "2.6 Ma", desc: "Among the oldest Oldowan stone tools" },
+      { name: "Lomekwi 3", x: 380, y: 195, date: "3.3 Ma", desc: "Oldest known stone tools" },
+      { name: "Olduvai Gorge", x: 385, y: 220, date: "1.9 Ma", desc: "Louis and Mary Leakey's long sequence of early tools" },
+      { name: "Wonderwerk Cave", x: 320, y: 310, date: "1.0 Ma", desc: "Burned bone and plant ash: fire used inside the cave" },
+      { name: "Klasies River", x: 330, y: 350, date: "115 ka", desc: "Early seafood eating: heaps of shells" },
+      { name: "Blombos Cave", x: 300, y: 345, align: "left", date: "77 ka", desc: "Engraved ochre and the oldest known drawing" },
+      { name: "Qafzeh / Skhul", x: 390, y: 90, date: "100 ka", desc: "Early Homo sapiens burials with ochre" }
     ];
 
     var readouts = FIG.readouts(container, [
-      { id: "climate-regime", label: "Climate Regime", value: "MIS 5 Interglacial (Wet 'Green Sahara')" },
-      { id: "corridor-status", label: "Trans-Saharan Corridors", value: "Open (River networks & lakes active)" }
+      { id: "climate-regime", label: "Climate", value: "Warm and wet: a green Sahara" },
+      { id: "corridor-status", label: "Routes across the Sahara", value: "Open (rivers and lakes)" }
     ]);
 
     function renderMap() {
       mapWrap.innerHTML = '';
 
       var isGreen = (misStage === 5 || misStage === 1);
-      readouts.update("climate-regime", isGreen ? "Interglacial (Pluvial wet phase, ~125 ka)" : "Glacial Maxima (Hyper-arid desert expansion)");
-      readouts.update("corridor-status", isGreen ? "Open: Wadi networks and mega-lakes (Lake Mega-Chad) facilitate migration" : "Constrained: Severe aridity; populations restricted to coastal & river refugia");
+      readouts.update("climate-regime", isGreen ? "Warm and wet: a green Sahara" : "Cold and dry: the desert spreads");
+      readouts.update("corridor-status", isGreen ? "Open: rivers and huge lakes make travel possible" : "Mostly closed: people keep to coasts and river valleys");
 
       var landBg = isGreen ? "#cfdec0" : "#dfd9c7"; // Green Sahara vs Arid Ochre
       var corridorCol = isGreen ? "rgba(11, 102, 195, 0.45)" : "none";
@@ -517,7 +517,7 @@
       var svg = FIG.map(mapWrap, {
         width: 720,
         height: 420,
-        title: "African Pleistocene Fossil Sites & Paleoclimate Corridors",
+        title: "Key sites and changing climates in Africa",
         attribution: "Cartographic data: Natural Earth (Public Domain); Paleoclimate: Drake et al., 2011",
         landPaths: [
           // Simplified Africa & Southwest Asia continent silhouette
@@ -547,12 +547,12 @@
 
     FIG.select(controls, {
       id: "mis-select",
-      label: "Marine Isotope Stage (MIS Climate Cycle):",
+      label: "Climate period:",
       options: [
-        { value: "5", label: "MIS 5 Interglacial (~125,000 yr ago — Humid Green Sahara pluvial)" },
-        { value: "4", label: "MIS 4 Glacial Stage (~65,000 yr ago — Arid desert expansion, refugia)" },
-        { value: "2", label: "MIS 2 Last Glacial Maximum (~20,000 yr ago — Hyper-arid belt)" },
-        { value: "1", label: "MIS 1 Holocene (~9,000 yr ago — African Humid Period)" }
+        { value: "5", label: "Warm, wet period (about 125,000 years ago): green Sahara" },
+        { value: "4", label: "Cold, dry period (about 65,000 years ago): desert spreads" },
+        { value: "2", label: "Height of the last ice age (about 20,000 years ago): very dry" },
+        { value: "1", label: "After the ice age (about 9,000 years ago): green Sahara again" }
       ],
       value: "5",
       onChange: function (val) {
@@ -581,9 +581,9 @@
     var rawRatio = 50; // percent cooked vs raw
 
     var readouts = FIG.readouts(container, [
-      { id: "digest-gain", label: "Ileal Energy Digestibility", value: "+38%" },
-      { id: "chewing-time", label: "Daily Chewing Time Required", value: "2.1 hours / day" },
-      { id: "brain-energy", label: "Basal Energy Available for Brain", value: "22.5%" }
+      { id: "digest-gain", label: "Extra energy absorbed from food", value: "+38%" },
+      { id: "chewing-time", label: "Chewing time needed per day", value: "2.1 hours / day" },
+      { id: "brain-energy", label: "Share of resting energy left for the brain", value: "22.5%" }
     ]);
 
     function updateMetabolism() {
@@ -599,7 +599,7 @@
 
       readouts.update("digest-gain", digestibility.toFixed(0) + "%");
       readouts.update("chewing-time", chewingHours + " hrs / day");
-      readouts.update("brain-energy", brainBudget + "% of BMR");
+      readouts.update("brain-energy", brainBudget + "% of resting energy");
 
       var barData = [
         [1, digestibility],
@@ -612,12 +612,12 @@
         height: 320,
         xDomain: [0.5, 3.5],
         yDomain: [0, 100],
-        xLabel: "1: Digestibility (%)  |  2: Chewing Overhead (% of 6h)  |  3: Relative Encephalisation Energy",
-        yLabel: "Relative Percentage Index (%)",
+        xLabel: "1: energy absorbed  |  2: chewing time (% of 6 h)  |  3: energy for the brain",
+        yLabel: "Percent",
         padding: { top: 30, right: 30, bottom: 50, left: 60 },
         xTicks: 3,
         yTicks: 5,
-        title: "Metabolic Impact of Thermal Food Processing (Wrangham Cooking Hypothesis)",
+        title: "What cooking does to the energy budget (Wrangham's cooking idea)",
         series: [
           {
             type: 'bar',
@@ -630,7 +630,7 @@
 
     FIG.slider(controls, {
       id: "cooked-pct",
-      label: "Dietary Cooking Proportion (% of caloric intake thermally processed):",
+      label: "Share of food eaten cooked (%):",
       min: 0,
       max: 100,
       step: 5,
@@ -664,35 +664,35 @@
 
     var stepInfo = [
       {
-        title: "Step 1: Raw Flint Nodule Selection",
-        desc: "The knapper selects a cryptocrystalline nodule (flint or chert) with homogeneous texture free from frost cracks.",
-        action: "Inspecting core geometry and initial striking margins."
+        title: "Step 1: Choose a good flint nodule",
+        desc: "Pick a lump of flint or chert with an even texture and no cracks.",
+        action: "Checking the shape and where to start striking."
       },
       {
-        title: "Step 2: Centripetal Flaking (Shaping the Lower Face)",
-        desc: "Series of bifacial radial strikes along the margin establish a perimeter striking platform around the nodule.",
-        action: "Establishing a continuous circumferential working platform."
+        title: "Step 2: Trim all round the edge",
+        desc: "Knock flakes off all the way around, giving an edge to strike from.",
+        action: "Making a striking edge all the way round."
       },
       {
-        title: "Step 3: Preparing the Upper Convex Surface (Carapace)",
-        desc: "Knapper removes invasive transversal flakes to engineer precise longitudinal and lateral convexities across the top face.",
-        action: "Setting dome curvature so the fracture wave will run along desired margins."
+        title: "Step 3: Shape the top into a dome",
+        desc: "Remove overlapping flakes from the top until it is domed like a tortoise shell.",
+        action: "Setting the curves that will guide the final crack."
       },
       {
-        title: "Step 4: Striking Platform Faceting",
-        desc: "Small, precise flakes are detached from one edge to create an inclined, multifaceted platform ('chapeau de gendarme').",
-        action: "Creating an exact 75° impact angle for the decisive punch."
+        title: "Step 4: Prepare the striking spot",
+        desc: "Trim small flakes from one end to make an angled surface to hit.",
+        action: "Setting the angle (about 75°) for the final blow."
       },
       {
-        title: "Step 5: The Decisive Levallois Strike",
-        desc: "A single, heavy, carefully positioned hammerstone blow detaches a broad, razor-sharp flake with pre-determined geometry.",
-        action: "Detached Levallois flake ready for hafting; tortoise core remains for second extraction."
+        title: "Step 5: One final blow",
+        desc: "One well-placed blow knocks off a broad, sharp flake whose shape was planned in advance.",
+        action: "The flake is ready to use or fit to a handle; the block can be reshaped for another."
       }
     ];
 
     var readouts = FIG.readouts(container, [
-      { id: "step-title", label: "Current Operation", value: stepInfo[0].title },
-      { id: "step-action", label: "Knapper Action", value: stepInfo[0].action }
+      { id: "step-title", label: "Current step", value: stepInfo[0].title },
+      { id: "step-action", label: "What the knapper is doing", value: stepInfo[0].action }
     ]);
 
     function renderStep() {
@@ -834,9 +834,9 @@
     var currentDay = 14; // Day of lunar cycle (0 to 59 days = 2 months)
 
     var readouts = FIG.readouts(container, [
-      { id: "moon-phase-name", label: "Visible Lunar Phase", value: "Full Moon (100% illumination)" },
-      { id: "synodic-day", label: "Day in Synodic Month", value: "Day 14.8 / 29.5" },
-      { id: "notch-count", label: "Notches Passed on Lebombo Fibula", value: "15 / 29 notches" }
+      { id: "moon-phase-name", label: "Moon phase", value: "Full Moon (100% illumination)" },
+      { id: "synodic-day", label: "Day of the lunar month", value: "Day 14.8 / 29.5" },
+      { id: "notch-count", label: "Notches so far on the Lebombo bone", value: "15 / 29 notches" }
     ]);
 
     function renderTally() {
@@ -850,7 +850,7 @@
       if (phaseFraction >= 0.05 && phaseFraction < 0.20) phaseName = "Waxing Crescent";
       else if (phaseFraction >= 0.20 && phaseFraction < 0.30) phaseName = "First Quarter (Half Moon)";
       else if (phaseFraction >= 0.30 && phaseFraction < 0.45) phaseName = "Waxing Gibbous";
-      else if (phaseFraction >= 0.45 && phaseFraction < 0.55) phaseName = "Full Moon (Peak Illumination)";
+      else if (phaseFraction >= 0.45 && phaseFraction < 0.55) phaseName = "Full Moon";
       else if (phaseFraction >= 0.55 && phaseFraction < 0.70) phaseName = "Waning Gibbous";
       else if (phaseFraction >= 0.70 && phaseFraction < 0.80) phaseName = "Last Quarter (Half Moon)";
       else if (phaseFraction >= 0.80 && phaseFraction < 0.95) phaseName = "Waning Crescent";
@@ -962,13 +962,13 @@
       boneLbl.setAttribute('font-size', '11');
       boneLbl.setAttribute('font-family', FIG.getCSSVar('--font-mono'));
       boneLbl.setAttribute('fill', accentCol);
-      boneLbl.textContent = "Lebombo Bone (Eswatini, ~44 ka): 29 Incised Transverse Notches on Baboon Fibula";
+      boneLbl.textContent = "Lebombo bone (about 44,000 years old): 29 notches cut across a baboon bone";
       svg.appendChild(boneLbl);
     }
 
     FIG.slider(controls, {
       id: "lunar-day",
-      label: "Day of Observation (0 to 59 days across 2 complete lunar cycles):",
+      label: "Day (0 to 59, two lunar months):",
       min: 0,
       max: 59,
       step: 1,
@@ -992,114 +992,114 @@
 
     var questions = [
       {
-        question: "Why do archaeological stone tools from Lomekwi 3 (3.3 Ma) challenge traditional definitions of the genus Homo?",
+        question: "Why were the 3.3-million-year-old stone tools from Lomekwi 3 such a surprise?",
         options: [
-          "They prove that metal extraction occurred millions of years earlier than thought.",
-          "They show intentional core reduction predates the earliest known fossil evidence of Homo by roughly 500,000 years.",
-          "They demonstrate that chimpanzees had written symbolic language in the Pliocene.",
-          "They were manufactured using volcanic glass polished with mechanical grindstones."
+          "They show people were working metal millions of years earlier than thought.",
+          "They are about 500,000 years older than the oldest known fossil of our genus, Homo.",
+          "They show that chimpanzees once had a written language.",
+          "They were polished on grindstones."
         ],
         answer: 1,
-        explanation: "Dated to 3.3 Ma, Lomekwi 3 stone tools predate the earliest Homo fossils (~2.8 Ma at Ledi-Geraru), indicating earlier hominins such as Kenyanthropus or Australopithecus possessed flaking ability."
+        explanation: "The oldest Homo fossil, a jaw from Ledi-Geraru, is about 2.8 million years old. So the Lomekwi tools were made by an earlier member of the human family, probably Kenyanthropus or Australopithecus."
       },
       {
-        question: "What physical property of fine-grained silicate rocks (chert, flint, obsidian) makes conchoidal knapping predictable?",
+        question: "Why do flint, chert and obsidian break so predictably?",
         options: [
-          "Crystalline cleavages that snap in strict 90-degree right angles.",
-          "Isotropic mechanical behavior lacking internal cleavage planes, allowing shockwaves to radiate in Hertzian cones.",
-          "High thermal conductivity that melts the stone under impact.",
-          "Organic moisture content that acts as a hydraulic lubricant during fracture."
+          "They split cleanly at right angles.",
+          "They have no grain or weak planes, so a blow spreads out evenly as a cone.",
+          "The blow melts the stone slightly.",
+          "Water inside the stone helps it split."
         ],
         answer: 1,
-        explanation: "Because cryptocrystalline silicates are isotropic (uniform in all directions), striking force propagates without following grain boundaries, forming reproducible Hertzian cones."
+        explanation: "These stones are the same in every direction, so the crack doesn't follow any grain. It spreads as a cone, the same way every time."
       },
       {
-        question: "Which scientific method provided the microstratigraphic proof of controlled fire at Wonderwerk Cave (~1.0 Ma)?",
+        question: "How did scientists show that fire was used inside Wonderwerk Cave about a million years ago?",
         options: [
-          "Potassium-argon dating of ash layers directly.",
-          "Radiocarbon dating of charred mammoth hides.",
-          "Satellite radar detection of ancient smoke plumes.",
-          "Fourier-Transform Infrared Microspectroscopy (FTIR) identifying burnt bone and ashed plant matter in place, deep inside the cave."
+          "By dating the ash with potassium–argon.",
+          "By radiocarbon dating burned mammoth skins.",
+          "By spotting ancient smoke from satellites.",
+          "By analysing tiny samples with infrared light, which showed burned bone and plant ash in place deep inside the cave."
         ],
         answer: 3,
-        explanation: "Berna et al. (2012) used micromorphological thin sections and FTIR to identify ash and burnt bone within cave strata too deep to have been produced by surface wildfires."
+        explanation: "Berna and colleagues (2012) studied thin slices of the cave floor under the microscope and with infrared light. The burned material was too deep in the cave to come from a wildfire outside."
       },
       {
-        question: "According to the 'Expensive-Tissue Hypothesis' (Aiello & Wheeler), what anatomical trade-off enabled the expansion of hominin brain volume?",
+        question: "According to Aiello and Wheeler's 'expensive tissue' idea, what trade-off made a bigger brain possible?",
         options: [
-          "Reduction in bone density throughout the limbs.",
-          "A major reduction in the mass and energy demands of the gastrointestinal tract, made possible by high-calorie cooked diets.",
-          "Loss of body hair reducing sweat gland metabolic load.",
-          "Shrinkage of the visual cortex in favor of the frontal lobe."
+          "Lighter bones in the arms and legs.",
+          "A smaller gut that used less energy, made possible by richer, cooked food.",
+          "Losing body hair.",
+          "A smaller part of the brain for vision."
         ],
         answer: 1,
-        explanation: "Both gut tissue and neural tissue are metabolically greedy; higher-quality cooked foods allowed gut mass to shrink, liberating metabolic energy for brain growth."
+        explanation: "Brain and gut both use a lot of energy. Richer, cooked food let the gut shrink, freeing energy for a bigger brain. It is still a debated hypothesis."
       },
       {
-        question: "What did the 2017 thermoluminescence dating of fossil remains at Jebel Irhoud, Morocco reveal about the origin of Homo sapiens?",
+        question: "What did the 2017 dating of the Jebel Irhoud fossils in Morocco show about our species?",
         options: [
-          "Homo sapiens originated solely in southern Africa roughly 50,000 years ago.",
-          "Neanderthals and modern humans evolved completely independently on different continents without common ancestry.",
-          "Our species emerged around 315,000 years ago in a pan-African mosaic rather than a single East African event 200,000 years ago.",
-          "Stone tool production began simultaneously with the invention of agriculture."
+          "Homo sapiens appeared in southern Africa only about 50,000 years ago.",
+          "Neanderthals and modern humans have no common ancestor.",
+          "Our species is about 315,000 years old and took shape across Africa, not in one East African spot 200,000 years ago.",
+          "Stone tools were invented at the same time as farming."
         ],
         answer: 2,
-        explanation: "Hublin et al. pushed back the known antiquity of anatomically modern Homo sapiens to ~315 ka, demonstrating our species had evolved across Africa far earlier than previously believed."
+        explanation: "Hublin and colleagues dated the fossils to about 315,000 years ago, more than 100,000 years older than the earlier evidence, and far from East Africa."
       },
       {
-        question: "Why can radiocarbon (¹⁴C) dating not be applied to Oldowan pebble tools or 1.5-million-year-old Acheulean handaxes?",
+        question: "Why can't radiocarbon dating be used for sites over a million years old?",
         options: [
-          "With a half-life of 5,730 years, after roughly 50,000 years (~9 half-lives) only about 0.2% of the ¹⁴C remains, too little to measure reliably.",
-          "Stone absorbs excessive radiation from groundwater, resetting the clock.",
-          "¹⁴C decay only begins when rock is exposed to sunlight at the surface.",
-          "Only volcanic basalt contains radiocarbon, whereas Oldowan tools are flint."
+          "Carbon-14 halves every 5,730 years, so after about 50,000 years only about 0.2% is left: too little to measure reliably.",
+          "Groundwater resets the clock.",
+          "Carbon-14 only starts to decay in sunlight.",
+          "Only volcanic rock contains carbon-14."
         ],
         answer: 0,
-        explanation: "Radiocarbon is effective only on organic material up to ~50,000 years ago. Early hominin sites are dated using ⁴⁰Ar/³⁹Ar on intercalated volcanic tuffs, paleomagnetism, or luminescence."
+        explanation: "Radiocarbon works only on once-living material up to about 50,000 years old. Older sites are dated from the volcanic ash layers around them (argon–argon), from reversals of Earth's magnetic field recorded in the rocks, or by luminescence."
       },
       {
-        question: "What technological feature distinguishes Mode 3 Levallois flaking from earlier Mode 2 Acheulean handaxes?",
+        question: "What is special about the Levallois method compared with earlier handaxes?",
         options: [
-          "Levallois tools are made by heating iron ore in ceramic furnaces.",
-          "Tools are made purely by rubbing river cobbles against abrasive granite.",
-          "Levallois techniques eliminate the use of hammerstones in favor of wooden wedges.",
-          "The knapper carefully prepares the convexities of the core in advance so that a single final blow releases a tool of predetermined shape."
+          "The tools are made by smelting iron.",
+          "The tools are made by grinding pebbles on granite.",
+          "Wooden wedges replace hammerstones.",
+          "The block is shaped in advance so that one final blow knocks off a flake of a planned shape."
         ],
         answer: 3,
-        explanation: "Levallois knapping represents sophisticated mental templating: the core is an abstract matrix prepared specifically to extract a predetermined projectile or cutting edge."
+        explanation: "Levallois takes planning: the block is shaped like a mould so that one blow gives the flake the knapper had in mind."
       },
       {
-        question: "What was discovered at Blombos Cave (South Africa, ~73–100 ka) that is widely taken as evidence of symbolic behaviour?",
+        question: "What was found at Blombos Cave in South Africa that is widely seen as early evidence of symbols?",
         options: [
-          "Engraved ochre plaques incised with deliberate geometric cross-hatching, and an ochre-processing workshop.",
-          "Cuneiform clay tablets detailing cattle counts.",
-          "Cast bronze animal figurines.",
-          "Glass beads traded from the Mediterranean."
+          "Pieces of ochre deliberately engraved with a cross-hatched pattern.",
+          "Clay tablets counting cattle.",
+          "Bronze animal figures.",
+          "Glass beads from the Mediterranean."
         ],
         answer: 0,
-        explanation: "Henshilwood and colleagues excavated carefully ground ochre slabs with intentional, intersecting geometric cross-hatches dated to ~77 ka, far predating European cave art."
+        explanation: "Henshilwood and colleagues found ochre pieces, ground flat and engraved with a deliberate cross-hatch, about 77,000 years old: far older than Europe's cave paintings."
       },
       {
-        question: "What can be said with confidence about the 29 notches on the Lebombo bone (Eswatini/South Africa, ~44 ka)?",
+        question: "What can we say for sure about the 29 notches on the Lebombo bone (about 44,000 years old)?",
         options: [
-          "The notches were cut deliberately, probably over time — but whether they count days of the Moon or anything else is unknown.",
-          "It is a weapon tally recording military victories between hominin tribes.",
-          "It was accidentally produced by hyena gnawing during burial.",
-          "It served as a musical flute with pitch holes."
+          "They were cut on purpose, probably over a period of time, but nobody knows whether they count days of the Moon or something else.",
+          "It records victories in battles.",
+          "The marks were made by a hyena chewing it.",
+          "It was a flute."
         ],
         answer: 0,
-        explanation: "Microscopic analysis (d'Errico et al.) shows the notches were incised sequentially with deliberate tools, making it one of the oldest possible tallies. A lunar count is an attractive but unproven interpretation, and the bone is broken."
+        explanation: "Under the microscope (d'Errico and colleagues) the notches turn out to be cut deliberately, with different tools. A Moon count is an attractive idea but unproven, and the bone is broken."
       },
       {
-        question: "Why do modern archaeologists reject the mid-20th century concept of a sudden 50,000-year-old 'Upper Paleolithic Human Revolution'?",
+        question: "Why do most archaeologists now reject the idea of a sudden 'revolution' in human behaviour 50,000 years ago?",
         options: [
-          "Because stone tools were not invented until 10,000 years ago.",
-          "Because genetic testing proved Neanderthals never interacted with Homo sapiens.",
-          "Because Middle Stone Age excavations across Africa demonstrate that art, composite tools, hafting, and trade emerged gradually over 250,000 years.",
-          "Because ancient humans did not possess vocal cords until the Bronze Age."
+          "Because stone tools were invented only 10,000 years ago.",
+          "Because DNA shows Neanderthals never met Homo sapiens.",
+          "Because digs across Africa show that pigments, tools with handles, symbols and trade appeared gradually over a quarter of a million years.",
+          "Because people couldn't speak until the Bronze Age."
         ],
         answer: 2,
-        explanation: "As documented by McBrearty and Brooks ('The Revolution That Wasn't'), markers of cognitive modernity (pigment processing, bladelets, marine foraging, bone points) appeared piecemeal in Africa long before 50 ka."
+        explanation: "As McBrearty and Brooks showed in 'The Revolution That Wasn't', the signs of modern behaviour (pigment, small blades, seafood, bone tools) turned up bit by bit in Africa, long before 50,000 years ago."
       }
     ];
 
