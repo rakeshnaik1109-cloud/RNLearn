@@ -54,11 +54,11 @@
 
     ctrlRow.innerHTML =
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>Step Size ($\Delta x$):</strong>' +
+      '<strong>Gap between the two points:</strong>' +
       '<input type="range" id="calc-dx" min="0.02" max="1.50" step="0.02" value="0.80" style="width:130px;">' +
       '<span id="calc-dx-val">0.80</span>' +
       '</label>' +
-      '<button id="calc-zero-btn" style="padding:4px 12px; border-radius:4px; border:1px solid #999; background:var(--color-primary, #2160c4); color:#fff; cursor:pointer;">Approach Zero ($\Delta x \\to 0$)</button>' +
+      '<button id="calc-zero-btn" style="padding:4px 12px; border-radius:4px; border:1px solid #999; background:var(--color-primary, #2160c4); color:#fff; cursor:pointer;">Shrink the gap</button>' +
       '<span id="calc-slope-disp" style="font-weight:bold; color:var(--color-hot, #dc2626);">Secant Slope: 0.00</span>';
 
     wrapper.appendChild(ctrlRow);
@@ -82,9 +82,9 @@
 
     readouts.innerHTML =
       '<div><strong>Curve:</strong> <span>$f(x) = x^3 - 2x$</span> at $x_0 = 1.0$</div>' +
-      '<div><strong>Secant Slope ($\\frac{\\Delta y}{\\Delta x}$):</strong> <span id="sec-slope-val" style="font-weight:bold;">1.84</span></div>' +
-      '<div><strong>Exact Derivative ($f\'(x_0) = 3x_0^2 - 2$):</strong> <span style="font-weight:bold; color:var(--color-primary, #2160c4);">1.000</span></div>' +
-      '<div><strong>Bishop Berkeley’s Paradox:</strong> <span>"Ghosts of departed quantities"</span></div>';
+      '<div><strong>Slope of the line through two points:</strong> <span id="sec-slope-val" style="font-weight:bold;">1.84</span></div>' +
+      '<div><strong>Slope at the point itself:</strong> <span style="font-weight:bold; color:var(--color-primary, #2160c4);">1.000</span></div>' +
+      '<div><strong>Berkeley’s worry:</strong> <span>can the gap be zero and not zero?</span></div>';
     wrapper.appendChild(readouts);
 
     container.appendChild(wrapper);
@@ -116,7 +116,7 @@
       var secantSlope = (y1 - y0) / dx;
       var trueSlope = fPrime(x0);
 
-      slopeDisp.textContent = 'Secant Slope: ' + secantSlope.toFixed(3);
+      slopeDisp.textContent = 'Slope: ' + secantSlope.toFixed(3);
       secSlopeVal.textContent = secantSlope.toFixed(3);
 
       ctx.fillStyle = colors.bg;
@@ -217,9 +217,9 @@
       // Legend in top-left corner
       ctx.fillStyle = colors.hot;
       ctx.font = 'bold 12px sans-serif';
-      ctx.fillText('Secant Line Slope = Δy/Δx', 40, 40);
+      ctx.fillText('Red: line through P and Q', 40, 40);
       ctx.fillStyle = colors.muted;
-      ctx.fillText('Tangent Line Slope = f\'(x₀) = 1.000', 40, 60);
+      ctx.fillText('Dashed: slope at P itself = 1.000', 40, 60);
     }
 
     dxSlider.addEventListener('input', render);
@@ -265,12 +265,12 @@
 
     ctrlRow.innerHTML =
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>Target Tolerance ($\epsilon$):</strong>' +
+      '<strong>Margin of error, epsilon:</strong>' +
       '<input type="range" id="ed-eps" min="0.2" max="1.2" step="0.05" value="0.6" style="width:110px;">' +
       '<span id="ed-eps-val">0.60</span>' +
       '</label>' +
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>Chosen Window ($\delta$):</strong>' +
+      '<strong>Your distance, delta:</strong>' +
       '<input type="range" id="ed-del" min="0.05" max="0.8" step="0.02" value="0.25" style="width:110px;">' +
       '<span id="ed-del-val">0.25</span>' +
       '</label>' +
@@ -289,7 +289,7 @@
     var explBox = document.createElement('div');
     explBox.style.fontSize = '0.85rem';
     explBox.style.color = 'var(--color-text-muted, #666)';
-    explBox.innerHTML = '<strong>Karl Weierstrass’s Modern Formal Definition:</strong> $\\lim_{x \\to x_0} f(x) = L$ if and only if for every $\\epsilon > 0$, there exists a $\\delta > 0$ such that whenever $0 < |x - x_0| < \\delta$, we are guaranteed that $|f(x) - L| < \\epsilon$. The infinitesimal has been replaced by a dynamic challenge-and-response game.';
+    explBox.innerHTML = '<strong>The game:</strong> your opponent picks a margin of error (epsilon, the height of the band). You must choose a distance (delta, the width of the box) so that the curve stays inside the band everywhere within that distance. If you can always win, however thin the band, the limit is real.';
     wrapper.appendChild(explBox);
 
     container.appendChild(wrapper);
@@ -320,11 +320,11 @@
       var isValid = (maxF <= L + eps + 1e-4) && (minF >= L - eps - 1e-4);
 
       if (isValid) {
-        badge.textContent = 'VALID: |f(x) - L| < ε Holds!';
+        badge.textContent = 'You win: the curve stays inside the band';
         badge.style.background = isDark() ? '#14532d' : '#dcfce7';
         badge.style.color = '#16a34a';
       } else {
-        badge.textContent = 'INVALID: Curve spills outside ε-band!';
+        badge.textContent = 'Not yet: the curve leaves the band. Make delta smaller';
         badge.style.background = isDark() ? '#7f1d1d' : '#fee2e2';
         badge.style.color = '#dc2626';
       }
@@ -422,7 +422,7 @@
       ctx.fillText('Function f(x) = x²', ox + 20, 35);
       ctx.font = '11px sans-serif';
       ctx.fillStyle = colors.muted;
-      ctx.fillText('Given target ε band, choose δ small enough so curve stays inside yellow box', ox + 20, 52);
+      ctx.fillText('Keep the curve inside the band within the shaded box', ox + 20, 52);
     }
 
     epsSlider.addEventListener('input', render);
@@ -453,7 +453,7 @@
 
     ctrlRow.innerHTML =
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>Select Geometry:</strong>' +
+      '<strong>Choose a geometry:</strong>' +
       '<select id="geom-type" style="padding:4px 10px; border-radius:4px; border:1px solid #999; background:var(--color-bg, #fff); font-weight:bold;">' +
       '<option value="hyperbolic">Hyperbolic (Lobachevsky/Bolyai, K < 0)</option>' +
       '<option value="euclidean">Euclidean Flat (Parallels = 1, K = 0)</option>' +
@@ -481,9 +481,9 @@
     metrics.style.border = '1px solid var(--color-border, #eee)';
 
     metrics.innerHTML =
-      '<div><strong>Gaussian Curvature ($K$):</strong> <span id="geom-k" style="font-weight:bold;">-1 (Constant Negative)</span></div>' +
-      '<div><strong>Fifth Postulate (Parallel Lines):</strong> <span id="geom-par" style="font-weight:bold; color:var(--color-hot, #dc2626);">Infinitely Many Parallels</span></div>' +
-      '<div><strong>Triangle Angle Sum ($\\alpha+\\beta+\\gamma$):</strong> <span id="geom-sum" style="font-weight:bold; color:var(--color-primary, #2160c4);">< 180°</span></div>';
+      '<div><strong>Curvature:</strong> <span id="geom-k" style="font-weight:bold;">Negative (saddle)</span></div>' +
+      '<div><strong>Parallel lines through a point:</strong> <span id="geom-par" style="font-weight:bold; color:var(--color-hot, #dc2626);">Infinitely many</span></div>' +
+      '<div><strong>Angles of a triangle add up to:</strong> <span id="geom-sum" style="font-weight:bold; color:var(--color-primary, #2160c4);">< 180°</span></div>';
 
     wrapper.appendChild(metrics);
     container.appendChild(wrapper);
@@ -502,9 +502,9 @@
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       if (type === 'hyperbolic') {
-        kDisp.textContent = '-1 (Negative Curvature)';
-        parDisp.textContent = 'Infinitely Many Non-Intersecting Parallels';
-        sumDisp.textContent = '< 180° (Sum = 180° - Area)';
+        kDisp.textContent = 'Negative (saddle-shaped)';
+        parDisp.textContent = 'Infinitely many';
+        sumDisp.textContent = 'Less than 180°';
 
         // Poincaré Disk Model
         var cx = 360, cy = 170, R = 135;
@@ -562,9 +562,9 @@
         ctx.fillText('Hyperbolic Triangle: α+β+γ < 180°', cx - 90, cy + 100);
 
       } else if (type === 'euclidean') {
-        kDisp.textContent = '0 (Flat Plane)';
-        parDisp.textContent = 'Exactly 1 Unique Parallel Line (Fifth Postulate)';
-        sumDisp.textContent = '= 180° (Exact)';
+        kDisp.textContent = 'Zero (flat)';
+        parDisp.textContent = 'Exactly one (Euclid)';
+        sumDisp.textContent = 'Exactly 180°';
 
         // Flat plane grid
         var ox = 180, oy = 60, pw = 360, ph = 220;
@@ -618,9 +618,9 @@
         ctx.fillText('Euclidean Triangle: α+β+γ = 180°', ox + 40, oy + 200);
 
       } else { // spherical
-        kDisp.textContent = '+1 (Positive Curvature)';
-        parDisp.textContent = 'Zero Parallels: All Great Circles Intersect';
-        sumDisp.textContent = '> 180° (Sum = 180° + Area)';
+        kDisp.textContent = 'Positive (like a ball)';
+        parDisp.textContent = 'None: all great circles meet';
+        sumDisp.textContent = 'More than 180°';
 
         // 3D Sphere projection
         var scx = 360, scy = 170, sR = 120;
@@ -706,7 +706,7 @@
     var expl = document.createElement('div');
     expl.style.fontSize = '0.85rem';
     expl.style.color = 'var(--color-text-muted, #666)';
-    expl.innerHTML = '<strong>Riemannian Holonomy:</strong> Transporting a tangent vector parallel to itself along a closed circuit on a curved surface causes the vector to return rotated by an angle $\\Delta \\theta = \\iint K dA$. On a flat plane ($K=0$), the deflection is strictly zero.';
+    expl.innerHTML = '<strong>What to notice:</strong> walk an arrow round a loop, never turning it. On a flat sheet it comes back pointing the same way. On a sphere it comes back turned, and the more curved the surface inside the loop, the more it turns. That is how a creature living on the surface could detect the curvature.';
     wrapper.appendChild(expl);
 
     container.appendChild(wrapper);
@@ -774,22 +774,22 @@
         vecPos = ptA;
         vecAngle = Math.PI / 2; // pointing down along meridian AB
         vecLabel = 'Stage 0: Vector at North Pole, pointing South';
-        angleDisp.textContent = 'Holonomy Deflection: 0°';
+        angleDisp.textContent = 'Arrow turned by: 0°';
       } else if (currentStep === 1) {
         vecPos = ptB;
         vecAngle = Math.PI / 2; // still pointing down (parallel transport along meridian)
         vecLabel = 'Stage 1: Arrived at Equator without turning (angle preserved)';
-        angleDisp.textContent = 'Parallel Transport along AB: 0° relative rotation';
+        angleDisp.textContent = 'Walking from A to B: arrow not turned';
       } else if (currentStep === 2) {
         vecPos = ptC;
         vecAngle = Math.PI / 2; // still pointing South (perpendicular to equator BC)
         vecLabel = 'Stage 2: Slide along Equator to 90° East';
-        angleDisp.textContent = 'Parallel Transport along BC: Vector remains pointing South';
+        angleDisp.textContent = 'Walking from B to C: arrow still points south';
       } else { // 3: Return to North Pole
         vecPos = ptA;
         vecAngle = 0; // pointing East! Rotated by 90 degrees!
         vecLabel = 'Stage 3: Returned to North Pole! Deflected by 90°!';
-        angleDisp.textContent = 'Final Holonomy Deflection: 90° (Δθ = ∬ K dA = π/2)';
+        angleDisp.textContent = 'Back at the start: the arrow has turned 90°';
       }
 
       // Draw the transported tangent vector (Arrow)
@@ -863,7 +863,7 @@
 
     ctrlRow.innerHTML =
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>Enumeration Step ($N$):</strong>' +
+      '<strong>How many fractions counted:</strong>' +
       '<input type="range" id="pair-n" min="1" max="25" step="1" value="12" style="width:120px;">' +
       '<span id="pair-n-val">N = 12</span>' +
       '</label>' +
@@ -883,7 +883,7 @@
     var expl = document.createElement('div');
     expl.style.fontSize = '0.85rem';
     expl.style.color = 'var(--color-text-muted, #666)';
-    expl.innerHTML = '<strong>Georg Cantor (1874):</strong> By weaving along anti-diagonals of numerator $p$ and denominator $q$, every rational fraction $p/q$ is paired bijectively with a unique integer $N \\in \\mathbb{N}$. Therefore, the infinite set of rational numbers has the exact same cardinality as natural counting numbers: $|\\mathbb{Q}| = \\aleph_0$.';
+    expl.innerHTML = '<strong>The idea:</strong> zigzag through the grid of fractions (top number across, bottom number down), giving each fraction the next counting number. Every fraction is reached sooner or later, so there are exactly as many fractions as counting numbers.';
     wrapper.appendChild(expl);
 
     container.appendChild(wrapper);
@@ -909,7 +909,7 @@
       nVal.textContent = 'N = ' + maxIdx;
 
       var curItem = sequence[maxIdx - 1];
-      curFracDisp.textContent = 'N = ' + maxIdx + ' ↔ Fraction ' + curItem.p + '/' + curItem.q;
+      curFracDisp.textContent = 'Fraction number ' + maxIdx + ' is ' + curItem.p + '/' + curItem.q;
 
       ctx.fillStyle = colors.bg;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -1042,7 +1042,7 @@
     var expl = document.createElement('div');
     expl.style.fontSize = '0.85rem';
     expl.style.color = 'var(--color-text-muted, #666)';
-    expl.innerHTML = '<strong>Cantor’s Diagonal Slash (1891):</strong> Construct a real number $D = 0.d_1 d_2 d_3 \\dots$ by choosing $d_n \\neq s_{nn}$. $D$ differs from the 1st number at the 1st digit, from the 2nd at the 2nd digit, and from the $n$-th number at the $n$-th digit. $D$ cannot be anywhere on the infinite list: the real numbers $\\mathbb{R}$ are uncountably infinite ($|\\mathbb{R}| = \\mathfrak{c} > \\aleph_0$).';
+    expl.innerHTML = '<strong>The idea:</strong> build a new number D by changing every digit on the diagonal. D differs from the 1st number in its 1st digit, from the 2nd in its 2nd digit, and so on, so it can\'t be anywhere on the list. No list of decimals can ever be complete.';
     wrapper.appendChild(expl);
 
     container.appendChild(wrapper);
@@ -1222,7 +1222,7 @@
     var expl = document.createElement('div');
     expl.style.fontSize = '0.85rem';
     expl.style.color = 'var(--color-text-muted, #666)';
-    expl.innerHTML = '<strong>Alan Turing (1936):</strong> A simple discrete machine reading and writing symbols on an infinite tape can execute any algorithm conceivable by human reason. Yet Turing proved that no general algorithm can decide whether an arbitrary program will ever halt—the <strong>Halting Problem</strong> is undecidable.';
+    expl.innerHTML = '<strong>The idea:</strong> this machine only reads a square, writes a symbol, moves one step and changes its state, yet machines like it can carry out any step-by-step calculation. Turing also proved that no program can always tell whether another program will stop or run forever.';
     wrapper.appendChild(expl);
 
     container.appendChild(wrapper);
@@ -1390,114 +1390,114 @@
 
     var questions = [
       {
-        q: '1. What was Bishop George Berkeley’s famous philosophical critique of early calculus in his 1734 treatise "The Analyst"?',
+        q: '1. What was Bishop Berkeley\'s complaint about early calculus in "The Analyst" (1734)?',
         options: [
-          'Calculus could not be applied to planetary orbits.',
-          'Leibniz stole the integral symbol from Archimedes.',
-          'Calculus contradicted Christian theology because God made all numbers finite.',
-          'Infinitesimals were logically incoherent: mathematicians treated $dx$ as non-zero when dividing, and then set it to zero to eliminate it, calling them "the ghosts of departed quantities."'
+          'That calculus gave wrong answers for planetary orbits.',
+          'That Newton had stolen it from Leibniz.',
+          'That it used too many symbols.',
+          'That it treated tiny quantities as not zero in one step and as zero in the next, which is a contradiction.'
         ],
         answer: 3,
-        expl: 'Berkeley pointed out that dividing by an infinitesimal increment and subsequently setting it to zero was a logical fallacy: a quantity cannot be simultaneously non-zero and zero. He famously dubbed them "the ghosts of departed quantities."'
+        expl: 'You can\'t divide by zero, yet the tiny leftover was then thrown away as if it were zero. Berkeley called these quantities "ghosts of departed quantities".'
       },
       {
-        q: '2. How did Karl Weierstrass eliminate mystical infinitesimals from nineteenth-century mathematical analysis?',
+        q: '2. How did Weierstrass get rid of "infinitely small" quantities?',
         options: [
-          'By banning derivatives and integrals from pure mathematics.',
-          'By proving that all curves are composed of microscopic straight line segments.',
-          'By formulating the rigorous $\\epsilon$-$\\delta$ definition of limits, reducing continuity and convergence to static arithmetic inequalities involving real numbers.',
-          'By introducing imaginary numbers into coordinate systems.'
+          'By banning calculus.',
+          'By measuring them with a microscope.',
+          'With the epsilon–delta definition: for any margin of error you pick, you can find a small enough distance that keeps the curve within it.',
+          'By making them equal to one.'
         ],
         answer: 2,
-        expl: 'Weierstrass replaced mysterious "vanishing quantities" with the static, rigorous $\\epsilon$-$\\delta$ language of inequalities: $\\lim_{x \\to a} f(x) = L$ means for every $\\epsilon > 0$, there exists $\\delta > 0$ such that $0 < |x - a| < \\delta \\implies |f(x) - L| < \\epsilon$.'
+        expl: 'It works like a challenge game: whatever margin your opponent picks, you must be able to respond. No infinitely small numbers and no motion are needed.'
       },
       {
-        q: '3. What did Nikolai Lobachevsky and János Bolyai discover when they replaced Euclid’s Fifth Postulate (the Parallel Postulate) with the assumption that through a point not on a line, more than one parallel line can be drawn?',
+        q: '3. What did Lobachevsky and Bolyai find when they assumed that more than one parallel can pass through a point?',
         options: [
-          'They immediately ran into logical contradictions, proving Euclid’s geometry is the only possible one.',
-          'They showed that circles cannot exist in three dimensions.',
-          'They derived the algebraic formula for solving quintic equations.',
-          'They constructed a completely consistent, non-contradictory new geometry (Hyperbolic geometry) where triangle angles sum to strictly less than 180 degrees.'
+          'An immediate contradiction.',
+          'That Euclid had made an arithmetic mistake.',
+          'That all lines are circles.',
+          'A complete, consistent new geometry in which the angles of a triangle add up to less than 180°.'
         ],
         answer: 3,
-        expl: 'Lobachevsky and Bolyai proved that Euclid’s Fifth Postulate is not an absolute logical necessity: denying it produces Hyperbolic geometry, a self-consistent mathematical world with constant negative curvature where triangle angles sum to $< 180^\\circ$.'
+        expl: 'Hyperbolic geometry is as free of contradiction as Euclid\'s. Euclid\'s parallel rule is a choice, not a necessary truth.'
       },
       {
-        q: '4. Bernhard Riemann’s revolutionary 1854 Habilitation lecture expanded geometry by defining space through:',
+        q: '4. What new idea of space did Riemann introduce in his 1854 lecture?',
         options: [
-          'An immutable 3D Cartesian grid governed by Euclidean distances.',
-          'An $n$-dimensional continuous manifold whose geometry is determined intrinsically by an infinitesimal quadratic differential metric tensor ($ds^2 = \\sum g_{ij} dx^i dx^j$).',
-          'A discrete collection of isolated points.',
-          'Complex quarternions only.'
+          'Space is always flat and three-dimensional.',
+          'Spaces of any number of dimensions whose curvature can change from place to place, measured from the inside.',
+          'Space is made of tiny cubes.',
+          'Space doesn\'t exist.'
         ],
         answer: 1,
-        expl: 'Riemann liberated geometry from flat Euclidean constraints by defining the manifold: an $n$-dimensional space where curvature varies continuously from point to point, governed by the metric tensor $g_{ij}$, providing the exact mathematical language Einstein needed for General Relativity.'
+        expl: 'Riemann\'s curved spaces later gave Einstein the mathematics for general relativity, in which matter curves spacetime.'
       },
       {
-        q: '5. What did Georg Cantor prove regarding the infinite set of rational fractions $\\mathbb{Q}$ compared to the set of natural counting numbers $\\mathbb{N}$?',
+        q: '5. What did Cantor show about the fractions compared with the counting numbers?',
         options: [
-          'There are infinitely more rational numbers than natural numbers.',
-          'Rational numbers cannot be put into any order.',
-          'The cardinality of fractions depends on whether they are positive or negative.',
-          'The set of rational numbers has the exact same cardinality (countably infinite, $\\aleph_0$) as the natural numbers, because they can be arranged in a one-to-one diagonal bijection.'
+          'There are far more fractions.',
+          'There are fewer fractions.',
+          'Fractions can\'t be compared with counting numbers at all.',
+          'They are the same size: every fraction can be paired with a counting number, by zigzagging through a grid.'
         ],
         answer: 3,
-        expl: 'Using his famous diagonal pairing path, Cantor demonstrated a one-to-one correspondence (bijection) between $\\mathbb{N}$ and $\\mathbb{Q}$, proving that despite being dense on the line, the rational numbers are countably infinite: $|\\mathbb{Q}| = \\aleph_0$.'
+        expl: 'Even though fractions are packed tightly along the line, they are only "countably infinite", the same size of infinity as 1, 2, 3...'
       },
       {
-        q: '6. Cantor’s 1891 "diagonal argument" proved that the real numbers $\\mathbb{R}$ in the interval $[0, 1)$ are:',
+        q: '6. What did Cantor\'s diagonal argument prove about the decimals between 0 and 1?',
         options: [
-          'Countably infinite like the integers.',
-          'Uncountably infinite: any hypothetical list of real numbers can be shown to omit a newly constructed diagonal real number $D$, proving $|\\mathbb{R}| = \\mathfrak{c} > \\aleph_0$.',
-          'A finite set of extreme density.',
-          'Empty of irrational numbers.'
+          'They can be listed one by one.',
+          'They are a bigger infinity than the counting numbers: no list can ever contain them all.',
+          'There are only finitely many.',
+          'They are the same as the fractions.'
         ],
         answer: 1,
-        expl: 'Cantor constructed a real number $D$ whose $n$-th decimal digit differs from the $n$-th digit of the $n$-th listed number. Because $D$ differs from every number on the list, no list can contain all real numbers: the continuum is uncountably infinite.'
+        expl: 'Change every digit on the diagonal of any list and you get a decimal that differs from every number on the list, so the list was never complete.'
       },
       {
-        q: '7. What was Bertrand Russell’s famous paradox (1901) that threw Gottlob Frege’s naive set theory into foundational crisis?',
+        q: '7. What is Russell\'s paradox (sent to Frege in 1902)?',
         options: [
-          'The set of all primes is infinite.',
-          'Parallel lines can never meet at infinity.',
-          'Consider the set $R$ of all sets that do not contain themselves ($R = \\{x \\mid x \\notin x\\}$). If $R$ belongs to $R$, then by definition it does not; if it does not belong to $R$, then it does: $R \\in R \\iff R \\notin R$.',
-          'Zero cannot be divided by zero.'
+          'A puzzle about two trains passing.',
+          'A proof that 1 = 2.',
+          'Think of the set of all sets that are not members of themselves: if it is a member of itself, it isn\'t, and if it isn\'t, it is.',
+          'A question about the largest number.'
         ],
         answer: 2,
-        expl: 'Russell’s Barber Paradox exposed a fatal self-referential contradiction in unrestricted set comprehension: a set defined as containing all sets that do not contain themselves cannot consistently contain or not contain itself.'
+        expl: 'It showed that "for any property there is a set of things with it" leads to contradiction. New, more careful rules for sets were needed.'
       },
       {
-        q: '8. What was David Hilbert’s grand formalist program proposed at the International Congress of Mathematicians?',
+        q: '8. What was Hilbert\'s programme?',
         options: [
-          'To replace all mathematics with computer programs.',
-          'To place all of mathematics on a complete, consistent, and decidable formal axiomatic foundation, proving from within that no contradiction could ever arise.',
-          'To discard all transfinite numbers as theological mysticism.',
-          'To prove that every mathematical problem is unsolvable.'
+          'To abolish infinity from mathematics.',
+          'To write mathematics as a precise system of rules and prove that it is complete, free of contradiction and mechanically decidable.',
+          'To build the first computer.',
+          'To prove Euclid right.'
         ],
         answer: 1,
-        expl: 'Hilbert sought to secure mathematics once and for all: to formalize all mathematical systems into rigorous symbolic axioms and prove through metamathematics that the system is complete (every truth can be proved) and consistent (no contradictions).'
+        expl: 'Hilbert hoped to put mathematics beyond all doubt: "We must know. We will know."'
       },
       {
-        q: '9. Kurt Gödel’s First Incompleteness Theorem (1931) dealt a fatal blow to Hilbert’s program by proving that:',
+        q: '9. What did Gödel\'s first incompleteness theorem (1931) show?',
         options: [
-          'In any consistent formal axiomatic system capable of doing basic arithmetic, there are always true mathematical statements that cannot be proven from within the axioms.',
-          'All mathematical axioms are inherently false.',
-          'Computers will never be able to calculate logarithms.',
-          'Set theory is completely contradictory.'
+          'Any consistent system of rules strong enough for arithmetic contains true statements it cannot prove.',
+          'Arithmetic is full of contradictions.',
+          'Every true statement can be proved.',
+          'Mathematics is only a game.'
         ],
         answer: 0,
-        expl: 'Gödel showed through arithmetical encoding (Gödel numbering) that any consistent formal system rich enough to contain arithmetic can construct a self-referential statement asserting its own unprovability ($G \\iff \\neg\\text{Prov}(\\ulcorner G \\urcorner)$). Truth in mathematics forever outruns formal proof.'
+        expl: 'Gödel built a statement that says, in effect, "this statement cannot be proved". If the system is consistent, it is true but unprovable.'
       },
       {
-        q: '10. What profound limit did Alan Turing discover in 1936 regarding universal computation (the Halting Problem)?',
+        q: '10. What did Turing prove about the "halting problem" in 1936?',
         options: [
-          'No general algorithm can exist that can determine, for all possible programs and inputs, whether the program will eventually halt or run forever.',
-          'Computers can never solve problems faster than human brains.',
-          'All mechanical Turing machines require infinite electrical power.',
-          'Binary numbers cannot represent real numbers.'
+          'No program can ever decide, for every program and input, whether it will eventually stop or run forever.',
+          'Every program eventually stops.',
+          'Computers can answer any question given enough time.',
+          'Programs can only add numbers.'
         ],
         answer: 0,
-        expl: 'Turing proved that the Halting Problem is undecidable: assuming an algorithm $H$ exists that decides whether any machine halts leads to a self-referential contradiction when fed an inverted copy of itself, establishing the non-computable horizon of reason.'
+        expl: 'A contrary program that does the opposite of whatever the checker predicts about it would make any such checker wrong. Some questions can never be computed.'
       }
     ];
 
