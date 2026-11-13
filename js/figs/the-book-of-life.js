@@ -24,8 +24,8 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label for="fig-strata-layer">Select Geological Stratum: ' +
-            '<span id="fig-strata-layer-val" class="fig-readout">Cenozoic (Surface Layer)</span>' +
+          '<label for="fig-strata-layer">Pick a rock layer: ' +
+            '<span id="fig-strata-layer-val" class="fig-readout">Cenozoic (top layer, youngest)</span>' +
           '</label>' +
           '<input type="range" id="fig-strata-layer" min="0" max="4" step="1" value="0">' +
         '</div>' +
@@ -148,8 +148,8 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label>Select Feeding Niche: ' +
-            '<span id="fig-finch-niche-val" class="fig-readout">Large Ground Finch (Hard Seeds)</span>' +
+          '<label>Pick a food: ' +
+            '<span id="fig-finch-niche-val" class="fig-readout">Large ground finch (hard seeds)</span>' +
           '</label>' +
         '</div>' +
         '<div class="fig-control-group">' +
@@ -240,8 +240,8 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label for="fig-sel-env">Environment Type: ' +
-            '<span id="fig-sel-env-val" class="fig-readout">Pristine Lichen Forest (Light Tree Trunks)</span>' +
+          '<label for="fig-sel-env">Surroundings: ' +
+            '<span id="fig-sel-env-val" class="fig-readout">Clean forest (pale tree trunks)</span>' +
           '</label>' +
           '<input type="range" id="fig-sel-env" min="0" max="100" step="10" value="0">' +
         '</div>' +
@@ -348,8 +348,8 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label>Select Flask Treatment: ' +
-            '<span id="fig-pasteur-state-val" class="fig-readout">Intact Swan-Neck (Air enters; dust trapped in curve)</span>' +
+          '<label>Pick a flask: ' +
+            '<span id="fig-pasteur-state-val" class="fig-readout">Swan neck intact (air gets in, dust trapped in the bend)</span>' +
           '</label>' +
         '</div>' +
         '<div class="fig-control-group">' +
@@ -467,8 +467,8 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label>Select Genetic Cross: ' +
-            '<span id="fig-mendel-cross-val" class="fig-readout">F₂ Monohybrid Cross (Yy × Yy)</span>' +
+          '<label>Pick a cross: ' +
+            '<span id="fig-mendel-cross-val" class="fig-readout">Second generation, one trait (Yy × Yy)</span>' +
           '</label>' +
         '</div>' +
         '<div class="fig-control-group">' +
@@ -608,8 +608,8 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label>Select Complementary Base Pair: ' +
-            '<span id="fig-dna-pair-val" class="fig-readout">Adenine = Thymine (2 Hydrogen Bonds)</span>' +
+          '<label>Pick a base pair: ' +
+            '<span id="fig-dna-pair-val" class="fig-readout">A with T (2 hydrogen bonds)</span>' +
           '</label>' +
         '</div>' +
         '<div class="fig-control-group">' +
@@ -733,7 +733,7 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label for="fig-codon-select">Select mRNA Triplet Codon: ' +
+          '<label for="fig-codon-select">Pick a three-letter codon: ' +
             '<span id="fig-codon-val" class="fig-readout">AUG → Methionine (START)</span>' +
           '</label>' +
           '<input type="range" id="fig-codon-select" min="0" max="3" step="1" value="0">' +
@@ -823,114 +823,114 @@
   FIG['fig-quiz-part8'] = function (container) {
     var questions = [
       {
-        question: "How did Georges Cuvier's comparative anatomy in Paris establish the reality of extinction?",
+        question: "How did Georges Cuvier show that species can become extinct?",
         options: [
-          "He proved that fossils are mineral concretions grown inside rocks",
-          "He claimed that animals transform into trees during floods",
-          "He proved that fossil mammoth and mastodon bones were anatomically distinct from all living African and Indian elephants, demonstrating that entire species had vanished from the Earth",
-          "He discovered fossil dinosaur DNA in amber"
+          "He watched a species die out in his garden.",
+          "He found a written record of the last mammoth.",
+          "By comparing bones, he showed that mammoths and mastodons were different from any living elephant, and animals that big couldn't still be hiding somewhere.",
+          "He counted the rings in fossil trees."
         ],
         answer: 2,
-        explanation: "By meticulously comparing jaw and tooth anatomy, Cuvier demonstrated that fossil mammoths were distinct from any living elephant species, overthrowing the theological dogma that extinction is impossible because God would never permit a link in the Great Chain of Being to break."
+        explanation: "Cuvier's careful comparisons of teeth and jaws showed these were distinct species with no living members. Extinction was real."
       },
       {
-        question: "What is the biological principle established by Rudolf Virchow in 1858 ('Omnis cellula e cellula')?",
+        question: "What did Rudolf Virchow mean by 'Omnis cellula e cellula'?",
         options: [
-          "All living cells arise exclusively from the division of pre-existing cells",
-          "Cells generate spontaneously from inorganic crystals",
-          "Cells have no nuclei",
-          "Plants and animals are not related"
+          "Every cell comes from an existing cell, by division.",
+          "Cells form out of a shapeless fluid.",
+          "Only animals are made of cells.",
+          "Cells contain a vital force."
         ],
         answer: 0,
-        explanation: "Virchow completed the cell doctrine of Schleiden and Schwann by establishing that cells do not crystallize out of a formless blastema, but multiply strictly through the division of pre-existing living cells."
+        explanation: "Cells don't form from fluid; they come only from other cells dividing. That means an unbroken chain of cells links all living things back to the origin of life."
       },
       {
-        question: "What core ecological concept from Thomas Malthus’s 'Essay on Population' catalyzed Darwin’s insight into natural selection?",
+        question: "What idea from Thomas Malthus helped Darwin see natural selection?",
         options: [
-          "Farming techniques double every generation",
-          "Predators always outnumber prey",
-          "Organisms reproduce geometrically, while food resources increase only arithmetically, creating an inevitable struggle for survival in which favorable variations are preserved",
-          "Human population decreases during peacetime"
+          "That the Earth is very old.",
+          "That species never change.",
+          "That populations can grow much faster than their food supply, so most young must die before breeding: a struggle for existence.",
+          "That acquired traits are inherited."
         ],
         answer: 2,
-        explanation: "Reading Malthus in October 1838, Darwin realized that because far more individuals are born than can possibly survive, any slight variation that gives an organism an advantage in the struggle for life will tend to be preserved and passed on."
+        explanation: "If only some survive, those with slightly helpful traits will tend to survive and breed more. Over many generations, helpful traits build up."
       },
       {
-        question: "How did Louis Pasteur's 1861 swan-neck flask experiment disprove the theory of spontaneous generation?",
+        question: "How did Pasteur's swan-neck flask disprove spontaneous generation?",
         options: [
-          "He boiled broth in sealed lead containers that prevented all air exchange",
-          "He proved that bacteria only grow in ice",
-          "He allowed air to circulate freely into boiled broth through an S-shaped neck that trapped airborne dust in its curve; broth remained sterile indefinitely until dust was admitted",
-          "He added antibiotics to the broth"
+          "It kept all air out of the flask.",
+          "It boiled the broth until nothing could ever live in it.",
+          "Air could get in freely, but dust and germs settled in the curved neck, and the broth stayed clear until the neck was broken.",
+          "It added chemicals that killed germs."
         ],
         answer: 2,
-        explanation: "Pasteur demonstrated that air itself carries no 'vital force' capable of generating life spontaneously; broth decomposed only when living airborne microbial spores and dust particles were permitted to enter."
+        explanation: "Fresh air alone didn't make life appear; germs carried in dust did. Life comes only from life."
       },
       {
-        question: "What did Gregor Mendel’s pea-plant experiments prove about heredity?",
+        question: "What did Mendel's pea experiments show about inheritance?",
         options: [
-          "Parental traits blend together like colored paints",
-          "Hereditary traits are inherited as discrete, particulate factors (genes) that segregate during gamete formation and do not blend or corrupt each other",
-          "Acquired characteristics during lifetime are passed to offspring",
-          "Inheritance is determined entirely by soil quality"
+          "Offspring are a smooth blend of their parents.",
+          "Traits are passed on by separate units (genes) that don't blend, and can stay hidden for a generation before reappearing in a 3 : 1 ratio.",
+          "Only mothers pass on traits.",
+          "Traits acquired during life are inherited."
         ],
         answer: 1,
-        explanation: "Mendel proved particulate inheritance: recessive traits (like green pea seeds) disappear in the F₁ generation when crossed with dominant yellow, but reappear completely intact and unblended in a 3:1 ratio in the F₂ generation."
+        explanation: "Crossing round with wrinkled gave all round seeds, but the next generation was about 3 round to 1 wrinkled: the wrinkled version had been hidden, not blended away."
       },
       {
-        question: "What did Thomas Hunt Morgan and his 'Fly Room' team at Columbia University discover using Drosophila melanogaster?",
+        question: "What did Thomas Hunt Morgan's team discover using fruit flies?",
         options: [
-          "Genes reside at specific linear loci on physical chromosomes, displaying sex linkage and crossing over during meiosis",
-          "Fruit flies reproduce by binary fission",
-          "Flies have no genes",
-          "Mutations cannot be produced by radiation"
+          "That genes sit on chromosomes, including the X chromosome (sex-linked genes), and can be mapped in order along them.",
+          "That flies have no genes.",
+          "That DNA is a double helix.",
+          "That flies evolve in a single generation."
         ],
         answer: 0,
-        explanation: "Morgan's group demonstrated the chromosome theory of heredity: tracking white-eyed fly mutations proved that specific genes are physically located on chromosomes, enabling the construction of the world's first genetic linkage maps."
+        explanation: "The white-eyed male showed eye colour follows the X chromosome. Sturtevant used crossing over to make the first gene map."
       },
       {
-        question: "What did the Avery-MacLeod-McCarty (1944) and Hershey-Chase (1952) experiments prove about the chemical nature of genes?",
+        question: "What did the Avery–MacLeod–McCarty (1944) and Hershey–Chase (1952) experiments show?",
         options: [
-          "Deoxyribonucleic acid (DNA), not protein, is the chemical carrier of genetic information",
-          "Genes are made of structural proteins with 20 amino acids",
-          "Genes are made of lipid membranes",
-          "Genes exist only in bacterial ribosomes"
+          "That genes are made of DNA, not protein.",
+          "That genes are made of protein.",
+          "That viruses have no genes.",
+          "That DNA is made of twenty letters."
         ],
         answer: 0,
-        explanation: "For decades, biologists believed complex proteins must carry heredity. Avery's team showed that pure DNA transfers virulent traits between pneumococcal strains, and Hershey-Chase proved viral DNA enters bacteria to direct replication."
+        explanation: "Destroying DNA stopped bacterial transformation, and viruses injected their DNA (not their protein) into bacteria to make new viruses."
       },
       {
-        question: "What critical empirical feature did Rosalind Franklin’s 'Photo 51' X-ray diffraction photograph demonstrate about DNA?",
+        question: "What did Rosalind Franklin's Photo 51 reveal about DNA?",
         options: [
-          "That DNA has an antiparallel double helical structure (B-form) with the phosphate-sugar backbones on the outside and bases packed within",
-          "That DNA is a triple helix with bases on the outside",
-          "That DNA is a circular single-stranded ring",
-          "That DNA contains no phosphorus"
+          "That DNA is a helix, with measurable width and spacing between its turns.",
+          "That DNA is a flat sheet.",
+          "That DNA is made of protein.",
+          "The order of the letters in a gene."
         ],
         answer: 0,
-        explanation: "Franklin's crystalline Photo 51 revealed the classic X-shaped diffraction pattern characteristic of a double helix, providing the exact helical pitch (3.4 nm per turn) and diameter (2.0 nm) that guided Watson and Crick's model."
+        explanation: "The X-shaped pattern is the signature of a helix, and its spacing gave the helix's dimensions, crucial clues for Watson and Crick."
       },
       {
-        question: "Why was the specific base-pairing rule ($A=T$ and $G\\equiv C$) the key to Watson and Crick's 1953 model?",
+        question: "Why was the base-pairing rule (A with T, G with C) the key to the double helix?",
         options: [
-          "It made DNA soluble in cold water",
-          "It maintained a constant 2.0 nm helical diameter and immediately explained how genetic information is accurately copied through complementary replication",
-          "It allowed DNA to fold into crystalline cubes",
-          "It prevented all genetic mutations from ever occurring"
+          "It made DNA as complicated as possible.",
+          "Each pair is the same width, so the helix stays even, and each strand fixes its partner, which explains Chargaff's rules and how DNA can be copied.",
+          "It showed DNA has only two letters.",
+          "It proved genes are made of protein."
         ],
         answer: 1,
-        explanation: "Complementary base pairing meant that each strand of DNA contains all the information needed to reconstruct the opposite strand: when the helix unzips, each single strand serves as a template to synthesize an identical copy."
+        explanation: "Because A always faces T and G always faces C, either strand can serve as a pattern for building the other."
       },
       {
-        question: "What profound evolutionary truth is demonstrated by the universality of the genetic code across all living organisms?",
+        question: "What does it tell us that almost all living things use the same genetic code?",
         options: [
-          "All terrestrial life—from bacteria and fungi to oak trees and humans—shares a single common ancestry from a Last Universal Common Ancestor (LUCA)",
-          "Life originated independently in thousands of separate events",
-          "Viruses are not biological entities",
-          "DNA mutates at a strictly constant rate across all species"
+          "That all life on Earth shares a common ancestor.",
+          "That the code was invented by scientists.",
+          "That bacteria and humans are the same species.",
+          "That the code changes every generation."
         ],
         answer: 0,
-        explanation: "Because a bacterium, a fruit fly, and a human cell read the same triplet codon (e.g., UUU for phenylalanine, AUG for methionine), all living things are branches of a single unbroken tree of life originating from a common ancestor billions of years ago."
+        explanation: "The same three-letter codons mean the same amino acids in bacteria, plants and people. The simplest explanation is that all life inherited the code from a common ancestor."
       }
     ];
 
