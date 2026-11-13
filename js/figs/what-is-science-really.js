@@ -118,7 +118,7 @@
 
       ctx.fillStyle = colors.text;
       ctx.font = 'bold 12px sans-serif';
-      ctx.fillText('Empirical Observations (Swans in Lake)', ox1 + 25, oy1 - 10);
+      ctx.fillText('Swans seen so far', ox1 + 25, oy1 - 10);
 
       // Draw swan icons / dots
       var cols = 15;
@@ -160,16 +160,16 @@
 
       ctx.fillStyle = colors.text;
       ctx.font = '11px sans-serif';
-      ctx.fillText('Observations (N)', ox2 + w2 - 80, oy2 + 20);
+      ctx.fillText('Number seen', ox2 + w2 - 80, oy2 + 20);
       ctx.save();
       ctx.translate(ox2 - 35, oy2 - h2 / 2);
       ctx.rotate(-Math.PI / 2);
-      ctx.fillText('Subjective Confidence P(All White)', 0, 0);
+      ctx.fillText('Confidence (all white)', 0, 0);
       ctx.restore();
 
       ctx.fillStyle = colors.primary;
       ctx.font = 'bold 12px sans-serif';
-      ctx.fillText('The Inductive Illusion', ox2 + 65, 30);
+      ctx.fillText('How confidence grows', ox2 + 65, 30);
 
       // Plot curve of confidence
       ctx.beginPath();
@@ -206,7 +206,7 @@
 
         ctx.fillStyle = colors.hot;
         ctx.font = 'bold 11px sans-serif';
-        ctx.fillText('Instantaneous Collapse to 0', dropX - 80, oy2 - h2 / 2);
+        ctx.fillText('One black swan: confidence gone', dropX - 80, oy2 - h2 / 2);
       }
     }
 
@@ -252,7 +252,7 @@
 
     ctrlRow.innerHTML =
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>Test Hypothesis ($H$):</strong>' +
+      '<strong>Theory to test:</strong>' +
       '<select id="popper-hyp" style="padding:4px 8px; border-radius:4px; border:1px solid #999; background:var(--color-bg, #fff);">' +
       '<option value="general-relativity">General Relativity (Light Deflection = 1.75")</option>' +
       '<option value="astrology">Astrology (Planetary alignment causes luck)</option>' +
@@ -311,12 +311,12 @@
 
       ctx.fillStyle = colors.hot;
       ctx.font = 'bold 13px sans-serif';
-      ctx.fillText('Logical Fallacy: Verification', bx1 + 45, by1 + 30);
+      ctx.fillText('A logical mistake', bx1 + 45, by1 + 30);
 
       ctx.fillStyle = colors.text;
       ctx.font = '12px monospace';
-      ctx.fillText('Premise 1:  H → E', bx1 + 30, by1 + 70);
-      ctx.fillText('Premise 2:  E is observed', bx1 + 30, by1 + 95);
+      ctx.fillText('If the theory is true, we see E', bx1 + 30, by1 + 70);
+      ctx.fillText('We see E', bx1 + 30, by1 + 95);
       ctx.strokeStyle = colors.border;
       ctx.beginPath();
       ctx.moveTo(bx1 + 25, by1 + 110); ctx.lineTo(bx1 + bw - 25, by1 + 110);
@@ -324,12 +324,12 @@
 
       ctx.fillStyle = colors.hot;
       ctx.font = 'bold 12px monospace';
-      ctx.fillText('Conclusion: H is True  [INVALID!]', bx1 + 30, by1 + 135);
+      ctx.fillText('So the theory is true  (NOT valid)', bx1 + 30, by1 + 135);
 
       ctx.fillStyle = colors.muted;
       ctx.font = '11px sans-serif';
-      ctx.fillText('Affirming the Consequent: Rival theories', bx1 + 25, by1 + 175);
-      ctx.fillText('or coincidence could also predict E.', bx1 + 25, by1 + 195);
+      ctx.fillText('Other theories, or luck, could', bx1 + 25, by1 + 175);
+      ctx.fillText('also explain seeing E.', bx1 + 25, by1 + 195);
 
       // Right Box: Deductive Falsification (Modus Tollens)
       var bx2 = 380, by2 = 50, bw2 = 290, bh2 = 240;
@@ -341,12 +341,12 @@
 
       ctx.fillStyle = colors.success;
       ctx.font = 'bold 13px sans-serif';
-      ctx.fillText('Deductive Rigor: Modus Tollens', bx2 + 35, by2 + 30);
+      ctx.fillText('A valid argument', bx2 + 35, by2 + 30);
 
       ctx.fillStyle = colors.text;
       ctx.font = '12px monospace';
-      ctx.fillText('Premise 1:  H → E', bx2 + 30, by2 + 70);
-      ctx.fillText('Premise 2:  ¬E is observed', bx2 + 30, by2 + 95);
+      ctx.fillText('If the theory is true, we see E', bx2 + 30, by2 + 70);
+      ctx.fillText('We do NOT see E', bx2 + 30, by2 + 95);
       ctx.strokeStyle = colors.border;
       ctx.beginPath();
       ctx.moveTo(bx2 + 25, by2 + 110); ctx.lineTo(bx2 + bw2 - 25, by2 + 110);
@@ -354,18 +354,18 @@
 
       ctx.fillStyle = colors.success;
       ctx.font = 'bold 12px monospace';
-      ctx.fillText('Conclusion: ¬H is True [VALID!]', bx2 + 30, by2 + 135);
+      ctx.fillText('So the theory is false  (valid)', bx2 + 30, by2 + 135);
 
       ctx.fillStyle = colors.muted;
       ctx.font = '11px sans-serif';
       if (isFalsifiable) {
         ctx.fillStyle = colors.text;
-        ctx.fillText('Einstein boldly stated: If eclipse light', bx2 + 25, by2 + 175);
-        ctx.fillText('deflection is not 1.75", relativity is dead.', bx2 + 25, by2 + 195);
+        ctx.fillText('A clear miss at the 1919 eclipse', bx2 + 25, by2 + 175);
+        ctx.fillText('would have counted against relativity.', bx2 + 25, by2 + 195);
       } else {
         ctx.fillStyle = colors.hot;
-        ctx.fillText('Non-falsifiable: Negative results are', bx2 + 25, by2 + 175);
-        ctx.fillText('reinterpreted with ad-hoc rationalizations.', bx2 + 25, by2 + 195);
+        ctx.fillText('Can\'t be tested: any result can be', bx2 + 25, by2 + 175);
+        ctx.fillText('explained away after the fact.', bx2 + 25, by2 + 195);
       }
     }
 
@@ -602,14 +602,14 @@
       ctx.fillText('HARD CORE', cx - 40, cy - 6);
       ctx.font = '10px sans-serif';
       ctx.fillStyle = colors.muted;
-      ctx.fillText('(Newtonian Laws / Relativistic Laws)', cx - 80, cy + 12);
+      ctx.fillText('(e.g. Newton\'s laws)', cx - 80, cy + 12);
 
       // Protective belt labels around perimeter
       ctx.fillStyle = colors.primary;
       ctx.font = 'bold 11px sans-serif';
-      ctx.fillText('PROTECTIVE BELT: Auxiliary Hypotheses', cx - 110, cy - beltRadius + 18);
+      ctx.fillText('PROTECTIVE BELT: supporting assumptions', cx - 110, cy - beltRadius + 18);
       ctx.font = '10px sans-serif';
-      ctx.fillText('• Instrument calibrations  • Atmospheric refraction  • Planetary perturbation', cx - 145, cy + beltRadius - 15);
+      ctx.fillText('• Instruments  • The air bending light  • Unseen planets', cx - 145, cy + beltRadius - 15);
 
       // Incoming Anomaly projectile
       if (anomalyActive) {
@@ -630,13 +630,13 @@
         ctx.fill();
 
         ctx.font = 'bold 12px sans-serif';
-        ctx.fillText('Empirical Anomaly (Uranus Orbit Deviation)', ax + 14, ay + 4);
+        ctx.fillText('Problem: Uranus off course', ax + 14, ay + 4);
       }
 
       if (beltModified) {
         ctx.fillStyle = colors.success;
         ctx.font = 'bold 12px sans-serif';
-        ctx.fillText('Auxiliary Adjusted: Discovered Neptune! (Progressive Problemshift)', 160, 320);
+        ctx.fillText('Belt adjusted: Neptune predicted and found (progress)', 160, 320);
       }
     }
 
@@ -796,8 +796,8 @@
       // Sensory boundary annotation
       ctx.fillStyle = colors.muted;
       ctx.font = '10px sans-serif';
-      ctx.fillText('Sensory Boundary (Experience)', cx + 150, cy);
-      ctx.fillText('Deep Core (Logic)', cx - 40, cy + 28);
+      ctx.fillText('Edge: experience', cx + 150, cy);
+      ctx.fillText('Centre: logic, maths', cx - 40, cy + 28);
     }
 
     revisBtn.addEventListener('click', function () {
@@ -842,17 +842,17 @@
 
     ctrlRow.innerHTML =
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>Prior Probability $P(H)$:</strong>' +
+      '<strong>Confidence before, $P(H)$:</strong>' +
       '<input type="range" id="bayes-prior" min="0.05" max="0.95" step="0.05" value="0.20" style="width:100px;">' +
       '<span id="bayes-prior-val">0.20</span>' +
       '</label>' +
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>Likelihood $P(E|H)$:</strong>' +
+      '<strong>Chance of E if true, $P(E|H)$:</strong>' +
       '<input type="range" id="bayes-peh" min="0.5" max="0.99" step="0.01" value="0.90" style="width:90px;">' +
       '<span id="bayes-peh-val">0.90</span>' +
       '</label>' +
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>False Positive $P(E|\\neg H)$:</strong>' +
+      '<strong>Chance of E if false, $P(E|\\neg H)$:</strong>' +
       '<input type="range" id="bayes-penoth" min="0.01" max="0.30" step="0.01" value="0.05" style="width:80px;">' +
       '<span id="bayes-penoth-val">0.05</span>' +
       '</label>';
@@ -936,7 +936,7 @@
 
       ctx.fillStyle = colors.text;
       ctx.font = 'bold 13px sans-serif';
-      ctx.fillText('Prior P(H)', bx1 + 18, by1 + 22);
+      ctx.fillText('Before: P(H)', bx1 + 18, by1 + 22);
       ctx.fillText((pH * 100).toFixed(0) + '%', bx1 + 32, by1 - hPrior - 8);
 
       // 2. Posterior Bar
@@ -946,7 +946,7 @@
       ctx.strokeRect(bx2, by2 - hPost, bw, hPost);
 
       ctx.fillStyle = colors.text;
-      ctx.fillText('Posterior P(H|E)', bx2 + 5, by2 + 22);
+      ctx.fillText('After: P(H|E)', bx2 + 5, by2 + 22);
       ctx.fillStyle = colors.primary;
       ctx.fillText((pHE * 100).toFixed(1) + '%', bx2 + 25, by2 - hPost - 8);
 
@@ -966,10 +966,10 @@
       ctx.fill();
 
       ctx.font = 'bold 11px sans-serif';
-      ctx.fillText('New Evidence E', (bx1 + bx2) / 2 - 20, by1 - maxH / 2 - 12);
+      ctx.fillText('New evidence', (bx1 + bx2) / 2 - 20, by1 - maxH / 2 - 12);
       ctx.font = '10px sans-serif';
       ctx.fillStyle = colors.muted;
-      ctx.fillText('Rational Belief Shift', (bx1 + bx2) / 2 - 30, by1 - maxH / 2 + 18);
+      ctx.fillText('Confidence updated', (bx1 + bx2) / 2 - 30, by1 - maxH / 2 + 18);
     }
 
     priorSlider.addEventListener('input', render);
@@ -1002,13 +1002,13 @@
 
     ctrlRow.innerHTML =
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>Sample Size ($N$):</strong>' +
+      '<strong>People per study ($N$):</strong>' +
       '<input type="range" id="rep-n" min="20" max="300" step="20" value="60" style="width:100px;">' +
       '<span id="rep-n-val">N = 60</span>' +
       '</label>' +
       '<label style="display:flex; align-items:center; gap:6px;">' +
       '<input type="checkbox" id="rep-bias" checked>' +
-      '<span>Simulate Publication Bias (File-Drawer Effect)</span>' +
+      '<span>Only publish positive results (publication bias)</span>' +
       '</label>' +
       '<button id="rep-run-btn" style="padding:4px 12px; border-radius:4px; border:1px solid #999; background:var(--color-primary, #2160c4); color:#fff; cursor:pointer;">Run 40 Studies</button>';
 
@@ -1117,7 +1117,7 @@
 
       ctx.fillStyle = colors.muted;
       ctx.font = '10px sans-serif';
-      ctx.fillText('d = 0 (Null)', ox - 20, oy + plotH + 16);
+      ctx.fillText('No effect', ox - 20, oy + plotH + 16);
 
       // Vertical line of True Effect (d = 0.20)
       var trueX = ox + 0.20 * 300;
@@ -1128,7 +1128,7 @@
       ctx.lineTo(trueX, oy + plotH);
       ctx.stroke();
       ctx.fillStyle = colors.success;
-      ctx.fillText('True Effect (d = 0.20)', trueX - 45, oy - 10);
+      ctx.fillText('True effect (small)', trueX - 45, oy - 10);
 
       // Draw study point estimates and 95% confidence intervals
       var rowH = plotH / (simulatedStudies.length || 1);
@@ -1167,13 +1167,13 @@
       // Side annotations
       ctx.fillStyle = colors.text;
       ctx.font = 'bold 12px sans-serif';
-      ctx.fillText('Simulated Forest Plot', 30, 60);
+      ctx.fillText('Many simulated studies', 30, 60);
       ctx.font = '11px sans-serif';
       ctx.fillStyle = colors.muted;
-      ctx.fillText('Small sample sizes (low power) +', 30, 85);
-      ctx.fillText('publication bias distort scientific', 30, 102);
-      ctx.fillText('meta-analyses toward false positives.', 30, 119);
-      ctx.fillText('Remedy: Pre-registration & Open Science.', 30, 145);
+      ctx.fillText('Small studies plus publishing only', 30, 85);
+      ctx.fillText('positive results make the published', 30, 102);
+      ctx.fillText('evidence look stronger than it is.', 30, 119);
+      ctx.fillText('Fix: register plans, publish everything.', 30, 145);
     }
 
     nSlider.addEventListener('input', function () {
@@ -1203,114 +1203,114 @@
 
     var questions = [
       {
-        q: '1. Why did David Hume argue that inductive reasoning cannot be justified through purely logical demonstration?',
+        q: '1. Why did David Hume say we can\'t justify reasoning from past experience (induction) by logic?',
         options: [
-          'Because human senses are fundamentally deceitful.',
-          'Because nature operates by random supernatural intervention.',
-          'Because any inductive justification of induction (assuming the future will resemble the past because it has in the past) is a circular argument (begging the question).',
-          'Because mathematics cannot calculate probabilities.'
+          'Because our senses always lie.',
+          'Because nature is run by random miracles.',
+          'Because saying "induction works because it has worked before" uses induction to prove induction: it goes round in a circle.',
+          'Because maths can\'t handle probabilities.'
         ],
         answer: 2,
-        expl: 'Hume demonstrated that justifying induction by appealing to its past success is a circular argument: it assumes the very principle of the uniformity of nature that it attempts to prove.'
+        expl: 'To argue that the future will be like the past because it always has been is to assume the very thing you are trying to prove.'
       },
       {
-        q: '2. According to Karl Popper’s criterion of demarcation, what distinguishes genuine empirical science from pseudoscience and metaphysics?',
+        q: '2. According to Karl Popper, what makes a theory scientific?',
         options: [
-          'Scientific theories can be proven absolutely true beyond all doubt.',
-          'Scientific theories are published in peer-reviewed journals.',
-          'Scientific theories are derived directly from unbiased sensory observation.',
-          'Scientific theories make precise, testable predictions that are open to potential empirical falsification.'
+          'It has been proved true beyond all doubt.',
+          'It has been published in a journal.',
+          'It comes straight from unbiased observation.',
+          'It makes clear predictions that could turn out to be wrong.'
         ],
         answer: 3,
-        expl: 'Popper argued that a theory is scientific if and only if it takes risks: it must specify in advance which empirical observations, if discovered, would refute it. Irrefutable theories are metaphysical or pseudoscientific.'
+        expl: 'A scientific theory sticks its neck out: it says in advance what observation would prove it false. A theory that can explain any outcome is not science.'
       },
       {
-        q: '3. In Thomas Kuhn’s model, what characterizes the period of "Normal Science"?',
+        q: '3. In Thomas Kuhn\'s picture, what is "normal science"?',
         options: [
-          'Conservative "puzzle-solving" within the framework of an accepted paradigm, refining measurements without questioning the paradigm itself.',
-          'Constant radical overthrow of core foundational assumptions.',
-          'Scientists engaging in philosophical debates about reality.',
-          'Total chaos without any shared consensus.'
+          'Puzzle-solving within an accepted paradigm, filling in details without questioning the paradigm itself.',
+          'Constantly overturning basic assumptions.',
+          'Scientists debating the nature of reality.',
+          'Total confusion with no agreement.'
         ],
         answer: 0,
-        expl: 'Normal science is conservative research firmly based on past achievements: scientists take the paradigm for granted, solving specialized puzzles and fitting nature into the paradigm’s conceptual boxes.'
+        expl: 'Most of the time scientists take their field\'s framework for granted and use it to solve problems and measure things more precisely.'
       },
       {
-        q: '4. What did Thomas Kuhn mean by the claim that rival scientific paradigms are "incommensurable"?',
+        q: '4. What did Kuhn mean when he said rival paradigms are "incommensurable"?',
         options: [
-          'Scientific equations cannot be converted into metric units.',
-          'Older scientists always refuse to speak to younger scientists.',
-          'Scientific paradigms can only be described in natural language.',
-          'Proponents of competing paradigms share no neutral, theory-independent observation language and disagree on standards, meanings, and evidence, making direct objective comparison impossible.'
+          'Their equations can\'t be converted into metric units.',
+          'Older scientists won\'t talk to younger ones.',
+          'Paradigms can only be described in words.',
+          'There is no fully neutral language or standard for comparing them, because key words and what counts as evidence change between them.'
         ],
         answer: 3,
-        expl: 'Incommensurability means that because words and observations change meaning across paradigms (e.g., "mass" in Newton vs. Einstein), there is no neutral meta-language to judge them without bias.'
+        expl: 'For example, "mass" means something different in Newton\'s physics and in Einstein\'s, so there is no completely neutral way to score one against the other.'
       },
       {
-        q: '5. In Imre Lakatos’s Methodology of Scientific Research Programmes, what is the role of the "Protective Belt"?',
+        q: '5. In Imre Lakatos\'s view, what does the "protective belt" do?',
         options: [
-          'It is a legal copyright protecting scientific patents.',
-          'It consists of auxiliary hypotheses, observational assumptions, and initial conditions that absorb the shock of anomalies, protecting the core theory from immediate falsification.',
-          'It is the lead shielding around particle accelerators.',
-          'It prevents non-scientists from reading technical journals.'
+          'It protects scientific patents.',
+          'It is made of supporting assumptions that get adjusted when problems appear, so the core theory isn\'t thrown out straight away.',
+          'It is the shielding around a particle accelerator.',
+          'It keeps non-scientists from reading journals.'
         ],
         answer: 1,
-        expl: 'Lakatos showed that scientists do not abandon a core theory when an anomaly appears; they modify auxiliary hypotheses in the protective belt, keeping the programme progressive as long as it predicts novel facts.'
+        expl: 'When Uranus misbehaved, astronomers adjusted the belt (an unseen planet) rather than Newton\'s laws, and found Neptune. Adjustments that predict new things count as progress.'
       },
       {
-        q: '6. What radical epistemological thesis did Paul Feyerabend defend in his 1975 book "Against Method"?',
+        q: '6. What did Paul Feyerabend argue in Against Method (1975)?',
         options: [
-          'Science is the only valid source of truth in the universe.',
-          'There is no universal, ahistorical "scientific method"; any methodological rule has been violated by great scientists to make progress, summarized by the slogan "anything goes."',
-          'Mathematics should be banned from physics.',
-          'Experiments are useless compared to pure philosophical meditation.'
+          'Science is the only source of truth.',
+          'There is no single scientific method; great scientists have broken every rule, so "anything goes".',
+          'Maths should be banned from physics.',
+          'Experiments are useless compared with thinking.'
         ],
         answer: 1,
-        expl: 'Feyerabend argued for epistemological anarchism: historical advances (such as Galileo’s defence of Copernicus) succeeded by violating standard rules of logic and evidence. Imposing a rigid method damages creativity.'
+        expl: 'He pointed to Galileo, who succeeded partly by persuasion and by breaking the methodological rules philosophers later laid down. He did not mean every claim is equally good.'
       },
       {
-        q: '7. The Duhem-Quine Thesis ("Holism") demonstrates that:',
+        q: '7. What does the Duhem–Quine thesis say?',
         options: [
-          'All scientific equations must be balanced symmetrically.',
-          'Observation is completely independent of theoretical beliefs.',
-          'Single experiments can definitively settle all scientific disputes.',
-          'An experimental test never tests a theoretical hypothesis in isolation, but always an interconnected web of core theories, auxiliary assumptions, and instrument calibrations.'
+          'Scientific equations must balance.',
+          'Observation is completely independent of theory.',
+          'One experiment can settle any dispute.',
+          'An experiment never tests a theory on its own, but always together with many supporting assumptions about instruments and conditions.'
         ],
         answer: 3,
-        expl: 'Pierre Duhem and W. V. O. Quine showed that when an experiment contradicts a prediction, logic cannot tell you which premise in the web failed: the core theory, the telescope optics, or the atmospheric model.'
+        expl: 'If a prediction fails, logic tells you only that something in the bundle is wrong: the theory, the telescope, the clock or another assumption.'
       },
       {
-        q: '8. How does Bayesian confirmation theory view the relationship between evidence and scientific hypotheses?',
+        q: '8. How does the Bayesian view treat evidence and theories?',
         options: [
-          'Evidence shifts the subjective degree of rational belief (probability $P(H)$) according to Bayes’ rule: $P(H|E) = \\frac{P(E|H) P(H)}{P(E)}$.',
-          'Theories are either 100% verified or 100% falsified.',
-          'Probabilities apply only to rolling dice, never to physical laws.',
-          'Evidence has no effect on belief.'
+          'Evidence raises or lowers your confidence in a theory by an amount given by Bayes\' rule.',
+          'Theories are either 100% proved or 100% disproved.',
+          'Probability applies only to dice, never to science.',
+          'Evidence makes no difference to belief.'
         ],
         answer: 0,
-        expl: 'Bayesianism models scientific learning as rational probabilistic updating: new evidence incrementally raises or lowers the posterior confidence in a hypothesis based on its prior likelihood and diagnostic power.'
+        expl: 'Your new confidence depends on your old confidence and on how much more likely the evidence is if the theory is true than if it is false.'
       },
       {
-        q: '9. What is the "Pessimistic Meta-Induction" against scientific realism (formulated by Larry Laudan)?',
+        q: '9. What is Larry Laudan\'s "pessimistic induction" against scientific realism?',
         options: [
-          'Scientists are too pessimistic about funding.',
-          'Human technology is declining over historical epochs.',
-          'Because the vast majority of past successful scientific theories (caloric, phlogiston, luminiferous ether) turned out to be false, we have strong inductive reason to expect our current successful theories will also be proven false.',
-          'Computers will replace human scientists.'
+          'Scientists worry too much about money.',
+          'Technology gets worse over time.',
+          'Many successful theories of the past (caloric, phlogiston, the ether) turned out to be wrong about what exists, so today\'s theories may be too.',
+          'Computers will replace scientists.'
         ],
         answer: 2,
-        expl: 'The pessimistic meta-induction challenges scientific realism by observing that the history of science is a graveyard of empirically successful theories whose central theoretical entities were later rejected as non-existent.'
+        expl: 'History is full of successful theories whose central objects were later found not to exist. Structural realists reply that the mathematical relationships often survive.'
       },
       {
-        q: '10. What is the primary cause of the contemporary "Replication Crisis" in empirical science?',
+        q: '10. What were the main causes of the replication crisis?',
         options: [
-          'Scientists no longer have access to computers.',
-          'Mathematical formulas are too complicated.',
-          'A combination of low statistical power (small sample sizes), p-hacking, and publication bias (the "file-drawer effect" where negative null results remain unpublished).',
-          'The speed of light is changing over time.'
+          'Scientists lost access to computers.',
+          'The maths became too hard.',
+          'Studies that were too small, analysing data many ways until something "worked" (p-hacking), and journals publishing only positive results.',
+          'The speed of light is changing.'
         ],
         answer: 2,
-        expl: 'The replication crisis exposed systemic incentives: pressure to publish surprising positive results led to publication bias and p-hacking of underpowered studies, solved today by pre-registration and Open Science.'
+        expl: 'The response, open science, includes registering plans before collecting data, publishing results whatever they show, and sharing data and code.'
       }
     ];
 
