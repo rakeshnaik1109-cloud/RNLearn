@@ -16,19 +16,19 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label for="fig-optics-lamp1">Lamp 1 Vertical Position: ' +
-            '<span id="fig-optics-lamp1-val" class="fig-readout">High (Top)</span>' +
+          '<label for="fig-optics-lamp1">Height of lamp 1: ' +
+            '<span id="fig-optics-lamp1-val" class="fig-readout">High</span>' +
           '</label>' +
           '<input type="range" id="fig-optics-lamp1" min="-60" max="-10" step="5" value="-40">' +
         '</div>' +
         '<div class="fig-control-group">' +
-          '<label for="fig-optics-lamp2">Lamp 2 Vertical Position: ' +
-            '<span id="fig-optics-lamp2-val" class="fig-readout">Low (Bottom)</span>' +
+          '<label for="fig-optics-lamp2">Height of lamp 2: ' +
+            '<span id="fig-optics-lamp2-val" class="fig-readout">Low</span>' +
           '</label>' +
           '<input type="range" id="fig-optics-lamp2" min="10" max="60" step="5" value="40">' +
         '</div>' +
         '<div class="fig-control-group">' +
-          '<label><input type="checkbox" id="fig-optics-block" style="margin-right:0.4rem;"> Block Lamp 1 with Screen</label>' +
+          '<label><input type="checkbox" id="fig-optics-block" style="margin-right:0.4rem;"> Cover lamp 1</label>' +
           '<span style="font-size:0.85rem; color:var(--color-text-muted, #666); margin-left:1rem;">(Tests ray independence)</span>' +
         '</div>' +
       '</div>' +
@@ -166,13 +166,13 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label for="fig-biruni-h">Mountain Height (h): ' +
+          '<label for="fig-biruni-h">Height of the hill (h): ' +
             '<span id="fig-biruni-h-val" class="fig-readout">h = 650 cubits (≈ 325 m)</span>' +
           '</label>' +
           '<input type="range" id="fig-biruni-h" min="100" max="1000" step="25" value="650">' +
         '</div>' +
         '<div class="fig-control-group">' +
-          '<label for="fig-biruni-dip">Horizon Dip Angle (α): ' +
+          '<label for="fig-biruni-dip">How far the horizon dips below level (α): ' +
             '<span id="fig-biruni-dip-val" class="fig-readout">α = 0° 34\' (0.567°)</span>' +
           '</label>' +
           '<input type="range" id="fig-biruni-dip" min="20" max="50" step="1" value="34">' +
@@ -299,13 +299,13 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label for="fig-madhava-terms">Number of Terms (n): ' +
+          '<label for="fig-madhava-terms">Number of terms added: ' +
             '<span id="fig-madhava-terms-val" class="fig-readout">n = 10 terms</span>' +
           '</label>' +
           '<input type="range" id="fig-madhava-terms" min="1" max="40" step="1" value="10">' +
         '</div>' +
         '<div class="fig-control-group">' +
-          '<label><input type="checkbox" id="fig-madhava-correction" checked style="margin-right:0.4rem;"> Apply Mādhava’s Correction Term (<em>antya-saṁskāra</em>)</label>' +
+          '<label><input type="checkbox" id="fig-madhava-correction" checked style="margin-right:0.4rem;"> Add Mādhava’s correction (<em>antya-saṁskāra</em>)</label>' +
         '</div>' +
       '</div>' +
       '<div class="fig-canvas-container" style="min-height:360px;">' +
@@ -455,7 +455,7 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label for="fig-clock-flow">Water Flow Rate: ' +
+          '<label for="fig-clock-flow">How fast the water flows: ' +
             '<span id="fig-clock-flow-val" class="fig-readout">Normal Flow</span>' +
           '</label>' +
           '<input type="range" id="fig-clock-flow" min="1" max="4" step="1" value="2">' +
@@ -590,13 +590,13 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label for="fig-oresme-accel">Uniform Acceleration (Final Speed v₁): ' +
+          '<label for="fig-oresme-accel">Final speed: ' +
             '<span id="fig-oresme-accel-val" class="fig-readout">v₁ = 80 m/s</span>' +
           '</label>' +
           '<input type="range" id="fig-oresme-accel" min="20" max="100" step="5" value="80">' +
         '</div>' +
         '<div class="fig-control-group">' +
-          '<label><input type="checkbox" id="fig-oresme-shear" checked style="margin-right:0.4rem;"> Show Oresme’s Area-Conservation Shear</label>' +
+          '<label><input type="checkbox" id="fig-oresme-shear" checked style="margin-right:0.4rem;"> Show Oresme’s triangle-to-rectangle move</label>' +
         '</div>' +
       '</div>' +
       '<div class="fig-canvas-container" style="min-height:360px;">' +
@@ -707,7 +707,7 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label for="fig-tusi-angle">Rotation Angle (θ): ' +
+          '<label for="fig-tusi-angle">How far the circles have turned: ' +
             '<span id="fig-tusi-angle-val" class="fig-readout">θ = 45°</span>' +
           '</label>' +
           '<input type="range" id="fig-tusi-angle" min="0" max="360" step="2" value="45">' +
@@ -836,7 +836,7 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label>Select Intellectual Hub: ' +
+          '<label>Pick a centre of learning: ' +
             '<span id="fig-map-selected" class="fig-readout">Baghdad (Bayt al-Ḥikma)</span>' +
           '</label>' +
         '</div>' +
@@ -952,114 +952,114 @@
   FIG['fig-quiz-part5'] = function (container) {
     var questions = [
       {
-        question: "How did Ibn al-Haytham’s camera obscura experiment disprove the ancient Greek emission theory of vision?",
+        question: "How did Ibn al-Haytham's dark-room experiment show that we don't see by sending rays out of our eyes?",
         options: [
-          "It demonstrated that the eye contains a crystalline lens that bends rays",
-          "It showed that light travels instantaneously at infinite speed",
-          "It proved that mirrors absorb all ultraviolet light",
-          "It proved that distinct light rays from different lamps pass through a pinhole without blending and project inverted spots on a screen independently of an observer's eyes"
+          "The spots of light were brighter when he looked straight at them.",
+          "He saw the lamps clearly with his eyes closed.",
+          "The spots changed colour depending on who was watching.",
+          "Each lamp made its own spot through the small hole, and covering one lamp made only its own spot vanish, while the others stayed."
         ],
         answer: 3,
-        explanation: "By demonstrating that multiple rays of light travel along rectilinear paths independently through a tiny aperture and produce unmixed, inverted spots of light—and that blocking a lamp extinguishes its spot while leaving the others unchanged—Ibn al-Haytham showed that light originates from physical luminous sources and enters the eye (intromission), disproving the idea that visual rays emanate from the eyes."
+        explanation: "If seeing worked by rays from the eyes, covering a lamp outside couldn't make just one spot disappear inside. Light must travel from each lamp, in straight lines, into the room and into our eyes."
       },
       {
-        question: "What ingenious method did al-Bīrūnī use at Nandana Fort (c. 1020s) to calculate the Earth's radius?",
+        question: "How did al-Bīrūnī work out the size of the Earth at Nandana Fort?",
         options: [
-          "He measured the distance between two cities along a meridian by pacing camel caravans",
-          "He climbed a single mountain and measured the dip angle of the horizon below the true horizontal using a large astrolabe",
-          "He timed the difference between lunar eclipses observed in Baghdad and Ghazni",
-          "He dropped weights into a deep vertical well at the summer solstice"
+          "He timed a ship disappearing over the horizon.",
+          "He measured the hill's height and how far the horizon dipped below level, then used a right-angled triangle.",
+          "He measured shadows in two cities on the same day.",
+          "He used the length of a lunar eclipse."
         ],
         answer: 1,
-        explanation: "Al-Bīrūnī used a single mountain of known height h overlooking a flat horizon. By measuring the dip angle α of the horizon below astronomical horizontal, he applied the formula R = (h cos α)/(1 - cos α), calculating the Earth's radius to within 1% of the modern value."
+        explanation: "The line of sight just touches the curved Earth at the horizon, making a right angle with the radius. From the hill's height and the dip angle (about half a degree), trigonometry gives the Earth's radius."
       },
       {
-        question: "What major mathematical discovery was made by Mādhava of Sangamagrāma in fourteenth-century Kerala?",
+        question: "What did Mādhava of Sangamagrāma discover in 14th-century Kerala?",
         options: [
-          "The discovery of infinite power series for sine, cosine, and π over two centuries before Gregory, Newton, and Leibniz",
-          "The invention of matrix determinants",
-          "The proof of Fermat's Last Theorem for n = 3",
-          "The calculation of non-Euclidean hyperbolic triangles"
+          "Ways of writing π, sine and cosine as sums that go on forever, plus corrections that make them reach the answer quickly.",
+          "That the Earth goes round the Sun.",
+          "The first telescope.",
+          "The law of falling bodies."
         ],
         answer: 0,
-        explanation: "Mādhava derived the infinite alternating series for sine, cosine, and π/4 (later known as the Gregory-Leibniz series) and introduced correction terms (antya-saṁskāra) that accelerated their numerical convergence."
+        explanation: "π/4 = 1 − 1/3 + 1/5 − 1/7 + ... is usually called the Leibniz or Gregory series, but later Kerala texts credit it to Mādhava more than 250 years earlier."
       },
       {
-        question: "What key mechanical innovation was featured in Su Song’s astronomical clock tower (1092 CE) in Song Dynasty China?",
+        question: "What was the key part of Su Song's clock tower (1092 CE)?",
         options: [
-          "A water-powered tilting scoop escapement mechanism that converted continuous fluid flow into discrete, periodic wheel steps",
-          "A balance spring made of tempered steel",
-          "A mercury pendulum compensated for thermal expansion",
-          "A solar-powered steam turbine"
+          "An escapement: a balance lever that let the water wheel move forward one bucket at a time, turning a steady flow into regular ticks.",
+          "A pendulum.",
+          "An electric motor.",
+          "A sand timer."
         ],
         answer: 0,
-        explanation: "Su Song's water clock used an escapement balance beam that held the wheel until a scoop filled to a calibrated weight, tipping the balance and releasing the wheel to rotate exactly one spoke, driving an armillary sphere and celestial globe."
+        explanation: "When the top bucket filled enough, a lever tipped, released the wheel for one step and locked it again. That stop-and-go action is what makes a clock tick."
       },
       {
-        question: "What was the Mean Speed Theorem proved by the Merton Calculators at Oxford and Nicole Oresme in Paris?",
+        question: "What does the 'mean speed rule' proved at Oxford and by Oresme say?",
         options: [
-          "A body accelerating uniformly from rest covers the exact same distance in a given time as a body traveling at a constant speed equal to its average velocity",
-          "The speed of falling bodies is proportional to their weight",
-          "Planets sweep out equal areas in equal times",
-          "Motion in a vacuum is instantaneous"
+          "Something speeding up steadily from rest travels as far as something moving for the same time at its average speed (half its final speed).",
+          "Heavy things fall faster than light ones.",
+          "Speed and distance are always equal.",
+          "Nothing can move in empty space."
         ],
         answer: 0,
-        explanation: "The Merton Rule (geometrically proved by Nicole Oresme via area-preserving shear of a velocity-time trapezoid into a rectangle) showed that distance under uniform acceleration equals the time multiplied by the mean speed (v_initial + v_final)/2."
+        explanation: "Oresme showed it with a graph: the distance is the area under the speed line, and the triangle can be rearranged into a rectangle of the same area."
       },
       {
-        question: "What geometric mechanism did Naṣīr al-Dīn al-Ṭūsī invent to eliminate Ptolemy’s equant in planetary models?",
+        question: "What did al-Ṭūsī invent to get rid of Ptolemy's 'equant'?",
         options: [
-          "The Ṭūsī couple: a small circle rolling inside a circle of double diameter, producing pure rectilinear oscillation from uniform circular motions",
-          "The astrolabe rete projection",
-          "The parabolic mirror reflector",
-          "The cross-staff sight"
+          "The Ṭūsī couple: a small circle rolling inside one twice its size, so a point on it moves in a straight line.",
+          "A Sun-centred model of the planets.",
+          "The telescope.",
+          "Elliptical orbits."
         ],
         answer: 0,
-        explanation: "The Ṭūsī couple uses two concentric circles (the inner having half the diameter of the outer) to convert circular rotation into linear harmonic motion along a diameter line, which Copernicus later incorporated into De revolutionibus."
+        explanation: "Two steady circular motions combine into a straight back-and-forth motion. Ibn al-Shāṭir and later Copernicus used it to build planet models without the equant."
       },
       {
-        question: "Which 12th-century translation hub in Spain was most responsible for transmitting Arabic science into Latin?",
+        question: "Which Spanish city was the main centre for translating Arabic science into Latin in the 12th century?",
         options: [
-          "Barcelona",
-          "Madrid",
-          "Granada",
-          "Toledo (under Archbishop Raymond, where Gerard of Cremona translated dozens of major scientific texts)"
+          "Rome.",
+          "Paris.",
+          "Venice.",
+          "Toledo."
         ],
         answer: 3,
-        explanation: "Toledo was the epicentre of the 12th-century translation movement, where scholars like Gerard of Cremona translated Arabic versions of Euclid, Ptolemy, Ibn Sīnā, and al-Khwārizmī into Latin."
+        explanation: "After 1085 Toledo's Arabic libraries drew translators from all over Europe. Gerard of Cremona alone translated more than eighty works there."
       },
       {
-        question: "What historical evidence refutes the popular myth that the Library of Alexandria was destroyed in a single catastrophic burning by Arabs or Christians?",
+        question: "What does the evidence say about the destruction of the Library of Alexandria?",
         options: [
-          "The entire library collection was moved to Rome in 50 BCE and survived intact",
-          "Textual records show the library suffered multiple partial fires, institutional neglect, civil wars, and budget cuts over five centuries, rather than one apocalyptic fire",
-          "The library was constructed entirely out of non-combustible stone tablets",
-          "Julius Caesar left a notarized inventory proving no scrolls were burned"
+          "It burned in one afternoon in 642 CE.",
+          "It declined slowly over centuries, through damage in wars, neglect and lack of money; the story of an Arab burning first appears 500 years later.",
+          "It never existed.",
+          "It was moved to Baghdad intact."
         ],
         answer: 1,
-        explanation: "Historical consensus demonstrates that the Library of Alexandria underwent a centuries-long decline: partial burning during Julius Caesar's siege in 48 BCE, damage during Roman civil wars under Aurelian and Diocletian, and gradual dispersal rather than a single theatrical burning."
+        explanation: "Writers who lived through the Arab conquest never mention a library, because by then the Great Library had long since gone."
       },
       {
-        question: "How did the Parisian Condemnations of 1277 inadvertently stimulate European physics?",
+        question: "How did the Paris condemnations of 1277 end up helping physics?",
         options: [
-          "They banned the study of all pagan mathematics, forcing scholars to invent modern calculus",
-          "They declared the sun to be the center of the solar system",
-          "By prohibiting propositions that limited God's omnipotence to Aristotelian dogma, they encouraged natural philosophers to explore hypothetical alternatives like vacuums, multiple worlds, and Earth's diurnal rotation",
-          "They mandated that all natural philosophy be tested with laboratory equipment"
+          "They paid for new laboratories.",
+          "They banned the study of nature.",
+          "By insisting God could make a vacuum or other worlds, they stopped teachers saying 'impossible, because Aristotle said so' and encouraged 'what if?' thinking.",
+          "They made Aristotle compulsory."
         ],
         answer: 2,
-        explanation: "By forbidding the claim that Aristotle was universally infallible (for instance, that God could not create a vacuum or multiple worlds), Bishop Tempier's decree freed 14th-century scholastic thinkers to formulate hypothetical, non-Aristotelian physics."
+        explanation: "Thinkers such as Buridan and Oresme began asking how things would fall in a vacuum or what we would feel if the Earth spun, which loosened Aristotle's hold on physics."
       },
       {
-        question: "What was the institutional role of the medieval university's 'quaestio disputata' (disputed question)?",
+        question: "What was a 'disputation' in a medieval university?",
         options: [
-          "An exam where students were punished for questioning scripture",
-          "A formal dialectical exercise where students and professors advanced rigorous counter-arguments and objections before synthesizing a reasoned resolution",
-          "A secret trial conducted by the papal inquisition",
-          "A lottery system for electing the university rector"
+          "An exam where students copied out a book from memory.",
+          "A formal debate: a question was argued from both sides, and the teacher answered every objection one by one.",
+          "A ceremony for new students.",
+          "A punishment for breaking rules."
         ],
         answer: 1,
-        explanation: "The 'quaestio disputata' was the pedagogical core of medieval universities: a scholar presented a thesis, fielded counter-arguments from opponents, responded systematically to each objection, and provided a structured synthesis, instilling a culture of rigorous dialectical argumentation."
+        explanation: "Disputations trained students to take arguments apart and defend claims against challenge, rather than simply accepting authority."
       }
     ];
 
