@@ -1,0 +1,313 @@
+[
+  {
+    "slug": "what-is-science-really",
+    "title": "What is Science, Really? Demarcation, Revolutions, and the Fabric of Truth",
+    "summary": "From Bacon and Hume's induction to Popper's falsification, Kuhn's paradigms, Lakatos, Feyerabend, Bayesian belief, and the replication crisis.",
+    "subject": "History",
+    "tags": [
+      "philosophy-of-science",
+      "epistemology",
+      "popper",
+      "kuhn",
+      "falsification",
+      "scientific-method"
+    ],
+    "date": "2026-11-12",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 55,
+    "series": {
+      "id": "how-we-came-to-know",
+      "part": 12
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "mathematics-becomes-infinite",
+    "title": "Mathematics Becomes Infinite: Calculus, Rigour, and the Limits of Reason",
+    "summary": "From Newton and Leibniz's calculus and the crisis of non-Euclidean geometry to Cantor's transfinite infinities, Gödel's incompleteness, and Turing's machines.",
+    "subject": "History",
+    "tags": [
+      "mathematics",
+      "calculus",
+      "infinity",
+      "set-theory",
+      "logic",
+      "godel",
+      "turing"
+    ],
+    "date": "2026-11-12",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 55,
+    "series": {
+      "id": "how-we-came-to-know",
+      "part": 11
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "the-strange-new-physics",
+    "title": "The Strange New Physics: Relativity, the Quantum, and the Subatomic Realm",
+    "summary": "From the Michelson-Morley null result and Planck's quantum to Einstein's relativity, Rutherford's nucleus, Bohr's orbits, and Heisenberg's uncertainty.",
+    "subject": "History",
+    "tags": [
+      "physics",
+      "quantum-mechanics",
+      "relativity",
+      "einstein",
+      "atomic-theory",
+      "epistemology"
+    ],
+    "date": "2026-11-12",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 55,
+    "series": {
+      "id": "how-we-came-to-know",
+      "part": 10
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "fire-light-and-fields",
+    "title": "Fire, Light and Fields: Energy, Heat and Electromagnetism in the Nineteenth Century",
+    "summary": "From Rumford's cannon-boring and Carnot's heat engine to Joule, Clausius's entropy, Faraday's lines of force, and Maxwell's electromagnetic wave equations.",
+    "subject": "History",
+    "tags": [
+      "physics",
+      "thermodynamics",
+      "electromagnetism",
+      "energy",
+      "maxwell",
+      "faraday"
+    ],
+    "date": "2026-11-12",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 54,
+    "series": {
+      "id": "how-we-came-to-know",
+      "part": 9
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "the-book-of-life",
+    "title": "The Book of Life: Evolution, the Cell, and the Code",
+    "summary": "From Linnaean taxonomy and Cuvier's fossils to Darwin, Mendel's peas, Pasteur's germ theory, and Watson-Crick-Franklin's double helix: how life came to know itself.",
+    "subject": "History",
+    "tags": [
+      "biology",
+      "evolution",
+      "genetics",
+      "dna",
+      "cell-theory",
+      "epistemology"
+    ],
+    "date": "2026-11-12",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 52,
+    "series": {
+      "id": "how-we-came-to-know",
+      "part": 8
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "from-alchemy-to-the-periodic-table",
+    "title": "From Alchemy to the Periodic Table: The Making of Chemistry",
+    "summary": "From Islamic alembics and Boyle's Sceptical Chymist to Lavoisier's oxygen balance, Dalton's atoms, and Mendeleev's periodic cathedral: the rise of chemical science.",
+    "subject": "History",
+    "tags": [
+      "chemistry",
+      "atomic-theory",
+      "periodic-table",
+      "scientific-revolution",
+      "epistemology"
+    ],
+    "date": "2026-11-12",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 50,
+    "series": {
+      "id": "how-we-came-to-know",
+      "part": 7
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "the-scientific-revolution",
+    "title": "The Clockwork Heavens and the Open Eye: The Scientific Revolution",
+    "summary": "From Copernicus and Tycho Brahe's baseline to Kepler's elliptical orbits, Galileo's telescope, Descartes, and Newton's Principia: the birth of modern physics.",
+    "subject": "History",
+    "tags": [
+      "scientific-revolution",
+      "physics",
+      "astronomy",
+      "newton",
+      "galileo",
+      "mechanics"
+    ],
+    "date": "2026-11-12",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 52,
+    "series": {
+      "id": "how-we-came-to-know",
+      "part": 6
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "keepers-and-builders-of-knowledge",
+    "title": "Keepers and Builders of Knowledge: Science in the Medieval Commonwealth",
+    "summary": "From Baghdad's House of Wisdom and Ibn al-Haytham's optics to Kerala's calculus, Song Dynasty clocks, and European universities: how medieval thinkers transformed science.",
+    "subject": "History",
+    "tags": [
+      "medieval-science",
+      "islamic-science",
+      "optics",
+      "astronomy",
+      "universities",
+      "epistemology"
+    ],
+    "date": "2026-11-12",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 52,
+    "series": {
+      "id": "how-we-came-to-know",
+      "part": 5
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "from-tally-marks-to-proof",
+    "title": "From Tally Marks to Proof: The Story of Mathematics to the Middle Ages",
+    "summary": "From Babylonian clay tablets and Euclid's axiomatic geometry to Indian zero, Brahmagupta's negative numbers, and al-Khwārizmī's algebra: how mathematics learned to prove.",
+    "subject": "History",
+    "tags": [
+      "mathematics",
+      "geometry",
+      "algebra",
+      "epistemology",
+      "ancient-science",
+      "astronomy"
+    ],
+    "date": "2026-11-12",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 50,
+    "series": {
+      "id": "how-we-came-to-know",
+      "part": 4
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "asking-why-without-the-gods",
+    "title": "Asking \"Why\" Without the Gods: The Birth of Natural Philosophy",
+    "summary": "From Thales, Democritean atomism, and Aristotle's biology to Indian Vaiśeṣika physics, Nyāya logic, and Eratosthenes measuring the Earth: the rise of natural explanation.",
+    "subject": "History",
+    "tags": [
+      "natural-philosophy",
+      "presocratics",
+      "aristotle",
+      "epistemology",
+      "ancient-science",
+      "atomism"
+    ],
+    "date": "2026-11-12",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 48,
+    "series": {
+      "id": "how-we-came-to-know",
+      "part": 3
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "gods-stars-and-calendars",
+    "title": "Gods, Stars and Calendars: The Dawn of Systematic Order",
+    "summary": "From Babylonian sexagesimal algebra and Egyptian water clocks to Indus Valley weights and Maya calendar gears: how early civilizations built systematic knowledge.",
+    "subject": "History",
+    "tags": [
+      "astronomy",
+      "mathematics",
+      "ancient-history",
+      "mesopotamia",
+      "egypt",
+      "metrology"
+    ],
+    "date": "2026-11-12",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 45,
+    "series": {
+      "id": "how-we-came-to-know",
+      "part": 2
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "before-science-how-a-curious-ape-learned-to-know",
+    "title": "Before Science: How a Curious Ape Learned to Know",
+    "summary": "From 3.3-million-year-old stone cores at Lomekwi and controlled fire to ochre symbols and lunar tally bones: how humanity built empirical knowledge before writing.",
+    "subject": "History",
+    "tags": [
+      "paleoanthropology",
+      "prehistory",
+      "epistemology",
+      "evolution",
+      "archaeology"
+    ],
+    "date": "2026-11-12",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 45,
+    "series": {
+      "id": "how-we-came-to-know",
+      "part": 1
+    },
+    "featured": true,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  }
+]

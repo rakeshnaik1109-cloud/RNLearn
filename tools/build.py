@@ -1,0 +1,513 @@
+#!/usr/bin/env python3
+"""
+RNLearn — Static Site Generator (tools/build.py)
+Generates derived pages and indices from content/posts.json.
+Standard library only. Fully idempotent and deterministic.
+Supports --check to verify files are up to date.
+"""
+
+import sys
+import os
+import json
+import re
+import datetime
+from xml.sax.saxutils import escape as xml_escape
+
+BASE_URL = "https://rakeshnaik1109-cloud.github.io/RNLearn"
+SITE_NAME = "RNLearn"
+SITE_TAGLINE = "Deep-dive guides, models, and essays across science, economics, and history"
+AUTHOR = "Rakesh Naik"
+CORRECTIONS_EMAIL = "rakesh_n@cpqct.iitr.ac.in"
+
+CANONICAL_SUBJECTS = [
+    "Science",
+    "Research",
+    "Technology",
+    "Finance & Economics",
+    "History",
+    "Geography",
+    "Politics & Society",
+    "Philosophy & Ideas",
+    "Notes"
+]
+
+def slugify(text):
+    text = text.lower().strip()
+    text = re.sub(r'[\s&/_]+', '-', text)
+    text = re.sub(r'[^a-z0-9-]', '', text)
+    text = re.sub(r'-+', '-', text)
+    return text.strip('-')
+
+def format_date(iso_date):
+    try:
+        dt = datetime.datetime.strptime(iso_date, "%Y-%m-%d")
+        return dt.strftime("%d %B %Y")
+    except Exception:
+        return iso_date
+
+def replace_region(html, name, content):
+    pattern = rf"(<!--\s*build:start\s+{re.escape(name)}\s*-->)(.*?)(<!--\s*build:end\s+{re.escape(name)}\s*-->)"
+    replacement = rf"\1\n{content}\n\3"
+    new_html, count = re.subn(pattern, replacement, html, flags=re.DOTALL)
+    if count == 0:
+        return html
+    return new_html
+
+def load_manifest(root_dir):
+    path = os.path.join(root_dir, "content", "posts.json")
+    if not os.path.exists(path):
+        return []
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+def render_post_card(post, rel_prefix=""):
+    slug = post["slug"]
+    title = post["title"]
+    summary = post["summary"]
+    subject = post["subject"]
+    subject_slug = slugify(subject)
+    date_str = format_date(post["date"])
+    mins = post.get("readingMinutes", 5)
+    post_type = post.get("type", "article")
+
+    series_info = post.get("series")
+    series_badge = ""
+    cta_text = "Read Article →"
+    if series_info and isinstance(series_info, dict) and "part" in series_info:
+        part_num = series_info["part"]
+        series_badge = f'<span class="card-part-badge">Part {part_num} of 12</span>'
+        cta_text = f"Read Part {part_num} →"
+
+    tags_html = "".join(
+        f'<a href="{rel_prefix}tags/{slugify(t)}.html" class="post-tag">#{t}</a>'
+        for t in post.get("tags", [])
+    )
+
+    return f"""<article class="post-card">
+  <div class="post-meta">
+    {series_badge}
+    <a href="{rel_prefix}subjects/{subject_slug}.html" class="post-subject-tag" data-subject="{subject_slug}">{subject}</a>
+    <span>•</span>
+    <time datetime="{post['date']}">{date_str}</time>
+    <span>•</span>
+    <span>{mins} min read</span>
+  </div>
+  <h3 class="post-title"><a href="{rel_prefix}articles/{slug}.html">{title}</a></h3>
+  <p class="post-summary">{summary}</p>
+  <div class="post-footer">
+    <div class="post-tags">{tags_html}</div>
+    <a href="{rel_prefix}articles/{slug}.html" class="read-more-btn">{cta_text}</a>
+  </div>
+</article>"""
+
+def render_featured_card(post, rel_prefix=""):
+    slug = post["slug"]
+    title = post["title"]
+    summary = post["summary"]
+    subject = post["subject"]
+    subject_slug = slugify(subject)
+    date_str = format_date(post["date"])
+    mins = post.get("readingMinutes", 5)
+
+    return f"""<div class="post-featured-card">
+  <div class="post-featured-badge">Featured Essay</div>
+  <div class="post-meta">
+    <a href="{rel_prefix}subjects/{subject_slug}.html" class="post-subject-tag" data-subject="{subject_slug}">{subject}</a>
+    <span>•</span>
+    <time datetime="{post['date']}">{date_str}</time>
+    <span>•</span>
+    <span>{mins} min read</span>
+  </div>
+  <h2 class="post-title"><a href="{rel_prefix}articles/{slug}.html">{title}</a></h2>
+  <p class="post-summary">{summary}</p>
+</div>"""
+
+def generate_listing_page(title, eyebrow, lede, posts, canonical_rel, rel_prefix="../"):
+    if posts:
+        cards = "\n".join(render_post_card(p, rel_prefix=rel_prefix) for p in posts)
+        content = f'<div class="post-grid">\n{cards}\n</div>'
+    else:
+        content = """<div class="empty-state">
+  <h2 class="empty-state-title">No articles published yet</h2>
+  <p class="empty-state-text">New deep-dive articles are currently being researched and drafted. Check back soon or subscribe to the RSS feed.</p>
+</div>"""
+
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title} — {SITE_NAME}</title>
+  <meta name="description" content="{lede}">
+  <link rel="canonical" href="{BASE_URL}/{canonical_rel}">
+  <link rel="stylesheet" href="{rel_prefix}css/site.css">
+  <link rel="stylesheet" href="{rel_prefix}css/print.css" media="print">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="{rel_prefix}index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>{SITE_NAME}</span>
+        <span class="site-brand-tagline">{SITE_TAGLINE}</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="{rel_prefix}index.html">Home</a></li>
+          <li><a class="nav-link" href="{rel_prefix}search.html">Search</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="{rel_prefix}search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero">
+      <div class="container">
+        <div class="hero-eyebrow">{eyebrow}</div>
+        <h1 class="hero-title">{title}</h1>
+        <p class="hero-lede">{lede}</p>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="container">
+        {content}
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">{SITE_NAME}</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by {AUTHOR}.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="{rel_prefix}index.html">Home</a></li>
+            <li><a class="footer-link" href="{rel_prefix}search.html">Search</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">Feeds & Meta</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="{rel_prefix}feed.xml">RSS Feed</a></li>
+            <li><a class="footer-link" href="{rel_prefix}sitemap.xml">Sitemap</a></li>
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>Content licensed under CC BY-NC 4.0 · Code under MIT License.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="{rel_prefix}js/site.js"></script>
+</body>
+</html>"""
+
+def build_site(root_dir, check_mode=False):
+    manifest = load_manifest(root_dir)
+    # Sort deterministically by date descending, then title ascending
+    manifest.sort(key=lambda p: (p.get("date", ""), p.get("title", "")), reverse=True)
+
+    public_posts = [p for p in manifest if not p.get("draft", False)]
+
+    files_to_write = {}
+
+    # 1. Subject Pages
+    subjects_map = {s: [] for s in CANONICAL_SUBJECTS}
+    for p in public_posts:
+        s = p.get("subject")
+        if s in subjects_map:
+            subjects_map[s].append(p)
+        else:
+            subjects_map.setdefault(s, []).append(p)
+
+    for subj, posts in subjects_map.items():
+        s_slug = slugify(subj)
+        title = subj
+        eyebrow = "Subject Archive"
+        lede = f"Long-form guides, notes, and analytical pieces exploring {subj.lower()}."
+        if subj == "History":
+            eyebrow = "Subject Archive • Master Series"
+            lede = "How We Came To Know: A 12-part comprehensive journey through the history and philosophy of science from prehistory to modern epistemology."
+            posts.sort(key=lambda x: (x.get("series", {}).get("part", 999), x.get("date", "")))
+        html = generate_listing_page(title, eyebrow, lede, posts, f"subjects/{s_slug}.html")
+        files_to_write[os.path.join("subjects", f"{s_slug}.html")] = html
+
+    # 2. Tag Pages
+    tags_map = {}
+    for p in public_posts:
+        for t in p.get("tags", []):
+            tags_map.setdefault(t, []).append(p)
+
+    for tag, posts in tags_map.items():
+        t_slug = slugify(tag)
+        title = f"#{tag}"
+        eyebrow = "Tag Archive"
+        lede = f"Articles and notes indexed under the topic #{tag}."
+        html = generate_listing_page(title, eyebrow, lede, posts, f"tags/{t_slug}.html")
+        files_to_write[os.path.join("tags", f"{t_slug}.html")] = html
+
+    # 3. Series Pages & Article Series Links
+    series_map = {}
+    for p in manifest:
+        s_info = p.get("series")
+        if s_info and isinstance(s_info, dict) and "id" in s_info:
+            s_id = s_info["id"]
+            series_map.setdefault(s_id, []).append(p)
+
+    for s_id, s_posts in series_map.items():
+        s_posts.sort(key=lambda x: x.get("series", {}).get("part", 1))
+        # Build series page for public posts
+        pub_s_posts = [p for p in s_posts if not p.get("draft", False)]
+        title = s_id.replace("-", " ").title()
+        eyebrow = "Reading Path Series"
+        lede = f"A structured sequence of articles on {title.lower()}."
+        html = generate_listing_page(title, eyebrow, lede, pub_s_posts, f"series/{s_id}.html")
+        files_to_write[os.path.join("series", f"{s_id}.html")] = html
+
+        # Update each article's series banner
+        for idx, art in enumerate(s_posts):
+            art_slug = art["slug"]
+            art_file = os.path.join(root_dir, "articles", f"{art_slug}.html")
+            if os.path.exists(art_file):
+                with open(art_file, "r", encoding="utf-8") as f:
+                    art_html = f.read()
+
+                part_num = art.get("series", {}).get("part", idx + 1)
+                total_parts = len(s_posts)
+
+                prev_link = ""
+                if idx > 0:
+                    prev_p = s_posts[idx - 1]
+                    prev_link = f'<a href="{prev_p["slug"]}.html">← Part {idx}: {prev_p["title"]}</a>'
+                else:
+                    prev_link = '<span>First part</span>'
+
+                next_link = ""
+                if idx < total_parts - 1:
+                    next_p = s_posts[idx + 1]
+                    next_link = f'<a href="{next_p["slug"]}.html">Part {idx + 2}: {next_p["title"]} →</a>'
+                else:
+                    next_link = '<span>Final part</span>'
+
+                banner_content = f"""<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/{s_id}.html">{title}</a> (Part {part_num} of {total_parts})</div>
+  <div class="series-banner-links">
+    {prev_link}
+    {next_link}
+  </div>
+</div>"""
+
+                art_html = replace_region(art_html, "series-top", banner_content)
+                art_html = replace_region(art_html, "series-bottom", banner_content)
+                files_to_write[os.path.join("articles", f"{art_slug}.html")] = art_html
+
+    # Determine deterministic build timestamp from latest public post, or fixed epoch
+    if public_posts:
+        latest_iso = public_posts[0].get("updated") or public_posts[0].get("date", "2026-11-12")
+    else:
+        latest_iso = "2026-11-12"
+
+    try:
+        latest_dt = datetime.datetime.strptime(latest_iso, "%Y-%m-%d").replace(tzinfo=datetime.timezone.utc)
+    except Exception:
+        latest_dt = datetime.datetime(2026, 11, 12, 0, 0, 0, tzinfo=datetime.timezone.utc)
+
+    build_date_iso = latest_dt.strftime("%Y-%m-%d")
+    build_date_rfc822 = latest_dt.strftime("%a, %d %b %Y 00:00:00 GMT")
+
+    # 4. Search Index (search-index.json)
+    search_records = []
+    for p in public_posts:
+        search_records.append({
+            "slug": p["slug"],
+            "url": f"articles/{p['slug']}.html",
+            "title": p["title"],
+            "summary": p["summary"],
+            "subject": p["subject"],
+            "tags": p.get("tags", []),
+            "date": p["date"],
+            "type": p.get("type", "article")
+        })
+    files_to_write["search-index.json"] = json.dumps(search_records, indent=2, ensure_ascii=False) + "\n"
+
+    # 5. Sitemap (sitemap.xml)
+    sitemap_entries = [
+        f"""  <url>
+    <loc>{BASE_URL}/</loc>
+    <lastmod>{build_date_iso}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>""",
+        f"""  <url>
+    <loc>{BASE_URL}/search.html</loc>
+    <lastmod>{build_date_iso}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>"""
+    ]
+
+    for subj in CANONICAL_SUBJECTS:
+        s_slug = slugify(subj)
+        sitemap_entries.append(f"""  <url>
+    <loc>{BASE_URL}/subjects/{s_slug}.html</loc>
+    <lastmod>{build_date_iso}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>""")
+
+    for p in public_posts:
+        mod_date = p.get("updated") or p.get("date", build_date_iso)
+        sitemap_entries.append(f"""  <url>
+    <loc>{BASE_URL}/articles/{p['slug']}.html</loc>
+    <lastmod>{mod_date}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>""")
+
+    sitemap_xml = f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{chr(10).join(sitemap_entries)}
+</urlset>
+"""
+    files_to_write["sitemap.xml"] = sitemap_xml
+
+    # 6. RSS 2.0 Feed (feed.xml)
+    feed_items = []
+    for p in public_posts:
+        pub_dt = datetime.datetime.strptime(p["date"], "%Y-%m-%d").replace(tzinfo=datetime.timezone.utc)
+        pub_rfc822 = pub_dt.strftime("%a, %d %b %Y %H:%M:%S GMT")
+        link = f"{BASE_URL}/articles/{p['slug']}.html"
+        feed_items.append(f"""    <item>
+      <title>{xml_escape(p['title'])}</title>
+      <link>{link}</link>
+      <guid isPermaLink="true">{link}</guid>
+      <pubDate>{pub_rfc822}</pubDate>
+      <description>{xml_escape(p['summary'])}</description>
+      <category>{xml_escape(p['subject'])}</category>
+    </item>""")
+
+    feed_xml = f"""<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{xml_escape(SITE_NAME)}</title>
+    <link>{BASE_URL}/</link>
+    <description>{xml_escape(SITE_TAGLINE)}</description>
+    <language>en-gb</language>
+    <lastBuildDate>{build_date_rfc822}</lastBuildDate>
+    <atom:link href="{BASE_URL}/feed.xml" rel="self" type="application/rss+xml"/>
+{chr(10).join(feed_items)}
+  </channel>
+</rss>
+"""
+    files_to_write["feed.xml"] = feed_xml
+
+    # 7. Update index.html generated regions
+    index_path = os.path.join(root_dir, "index.html")
+    if os.path.exists(index_path):
+        with open(index_path, "r", encoding="utf-8") as f:
+            index_html = f.read()
+
+        # Featured Post
+        featured = next((p for p in public_posts if p.get("featured")), None)
+        if featured:
+            featured_content = render_featured_card(featured, rel_prefix="")
+        elif public_posts:
+            featured_content = render_featured_card(public_posts[0], rel_prefix="")
+        else:
+            featured_content = """<div class="empty-state">
+  <h2 class="empty-state-title">No articles published yet</h2>
+  <p class="empty-state-text">New deep-dive articles are currently being researched and drafted. Check back soon or subscribe to the RSS feed.</p>
+</div>"""
+        index_html = replace_region(index_html, "featured-post", featured_content)
+
+        # Latest Posts
+        if public_posts:
+            posts_content = '<div class="post-grid">\n' + "\n".join(render_post_card(p, rel_prefix="") for p in public_posts[:6]) + '\n</div>'
+        else:
+            posts_content = """<div class="empty-state">
+  <h2 class="empty-state-title">Articles coming soon</h2>
+  <p class="empty-state-text">New deep-dive guides and analytical articles are currently in preparation. Check back soon or search by topic.</p>
+</div>"""
+        index_html = replace_region(index_html, "latest-posts", posts_content)
+
+        # Subjects List
+        subjects_html = []
+        for s in CANONICAL_SUBJECTS:
+            s_slug = slugify(s)
+            count = len(subjects_map.get(s, []))
+            subjects_html.append(f'<a href="subjects/{s_slug}.html" class="subject-chip" data-subject="{s_slug}"><span class="subject-chip-dot"></span>{s} <span style="opacity:0.6;font-size:0.75rem;">({count})</span></a>')
+        index_html = replace_region(index_html, "subjects-list", "\n".join(subjects_html))
+
+        # Series List
+        series_html = []
+        for s_id, s_posts in series_map.items():
+            pub_s_count = len([p for p in s_posts if not p.get("draft", False)])
+            if pub_s_count > 0:
+                title = s_id.replace("-", " ").title()
+                series_html.append(f'<div class="post-card"><h3 class="post-title"><a href="series/{s_id}.html">{title}</a></h3><p class="post-summary">{pub_s_count} part series</p></div>')
+        if series_html:
+            series_block = '<div class="post-grid">\n' + "\n".join(series_html) + '\n</div>'
+        else:
+            series_block = '<p style="color:var(--ink-muted);font-size:0.9rem;">No reading series active yet.</p>'
+        index_html = replace_region(index_html, "series-list", series_block)
+
+        files_to_write["index.html"] = index_html
+
+    # Check or Write
+    differences = []
+    for rel_path, expected_content in files_to_write.items():
+        full_path = os.path.join(root_dir, rel_path)
+        if not os.path.exists(full_path):
+            differences.append(f"Missing file: {rel_path}")
+        else:
+            with open(full_path, "r", encoding="utf-8") as f:
+                existing = f.read()
+            if existing != expected_content:
+                differences.append(f"Content out of date: {rel_path}")
+
+    if check_mode:
+        if differences:
+            print(f"FAILED: {len(differences)} generated file(s) are out of date:")
+            for d in differences:
+                print(f" - {d}")
+            sys.exit(1)
+        else:
+            print("SUCCESS: All generated files are up to date.")
+            sys.exit(0)
+    else:
+        for rel_path, content in files_to_write.items():
+            full_path = os.path.join(root_dir, rel_path)
+            os.makedirs(os.path.dirname(full_path), exist_ok=True)
+            with open(full_path, "w", encoding="utf-8") as f:
+                f.write(content)
+        print(f"Successfully generated {len(files_to_write)} file(s).")
+
+if __name__ == "__main__":
+    check_mode = "--check" in sys.argv
+    root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    build_site(root_dir, check_mode=check_mode)

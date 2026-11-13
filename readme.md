@@ -1,0 +1,56 @@
+# RNLearn
+
+> Deep-dive guides, interactive models, and essays across science, economics, mathematics, and history.
+
+**Live site:** [https://rakeshnaik1109-cloud.github.io/RNLearn/](https://rakeshnaik1109-cloud.github.io/RNLearn/)
+
+---
+
+## Overview
+
+RNLearn is an editorial, static notebook designed for long-form learning. It features deep-dive analytical pieces, derivations, interactive canvas visualizations, and historical investigations—all built with zero tracking, zero ads, and pure static HTML/CSS/JavaScript.
+
+### Featured Series: *How We Came To Know*
+A 12-part master series chronicling the history, epistemology, and methodology of science from prehistoric toolmakers to modern physics:
+1. **Part 1**: *Before Science: How a Curious Ape Learned to Know* (Paleoanthropology & early empiricism)
+2. **Part 2**: *Gods, Stars and Calendars: The Dawn of Systematic Order* (Mesopotamia, Egypt & early astronomy)
+3. **Part 3**: *Asking "Why" Without the Gods: The Birth of Natural Philosophy* (Ionian physics, Indian atomism & Greek biology)
+4. **Part 4**: *From Tally Marks to Proof: The Story of Mathematics to the Middle Ages* (Axiomatic geometry & algebra)
+5. **Part 5**: *Keepers and Builders of Knowledge: Science in the Medieval Commonwealth* (Islamic golden age, optics & universities)
+6. **Part 6**: *The Clockwork Heavens and the Open Eye: The Scientific Revolution* (Copernicus, Galileo, Kepler & Newton)
+7. **Part 7**: *From Alchemy to the Periodic Table: The Making of Chemistry* (Boyle, Lavoisier & Mendeleev)
+8. **Part 8**: *The Book of Life: Evolution, the Cell, and the Code* (Darwin, Mendel, germ theory & DNA)
+9. **Part 9**: *Fire, Light and Fields: Energy, Heat and Electromagnetism in the Nineteenth Century* (Thermodynamics & Maxwell)
+10. **Part 10**: *The Strange New Physics: Relativity, the Quantum, and the Subatomic Realm* (Relativity & quantum mechanics)
+11. **Part 11**: *Mathematics Becomes Infinite: Calculus, Rigour, and the Limits of Reason* (Analysis, set theory & Gödel)
+12. **Part 12**: *What is Science, Really? Demarcation, Revolutions, and the Fabric of Truth* (Popper, Kuhn & epistemology)
+
+---
+
+## Architecture & Tooling
+
+- **Dual-Theme Typography**: Warm editorial paper light mode & night slate dark mode with WCAG AA contrast compliance.
+- **Fast Client-Side Search**: Zero-dependency lunr/prefix client search index.
+- **KaTeX Mathematics**: Full support for inline `$ ... $`, display `$$ ... $$`, with reactive MutationObserver for interactive widgets.
+- **Responsive Layout**: Wide-screen layout with left-attached sticky Table of Contents and expandable figures.
+- **Deterministic Static Site Generator**: Built with Python standard library (`tools/build.py`).
+
+### Local Development & Verification
+
+```bash
+# Build derived pages (RSS feed, sitemap, search index, subject & tag pages)
+python tools/build.py
+
+# Verify build idempotency (used in CI)
+python tools/build.py --check
+
+# Run site integrity and standards verification
+python tools/check.py
+```
+
+---
+
+## License
+
+- Content: [Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](LICENSE)
+- Code: [MIT License](LICENSE)

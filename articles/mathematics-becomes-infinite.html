@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mathematics Becomes Infinite: Calculus, Rigour, and the Limits of Reason — RNLearn</title>
+  <meta name="description" content="From Newton and Leibniz's calculus and the crisis of non-Euclidean geometry to Cantor's transfinite infinities, Gödel's incompleteness, and Turing's machines.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/mathematics-becomes-infinite.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Mathematics Becomes Infinite: Calculus, Rigour, and the Limits of Reason — RNLearn">
+  <meta property="og:description" content="From Newton and Leibniz's calculus and the crisis of non-Euclidean geometry to Cantor's transfinite infinities, Gödel's incompleteness, and Turing's machines.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/mathematics-becomes-infinite.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mathematics Becomes Infinite: Calculus, Rigour, and the Limits of Reason — RNLearn">
+  <meta name="twitter:description" content="From Newton and Leibniz's calculus and the crisis of non-Euclidean geometry to Cantor's transfinite infinities, Gödel's incompleteness, and Turing's machines.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Mathematics Becomes Infinite: Calculus, Rigour, and the Limits of Reason",
+    "description": "From Newton and Leibniz's calculus and the crisis of non-Euclidean geometry to Cantor's transfinite infinities, Gödel's incompleteness, and Turing's machines.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-12",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/mathematics-becomes-infinite.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/history.html" class="post-subject-tag" data-subject="history">History</a>
+        </div>
+        <h1 class="article-title">Mathematics Becomes Infinite: Calculus, Rigour, and the Limits of Reason</h1>
+        <p class="article-standfirst">
+          How human intellect conquered the infinitesimal, dared to tame non-Euclidean curved space and transfinite infinities, sought absolute certainty in formal axioms, and discovered the inescapable horizons of what can be proven and computed.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-12">12 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>55 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/how-we-came-to-know.html">How We Came To Know</a> (Part 11 of 12)</div>
+  <div class="series-banner-links">
+    <a href="the-strange-new-physics.html">← Part 10: The Strange New Physics: Relativity, the Quantum, and the Subatomic Realm</a>
+    <a href="what-is-science-really.html">Part 12: What is Science, Really? Demarcation, Revolutions, and the Fabric of Truth →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. The Ghosts of Departed Quantities</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Age of Fluents and Fluxions</a></li>
+              <li><a class="toc-link" href="#section-3">3. The Citadel of Rigour</a></li>
+              <li><a class="toc-link" href="#section-4">4. Banishing the Infinitesimal</a></li>
+              <li><a class="toc-link" href="#section-5">5. Parallel Lines That Meet</a></li>
+              <li><a class="toc-link" href="#section-6">6. Curved Spaces of Higher Dimensions</a></li>
+              <li><a class="toc-link" href="#section-7">7. Paradise Unveiled</a></li>
+              <li><a class="toc-link" href="#section-8">8. Diagonal Slashes</a></li>
+              <li><a class="toc-link" href="#section-9">9. The Serpent in Paradise</a></li>
+              <li><a class="toc-link" href="#section-10">10. Hilbert’s Dream</a></li>
+              <li><a class="toc-link" href="#section-11">11. The Castle Falls from Within</a></li>
+              <li><a class="toc-link" href="#section-12">12. The Mechanical Oracle</a></li>
+              <li><a class="toc-link" href="#section-13">13. How Did They Know? Cantor’s Diag...</a></li>
+              <li><a class="toc-link" href="#section-14">14. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-15">15. Philosophy Corner</a></li>
+              <li><a class="toc-link" href="#section-16">16. People in This Part</a></li>
+              <li><a class="toc-link" href="#section-17">17. Interactive Evaluation</a></li>
+              <li><a class="toc-link" href="#section-18">18. Further Reading &amp; Primary Sources</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+<section id="section-1">
+        <h2>1. The Ghosts of Departed Quantities: Newton, Leibniz, and Bishop Berkeley’s Scalpel</h2>
+        <p>In the late seventeenth century, human mathematics made a breathtaking leap that unlocked the physical cosmos: the invention of the infinitesimal calculus. Working independently, <strong>Isaac Newton</strong> (1642–1727) in England and <strong>Gottfried Wilhelm Leibniz</strong> (1646–1716) in Germany discovered that the two foundational operations of geometry—finding the instantaneous slope of a tangent line to a curve (differentiation) and calculating the continuous area enclosed beneath a curve (integration)—were inverse operations of each other: the Fundamental Theorem of Calculus.</p>
+        <p>Armed with this analytical engine, Newton calculated planetary orbits under inverse-square gravitation, while Leibniz and the Bernoulli brothers solved the brachistochrone problem, the catenary curve of a hanging chain, and the oscillations of violin strings. Yet beneath this towering mathematical triumph lurked a profound, embarrassing logical abyss. Neither Newton nor Leibniz could give a rigorous, non-contradictory definition of what an "infinitesimal" actually was.</p>
+        <p>Newton spoke of flowing quantities called <em>fluents</em> ($x, y$) and their instantaneous rates of change called <em>fluxions</em> ($\dot{x}, \dot{y}$), mediated by tiny, vanishing intervals of time denoted by an enigmatic symbol $o$. Leibniz spoke of <em>differentials</em> ($dx, dy$)—quantities smaller than any assignable number, yet strictly greater than zero. To find the derivative of $y = x^2$, practitioners computed the ratio:</p>
+        $$\frac{(x + dx)^2 - x^2}{dx} = \frac{2x\,dx + (dx)^2}{dx} = 2x + dx$$
+        <p>At this stage, mathematicians divided by $dx$, which required that $dx \neq 0$, because division by zero is mathematically undefined. But in the very next breath, to obtain the final answer $2x$, they simply discarded $dx$ by setting it equal to zero ($dx = 0$). How could a physical quantity be non-zero in the first step and zero in the second step of the same mathematical derivation?</p>
+        <p>In 1734, the Irish philosopher and Anglican churchman <strong>Bishop George Berkeley</strong> (1685–1753) attacked this intellectual hypocrisy in a devastating pamphlet entitled <em>The Analyst; or, a Discourse Addressed to an Infidel Mathematician</em> (directed at the astronomer Edmond Halley). Berkeley pointed out with merciless logical precision that the mathematicians who scoffed at religious faith for demanding belief in unseen theological mysteries were themselves resting their entire scientific kingdom upon logically absurd entities:</p>
+        <blockquote>
+          <p>And what are these fluxions? The velocities of evanescent increments? And what are these same evanescent increments? They are neither finite quantities, nor quantities infinitely small, nor yet nothing. May we not call them the ghosts of departed quantities?</p>
+        </blockquote>
+        <p>Berkeley demonstrated that early calculus arrived at correct answers not through sound logic, but through a compensation of subtle, offsetting errors. For over a century, mathematicians ignored Berkeley’s critique because calculus worked with miraculous, undeniable practical power in engineering and celestial mechanics. Yet the foundational debt remained unpaid. Mathematics had built an empire of reason upon a foundation of ghosts.</p>
+      </section>
+
+      <section id="section-2">
+        <h2>2. The Age of Fluents and Fluxions: The Calculus Priority Dispute</h2>
+        <p>Compounding the logical vulnerabilities of early calculus was one of the most toxic, nationalistic feuds in the history of science: the bitter priority dispute between Isaac Newton and Gottfried Wilhelm Leibniz over the invention of calculus.</p>
+        <p>Newton had developed his "method of fluxions" during the plague years of 1665–1666 at Woolsthorpe Manor, but possessed a neurotic, lifelong terror of criticism and publication. He circulated private handwritten manuscripts among friends in London (such as <em>De Analysi per Aequationes Numero Terminorum Infinitas</em> in 1669) but did not publish his calculus in print until his <em>Philosophiae Naturalis Principia Mathematica</em> in 1687, where he masked his fluxional derivations beneath classical Euclidean geometric proofs.</p>
+        <p>Meanwhile, Leibniz developed his differential calculus independently in Paris in 1675, publishing his landmark paper in the Leipzig journal <em>Acta Eruditorum</em> in October 1684: <em>Nova Methodus pro Maximis et Minimis</em> ("A New Method for Maxima and Minima"). Leibniz introduced the modern notation that survives in every calculus textbook today: the elongated "S" for integration ($\int y\,dx$, representing a sum of indivisible strips) and the differential quotient ($\frac{dy}{dx}$).</p>
+
+        <figure class="fig" data-fig="fig-calculus-limit">
+          <div class="fig-title">Interactive Figure 11.1: Secant to Tangent Slope Convergence ($\Delta x \to 0$)</div>
+          <!-- Canvas injected by JS -->
+        </figure>
+
+        <p>By the 1690s, English mathematicians accused Leibniz of plagiarism, claiming he had seen Newton’s private manuscripts during his visits to London in the 1670s. In 1712, the Royal Society of London appointed a supposedly impartial committee to adjudicate the dispute. In reality, Newton—who had been elected President of the Royal Society in 1703—secretly handpicked the committee members, drafted the committee’s final report himself (the <em>Commercium Epistolicum</em>), and published an anonymous review praising his own impartiality.</p>
+        <p>The consequences for British science were catastrophic. Paralyzed by stubborn national pride, British mathematicians stubbornly clung to Newton’s awkward dot-notation ($\dot{x}, \ddot{x}$) and geometric fluxions, cutting themselves off from continental developments for over a century. Continental mathematicians—led by Leonhard Euler, Joseph-Louis Lagrange, and the Bernoulli brothers—embraced Leibniz’s versatile symbolic operational calculus, leaving Britain an intellectual backwater until a group of Cambridge undergraduates (Charles Babbage, John Herschel, and George Peacock) founded the Analytical Society in 1812 to translate continental analysis and replace the "dots of Newton with the d’s of Leibniz."</p>
+      </section>
+
+      <section id="section-3">
+        <h2>3. The Citadel of Rigour: Cauchy, Bolzano, and the Arithmetic of Limits</h2>
+        <p>In the early nineteenth century, an intellectual counter-revolution swept European mathematics: the quest for absolute <strong>rigour</strong>. Throughout the eighteenth century, Euler and Lagrange had treated infinite series with breathtaking algebraic fearlessness, freely manipulating divergent series such as $1 - 1 + 1 - 1 + \dots = \frac{1}{2}$ or $1 + 2 + 4 + 8 + \dots = -1$ as formal polynomials. But as calculus expanded into complex functions and heat conduction (such as Joseph Fourier’s trigonometric series), intuitive algebraic manipulations produced glaring contradictions.</p>
+        <p>The turning point arrived in Paris following the fall of Napoleon. In 1821, the staunchly royalist Catholic mathematician <strong>Augustin-Louis Cauchy</strong> (1789–1857), teaching at the École Polytechnique, published his revolutionary textbook <em>Cours d'Analyse</em>. Cauchy proclaimed that geometry and physical intuition could no longer serve as the foundations of mathematics: analysis had to be built upon a purely arithmetical foundation.</p>
+        <p>Cauchy executed this revolution by rehabilitating the concept of the <strong>limit</strong>, originally proposed by Jean le Rond d’Alembert. Cauchy banished infinitesimals as actual physical quantities: an infinitesimal is not a mysterious number smaller than any other number, but a variable whose numerical value approaches zero as a limit:</p>
+        <blockquote>
+          <p>When the values successively attributed to the same variable approach indefinitely to a fixed value, up to the point of differing from it as little as one wishes, this fixed value is called the limit of all the others.</p>
+        </blockquote>
+        <p>Cauchy defined the derivative not as an elusive fraction $0/0$, but as the limit of a ratio of finite differences as the denominator approaches zero:</p>
+        $$f'(x) = \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x)}{\Delta x}$$
+        <p>Simultaneously in Prague, an obscure Bohemian priest and mathematician, <strong>Bernard Bolzano</strong> (1781–1848), was independently formulating modern definitions of continuity and convergence. In 1817, Bolzano proved the foundational <strong>Intermediate Value Theorem</strong>: if a continuous function $f(x)$ changes sign between $a$ and $b$ ($f(a) < 0$ and $f(b) > 0$), there must exist at least one point $c \in (a, b)$ where $f(c) = 0$. For two millennia, mathematicians had regarded this theorem as an obvious geometric truth—a continuous line cannot cross from one side of an axis to the other without cutting it. Bolzano recognized that geometric "obviousness" was an illusion: the theorem had to be proven purely from the arithmetical properties of real numbers.</p>
+      </section>
+
+      <section id="section-4">
+        <h2>4. Banishing the Infinitesimal: Weierstrass, Dedekind Cuts, and the Real Continuum</h2>
+        <p>Despite Cauchy’s heroic reforms, his verbal definitions of limits still contained subtle dynamic metaphors: variables "approached," "tended toward," and "flowed." In Berlin during the 1860s, <strong>Karl Weierstrass</strong> (1815–1897)—known as the father of modern analysis—stripped away the last vestiges of time and motion, replacing dynamic movement with static, rigorous logical inequalities: the <strong>Epsilon-Delta ($\epsilon$-$\delta$)</strong> framework.</p>
+
+        <figure class="fig" data-fig="fig-epsilon-delta">
+          <div class="fig-title">Interactive Figure 11.2: The Weierstrassian Epsilon-Delta Limit Challenge</div>
+          <!-- Canvas injected by JS -->
+        </figure>
+
+        <p>Weierstrass stated that $\lim_{x \to a} f(x) = L$ means:</p>
+        $$\forall \epsilon > 0, \quad \exists \delta > 0 \quad \text{such that} \quad 0 < |x - a| < \delta \implies |f(x) - L| < \epsilon$$
+        <p>This was a profound conceptual triumph. There are no vanishing quantities, no infinite processes, and no motion. It is a purely static logical game: whatever error tolerance $\epsilon > 0$ an adversary demands on the vertical $y$-axis, the mathematician can always supply a horizontal corridor $\delta > 0$ on the $x$-axis such that the curve remains safely trapped inside the box. In 1872, Weierstrass stunned the mathematical world by constructing a function that was continuous everywhere, but differentiable nowhere—a fractal-like pathological monster that completely defied geometric intuition.</p>
+        <p>Yet Weierstrass’s $\epsilon$-$\delta$ proofs rested upon an unexamined assumption: what exactly is a <strong>real number</strong>? Everyone understood rational fractions $p/q$, but what was an irrational number like $\sqrt{2}$ or $\pi$? In 1872, <strong>Richard Dedekind</strong> (1831–1916) in Brunswick published <em>Stetigkeit und irrationale Zahlen</em> ("Continuity and Irrational Numbers"), providing the definitive construction of the real continuum through <strong>Dedekind Cuts</strong>.</p>
+        <p>Dedekind observed that the rational numbers $\mathbb{Q}$ are dense, but filled with infinitely many microscopic "holes." If you cut the rational number line into two non-empty disjoint sets $A$ and $B$ such that every element of $A$ is less than every element of $B$, there may be no rational number separating the two halves (as in the cut where $A = \{x \in \mathbb{Q} \mid x \le 0 \text{ or } x^2 < 2\}$ and $B = \{x \in \mathbb{Q} \mid x > 0 \text{ and } x^2 > 2\}$). Dedekind defined an irrational number <em>as the cut itself</em>. The real numbers $\mathbb{R}$ were the completed, gapless continuum upon which the entire edifice of calculus could finally stand with absolute, unassailable logical rigour.</p>
+      </section>
+
+      <section id="section-5">
+        <h2>5. Parallel Lines That Meet: The Shock of Non-Euclidean Geometry</h2>
+        <p>While analysts were securing calculus, an even more profound earthquake was shattering the ancient foundation of geometry. For over two thousand years, Euclid’s <em>Elements</em> (c. 300 BCE) stood as the supreme model of human rational certainty. From five self-evident axioms and five postulates, Euclid had deduced the geometrical laws of space.</p>
+        <p>Yet one postulate had always troubled mathematicians: the famous <strong>Fifth Postulate</strong> (the Parallel Postulate). Unlike the first four postulates (which were brief and intuitively obvious, such as drawing a straight line between any two points), the Fifth Postulate was long, complicated, and clumsy:</p>
+        <blockquote>
+          <p>If a straight line falling on two straight lines makes the interior angles on the same side less than two right angles, the two straight lines, if produced indefinitely, meet on that side on which the angles are less than two right angles.</p>
+        </blockquote>
+        <p>In its equivalent modern form, formulated by John Playfair: <em>Given a straight line and a point not on that line, there exists exactly one straight line passing through the point parallel to the given line.</em></p>
+
+        <figure class="fig" data-fig="fig-non-euclidean-geometry">
+          <div class="fig-title">Interactive Figure 11.3: Non-Euclidean Geometries (Euclidean vs Hyperbolic vs Spherical)</div>
+          <!-- Canvas injected by JS -->
+        </figure>
+
+        <p>For two millennia, mathematicians from Ptolemy and Ibn al-Haytham to Omar Khayyam and Girolamo Saccheri attempted to prove the Fifth Postulate as a theorem derived from the first four. Saccheri (1733) attempted a reductio ad absurdum: he assumed the Fifth Postulate was false and tried to derive a logical contradiction. He derived bizarre theorems about quadrilateral angles, but found no contradiction, ultimately asserting with desperate prejudice that the hypothesis of the acute angle was "repugnant to the nature of the straight line."</p>
+        <p>The realization that Saccheri had not discovered an error, but an entirely new universe of geometry, dawned independently upon three men:</p>
+        <ul>
+          <li><strong>Carl Friedrich Gauss</strong> (1777–1855) in Göttingen recognized in the 1790s that a non-contradictory geometry could exist where through a point infinitely many parallel lines can be drawn. But Gauss concealed his discoveries, confessing in private letters that he feared "the clamour of the Boeotians"—the reactionary outcry of conservative philosophers who followed Immanuel Kant in declaring Euclidean space to be an absolute, synthetic a priori truth of human consciousness.</li>
+          <li><strong>Nikolai Ivanovich Lobachevsky</strong> (1792–1856), rector of the remote University of Kazan in Russia, boldly published his discovery in 1829 in the <em>Kazan Messenger</em>: <strong>Hyperbolic Geometry</strong>. Lobachevsky demonstrated that denying the Fifth Postulate produces an entirely consistent geometric world where:
+            <ol>
+              <li>Infinitely many non-intersecting parallel lines pass through a point not on a line.</li>
+              <li>The sum of the interior angles of any triangle is strictly less than 180 degrees: $\alpha + \beta + \gamma = 180^\circ - K \cdot \text{Area}$.</li>
+              <li>Similar triangles of different sizes cannot exist: absolute scale is woven into the geometry of space itself.</li>
+            </ol>
+          </li>
+          <li><strong>János Bolyai</strong> (1802–1860), a passionate young Hungarian cavalry officer in the Austrian army, independently discovered hyperbolic geometry in 1823, writing to his father Farkas: <em>"Out of nothing I have created a strange new universe."</em> When his father sent the manuscript to Gauss, Gauss replied that he could not praise Bolyai’s work, for to praise it would be to praise himself, having discovered the exact same results decades earlier. Crushed by Gauss’s cold response, Bolyai never published again.</li>
+        </ul>
+        <p>In 1868, the Italian mathematician <strong>Eugenio Beltrami</strong> proved that hyperbolic geometry was just as mathematically consistent as Euclidean geometry by constructing a concrete Euclidean surface—the <em>pseudosphere</em>—whose intrinsic surface geometry obeyed Lobachevsky’s laws. Geometry was no longer an absolute truth about physical reality: it was a formal mathematical system whose physical validity was an empirical question to be settled by measurement.</p>
+      </section>
+
+      <section id="section-6">
+        <h2>6. Curved Spaces of Higher Dimensions: Bernhard Riemann and the Manifold</h2>
+        <p>On June 10, 1854, the ailing, painfully shy twenty-seven-year-old mathematician <strong>Bernhard Riemann</strong> (1826–1866) delivered his probationary qualifying lecture (<em>Habilitationsvortrag</em>) before the faculty at Göttingen. In the audience sat his venerable former teacher, seventy-seven-year-old Carl Friedrich Gauss.</p>
+        <p>Riemann’s lecture, entitled <em>Über die Hypothesen, welche der Geometrie zu Grunde liegen</em> ("On the Hypotheses Which Lie at the Bases of Geometry"), is widely regarded as one of the greatest masterpieces in the history of mathematics. Working with almost no formulas, Riemann synthesized all previous geometries into a unified, higher-dimensional framework: the concept of an <strong>$n$-dimensional Manifold</strong>.</p>
+
+        <figure class="fig" data-fig="fig-riemann-curvature">
+          <div class="fig-title">Interactive Figure 11.4: Riemannian Curvature, Geodesics, and Holonomy Deflection</div>
+          <!-- Canvas injected by JS -->
+        </figure>
+
+        <p>Riemann recognized that space need not be flat, three-dimensional, or Euclidean. A space could possess any number of dimensions $n$, and its geometry was determined not by external embedding, but by an internal, localized distance rule—the <strong>metric tensor</strong> ($g_{ij}$):</p>
+        $$ds^2 = \sum_{i,j=1}^n g_{ij}(x)\, dx^i dx^j$$
+        <p>The curvature of space was not constant; it could vary continuously from point to point, governed by the <strong>Riemann Curvature Tensor</strong> ($R^\rho_{\sigma\mu\nu}$). Riemann discovered a third fundamental geometry: <strong>Elliptic (Spherical) Geometry</strong>, where curvature is positive ($K > 0$):</p>
+        <ul>
+          <li>There are zero parallel lines: all straight lines (great circles) eventually intersect.</li>
+          <li>The sum of the angles of a triangle is strictly greater than 180 degrees: $\alpha + \beta + \gamma = 180^\circ + K \cdot \text{Area}$.</li>
+        </ul>
+        <p>Riemann concluded his historic lecture with a prophetic vision: the physical geometry of the universe might not be an abstract, passive Euclidean stage; the metric properties of space might be determined by the physical forces and matter acting within it. Sixty-one years later, Albert Einstein adopted Riemann’s metric tensor and curvature equations to construct the General Theory of Relativity.</p>
+      </section>
+
+      <section id="section-7">
+        <h2>7. Paradise Unveiled: Georg Cantor and the Transfinite Numbers</h2>
+        <p>For more than two millennia, from Aristotle through Galileo and Gauss, mathematicians maintained a strict, universal prohibition against actual infinity. Aristotle distinguished between the <strong>potential infinite</strong> (a process that can be continued without end, such as counting $1, 2, 3\dots$) and the <strong>actual infinite</strong> (a completed, existing infinite collection). The actual infinite was banished as an absurdity that led to fatal paradoxes.</p>
+        <p>Galileo Galilei noted in 1638 that the natural numbers can be placed in a one-to-one correspondence with their squares ($1 \leftrightarrow 1, 2 \leftrightarrow 4, 3 \leftrightarrow 9, n \leftrightarrow n^2$), which seemed to contradict Euclid’s common notion that the whole is greater than the part: how could there be the exact same number of perfect squares as total integers? Gauss famously wrote in 1831: <em>"I protest against the use of an infinite quantity as an actual entity; this is never allowed in mathematics."</em></p>
+
+        <figure class="fig" data-fig="fig-cantor-pairing">
+          <div class="fig-title">Interactive Figure 11.5: Cantor's Diagonal Pairing for Rational Fractions ($|\mathbb{Q}| = \aleph_0$)</div>
+          <!-- Canvas injected by JS -->
+        </figure>
+
+        <p>In 1874, a young Russian-born German mathematician at the University of Halle, <strong>Georg Cantor</strong> (1845–1918), shattered this ancient taboo, giving birth to modern <strong>Set Theory</strong>. Cantor realized that to compare infinite collections rationally, one needed a precise definition of size: <strong>Cardinality</strong>.</p>
+        <p>Cantor established that two sets have the same cardinality (the same size) if and only if their elements can be placed in a perfect <strong>one-to-one correspondence (bijection)</strong>. A shepherd who cannot count can still verify that his flock is complete by placing a pebble in a bowl for every sheep that leaves the fold in the morning, and removing a pebble for every sheep that returns in the evening.</p>
+        <p>Using bijection, Cantor proved that the set of even integers has the exact same size as the set of all integers. Even more shocking, in 1874 Cantor proved that the infinite set of all rational numbers (fractions) $\mathbb{Q}$ has the exact same cardinality as the natural numbers $\mathbb{N}$! By arranging all fractions $p/q$ in a two-dimensional grid and weaving along diagonals, Cantor assigned a unique integer to every rational fraction. Sets that can be put in a bijection with $\mathbb{N}$ are called <strong>countably infinite</strong>, assigned the first transfinite cardinal number:</p>
+        $$|\mathbb{N}| = |\mathbb{Z}| = |\mathbb{Q}| = \aleph_0 \quad (\text{Aleph-null})$$
+      </section>
+
+      <section id="section-8">
+        <h2>8. Diagonal Slashes: Proving the Reals Uncountable and the Continuum Hypothesis</h2>
+        <p>Having proven that fractions are no more numerous than counting numbers, Cantor asked: are all infinities the same size? In December 1873, and later in his celebrated 1891 paper, Cantor delivered the stunning answer: <strong>No. There are different sizes of infinity.</strong></p>
+
+        <figure class="fig" data-fig="fig-cantor-diagonal">
+          <div class="fig-title">Interactive Figure 11.6: Cantor's Diagonalization Argument ($|\mathbb{R}| > \aleph_0$)</div>
+          <!-- Canvas injected by JS -->
+        </figure>
+
+        <p>Cantor proved through his famous <strong>Diagonal Argument</strong> that the set of real numbers $\mathbb{R}$ in the interval $[0, 1)$ cannot be put into a one-to-one correspondence with the natural numbers: the real continuum is <strong>uncountable</strong>.</p>
+        <p>Assume, for the sake of contradiction, that all real numbers between 0 and 1 can be listed in an infinite enumerated sequence:</p>
+        $$\begin{aligned}
+        s_1 &= 0.d_{11} d_{12} d_{13} d_{14} \dots \\
+        s_2 &= 0.d_{21} d_{22} d_{23} d_{24} \dots \\
+        s_3 &= 0.d_{31} d_{32} d_{33} d_{34} \dots \\
+        &\vdots
+        \end{aligned}$$
+        <p>Cantor now constructs a brand-new real number $D = 0.a_1 a_2 a_3 a_4 \dots$ by looking down the main diagonal ($d_{11}, d_{22}, d_{33}, \dots$). For every $n$, choose digit $a_n$ such that $a_n \neq d_{nn}$ (for example, if $d_{nn} = 5$, choose $a_n = 6$; otherwise choose $a_n = 5$).</p>
+        <p>Is this newly constructed number $D$ on the list? It cannot be $s_1$, because it differs from $s_1$ at the 1st decimal place ($a_1 \neq d_{11}$). It cannot be $s_2$, because it differs at the 2nd decimal place ($a_2 \neq d_{22}$). In general, $D$ cannot be $s_n$, because it differs from $s_n$ at the $n$-th decimal place. Therefore, $D$ is a legitimate real number that is <em>nowhere on the infinite list</em>. Any list of real numbers is fatally incomplete: the continuum of real numbers is strictly larger than the infinity of integers:</p>
+        $$|\mathbb{R}| = \mathfrak{c} = 2^{\aleph_0} > \aleph_0$$
+        <p>Cantor proved his general theorem: for any set $A$, its power set $\mathcal{P}(A)$ (the set of all subsets) has a strictly larger cardinality than $A$ itself ($|A| < |\mathcal{P}(A)|$). This meant there is no largest infinity: there exists an endless, infinite hierarchy of transfinite infinities soaring into eternity: $\aleph_0 < \aleph_1 < \aleph_2 < \dots$</p>
+        <p>This led Cantor to formulate the <strong>Continuum Hypothesis (CH)</strong>: is there any infinity intermediate between the countable integers $\aleph_0$ and the real continuum $\mathfrak{c} = 2^{\aleph_0}$? Cantor spent decades trying desperately to prove that $2^{\aleph_0} = \aleph_1$. It would take twentieth-century mathematical logic to reveal that the Continuum Hypothesis was undecidable from standard axioms.</p>
+      </section>
+
+      <section id="section-9">
+        <h2>9. The Serpent in Paradise: Russell’s Barber Paradox and the Crisis of Foundations</h2>
+        <p>While Cantor explored transfinite paradise, the German logician <strong>Gottlob Frege</strong> (1848–1925) in Jena was dedicating his life to <strong>Logicism</strong>: the philosophical project to prove that all of arithmetic could be derived from pure, universal laws of logic. Between 1893 and 1903, Frege labored on his two-volume magnum opus, <em>Grundgesetze der Arithmetik</em> ("Basic Laws of Arithmetic").</p>
+        <p>Frege’s system relied upon unrestricted set comprehension: for any property or predicate $P(x)$, there exists a valid mathematical set of all objects satisfying that property.</p>
+        <p>In June 1902, as the second volume of Frege’s work was at the printers, a twenty-nine-year-old British philosopher named <strong>Bertrand Russell</strong> (1872–1970) wrote Frege a polite, devastating one-page letter. Russell asked Frege to consider the set of all sets that do not contain themselves:</p>
+        $$R = \{ x \mid x \notin x \}$$
+        <p>Most ordinary sets do not contain themselves: the set of all teacups is not a teacup. But consider $R$: does $R$ contain itself?</p>
+        <ul>
+          <li>If $R$ <strong>is</strong> a member of $R$ ($R \in R$), then by the definition of $R$, it must not contain itself: $R \notin R$, a contradiction.</li>
+          <li>If $R$ <strong>is not</strong> a member of $R$ ($R \notin R$), then by definition it satisfies the condition and must belong to $R$: $R \in R$, another contradiction.</li>
+        </ul>
+        <p>Therefore:</p>
+        $$R \in R \iff R \notin R$$
+        <p>This was <strong>Russell’s Paradox</strong> (popularized as the Barber Paradox: in a town where the barber shaves all men, and only those men, who do not shave themselves, who shaves the barber?). Frege was devastated. In an appendix added to his book, Frege wrote with heartbreaking dignity:</p>
+        <blockquote>
+          <p>Hardly anything more unwelcome can befall a scientific writer than that one of the foundations of his edifice be shaken after the work is finished.</p>
+        </blockquote>
+        <p>To eliminate paradoxes, Ernst Zermelo and Abraham Fraenkel formulated axiomatic set theory (<strong>ZFC</strong>), restricting set formation to ban self-referential collections. But a deep anxiety had infected mathematics: how could anyone be certain that even the refined axioms would not harbor hidden contradictions?</p>
+      </section>
+
+      <section id="section-10">
+        <h2>10. Hilbert’s Dream: Formalism, Consistency, and the 1900 Paris Problems</h2>
+        <p>At the Second International Congress of Mathematicians in Paris in August 1900, the towering leader of world mathematics, <strong>David Hilbert</strong> (1862–1943) of Göttingen, delivered an epochal keynote address. Hilbert presented a list of twenty-three unsolved mathematical problems for the twentieth century—a list that would guide mathematical research for generations. Problem Number One was Cantor’s Continuum Hypothesis; Problem Number Two was to <strong>prove the consistency of the axioms of arithmetic</strong>.</p>
+        <p>Hilbert refused to surrender to skepticism. In opposition to the French intuitionists (such as Henri Poincaré and L. E. J. Brouwer) who wanted to ban transfinite sets, Hilbert declared defiantly: <em>"No one shall expel us from the paradise that Cantor has created for us."</em></p>
+        <p>To defend Cantor, Hilbert launched <strong>Hilbert’s Program</strong>: the philosophy of <strong>Formalism</strong>. Hilbert proposed that mathematics should be completely detached from intuitive meanings and formulated as a formal symbolic game played with marks on paper according to strict typographical syntactic rules. Hilbert set out three ultimate goals:</p>
+        <ol>
+          <li><strong>Completeness:</strong> Every mathematical statement formulated in the symbolic language must be either provable or refutable from the axioms ($T \vdash P$ or $T \vdash \neg P$).</li>
+          <li><strong>Consistency:</strong> The axioms must be proven never to lead to a contradiction ($0 = 1$). Crucially, this consistency proof had to be executed using safe, finitary, constructive methods (metamathematics).</li>
+          <li><strong>Decidability (Entscheidungsproblem):</strong> There must exist an effective mechanical algorithmic procedure that can determine, in a finite number of steps, whether any given mathematical statement is logically valid.</li>
+        </ol>
+        <p>Hilbert concluded his 1930 retirement address in Königsberg with words of monumental optimism that were carved onto his tombstone: <em>Wir müssen wissen. Wir werden wissen.</em> ("We must know. We will know.")</p>
+      </section>
+
+      <section id="section-11">
+        <h2>11. The Castle Falls from Within: Kurt Gödel’s Incompleteness Theorems (1931)</h2>
+        <p>The day before Hilbert delivered his triumphant Königsberg address in September 1930, a shy, twenty-four-year-old Austrian logician named <strong>Kurt Gödel</strong> (1906–1978) spoke quietly at a round-table conference. He mentioned that he had proven that in any consistent mathematical system, there must exist true statements that cannot be proved.</p>
+        <p>In 1931, Gödel published his paper in the <em>Monatshefte für Mathematik und Physik</em>: <em>Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme</em> ("On Formally Undecidable Propositions of Principia Mathematica and Related Systems"). It was an intellectual earthquake that permanently destroyed Hilbert’s formalist dream.</p>
+        <p>Gödel achieved this through an ingenious mathematical trick called <strong>Gödel Numbering</strong>. He assigned a unique natural number to every basic mathematical symbol, formula, and proof, turning statements <em>about</em> mathematics into arithmetic equations <em>inside</em> mathematics. Gödel then constructed a self-referential mathematical proposition $G$ that asserted its own unprovability:</p>
+        $$G \iff \neg \text{Prov}(\ulcorner G \urcorner)$$
+        <p>(Informally: "This mathematical statement cannot be proven from the axioms.")</p>
+        <p>Now consider whether $G$ can be proven:</p>
+        <ul>
+          <li>If $G$ <strong>can be proven</strong>, then the system has proven a statement that asserts it cannot be proven. The system has proven a falsehood, which means the axiomatic system is <strong>inconsistent</strong> (it contains contradictions).</li>
+          <li>If $G$ <strong>cannot be proven</strong>, then what $G$ asserts is genuinely <strong>true</strong>! But this means there is a true mathematical statement that the axioms can never prove: the system is <strong>incomplete</strong>.</li>
+        </ul>
+        <p>This was Gödel’s <strong>First Incompleteness Theorem</strong>: in any consistent formal axiomatic system capable of doing basic arithmetic, there are always true mathematical statements that cannot be proven from within the axioms.</p>
+        <p>Gödel followed with his even more devastating <strong>Second Incompleteness Theorem</strong>: no consistent formal axiomatic system rich enough to contain arithmetic can ever prove its own consistency from within its own axioms. If you want to prove arithmetic consistent, you must invoke stronger, more complex axioms whose own consistency is even more dubious. Hilbert’s dream of proving mathematics complete, self-contained, and provably free of contradiction was dead. Truth in mathematics forever outruns proof.</p>
+      </section>
+
+      <section id="section-12">
+        <h2>12. The Mechanical Oracle: Alan Turing, the Halting Problem, and What Cannot Be Computed</h2>
+        <p>Gödel had shattered completeness and consistency, but Hilbert’s third quest remained: the <em>Entscheidungsproblem</em> (the Decision Problem). Could there exist an algorithmic procedure to decide the truth of any formula?</p>
+        <p>In 1936, a twenty-four-year-old Cambridge fellow, <strong>Alan Turing</strong> (1912–1954), answered the question by inventing modern theoretical computer science. In his monumental paper <em>On Computable Numbers, with an Application to the Entscheidungsproblem</em>, Turing gave a precise, mechanistic definition of what it means to calculate.</p>
+
+        <figure class="fig" data-fig="fig-turing-machine">
+          <div class="fig-title">Interactive Figure 11.7: Alan Turing's Universal Machine Simulator</div>
+          <!-- Canvas injected by JS -->
+        </figure>
+
+        <p>Turing imagined an idealized mechanical device now known as a <strong>Turing Machine</strong>:</p>
+        <ul>
+          <li>An infinite paper tape divided into discrete squares, each containing a symbol (such as $0, 1$, or blank).</li>
+          <li>A read/write head that can inspect one square at a time, erase a symbol, write a new symbol, and move one square left or right.</li>
+          <li>An internal state register holding the current configuration ($q_0, q_1, \dots$).</li>
+          <li>A finite table of transition instructions determining the next action based on current state and scanned symbol.</li>
+        </ul>
+        <p>Turing proved that a single machine—the <strong>Universal Turing Machine</strong>—could execute the actions of <em>any</em> specialized machine if provided with that machine’s program encoded on the tape. The Universal Turing Machine is the conceptual blueprint of the modern stored-program digital computer.</p>
+        <p>Turing then used this machine to dismantle Hilbert’s decision problem. He posed the <strong>Halting Problem</strong>: can we write a master computer program $H(\text{Program}, \text{Input})$ that analyzes any arbitrary computer program and determines whether it will eventually finish running (halt) or get trapped in an infinite loop?</p>
+        <p>Turing proved by a brilliant self-referential diagonal argument that no such program can exist. Assume $H$ exists. We can construct a pathological adversarial program $P$ that calls $H(P, P)$: if $H$ predicts that $P$ will halt, $P$ enters an intentional infinite loop; if $H$ predicts that $P$ will loop, $P$ immediately halts. Program $P$ halts if and only if it does not halt—a direct logical contradiction. Therefore, the Halting Problem is mathematically <strong>undecidable</strong>.</p>
+        <p>The consequences were profound. Mathematics contains problems whose answers are not only unprovable, but fundamentally uncomputable. Reason had journeyed through the infinite only to discover the immutable boundaries of its own mechanical reflection.</p>
+      </section>
+
+      <section id="section-13">
+        <h2>13. How Did They Know? Cantor’s Diagonal Argument</h2>
+        <div class="callout callout-method">
+          <div class="callout-header">Methodological Deep Dive: Constructive Non-Existence Proofs</div>
+          <p>How did Georg Cantor definitively demonstrate that the real numbers cannot be counted, without having to inspect an infinite number of possible listing schemes?</p>
+          <p>The brilliance of Cantor’s diagonal argument lies in its self-contained constructive logic. Proving that an infinite set cannot be enumerated requires proving that <em>every possible conceivable listing algorithm</em> must fail. Cantor achieved this through proof by contradiction (reductio ad absurdum):</p>
+          <ol>
+            <li><strong>Assume Exhaustive Enumerability:</strong> Suppose an adversary claims to possess a complete, perfect enumeration of all real numbers in the unit interval $[0, 1)$, mapped to the positive integers: $n \leftrightarrow s_n$.</li>
+            <li><strong>The Diagonal Extraction:</strong> Cantor isolates the $n$-th decimal digit of the $n$-th number in the list: the diagonal sequence $d_{11}, d_{22}, d_{33}, \dots, d_{nn}$.</li>
+            <li><strong>The Inversion Rule:</strong> Cantor constructs a new decimal number $D = 0.a_1 a_2 a_3 \dots$ by applying an explicit rule:
+              $$a_n = \begin{cases} 4 & \text{if } d_{nn} \neq 4 \\ 5 & \text{if } d_{nn} = 4 \end{cases}$$
+              (Avoiding 0 and 9 prevents ambiguities regarding recurring decimals such as $0.4999\dots = 0.5000\dots$).</li>
+            <li><strong>The Inescapable Discrepancy:</strong> By construction, the number $D$ differs from $s_1$ in the first digit ($a_1 \neq d_{11}$); from $s_2$ in the second digit ($a_2 \neq d_{22}$); and from $s_k$ in the $k$-th digit ($a_k \neq d_{kk}$). Therefore, $D$ cannot be identical to any number on the adversary’s supposedly complete list.</li>
+          </ol>
+          <p>Because $D$ is undeniably a valid real number in $[0, 1)$, the initial assumption that the list was complete collapses. The continuum of real numbers is demonstrably uncountably infinite.</p>
+        </div>
+      </section>
+
+      <section id="section-14">
+        <h2>14. Legend and Record: Did Cantor Go Mad Because of Infinity? vs. Kronecker’s Cruelty</h2>
+        <div class="callout callout-history">
+          <div class="callout-header">Historical Revision: Madness, Mathematics, and Academic Hostility</div>
+          <p>Popular biographical accounts often dramaticize Georg Cantor as a tragic Faustian figure who stared into the blinding abyss of actual infinity, lost his mind, and died in a lunatic asylum as cosmic punishment for human hubris. Modern psychiatric and historical archives reveal a far more poignant and human reality.</p>
+          <p><strong>The Psychiatric Reality:</strong> Medical records from the Nervenklinik in Halle confirm that Cantor suffered from severe, textbook bipolar disorder (manic-depressive illness), an endogenous biological psychiatric condition completely unrelated to the abstract content of transfinite set theory. His depressive episodes were cyclical and seasonal, often triggered by personal bereavement—such as the sudden, tragic death of his beloved twelve-year-old son Rudolph in 1899.</p>
+          <p><strong>Leopold Kronecker’s Relentless Cruelty:</strong> What intensified Cantor’s psychological anguish was the vicious, personalized hostility of the mathematical establishment, led by his former professor in Berlin, <strong>Leopold Kronecker</strong> (1823–1891). Kronecker, an extreme finitist who famously declared <em>"God made the natural numbers, all else is the work of man,"</em> regarded Cantor’s transfinite numbers as dangerous theological heresy. Kronecker used his editorial power at Crelle’s Journal to delay and block Cantor’s papers, publicly calling Cantor a "corrupter of youth" and a "scientific charlatan." Kronecker actively blocked Cantor from ever securing a prestigious professorship in Berlin or Göttingen, leaving Cantor trapped in academic isolation at the provincial university of Halle. It was not infinity that broke Cantor, but the cruelty of academic orthodoxy.</p>
+        </div>
+      </section>
+
+      <section id="section-15">
+        <h2>15. Philosophy Corner: Platonism vs. Formalism vs. Intuitionism</h2>
+        <div class="callout callout-philosophy">
+          <div class="callout-header">Philosophical Foundations: Is Mathematics Discovered or Invented?</div>
+          <p>The foundational crisis of the early twentieth century divided mathematicians into three warring philosophical camps, debating whether mathematical reality is discovered or invented:</p>
+          <ul>
+            <li><strong>Platonism (Mathematical Realism):</strong> Championed by Kurt Gödel and Georg Cantor. Mathematical entities (numbers, sets, transfinite cardinals) possess an eternal, objective existence in an abstract, non-physical Platonic realm, completely independent of human minds or physical universes. Mathematicians do not invent theorems; they discover pre-existing truths. Gödel’s incompleteness theorems are viewed by Platonists as evidence that mathematical truth transcends human proof systems.</li>
+            <li><strong>Formalism:</strong> Championed by David Hilbert. Mathematics does not describe any metaphysical reality: it is a meaningless formal game played with abstract typographical symbols according to agreed-upon syntactical rules, like chess. A mathematical statement is "true" if and only if it can be derived from the axioms through a finite sequence of legal moves.</li>
+            <li><strong>Intuitionism / Constructivism:</strong> Championed by L. E. J. Brouwer. Mathematics is a constructive mental creation of the human intellect. An entity exists only if it can be explicitly constructed in a finite number of steps. Intuitionists rejected non-constructive existence proofs, transfinite actual infinity, and even the classical <em>Law of the Excluded Middle</em> ($P \lor \neg P$).</li>
+          </ul>
+          <p>This tripartite dispute remains unresolved today. Most working mathematicians practice as formalists on weekdays and Platonists on weekends: manipulating formal symbols by day, while believing in the eternal reality of their theorems by night.</p>
+        </div>
+      </section>
+
+      <section id="section-16">
+        <h2>16. People in This Part</h2>
+        <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+          <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+            <thead>
+              <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                <th style="padding:0.6rem 0.8rem;">Mathematician / Logician</th>
+                <th style="padding:0.6rem 0.8rem;">Dates &amp; Origin</th>
+                <th style="padding:0.6rem 0.8rem;">Key Work</th>
+                <th style="padding:0.6rem 0.8rem;">Major Epistemic Contribution</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Isaac Newton &amp; Gottfried Leibniz</td>
+                <td style="padding:0.6rem 0.8rem;">1642–1727 / 1646–1716<br>England / Germany</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Principia</em> (1687) / <em>Nova Methodus</em> (1684)</td>
+                <td style="padding:0.6rem 0.8rem;">Independently invented infinitesimal calculus; discovered the Fundamental Theorem of Calculus linking derivatives and integrals.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Bishop George Berkeley</td>
+                <td style="padding:0.6rem 0.8rem;">1685–1753<br>Cloyne, Ireland</td>
+                <td style="padding:0.6rem 0.8rem;"><em>The Analyst</em> (1734)</td>
+                <td style="padding:0.6rem 0.8rem;">Exposed the logical inconsistencies of early calculus, criticizing infinitesimals as "the ghosts of departed quantities."</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Augustin-Louis Cauchy</td>
+                <td style="padding:0.6rem 0.8rem;">1789–1857<br>Paris, France</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Cours d'Analyse</em> (1821)</td>
+                <td style="padding:0.6rem 0.8rem;">Rigorized calculus using the arithmetical concept of limits; defined convergence of infinite series and continuity.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Karl Weierstrass</td>
+                <td style="padding:0.6rem 0.8rem;">1815–1897<br>Berlin, Germany</td>
+                <td style="padding:0.6rem 0.8rem;">Lectures on Analytic Functions (1860s)</td>
+                <td style="padding:0.6rem 0.8rem;">Formulated the $\epsilon$-$\delta$ definition of limits and continuity, eliminating infinitesimals; discovered continuous nowhere-differentiable functions.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Nikolai Lobachevsky &amp; János Bolyai</td>
+                <td style="padding:0.6rem 0.8rem;">1792–1856 / 1802–1860<br>Russia / Hungary</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Kazan Messenger</em> (1829) / Appendix (1832)</td>
+                <td style="padding:0.6rem 0.8rem;">Independently discovered Hyperbolic Non-Euclidean Geometry, proving Euclid’s Fifth Postulate is not an absolute truth.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Bernhard Riemann</td>
+                <td style="padding:0.6rem 0.8rem;">1826–1866<br>Göttingen, Germany</td>
+                <td style="padding:0.6rem 0.8rem;">Habilitation lecture on Geometry (1854)</td>
+                <td style="padding:0.6rem 0.8rem;">Founded Riemannian differential geometry; introduced $n$-dimensional manifolds, metric tensors ($g_{ij}$), and variable curvature.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Georg Cantor</td>
+                <td style="padding:0.6rem 0.8rem;">1845–1918<br>Halle, Germany</td>
+                <td style="padding:0.6rem 0.8rem;">Set theory memoirs (1874, 1891)</td>
+                <td style="padding:0.6rem 0.8rem;">Founded transfinite set theory; proved $|\mathbb{Q}| = \aleph_0$, $|\mathbb{R}| = \mathfrak{c} > \aleph_0$ via diagonalization; discovered infinite tower of infinities.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Bertrand Russell</td>
+                <td style="padding:0.6rem 0.8rem;">1872–1970<br>Cambridge, UK</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Principia Mathematica</em> (1910–1913)</td>
+                <td style="padding:0.6rem 0.8rem;">Discovered Russell’s Paradox ($R \in R \iff R \notin R$); co-authored <em>Principia Mathematica</em> to derive arithmetic from typed logic.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">David Hilbert</td>
+                <td style="padding:0.6rem 0.8rem;">1862–1943<br>Göttingen, Germany</td>
+                <td style="padding:0.6rem 0.8rem;">Paris 23 Problems (1900), Formalist Program</td>
+                <td style="padding:0.6rem 0.8rem;">Championed formalism; posed the 23 Paris problems; sought to prove mathematics complete, consistent, and decidable.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Kurt Gödel</td>
+                <td style="padding:0.6rem 0.8rem;">1906–1978<br>Vienna / Princeton</td>
+                <td style="padding:0.6rem 0.8rem;">Incompleteness paper (1931)</td>
+                <td style="padding:0.6rem 0.8rem;">Proved the Incompleteness Theorems: no consistent formal system can be complete or prove its own consistency, ending Hilbert’s program.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Alan Turing</td>
+                <td style="padding:0.6rem 0.8rem;">1912–1954<br>Cambridge / Bletchley Park, UK</td>
+                <td style="padding:0.6rem 0.8rem;">On Computable Numbers (1936)</td>
+                <td style="padding:0.6rem 0.8rem;">Invented the Universal Turing Machine, founding theoretical computer science; proved the undecidability of the Halting Problem.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="section-17">
+        <h2>17. Interactive Evaluation: Mathematics Becomes Infinite</h2>
+        <p>Test your understanding of the journey from calculus and non-Euclidean geometry to Cantor’s transfinite sets, Gödel’s incompleteness, and Turing computability with this ten-question diagnostic evaluation.</p>
+        <figure class="fig" data-fig="fig-quiz-part11">
+          <div class="fig-title">Interactive Quiz: Calculus, Rigour, and the Limits of Reason</div>
+          <!-- Quiz widget injected by JS -->
+        </figure>
+      </section>
+
+      <section id="section-18">
+        <h2>18. Further Reading &amp; Primary Sources</h2>
+        <p>All historical citations, dates, formal proofs, and mathematical theorems in this article are derived from the following peer-reviewed scholarship and seminal treatises:</p>
+        <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+          <li><strong>Dauben, Joseph Warren.</strong> (1979). <em>Georg Cantor: His Mathematics and Philosophy of the Infinite</em>. Cambridge, MA: Harvard University Press. (The definitive, authoritative intellectual biography of Cantor).</li>
+          <li><strong>Gödel, Kurt.</strong> (1931). "Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme I." <em>Monatshefte für Mathematik und Physik</em>, 38: 173–198.</li>
+          <li><strong>Turing, Alan M.</strong> (1936). "On Computable Numbers, with an Application to the Entscheidungsproblem." <em>Proceedings of the London Mathematical Society</em>, 42(1): 230–265.</li>
+          <li><strong>Kline, Morris.</strong> (1972). <em>Mathematical Thought from Ancient to Modern Times</em>. Oxford: Oxford University Press. (Comprehensive monumental history of mathematics).</li>
+          <li><strong>Grabiner, Judith V.</strong> (1981). <em>The Origins of Cauchy's Rigorous Calculus</em>. Cambridge, MA: MIT Press. (Definitive analysis of the transition from intuitive to rigorous analysis).</li>
+          <li><strong>Berkeley, George.</strong> (1734). <em>The Analyst; or, a Discourse Addressed to an Infidel Mathematician</em>. London: J. Tonson.</li>
+          <li><strong>Riemann, Bernhard.</strong> (1867). "Ueber die Hypothesen, welche der Geometrie zu Grunde liegen." <em>Abhandlungen der Königlichen Gesellschaft der Wissenschaften zu Göttingen</em>, 13: 133–152.</li>
+          <li><strong>Nagel, Ernest &amp; Newman, James R.</strong> (1958). <em>Gödel's Proof</em>. New York: New York University Press. (The classic, lucid exposition of Gödel’s incompleteness derivation).</li>
+          <li><strong>Hodges, Andrew.</strong> (1983). <em>Alan Turing: The Enigma</em>. London: Burnett Books / Vintage. (The definitive biography of Turing and the invention of universal computing).</li>
+          <li><strong>Dedekind, Richard.</strong> (1872). <em>Stetigkeit und irrationale Zahlen</em>. Braunschweig: Vieweg. (English translation: <em>Continuity and Irrational Numbers</em>, Open Court, 1901).</li>
+        </ol>
+      </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/how-we-came-to-know.html">How We Came To Know</a> (Part 11 of 12)</div>
+  <div class="series-banner-links">
+    <a href="the-strange-new-physics.html">← Part 10: The Strange New Physics: Relativity, the Quantum, and the Subatomic Realm</a>
+    <a href="what-is-science-really.html">Part 12: What is Science, Really? Demarcation, Revolutions, and the Fabric of Truth →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">Feeds & Meta</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../feed.xml">RSS Feed</a></li>
+            <li><a class="footer-link" href="../sitemap.xml">Sitemap</a></li>
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>Content licensed under CC BY-NC 4.0 · Code under MIT License.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/mathematics-becomes-infinite.js"></script>
+</body>
+</html>

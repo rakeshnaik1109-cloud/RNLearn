@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Articles — RNLearn</title>
+  <meta name="description" content="Search across all long-form articles, tutorials, explainers, and notes published on RNLearn.">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/search.html">
+
+  <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="css/print.css" media="print">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="index.html">Home</a></li>
+          <li><a class="nav-link active" href="search.html">Search</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" style="border-bottom:none; padding-bottom: 1.5rem;">
+      <div class="container">
+        <div class="hero-eyebrow">Index & Search</div>
+        <h1 class="hero-title">Search Articles & Notes</h1>
+        <p class="hero-lede">Filter through our long-form guides, mathematical derivations, and notes.</p>
+      </div>
+    </section>
+
+    <div class="container search-container">
+      <div class="search-input-wrap">
+        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="search-box" class="search-input" placeholder="Type keyword, topic, or formula name..." aria-label="Search articles" autofocus>
+      </div>
+
+      <div id="search-status" class="search-meta" aria-live="polite">Loading search index...</div>
+
+      <div id="search-results" class="post-grid"></div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="index.html">Home</a></li>
+            <li><a class="footer-link" href="search.html">Search</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">Feeds & Meta</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="feed.xml">RSS Feed</a></li>
+            <li><a class="footer-link" href="sitemap.xml">Sitemap</a></li>
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>Content licensed under CC BY-NC 4.0 · Code under MIT License.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/site.js"></script>
+  <script>
+  (function () {
+    var searchBox = document.getElementById('search-box');
+    var statusEl = document.getElementById('search-status');
+    var resultsEl = document.getElementById('search-results');
+    var articles = [];
+
+    fetch('search-index.json')
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        articles = data || [];
+        statusEl.textContent = 'Showing ' + articles.length + ' article' + (articles.length === 1 ? '' : 's');
+        render(articles);
+      })
+      .catch(function () {
+        statusEl.textContent = 'Unable to load search index.';
+      });
+
+    function slugify(text) {
+      return text.toLowerCase().replace(/[\s&/_]+/g, '-').replace(/[^a-z0-9-]/g, '').replace(/-+/g, '-');
+    }
+
+    function render(list) {
+      resultsEl.innerHTML = '';
+      if (!list.length) {
+        resultsEl.innerHTML = '<div class="empty-state" style="grid-column: 1 / -1;"><h2 class="empty-state-title">No articles match your query</h2><p class="empty-state-text">Try different terms, broad keywords, or clear the search field.</p></div>';
+        return;
+      }
+      list.forEach(function (p) {
+        var card = document.createElement('article');
+        card.className = 'post-card';
+        var subjSlug = slugify(p.subject || 'notes');
+        var tagsHtml = (p.tags || []).map(function (t) {
+          return '<a href="tags/' + slugify(t) + '.html" class="post-tag">#' + t + '</a>';
+        }).join('');
+
+        card.innerHTML = '<div class="post-meta">' +
+          '<a href="subjects/' + subjSlug + '.html" class="post-subject-tag" data-subject="' + subjSlug + '">' + p.subject + '</a>' +
+          '<span>•</span><time datetime="' + p.date + '">' + p.date + '</time>' +
+          '</div>' +
+          '<h3 class="post-title"><a href="' + p.url + '">' + p.title + '</a></h3>' +
+          '<p class="post-summary">' + p.summary + '</p>' +
+          '<div class="post-footer"><div class="post-tags">' + tagsHtml + '</div><span style="text-transform:capitalize;">' + (p.type || 'article') + '</span></div>';
+        resultsEl.appendChild(card);
+      });
+    }
+
+    searchBox.addEventListener('input', function () {
+      var q = searchBox.value.toLowerCase().trim();
+      if (!q) {
+        statusEl.textContent = 'Showing ' + articles.length + ' article' + (articles.length === 1 ? '' : 's');
+        render(articles);
+        return;
+      }
+      var filtered = articles.filter(function (p) {
+        var inTitle = (p.title || '').toLowerCase().indexOf(q) !== -1;
+        var inSummary = (p.summary || '').toLowerCase().indexOf(q) !== -1;
+        var inSubject = (p.subject || '').toLowerCase().indexOf(q) !== -1;
+        var inTags = (p.tags || []).some(function (t) { return t.toLowerCase().indexOf(q) !== -1; });
+        return inTitle || inSummary || inSubject || inTags;
+      });
+      statusEl.textContent = 'Found ' + filtered.length + ' result' + (filtered.length === 1 ? '' : 's') + ' for "' + q + '"';
+      render(filtered);
+    });
+  })();
+  </script>
+</body>
+</html>

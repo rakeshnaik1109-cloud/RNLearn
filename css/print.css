@@ -1,0 +1,67 @@
+/* ==========================================================================
+   RNLearn — Print Stylesheet
+   Monochrome, hides navigation/chrome, prints URLs for links.
+   ========================================================================== */
+
+@media print {
+  *, *::before, *::after {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+
+  /* Hide navigation, header chrome, search, buttons, quiz options, footer links */
+  .site-header,
+  .site-footer,
+  .reading-progress-bar,
+  .skip-link,
+  .nav-bar,
+  .nav-actions,
+  .btn-icon,
+  .article-sidebar,
+  .quiz-widget,
+  .fig-controls,
+  .heading-anchor {
+    display: none !important;
+  }
+
+  .container,
+  .container-narrow,
+  .article-content {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  h1, h2, h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  figure.fig,
+  .table-wrapper {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    border: 1px solid #ccc !important;
+  }
+
+  /* Print anchor hrefs */
+  a[href^="http"]:after {
+    content: " (" attr(href) ")";
+    font-size: 85%;
+    font-family: monospace;
+    word-break: break-all;
+  }
+
+  /* Do not print internal anchors */
+  a[href^="#"]:after {
+    content: "";
+  }
+}
