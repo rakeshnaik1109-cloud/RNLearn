@@ -35,9 +35,9 @@
     var currentStadiaDist = 5000; // 5,000 stadia between Alexandria and Syene
 
     var readouts = FIG.readouts(container, [
-      { id: "circle-fraction", label: "Angular Fraction of Circle", value: "1 / 50.0 of 360°" },
-      { id: "calc-circumference", label: "Calculated Circumference", value: "250,000 stadia (~39,375 km)" },
-      { id: "error-vs-modern", label: "Modern Deviation", value: "-1.7% from true polar circumference (40,008 km)" }
+      { id: "circle-fraction", label: "Fraction of a full circle", value: "1/50 of a circle" },
+      { id: "calc-circumference", label: "Distance round the Earth", value: "250,000 stadia (~39,375 km)" },
+      { id: "error-vs-modern", label: "Compared with today's value", value: "1.6% smaller than today's 40,008 km" }
     ]);
 
     function renderEratosthenes() {
@@ -50,9 +50,9 @@
       var kmResult = totalStadia * 0.1575;
       var errorPct = ((kmResult - 40008) / 40008) * 100;
 
-      readouts.update("circle-fraction", "1 / " + fraction.toFixed(1) + " of 360° (" + theta.toFixed(2) + "°)");
+      readouts.update("circle-fraction", "1/" + fraction.toFixed(1) + " of a circle (" + theta.toFixed(1) + "°)");
       readouts.update("calc-circumference", Math.round(totalStadia).toLocaleString() + " stadia (~" + Math.round(kmResult).toLocaleString() + " km)");
-      readouts.update("error-vs-modern", (errorPct > 0 ? "+" : "") + errorPct.toFixed(1) + "% relative to modern polar value (40,008 km)");
+      readouts.update("error-vs-modern", Math.abs(errorPct).toFixed(1) + "% " + (errorPct < 0 ? "smaller" : "larger") + " than today's 40,008 km");
 
       var w = 680, h = 320;
       var svg = FIG.createSVG(dispWrap, w, h, "Eratosthenes geometric measurement of the Earth");
@@ -77,7 +77,8 @@
       var syeneY = ecY;
 
       // Alexandria (angle = -theta relative to horizontal east)
-      var rad = (theta * Math.PI) / 180;
+      // The real angle (about 7°) is too small to see, so it is drawn three times larger
+      var rad = (Math.min(theta * 3, 60) * Math.PI) / 180;
       var alexX = ecX + Math.cos(rad) * R;
       var alexY = ecY - Math.sin(rad) * R;
 
@@ -129,31 +130,32 @@
 
       // Text Labels
       var tArc = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      tArc.setAttribute('x', ecX + 55); tArc.setAttribute('y', ecY - 10);
+      tArc.setAttribute('x', ecX + 52); tArc.setAttribute('y', ecY - 6);
       tArc.setAttribute('font-size', '12'); tArc.setAttribute('font-weight', '700');
       tArc.setAttribute('fill', "#dc2626");
       tArc.textContent = "θ = " + theta.toFixed(1) + "°";
       svg.appendChild(tArc);
 
       var tSyene = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      tSyene.setAttribute('x', syeneX + 10); tSyene.setAttribute('y', syeneY - 10);
+      tSyene.setAttribute('x', syeneX + 12); tSyene.setAttribute('y', syeneY + 20);
       tSyene.setAttribute('font-size', '11'); tSyene.setAttribute('font-weight', '700');
       tSyene.setAttribute('fill', strokeCol);
-      tSyene.textContent = "Syene (Vertical Noon Well)";
+      tSyene.textContent = "Syene (Sun overhead)";
       svg.appendChild(tSyene);
 
       var tAlex = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      tAlex.setAttribute('x', alexX - 8); tAlex.setAttribute('y', alexY - 30);
+      tAlex.setAttribute('x', gnomonTipX - 8); tAlex.setAttribute('y', gnomonTipY - 14); tAlex.setAttribute('text-anchor', 'end');
       tAlex.setAttribute('font-size', '11'); tAlex.setAttribute('font-weight', '700');
       tAlex.setAttribute('fill', strokeCol);
-      tAlex.textContent = "Alexandria (Gnomon Shadow)";
+      tAlex.textContent = "Alexandria (post casts a shadow)";
       svg.appendChild(tAlex);
 
       var tDist = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      tDist.setAttribute('x', "235"); tDist.setAttribute('y', "140");
+      var midRad = rad / 2;
+      tDist.setAttribute('x', (ecX + Math.cos(midRad) * R + 14).toFixed(1)); tDist.setAttribute('y', (ecY - Math.sin(midRad) * R + 4).toFixed(1));
       tDist.setAttribute('font-size', '10.5'); tDist.setAttribute('font-family', FIG.getCSSVar('--font-mono'));
       tDist.setAttribute('fill', accentCol);
-      tDist.textContent = "Arc s = 5,000 stadia";
+      tDist.textContent = "← 5,000 stadia between the cities";
       svg.appendChild(tDist);
 
       var tFormula = document.createElementNS('http://www.w3.org/2000/svg', 'text');
@@ -161,7 +163,7 @@
       tFormula.setAttribute('text-anchor', 'middle'); tFormula.setAttribute('font-size', '12');
       tFormula.setAttribute('font-family', FIG.getCSSVar('--font-mono'));
       tFormula.setAttribute('fill', strokeCol);
-      tFormula.textContent = "Parallel Solar Rays: θ / 360° = s / C";
+      tFormula.textContent = "Angle ÷ 360° = distance ÷ way round";
       svg.appendChild(tFormula);
 
       var tFormula2 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
@@ -169,13 +171,20 @@
       tFormula2.setAttribute('text-anchor', 'middle'); tFormula2.setAttribute('font-size', '12');
       tFormula2.setAttribute('font-weight', '700');
       tFormula2.setAttribute('fill', accentCol);
-      tFormula2.textContent = "C = 50 × 5,000 = 250,000 stadia";
+      tFormula2.textContent = "Way round = 50 × 5,000 = 250,000 stadia";
       svg.appendChild(tFormula2);
+
+      var tNote = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      tNote.setAttribute('x', ecX); tNote.setAttribute('y', h - 8);
+      tNote.setAttribute('text-anchor', 'middle'); tNote.setAttribute('font-size', '10');
+      tNote.setAttribute('fill', FIG.getCSSVar('--ink-muted', '#6b7080'));
+      tNote.textContent = "(angle drawn three times larger so you can see it)";
+      svg.appendChild(tNote);
     }
 
     FIG.slider(controls, {
       id: "erato-angle",
-      label: "Alexandria Solstice Shadow Zenith Angle (θ degrees):",
+      label: "Shadow angle at Alexandria (degrees):",
       min: 5.0,
       max: 10.0,
       step: 0.1,
@@ -213,9 +222,9 @@
     var rhoWater = 1.00; // g/cm³
 
     var readouts = FIG.readouts(container, [
-      { id: "effective-density", label: "Composite Crown Density", value: "15.12 g/cm³" },
-      { id: "buoyancy-loss", label: "Submerged Weight Deficit", value: "66.1 g apparent loss (vs 51.8 g pure gold)" },
-      { id: "fraud-verdict", label: "Archimedes' Hydrostatic Verdict", value: "FRAUD DETECTED (Balance tips under water)" }
+      { id: "effective-density", label: "Density of the crown", value: "15.12 g/cm³" },
+      { id: "buoyancy-loss", label: "Water pushed aside", value: "66.1 cm³ (pure gold: 51.8 cm³)" },
+      { id: "fraud-verdict", label: "Verdict", value: "Not pure: the balance tips in water" }
     ]);
 
     function renderArchimedes() {
@@ -240,9 +249,9 @@
 
       var isAdulterated = (goldPurityPct < 98);
 
-      readouts.update("effective-density", compositeDensity.toFixed(2) + " g/cm³ (Pure Gold = 19.32 g/cm³)");
-      readouts.update("buoyancy-loss", "Crown displaces " + waterDisplacedCrown.toFixed(1) + " cm³ water (Pure gold: " + waterDisplacedPure.toFixed(1) + " cm³)");
-      readouts.update("fraud-verdict", isAdulterated ? "ADULTERATED CROWN: Tipped balance reveals " + (100 - goldPurityPct) + "% silver alloy" : "PURE GOLD: Balance remains in perfect equilibrium under water");
+      readouts.update("effective-density", compositeDensity.toFixed(2) + " g/cm³ (pure gold: 19.32 g/cm³)");
+      readouts.update("buoyancy-loss", "Crown pushes aside " + waterDisplacedCrown.toFixed(1) + " cm³ of water (pure gold: " + waterDisplacedPure.toFixed(1) + " cm³)");
+      readouts.update("fraud-verdict", isAdulterated ? "Not pure: the balance tips, showing " + (100 - goldPurityPct) + "% silver" : "Pure gold: the balance stays level in water");
 
       var w = 680, h = 320;
       var svg = FIG.createSVG(dispWrap, w, h, "Archimedes hydrostatic balance crown alloy test");
@@ -321,20 +330,20 @@
       lblL.setAttribute('x', "200"); lblL.setAttribute('y', "290");
       lblL.setAttribute('text-anchor', 'middle'); lblL.setAttribute('font-size', '12'); lblL.setAttribute('font-weight', '700');
       lblL.setAttribute('fill', strokeCol);
-      lblL.textContent = "Suspect Crown (" + goldPurityPct + "% Au)";
+      lblL.textContent = "Crown (" + goldPurityPct + "% gold)";
       svg.appendChild(lblL);
 
       var lblR = document.createElementNS('http://www.w3.org/2000/svg', 'text');
       lblR.setAttribute('x', "480"); lblR.setAttribute('y', "290");
       lblR.setAttribute('text-anchor', 'middle'); lblR.setAttribute('font-size', '12'); lblR.setAttribute('font-weight', '700');
       lblR.setAttribute('fill', strokeCol);
-      lblR.textContent = "Pure Gold Standard (100% Au)";
+      lblR.textContent = "Pure gold (100%)";
       svg.appendChild(lblR);
     }
 
     FIG.slider(controls, {
       id: "crown-gold-pct",
-      label: "Gold Content in Crown (% by mass):",
+      label: "Gold in the crown (% by weight):",
       min: 40,
       max: 100,
       step: 1,
@@ -367,9 +376,9 @@
     var agitationSpeed = 2;
 
     var readouts = FIG.readouts(container, [
-      { id: "atom-model-title", label: "Ontological Framework", value: "Democritean Mechanical Atomism (Atoma in Void)" },
-      { id: "binding-mechanism", label: "Binding Principle", value: "Mechanical hooks, interlocking geometries, and void collisions" },
-      { id: "epistemic-status", label: "Epistemic Status", value: "Secondary qualities (color, taste) are subjective observer constructs" }
+      { id: "atom-model-title", label: "Theory", value: "Democritus: atoms in empty space" },
+      { id: "binding-mechanism", label: "How atoms join", value: "Hooks and shapes that catch on each other as they collide" },
+      { id: "epistemic-status", label: "Colour and taste", value: "In us, not in the atoms" }
     ]);
 
     var canvasObj = FIG.createCanvas(canvasWrap, 680, 280);
@@ -392,9 +401,9 @@
       ctx.clearRect(0, 0, 680, 280);
 
       var isGreek = (currentTradition === 'greek');
-      readouts.update("atom-model-title", isGreek ? "Democritean Atomism (Abdera, c. 420 BCE)" : "Kaṇāda's Vaiśeṣika Atomism (India, c. 6th–2nd century BCE)");
-      readouts.update("binding-mechanism", isGreek ? "Mechanical collision in void (hook-and-eye geometries, barbed shapes)" : "Invisible moral/cosmic force (Adṛṣṭa) combining paramāṇu into dyads and triads");
-      readouts.update("epistemic-status", isGreek ? "'By convention color, by convention sweet; in reality atoms and void'" : "Qualities (Guṇa) are real inherences in atoms of Earth, Water, Fire, and Air");
+      readouts.update("atom-model-title", isGreek ? "Democritus (Abdera, Greece, c. 420 BCE)" : "Kaṇāda's Vaiśeṣika school (India, date uncertain)");
+      readouts.update("binding-mechanism", isGreek ? "They collide in empty space and catch on each other's hooks and barbs" : "An unseen force (adṛṣṭa) joins atoms into pairs, then threes");
+      readouts.update("epistemic-status", isGreek ? "'By convention colour, by convention sweet; in reality atoms and void'" : "Real qualities of the atoms themselves (smell, taste, colour, touch)");
 
       // Draw particles
       particles.forEach(function (p) {
@@ -430,10 +439,10 @@
 
     FIG.select(controls, {
       id: "atomism-model-select",
-      label: "Select Atomic Tradition to Contrast:",
+      label: "Which theory of atoms?",
       options: [
-        { value: "greek", label: "Greek Atomism (Leucippus & Democritus: Geometric Hooks & Void)" },
-        { value: "indian", label: "Indian Atomism (Kaṇāda's Vaiśeṣika Sūtra: Elemental Paramāṇu Dyads)" }
+        { value: "greek", label: "Greek: Leucippus and Democritus (shapes, hooks, empty space)" },
+        { value: "indian", label: "Indian: Kaṇāda (four kinds of atom joining in pairs)" }
       ],
       value: "greek",
       onChange: function (val) {
@@ -443,7 +452,7 @@
 
     FIG.slider(controls, {
       id: "atom-speed",
-      label: "Thermal Agitation / Particle Velocity:",
+      label: "How fast the atoms move:",
       min: 0.5,
       max: 5.0,
       step: 0.5,
@@ -474,9 +483,9 @@
     var displacedElement = "none";
 
     var readouts = FIG.readouts(container, [
-      { id: "cosmos-domain", label: "Cosmological Domain", value: "Sublunary Sphere (Mutable, 4 elements)" },
-      { id: "motion-tendency", label: "Natural Motion Law", value: "In equilibrium: Elements rest in concentric spheres by density" },
-      { id: "gravitas-levitas", label: "Intrinsic Quality", value: "Earth/Water possess gravitas; Air/Fire possess levitas" }
+      { id: "cosmos-domain", label: "Region", value: "Below the Moon (the four elements; things change)" },
+      { id: "motion-tendency", label: "What happens", value: "At rest: each element is in its own layer" },
+      { id: "gravitas-levitas", label: "Heavy or light", value: "Earth and water are heavy; air and fire are light" }
     ]);
 
     function renderCosmos() {
@@ -518,8 +527,8 @@
 
       // Trajectory arrow if an element is displaced
       if (displacedElement === "stone_in_air") {
-        readouts.update("motion-tendency", "NATURAL MOTION (Gravitas): Heavy Earth stone released in Air falls straight down toward cosmic center");
-        readouts.update("gravitas-levitas", "Intrinsic Gravitas (Gravity): Seeking natural resting place at the center of the universe");
+        readouts.update("motion-tendency", "Natural motion: a stone let go in the air falls straight down towards the centre");
+        readouts.update("gravitas-levitas", "Heavy: it heads for its natural place at the centre of the universe");
 
         var arrowDown = document.createElementNS('http://www.w3.org/2000/svg', 'line');
         arrowDown.setAttribute('x1', cx + 45); arrowDown.setAttribute('y1', cy - 80);
@@ -532,8 +541,8 @@
         rock.setAttribute('fill', "#854d0e");
         svg.appendChild(rock);
       } else if (displacedElement === "fire_under_earth") {
-        readouts.update("motion-tendency", "NATURAL MOTION (Levitas): Light Fire spark trapped below ascends vertically toward celestial periphery");
-        readouts.update("gravitas-levitas", "Intrinsic Levitas (Levity): Tendency to rise away from center toward lunar sphere");
+        readouts.update("motion-tendency", "Natural motion: a spark of fire below rises straight up");
+        readouts.update("gravitas-levitas", "Light: it heads up, away from the centre, towards the Moon");
 
         var arrowUp = document.createElementNS('http://www.w3.org/2000/svg', 'line');
         arrowUp.setAttribute('x1', cx - 45); arrowUp.setAttribute('y1', cy + 20);
@@ -546,8 +555,8 @@
         flame.setAttribute('fill', "#dc2626");
         svg.appendChild(flame);
       } else {
-        readouts.update("motion-tendency", "In equilibrium: Elements rest in concentric spheres by intrinsic density");
-        readouts.update("gravitas-levitas", "Sublunary realm: Linear rectilinear motion | Superlunary realm: Eternal circular motion of Aether");
+        readouts.update("motion-tendency", "At rest: each element is in its own layer");
+        readouts.update("gravitas-levitas", "Below the Moon: straight up or down. Above: endless circles of aether");
       }
 
       // Sphere labels
@@ -555,14 +564,14 @@
       tFire.setAttribute('x', cx + 115); tFire.setAttribute('y', cy - 85);
       tFire.setAttribute('font-size', '11'); tFire.setAttribute('font-weight', '700');
       tFire.setAttribute('fill', "#dc2626");
-      tFire.textContent = "Fire (Warm & Dry)";
+      tFire.textContent = "Fire (hot and dry)";
       svg.appendChild(tFire);
 
       var tAir = document.createElementNS('http://www.w3.org/2000/svg', 'text');
       tAir.setAttribute('x', cx + 80); tAir.setAttribute('y', cy - 55);
       tAir.setAttribute('font-size', '11'); tAir.setAttribute('font-weight', '700');
       tAir.setAttribute('fill', "#0e7490");
-      tAir.textContent = "Air (Warm & Moist)";
+      tAir.textContent = "Air (hot and wet)";
       svg.appendChild(tAir);
 
       var tEarth = document.createElementNS('http://www.w3.org/2000/svg', 'text');
@@ -577,17 +586,17 @@
       tSuper.setAttribute('text-anchor', 'middle'); tSuper.setAttribute('font-size', '11');
       tSuper.setAttribute('font-family', FIG.getCSSVar('--font-mono'));
       tSuper.setAttribute('fill', FIG.getCSSVar('--accent'));
-      tSuper.textContent = "Boundary to Superlunary Realm (Incorruptible Quintessence / Aether)";
+      tSuper.textContent = "Edge of the heavens (made of unchanging aether)";
       svg.appendChild(tSuper);
     }
 
     FIG.select(controls, {
       id: "aristotle-displacement",
-      label: "Displace an Element to Observe Natural Motion Law:",
+      label: "Move an element out of place:",
       options: [
-        { value: "none", label: "Cosmic Equilibrium (Rest in natural concentric spheres)" },
-        { value: "stone_in_air", label: "Displace Earth Stone into Air (Natural fall via Gravitas)" },
-        { value: "fire_under_earth", label: "Displace Fire Spark near Earth (Natural rise via Levitas)" }
+        { value: "none", label: "Everything in its place" },
+        { value: "stone_in_air", label: "Lift a stone into the air (it falls)" },
+        { value: "fire_under_earth", label: "Put a spark of fire low down (it rises)" }
       ],
       value: "none",
       onChange: function (val) {
@@ -617,9 +626,9 @@
     var screenDist = 180;
 
     var readouts = FIG.readouts(container, [
-      { id: "image-orientation", label: "Screen Image Orientation", value: "INVERTED (Upside Down)" },
-      { id: "intersection-point", label: "Optical Principle in Mozi", value: "Light travels in straight lines; rays intersect at the pinhole aperture" },
-      { id: "magnification-ratio", label: "Geometric Image Magnification", value: "0.90× object height (72 mm)" }
+      { id: "image-orientation", label: "Picture on the screen", value: "Upside down" },
+      { id: "intersection-point", label: "Why", value: "Light travels in straight lines and the rays cross at the hole" },
+      { id: "magnification-ratio", label: "Size of the picture", value: "0.90 × the object (72 px)" }
     ]);
 
     function renderPinhole() {
@@ -632,9 +641,9 @@
       var objDist = pinholeX - objX; // 200 px
       var imgHeight = objectHeight * (screenDist / objDist);
 
-      readouts.update("image-orientation", "INVERTED: Top of object forms bottom of screen image");
-      readouts.update("intersection-point", "Canon 4: 'The place of illumination... rays cross at the aperture like a compass point'");
-      readouts.update("magnification-ratio", (screenDist / objDist).toFixed(2) + "× (" + Math.round(imgHeight) + " px high)");
+      readouts.update("image-orientation", "Upside down: the top of the person lands at the bottom of the screen");
+      readouts.update("intersection-point", "Light travels in straight lines, so rays from the top and bottom cross at the hole");
+      readouts.update("magnification-ratio", (screenDist / objDist).toFixed(2) + "× the object (" + Math.round(imgHeight) + " px high)");
 
       var w = 680, h = 320;
       var svg = FIG.createSVG(dispWrap, w, h, "Mohist camera obscura pinhole optical ray tracing");
@@ -715,27 +724,27 @@
       lblO.setAttribute('x', objX); lblO.setAttribute('y', objTopY - 15);
       lblO.setAttribute('text-anchor', 'middle'); lblO.setAttribute('font-size', '11'); lblO.setAttribute('font-weight', '700');
       lblO.setAttribute('fill', strokeCol);
-      lblO.textContent = "Illuminated Object";
+      lblO.textContent = "Lit person";
       svg.appendChild(lblO);
 
       var lblP = document.createElementNS('http://www.w3.org/2000/svg', 'text');
       lblP.setAttribute('x', pinholeX); lblP.setAttribute('y', "20");
       lblP.setAttribute('text-anchor', 'middle'); lblP.setAttribute('font-size', '11'); lblP.setAttribute('font-weight', '700');
       lblP.setAttribute('fill', strokeCol);
-      lblP.textContent = "Pinhole Aperture (Mozi, c. 380 BCE)";
+      lblP.textContent = "Pinhole";
       svg.appendChild(lblP);
 
       var lblI = document.createElementNS('http://www.w3.org/2000/svg', 'text');
       lblI.setAttribute('x', screenX); lblI.setAttribute('y', "280");
       lblI.setAttribute('text-anchor', 'middle'); lblI.setAttribute('font-size', '11'); lblI.setAttribute('font-weight', '700');
       lblI.setAttribute('fill', "#dc2626");
-      lblI.textContent = "Inverted Screen Image";
+      lblI.textContent = "Upside-down picture";
       svg.appendChild(lblI);
     }
 
     FIG.slider(controls, {
       id: "pinhole-obj-height",
-      label: "Object Height (pixels):",
+      label: "Size of the person:",
       min: 40,
       max: 120,
       step: 5,
@@ -749,7 +758,7 @@
 
     FIG.slider(controls, {
       id: "pinhole-screen-dist",
-      label: "Distance from Pinhole to Viewing Screen (mm):",
+      label: "Distance from pinhole to screen:",
       min: 100,
       max: 250,
       step: 10,
@@ -781,9 +790,9 @@
     var shadowProgress = 40; // Percent of Moon covered by Earth shadow
 
     var readouts = FIG.readouts(container, [
-      { id: "shadow-curvature", label: "Shadow Boundary Geometry", value: "Strict Circular Arc" },
-      { id: "aristotle-proof", label: "De Caelo Book II Proof", value: "Only a solid sphere casts an invariant circular shadow at all eclipse angles" },
-      { id: "flat-earth-refutation", label: "Refutation of Flat Disc", value: "A flat cylinder/disc would cast an elliptical or flat-line shadow at oblique angles" }
+      { id: "shadow-curvature", label: "Shape of the shadow's edge", value: "Part of a circle" },
+      { id: "aristotle-proof", label: "Aristotle's point", value: "Only a ball casts a round shadow from every direction" },
+      { id: "flat-earth-refutation", label: "Why not a flat disc?", value: "Seen edge-on, a disc would cast an oval or straight shadow" }
     ]);
 
     function renderEclipse() {
@@ -845,20 +854,20 @@
       tTitle.setAttribute('x', "340"); tTitle.setAttribute('y', "55");
       tTitle.setAttribute('text-anchor', 'middle'); tTitle.setAttribute('font-size', '12'); tTitle.setAttribute('font-weight', '700');
       tTitle.setAttribute('fill', "#ffffff");
-      tTitle.textContent = "Aristotle's Empirical Observation (De Caelo, Book II, 297b)";
+      tTitle.textContent = "Aristotle's observation (On the Heavens, Book II)";
       svg.appendChild(tTitle);
 
       var tCurve = document.createElementNS('http://www.w3.org/2000/svg', 'text');
       tCurve.setAttribute('x', shadowCx + shadowR - 35); tCurve.setAttribute('y', moonCy);
       tCurve.setAttribute('text-anchor', 'middle'); tCurve.setAttribute('font-size', '11'); tCurve.setAttribute('font-weight', '700');
       tCurve.setAttribute('fill', "#ffffff");
-      tCurve.textContent = "Curved Circular Umbra Margin";
+      tCurve.textContent = "Curved edge of the Earth's shadow";
       svg.appendChild(tCurve);
     }
 
     FIG.slider(controls, {
       id: "eclipse-progress",
-      label: "Advance Lunar Eclipse (Progress across Moon disc):",
+      label: "Move the shadow across the Moon:",
       min: 5,
       max: 95,
       step: 1,
@@ -890,18 +899,18 @@
     var currentScenario = 'valid'; // 'valid' or 'fallacious'
 
     var readouts = FIG.readouts(container, [
-      { id: "syllogism-status", label: "Inference Status (Anumāna)", value: "VALID DEDUCTIVE INFERENCE (Vyāpti Confirmed)" },
-      { id: "universal-relation", label: "Invariable Concomitance (Vyāpti)", value: "Smoke is strictly pervaded by fire: Wherever smoke exists, fire is present" },
-      { id: "pramana-criterion", label: "Pramāṇa Epistemic Test", value: "Passes all 5 criteria of Akṣapāda Gautama's Nyāya Sūtra" }
+      { id: "syllogism-status", label: "Is the argument sound?", value: "Yes: the link always holds" },
+      { id: "universal-relation", label: "The link (vyāpti)", value: "Wherever there is smoke, there is fire" },
+      { id: "pramana-criterion", label: "Five-step check", value: "All five steps hold" }
     ]);
 
     function renderSyllogism() {
       dispWrap.innerHTML = '';
 
       var isValid = (currentScenario === 'valid');
-      readouts.update("syllogism-status", isValid ? "VALID INFERENCE (Pramāṇa): Free from Hetvābhāsa (Fallacy)" : "FALLACIOUS INFERENCE (Hetvābhāsa): Unsound vyāpti link");
-      readouts.update("universal-relation", isValid ? "Universal Invariable Concomitance: Smoke → Fire (As in a kitchen hearth)" : "Asiddha Fallacy: Claiming fire entails smoke ignores red-hot smokeless iron");
-      readouts.update("pramana-criterion", isValid ? "5-Step Syllogism passes: Pratijñā, Hetu, Udāharaṇa, Upanaya, Nigamana" : "Fails Vyāpti test: The middle term (Hetu) is too narrow or unproven");
+      readouts.update("syllogism-status", isValid ? "Sound: no false reason" : "Faulty: the link can fail (a false reason, hetvābhāsa)");
+      readouts.update("universal-relation", isValid ? "Smoke always goes with fire, as in a kitchen hearth" : "Fire does not always go with smoke: red-hot iron gives off none");
+      readouts.update("pramana-criterion", isValid ? "Claim, reason, rule with example, application, conclusion: all hold" : "Fails at the rule: the reason does not always go with the conclusion");
 
       var steps = isValid ? [
         { num: "1. Pratijñā (Proposition)", text: "The distant mountain possesses fire." },
@@ -953,10 +962,10 @@
 
     FIG.select(controls, {
       id: "nyaya-scenario-select",
-      label: "Select Logical Case to Evaluate in the Nyāya Framework:",
+      label: "Pick an argument to check:",
       options: [
-        { value: "valid", label: "Valid Anumāna: Smoke on Hill → Fire (True Invariable Concomitance)" },
-        { value: "fallacious", label: "Fallacious Case: Fire on Iron → Smoke (Hetvābhāsa: Overextension Fallacy)" }
+        { value: "valid", label: "Sound: smoke on the hill, so fire" },
+        { value: "fallacious", label: "Faulty: red-hot iron, so smoke" }
       ],
       value: "valid",
       onChange: function (val) {
@@ -977,114 +986,114 @@
 
     var questions = [
       {
-        question: "What distinguished Thales of Miletus and the early Ionian Presocratics from preceding mythic poets (such as Hesiod and Homer)?",
+        question: "What was new about Thales and the other early thinkers of Miletus, compared with the poets who told stories of the gods?",
         options: [
-          "They sought to explain physical phenomena (earthquakes, weather, eclipses) using primary natural material principles (arche) without invoking divine wills.",
-          "They invented the telescope and discovered the rings of Saturn.",
-          "They proved mathematically that the Earth orbits the Sun.",
-          "They completely rejected geometry in favor of mystical poetry."
+          "They explained things like earthquakes and weather by natural causes, without bringing in the gods.",
+          "They invented the telescope.",
+          "They proved that the Earth goes round the Sun.",
+          "They gave up geometry for poetry."
         ],
         answer: 0,
-        explanation: "The Ionian revolution consisted of seeking natural, material causes (water, air, boundless matter) rather than treating events as the arbitrary whims of Zeus, Poseidon, or Apollo."
+        explanation: "Instead of blaming Poseidon or Zeus, they looked for natural causes: water, air or 'the boundless'. Their answers were wrong, but the kind of question was new."
       },
       {
-        question: "According to Eratosthenes' geometric calculation (c. 240 BCE), why was the Sun directly vertical at Syene on the summer solstice while casting a 7.2° shadow at Alexandria?",
+        question: "Why was the Sun straight overhead at Syene at midsummer noon, while at Alexandria it was 7.2° away from overhead?",
         options: [
-          "Because the Sun is only a few miles above the flat Earth.",
-          "Because Alexandria had taller gnomons that bent sunlight.",
-          "Because of atmospheric refraction bending light over the Mediterranean.",
-          "Because the Earth is a curved sphere, so parallel incoming solar rays strike different latitudes at different angles relative to the local vertical."
+          "Because the Sun is only a few kilometres above a flat Earth.",
+          "Because Alexandria's posts were taller.",
+          "Because the air over the sea bends sunlight.",
+          "Because the Earth is round, so the Sun's parallel rays meet the ground at different angles in different places."
         ],
         answer: 3,
-        explanation: "Because the Earth's surface is curved, nearly parallel rays from the distant Sun illuminate Syene's vertical well directly while striking Alexandria's plumb line at a 7.2° angle (1/50 of a circle)."
+        explanation: "The Sun's rays arrive almost parallel. On a curved Earth they come straight down in one place and at a slant further north. The 7.2° difference is one-fiftieth of a circle."
       },
       {
-        question: "Which method for testing King Hiero's crown is physically workable and consistent with Archimedes' 'On Floating Bodies' (as Galileo proposed)?",
+        question: "Which way of testing King Hiero's crown actually works and fits Archimedes' book On Floating Bodies (as Galileo suggested)?",
         options: [
-          "By running through Syracuse shouting 'Eureka' after splashing in a bath.",
-          "By melting down the crown to separate the gold from silver chemically.",
-          "By measuring the crown's electrical conductivity with copper wires.",
-          "By using a sensitive hydrostatic balance to compare the buoyant force (apparent mass loss) of the crown in water against an equal mass of pure gold."
+          "Splashing in a bath and running through the streets.",
+          "Melting the crown down.",
+          "Testing it with electric wires.",
+          "Comparing the crown with an equal weight of pure gold on a balance hung in water."
         ],
         answer: 3,
-        explanation: "Measuring a bucket's overflow is too crude for the tiny volume difference. Galileo proposed a hydrostatic balance instead — we do not actually know what Archimedes did: silver has lower density than gold, displacing more water and generating greater buoyant upthrust."
+        explanation: "The overflow from a bucket is too small to measure well. On a balance in water, a crown with silver in it is bigger, gets pushed up harder, and the balance tips. We don't actually know what Archimedes did."
       },
       {
-        question: "In the atomic theory of Democritus and Leucippus (c. 420 BCE), what physically exists in the universe?",
+        question: "According to Democritus and Leucippus, what really exists?",
         options: [
-          "Indivisible, uncuttable particles (atoma) of various geometric shapes moving through an infinite void (vacuum).",
-          "Only continuous fluid ether animated by divine spirit.",
-          "Four eternal elements held together by Love and Strife.",
-          "Only consciousness, while matter is a sensory illusion."
+          "Tiny uncuttable pieces (atoms) of different shapes, moving through empty space.",
+          "Only a continuous fluid filled with spirit.",
+          "Four elements held together by Love and Strife.",
+          "Only minds; matter is an illusion."
         ],
         answer: 0,
-        explanation: "Democritus famously declared: 'By convention sweet, by convention bitter, by convention color, but in reality atoms and void.'"
+        explanation: "As Democritus put it: 'By convention sweet, by convention bitter, by convention colour; but in reality atoms and the void.'"
       },
       {
-        question: "How did the ancient Indian atomic doctrine of the Vaiśeṣika school (founded by sage Kaṇāda) conceive of atoms (paramāṇu)?",
+        question: "How did the Indian Vaiśeṣika school (traced to Kaṇāda) picture atoms?",
         options: [
-          "As identical billiard balls without elemental differentiation.",
-          "As pure mathematical points lacking physical reality.",
-          "As eternal, indestructible particles of four physical substances (Earth, Water, Fire, Air) combining into dyads (dvyaṇuka) and triads through invisible forces (adṛṣṭa).",
-          "As fleeting packets of light that disappear every microsecond."
+          "All the same, like identical marbles.",
+          "As mathematical points with no real existence.",
+          "As everlasting particles of four kinds (earth, water, fire, air) that join in pairs and then groups of three, moved by an unseen force (adṛṣṭa).",
+          "As flashes of light that vanish instantly."
         ],
         answer: 2,
-        explanation: "The Vaiśeṣika Sūtra derived an atomic model where eternal paramāṇu of the four physical elements aggregate into compound dyads and triads to construct the macroscopic world."
+        explanation: "Two atoms make a pair; three pairs make a triad, the smallest thing big enough to see, like a dust speck in a sunbeam."
       },
       {
-        question: "What optical discovery was recorded in the Mohist Canon (Mozi) in Warring States China (c. 4th century BCE)?",
+        question: "What did the Mohist Canon, from Warring States China, describe about light?",
         options: [
-          "The invention of the compound glass microscope.",
-          "The discovery of the wave nature of light using diffraction slits.",
-          "The measurement of the finite speed of light using rotating mirrors.",
-          "The camera obscura: proving that light travels in straight lines and that rays intersecting through a pinhole form an inverted image on a screen."
+          "A microscope made of glass lenses.",
+          "That light is a wave.",
+          "The speed of light.",
+          "The pinhole image: light travels in straight lines, so rays crossing at a small hole make an upside-down picture."
         ],
         answer: 3,
-        explanation: "The Mohist Canon contains one of the earliest known descriptions of the pinhole camera obscura, explaining image inversion through the rectilinear crossing of light rays."
+        explanation: "It is the oldest surviving description of a pinhole image (camera obscura), explained by light rays crossing at the hole."
       },
       {
-        question: "What empirical evidence did Aristotle cite in 'De Caelo' to prove that the Earth is a sphere, not a flat disc?",
+        question: "What evidence did Aristotle give that the Earth is a ball, not a flat disc?",
         options: [
-          "Photographs taken from high mountain peaks.",
-          "The shadow of the Earth cast upon the Moon during all lunar eclipses is invariably curved and circular, and traveling south reveals new southern constellations.",
-          "The myth of Atlas holding the celestial globe.",
-          "Ships falling off the western horizon into the void."
+          "Pictures taken from mountain tops.",
+          "The Earth's shadow on the Moon in an eclipse is always curved, and travelling south brings new stars into view.",
+          "The story of Atlas holding up the sky.",
+          "Ships falling off the edge of the world."
         ],
         answer: 1,
-        explanation: "Aristotle provided two decisive empirical proofs: only a physical sphere always casts a circular shadow at all eclipse orientations, and moving southward causes southern stars to rise higher above the horizon."
+        explanation: "Only a ball casts a round shadow from every direction, and the stars you can see change quickly as you travel north or south."
       },
       {
-        question: "In Aristotle's physics, what is the difference between 'natural motion' and 'violent (forced) motion'?",
+        question: "In Aristotle's physics, what is the difference between 'natural' and 'forced' motion?",
         options: [
-          "Natural motion is the intrinsic tendency of an element to seek its natural resting place (Earth falls to center, Fire rises); violent motion is imposed by continuous contact with an external force.",
-          "Natural motion occurs in water; violent motion occurs in air.",
-          "Natural motion is circular; violent motion is straight.",
-          "Natural motion requires gravity; violent motion requires electromagnetism."
+          "Natural motion is an element heading for its proper place (stones fall, fire rises); forced motion needs something pushing it all the time.",
+          "Natural motion happens in water; forced motion in air.",
+          "Natural motion is in circles; forced motion is in straight lines.",
+          "Natural motion needs gravity; forced motion needs electricity."
         ],
         answer: 0,
-        explanation: "Aristotle argued that heavy elements (gravitas) naturally seek the cosmic center, while light elements (levitas) naturally rise; any other motion requires continuous external mechanical pushing."
+        explanation: "Heavy things head down towards the centre and light things rise, by nature. Any other motion, such as a thrown spear, needed a continuing push."
       },
       {
-        question: "In the classical Indian Nyāya epistemology, what is 'vyāpti'?",
+        question: "In Nyāya logic, what is 'vyāpti'?",
         options: [
-          "The spiritual liberation of the soul from reincarnation.",
-          "A ceremonial sacrifice performed before public debates.",
-          "The invariant, universal concomitance between the evidence (hetu) and the inferred property (sādhya), such as 'wherever there is smoke, there is fire'.",
-          "The classification of plants into medicinal families."
+          "Freeing the soul from rebirth.",
+          "A ritual before a debate.",
+          "A link that never fails between the evidence and the conclusion, such as 'wherever there is smoke, there is fire'.",
+          "A way of grouping medicinal plants."
         ],
         answer: 2,
-        explanation: "Vyāpti is the foundational relation of universal concomitance that validates an inference: without a verified vyāpti connection, deduction degenerates into fallacy (hetvābhāsa)."
+        explanation: "An inference is only as good as this link. If the link can fail (fire without smoke, as in red-hot iron), the argument is faulty."
       },
       {
-        question: "Why did modern 17th-century science eventually reject Aristotle's 'Final Cause' (teleology) while retaining Efficient and Material causes?",
+        question: "Why did 17th-century science drop Aristotle's 'what is it for?' cause in physics?",
         options: [
-          "Because Aristotle never wrote about final causes.",
-          "Because teleology was declared illegal by royal decree.",
-          "Because inanimate objects (falling stones, orbiting planets) do not possess internal desires, intentions, or future goals; physical laws act through blind mechanical forces.",
-          "Because final causes can only be measured with mercurial thermometers."
+          "Because Aristotle never wrote about it.",
+          "Because a king banned it.",
+          "Because stones and planets don't have wishes or goals; they move because of forces acting on them.",
+          "Because it could only be measured with thermometers."
         ],
         answer: 2,
-        explanation: "Mechanistic physics demonstrated that matter moves because of immediate physical forces (efficient causes) acting on physical masses, not because rocks 'desire' to reach the ground."
+        explanation: "Physics explains motion by forces acting on matter, not by what an object 'wants'. In biology, talk of what a part is 'for' survives, now explained by evolution."
       }
     ];
 
