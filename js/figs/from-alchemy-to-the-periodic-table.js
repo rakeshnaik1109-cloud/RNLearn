@@ -16,8 +16,8 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label for="fig-alembic-heat">Furnace Heat Level: ' +
-            '<span id="fig-alembic-heat-val" class="fig-readout">Moderate Heat (78°C - Alcohol boils)</span>' +
+          '<label for="fig-alembic-heat">How hot the furnace is: ' +
+            '<span id="fig-alembic-heat-val" class="fig-readout">Medium (78 °C: alcohol boils)</span>' +
           '</label>' +
           '<input type="range" id="fig-alembic-heat" min="1" max="3" step="1" value="2">' +
         '</div>' +
@@ -149,8 +149,8 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label>Select Competing Theory of Combustion: ' +
-            '<span id="fig-phlog-mode-val" class="fig-readout">Phlogiston Theory (Stahl, c. 1700)</span>' +
+          '<label>Which theory of burning? ' +
+            '<span id="fig-phlog-mode-val" class="fig-readout">Phlogiston (Stahl, about 1700)</span>' +
           '</label>' +
         '</div>' +
         '<div class="fig-control-group">' +
@@ -285,8 +285,8 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label for="fig-mercury-day">Heating Duration: ' +
-            '<span id="fig-mercury-day-val" class="fig-readout">Day 0 (Initial Setup)</span>' +
+          '<label for="fig-mercury-day">Days of heating: ' +
+            '<span id="fig-mercury-day-val" class="fig-readout">Day 0 (start)</span>' +
           '</label>' +
           '<input type="range" id="fig-mercury-day" min="0" max="12" step="1" value="0">' +
         '</div>' +
@@ -391,8 +391,8 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label>Select Compound Pair to Compare: ' +
-            '<span id="fig-dalton-pair-val" class="fig-readout">Carbon Oxides (CO vs CO₂)</span>' +
+          '<label>Pick a pair of compounds: ' +
+            '<span id="fig-dalton-pair-val" class="fig-readout">Carbon monoxide and carbon dioxide</span>' +
           '</label>' +
         '</div>' +
         '<div class="fig-control-group">' +
@@ -543,8 +543,8 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label>Reaction Progress: ' +
-            '<span id="fig-avo-state-val" class="fig-readout">Reactants (2 Vol H₂ + 1 Vol O₂)</span>' +
+          '<label>Stage of the reaction: ' +
+            '<span id="fig-avo-state-val" class="fig-readout">Start: 2 volumes H₂ + 1 volume O₂</span>' +
           '</label>' +
         '</div>' +
         '<div class="fig-control-group">' +
@@ -690,8 +690,8 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label>Voltaic Battery Circuit: ' +
-            '<span id="fig-davy-status-val" class="fig-readout">Circuit Open (No Current)</span>' +
+          '<label>Battery: ' +
+            '<span id="fig-davy-status-val" class="fig-readout">Switched off (no current)</span>' +
           '</label>' +
         '</div>' +
         '<div class="fig-control-group">' +
@@ -808,8 +808,8 @@
     container.innerHTML =
       '<div class="fig-controls">' +
         '<div class="fig-control-group">' +
-          '<label>Select Mystery Element in 1869 Table: ' +
-            '<span id="fig-mende-elem-val" class="fig-readout">Gap at Atomic Weight ~68 (Eka-Aluminium)</span>' +
+          '<label>Pick a gap in the 1869 table: ' +
+            '<span id="fig-mende-elem-val" class="fig-readout">Gap at weight about 68 (eka-aluminium)</span>' +
           '</label>' +
         '</div>' +
         '<div class="fig-control-group">' +
@@ -935,114 +935,114 @@
   FIG['fig-quiz-part7'] = function (container) {
     var questions = [
       {
-        question: "How did Robert Boyle define a chemical element in 'The Sceptical Chymist' (1661)?",
+        question: "What did Robert Boyle say about elements in The Sceptical Chymist (1661)?",
         options: [
-          "As perfectly unmingled bodies, not made of any other bodies, of which compound bodies are composed (while doubting any known substance qualified)",
-          "As one of four primordial qualities: earth, water, air, or fire",
-          "As any substance that glows under phosphorus",
-          "As a substance possessing negative weight"
+          "A true element would be a simple, unmixed substance that everything else is made from, and claims about which substances are elements must be tested in the laboratory.",
+          "There are exactly four elements: earth, water, air and fire.",
+          "Elements are made of sulfur, mercury and salt.",
+          "Elements can only be found by thinking, not by experiment."
         ],
         answer: 0,
-        explanation: "Boyle rejected both Aristotle's four elements and Paracelsus's three principles (tria prima), describing an element as a simple, unmingled body that is not made of other bodies — while doubting that any known substance qualified. Lavoisier later turned this into a working laboratory definition."
+        explanation: "Boyle attacked both the four elements and Paracelsus's three principles, and insisted on laboratory tests. This led to Lavoisier's working definition: a substance nobody has yet broken down."
       },
       {
-        question: "What major observational anomaly plagued the phlogiston theory of combustion throughout the 18th century?",
+        question: "What was the big problem with the phlogiston theory of burning?",
         options: [
-          "Combustion could occur underwater without oxygen",
-          "When metals were roasted into a calx (oxide), the remaining ash was heavier than the original metal, contradicting the idea that phlogiston had escaped",
-          "Flames were found to have negative temperature",
-          "Diamonds resisted burning entirely"
+          "Phlogiston was too easy to see.",
+          "Metals got heavier when they were burned to a calx, even though they were supposed to be losing phlogiston.",
+          "Wood didn't burn at all.",
+          "Nobody could make a fire."
         ],
         answer: 1,
-        explanation: "If combustion was the escape of a material essence (phlogiston), metals should have lost weight upon calcination. Instead, metals like lead and tin gained weight, forcing defenders to propose unscientific ad-hoc theories like 'negative weight'."
+        explanation: "If burning means losing something, the remains should be lighter. Burned metals were heavier, because (as Lavoisier showed) they had combined with oxygen from the air."
       },
       {
-        question: "What fundamental chemical principle was established by Antoine Lavoisier's sealed-vessel experiments?",
+        question: "What basic rule did Lavoisier establish with his closed-container experiments?",
         options: [
-          "The Law of Octaves",
-          "The Conservation of Mass: in every chemical reaction, the total mass of the products equals the total mass of the reactants",
-          "The Uncertainty Principle",
-          "Electrochemical Dualism"
+          "Air is a single element.",
+          "Conservation of mass: in a chemical change, the total weight before equals the total weight after.",
+          "Heat is a substance called phlogiston.",
+          "Metals are made of sulfur and mercury."
         ],
         answer: 1,
-        explanation: "By conducting reactions in hermetically sealed vessels on precision balances, Lavoisier proved that the gain in the metal calx's mass equaled the exact mass of air absorbed from the flask, establishing the universal conservation of mass."
+        explanation: "By weighing everything, including the gases, in sealed containers, Lavoisier showed that nothing is created or destroyed in a reaction; things only rearrange."
       },
       {
-        question: "What was the purpose of the 1787 Chemical Nomenclature created by Guyton de Morveau, Lavoisier, Berthollet, and Fourcroy?",
+        question: "What was the point of the new system of chemical names in 1787?",
         options: [
-          "To replace obscure, mystical alchemical names ('butter of antimony', 'flowers of zinc') with systematic names reflecting elemental chemical composition",
-          "To translate ancient Egyptian hieroglyphics into Latin",
-          "To classify elements by their astrological constellations",
-          "To encrypt military gunpowder recipes"
+          "To make each name say what the substance is made of, such as 'copper sulfate' or 'iron oxide'.",
+          "To name every chemical after its discoverer.",
+          "To keep chemistry secret.",
+          "To use the old alchemical names."
         ],
         answer: 0,
-        explanation: "The 1787 reform abolished alchemical jargon and created a rational, compositional vocabulary based on oxygen acids and metal bases (e.g. sulfuric acid, copper sulfate, zinc oxide), providing the language modern chemistry still speaks."
+        explanation: "Old names like 'oil of vitriol' or 'flowers of zinc' said nothing about composition. The new names did, and chemists still use the system."
       },
       {
-        question: "What does John Dalton’s Law of Multiple Proportions (1803) demonstrate about matter?",
+        question: "What does Dalton's law of multiple proportions show?",
         options: [
-          "Chemical elements combine in continuous, infinitely variable ratios like mixed liquids",
-          "When two elements form multiple compounds, the masses of one element combining with a fixed mass of the other stand in small whole-number ratios (1:2, 1:3), proving discrete atoms",
-          "Gases expand by 1/273 of their volume for every degree Celsius",
-          "Atomic weight is equal to atomic number times two"
+          "Elements can combine in any amount at all.",
+          "When two elements form more than one compound, the amounts combine in simple whole-number ratios (like 16 g and 32 g of oxygen with 12 g of carbon), a sign of atoms.",
+          "All gases weigh the same.",
+          "Atoms can be split."
         ],
         answer: 1,
-        explanation: "Dalton showed that in compounds like CO and CO₂, or N₂O, NO, and NO₂, the fixed mass of one element combines with integer multiples of the other (16g, 32g, 64g), proving matter is structured from indivisible integer units (atoms)."
+        explanation: "Carbon monoxide has 16 g of oxygen per 12 g of carbon; carbon dioxide has exactly twice as much, 32 g. Matter combines in whole steps, as separate atoms would."
       },
       {
-        question: "How did Amedeo Avogadro (1811) resolve the conflict between Gay-Lussac’s gas volumes and Dalton’s atomic theory?",
+        question: "How did Avogadro solve the puzzle of gas volumes in 1811?",
         options: [
-          "He proved that all gases have zero mass",
-          "He showed that gases become liquid at room temperature",
-          "He proposed that equal volumes of gases at the same temperature and pressure contain equal numbers of particles, and that elemental gases exist as diatomic molecules (H₂, O₂, N₂)",
-          "He abandoned atomic theory entirely in favor of caloric fluid"
+          "He said Gay-Lussac's measurements were wrong.",
+          "He said atoms can be split in half.",
+          "He suggested equal volumes of gas contain equal numbers of molecules, and that gases like hydrogen and oxygen are made of pairs of atoms (H₂, O₂).",
+          "He said gases have no weight."
         ],
         answer: 2,
-        explanation: "Avogadro showed that 2 volumes of H₂ combine with 1 volume of O₂ to yield 2 volumes of steam because oxygen molecules are diatomic (O₂) and split their atoms between two separate water molecules (2H₂O)."
+        explanation: "With oxygen as O₂, one volume of oxygen can make two volumes of water vapour without splitting any atom: 2H₂ + O₂ → 2H₂O."
       },
       {
-        question: "What laboratory tool enabled Humphry Davy to isolate potassium, sodium, calcium, and magnesium in 1807–1808?",
+        question: "What tool let Humphry Davy discover potassium, sodium, calcium and magnesium in 1807–1808?",
         options: [
-          "The electric current from a powerful Voltaic battery (electrolysis)",
-          "The compound achromatic microscope",
-          "A high-pressure steam centrifuge",
-          "Fractional crystallization"
+          "A powerful electric battery, used to split compounds apart.",
+          "A telescope.",
+          "A microscope.",
+          "A very hot furnace."
         ],
         answer: 0,
-        explanation: "Davy connected hundreds of Voltaic battery plates to molten alkalis and alkaline earths, using electrical current to break powerful chemical bonds and isolate pure, lustrous metallic potassium and sodium."
+        explanation: "Volta's battery (1800) gave chemists electricity. Davy's huge battery split compounds that heat and acids couldn't, freeing the new metals."
       },
       {
-        question: "What did the 1860 Karlsruhe Congress achieve for international chemistry?",
+        question: "What did the Karlsruhe meeting of 1860 achieve?",
         options: [
-          "It banned the manufacture of synthetic dyes",
-          "Stanislao Cannizzaro revived Avogadro's hypothesis, standardizing a single, universally accepted set of atomic weights across Europe",
-          "It officially adopted the phlogiston theory into university curricula",
-          "It discovered the neutron"
+          "It discovered oxygen.",
+          "Through Cannizzaro's paper reviving Avogadro's idea, it gave chemists an agreed way to work out atomic weights and correct formulas such as H₂O.",
+          "It banned alchemy.",
+          "It created the periodic table."
         ],
         answer: 1,
-        explanation: "Cannizzaro distributed his landmark pamphlet at Karlsruhe, showing how Avogadro's hypothesis consistently resolved the 50-year confusion between atomic weights and equivalent weights, providing the reliable data Mendeleev needed."
+        explanation: "Before Karlsruhe, labs used different formulas for the same substances. Cannizzaro showed how Avogadro's hypothesis gives reliable atomic weights."
       },
       {
-        question: "Why was Dmitri Mendeleev’s 1869 Periodic Table superior to previous periodic arrangements (such as Newlands or Meyer)?",
+        question: "Why was Mendeleev's periodic table better than earlier attempts?",
         options: [
-          "He organized elements strictly in alphabetical order",
-          "He proved that there are only 50 elements in the universe",
-          "He incorporated electron orbital shells",
-          "He left deliberate gaps for undiscovered elements and accurately predicted their atomic weights, densities, and chemical reactions before they were found"
+          "It listed the elements alphabetically.",
+          "It used only the elements known in ancient times.",
+          "It was the first to use atomic weights at all.",
+          "He left gaps for undiscovered elements, predicted their properties, and trusted chemical families over doubtful weights."
         ],
         answer: 3,
-        explanation: "Mendeleev recognized that the periodic law was an objective law of nature. Where elements did not fit, he left empty spaces and predicted the properties of unknown elements (like eka-aluminium / gallium and eka-silicon / germanium)."
+        explanation: "Mendeleev's boldness made his table testable: when gallium, scandium and germanium were found with the predicted properties, the table was confirmed."
       },
       {
-        question: "Which metal’s discovery in 1875 by Lecoq de Boisbaudran dramatically confirmed Mendeleev’s periodic predictions?",
+        question: "Which element, discovered in 1875, matched Mendeleev's 'eka-aluminium' and confirmed his table?",
         options: [
-          "Gallium (predicted by Mendeleev as 'eka-aluminium')",
-          "Uranium",
-          "Titanium",
-          "Platinum"
+          "Gallium, which melts at about 30 °C, in the warmth of your hand.",
+          "Uranium.",
+          "Oxygen.",
+          "Hydrogen."
         ],
         answer: 0,
-        explanation: "Lecoq de Boisbaudran discovered Gallium in zinc blende ore; its measured density (5.91 g/cm³), atomic weight (69.7), and low melting point matched Mendeleev's 1871 prediction for eka-aluminium almost exactly."
+        explanation: "Lecoq de Boisbaudran's gallium had almost exactly the weight and density Mendeleev had predicted four years earlier."
       }
     ];
 
