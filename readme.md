@@ -38,7 +38,7 @@ A 12-part master series chronicling the history, epistemology, and methodology o
 ### Local Development & Verification
 
 ```bash
-# Build derived pages (RSS feed, sitemap, search index, subject & tag pages)
+# Build derived pages (search index, subject, tag and series pages)
 python tools/build.py
 
 # Verify build idempotency (used in CI)
@@ -52,5 +52,4 @@ python tools/check.py
 
 ## License
 
-- Content: [Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](LICENSE)
-- Code: [MIT License](LICENSE)
+© 2026 Rakesh Naik. All rights reserved. No part of this repository or website may be reproduced or reused without written permission. See [LICENSE](LICENSE).

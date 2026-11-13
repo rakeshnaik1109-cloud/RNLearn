@@ -1218,22 +1218,22 @@
         question: "Which Indian text contains the earliest systematic mathematical rules treating zero and negative numbers as algebraic entities?",
         options: [
           "The Rigveda (c. 1200 BCE)",
-          "The Brāhmasphuṭasiddhānta by Brahmagupta (628 CE)",
           "The Sulba Sūtras by Baudhāyana (c. 600 BCE)",
-          "The Lilāvatī by Bhāskara II (1150 CE)"
+          "The Lilāvatī by Bhāskara II (1150 CE)",
+          "The Brāhmasphuṭasiddhānta by Brahmagupta (628 CE)"
         ],
-        answer: 1,
+        answer: 3,
         explanation: "In Chapter 18 of the Brāhmasphuṭasiddhānta (628 CE), Brahmagupta defined operational arithmetic rules for positive numbers (dhana / fortune), negative numbers (ṛṇa / debt), and zero (kha / śūnya), including rules like (-a) × (-b) = +ab and a + 0 = a."
       },
       {
         question: "How did the Indian trigonometric function 'jyā' differ conceptually from Ptolemy’s 'chord' (crd)?",
         options: [
           "Jyā was measured only in degrees rather than sexagesimal minutes",
-          "Jyā is the half-chord corresponding to half the central angle (modern R sin θ), creating an immediate right triangle with the radius",
           "Jyā was applied exclusively to hyperbolic geometry",
+          "Jyā is the half-chord corresponding to half the central angle (modern R sin θ), creating an immediate right triangle with the radius",
           "Jyā eliminated the need for circles"
         ],
-        answer: 1,
+        answer: 2,
         explanation: "Ptolemy used chords subtending the entire arc 2θ. Āryabhaṭa and Indian astronomers adopted the half-chord (ardha-jyā, later jyā) for arc θ, making it the vertical leg of a right triangle of hypotenuse R, establishing the foundation of modern sine."
       },
       {
@@ -1251,11 +1251,11 @@
         question: "How did Omar Khayyam solve general cubic equations in eleventh-century Persia?",
         options: [
           "Using modern Tartaglia-Cardano algebraic radical formulas",
-          "Through the geometric intersection of conic sections (e.g. parabolas and circles/hyperbolas)",
           "By claiming that cubic equations have no real solutions",
+          "Through the geometric intersection of conic sections (e.g. parabolas and circles/hyperbolas)",
           "By employing matrix determinants"
         ],
-        answer: 1,
+        answer: 2,
         explanation: "Centuries before sixteenth-century Italian algebraists found radical formulas, Omar Khayyam systematically classified and solved cubic equations geometrically by constructing the intersections of conic sections such as a parabola and a circle."
       },
       {

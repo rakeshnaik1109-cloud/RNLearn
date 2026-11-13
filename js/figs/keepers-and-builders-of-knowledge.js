@@ -956,15 +956,15 @@
         question: "How did Ibn al-Haytham’s camera obscura experiment disprove the ancient Greek emission theory of vision?",
         options: [
           "It demonstrated that the eye contains a crystalline lens that bends rays",
-          "It proved that distinct light rays from different colored lamps pass through a pinhole without blending and project inverted spots on a screen independently of an observer's eyes",
           "It showed that light travels instantaneously at infinite speed",
-          "It proved that mirrors absorb all ultraviolet light"
+          "It proved that mirrors absorb all ultraviolet light",
+          "It proved that distinct light rays from different lamps pass through a pinhole without blending and project inverted spots on a screen independently of an observer's eyes"
         ],
-        answer: 1,
+        answer: 3,
         explanation: "By demonstrating that multiple rays of light travel along rectilinear paths independently through a tiny aperture and produce unmixed, inverted spots of light—and that blocking a lamp extinguishes its spot while leaving the others unchanged—Ibn al-Haytham showed that light originates from physical luminous sources and enters the eye (intromission), disproving the idea that visual rays emanate from the eyes."
       },
       {
-        question: "What ingenious method did al-Bīrūnī use at Nandana Fort in 1021 CE to calculate the Earth's radius?",
+        question: "What ingenious method did al-Bīrūnī use at Nandana Fort (c. 1020s) to calculate the Earth's radius?",
         options: [
           "He measured the distance between two cities along a meridian by pacing camel caravans",
           "He climbed a single mountain and measured the dip angle of the horizon below the true horizontal using a large astrolabe",
@@ -977,56 +977,56 @@
       {
         question: "What major mathematical discovery was made by Mādhava of Sangamagrāma in fourteenth-century Kerala?",
         options: [
-          "The invention of matrix determinants",
           "The discovery of infinite power series for sine, cosine, and π over two centuries before Gregory, Newton, and Leibniz",
+          "The invention of matrix determinants",
           "The proof of Fermat's Last Theorem for n = 3",
           "The calculation of non-Euclidean hyperbolic triangles"
         ],
-        answer: 1,
+        answer: 0,
         explanation: "Mādhava derived the infinite alternating series for sine, cosine, and π/4 (later known as the Gregory-Leibniz series) and introduced correction terms (antya-saṁskāra) that accelerated their numerical convergence."
       },
       {
         question: "What key mechanical innovation was featured in Su Song’s astronomical clock tower (1092 CE) in Song Dynasty China?",
         options: [
-          "A balance spring made of tempered steel",
           "A water-powered tilting scoop escapement mechanism that converted continuous fluid flow into discrete, periodic wheel steps",
+          "A balance spring made of tempered steel",
           "A mercury pendulum compensated for thermal expansion",
           "A solar-powered steam turbine"
         ],
-        answer: 1,
+        answer: 0,
         explanation: "Su Song's water clock used an escapement balance beam that held the wheel until a scoop filled to a calibrated weight, tipping the balance and releasing the wheel to rotate exactly one spoke, driving an armillary sphere and celestial globe."
       },
       {
         question: "What was the Mean Speed Theorem proved by the Merton Calculators at Oxford and Nicole Oresme in Paris?",
         options: [
-          "The speed of falling bodies is proportional to their weight",
           "A body accelerating uniformly from rest covers the exact same distance in a given time as a body traveling at a constant speed equal to its average velocity",
+          "The speed of falling bodies is proportional to their weight",
           "Planets sweep out equal areas in equal times",
           "Motion in a vacuum is instantaneous"
         ],
-        answer: 1,
+        answer: 0,
         explanation: "The Merton Rule (geometrically proved by Nicole Oresme via area-preserving shear of a velocity-time trapezoid into a rectangle) showed that distance under uniform acceleration equals the time multiplied by the mean speed (v_initial + v_final)/2."
       },
       {
         question: "What geometric mechanism did Naṣīr al-Dīn al-Ṭūsī invent to eliminate Ptolemy’s equant in planetary models?",
         options: [
-          "The astrolabe rete projection",
           "The Ṭūsī couple: a small circle rolling inside a circle of double diameter, producing pure rectilinear oscillation from uniform circular motions",
+          "The astrolabe rete projection",
           "The parabolic mirror reflector",
           "The cross-staff sight"
         ],
-        answer: 1,
+        answer: 0,
         explanation: "The Ṭūsī couple uses two concentric circles (the inner having half the diameter of the outer) to convert circular rotation into linear harmonic motion along a diameter line, which Copernicus later incorporated into De revolutionibus."
       },
       {
         question: "Which 12th-century translation hub in Spain was most responsible for transmitting Arabic science into Latin?",
         options: [
           "Barcelona",
-          "Toledo (under Archbishop Raymond, where Gerard of Cremona translated dozens of major scientific texts)",
           "Madrid",
-          "Granada"
+          "Granada",
+          "Toledo (under Archbishop Raymond, where Gerard of Cremona translated dozens of major scientific texts)"
         ],
-        answer: 1,
+        answer: 3,
         explanation: "Toledo was the epicentre of the 12th-century translation movement, where scholars like Gerard of Cremona translated Arabic versions of Euclid, Ptolemy, Ibn Sīnā, and al-Khwārizmī into Latin."
       },
       {
@@ -1044,11 +1044,11 @@
         question: "How did the Parisian Condemnations of 1277 inadvertently stimulate European physics?",
         options: [
           "They banned the study of all pagan mathematics, forcing scholars to invent modern calculus",
-          "By prohibiting propositions that limited God's omnipotence to Aristotelian dogma, they encouraged natural philosophers to explore hypothetical alternatives like vacuums, multiple worlds, and Earth's diurnal rotation",
           "They declared the sun to be the center of the solar system",
+          "By prohibiting propositions that limited God's omnipotence to Aristotelian dogma, they encouraged natural philosophers to explore hypothetical alternatives like vacuums, multiple worlds, and Earth's diurnal rotation",
           "They mandated that all natural philosophy be tested with laboratory equipment"
         ],
-        answer: 1,
+        answer: 2,
         explanation: "By forbidding the claim that Aristotle was universally infallible (for instance, that God could not create a vacuum or multiple worlds), Bishop Tempier's decree freed 14th-century scholastic thinkers to formulate hypothetical, non-Aristotelian physics."
       },
       {

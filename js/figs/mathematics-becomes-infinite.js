@@ -1390,33 +1390,33 @@
         q: '1. What was Bishop George Berkeley’s famous philosophical critique of early calculus in his 1734 treatise "The Analyst"?',
         options: [
           'Calculus could not be applied to planetary orbits.',
-          'Infinitesimals were logically incoherent: mathematicians treated $dx$ as non-zero when dividing, and then set it to zero to eliminate it, calling them "the ghosts of departed quantities."',
           'Leibniz stole the integral symbol from Archimedes.',
-          'Calculus contradicted Christian theology because God made all numbers finite.'
+          'Calculus contradicted Christian theology because God made all numbers finite.',
+          'Infinitesimals were logically incoherent: mathematicians treated $dx$ as non-zero when dividing, and then set it to zero to eliminate it, calling them "the ghosts of departed quantities."'
         ],
-        answer: 1,
+        answer: 3,
         expl: 'Berkeley pointed out that dividing by an infinitesimal increment and subsequently setting it to zero was a logical fallacy: a quantity cannot be simultaneously non-zero and zero. He famously dubbed them "the ghosts of departed quantities."'
       },
       {
         q: '2. How did Karl Weierstrass eliminate mystical infinitesimals from nineteenth-century mathematical analysis?',
         options: [
           'By banning derivatives and integrals from pure mathematics.',
-          'By formulating the rigorous $\\epsilon$-$\\delta$ definition of limits, reducing continuity and convergence to static arithmetic inequalities involving real numbers.',
           'By proving that all curves are composed of microscopic straight line segments.',
+          'By formulating the rigorous $\\epsilon$-$\\delta$ definition of limits, reducing continuity and convergence to static arithmetic inequalities involving real numbers.',
           'By introducing imaginary numbers into coordinate systems.'
         ],
-        answer: 1,
+        answer: 2,
         expl: 'Weierstrass replaced mysterious "vanishing quantities" with the static, rigorous $\\epsilon$-$\\delta$ language of inequalities: $\\lim_{x \\to a} f(x) = L$ means for every $\\epsilon > 0$, there exists $\\delta > 0$ such that $0 < |x - a| < \\delta \\implies |f(x) - L| < \\epsilon$.'
       },
       {
         q: '3. What did Nikolai Lobachevsky and János Bolyai discover when they replaced Euclid’s Fifth Postulate (the Parallel Postulate) with the assumption that through a point not on a line, more than one parallel line can be drawn?',
         options: [
           'They immediately ran into logical contradictions, proving Euclid’s geometry is the only possible one.',
-          'They constructed a completely consistent, non-contradictory new geometry (Hyperbolic geometry) where triangle angles sum to strictly less than 180 degrees.',
           'They showed that circles cannot exist in three dimensions.',
-          'They derived the algebraic formula for solving quintic equations.'
+          'They derived the algebraic formula for solving quintic equations.',
+          'They constructed a completely consistent, non-contradictory new geometry (Hyperbolic geometry) where triangle angles sum to strictly less than 180 degrees.'
         ],
-        answer: 1,
+        answer: 3,
         expl: 'Lobachevsky and Bolyai proved that Euclid’s Fifth Postulate is not an absolute logical necessity: denying it produces Hyperbolic geometry, a self-consistent mathematical world with constant negative curvature where triangle angles sum to $< 180^\\circ$.'
       },
       {
@@ -1434,11 +1434,11 @@
         q: '5. What did Georg Cantor prove regarding the infinite set of rational fractions $\\mathbb{Q}$ compared to the set of natural counting numbers $\\mathbb{N}$?',
         options: [
           'There are infinitely more rational numbers than natural numbers.',
-          'The set of rational numbers has the exact same cardinality (countably infinite, $\\aleph_0$) as the natural numbers, because they can be arranged in a one-to-one diagonal bijection.',
           'Rational numbers cannot be put into any order.',
-          'The cardinality of fractions depends on whether they are positive or negative.'
+          'The cardinality of fractions depends on whether they are positive or negative.',
+          'The set of rational numbers has the exact same cardinality (countably infinite, $\\aleph_0$) as the natural numbers, because they can be arranged in a one-to-one diagonal bijection.'
         ],
-        answer: 1,
+        answer: 3,
         expl: 'Using his famous diagonal pairing path, Cantor demonstrated a one-to-one correspondence (bijection) between $\\mathbb{N}$ and $\\mathbb{Q}$, proving that despite being dense on the line, the rational numbers are countably infinite: $|\\mathbb{Q}| = \\aleph_0$.'
       },
       {
@@ -1456,11 +1456,11 @@
         q: '7. What was Bertrand Russell’s famous paradox (1901) that threw Gottlob Frege’s naive set theory into foundational crisis?',
         options: [
           'The set of all primes is infinite.',
-          'Consider the set $R$ of all sets that do not contain themselves ($R = \\{x \\mid x \\notin x\\}$). If $R$ belongs to $R$, then by definition it does not; if it does not belong to $R$, then it does: $R \\in R \\iff R \\notin R$.',
           'Parallel lines can never meet at infinity.',
+          'Consider the set $R$ of all sets that do not contain themselves ($R = \\{x \\mid x \\notin x\\}$). If $R$ belongs to $R$, then by definition it does not; if it does not belong to $R$, then it does: $R \\in R \\iff R \\notin R$.',
           'Zero cannot be divided by zero.'
         ],
-        answer: 1,
+        answer: 2,
         expl: 'Russell’s Barber Paradox exposed a fatal self-referential contradiction in unrestricted set comprehension: a set defined as containing all sets that do not contain themselves cannot consistently contain or not contain itself.'
       },
       {
@@ -1477,23 +1477,23 @@
       {
         q: '9. Kurt Gödel’s First Incompleteness Theorem (1931) dealt a fatal blow to Hilbert’s program by proving that:',
         options: [
-          'All mathematical axioms are inherently false.',
           'In any consistent formal axiomatic system capable of doing basic arithmetic, there are always true mathematical statements that cannot be proven from within the axioms.',
+          'All mathematical axioms are inherently false.',
           'Computers will never be able to calculate logarithms.',
           'Set theory is completely contradictory.'
         ],
-        answer: 1,
+        answer: 0,
         expl: 'Gödel showed through arithmetical encoding (Gödel numbering) that any consistent formal system rich enough to contain arithmetic can construct a self-referential statement asserting its own unprovability ($G \\iff \\neg\\text{Prov}(\\ulcorner G \\urcorner)$). Truth in mathematics forever outruns formal proof.'
       },
       {
         q: '10. What profound limit did Alan Turing discover in 1936 regarding universal computation (the Halting Problem)?',
         options: [
-          'Computers can never solve problems faster than human brains.',
           'No general algorithm can exist that can determine, for all possible programs and inputs, whether the program will eventually halt or run forever.',
+          'Computers can never solve problems faster than human brains.',
           'All mechanical Turing machines require infinite electrical power.',
           'Binary numbers cannot represent real numbers.'
         ],
-        answer: 1,
+        answer: 0,
         expl: 'Turing proved that the Halting Problem is undecidable: assuming an algorithm $H$ exists that decides whether any machine halts leads to a self-referential contradiction when fed an inverted copy of itself, establishing the non-computable horizon of reason.'
       }
     ];

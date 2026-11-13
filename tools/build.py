@@ -129,7 +129,7 @@ def generate_listing_page(title, eyebrow, lede, posts, canonical_rel, rel_prefix
     else:
         content = """<div class="empty-state">
   <h2 class="empty-state-title">No articles published yet</h2>
-  <p class="empty-state-text">New deep-dive articles are currently being researched and drafted. Check back soon or subscribe to the RSS feed.</p>
+  <p class="empty-state-text">New deep-dive articles are currently being researched and drafted. Check back soon.</p>
 </div>"""
 
     return f"""<!DOCTYPE html>
@@ -211,16 +211,14 @@ def generate_listing_page(title, eyebrow, lede, posts, canonical_rel, rel_prefix
           </ul>
         </div>
         <div>
-          <h2 class="footer-title">Feeds & Meta</h2>
+          <h2 class="footer-title">More</h2>
           <ul class="footer-links">
-            <li><a class="footer-link" href="{rel_prefix}feed.xml">RSS Feed</a></li>
-            <li><a class="footer-link" href="{rel_prefix}sitemap.xml">Sitemap</a></li>
             <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <div>Content licensed under CC BY-NC 4.0 · Code under MIT License.</div>
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
         <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
       </div>
     </div>
@@ -358,78 +356,7 @@ def build_site(root_dir, check_mode=False):
         })
     files_to_write["search-index.json"] = json.dumps(search_records, indent=2, ensure_ascii=False) + "\n"
 
-    # 5. Sitemap (sitemap.xml)
-    sitemap_entries = [
-        f"""  <url>
-    <loc>{BASE_URL}/</loc>
-    <lastmod>{build_date_iso}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>""",
-        f"""  <url>
-    <loc>{BASE_URL}/search.html</loc>
-    <lastmod>{build_date_iso}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>"""
-    ]
-
-    for subj in CANONICAL_SUBJECTS:
-        s_slug = slugify(subj)
-        sitemap_entries.append(f"""  <url>
-    <loc>{BASE_URL}/subjects/{s_slug}.html</loc>
-    <lastmod>{build_date_iso}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>""")
-
-    for p in public_posts:
-        mod_date = p.get("updated") or p.get("date", build_date_iso)
-        sitemap_entries.append(f"""  <url>
-    <loc>{BASE_URL}/articles/{p['slug']}.html</loc>
-    <lastmod>{mod_date}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>""")
-
-    sitemap_xml = f"""<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-{chr(10).join(sitemap_entries)}
-</urlset>
-"""
-    files_to_write["sitemap.xml"] = sitemap_xml
-
-    # 6. RSS 2.0 Feed (feed.xml)
-    feed_items = []
-    for p in public_posts:
-        pub_dt = datetime.datetime.strptime(p["date"], "%Y-%m-%d").replace(tzinfo=datetime.timezone.utc)
-        pub_rfc822 = pub_dt.strftime("%a, %d %b %Y %H:%M:%S GMT")
-        link = f"{BASE_URL}/articles/{p['slug']}.html"
-        feed_items.append(f"""    <item>
-      <title>{xml_escape(p['title'])}</title>
-      <link>{link}</link>
-      <guid isPermaLink="true">{link}</guid>
-      <pubDate>{pub_rfc822}</pubDate>
-      <description>{xml_escape(p['summary'])}</description>
-      <category>{xml_escape(p['subject'])}</category>
-    </item>""")
-
-    feed_xml = f"""<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>{xml_escape(SITE_NAME)}</title>
-    <link>{BASE_URL}/</link>
-    <description>{xml_escape(SITE_TAGLINE)}</description>
-    <language>en-gb</language>
-    <lastBuildDate>{build_date_rfc822}</lastBuildDate>
-    <atom:link href="{BASE_URL}/feed.xml" rel="self" type="application/rss+xml"/>
-{chr(10).join(feed_items)}
-  </channel>
-</rss>
-"""
-    files_to_write["feed.xml"] = feed_xml
-
-    # 7. Update index.html generated regions
+    # 5. Update index.html generated regions
     index_path = os.path.join(root_dir, "index.html")
     if os.path.exists(index_path):
         with open(index_path, "r", encoding="utf-8") as f:
@@ -444,7 +371,7 @@ def build_site(root_dir, check_mode=False):
         else:
             featured_content = """<div class="empty-state">
   <h2 class="empty-state-title">No articles published yet</h2>
-  <p class="empty-state-text">New deep-dive articles are currently being researched and drafted. Check back soon or subscribe to the RSS feed.</p>
+  <p class="empty-state-text">New deep-dive articles are currently being researched and drafted. Check back soon.</p>
 </div>"""
         index_html = replace_region(index_html, "featured-post", featured_content)
 

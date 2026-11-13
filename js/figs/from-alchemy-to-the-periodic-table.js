@@ -293,7 +293,7 @@
         '<div class="fig-control-group">' +
           '<button type="button" id="fig-mercury-btn-start" class="fig-btn">Day 0 (Start)</button>' +
           '<button type="button" id="fig-mercury-btn-mid" class="fig-btn">Day 6 (Active Calcination)</button>' +
-          '<button type="button" id="fig-mercury-btn-end" class="fig-btn">Day 12 (1/5 Air Absorbed)</button>' +
+          '<button type="button" id="fig-mercury-btn-end" class="fig-btn">Day 12 (about 1/6 of the air absorbed)</button>' +
         '</div>' +
       '</div>' +
       '<div class="fig-canvas-container" style="min-height:360px;">' +
@@ -311,10 +311,10 @@
 
     function draw() {
       var day = parseInt(slider.value, 10);
-      dayVal.textContent = 'Day ' + day + (day === 0 ? ' (Air Volume: 50 cubic inches)' : day === 12 ? ' (Air Volume: 42 cu. in. - Exactly 1/5th absorbed!)' : ' (Calx accumulating)');
+      dayVal.textContent = 'Day ' + day + (day === 0 ? ' (Air Volume: 50 cubic inches)' : day === 12 ? ' (Air Volume: 42 cu. in. - about 1/6 absorbed)' : ' (Calx accumulating)');
 
       // In Lavoisier's experiment: 50 cubic inches of air initially in bell jar
-      // Over 12 days, 8 cubic inches (approx 1/5 of oxygen volume) is consumed
+      // Over 12 days, 8 cubic inches (about 1/6 of the enclosed air) is consumed
       var airLostFraction = (day / 12) * 0.16; // 16% volume loss
       var waterRise = airLostFraction * 90; // pixels mercury level rises inside bell jar
 
@@ -363,7 +363,7 @@
           '<text x="12" y="128" font-size="10" fill="currentColor">(Mercuric Oxide, HgO).</text>' +
           '<line x1="12" y1="142" x2="153" y2="142" stroke="var(--color-border, #eee)"/>' +
           '<text x="12" y="160" font-size="11" font-weight="bold" fill="#3b82f6">Air Absorbed:</text>' +
-          '<text x="12" y="176" font-size="10" fill="currentColor">Volume dropped by 1/5th</text>' +
+          '<text x="12" y="176" font-size="10" fill="currentColor">Volume dropped by about 1/6</text>' +
           '<text x="12" y="190" font-size="10" fill="currentColor">(from 50 to 42 in³).</text>' +
           '<line x1="12" y1="204" x2="153" y2="204" stroke="var(--color-border, #eee)"/>' +
           '<text x="12" y="222" font-size="11" font-weight="bold" fill="#10b981">2. Reverse Step:</text>' +
@@ -374,7 +374,7 @@
       svg.innerHTML = svgContent;
 
       explain.innerHTML =
-        '<strong>Lavoisier’s Quantitative Masterpiece (1776):</strong> Lavoisier heated liquid mercury in a sealed glass retort connected to a bell jar for 12 days. The air in the jar contracted by exactly one-fifth ($8$ cubic inches), leaving behind unbreathable nitrogen (*azote*), while red mercuric oxide formed in the retort. He then collected that red oxide and heated it intensely: it decomposed into pure liquid mercury, releasing <em>exactly 8 cubic inches of pure respirable oxygen gas</em>. Synthesis and analysis were in perfect quantitative balance.';
+        '<strong>Lavoisier’s Quantitative Masterpiece (mid-1770s):</strong> Lavoisier heated liquid mercury in a sealed glass retort connected to a bell jar for 12 days. The air in the jar contracted by about one-sixth ($8$ of $50$ cubic inches), leaving behind unbreathable nitrogen (*azote*), while red mercuric oxide formed in the retort. He then collected that red oxide and heated it intensely: it decomposed into pure liquid mercury, releasing <em>exactly 8 cubic inches of pure respirable oxygen gas</em>. Synthesis and analysis were in perfect quantitative balance.';
     }
 
     slider.addEventListener('input', draw);
@@ -932,13 +932,13 @@
       {
         question: "How did Robert Boyle define a chemical element in 'The Sceptical Chymist' (1661)?",
         options: [
+          "As perfectly unmingled bodies, not made of any other bodies, of which compound bodies are composed (while doubting any known substance qualified)",
           "As one of four primordial qualities: earth, water, air, or fire",
-          "As an operational entity: perfectly unmingled bodies that cannot be resolved into any other, and of which compound bodies are composed",
           "As any substance that glows under phosphorus",
           "As a substance possessing negative weight"
         ],
-        answer: 1,
-        explanation: "Boyle rejected both Aristotle's four elements and Paracelsus's three principles (tria prima), defining an element operationally as a simple, unmingled substance that cannot be broken down by chemical analysis into anything simpler."
+        answer: 0,
+        explanation: "Boyle rejected both Aristotle's four elements and Paracelsus's three principles (tria prima), describing an element as a simple, unmingled body that is not made of other bodies — while doubting that any known substance qualified. Lavoisier later turned this into a working laboratory definition."
       },
       {
         question: "What major observational anomaly plagued the phlogiston theory of combustion throughout the 18th century?",
@@ -965,12 +965,12 @@
       {
         question: "What was the purpose of the 1787 Chemical Nomenclature created by Guyton de Morveau, Lavoisier, Berthollet, and Fourcroy?",
         options: [
-          "To translate ancient Egyptian hieroglyphics into Latin",
           "To replace obscure, mystical alchemical names ('butter of antimony', 'flowers of zinc') with systematic names reflecting elemental chemical composition",
+          "To translate ancient Egyptian hieroglyphics into Latin",
           "To classify elements by their astrological constellations",
           "To encrypt military gunpowder recipes"
         ],
-        answer: 1,
+        answer: 0,
         explanation: "The 1787 reform abolished alchemical jargon and created a rational, compositional vocabulary based on oxygen acids and metal bases (e.g. sulfuric acid, copper sulfate, zinc oxide), providing the language modern chemistry still speaks."
       },
       {
@@ -988,22 +988,22 @@
         question: "How did Amedeo Avogadro (1811) resolve the conflict between Gay-Lussac’s gas volumes and Dalton’s atomic theory?",
         options: [
           "He proved that all gases have zero mass",
-          "He proposed that equal volumes of gases at the same temperature and pressure contain equal numbers of particles, and that elemental gases exist as diatomic molecules (H₂, O₂, N₂)",
           "He showed that gases become liquid at room temperature",
+          "He proposed that equal volumes of gases at the same temperature and pressure contain equal numbers of particles, and that elemental gases exist as diatomic molecules (H₂, O₂, N₂)",
           "He abandoned atomic theory entirely in favor of caloric fluid"
         ],
-        answer: 1,
+        answer: 2,
         explanation: "Avogadro showed that 2 volumes of H₂ combine with 1 volume of O₂ to yield 2 volumes of steam because oxygen molecules are diatomic (O₂) and split their atoms between two separate water molecules (2H₂O)."
       },
       {
         question: "What laboratory tool enabled Humphry Davy to isolate potassium, sodium, calcium, and magnesium in 1807–1808?",
         options: [
-          "The compound achromatic microscope",
           "The electric current from a powerful Voltaic battery (electrolysis)",
+          "The compound achromatic microscope",
           "A high-pressure steam centrifuge",
           "Fractional crystallization"
         ],
-        answer: 1,
+        answer: 0,
         explanation: "Davy connected hundreds of Voltaic battery plates to molten alkalis and alkaline earths, using electrical current to break powerful chemical bonds and isolate pure, lustrous metallic potassium and sodium."
       },
       {
@@ -1021,22 +1021,22 @@
         question: "Why was Dmitri Mendeleev’s 1869 Periodic Table superior to previous periodic arrangements (such as Newlands or Meyer)?",
         options: [
           "He organized elements strictly in alphabetical order",
-          "He left deliberate gaps for undiscovered elements and accurately predicted their atomic weights, densities, and chemical reactions before they were found",
           "He proved that there are only 50 elements in the universe",
-          "He incorporated electron orbital shells"
+          "He incorporated electron orbital shells",
+          "He left deliberate gaps for undiscovered elements and accurately predicted their atomic weights, densities, and chemical reactions before they were found"
         ],
-        answer: 1,
-        explanation: "Mendeleev recognized that the periodic law was an objective law of nature. Where elements did not fit, he left empty spaces and predicted the exact physical properties of unknown elements (like eka-aluminium / gallium and eka-silicon / germanium)."
+        answer: 3,
+        explanation: "Mendeleev recognized that the periodic law was an objective law of nature. Where elements did not fit, he left empty spaces and predicted the properties of unknown elements (like eka-aluminium / gallium and eka-silicon / germanium)."
       },
       {
         question: "Which metal’s discovery in 1875 by Lecoq de Boisbaudran dramatically confirmed Mendeleev’s periodic predictions?",
         options: [
-          "Uranium",
           "Gallium (predicted by Mendeleev as 'eka-aluminium')",
+          "Uranium",
           "Titanium",
           "Platinum"
         ],
-        answer: 1,
+        answer: 0,
         explanation: "Lecoq de Boisbaudran discovered Gallium in zinc blende ore; its measured density (5.91 g/cm³), atomic weight (69.7), and low melting point matched Mendeleev's 1871 prediction for eka-aluminium almost exactly."
       }
     ];

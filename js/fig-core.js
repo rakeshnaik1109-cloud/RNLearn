@@ -33,7 +33,7 @@
     var svg = document.createElementNS(SVG_NS, 'svg');
     svg.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
     svg.setAttribute('width', '100%');
-    svg.setAttribute('height', 'auto');
+    svg.style.height = 'auto';
     svg.setAttribute('role', 'img');
     if (ariaLabel) {
       svg.setAttribute('aria-label', ariaLabel);
@@ -765,7 +765,9 @@
         figEl.classList.add('fig');
       }
       var name = figEl.getAttribute('data-fig');
+      if (figEl.getAttribute('data-fig-ready')) continue;
       if (name && typeof FIG[name] === 'function') {
+        figEl.setAttribute('data-fig-ready', '1');
         try {
           FIG[name](figEl);
         } catch (err) {
@@ -777,9 +779,18 @@
 
   window.FIG = FIG;
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', FIG.initAll);
-  } else {
+  // Start only after every deferred figure script has registered its figures.
+  // (Deferred scripts run before DOMContentLoaded; starting earlier left figures blank.)
+  var started = false;
+  function startFigures() {
+    if (started) return;
+    started = true;
     FIG.initAll();
+  }
+  if (document.readyState === 'complete') {
+    startFigures();
+  } else {
+    document.addEventListener('DOMContentLoaded', startFigures);
+    window.addEventListener('load', startFigures);
   }
 })();

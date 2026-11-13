@@ -2016,12 +2016,12 @@
       {
         q: '2. Sadi Carnot’s 1824 treatise established that the maximum theoretical efficiency of any heat engine operating between hot ($T_H$) and cold ($T_C$) reservoirs depends strictly on:',
         options: [
+          'The absolute temperatures of the two thermal reservoirs: $\\eta = 1 - T_C / T_H$.',
           'The chemical composition of the working substance (steam vs. alcohol vs. air).',
           'The pressure difference inside the piston cylinders.',
-          'The absolute temperatures of the two thermal reservoirs: $\\eta = 1 - T_C / T_H$.',
           'The mechanical friction of the engine crankshaft.'
         ],
-        answer: 2,
+        answer: 0,
         expl: 'Carnot proved that the maximum thermodynamic efficiency of a reversible cycle is independent of the working substance and depends solely on the temperature drop between the heat source and sink: $\\eta = 1 - T_C / T_H$.'
       },
       {
@@ -2038,56 +2038,56 @@
       {
         q: '4. Rudolf Clausius formulated the Second Law of Thermodynamics and introduced the state function Entropy ($S$). For an isolated system undergoing any spontaneous process:',
         options: [
+          'Entropy can never decrease: $\\Delta S \\ge 0$, reaching its maximum at thermodynamic equilibrium.',
           'Entropy is always conserved: $\\Delta S = 0$.',
           'Entropy continuously decreases toward zero: $\\Delta S < 0$.',
-          'Entropy can never decrease: $\\Delta S \\ge 0$, reaching its maximum at thermodynamic equilibrium.',
           'Entropy oscillates sinusoidally with temperature.'
         ],
-        answer: 2,
+        answer: 0,
         expl: 'Clausius famously summarized the laws of the universe: "The energy of the universe is constant; the entropy of the universe tends to a maximum." In any isolated system, entropy never decreases ($dS \\ge 0$).'
       },
       {
         q: '5. What was Alessandro Volta’s crucial counter-argument to Luigi Galvani’s claim of "animal electricity" in twitching frog legs?',
         options: [
           'Frogs have no nerves and cannot conduct electric fluids.',
-          'The electrical current was generated not by the animal tissue, but by the contact between two dissimilar metals (copper and zinc) separated by a moist electrolyte.',
           'Electric shocks in animals are strictly caused by static atmospheric electricity.',
+          'The electrical current was generated not by the animal tissue, but by the contact between two dissimilar metals (copper and zinc) separated by a moist electrolyte.',
           'Frog legs twitch only when exposed to strong magnetic lodestones.'
         ],
-        answer: 1,
+        answer: 2,
         expl: 'Volta realized that the frog’s leg served merely as an exquisitely sensitive biological galvanometer. The true source of the continuous electric potential was the bimetallic contact of zinc and copper immersed in a moist conductor, leading directly to the invention of the Voltaic pile (1800).'
       },
       {
         q: '6. Hans Christian Ørsted’s 1820 experiment was revolutionary because it demonstrated for the first time that:',
         options: [
-          'Electric current generates a circular magnetic field that deflects compass needles perpendicular to the wire.',
           'Magnets can conduct electric currents without wires.',
+          'Electric current generates a circular magnetic field that deflects compass needles perpendicular to the wire.',
           'Light travels in transverse electromagnetic waves.',
           'Iron loses its magnetism when heated past its Curie point.'
         ],
-        answer: 0,
+        answer: 1,
         expl: 'Before Ørsted, electricity and magnetism were considered entirely distinct forces. By demonstrating that a steady direct current deflecting a compass needle placed parallel to a wire, Ørsted unveiled the electromagnetic connection.'
       },
       {
         q: '7. According to Michael Faraday’s Law of Electromagnetic Induction, what produces an induced electromotive force (voltage) in a closed conducting loop?',
         options: [
           'A stationary, unchanging magnetic field of high intensity.',
-          'A time-varying magnetic flux passing through the loop: $\\mathcal{E} = -d\\Phi_B / dt$.',
           'The absolute electrostatic charge on the surrounding air.',
-          'Heating the copper wire above room temperature.'
+          'Heating the copper wire above room temperature.',
+          'A time-varying magnetic flux passing through the loop: $\\mathcal{E} = -d\\Phi_B / dt$.'
         ],
-        answer: 1,
+        answer: 3,
         expl: 'Faraday discovered in 1831 that an electromotive force is induced only when the magnetic flux passing through the circuit changes over time ($\\mathcal{E} = -d\\Phi_B / dt$), laying the foundation for all modern electric dynamos, motors, and transformers.'
       },
       {
         q: '8. What crucial mathematical term did James Clerk Maxwell add to Ampère’s Law to ensure conservation of electric charge in time-varying fields?',
         options: [
           'The Lorentz force term ($q\\vec{v} \\times \\vec{B}$).',
-          'The displacement current density ($J_D = \\epsilon_0 \\frac{\\partial \\vec{E}}{\\partial t}$).',
           'The gravitational constant ($G$).',
-          'The quantum Planck constant ($h$).'
+          'The quantum Planck constant ($h$).',
+          'The displacement current density ($J_D = \\epsilon_0 \\frac{\\partial \\vec{E}}{\\partial t}$).'
         ],
-        answer: 1,
+        answer: 3,
         expl: 'Maxwell introduced the displacement current $\\epsilon_0 \\frac{\\partial \\vec{E}}{\\partial t}$ to Ampère’s circuital law. This term completed the symmetry of the field equations, predicting that changing electric fields generate magnetic fields, and enabling propagating wave solutions in free space.'
       },
       {
@@ -2104,12 +2104,12 @@
       {
         q: '10. Ludwig Boltzmann’s famous formula $S = k_B \\ln \\Omega$ provided a revolutionary statistical interpretation of entropy by connecting it to:',
         options: [
-          'The macroscopic volume occupied by an ideal gas.',
           'The number of microscopic configurations (microstates $\\Omega$) compatible with a given macroscopic thermodynamic state.',
+          'The macroscopic volume occupied by an ideal gas.',
           'The chemical bond energy between atoms.',
           'The total gravitational potential of a closed box.'
         ],
-        answer: 1,
+        answer: 0,
         expl: 'Boltzmann showed that macroscopic thermodynamic states correspond to staggering numbers of microscopic permutations (microstates $\\Omega$). Thermodynamic irreversibility is not a mechanical impossibility, but an overwhelming statistical certainty: systems spontaneously evolve toward states with exponentially larger $\\Omega$.'
       }
     ];

@@ -1786,12 +1786,12 @@
       {
         q: '3. In his 1905 explanation of the photoelectric effect, Albert Einstein proposed that light consists of localized quanta (photons). Why did this overturn classical wave theory?',
         options: [
-          'Classical wave theory predicted that increasing light intensity should increase electron kinetic energy, whereas experiments showed kinetic energy depends strictly on light frequency ($K_{\\max} = h\\nu - \\Phi$).',
           'Classical wave theory could not explain why light travels in straight lines.',
+          'Classical wave theory predicted that increasing light intensity should increase electron kinetic energy, whereas experiments showed kinetic energy depends strictly on light frequency ($K_{\\max} = h\\nu - \\Phi$).',
           'Electrons were emitted only after hours of continuous illumination.',
           'Photons carry electric charge that repels electrons.'
         ],
-        answer: 0,
+        answer: 1,
         expl: 'Under classical wave theory, brighter light carries more energy and should eject faster electrons. Einstein showed that light delivers energy in discrete photon packets; each photon interacts one-on-one with an electron, making kinetic energy depend on frequency ($h\\nu$) rather than intensity.'
       },
       {
@@ -1799,43 +1799,43 @@
         options: [
           'Human senses suffer from neurological processing delays.',
           'Clocks run slower at higher altitudes due to gravity.',
-          'Because the speed of light $c$ is identical for all inertial observers, events that are simultaneous in one reference frame occur at different times in a frame moving relative to it.',
-          'Simultaneity depends on whether the observer is accelerating.'
+          'Simultaneity depends on whether the observer is accelerating.',
+          'Because the speed of light $c$ is identical for all inertial observers, events that are simultaneous in one reference frame occur at different times in a frame moving relative to it.'
         ],
-        answer: 2,
+        answer: 3,
         expl: 'Einstein demonstrated through his train thought experiment that because light signals take finite time and travel at speed $c$ in all frames, two spatially separated events that appear simultaneous to an observer on the platform do not appear simultaneous to an observer aboard the moving train.'
       },
       {
         q: '5. What astonishing observation in the 1909–1911 Geiger-Marsden experiment compelled Ernest Rutherford to propose the nuclear model of the atom?',
         options: [
           'All alpha particles were completely absorbed by the gold foil.',
-          'A tiny fraction (about 1 in 8,000) of positively charged alpha particles were back-scattered at angles greater than 90 degrees.',
           'Gold foil emitted bright blue fluorescence when hit by X-rays.',
-          'Electrons transformed into protons upon impact.'
+          'Electrons transformed into protons upon impact.',
+          'A tiny fraction (about 1 in 8,000) of positively charged alpha particles were back-scattered at angles greater than 90 degrees.'
         ],
-        answer: 1,
+        answer: 3,
         expl: 'In Thomson’s diffuse "plum pudding" model, the electric field was far too weak to deflect fast alpha particles significantly. The fact that heavy alpha particles rebounded backward proved that almost all the mass and positive charge of the atom is concentrated in a minuscule central nucleus.'
       },
       {
         q: '6. How did Niels Bohr overcome the classical paradox that an orbiting electron should rapidly radiate its energy and spiral into the nucleus in less than a nanosecond?',
         options: [
           'He claimed electrons move in straight lines rather than circles.',
-          'He postulated that electrons inhabit discrete, non-radiating "stationary orbits" with quantized orbital angular momentum ($L = n\\hbar$).',
           'He replaced the Coulomb force with gravitational attraction.',
-          'He assumed the nucleus is hollow.'
+          'He assumed the nucleus is hollow.',
+          'He postulated that electrons inhabit discrete, non-radiating "stationary orbits" with quantized orbital angular momentum ($L = n\\hbar$).'
         ],
-        answer: 1,
+        answer: 3,
         expl: 'Bohr broke with classical electrodynamics by postulating that electrons do not radiate while in stationary quantized orbits ($L = n\\hbar$). Radiation is emitted or absorbed only when an electron jumps discontinuously between orbits: $\\Delta E = h\\nu$.'
       },
       {
         q: '7. Louis de Broglie proposed in 1924 that material particles possess wave-like properties. What is the de Broglie wavelength of a particle with momentum $p$?',
         options: [
           '$\\lambda = p / h$',
-          '$\\lambda = h / p$',
           '$\\lambda = h c / p^2$',
+          '$\\lambda = h / p$',
           '$\\lambda = \\sqrt{h p}$'
         ],
-        answer: 1,
+        answer: 2,
         expl: 'de Broglie extended the Planck-Einstein relation for photons ($p = h/\\lambda$) to all matter: any moving particle with momentum $p = mv$ has an associated matter wave with wavelength $\\lambda = h/p$, confirmed by electron diffraction in 1927.'
       },
       {
@@ -1852,23 +1852,23 @@
       {
         q: '9. What does Werner Heisenberg’s Uncertainty Principle ($\\Delta x \\Delta p \\ge \\hbar/2$) state about physical reality?',
         options: [
-          'Our measuring instruments are technologically imperfect, but particles possess definite simultaneous positions and momenta in reality.',
           'Nature possesses an intrinsic ontological limit: a quantum particle cannot simultaneously possess a precisely defined position and a precisely defined momentum.',
+          'Our measuring instruments are technologically imperfect, but particles possess definite simultaneous positions and momenta in reality.',
           'Quantum particles only exist when they are observed by a conscious human.',
           'Measurement changes the mass of the particle.'
         ],
-        answer: 1,
+        answer: 0,
         expl: 'The uncertainty principle is not a limitation of experimental apparatus, but an inescapable property of wave mechanics: because position and momentum are Fourier conjugates, narrowing spatial distribution $\\Delta x$ inherently broadens momentum spread $\\Delta p$.'
       },
       {
         q: '10. What historical observation during the May 29, 1919 total solar eclipse led by Arthur Eddington confirmed Einstein’s General Theory of Relativity?',
         options: [
           'The sun’s corona was composed of ionized helium.',
-          'Light rays from stars passing near the edge of the darkened sun were deflected by the sun’s gravitational field by 1.75 arcseconds, exactly matching spacetime curvature.',
           'The speed of light slowed down inside the sun’s shadow.',
+          'Light rays from stars passing near the edge of the darkened sun were deflected by the sun’s gravitational field by close to the 1.75 arcseconds predicted by general relativity — about twice the Newtonian value.',
           'Mercury’s orbit became circular during the eclipse.'
         ],
-        answer: 1,
+        answer: 2,
         expl: 'Eddington’s expeditions to Príncipe and Sobral measured the deflection of starlight grazing the sun ($1.75$ arcseconds), twice the Newtonian corpuscular value, triumphantly proving that gravity is the geometric curvature of spacetime.'
       }
     ];

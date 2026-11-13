@@ -979,68 +979,68 @@
       {
         question: "What distinguished Thales of Miletus and the early Ionian Presocratics from preceding mythic poets (such as Hesiod and Homer)?",
         options: [
-          "They invented the telescope and discovered the rings of Saturn.",
           "They sought to explain physical phenomena (earthquakes, weather, eclipses) using primary natural material principles (arche) without invoking divine wills.",
+          "They invented the telescope and discovered the rings of Saturn.",
           "They proved mathematically that the Earth orbits the Sun.",
           "They completely rejected geometry in favor of mystical poetry."
         ],
-        answer: 1,
+        answer: 0,
         explanation: "The Ionian revolution consisted of seeking natural, material causes (water, air, boundless matter) rather than treating events as the arbitrary whims of Zeus, Poseidon, or Apollo."
       },
       {
         question: "According to Eratosthenes' geometric calculation (c. 240 BCE), why was the Sun directly vertical at Syene on the summer solstice while casting a 7.2° shadow at Alexandria?",
         options: [
           "Because the Sun is only a few miles above the flat Earth.",
-          "Because the Earth is a curved sphere, so parallel incoming solar rays strike different latitudes at different angles relative to the local vertical.",
           "Because Alexandria had taller gnomons that bent sunlight.",
-          "Because of atmospheric refraction bending light over the Mediterranean."
+          "Because of atmospheric refraction bending light over the Mediterranean.",
+          "Because the Earth is a curved sphere, so parallel incoming solar rays strike different latitudes at different angles relative to the local vertical."
         ],
-        answer: 1,
-        explanation: "Because the Earth's surface is curved, parallel rays from the distant Sun illuminate Syene's vertical well directly while striking Alexandria's plumb line at a 7.2° angle (1/50 of a circle)."
+        answer: 3,
+        explanation: "Because the Earth's surface is curved, nearly parallel rays from the distant Sun illuminate Syene's vertical well directly while striking Alexandria's plumb line at a 7.2° angle (1/50 of a circle)."
       },
       {
-        question: "How did Archimedes actually solve the problem of King Hiero's golden crown according to his treatise 'On Floating Bodies'?",
+        question: "Which method for testing King Hiero's crown is physically workable and consistent with Archimedes' 'On Floating Bodies' (as Galileo proposed)?",
         options: [
           "By running through Syracuse shouting 'Eureka' after splashing in a bath.",
           "By melting down the crown to separate the gold from silver chemically.",
-          "By using a sensitive hydrostatic balance to compare the buoyant force (apparent mass loss) of the crown in water against an equal mass of pure gold.",
-          "By measuring the crown's electrical conductivity with copper wires."
+          "By measuring the crown's electrical conductivity with copper wires.",
+          "By using a sensitive hydrostatic balance to compare the buoyant force (apparent mass loss) of the crown in water against an equal mass of pure gold."
         ],
-        answer: 2,
-        explanation: "Direct water bucket overflow is unworkable due to meniscus and surface tension errors. Archimedes used an hydrostatic balance: silver has lower density than gold, displacing more water and generating greater buoyant upthrust."
+        answer: 3,
+        explanation: "Measuring a bucket's overflow is too crude for the tiny volume difference. Galileo proposed a hydrostatic balance instead — we do not actually know what Archimedes did: silver has lower density than gold, displacing more water and generating greater buoyant upthrust."
       },
       {
         question: "In the atomic theory of Democritus and Leucippus (c. 420 BCE), what physically exists in the universe?",
         options: [
-          "Only continuous fluid ether animated by divine spirit.",
           "Indivisible, uncuttable particles (atoma) of various geometric shapes moving through an infinite void (vacuum).",
+          "Only continuous fluid ether animated by divine spirit.",
           "Four eternal elements held together by Love and Strife.",
           "Only consciousness, while matter is a sensory illusion."
         ],
-        answer: 1,
+        answer: 0,
         explanation: "Democritus famously declared: 'By convention sweet, by convention bitter, by convention color, but in reality atoms and void.'"
       },
       {
         question: "How did the ancient Indian atomic doctrine of the Vaiśeṣika school (founded by sage Kaṇāda) conceive of atoms (paramāṇu)?",
         options: [
           "As identical billiard balls without elemental differentiation.",
-          "As eternal, indestructible particles of four physical substances (Earth, Water, Fire, Air) combining into dyads (dvyaṇuka) and triads through invisible forces (adṛṣṭa).",
           "As pure mathematical points lacking physical reality.",
+          "As eternal, indestructible particles of four physical substances (Earth, Water, Fire, Air) combining into dyads (dvyaṇuka) and triads through invisible forces (adṛṣṭa).",
           "As fleeting packets of light that disappear every microsecond."
         ],
-        answer: 1,
+        answer: 2,
         explanation: "The Vaiśeṣika Sūtra derived an atomic model where eternal paramāṇu of the four physical elements aggregate into compound dyads and triads to construct the macroscopic world."
       },
       {
         question: "What optical discovery was recorded in the Mohist Canon (Mozi) in Warring States China (c. 4th century BCE)?",
         options: [
           "The invention of the compound glass microscope.",
-          "The camera obscura: proving that light travels in straight lines and that rays intersecting through a pinhole form an inverted image on a screen.",
           "The discovery of the wave nature of light using diffraction slits.",
-          "The measurement of the finite speed of light using rotating mirrors."
+          "The measurement of the finite speed of light using rotating mirrors.",
+          "The camera obscura: proving that light travels in straight lines and that rays intersecting through a pinhole form an inverted image on a screen."
         ],
-        answer: 1,
-        explanation: "The Mohist Canon contains the earliest known scientific description of the pinhole camera obscura, explaining image inversion through the rectilinear crossing of light rays."
+        answer: 3,
+        explanation: "The Mohist Canon contains one of the earliest known descriptions of the pinhole camera obscura, explaining image inversion through the rectilinear crossing of light rays."
       },
       {
         question: "What empirical evidence did Aristotle cite in 'De Caelo' to prove that the Earth is a sphere, not a flat disc?",
@@ -1056,34 +1056,34 @@
       {
         question: "In Aristotle's physics, what is the difference between 'natural motion' and 'violent (forced) motion'?",
         options: [
-          "Natural motion occurs in water; violent motion occurs in air.",
           "Natural motion is the intrinsic tendency of an element to seek its natural resting place (Earth falls to center, Fire rises); violent motion is imposed by continuous contact with an external force.",
+          "Natural motion occurs in water; violent motion occurs in air.",
           "Natural motion is circular; violent motion is straight.",
           "Natural motion requires gravity; violent motion requires electromagnetism."
         ],
-        answer: 1,
+        answer: 0,
         explanation: "Aristotle argued that heavy elements (gravitas) naturally seek the cosmic center, while light elements (levitas) naturally rise; any other motion requires continuous external mechanical pushing."
       },
       {
         question: "In the classical Indian Nyāya epistemology, what is 'vyāpti'?",
         options: [
           "The spiritual liberation of the soul from reincarnation.",
-          "The invariant, universal concomitance between the evidence (hetu) and the inferred property (sādhya), such as 'wherever there is smoke, there is fire'.",
           "A ceremonial sacrifice performed before public debates.",
+          "The invariant, universal concomitance between the evidence (hetu) and the inferred property (sādhya), such as 'wherever there is smoke, there is fire'.",
           "The classification of plants into medicinal families."
         ],
-        answer: 1,
+        answer: 2,
         explanation: "Vyāpti is the foundational relation of universal concomitance that validates an inference: without a verified vyāpti connection, deduction degenerates into fallacy (hetvābhāsa)."
       },
       {
         question: "Why did modern 17th-century science eventually reject Aristotle's 'Final Cause' (teleology) while retaining Efficient and Material causes?",
         options: [
           "Because Aristotle never wrote about final causes.",
-          "Because inanimate objects (falling stones, orbiting planets) do not possess internal desires, intentions, or future goals; physical laws act through blind mechanical forces.",
           "Because teleology was declared illegal by royal decree.",
+          "Because inanimate objects (falling stones, orbiting planets) do not possess internal desires, intentions, or future goals; physical laws act through blind mechanical forces.",
           "Because final causes can only be measured with mercurial thermometers."
         ],
-        answer: 1,
+        answer: 2,
         explanation: "Mechanistic physics demonstrated that matter moves because of immediate physical forces (efficient causes) acting on physical masses, not because rocks 'desire' to reach the ground."
       }
     ];

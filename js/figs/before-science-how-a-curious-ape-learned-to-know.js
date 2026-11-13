@@ -997,11 +997,11 @@
         question: "Which scientific method provided the microstratigraphic proof of controlled fire at Wonderwerk Cave (~1.0 Ma)?",
         options: [
           "Potassium-argon dating of ash layers directly.",
-          "Fourier-Transform Infrared Microspectroscopy (FTIR) identifying thermally altered bone and ashed plant matter at 400–700°C in unweathered cave sediments.",
           "Radiocarbon dating of charred mammoth hides.",
-          "Satellite radar detection of ancient smoke plumes."
+          "Satellite radar detection of ancient smoke plumes.",
+          "Fourier-Transform Infrared Microspectroscopy (FTIR) identifying burnt bone and ashed plant matter in place, deep inside the cave."
         ],
-        answer: 1,
+        answer: 3,
         explanation: "Berna et al. (2012) used micromorphological thin sections and FTIR to identify ash and burnt bone within cave strata too deep to have been produced by surface wildfires."
       },
       {
@@ -1019,67 +1019,67 @@
         question: "What did the 2017 thermoluminescence dating of fossil remains at Jebel Irhoud, Morocco reveal about the origin of Homo sapiens?",
         options: [
           "Homo sapiens originated solely in southern Africa roughly 50,000 years ago.",
-          "Our species emerged around 315,000 years ago in a pan-African mosaic rather than a single East African event 200,000 years ago.",
           "Neanderthals and modern humans evolved completely independently on different continents without common ancestry.",
+          "Our species emerged around 315,000 years ago in a pan-African mosaic rather than a single East African event 200,000 years ago.",
           "Stone tool production began simultaneously with the invention of agriculture."
         ],
-        answer: 1,
+        answer: 2,
         explanation: "Hublin et al. pushed back the known antiquity of anatomically modern Homo sapiens to ~315 ka, demonstrating our species had evolved across Africa far earlier than previously believed."
       },
       {
-        question: "Why does radiocarbon (¹⁴C) dating cannot be applied to Oldowan pebble tools or 1.5-million-year-old Acheulean handaxes?",
+        question: "Why can radiocarbon (¹⁴C) dating not be applied to Oldowan pebble tools or 1.5-million-year-old Acheulean handaxes?",
         options: [
+          "With a half-life of 5,730 years, after roughly 50,000 years (~9 half-lives) only about 0.2% of the ¹⁴C remains, too little to measure reliably.",
           "Stone absorbs excessive radiation from groundwater, resetting the clock.",
-          "With a half-life of 5,730 years, after roughly 50,000 years (~10 half-lives) the remaining ¹⁴C activity falls below analytical detection thresholds.",
           "¹⁴C decay only begins when rock is exposed to sunlight at the surface.",
           "Only volcanic basalt contains radiocarbon, whereas Oldowan tools are flint."
         ],
-        answer: 1,
+        answer: 0,
         explanation: "Radiocarbon is effective only on organic material up to ~50,000 years ago. Early hominin sites are dated using ⁴⁰Ar/³⁹Ar on intercalated volcanic tuffs, paleomagnetism, or luminescence."
       },
       {
         question: "What technological feature distinguishes Mode 3 Levallois flaking from earlier Mode 2 Acheulean handaxes?",
         options: [
           "Levallois tools are made by heating iron ore in ceramic furnaces.",
-          "The knapper carefully prepares the convexities of the core in advance so that a single final blow releases a tool of predetermined shape.",
           "Tools are made purely by rubbing river cobbles against abrasive granite.",
-          "Levallois techniques eliminate the use of hammerstones in favor of wooden wedges."
+          "Levallois techniques eliminate the use of hammerstones in favor of wooden wedges.",
+          "The knapper carefully prepares the convexities of the core in advance so that a single final blow releases a tool of predetermined shape."
         ],
-        answer: 1,
+        answer: 3,
         explanation: "Levallois knapping represents sophisticated mental templating: the core is an abstract matrix prepared specifically to extract a predetermined projectile or cutting edge."
       },
       {
-        question: "What was discovered at Blombos Cave (South Africa, ~73–100 ka) that provides definitive proof of abstract symbolic communication?",
+        question: "What was discovered at Blombos Cave (South Africa, ~73–100 ka) that is widely taken as evidence of symbolic behaviour?",
         options: [
+          "Engraved ochre plaques incised with deliberate geometric cross-hatching, and an ochre-processing workshop.",
           "Cuneiform clay tablets detailing cattle counts.",
-          "Engraved ochre plaques incised with deliberate geometric cross-hatch cross-hatching and compound pigment recipes.",
           "Cast bronze animal figurines.",
           "Glass beads traded from the Mediterranean."
         ],
-        answer: 1,
+        answer: 0,
         explanation: "Henshilwood and colleagues excavated carefully ground ochre slabs with intentional, intersecting geometric cross-hatches dated to ~77 ka, far predating European cave art."
       },
       {
-        question: "What is the primary scientific consensus regarding the 29 notches on the Lebombo bone (Eswatini, ~44 ka)?",
+        question: "What can be said with confidence about the 29 notches on the Lebombo bone (Eswatini/South Africa, ~44 ka)?",
         options: [
+          "The notches were cut deliberately, probably over time — but whether they count days of the Moon or anything else is unknown.",
           "It is a weapon tally recording military victories between hominin tribes.",
-          "It represents an intentional numerical tally, closely matching the 29.5-day synodic lunar month or menstrual cycle tracking.",
           "It was accidentally produced by hyena gnawing during burial.",
           "It served as a musical flute with pitch holes."
         ],
-        answer: 1,
-        explanation: "Microscopic analysis (d'Errico et al.) shows the notches were incised sequentially with deliberate tools, making it one of the oldest known mathematical counting and lunar tracking artifacts."
+        answer: 0,
+        explanation: "Microscopic analysis (d'Errico et al.) shows the notches were incised sequentially with deliberate tools, making it one of the oldest possible tallies. A lunar count is an attractive but unproven interpretation, and the bone is broken."
       },
       {
         question: "Why do modern archaeologists reject the mid-20th century concept of a sudden 50,000-year-old 'Upper Paleolithic Human Revolution'?",
         options: [
           "Because stone tools were not invented until 10,000 years ago.",
-          "Because Middle Stone Age excavations across Africa demonstrate that art, composite tools, hafting, and trade emerged gradually over 250,000 years.",
           "Because genetic testing proved Neanderthals never interacted with Homo sapiens.",
+          "Because Middle Stone Age excavations across Africa demonstrate that art, composite tools, hafting, and trade emerged gradually over 250,000 years.",
           "Because ancient humans did not possess vocal cords until the Bronze Age."
         ],
-        answer: 1,
-        explanation: "As documented by McBrearty and Brooks ('The Revolution That Wasn't'), every marker of cognitive modernity (pigment processing, bladelets, marine foraging, bone points) appeared piecemeal in Africa long before 50 ka."
+        answer: 2,
+        explanation: "As documented by McBrearty and Brooks ('The Revolution That Wasn't'), markers of cognitive modernity (pigment processing, bladelets, marine foraging, bone points) appeared piecemeal in Africa long before 50 ka."
       }
     ];
 

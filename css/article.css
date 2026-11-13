@@ -958,3 +958,79 @@ figure[data-fig] figcaption,
     margin: 1.25rem 0;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Tap-to-define glossary terms (js/glossary.js)
+   -------------------------------------------------------------------------- */
+.gloss-term {
+  display: inline;
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: help;
+  text-decoration: underline dotted var(--accent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.22em;
+  -webkit-tap-highlight-color: transparent;
+  border-radius: 2px;
+}
+.gloss-term:hover,
+.gloss-term[aria-expanded="true"] {
+  background: var(--accent-light);
+  text-decoration-style: solid;
+}
+.gloss-term:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.gloss-pop {
+  position: absolute;
+  z-index: 1000;
+  box-sizing: border-box;
+  max-width: 340px;
+  padding: 0.7rem 0.85rem 0.75rem;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--accent-border);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+.gloss-pop[hidden] { display: none; }
+.gloss-pop-term {
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 0.2rem;
+}
+.gloss-pop-def { color: var(--ink-secondary); }
+@media print {
+  .gloss-term { text-decoration: none; }
+  .gloss-pop { display: none !important; }
+}
+
+/* --------------------------------------------------------------------------
+   Phone-width safety for figures and tables (no sideways page scrolling)
+   -------------------------------------------------------------------------- */
+.fig { max-width: 100%; min-width: 0; }
+.fig svg { max-width: 100%; overflow: hidden; }
+.fig canvas { max-width: 100%; }
+.fig-controls { flex-wrap: wrap; max-width: 100%; }
+.fig-control-group { flex-wrap: wrap; min-width: 0; max-width: 100%; }
+.fig label { flex-wrap: wrap; max-width: 100%; }
+.fig input[type="range"], .fig select { max-width: 100%; min-width: 0; }
+@media (max-width: 720px) {
+  .article-content table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .fig { overflow-x: auto; }
+}
+/* Wide equations scroll inside their own box instead of widening the page */
+.katex-display { max-width: 100%; overflow-x: auto; overflow-y: hidden; padding: 0.15em 0; }
+.article-content { overflow-wrap: break-word; }

@@ -825,44 +825,44 @@
         question: "How did Georges Cuvier's comparative anatomy in Paris establish the reality of extinction?",
         options: [
           "He proved that fossils are mineral concretions grown inside rocks",
-          "He proved that fossil mammoth and mastodon bones were anatomically distinct from all living African and Indian elephants, demonstrating that entire species had vanished from the Earth",
           "He claimed that animals transform into trees during floods",
+          "He proved that fossil mammoth and mastodon bones were anatomically distinct from all living African and Indian elephants, demonstrating that entire species had vanished from the Earth",
           "He discovered fossil dinosaur DNA in amber"
         ],
-        answer: 1,
+        answer: 2,
         explanation: "By meticulously comparing jaw and tooth anatomy, Cuvier demonstrated that fossil mammoths were distinct from any living elephant species, overthrowing the theological dogma that extinction is impossible because God would never permit a link in the Great Chain of Being to break."
       },
       {
         question: "What is the biological principle established by Rudolf Virchow in 1858 ('Omnis cellula e cellula')?",
         options: [
-          "Cells generate spontaneously from inorganic crystals",
           "All living cells arise exclusively from the division of pre-existing cells",
+          "Cells generate spontaneously from inorganic crystals",
           "Cells have no nuclei",
           "Plants and animals are not related"
         ],
-        answer: 1,
+        answer: 0,
         explanation: "Virchow completed the cell doctrine of Schleiden and Schwann by establishing that cells do not crystallize out of a formless blastema, but multiply strictly through the division of pre-existing living cells."
       },
       {
         question: "What core ecological concept from Thomas Malthus’s 'Essay on Population' catalyzed Darwin’s insight into natural selection?",
         options: [
           "Farming techniques double every generation",
-          "Organisms reproduce geometrically, while food resources increase only arithmetically, creating an inevitable struggle for survival in which favorable variations are preserved",
           "Predators always outnumber prey",
+          "Organisms reproduce geometrically, while food resources increase only arithmetically, creating an inevitable struggle for survival in which favorable variations are preserved",
           "Human population decreases during peacetime"
         ],
-        answer: 1,
+        answer: 2,
         explanation: "Reading Malthus in October 1838, Darwin realized that because far more individuals are born than can possibly survive, any slight variation that gives an organism an advantage in the struggle for life will tend to be preserved and passed on."
       },
       {
         question: "How did Louis Pasteur's 1861 swan-neck flask experiment disprove the theory of spontaneous generation?",
         options: [
           "He boiled broth in sealed lead containers that prevented all air exchange",
-          "He allowed air to circulate freely into boiled broth through an S-shaped neck that trapped airborne dust in its curve; broth remained sterile indefinitely until dust was admitted",
           "He proved that bacteria only grow in ice",
+          "He allowed air to circulate freely into boiled broth through an S-shaped neck that trapped airborne dust in its curve; broth remained sterile indefinitely until dust was admitted",
           "He added antibiotics to the broth"
         ],
-        answer: 1,
+        answer: 2,
         explanation: "Pasteur demonstrated that air itself carries no 'vital force' capable of generating life spontaneously; broth decomposed only when living airborne microbial spores and dust particles were permitted to enter."
       },
       {
@@ -879,34 +879,34 @@
       {
         question: "What did Thomas Hunt Morgan and his 'Fly Room' team at Columbia University discover using Drosophila melanogaster?",
         options: [
-          "Fruit flies reproduce by binary fission",
           "Genes reside at specific linear loci on physical chromosomes, displaying sex linkage and crossing over during meiosis",
+          "Fruit flies reproduce by binary fission",
           "Flies have no genes",
           "Mutations cannot be produced by radiation"
         ],
-        answer: 1,
+        answer: 0,
         explanation: "Morgan's group demonstrated the chromosome theory of heredity: tracking white-eyed fly mutations proved that specific genes are physically located on chromosomes, enabling the construction of the world's first genetic linkage maps."
       },
       {
         question: "What did the Avery-MacLeod-McCarty (1944) and Hershey-Chase (1952) experiments prove about the chemical nature of genes?",
         options: [
-          "Genes are made of structural proteins with 20 amino acids",
           "Deoxyribonucleic acid (DNA), not protein, is the chemical carrier of genetic information",
+          "Genes are made of structural proteins with 20 amino acids",
           "Genes are made of lipid membranes",
           "Genes exist only in bacterial ribosomes"
         ],
-        answer: 1,
+        answer: 0,
         explanation: "For decades, biologists believed complex proteins must carry heredity. Avery's team showed that pure DNA transfers virulent traits between pneumococcal strains, and Hershey-Chase proved viral DNA enters bacteria to direct replication."
       },
       {
         question: "What critical empirical feature did Rosalind Franklin’s 'Photo 51' X-ray diffraction photograph demonstrate about DNA?",
         options: [
-          "That DNA is a triple helix with bases on the outside",
           "That DNA has an antiparallel double helical structure (B-form) with the phosphate-sugar backbones on the outside and bases packed within",
+          "That DNA is a triple helix with bases on the outside",
           "That DNA is a circular single-stranded ring",
           "That DNA contains no phosphorus"
         ],
-        answer: 1,
+        answer: 0,
         explanation: "Franklin's crystalline Photo 51 revealed the classic X-shaped diffraction pattern characteristic of a double helix, providing the exact helical pitch (3.4 nm per turn) and diameter (2.0 nm) that guided Watson and Crick's model."
       },
       {
@@ -923,12 +923,12 @@
       {
         question: "What profound evolutionary truth is demonstrated by the universality of the genetic code across all living organisms?",
         options: [
-          "Life originated independently in thousands of separate events",
           "All terrestrial life—from bacteria and fungi to oak trees and humans—shares a single common ancestry from a Last Universal Common Ancestor (LUCA)",
+          "Life originated independently in thousands of separate events",
           "Viruses are not biological entities",
           "DNA mutates at a strictly constant rate across all species"
         ],
-        answer: 1,
+        answer: 0,
         explanation: "Because a bacterium, a fruit fly, and a human cell read the same triplet codon (e.g., UUU for phenylalanine, AUG for methionine), all living things are branches of a single unbroken tree of life originating from a common ancestor billions of years ago."
       }
     ];

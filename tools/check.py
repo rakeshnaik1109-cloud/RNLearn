@@ -3,7 +3,7 @@
 RNLearn — Integrity & Validation Checker (tools/check.py)
 Validates the entire static site:
 - Manifest content/posts.json schema and types
-- JSON and XML syntax (feed.xml, sitemap.xml, search-index.json)
+- JSON syntax (search-index.json)
 - Single <h1>, <title>, meta description, and canonical URL per page
 - Internal link and #anchor integrity
 - data-fig and FIG. registry alignment
@@ -16,7 +16,6 @@ import sys
 import os
 import json
 import re
-import xml.etree.ElementTree as ET
 from urllib.parse import urlparse
 
 REQUIRED_POST_FIELDS = [
@@ -75,17 +74,6 @@ def check_manifest(root_dir, errors):
             errors.append(f"Post '{slug}' summary exceeds 200 characters ({len(summary)} chars)")
 
     return posts
-
-def check_xml_files(root_dir, errors):
-    for xml_rel in ["sitemap.xml", "feed.xml"]:
-        xml_path = os.path.join(root_dir, xml_rel)
-        if not os.path.exists(xml_path):
-            errors.append(f"Missing {xml_rel}")
-            continue
-        try:
-            ET.parse(xml_path)
-        except Exception as e:
-            errors.append(f"XML parse error in {xml_rel}: {e}")
 
 def check_json_files(root_dir, errors):
     for json_rel in ["search-index.json"]:
@@ -239,7 +227,6 @@ def main():
     print("Running RNLearn site checks...")
 
     manifest = check_manifest(root_dir, errors)
-    check_xml_files(root_dir, errors)
     check_json_files(root_dir, errors)
 
     html_files = collect_html_files(root_dir)

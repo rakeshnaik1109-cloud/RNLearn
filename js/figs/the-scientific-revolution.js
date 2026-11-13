@@ -956,56 +956,56 @@
       {
         question: "What observational discovery by Tycho Brahe in 1572 shattered Aristotle's doctrine of immutable heavenly spheres?",
         options: [
-          "The moons of Jupiter",
           "A 'New Star' (Supernova 1572) that displayed zero measurable daily parallax, proving it lay far beyond the Moon in the supposedly changeless stellar sphere",
+          "The moons of Jupiter",
           "The rings of Saturn",
           "The phases of Mercury"
         ],
-        answer: 1,
+        answer: 0,
         explanation: "Tycho Brahe's rigorous triangulation showed that the 1572 supernova displayed no diurnal parallax relative to nearby stars, proving it was situated far beyond the Moon in the celestial realm, disproving the Aristotelian dogma that the heavens are eternal and unalterable."
       },
       {
         question: "What stubborn numerical discrepancy forced Johannes Kepler to abandon circular orbits for Mars?",
         options: [
           "A 45-degree error in solar eclipse calculations",
-          "An 8-arcminute discrepancy between Tycho Brahe's observations and the best possible circular orbit",
           "A 3-day error in the Martian calendar",
-          "The discovery of Martian moons"
+          "The discovery of Martian moons",
+          "An 8-arcminute discrepancy between Tycho Brahe's observations and the best possible circular orbit"
         ],
-        answer: 1,
+        answer: 3,
         explanation: "In 'Astronomia Nova' (1609), Kepler wrote that if he had believed he could ignore 8 arcminutes of error, he would have patched up the hypothesis; but because Tycho's observations were accurate to within 2 arcminutes, those 8 arcminutes alone paved the way for a total reformation of astronomy (ellipses)."
       },
       {
         question: "How did Galileo’s observation of the phases of Venus in 1610 decisively disprove Ptolemaic geocentrism?",
         options: [
-          "It showed that Venus emits its own light",
           "Venus exhibited a complete cycle of phases (from crescent to gibbous and full), proving it orbits the Sun, which was geometrically impossible in Ptolemy's model",
+          "It showed that Venus emits its own light",
           "It revealed oceans and continents on Venus",
           "It proved Venus has four orbiting moons"
         ],
-        answer: 1,
+        answer: 0,
         explanation: "In Ptolemy's system, Venus is permanently tethered between the Earth and the Sun and could never appear more than half illuminated. Galileo observed a full cycle of phases from crescent to gibbous, proving Venus passes behind the Sun as it orbits."
       },
       {
         question: "What did Galileo demonstrate using his inclined plane experiments in the 'Two New Sciences' (1638)?",
         options: [
-          "Heavier objects fall significantly faster than lighter ones in proportion to their weight",
           "The total distance traveled by an accelerating body is proportional to the square of the elapsed time (s ∝ t²), with distance increments following the odd numbers",
+          "Heavier objects fall significantly faster than lighter ones in proportion to their weight",
           "Friction can be completely eliminated by applying olive oil",
           "Pendulum frequency depends strictly on the bob's mass"
         ],
-        answer: 1,
+        answer: 0,
         explanation: "By diluting gravity down an inclined plane, Galileo proved that uniform acceleration produces distance proportional to time squared (s ∝ t²), and that successive distances traversed in equal time intervals follow the sequence of odd numbers (1, 3, 5, 7, ...)."
       },
       {
         question: "What was the core epistemological argument of Francis Bacon’s 'Novum Organum' (1620)?",
         options: [
           "All knowledge can be derived through pure Cartesian mathematical deduction",
-          "Scientific truth must be built systematically from structured empirical observations and experiments using inductive tables, clearing away 'Idols of the Mind'",
           "Ancient scholastic authority is superior to modern observation",
-          "Physics should be subordinated to astrology"
+          "Physics should be subordinated to astrology",
+          "Scientific truth must be built systematically from structured empirical observations and experiments using inductive tables, clearing away 'Idols of the Mind'"
         ],
-        answer: 1,
+        answer: 3,
         explanation: "Bacon rejected blind reliance on traditional syllogisms and scholastic authority, arguing that true natural knowledge must be built from the ground up through systematic inductive observation, experimental tables, and elimination of cognitive biases ('Idols')."
       },
       {
@@ -1034,11 +1034,11 @@
         question: "What did Newton’s 'experimentum crucis' (crucial experiment) with two prisms demonstrate about white light?",
         options: [
           "Glass prisms physically tint and stain pure light into rainbow colors",
-          "White light is a heterogeneous mixture of rays with differing innate refrangibilities; once isolated, monochromatic colors cannot be altered by further refraction",
           "Light travels faster in glass than in air",
-          "Colors exist only in the human eye and have no physical wavelength"
+          "Colors exist only in the human eye and have no physical wavelength",
+          "White light is a heterogeneous mixture of rays with differing innate refrangibilities; once isolated, monochromatic colors cannot be altered by further refraction"
         ],
-        answer: 1,
+        answer: 3,
         explanation: "Newton showed that isolating a single color (like red) with a slit and passing it through a second prism bent the ray but did not change its color, proving that white sunlight is a composite of rays with immutable refrangibilities rather than altered light."
       },
       {

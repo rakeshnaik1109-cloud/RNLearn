@@ -1199,11 +1199,11 @@
         q: '1. Why did David Hume argue that inductive reasoning cannot be justified through purely logical demonstration?',
         options: [
           'Because human senses are fundamentally deceitful.',
-          'Because any inductive justification of induction (assuming the future will resemble the past because it has in the past) is a circular argument (begging the question).',
           'Because nature operates by random supernatural intervention.',
+          'Because any inductive justification of induction (assuming the future will resemble the past because it has in the past) is a circular argument (begging the question).',
           'Because mathematics cannot calculate probabilities.'
         ],
-        answer: 1,
+        answer: 2,
         expl: 'Hume demonstrated that justifying induction by appealing to its past success is a circular argument: it assumes the very principle of the uniformity of nature that it attempts to prove.'
       },
       {
@@ -1211,32 +1211,32 @@
         options: [
           'Scientific theories can be proven absolutely true beyond all doubt.',
           'Scientific theories are published in peer-reviewed journals.',
-          'Scientific theories make precise, testable predictions that are open to potential empirical falsification.',
-          'Scientific theories are derived directly from unbiased sensory observation.'
+          'Scientific theories are derived directly from unbiased sensory observation.',
+          'Scientific theories make precise, testable predictions that are open to potential empirical falsification.'
         ],
-        answer: 2,
+        answer: 3,
         expl: 'Popper argued that a theory is scientific if and only if it takes risks: it must specify in advance which empirical observations, if discovered, would refute it. Irrefutable theories are metaphysical or pseudoscientific.'
       },
       {
         q: '3. In Thomas Kuhn’s model, what characterizes the period of "Normal Science"?',
         options: [
-          'Constant radical overthrow of core foundational assumptions.',
           'Conservative "puzzle-solving" within the framework of an accepted paradigm, refining measurements without questioning the paradigm itself.',
+          'Constant radical overthrow of core foundational assumptions.',
           'Scientists engaging in philosophical debates about reality.',
           'Total chaos without any shared consensus.'
         ],
-        answer: 1,
+        answer: 0,
         expl: 'Normal science is conservative research firmly based on past achievements: scientists take the paradigm for granted, solving specialized puzzles and fitting nature into the paradigm’s conceptual boxes.'
       },
       {
         q: '4. What did Thomas Kuhn mean by the claim that rival scientific paradigms are "incommensurable"?',
         options: [
           'Scientific equations cannot be converted into metric units.',
-          'Proponents of competing paradigms share no neutral, theory-independent observation language and disagree on standards, meanings, and evidence, making direct objective comparison impossible.',
           'Older scientists always refuse to speak to younger scientists.',
-          'Scientific paradigms can only be described in natural language.'
+          'Scientific paradigms can only be described in natural language.',
+          'Proponents of competing paradigms share no neutral, theory-independent observation language and disagree on standards, meanings, and evidence, making direct objective comparison impossible.'
         ],
-        answer: 1,
+        answer: 3,
         expl: 'Incommensurability means that because words and observations change meaning across paradigms (e.g., "mass" in Newton vs. Einstein), there is no neutral meta-language to judge them without bias.'
       },
       {
@@ -1265,44 +1265,44 @@
         q: '7. The Duhem-Quine Thesis ("Holism") demonstrates that:',
         options: [
           'All scientific equations must be balanced symmetrically.',
-          'An experimental test never tests a theoretical hypothesis in isolation, but always an interconnected web of core theories, auxiliary assumptions, and instrument calibrations.',
           'Observation is completely independent of theoretical beliefs.',
-          'Single experiments can definitively settle all scientific disputes.'
+          'Single experiments can definitively settle all scientific disputes.',
+          'An experimental test never tests a theoretical hypothesis in isolation, but always an interconnected web of core theories, auxiliary assumptions, and instrument calibrations.'
         ],
-        answer: 1,
+        answer: 3,
         expl: 'Pierre Duhem and W. V. O. Quine showed that when an experiment contradicts a prediction, logic cannot tell you which premise in the web failed: the core theory, the telescope optics, or the atmospheric model.'
       },
       {
         q: '8. How does Bayesian confirmation theory view the relationship between evidence and scientific hypotheses?',
         options: [
-          'Theories are either 100% verified or 100% falsified.',
           'Evidence shifts the subjective degree of rational belief (probability $P(H)$) according to Bayes’ rule: $P(H|E) = \\frac{P(E|H) P(H)}{P(E)}$.',
+          'Theories are either 100% verified or 100% falsified.',
           'Probabilities apply only to rolling dice, never to physical laws.',
           'Evidence has no effect on belief.'
         ],
-        answer: 1,
+        answer: 0,
         expl: 'Bayesianism models scientific learning as rational probabilistic updating: new evidence incrementally raises or lowers the posterior confidence in a hypothesis based on its prior likelihood and diagnostic power.'
       },
       {
         q: '9. What is the "Pessimistic Meta-Induction" against scientific realism (formulated by Larry Laudan)?',
         options: [
           'Scientists are too pessimistic about funding.',
-          'Because the vast majority of past successful scientific theories (caloric, phlogiston, luminiferous ether) turned out to be false, we have strong inductive reason to expect our current successful theories will also be proven false.',
           'Human technology is declining over historical epochs.',
+          'Because the vast majority of past successful scientific theories (caloric, phlogiston, luminiferous ether) turned out to be false, we have strong inductive reason to expect our current successful theories will also be proven false.',
           'Computers will replace human scientists.'
         ],
-        answer: 1,
+        answer: 2,
         expl: 'The pessimistic meta-induction challenges scientific realism by observing that the history of science is a graveyard of empirically successful theories whose central theoretical entities were later rejected as non-existent.'
       },
       {
         q: '10. What is the primary cause of the contemporary "Replication Crisis" in empirical science?',
         options: [
           'Scientists no longer have access to computers.',
-          'A combination of low statistical power (small sample sizes), p-hacking, and publication bias (the "file-drawer effect" where negative null results remain unpublished).',
           'Mathematical formulas are too complicated.',
+          'A combination of low statistical power (small sample sizes), p-hacking, and publication bias (the "file-drawer effect" where negative null results remain unpublished).',
           'The speed of light is changing over time.'
         ],
-        answer: 1,
+        answer: 2,
         expl: 'The replication crisis exposed systemic incentives: pressure to publish surprising positive results led to publication bias and p-hacking of underpowered studies, solved today by pre-registration and Open Science.'
       }
     ];
