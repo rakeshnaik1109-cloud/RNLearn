@@ -54,12 +54,12 @@
 
     ctrlRow.innerHTML =
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>Hypothetical Ether Wind ($v/c$):</strong>' +
+      '<strong>Supposed ether wind speed:</strong>' +
       '<input type="range" id="mm-ether-v" min="0" max="0.1" step="0.005" value="0.0" style="width:110px;">' +
       '<span id="mm-v-val">0.000 c (Null Result)</span>' +
       '</label>' +
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>Table Rotation ($\theta$):</strong>' +
+      '<strong>Turn the table:</strong>' +
       '<input type="range" id="mm-angle" min="0" max="360" step="5" value="0" style="width:110px;">' +
       '<span id="mm-angle-val">0°</span>' +
       '</label>' +
@@ -361,9 +361,9 @@
     readouts.style.border = '1px solid var(--color-border, #eee)';
 
     readouts.innerHTML =
-      '<div><strong>Wien Peak Wavelength ($\\lambda_{\\max} = b/T$):</strong> <span id="wien-disp" style="font-weight:bold; color:var(--color-hot, #dc2626);">580 nm</span></div>' +
-      '<div><strong>Planck Quantum Constant ($h$):</strong> <span>6.626 × 10⁻³⁴ J·s</span></div>' +
-      '<div><strong>Ultraviolet Catastrophe:</strong> <span style="color:var(--color-accent, #d97706);">Classical energy diverges to $\\infty$</span></div>';
+      '<div><strong>Brightest wavelength:</strong> <span id="wien-disp" style="font-weight:bold; color:var(--color-hot, #dc2626);">580 nm</span></div>' +
+      '<div><strong>Planck’s constant:</strong> <span>6.626 × 10⁻³⁴ J·s</span></div>' +
+      '<div><strong>Ultraviolet catastrophe:</strong> <span style="color:var(--color-accent, #d97706);">the old theory predicts unlimited energy</span></div>';
     wrapper.appendChild(readouts);
 
     container.appendChild(wrapper);
@@ -539,7 +539,7 @@
 
     ctrlRow.innerHTML =
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>Target Metal:</strong>' +
+      '<strong>Metal:</strong>' +
       '<select id="pe-metal" style="padding:3px 8px; border-radius:4px; border:1px solid #999; background:var(--color-bg, #fff);">' +
       '<option value="2.28">Sodium (Na, Φ = 2.28 eV)</option>' +
       '<option value="2.29">Potassium (K, Φ = 2.29 eV)</option>' +
@@ -548,12 +548,12 @@
       '</select>' +
       '</label>' +
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>Wavelength ($\lambda$):</strong>' +
+      '<strong>Wavelength of the light:</strong>' +
       '<input type="range" id="pe-lambda" min="200" max="750" step="10" value="450" style="width:110px;">' +
       '<span id="pe-lambda-val">450 nm (Blue)</span>' +
       '</label>' +
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>Retarding Voltage ($V$):</strong>' +
+      '<strong>Stopping voltage:</strong>' +
       '<input type="range" id="pe-volt" min="0" max="4.0" step="0.1" value="0.0" style="width:90px;">' +
       '<span id="pe-volt-val">0.0 V</span>' +
       '</label>';
@@ -578,10 +578,10 @@
     statRow.style.border = '1px solid var(--color-border, #eee)';
 
     statRow.innerHTML =
-      '<div><strong>Photon Energy ($h\\nu$):</strong> <span id="pe-hnu" style="font-weight:bold;">2.76 eV</span></div>' +
-      '<div><strong>Work Function ($\\Phi$):</strong> <span id="pe-phi">2.28 eV</span></div>' +
-      '<div><strong>Max Kinetic Energy ($K_{\\max}$):</strong> <span id="pe-kmax" style="font-weight:bold; color:var(--color-hot, #dc2626);">0.48 eV</span></div>' +
-      '<div><strong>Photo-Current ($I$):</strong> <span id="pe-current" style="font-weight:bold; color:var(--color-success, #16a34a);">Active Current</span></div>';
+      '<div><strong>Energy of each photon:</strong> <span id="pe-hnu" style="font-weight:bold;">2.76 eV</span></div>' +
+      '<div><strong>Energy needed to free an electron:</strong> <span id="pe-phi">2.28 eV</span></div>' +
+      '<div><strong>Energy left for the fastest electrons:</strong> <span id="pe-kmax" style="font-weight:bold; color:var(--color-hot, #dc2626);">0.48 eV</span></div>' +
+      '<div><strong>Current:</strong> <span id="pe-current" style="font-weight:bold; color:var(--color-success, #16a34a);">Active Current</span></div>';
 
     wrapper.appendChild(statRow);
     container.appendChild(wrapper);
@@ -858,7 +858,7 @@
 
     ctrlRow.innerHTML =
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>Velocity ($v/c$):</strong>' +
+      '<strong>Speed (fraction of light speed):</strong>' +
       '<input type="range" id="rel-v" min="0" max="0.95" step="0.01" value="0.60" style="width:130px;">' +
       '<span id="rel-v-val">0.60 c</span>' +
       '</label>' +
@@ -1079,7 +1079,7 @@
 
     ctrlRow.innerHTML =
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>Atomic Model:</strong>' +
+      '<strong>Model of the atom:</strong>' +
       '<select id="ruth-model" style="padding:3px 8px; border-radius:4px; border:1px solid #999; background:var(--color-bg, #fff);">' +
       '<option value="rutherford">Rutherford Nuclear Atom (Dense Gold Nucleus Z=+79)</option>' +
       '<option value="thomson">Thomson Plum Pudding (Diffuse + Charge)</option>' +
@@ -1312,7 +1312,7 @@
 
     ctrlRow.innerHTML =
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>Initial Orbit ($n_i$):</strong>' +
+      '<strong>Jump from level:</strong>' +
       '<select id="bohr-ni" style="padding:3px 8px; border-radius:4px; border:1px solid #999; background:var(--color-bg, #fff);">' +
       '<option value="3">n = 3 (-1.51 eV)</option>' +
       '<option value="4">n = 4 (-0.85 eV)</option>' +
@@ -1320,7 +1320,7 @@
       '</select>' +
       '</label>' +
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>Final Orbit ($n_f$):</strong>' +
+      '<strong>Down to level:</strong>' +
       '<select id="bohr-nf" style="padding:3px 8px; border-radius:4px; border:1px solid #999; background:var(--color-bg, #fff);">' +
       '<option value="2">n = 2 (Balmer: Visible)</option>' +
       '<option value="1">n = 1 (Lyman: Ultraviolet)</option>' +
@@ -1350,9 +1350,9 @@
 
     infoRow.innerHTML =
       '<div><strong>Transition:</strong> <span id="bohr-trans-disp" style="font-weight:bold;">3 → 2</span></div>' +
-      '<div><strong>Emitted Photon Energy ($\Delta E$):</strong> <span id="bohr-de-disp" style="font-weight:bold; color:var(--color-hot, #dc2626);">1.89 eV</span></div>' +
-      '<div><strong>Wavelength ($\\lambda = hc/\\Delta E$):</strong> <span id="bohr-lambda-disp" style="font-weight:bold; color:var(--color-accent, #d97706);">656.3 nm (Hα Red)</span></div>' +
-      '<div><strong>Spectral Series:</strong> <span id="bohr-series-disp">Balmer Series</span></div>';
+      '<div><strong>Energy of the light given off:</strong> <span id="bohr-de-disp" style="font-weight:bold; color:var(--color-hot, #dc2626);">1.89 eV</span></div>' +
+      '<div><strong>Wavelength:</strong> <span id="bohr-lambda-disp" style="font-weight:bold; color:var(--color-accent, #d97706);">656.3 nm (Hα Red)</span></div>' +
+      '<div><strong>Family of lines:</strong> <span id="bohr-series-disp">Balmer Series</span></div>';
 
     wrapper.appendChild(infoRow);
     container.appendChild(wrapper);
@@ -1592,7 +1592,7 @@
 
     ctrlRow.innerHTML =
       '<label style="display:flex; align-items:center; gap:6px;">' +
-      '<strong>Spatial Confinement ($\Delta x$):</strong>' +
+      '<strong>How tightly the position is squeezed:</strong>' +
       '<input type="range" id="uncert-dx" min="10" max="90" step="2" value="40" style="width:130px;">' +
       '<span id="uncert-dx-val">40 nm</span>' +
       '</label>' +
@@ -1767,114 +1767,114 @@
 
     var questions = [
       {
-        q: '1. What was the profound epistemic outcome of the 1887 Michelson-Morley experiment?',
+        q: '1. What did the Michelson–Morley experiment of 1887 find?',
         options: [
-          'It accurately measured the orbital velocity of the Earth through the luminiferous ether as 30 km/s.',
-          'It yielded a null result, proving that the speed of light is invariant and that a stationary luminiferous ether does not exist.',
-          'It discovered that light waves travel in longitudinal compression pulses.',
-          'It proved that gravity bends light rays around massive stars.'
+          'A strong ether wind blowing from the Sun.',
+          'No sign of any ether wind: light\'s speed was the same in every direction they measured.',
+          'That light travels faster in the morning.',
+          'That the Earth is not moving.'
         ],
         answer: 1,
-        expl: 'Michelson and Morley detected no fringe shift upon rotating their optical interferometer, demonstrating that the speed of light is completely independent of the Earth’s motion through space, abolishing the classical mechanical ether.'
+        expl: 'The interference stripes didn\'t shift as expected. Einstein\'s relativity later made the ether unnecessary.'
       },
       {
-        q: '2. How did Max Planck resolve the "Ultraviolet Catastrophe" of classical blackbody radiation in December 1900?',
+        q: '2. How did Max Planck solve the puzzle of the glow of hot objects in 1900?',
         options: [
-          'By assuming that light travels at variable speeds inside hot cavities.',
-          'By postulating that atomic oscillators can absorb and emit electromagnetic energy only in discrete, indivisible packets called quanta ($E = h\\nu$).',
-          'By redefining absolute zero temperature.',
-          'By showing that ultraviolet light is absorbed by nitrogen molecules in air.'
+          'By saying hot objects give off no ultraviolet light at all.',
+          'By assuming energy is given out only in packets (quanta) whose size depends on the frequency, E = hf.',
+          'By measuring the ether.',
+          'By showing light has no energy.'
         ],
         answer: 1,
-        expl: 'Planck introduced the revolutionary hypothesis that vibrational modes in cavity walls cannot exchange continuous energy; energy is quantized in discrete steps proportional to frequency: $E = h\\nu$, introducing Planck’s quantum constant $h$.'
+        expl: 'High-frequency packets are too "expensive" for a hot object to give off in large numbers, so the ultraviolet catastrophe disappears.'
       },
       {
-        q: '3. In his 1905 explanation of the photoelectric effect, Albert Einstein proposed that light consists of localized quanta (photons). Why did this overturn classical wave theory?',
+        q: '3. Why did Einstein\'s explanation of the photoelectric effect (1905) overturn the wave picture of light?',
         options: [
-          'Classical wave theory could not explain why light travels in straight lines.',
-          'Classical wave theory predicted that increasing light intensity should increase electron kinetic energy, whereas experiments showed kinetic energy depends strictly on light frequency ($K_{\\max} = h\\nu - \\Phi$).',
-          'Electrons were emitted only after hours of continuous illumination.',
-          'Photons carry electric charge that repels electrons.'
+          'Because light turned out to be sound.',
+          'Because electrons are knocked out by individual packets of light (photons), so the colour of the light matters, not its brightness.',
+          'Because light was shown to have no speed.',
+          'Because metals were shown to have no electrons.'
         ],
         answer: 1,
-        expl: 'Under classical wave theory, brighter light carries more energy and should eject faster electrons. Einstein showed that light delivers energy in discrete photon packets; each photon interacts one-on-one with an electron, making kinetic energy depend on frequency ($h\\nu$) rather than intensity.'
+        expl: 'A single red photon has too little energy to free an electron, however bright the light. Brighter light means more photons, not more energetic ones.'
       },
       {
-        q: '4. In Special Relativity, why is the concept of "simultaneity" relative rather than absolute?',
+        q: '4. In special relativity, why don\'t all observers agree on whether two events happen at the same time?',
         options: [
-          'Human senses suffer from neurological processing delays.',
-          'Clocks run slower at higher altitudes due to gravity.',
-          'Simultaneity depends on whether the observer is accelerating.',
-          'Because the speed of light $c$ is identical for all inertial observers, events that are simultaneous in one reference frame occur at different times in a frame moving relative to it.'
+          'Because clocks are badly made.',
+          'Because light travels at different speeds for different people.',
+          'Because time doesn\'t exist.',
+          'Because the speed of light is the same for everyone, so observers moving relative to each other must disagree about timing.'
         ],
         answer: 3,
-        expl: 'Einstein demonstrated through his train thought experiment that because light signals take finite time and travel at speed $c$ in all frames, two spatially separated events that appear simultaneous to an observer on the platform do not appear simultaneous to an observer aboard the moving train.'
+        expl: 'Keeping the speed of light fixed for everyone forces time itself to be relative: moving clocks run slow, and "at the same moment" depends on who is watching.'
       },
       {
-        q: '5. What astonishing observation in the 1909–1911 Geiger-Marsden experiment compelled Ernest Rutherford to propose the nuclear model of the atom?',
+        q: '5. What surprising result made Rutherford propose that atoms have a nucleus?',
         options: [
-          'All alpha particles were completely absorbed by the gold foil.',
-          'Gold foil emitted bright blue fluorescence when hit by X-rays.',
-          'Electrons transformed into protons upon impact.',
-          'A tiny fraction (about 1 in 8,000) of positively charged alpha particles were back-scattered at angles greater than 90 degrees.'
+          'All the alpha particles went straight through the gold foil.',
+          'The gold foil melted.',
+          'The alpha particles turned into gold.',
+          'A few alpha particles bounced back, which only a tiny, heavy, concentrated core of positive charge could cause.'
         ],
         answer: 3,
-        expl: 'In Thomson’s diffuse "plum pudding" model, the electric field was far too weak to deflect fast alpha particles significantly. The fact that heavy alpha particles rebounded backward proved that almost all the mass and positive charge of the atom is concentrated in a minuscule central nucleus.'
+        expl: 'About 1 in 8,000 was turned back. Rutherford compared it to firing a shell at tissue paper and having it bounce back.'
       },
       {
-        q: '6. How did Niels Bohr overcome the classical paradox that an orbiting electron should rapidly radiate its energy and spiral into the nucleus in less than a nanosecond?',
+        q: '6. How did Bohr explain why atoms don\'t collapse?',
         options: [
-          'He claimed electrons move in straight lines rather than circles.',
-          'He replaced the Coulomb force with gravitational attraction.',
-          'He assumed the nucleus is hollow.',
-          'He postulated that electrons inhabit discrete, non-radiating "stationary orbits" with quantized orbital angular momentum ($L = n\\hbar$).'
+          'Electrons stand still.',
+          'The nucleus pushes electrons away.',
+          'Atoms are held up by the ether.',
+          'Electrons can only be in certain allowed orbits, where they don\'t give off light; they give off light only when they jump between them.'
         ],
         answer: 3,
-        expl: 'Bohr broke with classical electrodynamics by postulating that electrons do not radiate while in stationary quantized orbits ($L = n\\hbar$). Radiation is emitted or absorbed only when an electron jumps discontinuously between orbits: $\\Delta E = h\\nu$.'
+        expl: 'Each allowed orbit has a fixed energy. Jumps between them give off light of particular colours, matching hydrogen\'s "barcode".'
       },
       {
-        q: '7. Louis de Broglie proposed in 1924 that material particles possess wave-like properties. What is the de Broglie wavelength of a particle with momentum $p$?',
+        q: '7. What did de Broglie propose about particles such as electrons?',
         options: [
-          '$\\lambda = p / h$',
-          '$\\lambda = h c / p^2$',
-          '$\\lambda = h / p$',
-          '$\\lambda = \\sqrt{h p}$'
+          'They have no mass.',
+          'They travel faster than light.',
+          'They also behave like waves, with a wavelength equal to Planck\'s constant divided by their momentum.',
+          'They are made of light.'
         ],
         answer: 2,
-        expl: 'de Broglie extended the Planck-Einstein relation for photons ($p = h/\\lambda$) to all matter: any moving particle with momentum $p = mv$ has an associated matter wave with wavelength $\\lambda = h/p$, confirmed by electron diffraction in 1927.'
+        expl: 'A whole number of electron waves must fit around an allowed orbit, which explains Bohr\'s rules. Electron waves were seen in 1927.'
       },
       {
-        q: '8. According to Max Born’s statistical interpretation (1926), what does the square modulus of Schrödinger’s wavefunction, $|\\psi(x, t)|^2$, physically represent?',
+        q: '8. According to Max Born, what does the wavefunction tell us?',
         options: [
-          'The electric charge density smeared continuously throughout space.',
-          'The mechanical mass density of the electron.',
-          'The probability per unit volume of finding the particle at position $x$ at time $t$.',
-          'The velocity of the electron.'
+          'The exact path of the particle.',
+          'The particle\'s colour.',
+          'The probability of finding the particle in each place (from the square of the wavefunction).',
+          'The particle\'s age.'
         ],
         answer: 2,
-        expl: 'Born showed that $\\psi$ itself is a probability amplitude; its absolute square $|\\psi(x, t)|^2$ gives the probability density of detecting the localized particle at point $x$ upon measurement.'
+        expl: 'Quantum mechanics gives odds, not certainties: where the wave is large, the particle is likely to be found.'
       },
       {
-        q: '9. What does Werner Heisenberg’s Uncertainty Principle ($\\Delta x \\Delta p \\ge \\hbar/2$) state about physical reality?',
+        q: '9. What does Heisenberg\'s uncertainty principle say?',
         options: [
-          'Nature possesses an intrinsic ontological limit: a quantum particle cannot simultaneously possess a precisely defined position and a precisely defined momentum.',
-          'Our measuring instruments are technologically imperfect, but particles possess definite simultaneous positions and momenta in reality.',
-          'Quantum particles only exist when they are observed by a conscious human.',
-          'Measurement changes the mass of the particle.'
+          'The more precisely a particle\'s position is defined, the less precisely its momentum can be, and vice versa, because of the wave nature of matter.',
+          'Measuring instruments are always faulty.',
+          'Particles have no position at all.',
+          'Energy is not conserved.'
         ],
         answer: 0,
-        expl: 'The uncertainty principle is not a limitation of experimental apparatus, but an inescapable property of wave mechanics: because position and momentum are Fourier conjugates, narrowing spatial distribution $\\Delta x$ inherently broadens momentum spread $\\Delta p$.'
+        expl: 'A wave squeezed into a small space must be made of many wavelengths, which means many possible momenta. It isn\'t just a limit of our instruments.'
       },
       {
-        q: '10. What historical observation during the May 29, 1919 total solar eclipse led by Arthur Eddington confirmed Einstein’s General Theory of Relativity?',
+        q: '10. What did the eclipse expeditions of 29 May 1919 observe?',
         options: [
-          'The sun’s corona was composed of ionized helium.',
-          'The speed of light slowed down inside the sun’s shadow.',
-          'Light rays from stars passing near the edge of the darkened sun were deflected by the sun’s gravitational field by close to the 1.75 arcseconds predicted by general relativity — about twice the Newtonian value.',
-          'Mercury’s orbit became circular during the eclipse.'
+          'That the Sun had stopped moving.',
+          'That stars disappear during an eclipse.',
+          'That starlight passing close to the Sun was bent by about the amount Einstein\'s general relativity predicted.',
+          'That the Moon has an atmosphere.'
         ],
         answer: 2,
-        expl: 'Eddington’s expeditions to Príncipe and Sobral measured the deflection of starlight grazing the sun ($1.75$ arcseconds), twice the Newtonian corpuscular value, triumphantly proving that gravity is the geometric curvature of spacetime.'
+        expl: 'Stars near the darkened Sun appeared shifted by about 1.6–2.0 seconds of arc, close to Einstein\'s 1.75. Later measurements confirmed his value precisely.'
       }
     ];
 
