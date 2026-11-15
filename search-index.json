@@ -17,6 +17,23 @@
     "type": "tutorial"
   },
   {
+    "slug": "can-machines-think",
+    "url": "articles/can-machines-think.html",
+    "title": "Can Machines Think? Turing, the First Computers and the Birth of AI",
+    "summary": "From Turing’s universal machine and the first electronic computers to model neurons, robot tortoises, the Turing test, learning matchboxes, Dartmouth and the perceptron.",
+    "subject": "Technology",
+    "tags": [
+      "artificial-intelligence",
+      "history-of-computing",
+      "turing",
+      "turing-test",
+      "neural-networks",
+      "machine-learning"
+    ],
+    "date": "2026-11-15",
+    "type": "tutorial"
+  },
+  {
     "slug": "what-is-science-really",
     "url": "articles/what-is-science-really.html",
     "title": "What is Science, Really? Demarcation, Revolutions, and the Fabric of Truth",

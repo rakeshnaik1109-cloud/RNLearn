@@ -2130,5 +2130,64 @@ window.RNLEARN_GLOSSARY = [
   [
    "robots"
   ]
+ ],
+ [
+  "Neural network",
+  "A computing system made of many simple connected units, loosely modelled on brain cells, whose connection strengths can be adjusted so that it learns.",
+  [
+   "neural networks",
+   "artificial neural network",
+   "artificial neural networks"
+  ]
+ ],
+ [
+  "Neuron",
+  "A nerve cell that receives signals and, if they are strong enough, fires a signal of its own. In AI, a simple unit that imitates this.",
+  [
+   "neurons"
+  ]
+ ],
+ [
+  "Perceptron",
+  "Frank Rosenblatt’s 1950s learning machine: an artificial neuron (or layer of them) whose weights are adjusted after each mistake.",
+  [
+   "perceptrons"
+  ]
+ ],
+ [
+  "Turing test",
+  "Alan Turing’s 1950 'imitation game': a judge holds typed conversations and tries to tell a machine from a person.",
+  [
+   "imitation game"
+  ]
+ ],
+ [
+  "Cybernetics",
+  "The study of feedback, communication and control in animals and machines, founded by Norbert Wiener in 1948.",
+  []
+ ],
+ [
+  "Heuristic",
+  "A rule of thumb that usually helps find a good answer quickly, without guaranteeing the best one.",
+  [
+   "heuristics"
+  ]
+ ],
+ [
+  "Machine learning",
+  "Making computers improve at a task through experience or examples, rather than by being given every rule.",
+  []
+ ],
+ [
+  "Reinforcement learning",
+  "Learning by trial and error, where actions that lead to rewards become more likely and those that lead to penalties less likely.",
+  []
+ ],
+ [
+  "Stored program",
+  "A computer design in which the instructions are kept in the machine’s memory alongside the data, so a new program can be loaded easily.",
+  [
+   "stored-program"
+  ]
  ]
 ];

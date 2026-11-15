@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Can Machines Think? Turing, the First Computers and the Birth of AI — RNLearn</title>
+  <meta name="description" content="From Turing’s universal machine and the first electronic computers to model neurons, robot tortoises, the Turing test, learning matchboxes, Dartmouth and the perceptron.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/can-machines-think.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Can Machines Think? Turing, the First Computers and the Birth of AI — RNLearn">
+  <meta property="og:description" content="From Turing’s universal machine and the first electronic computers to model neurons, robot tortoises, the Turing test, learning matchboxes, Dartmouth and the perceptron.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/can-machines-think.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Can Machines Think? Turing, the First Computers and the Birth of AI — RNLearn">
+  <meta name="twitter:description" content="From Turing’s universal machine and the first electronic computers to model neurons, robot tortoises, the Turing test, learning matchboxes, Dartmouth and the perceptron.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Can Machines Think? Turing, the First Computers and the Birth of AI",
+    "description": "From Turing’s universal machine and the first electronic computers to model neurons, robot tortoises, the Turing test, learning matchboxes, Dartmouth and the perceptron.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-15",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/can-machines-think.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/technology.html" class="post-subject-tag" data-subject="technology">Technology</a>
+        </div>
+        <h1 class="article-title">Can Machines Think? Turing, the First Computers and the Birth of AI</h1>
+        <p class="article-standfirst">
+          In just twenty-five years, electronic computers went from an idea on paper to machines that played games, learned from experience and proved theorems, and a new science got its name: artificial intelligence.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-15">15 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>26 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/how-machines-learned-to-think.html">How Machines Learned to Think</a> (Part 2 of 8)</div>
+  <div class="series-banner-links">
+    <a href="dreams-of-thinking-machines.html">← Part 1: Dreams of Thinking Machines: From Bronze Giants to Babbage’s Engines</a>
+    <span>Part 3 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. A New Kind of Machine</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Turing, War and the First Computers</a></li>
+              <li><a class="toc-link" href="#section-4">4. Brains Made of Switches</a></li>
+              <li><a class="toc-link" href="#section-5">5. Feedback and Robot Tortoises</a></li>
+              <li><a class="toc-link" href="#section-6">6. Shannon: Bits and Chess</a></li>
+              <li><a class="toc-link" href="#section-7">7. The Imitation Game</a></li>
+              <li><a class="toc-link" href="#section-8">8. Turing Answers His Critics</a></li>
+              <li><a class="toc-link" href="#section-9">9. Machines That Learned to Play</a></li>
+              <li><a class="toc-link" href="#section-10">10. Naming the Field: Dartmouth</a></li>
+              <li><a class="toc-link" href="#section-11">11. A Program That Proved Theorems</a></li>
+              <li><a class="toc-link" href="#section-12">12. The Perceptron</a></li>
+              <li><a class="toc-link" href="#section-13">13. How Did They Know?</a></li>
+              <li><a class="toc-link" href="#section-14">14. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-15">15. Philosophy Corner</a></li>
+              <li><a class="toc-link" href="#section-16">16. People in This Part</a></li>
+              <li><a class="toc-link" href="#section-17">17. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-18">18. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. A New Kind of Machine</h2>
+            <p>Part 1 ended in 1937 with three ideas waiting to come together: machines that follow a stored program, reasoning as calculation, and logic written as 1s and 0s. In the twenty-five years after that, they did. Electronic computers were built, and almost at once people began asking whether these new machines could think. <span class="cite-group">[<a class="cite" href="#ref-18">18</a>, <a class="cite" href="#ref-19">19</a>]</span></p>
+            <p>This part covers roughly 1936 to 1961. In that short time:</p>
+            <ul>
+              <li>Alan Turing worked out what a computer is, before one existed, and later asked the famous question that gives this part its title.</li>
+              <li>Scientists built model brain cells out of logic, and robots out of a few valves and a light sensor.</li>
+              <li>The first programs played games, learned from experience and proved mathematical theorems.</li>
+              <li>A group of researchers gave the new field its name: <strong>artificial intelligence</strong>.</li>
+            </ul>
+            <p>It was a time of huge excitement and bold predictions. Many of those predictions turned out to be wrong, and Part 3 tells what happened next. But almost every basic idea in today's AI, from neural networks to learning by trial and error, first appeared in these years.</p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it and jump to the section that tells the story.</p>
+            <figure class="fig" data-fig="fig-ai-timeline-2">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. From Turing's paper machine to learning matchboxes, 1936–1961.</strong> The points are in order but not to scale. Colours show the four threads of the story.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Turing, War and the First Computers</h2>
+            <p>In 1936 a 24-year-old Cambridge mathematician, <strong>Alan Turing</strong> (1912–1954), published a paper about a question in pure mathematics: is there a mechanical method for deciding every mathematical statement? To answer it (the answer was no), he first had to pin down exactly what a "mechanical method" is. So he imagined the simplest possible calculating machine: a long tape of squares, a head that reads and writes one symbol at a time, and a short table of rules. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-3">3</a>]</span></p>
+            <p>Turing showed that one such machine, a <strong>universal machine</strong>, could imitate any other, if it was given the other machine's rules written on its tape. In other words, one machine plus the right instructions can do any job that can be done by following rules. That is exactly what a modern computer is. (The mathematics is told in Part 11 of <em>How We Came to Know</em>, <a href="mathematics-becomes-infinite.html#section-12">"What Computers Can't Do"</a>.)</p>
+            <p>Three years later war broke out, and Turing joined the British codebreakers at <strong>Bletchley Park</strong>. He designed the "bombe", an electro-mechanical machine that from 1940 helped break messages sent with the German Enigma cipher machine. For a harder German cipher, used by the high command, the Post Office engineer <strong>Tommy Flowers</strong> built <strong>Colossus</strong>. Working from early 1944, it used about 1,600 vacuum tubes (valves), electronic switches with no moving parts, and was thousands of times faster than anything mechanical. Colossus was kept secret for decades. <span class="cite-group">[<a class="cite" href="#ref-21">21</a>]</span></p>
+            <p>In the United States, <strong>ENIAC</strong> was completed at the University of Pennsylvania in 1945 to calculate artillery tables. It filled a large room and used about 18,000 valves. But Colossus and ENIAC had to be "programmed" by setting switches and plugging cables, which could take days. In 1945 the mathematician <strong>John von Neumann</strong> wrote a report describing a better design: keep the program in the computer's own memory, alongside the numbers it works on, so a new program can be loaded as easily as new data. <span class="cite-group">[<a class="cite" href="#ref-22">22</a>, <a class="cite" href="#ref-23">23</a>]</span></p>
+            <p>The first machine to actually do this was a small experimental computer in Manchester, nicknamed the <strong>Baby</strong>. On 21 June 1948 it ran a 17-instruction program, stored in its own memory, that found the highest factor of a number. Every computer since, including the one you are reading this on, works the same way. Turing himself moved to Manchester later that year, to work on programming its successors. <span class="cite-group">[<a class="cite" href="#ref-22">22</a>]</span></p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Brains Made of Switches</h2>
+            <p>If a computer is a network of switches, is a brain one too? In 1943 the neuroscientist <strong>Warren McCulloch</strong> and a brilliant, largely self-taught young logician, <strong>Walter Pitts</strong>, published a paper suggesting that it could be thought of that way. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span></p>
+            <p>A real brain cell, or <strong>neuron</strong>, receives signals from other cells. If enough signals arrive together, it "fires", sending a signal of its own. McCulloch and Pitts simplified this into a model neuron:</p>
+            <ul>
+              <li>Each input is either on (1) or off (0).</li>
+              <li>Some inputs <strong>excite</strong> the neuron (push it towards firing); others <strong>inhibit</strong> it (hold it back).</li>
+              <li>The neuron adds up its inputs. If the total reaches a set level, its <strong>threshold</strong>, it fires (outputs 1); otherwise it stays silent (0).</li>
+            </ul>
+            <p>Their key result was that networks of these simple units could carry out any logical rule, the same AND, OR and NOT that Boole had described (Part 1). The brain, they suggested, might be a kind of logic machine. It was a huge simplification of real neurons, but it planted the seed of every <strong>artificial neural network</strong> since.</p>
+            <figure class="fig" data-fig="fig-mp-neuron">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. A model neuron.</strong> Tap the inputs to switch them on and off, change the connection strengths and the threshold, and see which logical rule the neuron computes. This uses a simplified version of the McCulloch–Pitts model, with strengths of +1, −1 or 0.
+              </figcaption>
+            </figure>
+            <p>McCulloch and Pitts's neurons were wired up in fixed ways: they could not learn. In 1949 the Canadian psychologist <strong>Donald Hebb</strong> suggested how real brains might. When one cell repeatedly helps to make another fire, he proposed, the connection between them grows stronger. This is often summed up as "cells that fire together wire together". Hebb's idea, that learning means changing the strength of connections, is still at the heart of how neural networks are trained today. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span></p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Feedback and Robot Tortoises</h2>
+            <p>During the war, the American mathematician <strong>Norbert Wiener</strong> worked on anti-aircraft guns that would aim at where a plane was <em>going</em> to be. This got him thinking about <strong>feedback</strong>: a system that measures the result of its own actions and corrects itself. A thermostat does it, and so does your hand reaching for a cup, constantly adjusting as it goes. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+            <p>In 1948 Wiener published <em>Cybernetics</em>, a book arguing that animals and machines both control themselves through feedback and information, so the same science could study both. The word comes from the Greek for "steersman". For a few years cybernetics was the most exciting field around, bringing together engineers, biologists and psychologists.</p>
+            <p>The most charming result came from Bristol, England. The neuroscientist <strong>William Grey Walter</strong> built two small robots in 1948–49, nicknamed <strong>Elmer and Elsie</strong>. Each had a shell, three wheels, a light sensor, a touch switch and a "brain" of just two valves. Their behaviour came from a few simple rules: <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span></p>
+            <ul>
+              <li>If you see no light, keep turning your steering while you creep forward, which makes you scan around.</li>
+              <li>If you see a moderate light, stop turning and head for it.</li>
+              <li>If the light is very bright, turn away.</li>
+              <li>If you bump into something, back off and turn.</li>
+            </ul>
+            <figure class="fig" data-fig="fig-tortoise">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. A light-seeking tortoise.</strong> The tortoise's light sensor points the same way as its steering, so it "looks" where it is going. Move the lamp and watch it scan, approach, get dazzled and circle. This simulation follows the rules Grey Walter described, simplified.
+              </figcaption>
+            </figure>
+            <p>The tortoises seemed almost alive. They explored, circled lights, and wove complicated paths around obstacles. Later versions had a light inside their charging hutch: when their batteries ran low, they became less dazzled by bright light and so found their way home to "feed". Grey Walter's point was that complex, purposeful-looking behaviour can come from very simple machinery interacting with the world. That idea would return decades later in robotics. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span></p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Shannon: Bits and Chess</h2>
+            <p>We met <strong>Claude Shannon</strong> in Part 1, showing that switches can do logic. In 1948, working at Bell Labs, he published "A Mathematical Theory of Communication". It showed how to measure information itself, in units he called <strong>bits</strong> (binary digits): one bit is the information in the answer to a single yes/no question. Every text, photo, song and AI model today is stored and sent as bits. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span></p>
+            <p>Shannon also loved games and gadgets. In 1950 he wrote a paper on how a computer could be programmed to play chess. A chess program, he explained, should do two things: <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span></p>
+            <ul>
+              <li><strong>Look ahead:</strong> imagine its possible moves, the opponent's possible replies, its replies to those, and so on, building a "tree" of possibilities.</li>
+              <li><strong>Score positions:</strong> since it can't look ahead to the end of the game, judge each imagined position with a rule of thumb, for example by counting material (a queen is worth about nine pawns) and adding points for things like mobility.</li>
+            </ul>
+            <p>Then pick the move that leads to the best position, assuming the opponent also plays their best. Shannon estimated that the number of possible chess games is around 10<sup>120</sup>, far more than the number of atoms in the observable universe, so no machine could ever simply check them all. It would have to be selective, as human players are. That combination of look-ahead and scoring was used by chess programs for the rest of the century. Shannon also built "Theseus" (1950), a mechanical mouse that found its way through a maze by trial and error and then remembered the route.</p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. The Imitation Game</h2>
+            <p>In October 1950, Turing published a paper in the philosophy journal <em>Mind</em> called "Computing Machinery and Intelligence". It begins: "I propose to consider the question, 'Can machines think?'" <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span></p>
+            <p>But Turing immediately pointed out a problem. Words like "machine" and "think" are too vague to argue about usefully. So instead he replaced the question with a game. In the original version, a judge exchanges typed messages with two hidden players, a man and a woman, and tries to work out which is which. Then, Turing asked, what if one player is replaced by a machine? Can the judge tell the machine from the person? This is the <strong>imitation game</strong>, now known as the <strong>Turing test</strong>.</p>
+            <p>The beauty of the test is that it ignores what the machine is made of and how it works. Judge it the way we judge each other: by what it says. If it can talk about anything as well as a person can, Turing suggested, we would have as much reason to say it thinks as we have for other people.</p>
+            <p>Turing also made a prediction. He thought that in about fifty years, computers with a memory of about 10<sup>9</sup> bits (roughly 125 megabytes) would play the game so well that "an average interrogator will not have more than 70 per cent chance of making the right identification after five minutes of questioning". And he expected that by the end of the century, people would be able to speak of machines thinking "without expecting to be contradicted". How those predictions turned out is part of the story of Parts 6 and 7.</p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Turing Answers His Critics</h2>
+            <p>Most of Turing's paper is spent answering objections to the idea of thinking machines. He listed nine, and his replies are still worth reading. Here are five of them in plain words: <span class="cite-group">[<a class="cite" href="#ref-10">10</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <ul>
+              <li><strong>"The consequences would be too dreadful."</strong> Turing called this the "heads in the sand" objection: wishing something weren't true is no argument that it isn't.</li>
+              <li><strong>"Machines can't be conscious."</strong> But, Turing replied, we can't be sure anyone else is conscious either; we only see how they behave. If we refuse to judge machines by behaviour, we must doubt each other too. Most people adopt the "polite convention" that others think.</li>
+              <li><strong>"Gödel proved machines have limits."</strong> Gödel's theorem (Part 11 of <em>How We Came to Know</em>) shows any machine has questions it can't answer. True, said Turing, but there is no proof that humans are free of such limits.</li>
+              <li><strong>"Machines can never do X"</strong>: be kind, fall in love, enjoy strawberries and cream, make mistakes, learn from experience. Turing noted that these claims were mostly based on the machines people had seen so far, not on any argument.</li>
+              <li><strong>Lady Lovelace's objection:</strong> a machine can only do what we tell it (Part 1). Turing replied that machines surprised him all the time. And it could be built to learn, so that its behaviour came from experience rather than from its programmer.</li>
+            </ul>
+            <p>That last point led to the most forward-looking idea in the paper. Instead of trying to program an adult mind directly, Turing wrote, "why not rather try to produce one which simulates the child's?" Build a simple <strong>learning machine</strong>, then educate it, rewarding and punishing it as we teach children. That is very close to how today's AI systems are made: they are trained rather than programmed.</p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Machines That Learned to Play</h2>
+            <p>Games were the perfect testing ground: clear rules, a clear goal, and a clear way to keep score. By 1952, <strong>Christopher Strachey</strong> had a program playing complete games of draughts (checkers) on the Ferranti Mark 1 computer in Manchester. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+            <p>At IBM in the United States, <strong>Arthur Samuel</strong> wrote a draughts program for IBM's first commercial computers and kept improving it for years. Its real novelty was that it learned. It used Shannon's look-ahead and scoring idea, but it adjusted its own scoring rule based on experience, including thousands of games against copies of itself. In time it played better than Samuel himself. His 1959 paper about it helped make the phrase <strong>machine learning</strong> popular. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span></p>
+            <p>The simplest learning machine of all contained no electronics. In 1961 the British researcher <strong>Donald Michie</strong>, who had worked alongside Turing at Bletchley Park, built <strong>MENACE</strong> (the Machine Educable Noughts And Crosses Engine) out of 304 matchboxes. Each box stood for one position on the board and held coloured beads, one colour for each possible move. To play, you took the box for the current position, shook out a bead at random, and made that move. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span></p>
+            <p>After each game, MENACE was rewarded or punished. If it won, three extra beads of the right colour went into each box it had used; for a draw, one; if it lost, the beads it had played were taken away. Moves that led to wins became more likely; moves that led to losses gradually disappeared. In a tournament of a couple of hundred games against Michie himself, MENACE steadily improved until it was hard to beat, without anyone telling it a single rule of strategy.</p>
+            <figure class="fig" data-fig="fig-menace">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. A matchbox machine that learns.</strong> MENACE plays X and moves first. Play O against it, or let it practise 100 games at a time against a random player, and watch the bar chart: wins (green) grow and losses (red) shrink. The bead rules follow Michie's; unlike the real MENACE, this version doesn't treat rotated or mirrored boards as the same, so it has more matchboxes to fill.
+              </figcaption>
+            </figure>
+            <p>This idea, learning by reward and punishment, is now called <strong>reinforcement learning</strong>. Fifty-five years later, a far more powerful version of it would beat the world's best player at Go (Part 5).</p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Naming the Field: Dartmouth, 1956</h2>
+            <p>By the mid-1950s, researchers were trying to make machines think in many different ways, under many different names: cybernetics, automata studies, complex information processing. A young mathematician at Dartmouth College in New Hampshire, <strong>John McCarthy</strong>, wanted to bring them together. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span></p>
+            <p>In August 1955, with <strong>Marvin Minsky</strong> of Harvard, <strong>Nathaniel Rochester</strong> of IBM and Claude Shannon, McCarthy wrote a proposal to the Rockefeller Foundation for a two-month summer workshop. It was here that the name <strong>artificial intelligence</strong> first appeared. The proposal's central claim was breathtakingly confident:</p>
+            <blockquote>
+              <p>The study is to proceed on the basis of the conjecture that every aspect of learning or any other feature of intelligence can in principle be so precisely described that a machine can be made to simulate it.</p>
+            </blockquote>
+            <p>It listed topics to study: how to make machines use language, form abstractions and concepts, solve kinds of problems then reserved for humans, and improve themselves. It also predicted that "a significant advance can be made in one or more of these problems if a carefully selected group of scientists work on it together for a summer."</p>
+            <p>The workshop took place in the summer of 1956. Among those who came, for at least part of it, were McCarthy, Minsky, Shannon, Rochester, Arthur Samuel, Oliver Selfridge, Ray Solomonoff, and two researchers from Pittsburgh, Allen Newell and Herbert Simon. No great breakthrough happened that summer. But the people there went on to found the main AI laboratories, at MIT, Stanford and Carnegie Mellon, and to lead the field for the next twenty years.</p>
+          </section>
+
+          <section id="section-11">
+            <h2>11. A Program That Proved Theorems</h2>
+            <p>Newell and Simon arrived at Dartmouth with something nobody else had: a working program. Together with the programmer <strong>Cliff Shaw</strong> at the RAND Corporation, they had built the <strong>Logic Theorist</strong>, a program that proved theorems in logic. In January 1956 Simon told his students: "Over Christmas, Allen Newell and I invented a thinking machine." Before the program ran on a computer, Simon tested it by having his family and students act out its parts by hand, each holding cards with instructions. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>, <a class="cite" href="#ref-18">18</a>]</span></p>
+            <p>The Logic Theorist worked on theorems from <em>Principia Mathematica</em>, Whitehead and Russell's great attempt to build mathematics from logic. It searched for proofs by working backwards from the statement to be proved, trying to reach things it already knew. Because the number of possible paths explodes, it used rules of thumb, called <strong>heuristics</strong>, to try the most promising steps first, much as a human mathematician does.</p>
+            <p>It proved 38 of the first 52 theorems in chapter 2 of <em>Principia</em>. For one of them, its proof was shorter and more elegant than Whitehead and Russell's. Simon wrote to Russell, who was reportedly delighted. Newell and Simon tried to publish the new proof in a logic journal with the Logic Theorist as a co-author; the journal declined.</p>
+            <p>The team followed it with the <strong>General Problem Solver</strong> (from 1957), which tried to solve any problem that could be described as getting from a starting situation to a goal, by repeatedly reducing the difference between where it was and where it wanted to be. Meanwhile McCarthy invented <strong>LISP</strong> (1958), a programming language for manipulating symbols that was used for AI research for decades.</p>
+            <p>Success bred confidence. In 1958 Simon and Newell predicted that within ten years a computer would be the world chess champion, unless the rules barred it, and would discover and prove an important new mathematical theorem. Both things did happen eventually: a computer beat the world chess champion in 1997, and in 1996 a program proved a long-open problem in algebra (the Robbins conjecture). But it took nearly forty years, not ten. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span></p>
+          </section>
+
+          <section id="section-12">
+            <h2>12. The Perceptron: A Machine That Learned to See</h2>
+            <p>Newell, Simon and McCarthy believed intelligence was a matter of manipulating symbols by rules. A psychologist at Cornell, <strong>Frank Rosenblatt</strong> (1928–1971), took the other road, the one McCulloch, Pitts and Hebb had pointed to: build something like a brain, and let it learn. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span></p>
+            <p>His <strong>perceptron</strong> (1957–58) was a network of artificial neurons with one crucial addition: the strengths of its connections, called <strong>weights</strong>, could change. It was shown examples, such as cards marked on the left or the right, and told the right answer each time. Whenever it got one wrong, each weight was nudged slightly in the direction that would have given the right answer. Over many examples, the mistakes became rarer.</p>
+            <figure class="fig" data-fig="fig-perceptron">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Training a perceptron.</strong> The perceptron draws a straight line to split blue dots from orange triangles. Each learning step takes one point on the wrong side and nudges the line towards it, using Rosenblatt's rule. Tap the square to add your own points. Then try the "XOR pattern", where no straight line can work.
+              </figcaption>
+            </figure>
+            <p>It was soon proved that if the two kinds of example can be separated by a straight line (or, with more inputs, a flat cut), this learning rule is guaranteed to find a separating line eventually. In 1958 he built a machine version, the <strong>Mark I Perceptron</strong>: a camera of 400 light sensors arranged in a 20 × 20 grid, wired to artificial neurons whose weights were adjusted by electric motors turning dials. It learned to recognise simple shapes and letters.</p>
+            <p>The press went wild. After a demonstration in July 1958, the <em>New York Times</em> reported that the US Navy, which funded the work, expected the device to be the "embryo of an electronic computer" that "will be able to walk, talk, see, write, reproduce itself and be conscious of its existence". Rosenblatt himself made bold claims. <span class="cite-group">[<a class="cite" href="#ref-17">17</a>]</span></p>
+            <p>So by about 1960, two rival approaches to AI were each promising the world. The <strong>symbolic</strong> road, of logic and rules, had the Logic Theorist. The <strong>neural</strong> road, of learning networks, had the perceptron. As Figure 5 hints, the perceptron had a weakness: it could only learn patterns that a straight line can split. Part 3 tells how that weakness, and a lot of broken promises, plunged AI into its first winter.</p>
+          </section>
+
+          <section id="section-13">
+            <h2>13. How Did They Know? How Samuel's Program Learned</h2>
+            <div class="callout callout-method">
+              <div class="callout-header">How did they know? Teaching a program to judge a position</div>
+              <p>Saying a program "learns" sounds mysterious. Samuel's 1959 paper explained exactly what his draughts program did, and it can be followed step by step. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span></p>
+              <ol>
+                <li><strong>Describe a position with numbers.</strong> Samuel chose features a player might notice: how many pieces each side has, how many kings, how many moves are available, how much of the centre is controlled, and so on.</li>
+                <li><strong>Score it with a weighted sum.</strong> The program's judgement of a position was a total: each feature multiplied by a weight saying how important it is. At first the weights were guesses.</li>
+                <li><strong>Look ahead.</strong> To choose a move, it imagined the possible moves and replies several turns ahead (Shannon's tree) and used the scoring rule on the positions at the end.</li>
+                <li><strong>Compare the quick judgement with the deeper one.</strong> A position's score after looking ahead is usually more accurate than its score at a glance. So after each move, the program adjusted its weights so that its quick, at-a-glance scores agreed better with the scores it got by looking ahead.</li>
+                <li><strong>Practise against itself.</strong> One version of the program played another; the one that learned better rules kept them.</li>
+              </ol>
+              <p>Step 4 is the clever part. Without anyone telling it which features mattered, the program discovered, for example, that some features it had been given were nearly useless and that others mattered a lot. The general idea, improving your estimates by making them consistent with slightly better later estimates, became an important technique in modern reinforcement learning.</p>
+            </div>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Legend and Record: Was AI Born at Dartmouth?</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: the Dartmouth workshop</div>
+              <p><strong>The legend:</strong> in the summer of 1956, the founders of AI gathered at Dartmouth for two months, worked side by side, and launched a new science. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>, <a class="cite" href="#ref-18">18</a>, <a class="cite" href="#ref-19">19</a>]</span></p>
+              <p><strong>The record:</strong> the truth is messier. The proposal asked for ten people for two months, but attendance was patchy: many came for a few days or weeks, and only a few stayed for the whole summer. There was no shared project. Newell and Simon, the only ones with a working program, were reportedly not very interested in the others' ideas, and McCarthy later said the meeting fell short of what he had hoped. Many of the key ideas came from earlier work done elsewhere: McCulloch and Pitts, Turing, Shannon, and the cyberneticists.</p>
+              <p><strong>What really happened:</strong> the workshop's lasting achievement was the <em>name</em>, and the network of people it brought together. McCarthy said he chose "artificial intelligence" partly to set the field apart from cybernetics, which was dominated by Norbert Wiener. The name stuck, though many people, then and now, have found it misleading or overblown.</p>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Philosophy Corner: Is Passing the Test Enough?</h2>
+            <div class="callout callout-philosophy">
+              <div class="callout-header">Philosophy Corner: the Turing test and the Chinese Room</div>
+              <p>Turing's test says, in effect: if it talks like a thinker, treat it as a thinker. Not everyone agrees that this is enough. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>, <a class="cite" href="#ref-20">20</a>]</span></p>
+              <p>The most famous challenge came in 1980 from the American philosopher <strong>John Searle</strong>, with a thought experiment called the <strong>Chinese Room</strong>. Imagine a person who speaks no Chinese, locked in a room with a huge rule book. Chinese questions are passed in through a slot. By following the rules, which say things like "when you see these symbols, write those symbols", the person sends back perfect Chinese answers. To people outside, the room understands Chinese. But the person inside understands nothing. They are just shuffling symbols.</p>
+              <p>A computer running a program, Searle argued, is in the same position: it follows rules for manipulating symbols without understanding what they mean. So passing the Turing test would not prove a machine understands anything.</p>
+              <p>Critics replied in several ways. Perhaps the person doesn't understand Chinese, but the whole system (person, rule book and room together) does. Or perhaps understanding is nothing more than having the right patterns of activity, whatever they are made of. Searle answered that adding more symbol-shuffling never adds meaning.</p>
+              <p>The argument has never been settled, and it matters more today than ever. Modern AI chatbots produce fluent answers by learning patterns from enormous amounts of text. Are they the Chinese Room, or something more? Keep the question in mind through Parts 6 to 8.</p>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Alan Turing</td>
+                <td style="padding:0.6rem 0.8rem;">1912–1954<br>Britain</td>
+                <td style="padding:0.6rem 0.8rem;">"On Computable Numbers" (1936); "Computing Machinery and Intelligence" (1950)</td>
+                <td style="padding:0.6rem 0.8rem;">Defined what a computer is, helped break wartime codes, and proposed the imitation game and learning machines.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Tommy Flowers</td>
+                <td style="padding:0.6rem 0.8rem;">1905–1998<br>Britain</td>
+                <td style="padding:0.6rem 0.8rem;">Colossus (1944)</td>
+                <td style="padding:0.6rem 0.8rem;">Built the first large electronic digital computer, for codebreaking at Bletchley Park.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John von Neumann</td>
+                <td style="padding:0.6rem 0.8rem;">1903–1957<br>Hungary / USA</td>
+                <td style="padding:0.6rem 0.8rem;">Report on the EDVAC (1945)</td>
+                <td style="padding:0.6rem 0.8rem;">Described the stored-program design that nearly every computer still follows.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Warren McCulloch &amp; Walter Pitts</td>
+                <td style="padding:0.6rem 0.8rem;">1898–1969 / 1923–1969<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">"A Logical Calculus of the Ideas Immanent in Nervous Activity" (1943)</td>
+                <td style="padding:0.6rem 0.8rem;">Modelled neurons as simple logic units: the seed of artificial neural networks.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Donald Hebb</td>
+                <td style="padding:0.6rem 0.8rem;">1904–1985<br>Canada</td>
+                <td style="padding:0.6rem 0.8rem;"><em>The Organization of Behavior</em> (1949)</td>
+                <td style="padding:0.6rem 0.8rem;">Proposed that learning strengthens connections between cells that are active together.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Norbert Wiener</td>
+                <td style="padding:0.6rem 0.8rem;">1894–1964<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Cybernetics</em> (1948)</td>
+                <td style="padding:0.6rem 0.8rem;">Founded cybernetics, the study of feedback and control in animals and machines.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">William Grey Walter</td>
+                <td style="padding:0.6rem 0.8rem;">1910–1977<br>Britain</td>
+                <td style="padding:0.6rem 0.8rem;">Robot tortoises Elmer and Elsie (1948–49)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed that a few simple rules can produce lifelike, purposeful-looking behaviour.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Claude Shannon</td>
+                <td style="padding:0.6rem 0.8rem;">1916–2001<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Information theory (1948); chess paper (1950)</td>
+                <td style="padding:0.6rem 0.8rem;">Measured information in bits and set out how a computer could play chess.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Arthur Samuel</td>
+                <td style="padding:0.6rem 0.8rem;">1901–1990<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Draughts program; "Some Studies in Machine Learning" (1959)</td>
+                <td style="padding:0.6rem 0.8rem;">Wrote a program that improved by experience and helped popularise "machine learning".</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Donald Michie</td>
+                <td style="padding:0.6rem 0.8rem;">1923–2007<br>Britain</td>
+                <td style="padding:0.6rem 0.8rem;">MENACE (1961)</td>
+                <td style="padding:0.6rem 0.8rem;">Built a learning machine from matchboxes, an early demonstration of reinforcement learning.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John McCarthy</td>
+                <td style="padding:0.6rem 0.8rem;">1927–2011<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Dartmouth proposal (1955); LISP (1958)</td>
+                <td style="padding:0.6rem 0.8rem;">Named the field of artificial intelligence and invented its main programming language.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Marvin Minsky</td>
+                <td style="padding:0.6rem 0.8rem;">1927–2016<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Dartmouth proposal (1955)</td>
+                <td style="padding:0.6rem 0.8rem;">Co-organised Dartmouth and co-founded the MIT AI laboratory (more in Part 3).</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Allen Newell &amp; Herbert Simon</td>
+                <td style="padding:0.6rem 0.8rem;">1927–1992 / 1916–2001<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Logic Theorist (1956), General Problem Solver (1957)</td>
+                <td style="padding:0.6rem 0.8rem;">Built the first programs that solved problems by searching with rules of thumb.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Frank Rosenblatt</td>
+                <td style="padding:0.6rem 0.8rem;">1928–1971<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">The perceptron (1957–58)</td>
+                <td style="padding:0.6rem 0.8rem;">Built the first neural network that learned from examples.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John Searle</td>
+                <td style="padding:0.6rem 0.8rem;">1932–2025<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">"Minds, Brains, and Programs" (1980)</td>
+                <td style="padding:0.6rem 0.8rem;">Argued with the Chinese Room that following rules is not the same as understanding.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-17">
+            <h2>17. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember, from Turing's paper machine to the perceptron.</p>
+            <figure class="fig" data-fig="fig-quiz-ai2">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-18">
+            <h2>18. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Turing, Alan M.</strong> (1936). "On Computable Numbers, with an Application to the Entscheidungsproblem." <em>Proceedings of the London Mathematical Society</em>, series 2, 42: 230–265.</li>
+              <li id="ref-2"><strong>Copeland, B. Jack (ed.).</strong> (2004). <em>The Essential Turing</em>. Oxford: Oxford University Press.</li>
+              <li id="ref-3"><strong>Hodges, Andrew.</strong> (1983). <em>Alan Turing: The Enigma</em>. London: Burnett Books.</li>
+              <li id="ref-4"><strong>McCulloch, Warren S. &amp; Pitts, Walter.</strong> (1943). "A Logical Calculus of the Ideas Immanent in Nervous Activity." <em>Bulletin of Mathematical Biophysics</em>, 5: 115–133.</li>
+              <li id="ref-5"><strong>Hebb, Donald O.</strong> (1949). <em>The Organization of Behavior: A Neuropsychological Theory</em>. New York: Wiley.</li>
+              <li id="ref-6"><strong>Wiener, Norbert.</strong> (1948). <em>Cybernetics: Or Control and Communication in the Animal and the Machine</em>. Cambridge, MA: MIT Press.</li>
+              <li id="ref-7"><strong>Walter, W. Grey.</strong> (1950). "An Imitation of Life." <em>Scientific American</em>, 182(5): 42–45.</li>
+              <li id="ref-8"><strong>Shannon, Claude E.</strong> (1948). "A Mathematical Theory of Communication." <em>Bell System Technical Journal</em>, 27: 379–423, 623–656.</li>
+              <li id="ref-9"><strong>Shannon, Claude E.</strong> (1950). "Programming a Computer for Playing Chess." <em>Philosophical Magazine</em>, series 7, 41(314): 256–275.</li>
+              <li id="ref-10"><strong>Turing, Alan M.</strong> (1950). "Computing Machinery and Intelligence." <em>Mind</em>, 59(236): 433–460.</li>
+              <li id="ref-11"><strong>Samuel, Arthur L.</strong> (1959). "Some Studies in Machine Learning Using the Game of Checkers." <em>IBM Journal of Research and Development</em>, 3(3): 210–229.</li>
+              <li id="ref-12"><strong>Michie, Donald.</strong> (1963). "Experiments on the Mechanization of Game-Learning, Part I: Characterization of the Model and its Parameters." <em>The Computer Journal</em>, 6(3): 232–236.</li>
+              <li id="ref-13"><strong>McCarthy, J., Minsky, M. L., Rochester, N. &amp; Shannon, C. E.</strong> (1955). "A Proposal for the Dartmouth Summer Research Project on Artificial Intelligence." Reprinted in <em>AI Magazine</em>, 27(4): 12–14 (2006).</li>
+              <li id="ref-14"><strong>Newell, Allen &amp; Simon, Herbert A.</strong> (1956). "The Logic Theory Machine: A Complex Information Processing System." <em>IRE Transactions on Information Theory</em>, 2(3): 61–79.</li>
+              <li id="ref-15"><strong>Simon, Herbert A. &amp; Newell, Allen.</strong> (1958). "Heuristic Problem Solving: The Next Advance in Operations Research." <em>Operations Research</em>, 6(1): 1–10.</li>
+              <li id="ref-16"><strong>Rosenblatt, Frank.</strong> (1958). "The Perceptron: A Probabilistic Model for Information Storage and Organization in the Brain." <em>Psychological Review</em>, 65(6): 386–408.</li>
+              <li id="ref-17"><strong><em>The New York Times</em>.</strong> (1958). "New Navy Device Learns by Doing." 8 July 1958.</li>
+              <li id="ref-18"><strong>McCorduck, Pamela.</strong> (2004). <em>Machines Who Think</em>. 2nd ed. Natick, MA: A K Peters.</li>
+              <li id="ref-19"><strong>Nilsson, Nils J.</strong> (2010). <em>The Quest for Artificial Intelligence: A History of Ideas and Achievements</em>. Cambridge: Cambridge University Press.</li>
+              <li id="ref-20"><strong>Searle, John R.</strong> (1980). "Minds, Brains, and Programs." <em>Behavioral and Brain Sciences</em>, 3(3): 417–457.</li>
+              <li id="ref-21"><strong>Copeland, B. Jack, et al.</strong> (2006). <em>Colossus: The Secrets of Bletchley Park’s Codebreaking Computers</em>. Oxford: Oxford University Press.</li>
+              <li id="ref-22"><strong>Ceruzzi, Paul E.</strong> (2003). <em>A History of Modern Computing</em>. 2nd ed. Cambridge, MA: MIT Press.</li>
+              <li id="ref-23"><strong>von Neumann, John.</strong> (1945). <em>First Draft of a Report on the EDVAC</em>. Philadelphia: Moore School of Electrical Engineering, University of Pennsylvania.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/how-machines-learned-to-think.html">How Machines Learned to Think</a> (Part 2 of 8)</div>
+  <div class="series-banner-links">
+    <a href="dreams-of-thinking-machines.html">← Part 1: Dreams of Thinking Machines: From Bronze Giants to Babbage’s Engines</a>
+    <span>Part 3 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/can-machines-think.js"></script>
+</body>
+</html>

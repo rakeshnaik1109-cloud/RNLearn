@@ -2128,5 +2128,64 @@
     "forms": [
       "robots"
     ]
+  },
+  {
+    "term": "Neural network",
+    "definition": "A computing system made of many simple connected units, loosely modelled on brain cells, whose connection strengths can be adjusted so that it learns.",
+    "forms": [
+      "neural networks",
+      "artificial neural network",
+      "artificial neural networks"
+    ]
+  },
+  {
+    "term": "Neuron",
+    "definition": "A nerve cell that receives signals and, if they are strong enough, fires a signal of its own. In AI, a simple unit that imitates this.",
+    "forms": [
+      "neurons"
+    ]
+  },
+  {
+    "term": "Perceptron",
+    "definition": "Frank Rosenblatt’s 1950s learning machine: an artificial neuron (or layer of them) whose weights are adjusted after each mistake.",
+    "forms": [
+      "perceptrons"
+    ]
+  },
+  {
+    "term": "Turing test",
+    "definition": "Alan Turing’s 1950 'imitation game': a judge holds typed conversations and tries to tell a machine from a person.",
+    "forms": [
+      "imitation game"
+    ]
+  },
+  {
+    "term": "Cybernetics",
+    "definition": "The study of feedback, communication and control in animals and machines, founded by Norbert Wiener in 1948.",
+    "forms": []
+  },
+  {
+    "term": "Heuristic",
+    "definition": "A rule of thumb that usually helps find a good answer quickly, without guaranteeing the best one.",
+    "forms": [
+      "heuristics"
+    ]
+  },
+  {
+    "term": "Machine learning",
+    "definition": "Making computers improve at a task through experience or examples, rather than by being given every rule.",
+    "forms": []
+  },
+  {
+    "term": "Reinforcement learning",
+    "definition": "Learning by trial and error, where actions that lead to rewards become more likely and those that lead to penalties less likely.",
+    "forms": []
+  },
+  {
+    "term": "Stored program",
+    "definition": "A computer design in which the instructions are kept in the machine’s memory alongside the data, so a new program can be loaded easily.",
+    "forms": [
+      "stored-program"
+    ]
   }
 ]
