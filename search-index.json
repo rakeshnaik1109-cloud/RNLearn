@@ -1,5 +1,22 @@
 [
   {
+    "slug": "how-far-is-the-moon",
+    "url": "articles/how-far-is-the-moon.html",
+    "title": "How Far Is the Moon? Shadows, Parallax and Mirrors on the Moon",
+    "summary": "How Aristarchus used the Earth’s shadow, Hipparchus an eclipse seen from two cities, and Lalande and Lacaille parallax, to find the Moon’s distance, and how lasers now measure it to millimetres.",
+    "subject": "Science",
+    "tags": [
+      "measurement",
+      "moon",
+      "astronomy",
+      "parallax",
+      "lunar-laser-ranging",
+      "history-of-science"
+    ],
+    "date": "2026-11-18",
+    "type": "tutorial"
+  },
+  {
     "slug": "the-shape-of-the-earth",
     "url": "articles/the-shape-of-the-earth.html",
     "title": "The Shape of the Earth: Squashed Planets, the Metre and Mount Everest",

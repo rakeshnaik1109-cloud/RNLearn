@@ -2627,5 +2627,29 @@
     "term": "Geoid",
     "definition": "The true shape of the Earth as defined by mean sea level extended under the continents; lumpy because of uneven mass inside the Earth.",
     "forms": []
+  },
+  {
+    "term": "Lunar eclipse",
+    "definition": "When the Moon passes through the Earth’s shadow, so the full Moon darkens and often turns a coppery red.",
+    "forms": [
+      "lunar eclipses"
+    ]
+  },
+  {
+    "term": "Retroreflector",
+    "definition": "A reflector, often made of corner-cube prisms, that sends light straight back towards its source whatever angle it arrives at.",
+    "forms": [
+      "retroreflectors"
+    ]
+  },
+  {
+    "term": "Perigee",
+    "definition": "The point in the Moon’s (or a satellite’s) orbit where it is closest to the Earth.",
+    "forms": []
+  },
+  {
+    "term": "Apogee",
+    "definition": "The point in the Moon’s (or a satellite’s) orbit where it is furthest from the Earth.",
+    "forms": []
   }
 ]
