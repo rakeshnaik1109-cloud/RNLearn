@@ -36,6 +36,10 @@ An 8-part history of artificial intelligence, from the first dreams of thinking 
 7. **Part 7**: *Where We Are Now: Reasoning Models, Agents and the AI Boom* (2023 to November 2026: multimodal and open models, reasoning, DeepSeek, agents, costs & limits)
 8. **Part 8**: *Where Is It Leading Us? Work, Safety, Rules and the Future of AI* (Five views of the future, jobs, education, alignment, risks, regulation & lessons)
 
+### New Series: *How We Measured the Universe*
+A 12-part series on how people measured the Earth, the Moon, the Sun, light, gravity, time, the stars, galaxies and atoms, with experiments to try yourself (in progress):
+1. **Part 1**: *How Big Is the Earth? From Eratosthenes' Shadows to Satellites* (Eratosthenes, al-Biruni, Fernel, Snell, Picard & GPS)
+
 ---
 
 ## Architecture & Tooling

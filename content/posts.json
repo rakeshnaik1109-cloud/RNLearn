@@ -1,5 +1,31 @@
 [
   {
+    "slug": "how-big-is-the-earth",
+    "title": "How Big Is the Earth? From Eratosthenes’ Shadows to Satellites",
+    "summary": "How people measured the Earth with shadows, stars, a mountaintop, a carriage wheel and chains of triangles, from Eratosthenes and al-Biruni to Snell, Picard and GPS.",
+    "subject": "Science",
+    "tags": [
+      "measurement",
+      "earth",
+      "eratosthenes",
+      "geodesy",
+      "history-of-science",
+      "experiments"
+    ],
+    "date": "2026-11-16",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 20,
+    "series": {
+      "id": "how-we-measured-the-universe",
+      "part": 1
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": false
+  },
+  {
     "slug": "where-is-it-leading-us",
     "title": "Where Is It Leading Us? Work, Safety, Rules and the Future of AI",
     "summary": "The final part: five views of AI’s future, the evidence on jobs, education and misinformation, the alignment problem, how big the risks are, the rules being written, and lessons from seventy years.",

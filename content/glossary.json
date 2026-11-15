@@ -2553,5 +2553,43 @@
     "forms": [
       "liar's dividend"
     ]
+  },
+  {
+    "term": "Circumference",
+    "definition": "The distance all the way round a circle or sphere.",
+    "forms": []
+  },
+  {
+    "term": "Arcminute",
+    "definition": "One sixtieth of a degree of angle. A full circle has 360 degrees, or 21,600 arcminutes.",
+    "forms": [
+      "arcminutes",
+      "minutes of arc",
+      "minute of arc"
+    ]
+  },
+  {
+    "term": "Triangulation",
+    "definition": "Surveying by measuring one baseline accurately and finding all other distances from angles in a chain of triangles.",
+    "forms": []
+  },
+  {
+    "term": "Baseline",
+    "definition": "In surveying, a line whose length is measured directly and accurately, from which other distances are calculated.",
+    "forms": [
+      "baselines"
+    ]
+  },
+  {
+    "term": "Dip of the horizon",
+    "definition": "The small angle by which the horizon appears below the true level when seen from a height, because the Earth curves away.",
+    "forms": []
+  },
+  {
+    "term": "Local noon",
+    "definition": "The moment when the Sun is highest in the sky at a given place; usually not exactly 12:00 by the clock.",
+    "forms": [
+      "solar noon"
+    ]
   }
 ]

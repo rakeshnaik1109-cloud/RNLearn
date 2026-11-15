@@ -1,5 +1,22 @@
 [
   {
+    "slug": "how-big-is-the-earth",
+    "url": "articles/how-big-is-the-earth.html",
+    "title": "How Big Is the Earth? From Eratosthenes’ Shadows to Satellites",
+    "summary": "How people measured the Earth with shadows, stars, a mountaintop, a carriage wheel and chains of triangles, from Eratosthenes and al-Biruni to Snell, Picard and GPS.",
+    "subject": "Science",
+    "tags": [
+      "measurement",
+      "earth",
+      "eratosthenes",
+      "geodesy",
+      "history-of-science",
+      "experiments"
+    ],
+    "date": "2026-11-16",
+    "type": "tutorial"
+  },
+  {
     "slug": "where-is-it-leading-us",
     "url": "articles/where-is-it-leading-us.html",
     "title": "Where Is It Leading Us? Work, Safety, Rules and the Future of AI",

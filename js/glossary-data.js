@@ -2555,5 +2555,43 @@ window.RNLEARN_GLOSSARY = [
   [
    "liar's dividend"
   ]
+ ],
+ [
+  "Circumference",
+  "The distance all the way round a circle or sphere.",
+  []
+ ],
+ [
+  "Arcminute",
+  "One sixtieth of a degree of angle. A full circle has 360 degrees, or 21,600 arcminutes.",
+  [
+   "arcminutes",
+   "minutes of arc",
+   "minute of arc"
+  ]
+ ],
+ [
+  "Triangulation",
+  "Surveying by measuring one baseline accurately and finding all other distances from angles in a chain of triangles.",
+  []
+ ],
+ [
+  "Baseline",
+  "In surveying, a line whose length is measured directly and accurately, from which other distances are calculated.",
+  [
+   "baselines"
+  ]
+ ],
+ [
+  "Dip of the horizon",
+  "The small angle by which the horizon appears below the true level when seen from a height, because the Earth curves away.",
+  []
+ ],
+ [
+  "Local noon",
+  "The moment when the Sun is highest in the sky at a given place; usually not exactly 12:00 by the clock.",
+  [
+   "solar noon"
+  ]
  ]
 ];
