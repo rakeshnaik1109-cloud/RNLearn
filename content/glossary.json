@@ -2073,5 +2073,60 @@
     "forms": [
       "incommensurable paradigms"
     ]
+  },
+  {
+    "term": "Automaton",
+    "definition": "A machine that moves by itself once set going, often imitating a person or animal. Plural: automata.",
+    "forms": [
+      "automata"
+    ]
+  },
+  {
+    "term": "Programmable machine",
+    "definition": "A machine whose behaviour is set by a changeable pattern of instructions (pins, pegs, punched holes or code), so the same machine can do different jobs.",
+    "forms": [
+      "programmable machines",
+      "programmable"
+    ]
+  },
+  {
+    "term": "Punched card",
+    "definition": "A stiff card in which the presence or absence of holes stores instructions or data, first used to control looms and later computers.",
+    "forms": [
+      "punched cards"
+    ]
+  },
+  {
+    "term": "Binary",
+    "definition": "A way of writing numbers using only the digits 0 and 1. Digital computers store everything in binary.",
+    "forms": []
+  },
+  {
+    "term": "Method of differences",
+    "definition": "A way of calculating a table of values for a formula such as n × n using only addition, by building each new value from the differences between earlier ones.",
+    "forms": []
+  },
+  {
+    "term": "Boolean logic",
+    "definition": "George Boole's algebra of logic, in which statements are true (1) or false (0) and are combined with AND, OR and NOT.",
+    "forms": [
+      "Boolean algebra",
+      "Boole's algebra",
+      "Boole’s algebra"
+    ]
+  },
+  {
+    "term": "Logic gate",
+    "definition": "A simple circuit that carries out one logical rule, such as AND, OR or NOT, on true/false (1/0) signals.",
+    "forms": [
+      "logic gates"
+    ]
+  },
+  {
+    "term": "Robot",
+    "definition": "A machine that can carry out tasks by itself. The word comes from Karel Čapek's 1920 play R.U.R., from the Czech robota, forced labour.",
+    "forms": [
+      "robots"
+    ]
   }
 ]

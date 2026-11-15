@@ -31,6 +31,34 @@ CANONICAL_SUBJECTS = [
     "Notes"
 ]
 
+# Planned series. "parts" is the planned total, so a series still being written
+# shows "Part 1 of 8" rather than "Part 1 of 1". "label" prefixes part numbers
+# where several series are listed together (the glossary).
+SERIES = {
+    "how-we-came-to-know": {
+        "title": "How We Came To Know",
+        "parts": 12,
+        "label": "Part",
+        "lede": "A structured sequence of articles on how we came to know.",
+    },
+    "how-machines-learned-to-think": {
+        "title": "How Machines Learned to Think",
+        "parts": 8,
+        "label": "AI Part",
+        "lede": "An eight-part history of artificial intelligence, from the first dreams of thinking machines to today's AI and where it may lead.",
+    },
+}
+
+def series_meta(s_id, n_posts=0):
+    meta = SERIES.get(s_id, {})
+    title = meta.get("title") or s_id.replace("-", " ").title()
+    return {
+        "title": title,
+        "parts": max(meta.get("parts", 0), n_posts),
+        "label": meta.get("label", "Part"),
+        "lede": meta.get("lede") or f"A structured sequence of articles on {title.lower()}.",
+    }
+
 def slugify(text):
     text = text.lower().strip()
     text = re.sub(r'[\s&/_]+', '-', text)
@@ -75,7 +103,8 @@ def render_post_card(post, rel_prefix=""):
     cta_text = "Read Article →"
     if series_info and isinstance(series_info, dict) and "part" in series_info:
         part_num = series_info["part"]
-        series_badge = f'<span class="card-part-badge">Part {part_num} of 12</span>'
+        total = series_meta(series_info.get("id", "")).get("parts") or part_num
+        series_badge = f'<span class="card-part-badge">Part {part_num} of {total}</span>'
         cta_text = f"Read Part {part_num} →"
 
     tags_html = "".join(
@@ -266,7 +295,7 @@ def build_glossary(root_dir, public_posts, files_to_write):
         h = h[a:b] if a >= 0 and b > a else h
         h = re.sub(r"<script.*?</script>", " ", h, flags=re.S)
         texts[p["slug"]] = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", h))
-    order = sorted(public_posts, key=lambda p: (p.get("series", {}).get("part", 999), p.get("date", "")))
+    order = sorted(public_posts, key=lambda p: (list(SERIES).index(p.get("series", {}).get("id")) if p.get("series", {}).get("id") in SERIES else 99, p.get("series", {}).get("part", 999), p.get("date", "")))
 
     def appears_in(e):
         forms = sorted([e["term"]] + e.get("forms", []), key=len, reverse=True)
@@ -275,7 +304,7 @@ def build_glossary(root_dir, public_posts, files_to_write):
         for p in order:
             if p["slug"] in texts and rx.search(texts[p["slug"]]):
                 part = p.get("series", {}).get("part")
-                label = f"Part {part}" if part else p["title"]
+                label = f'{series_meta(p["series"].get("id", ""))["label"]} {part}' if part else p["title"]
                 found.append(f'<a href="articles/{p["slug"]}.html" title="{xml_escape(p["title"])}">{label}</a>')
         return found
 
@@ -376,9 +405,10 @@ def build_site(root_dir, check_mode=False):
         s_posts.sort(key=lambda x: x.get("series", {}).get("part", 1))
         # Build series page for public posts
         pub_s_posts = [p for p in s_posts if not p.get("draft", False)]
-        title = s_id.replace("-", " ").title()
+        meta = series_meta(s_id, len(s_posts))
+        title = meta["title"]
         eyebrow = "Reading Path Series"
-        lede = f"A structured sequence of articles on {title.lower()}."
+        lede = meta["lede"]
         html = generate_listing_page(title, eyebrow, lede, pub_s_posts, f"series/{s_id}.html")
         files_to_write[os.path.join("series", f"{s_id}.html")] = html
 
@@ -391,7 +421,7 @@ def build_site(root_dir, check_mode=False):
                     art_html = f.read()
 
                 part_num = art.get("series", {}).get("part", idx + 1)
-                total_parts = len(s_posts)
+                total_parts = meta["parts"]
 
                 prev_link = ""
                 if idx > 0:
@@ -401,9 +431,11 @@ def build_site(root_dir, check_mode=False):
                     prev_link = '<span>First part</span>'
 
                 next_link = ""
-                if idx < total_parts - 1:
+                if idx < len(s_posts) - 1:
                     next_p = s_posts[idx + 1]
                     next_link = f'<a href="{next_p["slug"]}.html">Part {idx + 2}: {next_p["title"]} →</a>'
+                elif part_num < total_parts:
+                    next_link = f'<span>Part {part_num + 1} coming soon</span>'
                 else:
                     next_link = '<span>Final part</span>'
 
@@ -490,8 +522,10 @@ def build_site(root_dir, check_mode=False):
         for s_id, s_posts in series_map.items():
             pub_s_count = len([p for p in s_posts if not p.get("draft", False)])
             if pub_s_count > 0:
-                title = s_id.replace("-", " ").title()
-                series_html.append(f'<div class="post-card"><h3 class="post-title"><a href="series/{s_id}.html">{title}</a></h3><p class="post-summary">{pub_s_count} part series</p></div>')
+                meta = series_meta(s_id, len(s_posts))
+                title = meta["title"]
+                count_txt = f'{meta["parts"]} part series' + ("" if pub_s_count >= meta["parts"] else f' · {pub_s_count} published so far')
+                series_html.append(f'<div class="post-card"><h3 class="post-title"><a href="series/{s_id}.html">{title}</a></h3><p class="post-summary">{count_txt}</p></div>')
         if series_html:
             series_block = '<div class="post-grid">\n' + "\n".join(series_html) + '\n</div>'
         else:

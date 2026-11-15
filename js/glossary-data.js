@@ -2075,5 +2075,60 @@ window.RNLEARN_GLOSSARY = [
   [
    "incommensurable paradigms"
   ]
+ ],
+ [
+  "Automaton",
+  "A machine that moves by itself once set going, often imitating a person or animal. Plural: automata.",
+  [
+   "automata"
+  ]
+ ],
+ [
+  "Programmable machine",
+  "A machine whose behaviour is set by a changeable pattern of instructions (pins, pegs, punched holes or code), so the same machine can do different jobs.",
+  [
+   "programmable machines",
+   "programmable"
+  ]
+ ],
+ [
+  "Punched card",
+  "A stiff card in which the presence or absence of holes stores instructions or data, first used to control looms and later computers.",
+  [
+   "punched cards"
+  ]
+ ],
+ [
+  "Binary",
+  "A way of writing numbers using only the digits 0 and 1. Digital computers store everything in binary.",
+  []
+ ],
+ [
+  "Method of differences",
+  "A way of calculating a table of values for a formula such as n × n using only addition, by building each new value from the differences between earlier ones.",
+  []
+ ],
+ [
+  "Boolean logic",
+  "George Boole's algebra of logic, in which statements are true (1) or false (0) and are combined with AND, OR and NOT.",
+  [
+   "Boolean algebra",
+   "Boole's algebra",
+   "Boole’s algebra"
+  ]
+ ],
+ [
+  "Logic gate",
+  "A simple circuit that carries out one logical rule, such as AND, OR or NOT, on true/false (1/0) signals.",
+  [
+   "logic gates"
+  ]
+ ],
+ [
+  "Robot",
+  "A machine that can carry out tasks by itself. The word comes from Karel Čapek's 1920 play R.U.R., from the Czech robota, forced labour.",
+  [
+   "robots"
+  ]
  ]
 ];

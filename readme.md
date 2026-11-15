@@ -25,6 +25,10 @@ A 12-part master series chronicling the history, epistemology, and methodology o
 11. **Part 11**: *Mathematics Becomes Infinite: Calculus, Rigour, and the Limits of Reason* (Analysis, set theory & Gödel)
 12. **Part 12**: *What is Science, Really? Demarcation, Revolutions, and the Fabric of Truth* (Popper, Kuhn & epistemology)
 
+### New Series: *How Machines Learned to Think*
+An 8-part history of artificial intelligence, from the first dreams of thinking machines to today's AI and where it may lead (in progress):
+1. **Part 1**: *Dreams of Thinking Machines: From Bronze Giants to Babbage's Engines* (Myths, automata, Llull, Leibniz, Babbage, Lovelace & Boole)
+
 ---
 
 ## Architecture & Tooling

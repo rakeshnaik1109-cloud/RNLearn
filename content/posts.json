@@ -1,5 +1,31 @@
 [
   {
+    "slug": "dreams-of-thinking-machines",
+    "title": "Dreams of Thinking Machines: From Bronze Giants to Babbage’s Engines",
+    "summary": "From Talos and golden robots in Greek myth to programmable automata, Llull’s wheels, Leibniz’s “Let us calculate”, Babbage, Ada Lovelace and Boole’s logic.",
+    "subject": "Technology",
+    "tags": [
+      "artificial-intelligence",
+      "history-of-computing",
+      "automata",
+      "babbage",
+      "lovelace",
+      "logic"
+    ],
+    "date": "2026-11-15",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 27,
+    "series": {
+      "id": "how-machines-learned-to-think",
+      "part": 1
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": false
+  },
+  {
     "slug": "what-is-science-really",
     "title": "What is Science, Really? Demarcation, Revolutions, and the Fabric of Truth",
     "summary": "From Bacon and Hume's induction to Popper's falsification, Kuhn's paradigms, Lakatos, Feyerabend, Bayesian belief, and the replication crisis.",
