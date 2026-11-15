@@ -2593,5 +2593,41 @@ window.RNLEARN_GLOSSARY = [
   [
    "solar noon"
   ]
+ ],
+ [
+  "Flattening",
+  "How much a planet is squashed at the poles: the difference between its equatorial and polar radii divided by the equatorial radius. For Earth, about 1 part in 298.",
+  []
+ ],
+ [
+  "Oblate",
+  "Squashed at the poles and bulging at the equator, like the Earth.",
+  []
+ ],
+ [
+  "Degree of latitude",
+  "The north–south distance over which the height of the Pole Star changes by one degree; about 111 km, slightly longer near the poles.",
+  [
+   "degrees of latitude"
+  ]
+ ],
+ [
+  "Meridian",
+  "An imaginary line on the Earth’s surface running due north–south from pole to pole.",
+  [
+   "meridians"
+  ]
+ ],
+ [
+  "Theodolite",
+  "A surveying instrument with a telescope for measuring horizontal and vertical angles precisely.",
+  [
+   "theodolites"
+  ]
+ ],
+ [
+  "Geoid",
+  "The true shape of the Earth as defined by mean sea level extended under the continents; lumpy because of uneven mass inside the Earth.",
+  []
  ]
 ];

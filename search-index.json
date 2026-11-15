@@ -1,5 +1,22 @@
 [
   {
+    "slug": "the-shape-of-the-earth",
+    "url": "articles/the-shape-of-the-earth.html",
+    "title": "The Shape of the Earth: Squashed Planets, the Metre and Mount Everest",
+    "summary": "Is the Earth squashed or stretched? Expeditions to Lapland and Peru, the survey that defined the metre, and India’s Great Trigonometrical Survey that measured Mount Everest.",
+    "subject": "Science",
+    "tags": [
+      "measurement",
+      "earth",
+      "geodesy",
+      "metric-system",
+      "mount-everest",
+      "history-of-science"
+    ],
+    "date": "2026-11-17",
+    "type": "tutorial"
+  },
+  {
     "slug": "how-big-is-the-earth",
     "url": "articles/how-big-is-the-earth.html",
     "title": "How Big Is the Earth? From Eratosthenes’ Shadows to Satellites",

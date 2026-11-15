@@ -39,6 +39,7 @@ An 8-part history of artificial intelligence, from the first dreams of thinking 
 ### New Series: *How We Measured the Universe*
 A 12-part series on how people measured the Earth, the Moon, the Sun, light, gravity, time, the stars, galaxies and atoms, with experiments to try yourself (in progress):
 1. **Part 1**: *How Big Is the Earth? From Eratosthenes' Shadows to Satellites* (Eratosthenes, al-Biruni, Fernel, Snell, Picard & GPS)
+2. **Part 2**: *The Shape of the Earth: Squashed Planets, the Metre and Mount Everest* (Newton vs Cassini, Lapland & Peru, the metre, the Great Trigonometrical Survey & Everest)
 
 ---
 
