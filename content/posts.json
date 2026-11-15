@@ -1,5 +1,27 @@
 [
   {
+    "slug": "how-dna-paternity-tests-work",
+    "title": "Who’s the Father? How a DNA Paternity Test Works",
+    "summary": "From chromosomes and short tandem repeats to PCR, the paternity index and Bayes’ theorem: how a cheek swab becomes a report saying “excluded” or “99.99%”, plus the tricky cases and Indian law.",
+    "subject": "Science",
+    "tags": [
+      "dna",
+      "genetics",
+      "paternity-testing",
+      "forensic-science",
+      "probability",
+      "law"
+    ],
+    "date": "2026-11-28",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 25,
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": false
+  },
+  {
     "slug": "how-far-is-the-moon",
     "title": "How Far Is the Moon? Shadows, Parallax and Mirrors on the Moon",
     "summary": "How Aristarchus used the Earth’s shadow, Hipparchus an eclipse seen from two cities, and Lalande and Lacaille parallax, to find the Moon’s distance, and how lasers now measure it to millimetres.",

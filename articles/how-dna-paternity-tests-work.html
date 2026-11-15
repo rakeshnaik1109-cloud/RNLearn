@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Who’s the Father? How a DNA Paternity Test Works — RNLearn</title>
+  <meta name="description" content="From chromosomes and short tandem repeats to PCR, the paternity index and Bayes’ theorem: how a cheek swab becomes a report saying “excluded” or “99.99%”, plus the tricky cases and Indian law.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/how-dna-paternity-tests-work.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Who’s the Father? How a DNA Paternity Test Works — RNLearn">
+  <meta property="og:description" content="From chromosomes and short tandem repeats to PCR, the paternity index and Bayes’ theorem: how a cheek swab becomes a report saying “excluded” or “99.99%”, plus the tricky cases and Indian law.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/how-dna-paternity-tests-work.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Who’s the Father? How a DNA Paternity Test Works — RNLearn">
+  <meta name="twitter:description" content="From chromosomes and short tandem repeats to PCR, the paternity index and Bayes’ theorem: how a cheek swab becomes a report saying “excluded” or “99.99%”, plus the tricky cases and Indian law.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Who’s the Father? How a DNA Paternity Test Works",
+    "description": "From chromosomes and short tandem repeats to PCR, the paternity index and Bayes’ theorem: how a cheek swab becomes a report saying “excluded” or “99.99%”, plus the tricky cases and Indian law.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-28",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/how-dna-paternity-tests-work.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/science.html" class="post-subject-tag" data-subject="science">Science</a>
+        </div>
+        <h1 class="article-title">Who’s the Father? How a DNA Paternity Test Works</h1>
+        <p class="article-standfirst">
+          A few cells from inside a cheek can answer one of the oldest questions in human life. Here is how, step by step, from what DNA is to the numbers on the final report.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-28">28 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>25 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. One Question, Two Possible Answers</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. DNA in Five Minutes</a></li>
+              <li><a class="toc-link" href="#section-4">4. Half from Each Parent</a></li>
+              <li><a class="toc-link" href="#section-5">5. Before DNA: Blood Groups</a></li>
+              <li><a class="toc-link" href="#section-6">6. A Eureka Moment in Leicester</a></li>
+              <li><a class="toc-link" href="#section-7">7. Short Tandem Repeats</a></li>
+              <li><a class="toc-link" href="#section-8">8. In the Laboratory</a></li>
+              <li><a class="toc-link" href="#section-9">9. Comparing the Profiles</a></li>
+              <li><a class="toc-link" href="#section-10">10. From Matches to a Probability</a></li>
+              <li><a class="toc-link" href="#section-11">11. The End Result: Reading the Report</a></li>
+              <li><a class="toc-link" href="#section-12">12. Tricky Cases</a></li>
+              <li><a class="toc-link" href="#section-13">13. The Law, Ethics and India</a></li>
+              <li><a class="toc-link" href="#section-14">14. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-15">15. Philosophy Corner</a></li>
+              <li><a class="toc-link" href="#section-16">16. People in This Story</a></li>
+              <li><a class="toc-link" href="#section-17">17. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-18">18. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. One Question, Two Possible Answers</h2>
+            <p>"Is he the father?" It is one of the oldest questions in human life, and for almost all of history nobody could answer it with any confidence. Today a laboratory can answer it in a few days, from a few cells scraped from the inside of a cheek.</p>
+            <p>A DNA paternity test can give only two kinds of answer. Either the man is <strong>excluded</strong>: the DNA shows he cannot be the biological father. Or he is <strong>not excluded</strong>, and the laboratory works out how much more likely the DNA evidence is if he is the father than if some random, unrelated man is. That is usually reported as a probability, such as 99.99 per cent. The first answer is close to certain. The second, as we will see, is a very strong probability, but never quite 100 per cent.</p>
+            <p>This tutorial starts from the very beginning: what DNA is and how we inherit it. It then follows a sample through the laboratory, explains how the numbers on a real report are calculated, and ends with the tricky cases, the law in India, and some myths. Along the way, a fictional family (mother Meera, child Anaya and alleged father Vikram) will help us read the results. You can play with every step in the interactive figures.</p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-paternity-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. From blood groups to DNA profiles, 1901–2026.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. DNA in Five Minutes</h2>
+            <p>Your body is built from tens of trillions of cells. Almost every one of them carries a complete copy of your <strong>DNA</strong>, a long molecule shaped like a twisted ladder, the famous double helix. Each rung of the ladder is a pair of chemical "letters" called <strong>bases</strong>: A (adenine) always pairs with T (thymine), and G (guanine) with C (cytosine). The order of these letters spells out the instructions for building and running a body, rather as the order of letters in a book spells out its story. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+            <p>Your DNA is not one long string. It is cut into 46 pieces called <strong>chromosomes</strong>, which come in <strong>23 pairs</strong>. One chromosome of each pair came from your mother, and the other from your father. A single set of 23 chromosomes contains about 3 billion letters. Printed in ordinary type, that would fill about a thousand thick books.</p>
+            <p>Any two people's DNA is about <strong>99.9 per cent identical</strong>. That is why we all have two eyes, a heart and a liver in the same places. But 0.1 per cent of 3 billion letters is still millions of differences, and those differences are what make each person, apart from identical twins, genetically unique. A paternity test looks at a small number of carefully chosen places where people differ a great deal. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Half from Each Parent</h2>
+            <p>When a man makes sperm or a woman makes eggs, each cell receives only <strong>one chromosome from each pair</strong>, chosen at random. When a sperm fertilises an egg, the two halves come together, and the child once again has 23 pairs: one of each pair from the mother, one from the father.</p>
+            <p>This is the whole basis of paternity testing. At every place in the DNA that we examine, a child has <strong>two versions</strong>, called <strong>alleles</strong>. One must have come from the mother and the other from the father. So if we know the child's two alleles and the mother's two, we can usually work out which one came from the father, and then check whether the alleged father carries it.</p>
+            <figure class="fig" data-fig="fig-inheritance">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Each child gets one allele from each parent at every location.</strong> Press "Make a child" again and again. Notice how brothers and sisters from the same parents get different combinations, yet every allele a child carries can be traced to one parent or the other.
+              </figcaption>
+            </figure>
+            <p>The random shuffling is enormous. Just by choosing one chromosome from each of 23 pairs, each parent can make about 8 million different combinations, and in reality the chromosomes also swap pieces before they are shared out (a process called crossing over), so the number is far larger still. This is why brothers and sisters look alike but are not identical, and why we need to look at many locations to be sure of a relationship.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Before DNA: Blood Groups and Charlie Chaplin</h2>
+            <p>The first scientific paternity tests used blood groups. In 1901 the Austrian scientist <strong>Karl Landsteiner</strong> discovered that human blood comes in different types, which we now call A, B, AB and O. Landsteiner himself suggested that, because blood groups are inherited, they might help settle disputed paternity. In 1910 Emil von Dungern and Ludwik Hirszfeld showed that the groups are inherited according to Mendel's rules. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>, <a class="cite" href="#ref-4">4</a>, <a class="cite" href="#ref-5">5</a>]</span></p>
+            <p>Blood groups could only ever <strong>exclude</strong> a man, never identify one. Millions of men share any given blood group, so a match proves little. But some combinations are impossible. A child with group B must have received a B allele from one parent. If the mother is group A and the man is group O, neither carries a B, so he cannot be the father.</p>
+            <p>That is exactly what happened in the most famous paternity case of the blood-group era. In 1943 the actress Joan Barry claimed that Charlie Chaplin was the father of her daughter. Blood tests in 1944 showed that Barry was group A, the baby group B and Chaplin group O. Three doctors, one chosen by each side and one neutral, agreed that Chaplin could not be the father. Yet blood tests were not treated as conclusive evidence in California courts at the time, and in April 1945 a jury found him to be the father anyway. The case became a famous example of science and law pulling in different directions. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>, <a class="cite" href="#ref-7">7</a>]</span></p>
+            <p>More blood groups were discovered over the following decades (M and N were used in paternity cases from the late 1920s), and in the 1970s tissue typing, which compares the proteins used to match organ transplants, made exclusions much more powerful. But all of these methods compared <em>proteins</em>, the products of genes. The next step was to read the genes themselves. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. A Eureka Moment in Leicester</h2>
+            <p>At 9.05 in the morning on <strong>10 September 1984</strong>, the British geneticist <strong>Alec Jeffreys</strong> at the University of Leicester looked at an X-ray film from an experiment and saw something astonishing. His lab had been studying stretches of DNA in which a short sequence is repeated over and over, like a stutter. The number of repeats varied hugely from person to person, so the film showed a pattern of dark bands, like a supermarket barcode, that was different for every individual, yet shared half its bands with each parent. He called it a <strong>DNA fingerprint</strong>. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>, <a class="cite" href="#ref-9">9</a>]</span></p>
+            <p>The first real use came within months, in 1985. A boy from a Ghanaian family living in Britain had been refused permission to return to the UK because immigration officials doubted that he was really his mother's son. Jeffreys compared the DNA fingerprints of the boy, his mother and her other children. Every band in the boy's pattern could be found in his mother or in the bands his siblings had inherited from their father. He was her son, and the Home Office allowed him to stay. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>, <a class="cite" href="#ref-8">8</a>]</span></p>
+            <p>India was not far behind. At the Centre for Cellular and Molecular Biology in Hyderabad, <strong>Lalji Singh</strong> developed an Indian DNA fingerprinting method from 1987, using a probe derived from the DNA of a snake, the banded krait. His lab's evidence was used to settle a disputed paternity case in a Kerala court; Singh recalled it as 1988, although some accounts give 1991. The Centre for DNA Fingerprinting and Diagnostics (CDFD) in Hyderabad was later set up to carry on this work. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span></p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Where People Differ: Short Tandem Repeats</h2>
+            <p>Jeffreys's barcodes needed a lot of good-quality DNA and weeks of work, and the patterns were hard to compare between laboratories. Since the 1990s, laboratories have instead used much shorter repeats called <strong>short tandem repeats</strong>, or STRs. An STR is a place in the DNA where a short "word" of usually four letters is repeated several times in a row. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <p>For example, at a location called TH01 the word AATG is repeated. One person might have AATG repeated 6 times on the chromosome from their mother and 9 times on the one from their father. Their result at TH01 is written simply as <strong>6, 9</strong>. Someone else might be 7, 9.3 (the ".3" means a partial repeat of three extra letters). Each location like this is called a <strong>locus</strong> (plural <em>loci</em>), and each version, such as "9 repeats", is an allele.</p>
+            <figure class="fig" data-fig="fig-str-repeats">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Counting repeats.</strong> Change the number of repeats on each chromosome. More repeats make a longer piece of DNA, which travels more slowly through the laboratory instrument, so its peak appears further to the right. The lengths are simplified for illustration.
+              </figcaption>
+            </figure>
+            <p>STRs have three great advantages. They are short, so they can be read even from small or damaged samples. They vary a lot: at a typical locus there are 10 or more common alleles. And because they lie mostly in parts of the DNA that do not make proteins, the result reveals nothing about a person's health or appearance. Laboratories test a standard set of loci; in the United States, the national criminal database expanded its core set from 13 to <strong>20 STR loci</strong> in 2017, and paternity kits commonly test around 20 or more. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. In the Laboratory: From Swab to Profile</h2>
+            <p><strong>1. Collecting the samples.</strong> The usual sample is a <strong>cheek swab</strong>: a soft brush rubbed on the inside of the cheek for a few seconds picks up thousands of cells. Blood works too, and so, with more difficulty, do hair roots, used toothbrushes or tissue from someone who has died. Ideally the mother, the child and the alleged father are all tested.</p>
+            <p>For a test that will be used in court, the <strong>chain of custody</strong> matters as much as the chemistry. A neutral person checks everyone's identity documents, takes photographs, collects the swabs, seals and signs the packages, and records every hand they pass through. A home "peace of mind" kit uses the same laboratory science, but because nobody can prove whose cheeks were swabbed, its result is not normally accepted as legal evidence. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span></p>
+            <p><strong>2. Extracting the DNA.</strong> In the lab, the cells are broken open with chemicals and heat, and the DNA is separated from proteins and other debris. The amount recovered is measured: a few billionths of a gram is plenty.</p>
+            <p><strong>3. Copying it: PCR.</strong> That is far too little DNA to see, so the chosen STR loci are copied millions of times using the <strong>polymerase chain reaction</strong> (PCR), a method invented by the American chemist <strong>Kary Mullis</strong> in 1983, for which he shared the 1993 Nobel Prize in Chemistry. The sample is heated and cooled about 30 times; each cycle doubles the number of copies of each target, so 30 cycles make about a billion. Short pieces of DNA called primers, which mark the start of each locus, are tagged with coloured fluorescent dyes, so that all 20 or so loci can be copied together in one tube. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <p><strong>4. Measuring the lengths.</strong> The copies are drawn by electricity through a hair-thin glass tube filled with gel, a technique called <strong>capillary electrophoresis</strong>. Short pieces travel faster than long ones. A laser at the end of the tube makes the dyes glow as each piece passes, and a computer records the result as a graph of peaks called an <strong>electropherogram</strong>. Each peak is an allele; its position shows its length, and so its number of repeats. Comparing the peaks with an "allelic ladder", a mixture of known alleles run alongside, lets the software name each one. A marker called amelogenin is included too, which shows whether the sample came from a male or a female, as a check against mix-ups.</p>
+            <p>The result for each person is their <strong>DNA profile</strong>: simply a list of pairs of numbers, one pair for each locus.</p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Comparing the Profiles</h2>
+            <p>Now comes the detective work. At each locus, the laboratory compares the child's two alleles with the mother's. The allele the child could not have got from the mother must have come from the biological father. It is called the <strong>obligate paternal allele</strong>. Then the question is simple: does the alleged father carry it?</p>
+            <p>Take one locus from our fictional family. Anaya is <strong>12, 15</strong>. Her mother, Meera, is <strong>12, 14</strong>. Meera could have given the 12, but she has no 15, so the 15 must have come from Anaya's father. Vikram is <strong>15, 17</strong>. He carries a 15, so at this locus he is not excluded.</p>
+            <p>If Vikram had been, say, 13, 17, he could not have given Anaya her 15. That locus would be an <strong>inconsistency</strong>. One inconsistency is not enough to exclude him, however, because STRs occasionally mutate between generations: a repeat is gained or lost when the DNA is copied in a sperm or egg. This happens about 1 to 3 times in every 1,000 transmissions at a typical locus, more often from fathers than from mothers. So most laboratories report an <strong>exclusion</strong> only when the man fails to match at two or more loci, and many require three. With 20 or more loci, a man who is not the father almost always fails at many. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>, <a class="cite" href="#ref-14">14</a>, <a class="cite" href="#ref-17">17</a>]</span></p>
+            <figure class="fig" data-fig="fig-paternity-match">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. A paternity test at 20 loci.</strong> Choose who is being tested as the alleged father, and whether the mother's DNA is available. The figure finds the obligate paternal allele at each locus, checks the man, and calculates the paternity index (section 10). Press "New family" for a different random family. The allele frequencies are illustrative, similar in range to real ones, so the exact numbers will differ from a real laboratory's.
+              </figcaption>
+            </figure>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: who is excluded?</div>
+              <p>Here are a mother, a child and two men at three loci. For each locus, find the obligate paternal allele, then decide whether each man is excluded.</p>
+              <div class="table-container" style="overflow-x:auto; margin:1rem 0;">
+                <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                  <thead>
+                    <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                      <th style="padding:0.4rem 0.6rem;">Locus</th><th style="padding:0.4rem 0.6rem;">Mother</th><th style="padding:0.4rem 0.6rem;">Child</th><th style="padding:0.4rem 0.6rem;">Man X</th><th style="padding:0.4rem 0.6rem;">Man Y</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem 0.6rem;">A</td><td style="padding:0.4rem 0.6rem;">12, 14</td><td style="padding:0.4rem 0.6rem;">12, 16</td><td style="padding:0.4rem 0.6rem;">15, 16</td><td style="padding:0.4rem 0.6rem;">13, 14</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem 0.6rem;">B</td><td style="padding:0.4rem 0.6rem;">8, 9</td><td style="padding:0.4rem 0.6rem;">9, 11</td><td style="padding:0.4rem 0.6rem;">10, 11</td><td style="padding:0.4rem 0.6rem;">11, 12</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem 0.6rem;">C</td><td style="padding:0.4rem 0.6rem;">17, 20</td><td style="padding:0.4rem 0.6rem;">17, 17</td><td style="padding:0.4rem 0.6rem;">17, 22</td><td style="padding:0.4rem 0.6rem;">18, 21</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <details>
+                <summary><strong>Show the answer</strong></summary>
+                <p>The obligate paternal alleles are 16 (locus A), 11 (locus B) and 17 (locus C: the child has two 17s, so one must have come from the father). Man X carries all three, so he is not excluded at these loci. Man Y has the 11 but neither the 16 nor the 17: two inconsistencies, so he would normally be excluded. A real test would check about 20 loci before reaching a conclusion about Man X.</p>
+              </details>
+            </div>
+          </section>
+
+          <section id="section-10">
+            <h2>10. From Matches to a Probability</h2>
+            <p>If the man is not excluded, the next question is: how strong is the evidence? Matching at a locus means little if the obligate allele is very common, because many men carry it. It means much more if the allele is rare.</p>
+            <p>So, for each locus, the laboratory calculates a <strong>paternity index</strong> (PI). It compares two possibilities:</p>
+            <ul>
+              <li><strong>X</strong>: the chance that this man would pass on the obligate allele to a child. If he has two copies, X = 1; if he has one, X = ½.</li>
+              <li><strong>Y</strong>: the chance that a random, unrelated man would pass it on. This is simply how common the allele is in the population, worked out from large surveys of people's DNA.</li>
+            </ul>
+            <p>The paternity index is <strong>PI = X ÷ Y</strong>. At our example locus, Vikram has one 15 (X = ½), and suppose 1 in 10 alleles in the population are 15s (Y = 0.1). Then PI = 0.5 ÷ 0.1 = <strong>5</strong>: the DNA at this locus is five times more likely if Vikram is the father than if a random man is. (When the mother's alleles are ambiguous, or she was not tested, the formula is a little more complicated, but the idea is the same.) <span class="cite-group">[<a class="cite" href="#ref-17">17</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <p>Because the loci are inherited independently, the indices are multiplied together to give the <strong>combined paternity index</strong> (CPI). Twenty loci with an index of 5 each would give 5<sup>20</sup>, about 95 trillion. In practice indices vary from about 1 to about 30, and a true father's CPI is typically in the thousands to billions.</p>
+            <p>Finally, the CPI is turned into a <strong>probability of paternity</strong> using a rule from probability theory called <strong>Bayes' theorem</strong>. It combines the DNA evidence with a starting assumption, called the <strong>prior probability</strong>, of how likely the man was to be the father before the test. By convention, laboratories use a neutral prior of 50 per cent, as if the man were equally likely to be the father or not. Then:</p>
+            <p style="text-align:center;"><strong>probability of paternity = CPI ÷ (CPI + 1)</strong></p>
+            <p>A CPI of 10,000 gives 99.99 per cent. A CPI of 1 million gives 99.9999 per cent. However large the CPI, the probability never quite reaches 100 per cent, because the test cannot rule out every man on Earth, such as an untested close relative.</p>
+            <figure class="fig" data-fig="fig-paternity-bayes">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. From the combined paternity index to a probability.</strong> Change the strength of the DNA evidence (the CPI) and the prior probability. See why the standard 50 per cent prior is used, and why the answer is never quite 100 per cent.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-11">
+            <h2>11. The End Result: Reading the Report</h2>
+            <p>A paternity test report usually has three parts. Here is what a report for our fictional family might look like (the numbers are illustrative). <span class="cite-group">[<a class="cite" href="#ref-14">14</a>, <a class="cite" href="#ref-17">17</a>]</span></p>
+            <div class="table-container" style="overflow-x:auto; margin:1.5rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.5rem 0.7rem;">Locus</th>
+                    <th style="padding:0.5rem 0.7rem;">Mother (Meera)</th>
+                    <th style="padding:0.5rem 0.7rem;">Child (Anaya)</th>
+                    <th style="padding:0.5rem 0.7rem;">Alleged father (Vikram)</th>
+                    <th style="padding:0.5rem 0.7rem;">Paternity index</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem 0.7rem;">D8S1179</td><td style="padding:0.5rem 0.7rem;">12, 14</td><td style="padding:0.5rem 0.7rem;">12, 15</td><td style="padding:0.5rem 0.7rem;">15, 17</td><td style="padding:0.5rem 0.7rem;">5.0</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem 0.7rem;">TH01</td><td style="padding:0.5rem 0.7rem;">6, 9.3</td><td style="padding:0.5rem 0.7rem;">7, 9.3</td><td style="padding:0.5rem 0.7rem;">7, 7</td><td style="padding:0.5rem 0.7rem;">5.6</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem 0.7rem;">FGA</td><td style="padding:0.5rem 0.7rem;">21, 24</td><td style="padding:0.5rem 0.7rem;">21, 24</td><td style="padding:0.5rem 0.7rem;">24, 25</td><td style="padding:0.5rem 0.7rem;">1.6</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem 0.7rem;">vWA</td><td style="padding:0.5rem 0.7rem;">16, 17</td><td style="padding:0.5rem 0.7rem;">17, 19</td><td style="padding:0.5rem 0.7rem;">18, 19</td><td style="padding:0.5rem 0.7rem;">4.7</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem 0.7rem;">… 16 more loci</td><td style="padding:0.5rem 0.7rem;">…</td><td style="padding:0.5rem 0.7rem;">…</td><td style="padding:0.5rem 0.7rem;">…</td><td style="padding:0.5rem 0.7rem;">…</td></tr>
+                  <tr style="border-top:2px solid var(--color-border, #ddd);"><td style="padding:0.5rem 0.7rem;" colspan="4"><strong>Combined paternity index</strong></td><td style="padding:0.5rem 0.7rem;"><strong>2,450,000</strong></td></tr>
+                  <tr><td style="padding:0.5rem 0.7rem;" colspan="4"><strong>Probability of paternity</strong> (prior 50%)</td><td style="padding:0.5rem 0.7rem;"><strong>99.99996%</strong></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Notice the FGA row: Anaya has exactly the same two alleles as her mother, so either could have come from the father. Vikram has a 24, so he is not excluded, but the index is low because the evidence is weaker. The conclusion would be worded something like: <em>"The alleged father cannot be excluded as the biological father of the child. Based on the results, the probability of paternity is 99.99996%, compared with an untested, unrelated man of the same population."</em></p>
+            <p>If he had been excluded, the report would show the loci where he does not match, give a probability of paternity of 0 per cent, and state that he is <em>"excluded as the biological father"</em>.</p>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Tricky Cases</h2>
+            <ul>
+              <li><strong>No sample from the mother.</strong> Without her profile, the lab cannot tell which of the child's alleles came from the father, so each locus provides weaker evidence. The test still works, but the CPI is smaller, and more loci may be needed. <span class="cite-group">[<a class="cite" href="#ref-17">17</a>]</span></li>
+              <li><strong>Close relatives.</strong> A brother of the true father shares, on average, half of his alleles with him, so he will match at many loci by chance. The standard calculation assumes the alternative is an <em>unrelated</em> man. If a brother, father or son of the alleged father could be the true father, the laboratory must be told, so it can test more loci or test the relatives too. Try the "Father's brother" option in Figure 4.</li>
+              <li><strong>Identical twins.</strong> Identical twins come from one fertilised egg, so their standard DNA profiles are the same, and a normal paternity test cannot tell which twin is the father. In 2014 a German team showed that ultra-deep sequencing of the whole genome could find a handful of extremely rare mutations that one twin had passed to the child and the other twin did not carry. <span class="cite-group">[<a class="cite" href="#ref-18">18</a>]</span></li>
+              <li><strong>Before birth.</strong> A pregnant woman's blood contains small fragments of DNA from the placenta, which carries the baby's DNA. Non-invasive prenatal paternity tests analyse thousands of single-letter differences in this cell-free DNA, and studies have shown they can work from about 7 weeks of pregnancy, with no risk to the baby. <span class="cite-group">[<a class="cite" href="#ref-19">19</a>]</span></li>
+              <li><strong>The father has died, or is unavailable.</strong> His parents, brothers or other children can be tested instead, and the relationships reconstructed statistically. For a son, the <strong>Y chromosome</strong>, passed almost unchanged from father to son, can be compared with other men in the father's male line.</li>
+              <li><strong>A historical example.</strong> In 1998, Y-chromosome tests showed that a descendant of Eston Hemings, the youngest son of Sally Hemings, an enslaved woman at Thomas Jefferson's plantation, carried the same Y chromosome as men of Jefferson's family. Because all male-line Jeffersons share the same Y chromosome, the test showed that a Jefferson male fathered Eston, not which one; together with historical evidence, most historians now accept that it was Thomas Jefferson. <span class="cite-group">[<a class="cite" href="#ref-20">20</a>]</span></li>
+            </ul>
+          </section>
+
+          <section id="section-13">
+            <h2>13. The Law, Ethics and India</h2>
+            <p>A DNA test answers a biological question, but courts must also protect children and families. In India, Section 112 of the Indian Evidence Act, 1872, said that a child born during a valid marriage is <strong>conclusively presumed</strong> to be the husband's child, unless it is shown that the couple had no access to each other when the child could have been conceived. Since 1 July 2024, the same rule appears as Section 116 of the Bharatiya Sakshya Adhiniyam, 2023. The law was written to protect children from the stigma of illegitimacy, long before DNA tests existed. <span class="cite-group">[<a class="cite" href="#ref-21">21</a>]</span></p>
+            <p>The Supreme Court has had to balance that presumption against scientific evidence. In <em>Goutam Kundu v. State of West Bengal</em> (1993), it held that courts cannot order blood tests as a matter of course: there must be a strong case, and a test cannot be used for a "roving enquiry". In <em>Nandlal Wasudeo Badwaik v. Lata Nandlal Badwaik</em> (2014), where a DNA test had already shown that the husband was not the father, the Court held that when a legal presumption conflicts with accurate scientific proof, the truth must prevail. In April 2026, in <em>Nikhat Parveen v. Rafique</em>, it again held that the presumption must give way where an accurate, undisputed DNA report is already on record, while stressing the child's dignity and privacy. <span class="cite-group">[<a class="cite" href="#ref-22">22</a>, <a class="cite" href="#ref-23">23</a>, <a class="cite" href="#ref-24">24</a>]</span></p>
+            <p>The best-known Indian case involved the politician N. D. Tiwari. In 2008, Rohit Shekhar filed a suit claiming to be his son. Tiwari refused to give a sample until the Delhi High Court ordered him to. On 27 July 2012, the court opened the sealed report from CDFD Hyderabad and announced that Tiwari was Rohit Shekhar's biological father. <span class="cite-group">[<a class="cite" href="#ref-25">25</a>]</span></p>
+            <p>Beyond the law, a paternity test can change families. Good practice is to test only with the consent of the adults involved (and a court's or guardian's consent for a child), to use an accredited laboratory, and to think about counselling, especially when the result may be unexpected. DNA profiles are also personal data: anyone sending a sample to a company should know how it will be stored and when it will be destroyed.</p>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Legend and Record: "One Child in Ten"</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: how often is the father not the father?</div>
+              <p><strong>The legend:</strong> about one child in ten is not the biological child of the man they believe to be their father. The figure is repeated in newspapers, textbooks and lectures.</p>
+              <p><strong>The record:</strong> careful studies find far lower figures. A 2006 review of studies from around the world found a median of about <strong>1.7 per cent</strong> among men who were confident of their paternity. Genetic genealogy studies in Western Europe, comparing Y chromosomes with family trees going back centuries, have found rates of about <strong>1 per cent per generation</strong>. <span class="cite-group">[<a class="cite" href="#ref-26">26</a>, <a class="cite" href="#ref-27">27</a>]</span></p>
+              <p><strong>Where the legend came from:</strong> the high figures mostly come from biased samples, especially laboratories testing men who already doubted their paternity. In that group, the same 2006 review found a median of about 30 per cent. Those men are not typical: they had a reason to be tested.</p>
+              <p><strong>Why it matters:</strong> a number that sounds scientific can spread for decades without anyone checking where it came from. Always ask: <em>who was in the sample?</em></p>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Philosophy Corner: Is 99.99 Per Cent Proof?</h2>
+            <div class="callout callout-philosophy">
+              <div class="callout-header">Philosophy Corner: probability, proof and parenthood</div>
+              <p>A paternity report never says "100 per cent". Is that a weakness? Not really. Almost nothing outside mathematics is known with absolute certainty. We accept that the Sun will rise tomorrow and that a medicine works because the evidence is overwhelming, not because it is logically impossible to be wrong. A probability of 99.9999 per cent means that, if the result were wrong, something extraordinarily unlikely would have happened.</p>
+              <p>But notice the hidden assumption: the 50 per cent prior. It treats the man as equally likely to be the father or not before the test. Is that fair? A judge might prefer to decide the prior from the other evidence in the case. With a very strong CPI the prior hardly matters, but with weak evidence it can change the answer. Numbers can carry hidden choices.</p>
+              <p>There is a deeper question too. The test measures <em>biological</em> fatherhood. But who is a child's father: the man who supplied half the DNA, or the man who raised them? Indian law's presumption of legitimacy, many adoption laws, and countless families suggest that fatherhood is also a relationship, not only a fact about chromosomes. Science can answer the biological question with astonishing precision. What the answer <em>means</em> is a question for people.</p>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. People in This Story</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Karl Landsteiner</td>
+                <td style="padding:0.6rem 0.8rem;">1868–1943<br>Austria / USA</td>
+                <td style="padding:0.6rem 0.8rem;">ABO blood groups (1901)</td>
+                <td style="padding:0.6rem 0.8rem;">Discovered blood groups and suggested using them in paternity disputes.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Emil von Dungern &amp; Ludwik Hirszfeld</td>
+                <td style="padding:0.6rem 0.8rem;">1867–1961 / 1884–1954<br>Germany / Poland</td>
+                <td style="padding:0.6rem 0.8rem;">Inheritance of blood groups (1910)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed blood groups follow Mendel’s rules.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Kary Mullis</td>
+                <td style="padding:0.6rem 0.8rem;">1944–2019<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Polymerase chain reaction (1983)</td>
+                <td style="padding:0.6rem 0.8rem;">Invented the method that copies DNA for testing; Nobel Prize 1993.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Alec Jeffreys</td>
+                <td style="padding:0.6rem 0.8rem;">born 1950<br>UK</td>
+                <td style="padding:0.6rem 0.8rem;">DNA fingerprinting (1984)</td>
+                <td style="padding:0.6rem 0.8rem;">Discovered DNA fingerprints and solved the first immigration case with them.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Lalji Singh</td>
+                <td style="padding:0.6rem 0.8rem;">1947–2017<br>India</td>
+                <td style="padding:0.6rem 0.8rem;">DNA fingerprinting at CCMB, Hyderabad</td>
+                <td style="padding:0.6rem 0.8rem;">Brought DNA fingerprinting to India and its courts.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-17">
+            <h2>17. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about how paternity tests work.</p>
+            <figure class="fig" data-fig="fig-quiz-paternity">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-18">
+            <h2>18. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Alberts, Bruce et al.</strong> (2022). <em>Molecular Biology of the Cell</em>. 7th ed. New York: W. W. Norton.</li>
+              <li id="ref-2"><strong>Butler, John M.</strong> (2012). <em>Advanced Topics in Forensic DNA Typing: Methodology</em>. San Diego: Academic Press.</li>
+              <li id="ref-3"><strong>Landsteiner, Karl.</strong> (1901). "Über Agglutinationserscheinungen normalen menschlichen Blutes." <em>Wiener klinische Wochenschrift</em>, 14: 1132–1134.</li>
+              <li id="ref-4"><strong>von Dungern, Emil &amp; Hirszfeld, Ludwik.</strong> (1910). "Über Vererbung gruppenspezifischer Strukturen des Blutes." <em>Zeitschrift für Immunitätsforschung</em>, 6: 284–292.</li>
+              <li id="ref-5"><strong>The Nobel Prize.</strong> "Karl Landsteiner: Biographical." NobelPrize.org (Physiology or Medicine 1930).</li>
+              <li id="ref-6"><strong><em>Berry v. Chaplin</em></strong> (1946). 74 Cal. App. 2d 652. California Court of Appeal.</li>
+              <li id="ref-7"><strong>Science Friday.</strong> "Charlie Chaplin and ‘Paternity’ in Modern Times."</li>
+              <li id="ref-8"><strong>YourGenome (Wellcome Connecting Science).</strong> "The dawn of DNA profiling: the ‘eureka’ moment that revolutionised crime solving."</li>
+              <li id="ref-9"><strong>Jeffreys, Alec J., Wilson, Victoria &amp; Thein, Swee Lay.</strong> (1985). "Individual-specific ‘fingerprints’ of human DNA." <em>Nature</em>, 316: 76–79.</li>
+              <li id="ref-10"><strong>Jeffreys, Alec J., Brookfield, John F. Y. &amp; Semeonoff, Robert.</strong> (1985). "Positive identification of an immigration test-case using human DNA fingerprints." <em>Nature</em>, 317: 818–819.</li>
+              <li id="ref-11"><strong>Down To Earth.</strong> "Genetic fingerprinting catches on." (On Lalji Singh and the first Indian paternity case.)</li>
+              <li id="ref-12"><strong>Edwards, A., Civitello, A., Hammond, H. A. &amp; Caskey, C. T.</strong> (1991). "DNA typing and genetic mapping with trimeric and tetrameric tandem repeats." <em>American Journal of Human Genetics</em>, 49(4): 746–756.</li>
+              <li id="ref-13"><strong>Hares, Douglas R.</strong> (2015). "Selection and implementation of expanded CODIS core loci in the United States." <em>Forensic Science International: Genetics</em>, 17: e33–e34.</li>
+              <li id="ref-14"><strong>AABB.</strong> <em>Standards for Relationship Testing Laboratories</em>. Bethesda, MD: AABB (current edition).</li>
+              <li id="ref-15"><strong>Saiki, R. K., Scharf, S., Faloona, F., Mullis, K. B., Horn, G. T., Erlich, H. A. &amp; Arnheim, N.</strong> (1985). "Enzymatic amplification of β-globin genomic sequences and restriction site analysis for diagnosis of sickle cell anemia." <em>Science</em>, 230(4732): 1350–1354.</li>
+              <li id="ref-16"><strong>Brinkmann, B., Klintschar, M., Neuhuber, F., Hühne, J. &amp; Rolf, B.</strong> (1998). "Mutation rate in human microsatellites: influence of the structure and length of the tandem repeat." <em>American Journal of Human Genetics</em>, 62(6): 1408–1415.</li>
+              <li id="ref-17"><strong>Gjertson, D. W., Brenner, C. H., Baur, M. P. et al.</strong> (2007). "ISFG: Recommendations on biostatistics in paternity testing." <em>Forensic Science International: Genetics</em>, 1(3–4): 223–231.</li>
+              <li id="ref-18"><strong>Weber-Lehmann, J. et al.</strong> (2014). "Finding the needle in the haystack: differentiating ‘identical’ twins in paternity testing and forensics by ultra-deep next generation sequencing." <em>Forensic Science International: Genetics</em>, 9: 42–46.</li>
+              <li id="ref-19"><strong>Ryan, A. et al.</strong> (2013). "Informatics-based, highly accurate, noninvasive prenatal paternity testing." <em>Genetics in Medicine</em>, 15(6): 473–477.</li>
+              <li id="ref-20"><strong>Foster, E. A. et al.</strong> (1998). "Jefferson fathered slave’s last child." <em>Nature</em>, 396: 27–28.</li>
+              <li id="ref-21"><strong>Government of India.</strong> Indian Evidence Act, 1872, Section 112; Bharatiya Sakshya Adhiniyam, 2023 (Act No. 47 of 2023), Section 116.</li>
+              <li id="ref-22"><strong><em>Goutam Kundu v. State of West Bengal</em></strong> (1993). 3 SCC 418. Supreme Court of India.</li>
+              <li id="ref-23"><strong><em>Nandlal Wasudeo Badwaik v. Lata Nandlal Badwaik</em></strong> (2014). 2 SCC 576. Supreme Court of India.</li>
+              <li id="ref-24"><strong><em>Nikhat Parveen @ Khusboo Khatoon v. Rafique @ Shillu</em></strong> (2026). 2026 INSC 399. Supreme Court of India, 21 April 2026.</li>
+              <li id="ref-25"><strong>Press Trust of India.</strong> (2012). "N D Tiwari is biological father of Rohit Shekhar: HC." <em>Business Standard</em>, 27 July 2012.</li>
+              <li id="ref-26"><strong>Anderson, Kermyt G.</strong> (2006). "How well does paternity confidence match actual paternity? Evidence from worldwide nonpaternity rates." <em>Current Anthropology</em>, 47(3): 513–520.</li>
+              <li id="ref-27"><strong>Larmuseau, M. H. D., Matthijs, K. &amp; Wenseleers, T.</strong> (2016). "Cuckolded fathers rare in human populations." <em>Trends in Ecology &amp; Evolution</em>, 31(5): 327–329.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/how-dna-paternity-tests-work.js"></script>
+</body>
+</html>

@@ -313,7 +313,7 @@ def build_glossary(root_dir, public_posts, files_to_write):
         h = h[a:b] if a >= 0 and b > a else h
         h = re.sub(r"<script.*?</script>", " ", h, flags=re.S)
         texts[p["slug"]] = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", h))
-    order = sorted(public_posts, key=lambda p: (list(SERIES).index(p.get("series", {}).get("id")) if p.get("series", {}).get("id") in SERIES else 99, p.get("series", {}).get("part", 999), p.get("date", "")))
+    order = sorted(public_posts, key=lambda p: (list(SERIES).index((p.get("series") or {}).get("id")) if (p.get("series") or {}).get("id") in SERIES else 99, (p.get("series") or {}).get("part", 999), p.get("date", "")))
 
     def appears_in(e):
         forms = sorted([e["term"]] + e.get("forms", []), key=len, reverse=True)
@@ -321,7 +321,7 @@ def build_glossary(root_dir, public_posts, files_to_write):
         found = []
         for p in order:
             if p["slug"] in texts and rx.search(texts[p["slug"]]):
-                part = p.get("series", {}).get("part")
+                part = (p.get("series") or {}).get("part")
                 label = f'{series_meta(p["series"].get("id", ""))["label"]} {part}' if part else p["title"]
                 found.append(f'<a href="articles/{p["slug"]}.html" title="{xml_escape(p["title"])}">{label}</a>')
         return found
@@ -427,7 +427,7 @@ def build_site(root_dir, check_mode=False):
             series_map.setdefault(s_id, []).append(p)
 
     for s_id, s_posts in series_map.items():
-        s_posts.sort(key=lambda x: x.get("series", {}).get("part", 1))
+        s_posts.sort(key=lambda x: (x.get("series") or {}).get("part", 1))
         # Build series page for public posts
         pub_s_posts = [p for p in s_posts if not p.get("draft", False)]
         meta = series_meta(s_id, len(s_posts))
@@ -445,7 +445,7 @@ def build_site(root_dir, check_mode=False):
                 with open(art_file, "r", encoding="utf-8") as f:
                     art_html = f.read()
 
-                part_num = art.get("series", {}).get("part", idx + 1)
+                part_num = (art.get("series") or {}).get("part", idx + 1)
                 total_parts = meta["parts"]
 
                 prev_link = ""

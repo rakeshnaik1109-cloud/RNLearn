@@ -2653,5 +2653,56 @@ window.RNLEARN_GLOSSARY = [
   "Apogee",
   "The point in the Moon’s (or a satellite’s) orbit where it is furthest from the Earth.",
   []
+ ],
+ [
+  "Short tandem repeat",
+  "A place in the DNA where a short sequence, usually four letters, is repeated a number of times that varies between people; the main markers used in DNA profiling.",
+  [
+   "short tandem repeats",
+   "STR",
+   "STRs"
+  ]
+ ],
+ [
+  "Locus",
+  "A specific location in the DNA, such as an STR marker. Plural: loci.",
+  [
+   "loci"
+  ]
+ ],
+ [
+  "Polymerase chain reaction",
+  "PCR: a laboratory method that copies a chosen piece of DNA millions of times by repeatedly heating and cooling it with enzymes.",
+  [
+   "PCR"
+  ]
+ ],
+ [
+  "Capillary electrophoresis",
+  "Separating DNA pieces by length by pulling them with an electric field through a thin gel-filled tube; shorter pieces move faster.",
+  []
+ ],
+ [
+  "Electropherogram",
+  "The graph of peaks produced by capillary electrophoresis; each peak is a DNA piece of a particular length.",
+  []
+ ],
+ [
+  "Obligate paternal allele",
+  "The allele a child must have inherited from the biological father, because the mother does not carry it.",
+  []
+ ],
+ [
+  "Paternity index",
+  "For one DNA marker, how many times more likely the results are if the tested man is the father than if a random unrelated man is.",
+  [
+   "combined paternity index",
+   "CPI"
+  ]
+ ],
+ [
+  "Chain of custody",
+  "The documented record of who collected, handled and stored a sample, needed for it to be accepted as legal evidence.",
+  []
  ]
 ];

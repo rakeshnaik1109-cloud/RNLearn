@@ -1,5 +1,22 @@
 [
   {
+    "slug": "how-dna-paternity-tests-work",
+    "url": "articles/how-dna-paternity-tests-work.html",
+    "title": "Who’s the Father? How a DNA Paternity Test Works",
+    "summary": "From chromosomes and short tandem repeats to PCR, the paternity index and Bayes’ theorem: how a cheek swab becomes a report saying “excluded” or “99.99%”, plus the tricky cases and Indian law.",
+    "subject": "Science",
+    "tags": [
+      "dna",
+      "genetics",
+      "paternity-testing",
+      "forensic-science",
+      "probability",
+      "law"
+    ],
+    "date": "2026-11-28",
+    "type": "tutorial"
+  },
+  {
     "slug": "how-far-is-the-moon",
     "url": "articles/how-far-is-the-moon.html",
     "title": "How Far Is the Moon? Shadows, Parallax and Mirrors on the Moon",

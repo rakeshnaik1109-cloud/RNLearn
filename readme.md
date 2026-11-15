@@ -42,6 +42,9 @@ A 12-part series on how people measured the Earth, the Moon, the Sun, light, gra
 2. **Part 2**: *The Shape of the Earth: Squashed Planets, the Metre and Mount Everest* (Newton vs Cassini, Lapland & Peru, the metre, the Great Trigonometrical Survey & Everest)
 3. **Part 3**: *How Far Is the Moon? Shadows, Parallax and Mirrors on the Moon* (Aristarchus, Hipparchus, Ptolemy, Aryabhata, Lalande & Lacaille, radar & lunar laser ranging)
 
+### Standalone Tutorials
+- *Who's the Father? How a DNA Paternity Test Works* (DNA basics, inheritance, blood groups & the Chaplin case, Jeffreys, STRs, PCR & capillary electrophoresis, the paternity index & Bayes, tricky cases, Indian law)
+
 ---
 
 ## Architecture & Tooling

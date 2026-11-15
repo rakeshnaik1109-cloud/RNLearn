@@ -2651,5 +2651,56 @@
     "term": "Apogee",
     "definition": "The point in the Moon’s (or a satellite’s) orbit where it is furthest from the Earth.",
     "forms": []
+  },
+  {
+    "term": "Short tandem repeat",
+    "definition": "A place in the DNA where a short sequence, usually four letters, is repeated a number of times that varies between people; the main markers used in DNA profiling.",
+    "forms": [
+      "short tandem repeats",
+      "STR",
+      "STRs"
+    ]
+  },
+  {
+    "term": "Locus",
+    "definition": "A specific location in the DNA, such as an STR marker. Plural: loci.",
+    "forms": [
+      "loci"
+    ]
+  },
+  {
+    "term": "Polymerase chain reaction",
+    "definition": "PCR: a laboratory method that copies a chosen piece of DNA millions of times by repeatedly heating and cooling it with enzymes.",
+    "forms": [
+      "PCR"
+    ]
+  },
+  {
+    "term": "Capillary electrophoresis",
+    "definition": "Separating DNA pieces by length by pulling them with an electric field through a thin gel-filled tube; shorter pieces move faster.",
+    "forms": []
+  },
+  {
+    "term": "Electropherogram",
+    "definition": "The graph of peaks produced by capillary electrophoresis; each peak is a DNA piece of a particular length.",
+    "forms": []
+  },
+  {
+    "term": "Obligate paternal allele",
+    "definition": "The allele a child must have inherited from the biological father, because the mother does not carry it.",
+    "forms": []
+  },
+  {
+    "term": "Paternity index",
+    "definition": "For one DNA marker, how many times more likely the results are if the tested man is the father than if a random unrelated man is.",
+    "forms": [
+      "combined paternity index",
+      "CPI"
+    ]
+  },
+  {
+    "term": "Chain of custody",
+    "definition": "The documented record of who collected, handled and stored a sample, needed for it to be accepted as legal evidence.",
+    "forms": []
   }
 ]
