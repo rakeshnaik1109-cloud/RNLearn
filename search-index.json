@@ -1,22 +1,5 @@
 [
   {
-    "slug": "where-we-are-now",
-    "url": "articles/where-we-are-now.html",
-    "title": "Where We Are Now: Reasoning Models, Agents and the AI Boom",
-    "summary": "AI from 2023 to November 2026: multimodal and open models, reasoning models, DeepSeek, maths olympiad gold, agents, the cost in chips and power, and what still goes wrong.",
-    "subject": "Technology",
-    "tags": [
-      "artificial-intelligence",
-      "large-language-models",
-      "ai-agents",
-      "reasoning-models",
-      "ai-policy",
-      "history-of-computing"
-    ],
-    "date": "2026-11-15",
-    "type": "tutorial"
-  },
-  {
     "slug": "where-is-it-leading-us",
     "url": "articles/where-is-it-leading-us.html",
     "title": "Where Is It Leading Us? Work, Safety, Rules and the Future of AI",
@@ -34,88 +17,20 @@
     "type": "tutorial"
   },
   {
-    "slug": "the-deep-learning-revolution",
-    "url": "articles/the-deep-learning-revolution.html",
-    "title": "The Deep Learning Revolution: ImageNet, AlphaGo and AlphaFold",
-    "summary": "How deep networks, graphics chips and big data transformed AI after 2012: AlexNet, word vectors, neural translation, GANs, AlphaGo, AlphaFold, and the problems of bias and fragility.",
+    "slug": "where-we-are-now",
+    "url": "articles/where-we-are-now.html",
+    "title": "Where We Are Now: Reasoning Models, Agents and the AI Boom",
+    "summary": "AI from 2023 to November 2026: multimodal and open models, reasoning models, DeepSeek, maths olympiad gold, agents, the cost in chips and power, and what still goes wrong.",
     "subject": "Technology",
     "tags": [
       "artificial-intelligence",
-      "deep-learning",
-      "neural-networks",
-      "alphago",
-      "alphafold",
+      "large-language-models",
+      "ai-agents",
+      "reasoning-models",
+      "ai-policy",
       "history-of-computing"
     ],
-    "date": "2026-11-15",
-    "type": "tutorial"
-  },
-  {
-    "slug": "learning-from-examples",
-    "url": "articles/learning-from-examples.html",
-    "title": "Learning from Examples: Backpropagation, Big Data and Deep Blue",
-    "summary": "How AI stopped writing rules and started learning from data: backpropagation, LeCun’s digit reader, statistical translation, spam filters, TD-Gammon, Deep Blue and overfitting.",
-    "subject": "Technology",
-    "tags": [
-      "artificial-intelligence",
-      "machine-learning",
-      "neural-networks",
-      "backpropagation",
-      "deep-blue",
-      "history-of-computing"
-    ],
-    "date": "2026-11-15",
-    "type": "tutorial"
-  },
-  {
-    "slug": "dreams-of-thinking-machines",
-    "url": "articles/dreams-of-thinking-machines.html",
-    "title": "Dreams of Thinking Machines: From Bronze Giants to Babbage’s Engines",
-    "summary": "From Talos and golden robots in Greek myth to programmable automata, Llull’s wheels, Leibniz’s “Let us calculate”, Babbage, Ada Lovelace and Boole’s logic.",
-    "subject": "Technology",
-    "tags": [
-      "artificial-intelligence",
-      "history-of-computing",
-      "automata",
-      "babbage",
-      "lovelace",
-      "logic"
-    ],
-    "date": "2026-11-15",
-    "type": "tutorial"
-  },
-  {
-    "slug": "can-machines-think",
-    "url": "articles/can-machines-think.html",
-    "title": "Can Machines Think? Turing, the First Computers and the Birth of AI",
-    "summary": "From Turing’s universal machine and the first electronic computers to model neurons, robot tortoises, the Turing test, learning matchboxes, Dartmouth and the perceptron.",
-    "subject": "Technology",
-    "tags": [
-      "artificial-intelligence",
-      "history-of-computing",
-      "turing",
-      "turing-test",
-      "neural-networks",
-      "machine-learning"
-    ],
-    "date": "2026-11-15",
-    "type": "tutorial"
-  },
-  {
-    "slug": "big-promises-and-ai-winters",
-    "url": "articles/big-promises-and-ai-winters.html",
-    "title": "Big Promises and AI Winters: ELIZA, Expert Systems and Two Crashes",
-    "summary": "From the golden years of SHRDLU, Shakey and ELIZA to the Perceptrons book, the Lighthill report, MYCIN and the expert-system boom, and the two AI winters that followed.",
-    "subject": "Technology",
-    "tags": [
-      "artificial-intelligence",
-      "history-of-computing",
-      "ai-winter",
-      "expert-systems",
-      "eliza",
-      "neural-networks"
-    ],
-    "date": "2026-11-15",
+    "date": "2026-11-14",
     "type": "tutorial"
   },
   {
@@ -132,7 +47,7 @@
       "rlhf",
       "history-of-computing"
     ],
-    "date": "2026-11-15",
+    "date": "2026-11-13",
     "type": "tutorial"
   },
   {
@@ -153,54 +68,88 @@
     "type": "tutorial"
   },
   {
-    "slug": "the-strange-new-physics",
-    "url": "articles/the-strange-new-physics.html",
-    "title": "The Strange New Physics: Relativity, the Quantum, and the Subatomic Realm",
-    "summary": "From the Michelson-Morley null result and Planck's quantum to Einstein's relativity, Rutherford's nucleus, Bohr's orbits, and Heisenberg's uncertainty.",
-    "subject": "History",
+    "slug": "the-deep-learning-revolution",
+    "url": "articles/the-deep-learning-revolution.html",
+    "title": "The Deep Learning Revolution: ImageNet, AlphaGo and AlphaFold",
+    "summary": "How deep networks, graphics chips and big data transformed AI after 2012: AlexNet, word vectors, neural translation, GANs, AlphaGo, AlphaFold, and the problems of bias and fragility.",
+    "subject": "Technology",
     "tags": [
-      "physics",
-      "quantum-mechanics",
-      "relativity",
-      "einstein",
-      "atomic-theory",
-      "epistemology"
+      "artificial-intelligence",
+      "deep-learning",
+      "neural-networks",
+      "alphago",
+      "alphafold",
+      "history-of-computing"
     ],
     "date": "2026-11-12",
     "type": "tutorial"
   },
   {
-    "slug": "the-scientific-revolution",
-    "url": "articles/the-scientific-revolution.html",
-    "title": "The Clockwork Heavens and the Open Eye: The Scientific Revolution",
-    "summary": "From Copernicus and Tycho Brahe's baseline to Kepler's elliptical orbits, Galileo's telescope, Descartes, and Newton's Principia: the birth of modern physics.",
-    "subject": "History",
+    "slug": "learning-from-examples",
+    "url": "articles/learning-from-examples.html",
+    "title": "Learning from Examples: Backpropagation, Big Data and Deep Blue",
+    "summary": "How AI stopped writing rules and started learning from data: backpropagation, LeCun’s digit reader, statistical translation, spam filters, TD-Gammon, Deep Blue and overfitting.",
+    "subject": "Technology",
     "tags": [
-      "scientific-revolution",
-      "physics",
-      "astronomy",
-      "newton",
-      "galileo",
-      "mechanics"
+      "artificial-intelligence",
+      "machine-learning",
+      "neural-networks",
+      "backpropagation",
+      "deep-blue",
+      "history-of-computing"
     ],
-    "date": "2026-11-12",
+    "date": "2026-11-11",
     "type": "tutorial"
   },
   {
-    "slug": "the-book-of-life",
-    "url": "articles/the-book-of-life.html",
-    "title": "The Book of Life: Evolution, the Cell, and the Code",
-    "summary": "From Linnaean taxonomy and Cuvier's fossils to Darwin, Mendel's peas, Pasteur's germ theory, and Watson-Crick-Franklin's double helix: how life came to know itself.",
-    "subject": "History",
+    "slug": "big-promises-and-ai-winters",
+    "url": "articles/big-promises-and-ai-winters.html",
+    "title": "Big Promises and AI Winters: ELIZA, Expert Systems and Two Crashes",
+    "summary": "From the golden years of SHRDLU, Shakey and ELIZA to the Perceptrons book, the Lighthill report, MYCIN and the expert-system boom, and the two AI winters that followed.",
+    "subject": "Technology",
     "tags": [
-      "biology",
-      "evolution",
-      "genetics",
-      "dna",
-      "cell-theory",
-      "epistemology"
+      "artificial-intelligence",
+      "history-of-computing",
+      "ai-winter",
+      "expert-systems",
+      "eliza",
+      "neural-networks"
     ],
-    "date": "2026-11-12",
+    "date": "2026-11-10",
+    "type": "tutorial"
+  },
+  {
+    "slug": "can-machines-think",
+    "url": "articles/can-machines-think.html",
+    "title": "Can Machines Think? Turing, the First Computers and the Birth of AI",
+    "summary": "From Turing’s universal machine and the first electronic computers to model neurons, robot tortoises, the Turing test, learning matchboxes, Dartmouth and the perceptron.",
+    "subject": "Technology",
+    "tags": [
+      "artificial-intelligence",
+      "history-of-computing",
+      "turing",
+      "turing-test",
+      "neural-networks",
+      "machine-learning"
+    ],
+    "date": "2026-11-09",
+    "type": "tutorial"
+  },
+  {
+    "slug": "dreams-of-thinking-machines",
+    "url": "articles/dreams-of-thinking-machines.html",
+    "title": "Dreams of Thinking Machines: From Bronze Giants to Babbage’s Engines",
+    "summary": "From Talos and golden robots in Greek myth to programmable automata, Llull’s wheels, Leibniz’s “Let us calculate”, Babbage, Ada Lovelace and Boole’s logic.",
+    "subject": "Technology",
+    "tags": [
+      "artificial-intelligence",
+      "history-of-computing",
+      "automata",
+      "babbage",
+      "lovelace",
+      "logic"
+    ],
+    "date": "2026-11-08",
     "type": "tutorial"
   },
   {
@@ -218,74 +167,24 @@
       "godel",
       "turing"
     ],
-    "date": "2026-11-12",
+    "date": "2026-11-05",
     "type": "tutorial"
   },
   {
-    "slug": "keepers-and-builders-of-knowledge",
-    "url": "articles/keepers-and-builders-of-knowledge.html",
-    "title": "Keepers and Builders of Knowledge: Science in the Medieval Commonwealth",
-    "summary": "From Baghdad's House of Wisdom and Ibn al-Haytham's optics to Kerala's calculus, Song Dynasty clocks, and European universities: how medieval thinkers transformed science.",
+    "slug": "the-strange-new-physics",
+    "url": "articles/the-strange-new-physics.html",
+    "title": "The Strange New Physics: Relativity, the Quantum, and the Subatomic Realm",
+    "summary": "From the Michelson-Morley null result and Planck's quantum to Einstein's relativity, Rutherford's nucleus, Bohr's orbits, and Heisenberg's uncertainty.",
     "subject": "History",
     "tags": [
-      "medieval-science",
-      "islamic-science",
-      "optics",
-      "astronomy",
-      "universities",
-      "epistemology"
-    ],
-    "date": "2026-11-12",
-    "type": "tutorial"
-  },
-  {
-    "slug": "gods-stars-and-calendars",
-    "url": "articles/gods-stars-and-calendars.html",
-    "title": "Gods, Stars and Calendars: The Dawn of Systematic Order",
-    "summary": "From Babylonian sexagesimal algebra and Egyptian water clocks to Indus Valley weights and Maya calendar gears: how early civilizations built systematic knowledge.",
-    "subject": "History",
-    "tags": [
-      "astronomy",
-      "mathematics",
-      "ancient-history",
-      "mesopotamia",
-      "egypt",
-      "metrology"
-    ],
-    "date": "2026-11-12",
-    "type": "tutorial"
-  },
-  {
-    "slug": "from-tally-marks-to-proof",
-    "url": "articles/from-tally-marks-to-proof.html",
-    "title": "From Tally Marks to Proof: The Story of Mathematics to the Middle Ages",
-    "summary": "From Babylonian clay tablets and Euclid's axiomatic geometry to Indian zero, Brahmagupta's negative numbers, and al-Khwārizmī's algebra: how mathematics learned to prove.",
-    "subject": "History",
-    "tags": [
-      "mathematics",
-      "geometry",
-      "algebra",
-      "epistemology",
-      "ancient-science",
-      "astronomy"
-    ],
-    "date": "2026-11-12",
-    "type": "tutorial"
-  },
-  {
-    "slug": "from-alchemy-to-the-periodic-table",
-    "url": "articles/from-alchemy-to-the-periodic-table.html",
-    "title": "From Alchemy to the Periodic Table: The Making of Chemistry",
-    "summary": "From Islamic alembics and Boyle's Sceptical Chymist to Lavoisier's oxygen balance, Dalton's atoms, and Mendeleev's periodic cathedral: the rise of chemical science.",
-    "subject": "History",
-    "tags": [
-      "chemistry",
+      "physics",
+      "quantum-mechanics",
+      "relativity",
+      "einstein",
       "atomic-theory",
-      "periodic-table",
-      "scientific-revolution",
       "epistemology"
     ],
-    "date": "2026-11-12",
+    "date": "2026-10-29",
     "type": "tutorial"
   },
   {
@@ -302,23 +201,91 @@
       "maxwell",
       "faraday"
     ],
-    "date": "2026-11-12",
+    "date": "2026-10-22",
     "type": "tutorial"
   },
   {
-    "slug": "before-science-how-a-curious-ape-learned-to-know",
-    "url": "articles/before-science-how-a-curious-ape-learned-to-know.html",
-    "title": "Before Science: How a Curious Ape Learned to Know",
-    "summary": "From 3.3-million-year-old stone cores at Lomekwi and controlled fire to ochre symbols and lunar tally bones: how humanity built empirical knowledge before writing.",
+    "slug": "the-book-of-life",
+    "url": "articles/the-book-of-life.html",
+    "title": "The Book of Life: Evolution, the Cell, and the Code",
+    "summary": "From Linnaean taxonomy and Cuvier's fossils to Darwin, Mendel's peas, Pasteur's germ theory, and Watson-Crick-Franklin's double helix: how life came to know itself.",
     "subject": "History",
     "tags": [
-      "paleoanthropology",
-      "prehistory",
-      "epistemology",
+      "biology",
       "evolution",
-      "archaeology"
+      "genetics",
+      "dna",
+      "cell-theory",
+      "epistemology"
     ],
-    "date": "2026-11-12",
+    "date": "2026-10-15",
+    "type": "tutorial"
+  },
+  {
+    "slug": "from-alchemy-to-the-periodic-table",
+    "url": "articles/from-alchemy-to-the-periodic-table.html",
+    "title": "From Alchemy to the Periodic Table: The Making of Chemistry",
+    "summary": "From Islamic alembics and Boyle's Sceptical Chymist to Lavoisier's oxygen balance, Dalton's atoms, and Mendeleev's periodic cathedral: the rise of chemical science.",
+    "subject": "History",
+    "tags": [
+      "chemistry",
+      "atomic-theory",
+      "periodic-table",
+      "scientific-revolution",
+      "epistemology"
+    ],
+    "date": "2026-10-08",
+    "type": "tutorial"
+  },
+  {
+    "slug": "the-scientific-revolution",
+    "url": "articles/the-scientific-revolution.html",
+    "title": "The Clockwork Heavens and the Open Eye: The Scientific Revolution",
+    "summary": "From Copernicus and Tycho Brahe's baseline to Kepler's elliptical orbits, Galileo's telescope, Descartes, and Newton's Principia: the birth of modern physics.",
+    "subject": "History",
+    "tags": [
+      "scientific-revolution",
+      "physics",
+      "astronomy",
+      "newton",
+      "galileo",
+      "mechanics"
+    ],
+    "date": "2026-10-01",
+    "type": "tutorial"
+  },
+  {
+    "slug": "keepers-and-builders-of-knowledge",
+    "url": "articles/keepers-and-builders-of-knowledge.html",
+    "title": "Keepers and Builders of Knowledge: Science in the Medieval Commonwealth",
+    "summary": "From Baghdad's House of Wisdom and Ibn al-Haytham's optics to Kerala's calculus, Song Dynasty clocks, and European universities: how medieval thinkers transformed science.",
+    "subject": "History",
+    "tags": [
+      "medieval-science",
+      "islamic-science",
+      "optics",
+      "astronomy",
+      "universities",
+      "epistemology"
+    ],
+    "date": "2026-09-24",
+    "type": "tutorial"
+  },
+  {
+    "slug": "from-tally-marks-to-proof",
+    "url": "articles/from-tally-marks-to-proof.html",
+    "title": "From Tally Marks to Proof: The Story of Mathematics to the Middle Ages",
+    "summary": "From Babylonian clay tablets and Euclid's axiomatic geometry to Indian zero, Brahmagupta's negative numbers, and al-Khwārizmī's algebra: how mathematics learned to prove.",
+    "subject": "History",
+    "tags": [
+      "mathematics",
+      "geometry",
+      "algebra",
+      "epistemology",
+      "ancient-science",
+      "astronomy"
+    ],
+    "date": "2026-09-17",
     "type": "tutorial"
   },
   {
@@ -335,7 +302,40 @@
       "ancient-science",
       "atomism"
     ],
-    "date": "2026-11-12",
+    "date": "2026-09-10",
+    "type": "tutorial"
+  },
+  {
+    "slug": "gods-stars-and-calendars",
+    "url": "articles/gods-stars-and-calendars.html",
+    "title": "Gods, Stars and Calendars: The Dawn of Systematic Order",
+    "summary": "From Babylonian sexagesimal algebra and Egyptian water clocks to Indus Valley weights and Maya calendar gears: how early civilizations built systematic knowledge.",
+    "subject": "History",
+    "tags": [
+      "astronomy",
+      "mathematics",
+      "ancient-history",
+      "mesopotamia",
+      "egypt",
+      "metrology"
+    ],
+    "date": "2026-09-03",
+    "type": "tutorial"
+  },
+  {
+    "slug": "before-science-how-a-curious-ape-learned-to-know",
+    "url": "articles/before-science-how-a-curious-ape-learned-to-know.html",
+    "title": "Before Science: How a Curious Ape Learned to Know",
+    "summary": "From 3.3-million-year-old stone cores at Lomekwi and controlled fire to ochre symbols and lunar tally bones: how humanity built empirical knowledge before writing.",
+    "subject": "History",
+    "tags": [
+      "paleoanthropology",
+      "prehistory",
+      "epistemology",
+      "evolution",
+      "archaeology"
+    ],
+    "date": "2026-08-27",
     "type": "tutorial"
   }
 ]

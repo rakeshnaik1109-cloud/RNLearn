@@ -59,6 +59,18 @@ def series_meta(s_id, n_posts=0):
         "lede": meta.get("lede") or f"A structured sequence of articles on {title.lower()}.",
     }
 
+def reading_order(post):
+    """Series posts first, grouped by series (in SERIES order) and sorted by part;
+    other posts afterwards, newest first."""
+    info = post.get("series") or {}
+    sid = info.get("id")
+    if sid:
+        rank = list(SERIES).index(sid) if sid in SERIES else len(SERIES)
+        return (0, rank, sid, info.get("part", 999), "")
+    d = post.get("date", "0000-00-00")
+    inv = "".join(chr(ord("9") - ord(ch) + ord("0")) if ch.isdigit() else ch for ch in d)
+    return (1, 0, "", 0, inv)
+
 def slugify(text):
     text = text.lower().strip()
     text = re.sub(r'[\s&/_]+', '-', text)
@@ -375,7 +387,10 @@ def build_site(root_dir, check_mode=False):
         if subj == "History":
             eyebrow = "Subject Archive • Master Series"
             lede = "How We Came To Know: A 12-part comprehensive journey through the history and philosophy of science from prehistory to modern epistemology."
-            posts.sort(key=lambda x: (x.get("series", {}).get("part", 999), x.get("date", "")))
+        elif subj == "Technology" and any((x.get("series") or {}).get("id") == "how-machines-learned-to-think" for x in posts):
+            eyebrow = "Subject Archive • Series"
+            lede = "How Machines Learned to Think: an eight-part history of artificial intelligence, from the first dreams of thinking machines to today’s AI and where it may lead."
+        posts.sort(key=reading_order)
         html = generate_listing_page(title, eyebrow, lede, posts, f"subjects/{s_slug}.html")
         files_to_write[os.path.join("subjects", f"{s_slug}.html")] = html
 
@@ -390,6 +405,7 @@ def build_site(root_dir, check_mode=False):
         title = f"#{tag}"
         eyebrow = "Tag Archive"
         lede = f"Articles and notes indexed under the topic #{tag}."
+        posts.sort(key=reading_order)
         html = generate_listing_page(title, eyebrow, lede, posts, f"tags/{t_slug}.html")
         files_to_write[os.path.join("tags", f"{t_slug}.html")] = html
 
