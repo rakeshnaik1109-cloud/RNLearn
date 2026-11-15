@@ -2242,5 +2242,70 @@
     "term": "Frame problem",
     "definition": "The puzzle of how a reasoning program can know what stays the same when it acts, without checking every fact.",
     "forms": []
+  },
+  {
+    "term": "Backpropagation",
+    "definition": "The method for training neural networks that passes the error backwards from the output, working out how to adjust every weight to reduce it.",
+    "forms": []
+  },
+  {
+    "term": "Gradient descent",
+    "definition": "Improving a model step by step by adjusting it slightly in whichever direction reduces its error most, like walking downhill in fog.",
+    "forms": []
+  },
+  {
+    "term": "Learning rate",
+    "definition": "How big a step a learning method takes each time it adjusts its weights.",
+    "forms": []
+  },
+  {
+    "term": "Convolutional neural network",
+    "definition": "A neural network that slides small learned filters across an image, so a pattern is recognised wherever it appears.",
+    "forms": [
+      "convolutional neural networks",
+      "convolutional network",
+      "convolutional networks"
+    ]
+  },
+  {
+    "term": "Overfitting",
+    "definition": "When a model learns the quirks and noise of its training examples so closely that it does badly on new data.",
+    "forms": []
+  },
+  {
+    "term": "Test set",
+    "definition": "Examples kept back during training and used only to measure how well a model works on data it has never seen.",
+    "forms": []
+  },
+  {
+    "term": "Naive Bayes",
+    "definition": "A simple probabilistic classifier that adds up evidence from each feature (such as each word) as if they were independent.",
+    "forms": []
+  },
+  {
+    "term": "Support vector machine",
+    "definition": "A learning method that separates two classes with the boundary that leaves the widest possible gap between them.",
+    "forms": [
+      "support vector machines"
+    ]
+  },
+  {
+    "term": "Random forest",
+    "definition": "A learning method that trains many decision trees on random samples of the data and lets them vote.",
+    "forms": [
+      "random forests"
+    ]
+  },
+  {
+    "term": "Vanishing gradient",
+    "definition": "The problem that, in a deep network, the error signal shrinks as it is passed backwards, so early layers barely learn.",
+    "forms": [
+      "vanishing gradient problem"
+    ]
+  },
+  {
+    "term": "Deep learning",
+    "definition": "Machine learning with neural networks that have many layers, each learning more abstract features than the last.",
+    "forms": []
   }
 ]

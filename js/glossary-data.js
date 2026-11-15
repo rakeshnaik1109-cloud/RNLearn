@@ -2244,5 +2244,70 @@ window.RNLEARN_GLOSSARY = [
   "Frame problem",
   "The puzzle of how a reasoning program can know what stays the same when it acts, without checking every fact.",
   []
+ ],
+ [
+  "Backpropagation",
+  "The method for training neural networks that passes the error backwards from the output, working out how to adjust every weight to reduce it.",
+  []
+ ],
+ [
+  "Gradient descent",
+  "Improving a model step by step by adjusting it slightly in whichever direction reduces its error most, like walking downhill in fog.",
+  []
+ ],
+ [
+  "Learning rate",
+  "How big a step a learning method takes each time it adjusts its weights.",
+  []
+ ],
+ [
+  "Convolutional neural network",
+  "A neural network that slides small learned filters across an image, so a pattern is recognised wherever it appears.",
+  [
+   "convolutional neural networks",
+   "convolutional network",
+   "convolutional networks"
+  ]
+ ],
+ [
+  "Overfitting",
+  "When a model learns the quirks and noise of its training examples so closely that it does badly on new data.",
+  []
+ ],
+ [
+  "Test set",
+  "Examples kept back during training and used only to measure how well a model works on data it has never seen.",
+  []
+ ],
+ [
+  "Naive Bayes",
+  "A simple probabilistic classifier that adds up evidence from each feature (such as each word) as if they were independent.",
+  []
+ ],
+ [
+  "Support vector machine",
+  "A learning method that separates two classes with the boundary that leaves the widest possible gap between them.",
+  [
+   "support vector machines"
+  ]
+ ],
+ [
+  "Random forest",
+  "A learning method that trains many decision trees on random samples of the data and lets them vote.",
+  [
+   "random forests"
+  ]
+ ],
+ [
+  "Vanishing gradient",
+  "The problem that, in a deep network, the error signal shrinks as it is passed backwards, so early layers barely learn.",
+  [
+   "vanishing gradient problem"
+  ]
+ ],
+ [
+  "Deep learning",
+  "Machine learning with neural networks that have many layers, each learning more abstract features than the last.",
+  []
  ]
 ];

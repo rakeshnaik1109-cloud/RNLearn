@@ -1,5 +1,31 @@
 [
   {
+    "slug": "learning-from-examples",
+    "title": "Learning from Examples: Backpropagation, Big Data and Deep Blue",
+    "summary": "How AI stopped writing rules and started learning from data: backpropagation, LeCun’s digit reader, statistical translation, spam filters, TD-Gammon, Deep Blue and overfitting.",
+    "subject": "Technology",
+    "tags": [
+      "artificial-intelligence",
+      "machine-learning",
+      "neural-networks",
+      "backpropagation",
+      "deep-blue",
+      "history-of-computing"
+    ],
+    "date": "2026-11-15",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 23,
+    "series": {
+      "id": "how-machines-learned-to-think",
+      "part": 4
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": false
+  },
+  {
     "slug": "big-promises-and-ai-winters",
     "title": "Big Promises and AI Winters: ELIZA, Expert Systems and Two Crashes",
     "summary": "From the golden years of SHRDLU, Shakey and ELIZA to the Perceptrons book, the Lighthill report, MYCIN and the expert-system boom, and the two AI winters that followed.",

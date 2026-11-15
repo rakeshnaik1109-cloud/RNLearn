@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning from Examples: Backpropagation, Big Data and Deep Blue — RNLearn</title>
+  <meta name="description" content="How AI stopped writing rules and started learning from data: backpropagation, LeCun’s digit reader, statistical translation, spam filters, TD-Gammon, Deep Blue and overfitting.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/learning-from-examples.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Learning from Examples: Backpropagation, Big Data and Deep Blue — RNLearn">
+  <meta property="og:description" content="How AI stopped writing rules and started learning from data: backpropagation, LeCun’s digit reader, statistical translation, spam filters, TD-Gammon, Deep Blue and overfitting.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/learning-from-examples.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Learning from Examples: Backpropagation, Big Data and Deep Blue — RNLearn">
+  <meta name="twitter:description" content="How AI stopped writing rules and started learning from data: backpropagation, LeCun’s digit reader, statistical translation, spam filters, TD-Gammon, Deep Blue and overfitting.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Learning from Examples: Backpropagation, Big Data and Deep Blue",
+    "description": "How AI stopped writing rules and started learning from data: backpropagation, LeCun’s digit reader, statistical translation, spam filters, TD-Gammon, Deep Blue and overfitting.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-15",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/learning-from-examples.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/technology.html" class="post-subject-tag" data-subject="technology">Technology</a>
+        </div>
+        <h1 class="article-title">Learning from Examples: Backpropagation, Big Data and Deep Blue</h1>
+        <p class="article-standfirst">
+          Instead of telling machines what to do, researchers taught them to learn from examples. Over twenty quiet years, learning machines began reading cheques, filtering spam and translating text, while a chess computer grabbed the headlines.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-15">15 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>23 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/how-machines-learned-to-think.html">How Machines Learned to Think</a> (Part 4 of 8)</div>
+  <div class="series-banner-links">
+    <a href="big-promises-and-ai-winters.html">← Part 3: Big Promises and AI Winters: ELIZA, Expert Systems and Two Crashes</a>
+    <span>Part 5 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. Learning Instead of Telling</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Backpropagation</a></li>
+              <li><a class="toc-link" href="#section-4">4. Teaching Machines to Read</a></li>
+              <li><a class="toc-link" href="#section-5">5. The Statistical Turn</a></li>
+              <li><a class="toc-link" href="#section-6">6. Reasoning with Probabilities</a></li>
+              <li><a class="toc-link" href="#section-7">7. Learning by Playing: TD-Gammon</a></li>
+              <li><a class="toc-link" href="#section-8">8. Deep Blue Beats the Champion</a></li>
+              <li><a class="toc-link" href="#section-9">9. The Quiet Workhorses</a></li>
+              <li><a class="toc-link" href="#section-10">10. Training, Testing and Overfitting</a></li>
+              <li><a class="toc-link" href="#section-11">11. More Data Beats Cleverer Algorithms</a></li>
+              <li><a class="toc-link" href="#section-12">12. Keeping the Flame Alive</a></li>
+              <li><a class="toc-link" href="#section-13">13. How Did They Know?</a></li>
+              <li><a class="toc-link" href="#section-14">14. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-15">15. Philosophy Corner</a></li>
+              <li><a class="toc-link" href="#section-16">16. People in This Part</a></li>
+              <li><a class="toc-link" href="#section-17">17. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-18">18. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. Learning Instead of Telling</h2>
+            <p>Part 3 ended with expert systems in trouble. Writing down an expert's knowledge as thousands of rules was slow and expensive, and the rules broke as soon as the world didn't fit them. This part tells how AI found a different way: instead of <em>telling</em> machines what to do, let them <em>learn</em> it from examples. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <p>Between the 1980s and about 2010, three things changed together:</p>
+            <ul>
+              <li><strong>New learning methods.</strong> Researchers found how to train neural networks with hidden layers (backpropagation), and developed powerful statistical tools that learned from data.</li>
+              <li><strong>Much more data.</strong> As the world went digital, and then online, examples to learn from piled up: scanned cheques, recorded speech, translated documents, emails, clicks.</li>
+              <li><strong>Much faster computers.</strong> Each year computers grew faster and cheaper, making experiments possible that would have taken years before.</li>
+            </ul>
+            <p>This period has no single dramatic moment. Deep Blue's 1997 win at chess is the famous headline, and, ironically, it hardly learned at all. But by 2010, quietly, machine learning was reading cheques, filtering spam, recognising speech, translating text and recommending films. The stage was set for the explosion of Part 5.</p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-ai-timeline-4">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. Machines that learn, 1982–2009.</strong> The points are in order but not to scale. Colours show the four threads of the story.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. How Do You Train a Network? Backpropagation</h2>
+            <p>Part 3 ended with a puzzle. Networks with a hidden layer of neurons could, in principle, learn patterns like XOR, but nobody knew how to train them. If the network gives a wrong answer, which of its many weights is to blame, and by how much? <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+            <p>The answer is a method called <strong>backpropagation</strong> ("backward propagation of errors"). To understand it, start with the idea of <strong>gradient descent</strong>. Imagine you are on a hillside in thick fog and want to reach the bottom of the valley. You can't see far, but you can feel which way the ground slopes under your feet. So you take a small step downhill, feel again, and take another step. Eventually you reach the bottom.</p>
+            <p>For a neural network, the "height" is the <strong>error</strong>: how wrong its answers are over all the training examples. Each weight is a direction you can move in. Backpropagation is a clever and efficient way of working out the slope for every weight at once. It starts with the error at the output and passes it backwards through the network, layer by layer, using the chain rule from calculus to share out the blame. Then every weight is nudged a little in the direction that reduces the error. Repeat this thousands of times and the network learns.</p>
+            <p>The key mathematics was found more than once. Seppo Linnainmaa described the general technique in 1970, and Paul Werbos proposed using it for neural networks in his 1974 PhD thesis. But it was a 1986 paper in <em>Nature</em> by <strong>David Rumelhart</strong>, <strong>Geoffrey Hinton</strong> and <strong>Ronald Williams</strong> that convinced the world, by showing what it could do. Networks trained this way learned to solve problems that had defeated the perceptron, and, most strikingly, their hidden neurons invented useful features of their own (section 13). <span class="cite-group">[<a class="cite" href="#ref-3">3</a>, <a class="cite" href="#ref-4">4</a>, <a class="cite" href="#ref-1">1</a>]</span></p>
+            <figure class="fig" data-fig="fig-nn-playground">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Train a small neural network.</strong> The network has two inputs (a point's position), one hidden layer and one output (blue or orange). Press Train and watch backpropagation reshape the coloured regions until they fit the points, while the error falls. Change the number of hidden neurons and the learning rate (the size of each downhill step) to see their effects.
+              </figcaption>
+            </figure>
+            <p>Neural networks became fashionable again. A few years earlier, in 1982, the physicist <strong>John Hopfield</strong> had shown how a network of neurons could store and recall memories, borrowing ideas from the physics of magnets, and this too drew new people into the field. In 2024 Hopfield and Hinton shared the Nobel Prize in Physics for these foundations of machine learning. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span></p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Teaching Machines to Read</h2>
+            <p>The first big practical success came from reading handwriting. At Bell Labs in New Jersey, a young French researcher, <strong>Yann LeCun</strong>, trained a neural network to read the handwritten zip codes (postcodes) on US mail. His 1989 network did something new. Instead of connecting every pixel to every neuron, it used small <strong>filters</strong>, each looking at a tiny patch of the image, and slid the same filter across the whole picture. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+            <p>This design is called a <strong>convolutional neural network</strong>. It has two big advantages. A pattern such as a vertical stroke is recognised wherever it appears in the image, and the network needs far fewer weights to learn, because one small filter is reused everywhere. The first layer learns to spot simple things like edges; later layers combine them into curves, loops and corners, and finally into whole digits.</p>
+            <figure class="fig" data-fig="fig-convolution">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. What a filter sees.</strong> A 3 × 3 filter slides over every patch of the drawing, multiplying and adding, to produce a "feature map" that lights up wherever its pattern appears. Draw your own shape, switch filters, and hover over the feature map to see the sum. In a real convolutional network, the filter numbers are not chosen by hand: they are learned by backpropagation.
+              </figcaption>
+            </figure>
+            <p>By 1998 LeCun and his colleagues had refined the design into <strong>LeNet-5</strong>, and a cheque-reading system built on this work was used by banks. LeCun has estimated that by the late 1990s it was reading 10 to 20 per cent of all cheques written in the United States. His team also released <strong>MNIST</strong>, a collection of 70,000 handwritten digits that became the standard test for new learning methods for the next twenty years. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span></p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. The Statistical Turn</h2>
+            <p>While neural networks were reading digits, a quieter revolution was happening in speech and language. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>, <a class="cite" href="#ref-8">8</a>]</span></p>
+            <p>At IBM, a team led by the Czech-born engineer <strong>Frederick Jelinek</strong> worked on speech recognition from the 1970s onwards. Instead of writing rules of grammar and pronunciation, they treated speech as a problem of probabilities: given these sounds, which sequence of words is most likely? They estimated the probabilities from large amounts of recorded and transcribed speech, using a mathematical tool called a <strong>hidden Markov model</strong>. It worked better than the rule-based systems, and Jelinek is reported to have joked: "Every time I fire a linguist, the performance of the speech recogniser goes up."</p>
+            <p>Around 1990 the same IBM group applied the idea to translation. Their system learned to translate between French and English by studying millions of sentences from the records of the Canadian parliament, which are published in both languages. It learned which words and phrases tend to correspond, and how word order changes, without being told any grammar at all. This <strong>statistical machine translation</strong> became the basis of online translation services in the 2000s. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span></p>
+            <p>The lesson was startling to many AI researchers: with enough data, crude statistical models could beat carefully hand-crafted knowledge.</p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Reasoning with Probabilities: Spam Filters</h2>
+            <p>Probability also solved an old problem of expert systems: real life is uncertain. A symptom makes a disease more likely but not certain; a word makes an email more likely to be spam but not certainly so. In 1988 the computer scientist <strong>Judea Pearl</strong> published <em>Probabilistic Reasoning in Intelligent Systems</em>, showing how machines could reason with uncertainty using <strong>Bayesian networks</strong>, built on a rule for updating beliefs in the light of evidence that goes back to the 18th-century minister Thomas Bayes. Pearl later won the Turing Award, computing's highest honour. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span></p>
+            <p>A simple version of this idea protected millions of inboxes. By the late 1990s junk email was a plague. Researchers proposed filters that learn, and in 2002 an essay by the programmer Paul Graham, "A Plan for Spam", popularised them widely. The filter counts how often each word appears in spam and in normal email. To judge a new message, it combines the evidence from every word: "prize" and "click" push towards spam, "meeting" and "lecture" push away from it. As spammers changed their tricks, the filter simply learned from new examples. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>, <a class="cite" href="#ref-11">11</a>]</span></p>
+            <figure class="fig" data-fig="fig-spam">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. A learning spam filter.</strong> Type a message, or tap an example. The filter has learned from just 16 made-up emails, and shows how much each word pushes towards spam or normal email. This method is called <strong>naive Bayes</strong>: "naive" because it treats each word as separate evidence, ignoring how words go together, which is wrong but works surprisingly well.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Learning by Playing: TD-Gammon</h2>
+            <p>Reinforcement learning, learning by reward and punishment like MENACE in Part 2, also made a leap. In 1988 Richard Sutton published a method called <strong>temporal-difference learning</strong>, which improves predictions by making them agree with slightly later, better-informed predictions, as Samuel's draughts program had done. In 1989 Chris Watkins described <strong>Q-learning</strong>, a way for an agent to learn the value of each action in each situation purely from experience. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>, <a class="cite" href="#ref-13">13</a>]</span></p>
+            <p>At IBM, <strong>Gerald Tesauro</strong> combined temporal-difference learning with a neural network to play backgammon. <strong>TD-Gammon</strong> (1992 onwards) started knowing only the rules and learned by playing hundreds of thousands of games against itself. It reached a level close to the world's best human players, and some of its unusual opening moves were adopted by human experts. A program had discovered knowledge about a game that people had played for centuries. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span></p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Deep Blue Beats the World Champion</h2>
+            <p>The most famous AI event of the decade was a chess match. IBM's <strong>Deep Blue</strong> grew out of a project begun by students at Carnegie Mellon University, led by Feng-hsiung Hsu. In February 1996, in Philadelphia, it played world champion <strong>Garry Kasparov</strong>, widely considered one of the greatest players ever. Deep Blue won the first game, the first time a computer had beaten a reigning world champion in a game played at normal tournament speed. But Kasparov won the match 4–2. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span></p>
+            <p>An upgraded Deep Blue played a rematch in New York in May 1997. This time, after six tense games, it won 3½–2½. Newspapers around the world announced that a machine had beaten humanity's best at the ultimate game of intellect.</p>
+            <p>But Deep Blue barely learned at all. It used Shannon's 1950 recipe (Part 2): look ahead and score positions. What made it strong was speed: hundreds of custom chess chips let it examine about 200 million positions per second. Its scoring rule weighed thousands of features of a position, and the weights were tuned using grandmasters' advice and databases of master games. It was a triumph of engineering and search, and many people concluded, wrongly as it turned out, that this showed little about intelligence. After the match IBM retired the machine. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>, <a class="cite" href="#ref-16">16</a>]</span></p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. The Quiet Workhorses</h2>
+            <p>For most practical problems in the late 1990s and 2000s, neural networks weren't the favourite tool. Other learning methods were more reliable and easier to use. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+            <ul>
+              <li><strong>Decision trees</strong>, developed by Ross Quinlan and others from the 1980s, learn a flowchart of yes/no questions ("Is income above £30,000? Has the customer missed a payment?") that leads to an answer. They are easy for people to read. <span class="cite-group">[<a class="cite" href="#ref-17">17</a>]</span></li>
+              <li><strong>Support vector machines</strong>, published by Corinna Cortes and Vladimir Vapnik in 1995, find the dividing line (or surface) that leaves the widest possible gap between two classes. A mathematical trick, the "kernel trick", lets them draw curved boundaries as easily as straight ones. They came with solid mathematical guarantees and often gave the best results of their day. <span class="cite-group">[<a class="cite" href="#ref-18">18</a>]</span></li>
+              <li><strong>Random forests</strong>, introduced by Leo Breiman in 2001, grow hundreds of decision trees, each on a slightly different random sample of the data, and let them vote. The crowd is far more accurate than any single tree. <span class="cite-group">[<a class="cite" href="#ref-19">19</a>]</span></li>
+            </ul>
+            <p>Neural networks, meanwhile, had a problem. Adding more layers should have made them more powerful, but deep networks were very hard to train. As the error signal was passed backwards through many layers, it tended to shrink until it almost vanished, so the early layers barely learned. Sepp Hochreiter analysed this <strong>vanishing gradient problem</strong> in 1991. In 1997 he and Jürgen Schmidhuber designed a network for sequences, the <strong>LSTM</strong> ("long short-term memory"), with special memory cells that let information and error signals flow over long distances. It would later power speech recognition and translation in phones. But for most of the 2000s, many researchers regarded neural networks as an old-fashioned dead end. <span class="cite-group">[<a class="cite" href="#ref-20">20</a>]</span></p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Training, Testing and Overfitting</h2>
+            <p>Learning from examples brought a new danger. A model can do brilliantly on the examples it was trained on and badly on new ones, because instead of learning the real pattern, it has memorised the quirks and noise of its training data. This is called <strong>overfitting</strong>. It is like a student who memorises the answers to last year's exam questions without understanding the subject. <span class="cite-group">[<a class="cite" href="#ref-21">21</a>]</span></p>
+            <p>The defence is simple but essential: always keep some data back. A model is trained on a <strong>training set</strong> and judged on a separate <strong>test set</strong> it has never seen. Only the test score tells you how well it will do in the real world.</p>
+            <figure class="fig" data-fig="fig-overfit">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Overfitting.</strong> The blue training points come from a smooth curve (dashed) plus random noise. Increase the model's flexibility: at first the fitted curve (purple) gets closer to the truth, but soon it starts bending to pass through every training point. The training error keeps falling, but the error on the orange test points rises again. The best model is in between.
+              </figcaption>
+            </figure>
+            <p>This discipline, together with shared benchmark datasets like MNIST, turned machine learning into an experimental science. Researchers could compare methods fairly by testing them on the same unseen data, and progress could be measured year by year.</p>
+          </section>
+
+          <section id="section-11">
+            <h2>11. More Data Beats Cleverer Algorithms</h2>
+            <p>The rise of the internet in the late 1990s and 2000s created data on a scale never seen before: billions of web pages, emails, searches, photos and purchases. Researchers began noticing something surprising. <span class="cite-group">[<a class="cite" href="#ref-22">22</a>, <a class="cite" href="#ref-23">23</a>]</span></p>
+            <p>In 2001, Michele Banko and Eric Brill at Microsoft tested several learning methods on a language task as they gave them more and more training data. The amount of data mattered more than which method they used: a simple method with a billion words of training text beat a sophisticated one with a million. In 2009 three Google researchers, Alon Halevy, Peter Norvig and Fernando Pereira, summed up the lesson in an essay titled "The Unreasonable Effectiveness of Data".</p>
+            <p>Two contests showed the power of learning from data. In 2005 a robot car called <strong>Stanley</strong>, built by Sebastian Thrun's team at Stanford, won the DARPA Grand Challenge by driving itself 212 km across the Mojave Desert. It used machine learning to tell drivable ground from obstacles. A year earlier, no entrant had managed even 12 km. And from 2006 to 2009, Netflix offered a $1 million prize to anyone who could improve its film recommendations by 10%. The winning team, BellKor's Pragmatic Chaos, did it by blending hundreds of different learned models. <span class="cite-group">[<a class="cite" href="#ref-24">24</a>, <a class="cite" href="#ref-25">25</a>]</span></p>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Keeping the Flame Alive</h2>
+            <p>Through the 2000s, a small group of researchers kept faith with neural networks: Geoffrey Hinton in Toronto, Yann LeCun in New York, Yoshua Bengio in Montreal and Jürgen Schmidhuber in Switzerland, among others. A Canadian research organisation, CIFAR, funded a programme from 2004 that let Hinton, LeCun and Bengio meet and share ideas. They sometimes joked that they were a "conspiracy". <span class="cite-group">[<a class="cite" href="#ref-27">27</a>]</span></p>
+            <p>In 2006 Hinton and his colleagues showed a way to train networks with many layers: first train each layer on its own to capture patterns in the data, one layer at a time, then fine-tune the whole network with backpropagation. It worked, and to signal a fresh start they started calling the field <strong>deep learning</strong>. <span class="cite-group">[<a class="cite" href="#ref-26">26</a>, <a class="cite" href="#ref-27">27</a>]</span></p>
+            <p>Two more ingredients were falling into place. Graphics chips (GPUs), designed for video games, turned out to be very good at the kind of arithmetic neural networks need, and researchers began using them to train networks many times faster. And in 2009 a team led by <strong>Fei-Fei Li</strong> at Princeton released <strong>ImageNet</strong>: more than three million labelled photos at first, growing to over fourteen million, sorted into thousands of categories by people working through an online crowdsourcing service. <span class="cite-group">[<a class="cite" href="#ref-28">28</a>]</span></p>
+            <p>Deep networks, fast GPUs and a huge labelled dataset: in 2012 these three came together in a contest, and the result changed the course of AI. That is the story of Part 5.</p>
+          </section>
+
+          <section id="section-13">
+            <h2>13. How Did They Know? A Network That Invented Its Own Ideas</h2>
+            <div class="callout callout-method">
+              <div class="callout-header">How did they know? The family-tree experiment</div>
+              <p>Backpropagation could fit data, but did the hidden neurons learn anything meaningful, or just an arbitrary jumble of numbers? Rumelhart, Hinton and Williams designed an experiment to find out. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+              <ol>
+                <li><strong>Make up a task with hidden structure.</strong> They drew two family trees with the same shape, one of 12 English people and one of 12 Italian people, and turned them into 104 facts like "Colin's father is James" and "Sophia's mother is Lucia".</li>
+                <li><strong>Give the network no hints.</strong> Each person and each relationship was fed in as a separate on/off input. Nothing told the network that some people were English and some Italian, or which generation anyone belonged to.</li>
+                <li><strong>Train it on 100 of the facts</strong> with backpropagation, so that given a person and a relationship it would output the right relative.</li>
+                <li><strong>Hold back the other 4 as a test.</strong> The network answered all or most of these unseen facts correctly, so it had learned something of the structure, not just memorised.</li>
+                <li><strong>Look inside.</strong> The researchers examined what each hidden neuron responded to.</li>
+              </ol>
+              <p>They found hidden neurons that had come to stand for things nobody had told the network about: one picked up whether a person was English or Italian, another which generation they were in, another which branch of the family they were on. The network had invented useful concepts for itself, in order to do its job. This ability, learning its own internal representations from raw examples, is exactly what makes deep learning powerful today.</p>
+            </div>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Legend and Record: Did a Bug Beat Kasparov?</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: Deep Blue's mysterious moves</div>
+              <p><strong>The legends:</strong> two stories grew up around the 1997 match. One says IBM cheated, with a human grandmaster secretly helping the computer. The other says Deep Blue won because of a software bug that rattled Kasparov. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>, <a class="cite" href="#ref-29">29</a>, <a class="cite" href="#ref-30">30</a>]</span></p>
+              <p><strong>The record on cheating:</strong> in game 2, Deep Blue played a subtle, patient move of a kind Kasparov didn't expect from a computer, and Kasparov later resigned in a position that analysts found he could have drawn. Shaken, he publicly suggested that humans might have intervened, and asked to see the machine's logs; IBM declined a rematch and dismantled the machine, which fed the suspicion. No evidence of cheating has ever emerged. Twenty years later, in his book <em>Deep Thinking</em> (2017), Kasparov wrote that he no longer believed there had been any.</p>
+              <p><strong>The record on the bug:</strong> according to Deep Blue's team member Murray Campbell, as reported by the statistician Nate Silver in 2012, a bug at the end of game 1 made the computer play an essentially random move. Silver suggested Kasparov may have read deep meaning into it and overestimated the machine. Kasparov won that game anyway, and his own account plays down its importance. The bug is real, but how much it affected the match is a matter of interpretation.</p>
+              <p><strong>Why it matters:</strong> as with the Mechanical Turk (Part 1), people struggled to judge what a machine was really doing. Kasparov thought a clever move must have come from a human; others thought a random move might be genius. Our instincts about what machines can do are unreliable, in both directions.</p>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Philosophy Corner: Can We Trust What We Can't Explain?</h2>
+            <div class="callout callout-philosophy">
+              <div class="callout-header">Philosophy Corner: the black box and the question of cause</div>
+              <p>Expert systems had one great virtue: you could ask them "why?" and they would show you their rules (Part 3). Learned models gave that up. A trained neural network's knowledge is spread across thousands or millions of numbers, and nobody can read off why it made a particular decision. It is a <strong>black box</strong>. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>, <a class="cite" href="#ref-31">31</a>]</span></p>
+              <p>Does that matter? If a model reads cheques more accurately than people, perhaps we needn't know how. But when a model decides who gets a loan, a job interview or medical treatment, people have a right to an explanation. And a model that learns from data can quietly absorb the unfairness in that data. If past hiring favoured one group, a model trained on it will learn to do the same.</p>
+              <p>Judea Pearl raised a deeper point. Learning from data finds <strong>correlations</strong>: things that tend to occur together. But correlation is not causation. Ice-cream sales and drownings rise together, because both increase in hot weather, not because ice cream causes drowning. Pearl argued that real understanding means knowing about causes, being able to answer "what would happen if I did this?", and that learning patterns from data, however much, cannot by itself give you that.</p>
+              <p>Is a system that predicts brilliantly but cannot explain itself, and does not grasp causes, truly intelligent? Or is that also true of much of our own intuition? These questions become sharper with each part of this series.</p>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">David Rumelhart, Geoffrey Hinton &amp; Ronald Williams</td>
+                <td style="padding:0.6rem 0.8rem;">1942–2011 / born 1947 / born 1945<br>USA / Britain–Canada / USA</td>
+                <td style="padding:0.6rem 0.8rem;">"Learning representations by back-propagating errors" (1986)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed backpropagation could train hidden layers that learn their own features.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Paul Werbos</td>
+                <td style="padding:0.6rem 0.8rem;">born 1947<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">PhD thesis (1974)</td>
+                <td style="padding:0.6rem 0.8rem;">Proposed backpropagation for training neural networks.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John Hopfield</td>
+                <td style="padding:0.6rem 0.8rem;">born 1933<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Hopfield networks (1982)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed how networks of neurons can store memories; Nobel Prize in Physics 2024 with Hinton.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Yann LeCun</td>
+                <td style="padding:0.6rem 0.8rem;">born 1960<br>France / USA</td>
+                <td style="padding:0.6rem 0.8rem;">Convolutional networks (1989); LeNet-5 and MNIST (1998)</td>
+                <td style="padding:0.6rem 0.8rem;">Built networks that read handwriting for the post and for banks.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Frederick Jelinek</td>
+                <td style="padding:0.6rem 0.8rem;">1932–2010<br>Czechoslovakia / USA</td>
+                <td style="padding:0.6rem 0.8rem;">Statistical speech recognition at IBM</td>
+                <td style="padding:0.6rem 0.8rem;">Led the shift from hand-written rules to probabilities learned from data.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Judea Pearl</td>
+                <td style="padding:0.6rem 0.8rem;">born 1936<br>Israel / USA</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Probabilistic Reasoning in Intelligent Systems</em> (1988)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed machines how to reason with uncertainty, and later championed causal reasoning.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Richard Sutton</td>
+                <td style="padding:0.6rem 0.8rem;">born 1957<br>USA / Canada</td>
+                <td style="padding:0.6rem 0.8rem;">Temporal-difference learning (1988)</td>
+                <td style="padding:0.6rem 0.8rem;">Laid foundations of modern reinforcement learning.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Gerald Tesauro</td>
+                <td style="padding:0.6rem 0.8rem;">USA</td>
+                <td style="padding:0.6rem 0.8rem;">TD-Gammon (1992)</td>
+                <td style="padding:0.6rem 0.8rem;">Built a program that taught itself world-class backgammon.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Feng-hsiung Hsu &amp; Murray Campbell</td>
+                <td style="padding:0.6rem 0.8rem;">born 1959 / born 1957<br>Taiwan–USA / Canada–USA</td>
+                <td style="padding:0.6rem 0.8rem;">Deep Blue (1997)</td>
+                <td style="padding:0.6rem 0.8rem;">Led the team whose machine beat the world chess champion.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Garry Kasparov</td>
+                <td style="padding:0.6rem 0.8rem;">born 1963<br>Russia</td>
+                <td style="padding:0.6rem 0.8rem;">World chess champion 1985–2000</td>
+                <td style="padding:0.6rem 0.8rem;">The champion who played Deep Blue, and later wrote about human–machine collaboration.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Corinna Cortes &amp; Vladimir Vapnik</td>
+                <td style="padding:0.6rem 0.8rem;">born 1961 / born 1936<br>Denmark / Soviet Union–USA</td>
+                <td style="padding:0.6rem 0.8rem;">Support vector machines (1995)</td>
+                <td style="padding:0.6rem 0.8rem;">Created one of the most successful learning methods of the 1990s and 2000s.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Leo Breiman</td>
+                <td style="padding:0.6rem 0.8rem;">1928–2005<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Random forests (2001)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed how a crowd of simple trees can beat one complex model.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Sepp Hochreiter &amp; Jürgen Schmidhuber</td>
+                <td style="padding:0.6rem 0.8rem;">born 1967 / born 1963<br>Germany</td>
+                <td style="padding:0.6rem 0.8rem;">LSTM (1997)</td>
+                <td style="padding:0.6rem 0.8rem;">Solved the problem of networks forgetting over long sequences.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Fei-Fei Li</td>
+                <td style="padding:0.6rem 0.8rem;">born 1976<br>China / USA</td>
+                <td style="padding:0.6rem 0.8rem;">ImageNet (2009)</td>
+                <td style="padding:0.6rem 0.8rem;">Built the huge labelled photo collection that powered the deep-learning revolution.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-17">
+            <h2>17. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember, from backpropagation to the Netflix Prize.</p>
+            <figure class="fig" data-fig="fig-quiz-ai4">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-18">
+            <h2>18. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Nilsson, Nils J.</strong> (2010). <em>The Quest for Artificial Intelligence: A History of Ideas and Achievements</em>. Cambridge: Cambridge University Press.</li>
+              <li id="ref-2"><strong>Russell, Stuart &amp; Norvig, Peter.</strong> (2021). <em>Artificial Intelligence: A Modern Approach</em>. 4th ed. Hoboken, NJ: Pearson.</li>
+              <li id="ref-3"><strong>Rumelhart, David E., Hinton, Geoffrey E. &amp; Williams, Ronald J.</strong> (1986). "Learning Representations by Back-Propagating Errors." <em>Nature</em>, 323: 533–536.</li>
+              <li id="ref-4"><strong>Werbos, Paul J.</strong> (1974). <em>Beyond Regression: New Tools for Prediction and Analysis in the Behavioral Sciences</em>. PhD thesis, Harvard University.</li>
+              <li id="ref-5"><strong>Hopfield, John J.</strong> (1982). "Neural Networks and Physical Systems with Emergent Collective Computational Abilities." <em>Proceedings of the National Academy of Sciences</em>, 79(8): 2554–2558.</li>
+              <li id="ref-6"><strong>LeCun, Yann, et al.</strong> (1989). "Backpropagation Applied to Handwritten Zip Code Recognition." <em>Neural Computation</em>, 1(4): 541–551.</li>
+              <li id="ref-7"><strong>LeCun, Yann, Bottou, Léon, Bengio, Yoshua &amp; Haffner, Patrick.</strong> (1998). "Gradient-Based Learning Applied to Document Recognition." <em>Proceedings of the IEEE</em>, 86(11): 2278–2324.</li>
+              <li id="ref-8"><strong>Brown, Peter F., et al.</strong> (1990). "A Statistical Approach to Machine Translation." <em>Computational Linguistics</em>, 16(2): 79–85.</li>
+              <li id="ref-9"><strong>Pearl, Judea.</strong> (1988). <em>Probabilistic Reasoning in Intelligent Systems: Networks of Plausible Inference</em>. San Mateo, CA: Morgan Kaufmann.</li>
+              <li id="ref-10"><strong>Sahami, Mehran, Dumais, Susan, Heckerman, David &amp; Horvitz, Eric.</strong> (1998). "A Bayesian Approach to Filtering Junk E-Mail." <em>AAAI-98 Workshop on Learning for Text Categorization</em>.</li>
+              <li id="ref-11"><strong>Graham, Paul.</strong> (2002). "A Plan for Spam." Essay, August 2002.</li>
+              <li id="ref-12"><strong>Sutton, Richard S.</strong> (1988). "Learning to Predict by the Methods of Temporal Differences." <em>Machine Learning</em>, 3(1): 9–44.</li>
+              <li id="ref-13"><strong>Watkins, Christopher J. C. H.</strong> (1989). <em>Learning from Delayed Rewards</em>. PhD thesis, University of Cambridge.</li>
+              <li id="ref-14"><strong>Tesauro, Gerald.</strong> (1995). "Temporal Difference Learning and TD-Gammon." <em>Communications of the ACM</em>, 38(3): 58–68.</li>
+              <li id="ref-15"><strong>Campbell, Murray, Hoane, A. Joseph &amp; Hsu, Feng-hsiung.</strong> (2002). "Deep Blue." <em>Artificial Intelligence</em>, 134(1–2): 57–83.</li>
+              <li id="ref-16"><strong>Kasparov, Garry.</strong> (2017). <em>Deep Thinking: Where Machine Intelligence Ends and Human Creativity Begins</em>. New York: PublicAffairs.</li>
+              <li id="ref-17"><strong>Quinlan, J. Ross.</strong> (1986). "Induction of Decision Trees." <em>Machine Learning</em>, 1(1): 81–106.</li>
+              <li id="ref-18"><strong>Cortes, Corinna &amp; Vapnik, Vladimir.</strong> (1995). "Support-Vector Networks." <em>Machine Learning</em>, 20(3): 273–297.</li>
+              <li id="ref-19"><strong>Breiman, Leo.</strong> (2001). "Random Forests." <em>Machine Learning</em>, 45(1): 5–32.</li>
+              <li id="ref-20"><strong>Hochreiter, Sepp &amp; Schmidhuber, Jürgen.</strong> (1997). "Long Short-Term Memory." <em>Neural Computation</em>, 9(8): 1735–1780.</li>
+              <li id="ref-21"><strong>Hastie, Trevor, Tibshirani, Robert &amp; Friedman, Jerome.</strong> (2009). <em>The Elements of Statistical Learning</em>. 2nd ed. New York: Springer.</li>
+              <li id="ref-22"><strong>Banko, Michele &amp; Brill, Eric.</strong> (2001). "Scaling to Very Very Large Corpora for Natural Language Disambiguation." <em>Proceedings of the 39th Annual Meeting of the Association for Computational Linguistics</em>, 26–33.</li>
+              <li id="ref-23"><strong>Halevy, Alon, Norvig, Peter &amp; Pereira, Fernando.</strong> (2009). "The Unreasonable Effectiveness of Data." <em>IEEE Intelligent Systems</em>, 24(2): 8–12.</li>
+              <li id="ref-24"><strong>Thrun, Sebastian, et al.</strong> (2006). "Stanley: The Robot That Won the DARPA Grand Challenge." <em>Journal of Field Robotics</em>, 23(9): 661–692.</li>
+              <li id="ref-25"><strong>Bennett, James &amp; Lanning, Stan.</strong> (2007). "The Netflix Prize." <em>Proceedings of KDD Cup and Workshop 2007</em>.</li>
+              <li id="ref-26"><strong>Hinton, Geoffrey E., Osindero, Simon &amp; Teh, Yee-Whye.</strong> (2006). "A Fast Learning Algorithm for Deep Belief Nets." <em>Neural Computation</em>, 18(7): 1527–1554.</li>
+              <li id="ref-27"><strong>LeCun, Yann, Bengio, Yoshua &amp; Hinton, Geoffrey.</strong> (2015). "Deep Learning." <em>Nature</em>, 521: 436–444.</li>
+              <li id="ref-28"><strong>Deng, Jia, et al.</strong> (2009). "ImageNet: A Large-Scale Hierarchical Image Database." <em>Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition</em>, 248–255.</li>
+              <li id="ref-29"><strong>Silver, Nate.</strong> (2012). <em>The Signal and the Noise</em>. New York: Penguin Press.</li>
+              <li id="ref-30"><strong>Hsu, Feng-hsiung.</strong> (2002). <em>Behind Deep Blue: Building the Computer That Defeated the World Chess Champion</em>. Princeton, NJ: Princeton University Press.</li>
+              <li id="ref-31"><strong>Pearl, Judea &amp; Mackenzie, Dana.</strong> (2018). <em>The Book of Why: The New Science of Cause and Effect</em>. New York: Basic Books.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/how-machines-learned-to-think.html">How Machines Learned to Think</a> (Part 4 of 8)</div>
+  <div class="series-banner-links">
+    <a href="big-promises-and-ai-winters.html">← Part 3: Big Promises and AI Winters: ELIZA, Expert Systems and Two Crashes</a>
+    <span>Part 5 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/learning-from-examples.js"></script>
+</body>
+</html>
