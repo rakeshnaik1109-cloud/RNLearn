@@ -2309,5 +2309,64 @@ window.RNLEARN_GLOSSARY = [
   "Deep learning",
   "Machine learning with neural networks that have many layers, each learning more abstract features than the last.",
   []
+ ],
+ [
+  "GPU",
+  "Graphics processing unit: a chip with thousands of small processors working in parallel, first built for video games and now used to train neural networks.",
+  [
+   "GPUs",
+   "graphics processing unit",
+   "graphics processing units"
+  ]
+ ],
+ [
+  "ReLU",
+  "A simple way for an artificial neuron to respond: output zero for negative inputs and pass positive inputs straight through.",
+  []
+ ],
+ [
+  "Dropout",
+  "A training trick that randomly switches off some neurons each time, so the network can’t rely on any one of them and overfits less.",
+  []
+ ],
+ [
+  "Word vector",
+  "A list of numbers representing a word as a point in space, learned from text so that words with similar meanings lie close together.",
+  [
+   "word vectors",
+   "word embedding",
+   "word embeddings"
+  ]
+ ],
+ [
+  "Attention mechanism",
+  "In neural networks, a mechanism that lets the model weigh which parts of its input matter most for the output it is producing right now.",
+  []
+ ],
+ [
+  "Generative adversarial network",
+  "A pair of networks trained against each other: a generator that makes fakes and a discriminator that tries to spot them.",
+  [
+   "generative adversarial networks",
+   "GAN",
+   "GANs"
+  ]
+ ],
+ [
+  "Adversarial example",
+  "An input changed in tiny, carefully chosen ways that makes a neural network confidently give a wrong answer.",
+  [
+   "adversarial examples"
+  ]
+ ],
+ [
+  "Self-play",
+  "Training a game-playing program by having it play against copies of itself and learn from the results.",
+  []
+ ],
+ [
+  "Protein folding",
+  "The way a chain of amino acids folds into a precise 3-D shape, which determines what the protein does.",
+  []
  ]
 ];

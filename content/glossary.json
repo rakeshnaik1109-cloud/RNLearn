@@ -2307,5 +2307,64 @@
     "term": "Deep learning",
     "definition": "Machine learning with neural networks that have many layers, each learning more abstract features than the last.",
     "forms": []
+  },
+  {
+    "term": "GPU",
+    "definition": "Graphics processing unit: a chip with thousands of small processors working in parallel, first built for video games and now used to train neural networks.",
+    "forms": [
+      "GPUs",
+      "graphics processing unit",
+      "graphics processing units"
+    ]
+  },
+  {
+    "term": "ReLU",
+    "definition": "A simple way for an artificial neuron to respond: output zero for negative inputs and pass positive inputs straight through.",
+    "forms": []
+  },
+  {
+    "term": "Dropout",
+    "definition": "A training trick that randomly switches off some neurons each time, so the network can’t rely on any one of them and overfits less.",
+    "forms": []
+  },
+  {
+    "term": "Word vector",
+    "definition": "A list of numbers representing a word as a point in space, learned from text so that words with similar meanings lie close together.",
+    "forms": [
+      "word vectors",
+      "word embedding",
+      "word embeddings"
+    ]
+  },
+  {
+    "term": "Attention mechanism",
+    "definition": "In neural networks, a mechanism that lets the model weigh which parts of its input matter most for the output it is producing right now.",
+    "forms": []
+  },
+  {
+    "term": "Generative adversarial network",
+    "definition": "A pair of networks trained against each other: a generator that makes fakes and a discriminator that tries to spot them.",
+    "forms": [
+      "generative adversarial networks",
+      "GAN",
+      "GANs"
+    ]
+  },
+  {
+    "term": "Adversarial example",
+    "definition": "An input changed in tiny, carefully chosen ways that makes a neural network confidently give a wrong answer.",
+    "forms": [
+      "adversarial examples"
+    ]
+  },
+  {
+    "term": "Self-play",
+    "definition": "Training a game-playing program by having it play against copies of itself and learn from the results.",
+    "forms": []
+  },
+  {
+    "term": "Protein folding",
+    "definition": "The way a chain of amino acids folds into a precise 3-D shape, which determines what the protein does.",
+    "forms": []
   }
 ]

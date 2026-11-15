@@ -1,5 +1,31 @@
 [
   {
+    "slug": "the-deep-learning-revolution",
+    "title": "The Deep Learning Revolution: ImageNet, AlphaGo and AlphaFold",
+    "summary": "How deep networks, graphics chips and big data transformed AI after 2012: AlexNet, word vectors, neural translation, GANs, AlphaGo, AlphaFold, and the problems of bias and fragility.",
+    "subject": "Technology",
+    "tags": [
+      "artificial-intelligence",
+      "deep-learning",
+      "neural-networks",
+      "alphago",
+      "alphafold",
+      "history-of-computing"
+    ],
+    "date": "2026-11-15",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 23,
+    "series": {
+      "id": "how-machines-learned-to-think",
+      "part": 5
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": false
+  },
+  {
     "slug": "learning-from-examples",
     "title": "Learning from Examples: Backpropagation, Big Data and Deep Blue",
     "summary": "How AI stopped writing rules and started learning from data: backpropagation, LeCun’s digit reader, statistical translation, spam filters, TD-Gammon, Deep Blue and overfitting.",

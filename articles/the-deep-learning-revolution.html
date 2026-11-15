@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Deep Learning Revolution: ImageNet, AlphaGo and AlphaFold — RNLearn</title>
+  <meta name="description" content="How deep networks, graphics chips and big data transformed AI after 2012: AlexNet, word vectors, neural translation, GANs, AlphaGo, AlphaFold, and the problems of bias and fragility.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/the-deep-learning-revolution.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Deep Learning Revolution: ImageNet, AlphaGo and AlphaFold — RNLearn">
+  <meta property="og:description" content="How deep networks, graphics chips and big data transformed AI after 2012: AlexNet, word vectors, neural translation, GANs, AlphaGo, AlphaFold, and the problems of bias and fragility.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/the-deep-learning-revolution.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Deep Learning Revolution: ImageNet, AlphaGo and AlphaFold — RNLearn">
+  <meta name="twitter:description" content="How deep networks, graphics chips and big data transformed AI after 2012: AlexNet, word vectors, neural translation, GANs, AlphaGo, AlphaFold, and the problems of bias and fragility.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "The Deep Learning Revolution: ImageNet, AlphaGo and AlphaFold",
+    "description": "How deep networks, graphics chips and big data transformed AI after 2012: AlexNet, word vectors, neural translation, GANs, AlphaGo, AlphaFold, and the problems of bias and fragility.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-15",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/the-deep-learning-revolution.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/technology.html" class="post-subject-tag" data-subject="technology">Technology</a>
+        </div>
+        <h1 class="article-title">The Deep Learning Revolution: ImageNet, AlphaGo and AlphaFold</h1>
+        <p class="article-standfirst">
+          In 2012 a neural network trained on two gaming graphics cards won a photo-recognition contest by a huge margin. Within a decade, deep learning had mastered speech, translation and Go, and solved a fifty-year-old problem in biology.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-15">15 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>23 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/how-machines-learned-to-think.html">How Machines Learned to Think</a> (Part 5 of 8)</div>
+  <div class="series-banner-links">
+    <a href="learning-from-examples.html">← Part 4: Learning from Examples: Backpropagation, Big Data and Deep Blue</a>
+    <span>Part 6 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. The Year Everything Changed</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. ImageNet and AlexNet</a></li>
+              <li><a class="toc-link" href="#section-4">4. Why Now? Data, Chips and Tricks</a></li>
+              <li><a class="toc-link" href="#section-5">5. Deeper and Deeper</a></li>
+              <li><a class="toc-link" href="#section-6">6. Hearing, Seeing and Recognising</a></li>
+              <li><a class="toc-link" href="#section-7">7. Words as Numbers</a></li>
+              <li><a class="toc-link" href="#section-8">8. Translation and Attention</a></li>
+              <li><a class="toc-link" href="#section-9">9. Machines That Imagine: GANs</a></li>
+              <li><a class="toc-link" href="#section-10">10. Learning to Play: Atari and AlphaGo</a></li>
+              <li><a class="toc-link" href="#section-11">11. AlphaFold</a></li>
+              <li><a class="toc-link" href="#section-12">12. Growing Pains</a></li>
+              <li><a class="toc-link" href="#section-13">13. How Did They Know?</a></li>
+              <li><a class="toc-link" href="#section-14">14. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-15">15. Philosophy Corner</a></li>
+              <li><a class="toc-link" href="#section-16">16. People in This Part</a></li>
+              <li><a class="toc-link" href="#section-17">17. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-18">18. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. The Year Everything Changed</h2>
+            <p>At the end of Part 4, three things were ready: deep neural networks that could at last be trained, fast graphics chips, and huge collections of labelled data. In 2012 they came together in a contest to recognise photographs, and the result was so dramatic that within a few years almost the whole of AI had switched to the new approach, known as <strong>deep learning</strong>. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <p>This part covers roughly 2010 to 2021, the decade in which AI went from a research topic to something in everyone's pocket. In those years deep networks learned to:</p>
+            <ul>
+              <li>recognise objects in photos about as accurately as people, and recognise faces;</li>
+              <li>understand speech well enough for voice assistants;</li>
+              <li>translate between languages far better than before;</li>
+              <li>create realistic images of things that never existed;</li>
+              <li>beat the world's best players at Go, a game long thought too subtle for computers;</li>
+              <li>solve a 50-year-old problem in biology.</li>
+            </ul>
+            <p>It also brought new worries: systems that were biased, easily fooled, power-hungry and controlled by a handful of giant companies. Both sides of the story matter for understanding the AI of today.</p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-ai-timeline-5">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The deep learning decade, 2010–2021.</strong> The points are in order but not to scale. Colours show the four threads of the story.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. ImageNet and AlexNet</h2>
+            <p>In 2010 Fei-Fei Li's ImageNet project (Part 4) launched an annual contest, the ImageNet Large Scale Visual Recognition Challenge. Programs were given 1.2 million training photos sorted into 1,000 categories, from "tabby cat" to "container ship" to "strawberry", and then tested on photos they had never seen. A program was allowed five guesses per photo; it scored a mistake only if none of the five was right. In the first two years, the best systems, built with hand-designed image features, got about a quarter of the photos wrong. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+            <p>In 2012 a team from Geoffrey Hinton's lab in Toronto entered a deep convolutional network, designed by his students <strong>Alex Krizhevsky</strong> and <strong>Ilya Sutskever</strong>. It had 8 learned layers and about 60 million weights, and it was trained for about a week on two gaming graphics cards in Krizhevsky's bedroom at his parents' house. Now known as <strong>AlexNet</strong>, it got about 15 per cent of the test photos wrong. The next-best entry got about 26 per cent wrong. In a field where progress usually came a point or two at a time, it was a stunning leap. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>, <a class="cite" href="#ref-5">5</a>]</span></p>
+            <p>The computer-vision community took notice immediately. Within two years nearly every serious entry used a deep network. Tech companies scrambled to hire the people who knew how to build them. Hinton, Krizhevsky and Sutskever formed a tiny company, and after a bidding war between several tech giants, Google acquired it in 2013. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span></p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Why Now? Data, Chips and Tricks</h2>
+            <p>The basic design of AlexNet was close to LeCun's networks of the 1990s (Part 4). Why did it suddenly work so much better? Three reasons. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+            <p><strong>Data.</strong> LeCun's digit-readers learned from tens of thousands of small black-and-white images. AlexNet learned from 1.2 million colour photos. Deep networks have millions of weights to set, and they need vast numbers of examples to set them well without overfitting.</p>
+            <p><strong>Chips.</strong> Graphics processing units (GPUs) were designed to draw video-game scenes, which means doing the same simple calculation on millions of pixels at once. Training a neural network needs exactly that kind of arithmetic: huge numbers of simple multiplications that can be done side by side. A GPU has thousands of small, slowish workers rather than a few fast ones. Researchers had begun using GPUs for neural networks in the late 2000s, finding them dozens of times faster than ordinary processors, and the chip maker NVIDIA had released software that made them easier to program. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+            <figure class="fig" data-fig="fig-gpu-race">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Why GPUs won.</strong> Both chips must complete 576 calculations. The CPU's few workers are fast but must work through the job in turn; the GPU's many workers are slower, but they all work at once. The numbers are illustrative: real chips differ, but the principle is the same.
+              </figcaption>
+            </figure>
+            <p><strong>Tricks.</strong> A few simple changes made deep networks much easier to train. One was a new way for each neuron to respond, called a <strong>ReLU</strong> ("rectified linear unit"): output nothing for negative inputs and pass positive inputs straight through. Unlike the older S-shaped responses, it doesn't squash the learning signal, which eased the vanishing gradient problem. Another was <strong>dropout</strong>: during training, randomly switch off half the neurons each time, so the network can't rely on any one of them and is forced to learn more robust patterns. It sounds strange, but it greatly reduced overfitting. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>, <a class="cite" href="#ref-7">7</a>]</span></p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Deeper and Deeper</h2>
+            <p>If 8 layers worked, would more work better? Each year the ImageNet winners went deeper: 22 layers for Google's GoogLeNet in 2014, then 152 layers for Microsoft's <strong>ResNet</strong> in 2015. ResNet's key idea was a "shortcut" that lets each block of layers pass its input straight through and learn only an adjustment to it, so that signals could travel through a very deep network without fading away. Its error rate, 3.6 per cent, was lower than that of a trained human tester (section 13). <span class="cite-group">[<a class="cite" href="#ref-8">8</a>, <a class="cite" href="#ref-3">3</a>]</span></p>
+            <figure class="fig" data-fig="fig-imagenet-chart">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. The ImageNet contest, 2010–2017.</strong> The share of test photos for which the winning system's five guesses were all wrong (rounded; best entry each year). Grey bars used hand-designed features; blue bars used deep networks. Tap a bar for details.
+              </figcaption>
+            </figure>
+            <p>What were all these layers learning? In 2013 Matthew Zeiler and Rob Fergus found ways to show which patterns made each neuron respond. The first layers responded to edges and patches of colour, much like the filters in Part 4. The next layers responded to textures and simple shapes, such as grids and circles. Deeper layers responded to parts of objects, such as eyes, wheels or faces of dogs, and the final layers to whole objects. Nobody had told the network to build this hierarchy: it emerged from training, as the family-tree network's features had in 1986. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span></p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Hearing, Seeing and Recognising</h2>
+            <p>Deep learning swept through one field after another. Speech recognition was first. Around 2009–2012, groups at Toronto, Microsoft, Google and IBM found that replacing parts of their speech systems with deep networks cut errors substantially. Within a few years, the voice assistants on phones were built on deep learning, and speaking to a device became normal. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span></p>
+            <p>In 2012 a Google team led by Andrew Ng and Jeff Dean trained a huge network, running on 16,000 processor cores, on 10 million frames from YouTube videos, without telling it what any of them showed. One of its neurons ended up responding strongly to cats' faces. The press loved the "cat neuron". The serious point was that a network could discover meaningful categories for itself from unlabelled data. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span></p>
+            <p>In 2014 Facebook's DeepFace system matched pairs of face photos with 97.35 per cent accuracy on a standard test, close to human performance. Face recognition soon spread to unlocking phones, tagging photos, border control and police work, which raised difficult questions of privacy and fairness (section 12). <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span></p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Words as Numbers</h2>
+            <p>Language was harder. Images are already numbers (pixel brightnesses), but words are symbols. How do you feed a word into a neural network in a way that captures its meaning? <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span></p>
+            <p>The answer came from an old idea in linguistics: "You shall know a word by the company it keeps." Words that appear in similar surroundings tend to have similar meanings. In 2013 Tomas Mikolov and colleagues at Google released <strong>word2vec</strong>, which learned to place every word as a point in a space of a few hundred dimensions, by training a network to predict which words appear near each other in billions of words of text. Words with similar meanings ended up close together.</p>
+            <p>More surprisingly, <em>directions</em> in the space captured relationships. The step from "man" to "woman" was roughly the same as the step from "king" to "queen", and the step from "France" to "Paris" was roughly the same as from "Italy" to "Rome". So simple arithmetic could solve analogies: take the point for "king", subtract "man", add "woman", and the nearest word is "queen". <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span></p>
+            <figure class="fig" data-fig="fig-word-vectors">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Meaning as geometry.</strong> Choose an analogy: the program takes the arrow from A to B, starts it at C, and finds the nearest word. This is a hand-made two-dimensional toy so that it fits on a page; real word vectors are learned from text and have hundreds of dimensions, and their analogies work far less tidily.
+              </figcaption>
+            </figure>
+            <p>Word vectors also absorbed the prejudices in the text they learned from. Researchers found, for example, that some trained vectors completed "man is to computer programmer as woman is to ?" with "homemaker". A model learns the world as described in its data, including its stereotypes. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span></p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Translation and Attention</h2>
+            <p>In 2014 Ilya Sutskever, Oriol Vinyals and Quoc Le at Google showed that one network could read a whole sentence in one language, squeezing it into a list of numbers, and a second network could write it out in another language. This "sequence to sequence" learning used the LSTM networks of Part 4. It worked, but cramming a long sentence into one fixed list of numbers lost information. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span></p>
+            <p>The same year, Dzmitry Bahdanau, Kyunghyun Cho and Yoshua Bengio in Montreal added a crucial idea: <strong>attention</strong>. As the network writes each word of the translation, it looks back over all the words of the original sentence and decides which ones matter most right now, much as a human translator glances back at the relevant part of the text. Attention greatly improved translations of long sentences. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span></p>
+            <p>In late 2016 Google switched its translation service to neural networks. In side-by-side ratings by people, the new system cut translation errors by about 60 per cent on several major language pairs compared with the old statistical system. And in 2017 a Google team asked a bold question: what if attention was all you needed? Their answer, the <strong>transformer</strong>, is the subject of Part 6. <span class="cite-group">[<a class="cite" href="#ref-17">17</a>]</span></p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Machines That Imagine: GANs</h2>
+            <p>Networks could recognise images. Could they create them? In 2014 <strong>Ian Goodfellow</strong>, then a PhD student in Montreal, came up with an ingenious idea, reportedly during a discussion with friends in a bar: set two networks against each other. <span class="cite-group">[<a class="cite" href="#ref-18">18</a>, <a class="cite" href="#ref-5">5</a>]</span></p>
+            <p>In a <strong>generative adversarial network</strong> (GAN), one network, the <strong>generator</strong>, tries to create fake images, starting from random noise. The other, the <strong>discriminator</strong>, is shown a mix of real photos and the generator's fakes, and tries to tell which is which. Each learns from the other: as the discriminator gets better at spotting fakes, the generator is pushed to make more convincing ones. It is like a contest between a forger and an art expert, in which both keep improving.</p>
+            <p>Early GANs produced blurry, small images. Within five years, systems such as NVIDIA's StyleGAN (2019) could produce photographs of faces of people who had never existed, convincing enough to fool most viewers. The same techniques made "deepfakes" possible: realistic fake videos of real people, which raised serious worries about fraud and misinformation.</p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Learning to Play: Atari and AlphaGo</h2>
+            <p>In London, a company called <strong>DeepMind</strong>, founded in 2010 by Demis Hassabis, Shane Legg and Mustafa Suleyman, combined deep learning with the reinforcement learning of Parts 2 and 4. In 2013 it showed a single network learning to play classic Atari video games, such as Breakout and Space Invaders, from nothing but the screen pixels and the score. Its 2015 version, tested on 49 games, scored at least three-quarters of a professional games tester's score on more than half of them, and far better than the tester on some. Google bought the company in 2014. <span class="cite-group">[<a class="cite" href="#ref-19">19</a>]</span></p>
+            <p>DeepMind's next target was <strong>Go</strong>, an ancient board game in which two players place black and white stones on a 19 × 19 grid. Its rules are simple, but the number of possible positions, around 10<sup>170</sup>, dwarfs that of chess, and good play depends on an intuitive sense of shape and balance that players struggle to put into words. The brute-force search that worked for Deep Blue was hopeless. Many experts thought a computer champion was at least a decade away.</p>
+            <p><strong>AlphaGo</strong> combined three things: a "policy" network that suggested promising moves, trained first on about 30 million positions from games between strong human players; a "value" network that judged who was winning; and a search method that explored the most promising lines of play. It then improved by playing millions of games against versions of itself. In October 2015 it beat the European champion, Fan Hui, 5–0. In March 2016 in Seoul it played <strong>Lee Sedol</strong>, one of the strongest players of the previous decade, in a match watched by many millions, and won 4–1. <span class="cite-group">[<a class="cite" href="#ref-20">20</a>]</span></p>
+            <p>Two moves became legendary. In game 2, AlphaGo's <strong>move 37</strong> was so unusual that commentators first thought it was a mistake; AlphaGo itself estimated a human would play it about 1 time in 10,000. It proved brilliant. In game 4, Lee Sedol replied with his own extraordinary move 78, which confused AlphaGo and won him the game, the only one a human would win against it in a formal match.</p>
+            <p>In 2017 DeepMind went further. <strong>AlphaGo Zero</strong> learned entirely by playing against itself, starting from random moves with no human games at all. After three days it beat the version that had defeated Lee Sedol, 100 games to 0. A general version, <strong>AlphaZero</strong>, taught itself chess, shogi (Japanese chess) and Go, and beat the strongest existing programs at each. In 2019 Lee Sedol retired from professional play, saying that AI was "an entity that cannot be defeated". <span class="cite-group">[<a class="cite" href="#ref-21">21</a>, <a class="cite" href="#ref-22">22</a>]</span></p>
+          </section>
+
+          <section id="section-11">
+            <h2>11. AlphaFold: Solving a Problem in Biology</h2>
+            <p>Games were a proving ground. DeepMind's most important achievement was in science. <span class="cite-group">[<a class="cite" href="#ref-23">23</a>]</span></p>
+            <p>Proteins are the molecular machines of life: they digest food, carry oxygen, fight infections and build cells. Each is a long chain of building blocks called amino acids, which folds up into a precise three-dimensional shape, and its shape determines what it does. Reading the order of amino acids from DNA is easy. Working out the shape it folds into had been one of biology's great unsolved problems for 50 years. Doing it by experiment, using techniques such as X-ray crystallography, can take months or years for a single protein.</p>
+            <p>Since 1994, scientists had held a contest every two years, called CASP, in which teams predicted the shapes of proteins whose structures had just been measured but not yet published. In 2020 DeepMind's <strong>AlphaFold 2</strong> produced predictions so accurate that for most proteins they were comparable to experimental results. The contest's organisers said the problem had, in large part, been solved. <span class="cite-group">[<a class="cite" href="#ref-23">23</a>, <a class="cite" href="#ref-24">24</a>]</span></p>
+            <p>DeepMind and the European Bioinformatics Institute then released predicted structures for free, and by 2022 the database covered over 200 million proteins, nearly every one known to science. Researchers worldwide now use it in work on drugs, vaccines, enzymes and diseases. In 2024 Demis Hassabis and John Jumper of DeepMind shared the Nobel Prize in Chemistry for AlphaFold, together with David Baker, who designs new proteins. That year's physics prize, to Hopfield and Hinton (Part 4), made it a remarkable year for AI.</p>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Growing Pains</h2>
+            <p>Success brought problems that the field is still grappling with. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+            <p><strong>Fragility.</strong> In 2013 Christian Szegedy and colleagues discovered that tiny, carefully chosen changes to an image, invisible to people, could make a network give a completely wrong answer with high confidence. In a famous example, a photo of a panda, altered by an imperceptible pattern, was labelled "gibbon" with 99 per cent confidence. These <strong>adversarial examples</strong> showed that networks can be right for reasons quite unlike ours. <span class="cite-group">[<a class="cite" href="#ref-25">25</a>, <a class="cite" href="#ref-26">26</a>]</span></p>
+            <figure class="fig" data-fig="fig-adversarial">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Fooling a classifier.</strong> A simple classifier correctly says this picture is an O. Increase the change: each pixel is nudged slightly in whichever direction most pushes the classifier towards "X". The picture still clearly shows an O, but the answer flips. Because the classifier adds up evidence from all 1,600 pixels, many tiny changes add up to a big effect. This is a toy linear model; real attacks on deep networks need even smaller changes.
+              </figcaption>
+            </figure>
+            <p><strong>Bias.</strong> In 2018 Joy Buolamwini and Timnit Gebru tested commercial systems that guessed people's gender from photos. They found error rates below 1 per cent for lighter-skinned men but up to about 35 per cent for darker-skinned women. The systems had learned from datasets dominated by lighter-skinned faces. When such systems are used by police or employers, these errors can do real harm. <span class="cite-group">[<a class="cite" href="#ref-27">27</a>]</span></p>
+            <p><strong>Cost and concentration.</strong> Training the largest networks began to need enormous computing power, energy and money. A 2019 study estimated that developing one large language model, including the search for its best design, could emit as much carbon dioxide as five cars over their lifetimes. Only a few giant companies, such as Google, Facebook, Microsoft, Amazon and Baidu, could afford the hardware and the data, and they hired many of the field's top researchers from universities. <span class="cite-group">[<a class="cite" href="#ref-28">28</a>]</span></p>
+            <p>In 2019 the Turing Award went to Yoshua Bengio, Geoffrey Hinton and Yann LeCun for their decades of work on deep learning. The backwater of the 1990s had become the main road of computing.</p>
+          </section>
+
+          <section id="section-13">
+            <h2>13. How Did They Know? Measuring "Human-Level" Accuracy</h2>
+            <div class="callout callout-method">
+              <div class="callout-header">How did they know? A researcher competes against a network</div>
+              <p>When networks' ImageNet error rates fell below 10 per cent, people began asking: how well do <em>humans</em> do? It sounds obvious that people can recognise photos, but ImageNet's 1,000 categories include around 120 breeds of dog and many obscure objects. In 2014 Andrej Karpathy, then a PhD student at Stanford, measured it himself. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+              <ol>
+                <li><strong>Build a fair interface:</strong> a tool showing a test photo and the 1,000 categories, with example images of each, so a person could pick five guesses just as the networks did.</li>
+                <li><strong>Train the human:</strong> Karpathy practised on 500 images to learn the categories, since an untrained person wouldn't know the difference between, say, a Norwich terrier and a Norfolk terrier.</li>
+                <li><strong>Test on unseen images:</strong> he then labelled 1,500 test images, taking about a minute each.</li>
+                <li><strong>Analyse the errors:</strong> he got 5.1 per cent wrong. Many of his mistakes were fine-grained (dog breeds) or simply categories he didn't know existed; the network's mistakes were often different, such as failing on small, thin or oddly drawn objects.</li>
+              </ol>
+              <p>So "about 5 per cent" became the human benchmark, and when ResNet reached 3.6 per cent in 2015, headlines said machines had surpassed humans at image recognition. The careful reading is narrower: one trained, patient human, on this specific test, made more errors than the best network. Networks still failed in ways no person would, as adversarial examples showed. Benchmarks measure what they measure, and no more.</p>
+            </div>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Legend and Record: Did AlphaGo Teach Itself?</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: what AlphaGo learned, and from whom</div>
+              <p><strong>The legend:</strong> AlphaGo taught itself to play Go, from nothing, and surpassed thousands of years of human knowledge on its own. <span class="cite-group">[<a class="cite" href="#ref-20">20</a>, <a class="cite" href="#ref-21">21</a>]</span></p>
+              <p><strong>The record:</strong> the AlphaGo that beat Lee Sedol in 2016 began by learning from people. Its policy network was first trained to predict human moves, using about 30 million positions from games between strong amateur players on an internet Go server. Only then did it improve through self-play and reinforcement learning. Its designers also chose its overall structure, including the search method.</p>
+              <p>The claim of learning "from scratch" belongs to its successor, AlphaGo Zero (2017), which was given only the rules of the game and learned everything else by playing itself, and became even stronger. Even so, "from scratch" needs a footnote: the system's design, the choice of what to learn and how to search, all came from human researchers, and it used vast amounts of computing power.</p>
+              <p><strong>Why it matters:</strong> the difference is real and important. AlphaGo Zero showed that, for a game with fixed rules and a clear winner, self-play alone can go beyond human knowledge. But most real-world problems lack fixed rules and a clear score, and there, learning from human data remains essential, as the next part shows.</p>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Philosophy Corner: Was Move 37 Creative?</h2>
+            <div class="callout callout-philosophy">
+              <div class="callout-header">Philosophy Corner: Lovelace's objection, 170 years on</div>
+              <p>In 1843 Ada Lovelace wrote that a machine "has no pretensions whatever to originate anything. It can do whatever we know how to order it to perform" (Part 1). Was AlphaGo's move 37 an answer to her? <span class="cite-group">[<a class="cite" href="#ref-29">29</a>, <a class="cite" href="#ref-20">20</a>]</span></p>
+              <p><strong>Yes, it was creative:</strong> no one ordered AlphaGo to play move 37, and no one knew it was good. It was new, surprising and valuable, which is how many people define creativity. Top Go players have since studied AlphaGo's games and changed how they play. The mathematician Marcus du Sautoy has argued that such moments show machines can contribute genuinely new ideas.</p>
+              <p><strong>No, it was search:</strong> AlphaGo was built to choose whichever move its networks and search rated as most likely to win. Move 37 was surprising to humans, but for AlphaGo it was simply the highest-scoring option. It didn't intend to surprise, take a risk or express anything. On this view, creativity needs understanding and intention, not just novelty.</p>
+              <p><strong>A middle view:</strong> perhaps creativity comes in kinds. Exploring a well-defined space of possibilities in new ways, as AlphaGo did, is one kind, and machines can clearly do it. Inventing a new game, or deciding that Go is worth playing at all, may be another. Lovelace was right that the machine did what it was built to do. But what it was built to do turned out to include producing ideas its builders never had.</p>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Alex Krizhevsky &amp; Ilya Sutskever</td>
+                <td style="padding:0.6rem 0.8rem;">born 1986 / born 1986<br>Ukraine–Canada / Russia–Israel–Canada</td>
+                <td style="padding:0.6rem 0.8rem;">AlexNet (2012)</td>
+                <td style="padding:0.6rem 0.8rem;">Built the network whose ImageNet win launched the deep-learning era.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Geoffrey Hinton</td>
+                <td style="padding:0.6rem 0.8rem;">born 1947<br>Britain / Canada</td>
+                <td style="padding:0.6rem 0.8rem;">AlexNet (2012), with his students</td>
+                <td style="padding:0.6rem 0.8rem;">Led the Toronto group; Turing Award 2018, Nobel Prize in Physics 2024.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Fei-Fei Li</td>
+                <td style="padding:0.6rem 0.8rem;">born 1976<br>China / USA</td>
+                <td style="padding:0.6rem 0.8rem;">ImageNet and its challenge (2009–2017)</td>
+                <td style="padding:0.6rem 0.8rem;">Created the dataset and contest that measured, and drove, the revolution.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Kaiming He</td>
+                <td style="padding:0.6rem 0.8rem;">born 1984<br>China</td>
+                <td style="padding:0.6rem 0.8rem;">ResNet (2015)</td>
+                <td style="padding:0.6rem 0.8rem;">Made networks with over 100 layers trainable.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Tomas Mikolov</td>
+                <td style="padding:0.6rem 0.8rem;">born 1982<br>Czech Republic</td>
+                <td style="padding:0.6rem 0.8rem;">word2vec (2013)</td>
+                <td style="padding:0.6rem 0.8rem;">Turned words into points in space, so meaning became geometry.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Yoshua Bengio</td>
+                <td style="padding:0.6rem 0.8rem;">born 1964<br>France / Canada</td>
+                <td style="padding:0.6rem 0.8rem;">Attention, with Bahdanau and Cho (2014)</td>
+                <td style="padding:0.6rem 0.8rem;">Pioneer of deep learning for language; Turing Award 2018.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Ian Goodfellow</td>
+                <td style="padding:0.6rem 0.8rem;">born 1985<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">GANs (2014)</td>
+                <td style="padding:0.6rem 0.8rem;">Invented generative adversarial networks and studied adversarial examples.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Demis Hassabis</td>
+                <td style="padding:0.6rem 0.8rem;">born 1976<br>Britain</td>
+                <td style="padding:0.6rem 0.8rem;">DeepMind; AlphaGo (2016); AlphaFold (2020)</td>
+                <td style="padding:0.6rem 0.8rem;">Led the lab behind AlphaGo and AlphaFold; Nobel Prize in Chemistry 2024.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">David Silver</td>
+                <td style="padding:0.6rem 0.8rem;">born 1976<br>Britain</td>
+                <td style="padding:0.6rem 0.8rem;">AlphaGo, AlphaGo Zero, AlphaZero</td>
+                <td style="padding:0.6rem 0.8rem;">Led the reinforcement-learning work behind DeepMind’s game players.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John Jumper</td>
+                <td style="padding:0.6rem 0.8rem;">born 1985<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">AlphaFold 2 (2020)</td>
+                <td style="padding:0.6rem 0.8rem;">Led the AlphaFold team; Nobel Prize in Chemistry 2024.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Lee Sedol</td>
+                <td style="padding:0.6rem 0.8rem;">born 1983<br>South Korea</td>
+                <td style="padding:0.6rem 0.8rem;">Match against AlphaGo (2016)</td>
+                <td style="padding:0.6rem 0.8rem;">Won the only game a human took from AlphaGo in a formal match, with his famous move 78.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Joy Buolamwini &amp; Timnit Gebru</td>
+                <td style="padding:0.6rem 0.8rem;">born 1989 / born 1983<br>Canada–USA / Ethiopia–USA</td>
+                <td style="padding:0.6rem 0.8rem;">"Gender Shades" (2018)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed that face-analysis systems were far less accurate for darker-skinned women.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-17">
+            <h2>17. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember, from AlexNet to AlphaFold.</p>
+            <figure class="fig" data-fig="fig-quiz-ai5">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-18">
+            <h2>18. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>LeCun, Yann, Bengio, Yoshua &amp; Hinton, Geoffrey.</strong> (2015). "Deep Learning." <em>Nature</em>, 521: 436–444.</li>
+              <li id="ref-2"><strong>Russell, Stuart &amp; Norvig, Peter.</strong> (2021). <em>Artificial Intelligence: A Modern Approach</em>. 4th ed. Hoboken, NJ: Pearson.</li>
+              <li id="ref-3"><strong>Russakovsky, Olga, et al.</strong> (2015). "ImageNet Large Scale Visual Recognition Challenge." <em>International Journal of Computer Vision</em>, 115(3): 211–252.</li>
+              <li id="ref-4"><strong>Krizhevsky, Alex, Sutskever, Ilya &amp; Hinton, Geoffrey E.</strong> (2012). "ImageNet Classification with Deep Convolutional Neural Networks." <em>Advances in Neural Information Processing Systems</em>, 25: 1097–1105.</li>
+              <li id="ref-5"><strong>Metz, Cade.</strong> (2021). <em>Genius Makers: The Mavericks Who Brought AI to Google, Facebook, and the World</em>. New York: Dutton.</li>
+              <li id="ref-6"><strong>Raina, Rajat, Madhavan, Anand &amp; Ng, Andrew Y.</strong> (2009). "Large-Scale Deep Unsupervised Learning Using Graphics Processors." <em>Proceedings of the 26th International Conference on Machine Learning</em>, 873–880.</li>
+              <li id="ref-7"><strong>Srivastava, Nitish, et al.</strong> (2014). "Dropout: A Simple Way to Prevent Neural Networks from Overfitting." <em>Journal of Machine Learning Research</em>, 15: 1929–1958.</li>
+              <li id="ref-8"><strong>He, Kaiming, Zhang, Xiangyu, Ren, Shaoqing &amp; Sun, Jian.</strong> (2016). "Deep Residual Learning for Image Recognition." <em>Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition</em>, 770–778.</li>
+              <li id="ref-9"><strong>Zeiler, Matthew D. &amp; Fergus, Rob.</strong> (2014). "Visualizing and Understanding Convolutional Networks." <em>European Conference on Computer Vision</em>, Lecture Notes in Computer Science 8689: 818–833.</li>
+              <li id="ref-10"><strong>Hinton, Geoffrey, et al.</strong> (2012). "Deep Neural Networks for Acoustic Modeling in Speech Recognition." <em>IEEE Signal Processing Magazine</em>, 29(6): 82–97.</li>
+              <li id="ref-11"><strong>Le, Quoc V., et al.</strong> (2012). "Building High-Level Features Using Large Scale Unsupervised Learning." <em>Proceedings of the 29th International Conference on Machine Learning</em>.</li>
+              <li id="ref-12"><strong>Taigman, Yaniv, Yang, Ming, Ranzato, Marc’Aurelio &amp; Wolf, Lior.</strong> (2014). "DeepFace: Closing the Gap to Human-Level Performance in Face Verification." <em>Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition</em>, 1701–1708.</li>
+              <li id="ref-13"><strong>Mikolov, Tomas, Chen, Kai, Corrado, Greg &amp; Dean, Jeffrey.</strong> (2013). "Efficient Estimation of Word Representations in Vector Space." arXiv:1301.3781.</li>
+              <li id="ref-14"><strong>Bolukbasi, Tolga, et al.</strong> (2016). "Man Is to Computer Programmer as Woman Is to Homemaker? Debiasing Word Embeddings." <em>Advances in Neural Information Processing Systems</em>, 29.</li>
+              <li id="ref-15"><strong>Sutskever, Ilya, Vinyals, Oriol &amp; Le, Quoc V.</strong> (2014). "Sequence to Sequence Learning with Neural Networks." <em>Advances in Neural Information Processing Systems</em>, 27.</li>
+              <li id="ref-16"><strong>Bahdanau, Dzmitry, Cho, Kyunghyun &amp; Bengio, Yoshua.</strong> (2015). "Neural Machine Translation by Jointly Learning to Align and Translate." <em>International Conference on Learning Representations</em>.</li>
+              <li id="ref-17"><strong>Wu, Yonghui, et al.</strong> (2016). "Google’s Neural Machine Translation System: Bridging the Gap between Human and Machine Translation." arXiv:1609.08144.</li>
+              <li id="ref-18"><strong>Goodfellow, Ian, et al.</strong> (2014). "Generative Adversarial Nets." <em>Advances in Neural Information Processing Systems</em>, 27.</li>
+              <li id="ref-19"><strong>Mnih, Volodymyr, et al.</strong> (2015). "Human-Level Control through Deep Reinforcement Learning." <em>Nature</em>, 518: 529–533.</li>
+              <li id="ref-20"><strong>Silver, David, et al.</strong> (2016). "Mastering the Game of Go with Deep Neural Networks and Tree Search." <em>Nature</em>, 529: 484–489.</li>
+              <li id="ref-21"><strong>Silver, David, et al.</strong> (2017). "Mastering the Game of Go without Human Knowledge." <em>Nature</em>, 550: 354–359.</li>
+              <li id="ref-22"><strong>Silver, David, et al.</strong> (2018). "A General Reinforcement Learning Algorithm that Masters Chess, Shogi, and Go through Self-Play." <em>Science</em>, 362: 1140–1144.</li>
+              <li id="ref-23"><strong>Jumper, John, et al.</strong> (2021). "Highly Accurate Protein Structure Prediction with AlphaFold." <em>Nature</em>, 596: 583–589.</li>
+              <li id="ref-24"><strong>Varadi, Mihaly, et al.</strong> (2022). "AlphaFold Protein Structure Database: Massively Expanding the Structural Coverage of Protein-Sequence Space with High-Accuracy Models." <em>Nucleic Acids Research</em>, 50(D1): D439–D444.</li>
+              <li id="ref-25"><strong>Szegedy, Christian, et al.</strong> (2014). "Intriguing Properties of Neural Networks." <em>International Conference on Learning Representations</em>.</li>
+              <li id="ref-26"><strong>Goodfellow, Ian J., Shlens, Jonathon &amp; Szegedy, Christian.</strong> (2015). "Explaining and Harnessing Adversarial Examples." <em>International Conference on Learning Representations</em>.</li>
+              <li id="ref-27"><strong>Buolamwini, Joy &amp; Gebru, Timnit.</strong> (2018). "Gender Shades: Intersectional Accuracy Disparities in Commercial Gender Classification." <em>Proceedings of Machine Learning Research</em>, 81: 77–91.</li>
+              <li id="ref-28"><strong>Strubell, Emma, Ganesh, Ananya &amp; McCallum, Andrew.</strong> (2019). "Energy and Policy Considerations for Deep Learning in NLP." <em>Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics</em>, 3645–3650.</li>
+              <li id="ref-29"><strong>du Sautoy, Marcus.</strong> (2019). <em>The Creativity Code: How AI Is Learning to Write, Paint and Think</em>. London: Fourth Estate.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/how-machines-learned-to-think.html">How Machines Learned to Think</a> (Part 5 of 8)</div>
+  <div class="series-banner-links">
+    <a href="learning-from-examples.html">← Part 4: Learning from Examples: Backpropagation, Big Data and Deep Blue</a>
+    <span>Part 6 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/the-deep-learning-revolution.js"></script>
+</body>
+</html>
