@@ -1,5 +1,31 @@
 [
   {
+    "slug": "where-is-it-leading-us",
+    "title": "Where Is It Leading Us? Work, Safety, Rules and the Future of AI",
+    "summary": "The final part: five views of AI’s future, the evidence on jobs, education and misinformation, the alignment problem, how big the risks are, the rules being written, and lessons from seventy years.",
+    "subject": "Technology",
+    "tags": [
+      "artificial-intelligence",
+      "ai-safety",
+      "ai-policy",
+      "future-of-work",
+      "alignment",
+      "ethics"
+    ],
+    "date": "2026-11-15",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 24,
+    "series": {
+      "id": "how-machines-learned-to-think",
+      "part": 8
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": false
+  },
+  {
     "slug": "where-we-are-now",
     "title": "Where We Are Now: Reasoning Models, Agents and the AI Boom",
     "summary": "AI from 2023 to November 2026: multimodal and open models, reasoning models, DeepSeek, maths olympiad gold, agents, the cost in chips and power, and what still goes wrong.",

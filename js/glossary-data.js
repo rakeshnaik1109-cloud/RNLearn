@@ -2509,5 +2509,51 @@ window.RNLEARN_GLOSSARY = [
   [
    "artificial general intelligence"
   ]
+ ],
+ [
+  "Alignment problem",
+  "The challenge of making sure AI systems reliably do what their designers and users actually intend, and act in line with human values.",
+  []
+ ],
+ [
+  "Specification gaming",
+  "When an AI system meets the literal goal it was given in a way its designers did not intend, exploiting a loophole in the reward.",
+  [
+   "reward hacking"
+  ]
+ ],
+ [
+  "Interpretability",
+  "Research into how AI models work internally, to understand what they are doing and why.",
+  []
+ ],
+ [
+  "Red teaming",
+  "Deliberately trying to make an AI system misbehave or reveal dangerous abilities, to find weaknesses before others do.",
+  [
+   "red team",
+   "red teams"
+  ]
+ ],
+ [
+  "Uplift study",
+  "An experiment comparing people with and without AI help, to measure how much AI actually increases their ability to do something.",
+  [
+   "uplift studies"
+  ]
+ ],
+ [
+  "AI Act",
+  "The European Union’s law regulating artificial intelligence by level of risk, in force since August 2024.",
+  [
+   "EU AI Act"
+  ]
+ ],
+ [
+  "Liar’s dividend",
+  "The way the existence of convincing fakes lets people dismiss genuine evidence as fake.",
+  [
+   "liar's dividend"
+  ]
  ]
 ];

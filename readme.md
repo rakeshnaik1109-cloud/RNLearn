@@ -26,7 +26,7 @@ A 12-part master series chronicling the history, epistemology, and methodology o
 12. **Part 12**: *What is Science, Really? Demarcation, Revolutions, and the Fabric of Truth* (Popper, Kuhn & epistemology)
 
 ### New Series: *How Machines Learned to Think*
-An 8-part history of artificial intelligence, from the first dreams of thinking machines to today's AI and where it may lead (in progress):
+An 8-part history of artificial intelligence, from the first dreams of thinking machines to today's AI and where it may lead:
 1. **Part 1**: *Dreams of Thinking Machines: From Bronze Giants to Babbage's Engines* (Myths, automata, Llull, Leibniz, Babbage, Lovelace & Boole)
 2. **Part 2**: *Can Machines Think? Turing, the First Computers and the Birth of AI* (Turing, model neurons, cybernetics, the Turing test, Dartmouth & the perceptron)
 3. **Part 3**: *Big Promises and AI Winters: ELIZA, Expert Systems and Two Crashes* (SHRDLU, ELIZA, Perceptrons, Lighthill, MYCIN & the AI winters)
@@ -34,6 +34,7 @@ An 8-part history of artificial intelligence, from the first dreams of thinking 
 5. **Part 5**: *The Deep Learning Revolution: ImageNet, AlphaGo and AlphaFold* (AlexNet, GPUs, word2vec, attention, GANs, AlphaGo, AlphaFold & bias)
 6. **Part 6**: *Attention Is All You Need: Transformers, GPT and the Road to ChatGPT* (Transformers, next-word prediction, scaling laws, RLHF, ChatGPT & hallucination)
 7. **Part 7**: *Where We Are Now: Reasoning Models, Agents and the AI Boom* (2023 to November 2026: multimodal and open models, reasoning, DeepSeek, agents, costs & limits)
+8. **Part 8**: *Where Is It Leading Us? Work, Safety, Rules and the Future of AI* (Five views of the future, jobs, education, alignment, risks, regulation & lessons)
 
 ---
 

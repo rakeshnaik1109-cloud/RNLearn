@@ -2507,5 +2507,51 @@
     "forms": [
       "artificial general intelligence"
     ]
+  },
+  {
+    "term": "Alignment problem",
+    "definition": "The challenge of making sure AI systems reliably do what their designers and users actually intend, and act in line with human values.",
+    "forms": []
+  },
+  {
+    "term": "Specification gaming",
+    "definition": "When an AI system meets the literal goal it was given in a way its designers did not intend, exploiting a loophole in the reward.",
+    "forms": [
+      "reward hacking"
+    ]
+  },
+  {
+    "term": "Interpretability",
+    "definition": "Research into how AI models work internally, to understand what they are doing and why.",
+    "forms": []
+  },
+  {
+    "term": "Red teaming",
+    "definition": "Deliberately trying to make an AI system misbehave or reveal dangerous abilities, to find weaknesses before others do.",
+    "forms": [
+      "red team",
+      "red teams"
+    ]
+  },
+  {
+    "term": "Uplift study",
+    "definition": "An experiment comparing people with and without AI help, to measure how much AI actually increases their ability to do something.",
+    "forms": [
+      "uplift studies"
+    ]
+  },
+  {
+    "term": "AI Act",
+    "definition": "The European Union’s law regulating artificial intelligence by level of risk, in force since August 2024.",
+    "forms": [
+      "EU AI Act"
+    ]
+  },
+  {
+    "term": "Liar’s dividend",
+    "definition": "The way the existence of convincing fakes lets people dismiss genuine evidence as fake.",
+    "forms": [
+      "liar's dividend"
+    ]
   }
 ]
