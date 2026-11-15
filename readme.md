@@ -32,6 +32,7 @@ An 8-part history of artificial intelligence, from the first dreams of thinking 
 3. **Part 3**: *Big Promises and AI Winters: ELIZA, Expert Systems and Two Crashes* (SHRDLU, ELIZA, Perceptrons, Lighthill, MYCIN & the AI winters)
 4. **Part 4**: *Learning from Examples: Backpropagation, Big Data and Deep Blue* (Backpropagation, LeCun, statistical NLP, spam filters, TD-Gammon, Deep Blue & overfitting)
 5. **Part 5**: *The Deep Learning Revolution: ImageNet, AlphaGo and AlphaFold* (AlexNet, GPUs, word2vec, attention, GANs, AlphaGo, AlphaFold & bias)
+6. **Part 6**: *Attention Is All You Need: Transformers, GPT and the Road to ChatGPT* (Transformers, next-word prediction, scaling laws, RLHF, ChatGPT & hallucination)
 
 ---
 

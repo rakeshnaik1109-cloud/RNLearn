@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attention Is All You Need: Transformers, GPT and the Road to ChatGPT — RNLearn</title>
+  <meta name="description" content="How the transformer, next-word prediction, scaling laws and training with human feedback led from a 2017 Google paper to ChatGPT, and why language models make things up.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/attention-is-all-you-need.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Attention Is All You Need: Transformers, GPT and the Road to ChatGPT — RNLearn">
+  <meta property="og:description" content="How the transformer, next-word prediction, scaling laws and training with human feedback led from a 2017 Google paper to ChatGPT, and why language models make things up.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/attention-is-all-you-need.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Attention Is All You Need: Transformers, GPT and the Road to ChatGPT — RNLearn">
+  <meta name="twitter:description" content="How the transformer, next-word prediction, scaling laws and training with human feedback led from a 2017 Google paper to ChatGPT, and why language models make things up.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Attention Is All You Need: Transformers, GPT and the Road to ChatGPT",
+    "description": "How the transformer, next-word prediction, scaling laws and training with human feedback led from a 2017 Google paper to ChatGPT, and why language models make things up.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-15",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/attention-is-all-you-need.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/technology.html" class="post-subject-tag" data-subject="technology">Technology</a>
+        </div>
+        <h1 class="article-title">Attention Is All You Need: Transformers, GPT and the Road to ChatGPT</h1>
+        <p class="article-standfirst">
+          A new kind of neural network, a surprisingly simple training task and the discovery that bigger means better turned text predictors into assistants. In November 2022 the world met ChatGPT.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-15">15 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>22 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/how-machines-learned-to-think.html">How Machines Learned to Think</a> (Part 6 of 8)</div>
+  <div class="series-banner-links">
+    <a href="the-deep-learning-revolution.html">← Part 5: The Deep Learning Revolution: ImageNet, AlphaGo and AlphaFold</a>
+    <span>Part 7 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. The Week the World Met a Chatbot</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. The Transformer</a></li>
+              <li><a class="toc-link" href="#section-4">4. Predicting the Next Word</a></li>
+              <li><a class="toc-link" href="#section-5">5. Pre-training: GPT and BERT</a></li>
+              <li><a class="toc-link" href="#section-6">6. GPT-2: Too Dangerous to Release?</a></li>
+              <li><a class="toc-link" href="#section-7">7. Scaling Laws and GPT-3</a></li>
+              <li><a class="toc-link" href="#section-8">8. Learning from the Prompt</a></li>
+              <li><a class="toc-link" href="#section-9">9. Pictures and Code</a></li>
+              <li><a class="toc-link" href="#section-10">10. Learning from Human Feedback</a></li>
+              <li><a class="toc-link" href="#section-11">11. ChatGPT</a></li>
+              <li><a class="toc-link" href="#section-12">12. Making Things Up</a></li>
+              <li><a class="toc-link" href="#section-13">13. How Did They Know?</a></li>
+              <li><a class="toc-link" href="#section-14">14. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-15">15. Philosophy Corner</a></li>
+              <li><a class="toc-link" href="#section-16">16. People in This Part</a></li>
+              <li><a class="toc-link" href="#section-17">17. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-18">18. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. The Week the World Met a Chatbot</h2>
+            <p>On 30 November 2022, a company called OpenAI put a chatbot called <strong>ChatGPT</strong> on the internet, free to use, as a "research preview". Five days later it had a million users. People asked it to write poems, explain tax rules, debug code, plan holidays and argue about philosophy, and it answered fluently, in seconds. By early 2023 it was estimated to have around 100 million users a month, which would make it one of the fastest-growing consumer products ever. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <p>To many people it seemed to come from nowhere. In fact it was the result of five years of rapid progress, built on one idea from 2017 and one surprising discovery from 2020. This part tells that story:</p>
+            <ul>
+              <li>the <strong>transformer</strong>, a new design for neural networks built around "attention";</li>
+              <li>the discovery that simply predicting the next word, on a vast scale, teaches a model a great deal;</li>
+              <li><strong>scaling laws</strong>, which showed that bigger models get predictably better;</li>
+              <li>and <strong>training with human feedback</strong>, which turned raw text-predictors into helpful assistants.</li>
+            </ul>
+            <p>It also explains the strange weaknesses that came with them, above all their habit of confidently making things up. Part 7 picks up the story from 2023 to the present.</p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-ai-timeline-6">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. From the transformer to ChatGPT, 2017–2023.</strong> The points are in order but not to scale. Colours show the four threads of the story.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. The Transformer</h2>
+            <p>In June 2017 eight researchers at Google published a paper with a bold title: "Attention Is All You Need". Until then, networks for language, such as the LSTMs of Parts 4 and 5, read a sentence one word at a time, passing a summary along from word to word. That was slow, because each step had to wait for the one before, and the network tended to lose track of words far back in a long text. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+            <p>The <strong>transformer</strong> threw out the word-by-word reading and kept only the attention idea from Part 5. It looks at all the words of a passage at once. For each word, it asks: which other words in this passage help me understand this one, and how much? This is called <strong>self-attention</strong>. Take the sentence "The animal didn't cross the street because it was too tired." To understand "it", the network should pay attention to "animal". Change "tired" to "wide", and "it" now means the street. The transformer learns to make such links by itself. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>, <a class="cite" href="#ref-4">4</a>]</span></p>
+            <figure class="fig" data-fig="fig-self-attention">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Self-attention.</strong> Tap a word to see how much attention it pays to every word in the sentence. Switch the last word between "tired" and "wide" and watch where "it" looks. The weights here are chosen by hand to show the idea; a real transformer learns them, and has many layers, each with several attention "heads" looking for different kinds of link.
+              </figcaption>
+            </figure>
+            <p>A transformer stacks many layers of self-attention, so that word meanings are refined again and again in the light of their context. And because all the words are processed together rather than in sequence, the work can be spread across thousands of GPU cores at once. That made it possible to train much bigger networks on much more text than ever before. The transformer quickly became the basis of almost all language AI, and later of image, sound and protein models too.</p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Predicting the Next Word</h2>
+            <p>The task that turned out to be most powerful sounds almost trivially simple: given some text, predict what comes next. A model that does this is called a <strong>language model</strong>. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span></p>
+            <p>Language models work with <strong>tokens</strong>, small pieces of text. A common word like "the" is one token; a rarer word may be split into two or three pieces. In English a token is on average about three-quarters of a word. Given a passage, the model outputs a probability for every possible next token. To write text, you pick a token, add it to the passage, and ask again, over and over.</p>
+            <p>Why should predicting the next word teach a model anything deep? Because to predict well, you need to know a lot. To continue "The capital of France is", you need geography. To continue a mystery novel's final chapter, you need to follow the plot. To continue a half-finished maths proof, you need some maths. Trained on enough text, a model is pushed to absorb grammar, facts, styles and patterns of reasoning, because they all help predict the next word.</p>
+            <figure class="fig" data-fig="fig-next-word">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Predicting the next word.</strong> This toy model has "read" about 30 short sentences and simply counts which words followed which. Add the most likely word, or pick at random according to the probabilities. Raise the <strong>temperature</strong> to make unlikely words more likely (more surprising, less sensible); lower it to always play safe. Real language models use transformers trained on trillions of words, but they too produce text one token at a time, and use temperature in the same way.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Pre-training: GPT and BERT</h2>
+            <p>In 2018 two papers showed how to use transformers for language. OpenAI's <strong>GPT</strong> ("generative pre-trained transformer") was trained to predict the next word on about 7,000 unpublished books. Google's <strong>BERT</strong> was trained differently: words in a sentence were hidden at random, and the model had to guess them using the words on both sides. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>, <a class="cite" href="#ref-6">6</a>]</span></p>
+            <p>Both used a two-stage recipe that became standard. First, <strong>pre-training</strong>: learn general knowledge of language from a huge amount of unlabelled text, which is cheap because the text supplies its own answers. Then, <strong>fine-tuning</strong>: train the model a little more on a small labelled dataset for a particular job, such as answering questions or judging whether a review is positive. A pre-trained model learned new tasks from far fewer examples than a model starting from scratch.</p>
+            <p>BERT broke records on a whole set of language-understanding tests. In 2019 Google began using it in its search engine, where it helped interpret about one in ten English searches, especially longer questions in which small words like "to" and "for" change the meaning.</p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. GPT-2: "Too Dangerous to Release"?</h2>
+            <p>In February 2019 OpenAI announced <strong>GPT-2</strong>, a much bigger model with 1.5 billion <strong>parameters</strong> (the adjustable weights inside the network), trained on text from about 8 million web pages. Given a made-up opening about scientists discovering a herd of unicorns in the Andes that spoke perfect English, it wrote a fluent, news-style story about them, complete with invented quotes from a professor. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span></p>
+            <p>OpenAI decided not to release the full model at first, citing worries that it could be used to mass-produce fake news, spam or impersonation. Instead it released smaller versions in stages. The decision was controversial. Some researchers praised the caution; others thought it was hype, or that it went against the open sharing of science. When no flood of misuse appeared, the full model was released in November 2019.</p>
+            <p>GPT-2 was often silly. It lost the thread in long passages and invented facts. But the episode started a debate that continues: when a model is powerful, should its makers release it openly, so anyone can study and build on it, or keep it closed to limit misuse?</p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Scaling Laws and GPT-3</h2>
+            <p>In January 2020 a team at OpenAI led by Jared Kaplan published a remarkable finding. They trained many language models of different sizes and measured how well each predicted text it hadn't seen. The error fell in a strikingly regular way as they increased three things: the size of the model, the amount of training data, and the computing power used. Make the model ten times bigger, with enough data, and the error fell by a predictable fraction. These relationships are called <strong>scaling laws</strong>. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span></p>
+            <figure class="fig" data-fig="fig-scaling">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. The shape of a scaling law.</strong> Slide to change the model's size. Each tenfold increase cuts the error by the same fraction, so on axes where each step is ten times more, the curve becomes a straight line. The slope follows the law Kaplan's team measured for model size; the vertical scale is illustrative, and the GPT models are placed by their size only.
+              </figcaption>
+            </figure>
+            <p>Scaling laws gave companies a reason to spend enormous sums: if bigger reliably meant better, the path forward was to build bigger. In May 2020 OpenAI described <strong>GPT-3</strong>, with 175 billion parameters, more than a hundred times larger than GPT-2, trained on hundreds of billions of tokens from the web, books and Wikipedia. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span></p>
+            <p>In 2022 DeepMind refined the recipe. Its <strong>Chinchilla</strong> study found that most large models had been trained on too little data for their size. A model of 70 billion parameters, trained on about 1.4 trillion tokens, beat a 280-billion-parameter model trained on less. The lesson: grow the data along with the model, roughly 20 tokens of training text for every parameter. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span></p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Learning from the Prompt</h2>
+            <p>GPT-3's most surprising ability was one nobody had directly trained. Give it a few examples of a task in its prompt (say, three English words with their French translations) and then a new English word, and it would continue the pattern and give the French. It could do the same for arithmetic, unscrambling words, writing in a particular style and many other tasks, without any retraining. This is called <strong>in-context learning</strong> or "few-shot" learning. One model could do many jobs, just by being shown what was wanted. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span></p>
+            <p>Researchers soon found that the wording of the prompt mattered a lot. In 2022 a Google team showed that if the examples in the prompt included worked steps of reasoning ("Roger has 5 balls. He buys 2 cans of 3 balls each, which is 6 balls. 5 + 6 = 11."), large models solved maths word problems far more often. This is called <strong>chain-of-thought</strong> prompting. Another group found that simply adding "Let's think step by step" helped. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>, <a class="cite" href="#ref-12">12</a>]</span></p>
+            <p>Some abilities seemed to appear suddenly as models grew, absent in small models and present in large ones, and researchers called these <strong>emergent abilities</strong>. Others argued that much of this suddenness was an illusion caused by how the abilities were measured: with all-or-nothing scoring, gradual improvement can look like a sudden jump. Both sides agreed that bigger models could do things smaller ones couldn't; the argument is over how predictable those gains are. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>, <a class="cite" href="#ref-14">14</a>]</span></p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Pictures and Code</h2>
+            <p>Language models trained on computer code turned out to be good programmers' assistants. In 2021 OpenAI described <strong>Codex</strong>, a GPT model trained on public code from GitHub, and GitHub launched <strong>Copilot</strong>, which suggested whole lines and functions as programmers typed. Within a couple of years, many programmers used such tools every day. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span></p>
+            <p>Transformers also learned to connect words and pictures. In January 2021 OpenAI released <strong>CLIP</strong>, trained on 400 million images with their captions from the internet, which learned to match pictures with descriptions, and <strong>DALL·E</strong>, which generated images from text such as "an armchair in the shape of an avocado". <span class="cite-group">[<a class="cite" href="#ref-16">16</a>, <a class="cite" href="#ref-17">17</a>]</span></p>
+            <p>The image generators that took off in 2022 used a different technique, the <strong>diffusion model</strong>. During training, real images are gradually buried in random noise, and a network learns to undo each small step, removing a little noise at a time. To create a new image, you start from pure noise and let the network "denoise" it step by step, guided by a text description, until a picture appears. DALL·E 2 (April 2022), Midjourney (July 2022) and the openly released Stable Diffusion (August 2022) put this power in millions of hands, and raised hard questions about artists' work being used for training without permission. <span class="cite-group">[<a class="cite" href="#ref-18">18</a>, <a class="cite" href="#ref-19">19</a>]</span></p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. From Predictor to Assistant: Learning from Human Feedback</h2>
+            <p>GPT-3 was powerful but awkward. It predicted text, it didn't follow instructions. Ask it "Explain gravity to a six-year-old" and it might continue with a list of other homework questions, because that is what such text often looks like online. It could also produce toxic, false or harmful text as readily as helpful text. <span class="cite-group">[<a class="cite" href="#ref-20">20</a>]</span></p>
+            <p>The fix was to train the model on what people actually want, using <strong>reinforcement learning from human feedback</strong> (RLHF). The idea came from a 2017 study by researchers at OpenAI and DeepMind, who taught a simulated robot to do a backflip using nothing but people's choices between pairs of short video clips. Applied to language in OpenAI's <strong>InstructGPT</strong> (2022), it had three steps: <span class="cite-group">[<a class="cite" href="#ref-21">21</a>, <a class="cite" href="#ref-20">20</a>]</span></p>
+            <ol>
+              <li><strong>Show examples:</strong> people wrote good responses to a range of prompts, and the model was fine-tuned to imitate them.</li>
+              <li><strong>Learn preferences:</strong> the model wrote several answers to each prompt; people ranked them from best to worst; and a separate <strong>reward model</strong> was trained to predict which answers people would prefer.</li>
+              <li><strong>Practise:</strong> the language model was trained with reinforcement learning to write answers that the reward model scored highly, with a brake to stop it drifting too far from its original writing.</li>
+            </ol>
+            <figure class="fig" data-fig="fig-reward-model">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Teaching a reward model.</strong> Pick the better answer to each question. After each choice, a simple reward model updates how much it values five qualities, and it starts predicting your choices. In real RLHF the reward model is itself a large neural network that reads the whole answer; here each answer has been labelled by hand with five features to keep the idea visible.
+              </figcaption>
+            </figure>
+            <p>Other methods followed. In late 2022 the company Anthropic described "Constitutional AI", in which a model critiques and revises its own answers against a written list of principles, reducing the need for human labelling of harmful content. Whatever the method, the step from text predictor to assistant depends on human judgements of what a good answer is, and so on whose judgements are used. <span class="cite-group">[<a class="cite" href="#ref-22">22</a>]</span></p>
+          </section>
+
+          <section id="section-11">
+            <h2>11. ChatGPT</h2>
+            <p>ChatGPT was a GPT-3.5 model, a refined successor to GPT-3, fine-tuned with human feedback to hold a conversation, in a simple chat window that anyone could use. Nothing in it was a scientific breakthrough. What was new was putting a capable, instruction-following model in front of the public, free. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+            <p>The reaction was enormous. Students used it for essays, and some school systems, including New York City's public schools, banned it, then reversed course within months. Programmers used it to write and fix code. Google, which had invented the transformer and had its own chatbots, reportedly declared a "code red" over the threat to its search business. In January 2023 Microsoft announced a major new investment in OpenAI, widely reported as about $10 billion. <span class="cite-group">[<a class="cite" href="#ref-23">23</a>]</span></p>
+            <p>A race followed. In 2023 Google released Bard, Anthropic released Claude, Meta released its LLaMA models to researchers, and in March OpenAI released GPT-4, which could also read images. That story, and where it has led, is the subject of Part 7.</p>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Making Things Up</h2>
+            <p>Language models have a serious flaw: they sometimes state false things confidently, such as invented facts, quotes, statistics or references. This is called <strong>hallucination</strong>. <span class="cite-group">[<a class="cite" href="#ref-24">24</a>]</span></p>
+            <p>The reason lies in how they are trained. A language model learns to produce text that is <em>plausible</em>: the kind of thing that would come next. Usually the plausible answer is also the true one, because true statements are common in its training text. But when the model's knowledge runs out, it doesn't stop; it produces something that sounds right. A made-up journal reference looks just like a real one. Models also learn from text that contains mistakes and myths.</p>
+            <p>The consequences can be real. Just two weeks before ChatGPT's launch, Meta withdrew a science-writing model called Galactica after three days, because it produced authoritative-sounding nonsense, including fake research papers. In 2023 two New York lawyers were fined $5,000 after submitting a court filing that cited six cases ChatGPT had invented. <span class="cite-group">[<a class="cite" href="#ref-28">28</a>, <a class="cite" href="#ref-29">29</a>]</span> The lesson, then and now: treat a model's claims as a draft to check, not as an authority.</p>
+            <p>Other limits were clear too. Models had a knowledge cut-off, the date their training text ended. They could be steered into harmful output by clever prompts. They could reproduce the biases of their training text. And training them used vast amounts of energy and text, much of it written by people who were never asked.</p>
+          </section>
+
+          <section id="section-13">
+            <h2>13. How Did They Know? Did Human Feedback Really Help?</h2>
+            <div class="callout callout-method">
+              <div class="callout-header">How did they know? The InstructGPT comparison</div>
+              <p>"Helpful" is hard to measure with a single number. So in 2022 the InstructGPT team asked people directly, in a careful comparison. <span class="cite-group">[<a class="cite" href="#ref-20">20</a>]</span></p>
+              <ol>
+                <li><strong>Real prompts:</strong> they used prompts that customers had actually submitted to OpenAI's service (not ones the training team had written), so the test matched real use.</li>
+                <li><strong>Several models:</strong> each prompt was answered by plain GPT-3, by GPT-3 given a carefully written prompt, by a model fine-tuned on examples, and by InstructGPT models of different sizes, including one with only 1.3 billion parameters.</li>
+                <li><strong>Hidden identities:</strong> trained raters compared the answers without knowing which model wrote which.</li>
+                <li><strong>Check for over-fitting to the raters:</strong> a separate group of raters, who had not provided any training data, also judged the answers, to make sure the model hadn't just learned the quirks of one group.</li>
+                <li><strong>Measure specific failings too:</strong> they counted how often answers made up facts, and tested toxicity and bias on standard datasets.</li>
+              </ol>
+              <p>Raters preferred the answers of the 1.3-billion-parameter InstructGPT to those of the 175-billion-parameter GPT-3, a model more than 100 times bigger. InstructGPT also made up facts less often. But it was not more fair: on bias tests it showed little improvement. The team also noted a limitation of their own method: the model was aligned with the preferences of a few dozen paid raters and the company's instructions to them, not with everyone's values.</p>
+            </div>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Legend and Record: Did ChatGPT Come Out of Nowhere?</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: the overnight success that took seventy years</div>
+              <p><strong>The legend:</strong> in November 2022, a small company suddenly invented a talking AI that took the world by surprise. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>, <a class="cite" href="#ref-9">9</a>, <a class="cite" href="#ref-25">25</a>]</span></p>
+              <p><strong>The record:</strong> almost every ingredient was public and years old. The transformer came from Google in 2017; GPT-3 had been described in 2020; RLHF had been published in 2017 and InstructGPT in early 2022. Other chatbots existed: Google had shown its LaMDA conversation model in 2021, and Meta released BlenderBot 3 to the public in August 2022. In June 2022 a Google engineer, Blake Lemoine, even claimed publicly that LaMDA was sentient, a claim Google and most experts rejected; he was dismissed the following month. And the roots go much deeper: next-word probabilities go back to Shannon (Part 2), and neural networks and attention to Parts 2–5.</p>
+              <p><strong>What was genuinely new:</strong> a model good enough to be useful, tuned to follow instructions, in a free and simple interface, at a moment when the public was ready to try it. ChatGPT's breakthrough was as much about access as about technology.</p>
+              <p><strong>Why it matters:</strong> "overnight" stories hide the long, shared, mostly public work that makes breakthroughs possible, and make the future seem less predictable than it is. Many researchers saw this coming; the surprise was how many people wanted to use it, and how quickly.</p>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Philosophy Corner: Stochastic Parrots or World Models?</h2>
+            <div class="callout callout-philosophy">
+              <div class="callout-header">Philosophy Corner: does predicting text require understanding?</div>
+              <p>In 2021 the linguist Emily Bender, Timnit Gebru and colleagues published a paper calling large language models "stochastic parrots". A stochastic (random) parrot, they argued, stitches together sequences of words according to patterns in its training text, without any reference to meaning. Fluent output can fool us into thinking there is understanding behind it, as ELIZA's users were fooled (Part 3), and Searle's Chinese Room (Part 2) made the same point in principle. <span class="cite-group">[<a class="cite" href="#ref-26">26</a>]</span></p>
+              <p>Others replied that to predict text really well, a model may have to build some internal picture of the world the text describes. A 2023 study tested this with a small transformer trained only on lists of moves from the board game Othello, never shown the board itself. Researchers found that its internal activity encoded the current state of the board, and that changing that internal state changed the moves it predicted. It had built a "world model" it was never given. <span class="cite-group">[<a class="cite" href="#ref-27">27</a>]</span></p>
+              <p>Both sides can be partly right. A model can have useful internal representations and still lack things we associate with understanding, such as grounding in experience, stable beliefs or knowing when it doesn't know. Perhaps "understanding" isn't all-or-nothing, but comes in degrees and kinds. These questions are no longer purely academic: how much we should trust these systems, and for what, depends on the answers. Part 8 returns to them.</p>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Ashish Vaswani &amp; co-authors</td>
+                <td style="padding:0.6rem 0.8rem;">2017<br>Google</td>
+                <td style="padding:0.6rem 0.8rem;">"Attention Is All You Need" (2017)</td>
+                <td style="padding:0.6rem 0.8rem;">Eight researchers who introduced the transformer, the basis of modern language AI.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Alec Radford</td>
+                <td style="padding:0.6rem 0.8rem;">USA</td>
+                <td style="padding:0.6rem 0.8rem;">GPT (2018), GPT-2 (2019), CLIP (2021)</td>
+                <td style="padding:0.6rem 0.8rem;">Led OpenAI’s early work showing what pre-trained transformers could do.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Jacob Devlin</td>
+                <td style="padding:0.6rem 0.8rem;">USA</td>
+                <td style="padding:0.6rem 0.8rem;">BERT (2018)</td>
+                <td style="padding:0.6rem 0.8rem;">Led the Google model that learned language by filling in hidden words.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Jared Kaplan</td>
+                <td style="padding:0.6rem 0.8rem;">USA</td>
+                <td style="padding:0.6rem 0.8rem;">Scaling laws (2020)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed that language models improve smoothly and predictably with scale.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Tom Brown &amp; co-authors</td>
+                <td style="padding:0.6rem 0.8rem;">2020<br>OpenAI</td>
+                <td style="padding:0.6rem 0.8rem;">GPT-3 (2020)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed that a very large model could learn new tasks from examples in its prompt.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Jordan Hoffmann &amp; co-authors</td>
+                <td style="padding:0.6rem 0.8rem;">2022<br>DeepMind</td>
+                <td style="padding:0.6rem 0.8rem;">Chinchilla (2022)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed that models should be trained on far more data for their size.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Paul Christiano</td>
+                <td style="padding:0.6rem 0.8rem;">USA</td>
+                <td style="padding:0.6rem 0.8rem;">Learning from human preferences (2017)</td>
+                <td style="padding:0.6rem 0.8rem;">Co-developed the method behind training with human feedback.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Long Ouyang &amp; co-authors</td>
+                <td style="padding:0.6rem 0.8rem;">2022<br>OpenAI</td>
+                <td style="padding:0.6rem 0.8rem;">InstructGPT (2022)</td>
+                <td style="padding:0.6rem 0.8rem;">Turned a text predictor into an instruction-following assistant with RLHF.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Jason Wei</td>
+                <td style="padding:0.6rem 0.8rem;">USA</td>
+                <td style="padding:0.6rem 0.8rem;">Chain-of-thought prompting (2022)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed that prompting a model to reason step by step improves its answers.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Emily Bender &amp; Timnit Gebru</td>
+                <td style="padding:0.6rem 0.8rem;">USA</td>
+                <td style="padding:0.6rem 0.8rem;">"On the Dangers of Stochastic Parrots" (2021)</td>
+                <td style="padding:0.6rem 0.8rem;">Warned about the costs, biases and limits of ever-larger language models.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-17">
+            <h2>17. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember, from the transformer to ChatGPT.</p>
+            <figure class="fig" data-fig="fig-quiz-ai6">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-18">
+            <h2>18. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>OpenAI.</strong> (2022). "Introducing ChatGPT." OpenAI blog, 30 November 2022.</li>
+              <li id="ref-2"><strong>Hu, Krystal.</strong> (2023). "ChatGPT Sets Record for Fastest-Growing User Base – Analyst Note." Reuters, 2 February 2023.</li>
+              <li id="ref-3"><strong>Vaswani, Ashish, et al.</strong> (2017). "Attention Is All You Need." <em>Advances in Neural Information Processing Systems</em>, 30.</li>
+              <li id="ref-4"><strong>Uszkoreit, Jakob.</strong> (2017). "Transformer: A Novel Neural Network Architecture for Language Understanding." Google AI Blog, 31 August 2017.</li>
+              <li id="ref-5"><strong>Radford, Alec, Narasimhan, Karthik, Salimans, Tim &amp; Sutskever, Ilya.</strong> (2018). "Improving Language Understanding by Generative Pre-Training." OpenAI technical report.</li>
+              <li id="ref-6"><strong>Devlin, Jacob, Chang, Ming-Wei, Lee, Kenton &amp; Toutanova, Kristina.</strong> (2019). "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding." <em>Proceedings of NAACL-HLT 2019</em>, 4171–4186.</li>
+              <li id="ref-7"><strong>Radford, Alec, et al.</strong> (2019). "Language Models Are Unsupervised Multitask Learners." OpenAI technical report.</li>
+              <li id="ref-8"><strong>Kaplan, Jared, et al.</strong> (2020). "Scaling Laws for Neural Language Models." arXiv:2001.08361.</li>
+              <li id="ref-9"><strong>Brown, Tom B., et al.</strong> (2020). "Language Models Are Few-Shot Learners." <em>Advances in Neural Information Processing Systems</em>, 33: 1877–1901.</li>
+              <li id="ref-10"><strong>Hoffmann, Jordan, et al.</strong> (2022). "Training Compute-Optimal Large Language Models." <em>Advances in Neural Information Processing Systems</em>, 35.</li>
+              <li id="ref-11"><strong>Wei, Jason, et al.</strong> (2022). "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models." <em>Advances in Neural Information Processing Systems</em>, 35.</li>
+              <li id="ref-12"><strong>Kojima, Takeshi, et al.</strong> (2022). "Large Language Models Are Zero-Shot Reasoners." <em>Advances in Neural Information Processing Systems</em>, 35.</li>
+              <li id="ref-13"><strong>Wei, Jason, et al.</strong> (2022). "Emergent Abilities of Large Language Models." <em>Transactions on Machine Learning Research</em>.</li>
+              <li id="ref-14"><strong>Schaeffer, Rylan, Miranda, Brando &amp; Koyejo, Sanmi.</strong> (2023). "Are Emergent Abilities of Large Language Models a Mirage?" <em>Advances in Neural Information Processing Systems</em>, 36.</li>
+              <li id="ref-15"><strong>Chen, Mark, et al.</strong> (2021). "Evaluating Large Language Models Trained on Code." arXiv:2107.03374.</li>
+              <li id="ref-16"><strong>Radford, Alec, et al.</strong> (2021). "Learning Transferable Visual Models from Natural Language Supervision." <em>Proceedings of the 38th International Conference on Machine Learning</em>, PMLR 139: 8748–8763.</li>
+              <li id="ref-17"><strong>Ramesh, Aditya, et al.</strong> (2021). "Zero-Shot Text-to-Image Generation." <em>Proceedings of the 38th International Conference on Machine Learning</em>, PMLR 139: 8821–8831.</li>
+              <li id="ref-18"><strong>Ho, Jonathan, Jain, Ajay &amp; Abbeel, Pieter.</strong> (2020). "Denoising Diffusion Probabilistic Models." <em>Advances in Neural Information Processing Systems</em>, 33.</li>
+              <li id="ref-19"><strong>Rombach, Robin, et al.</strong> (2022). "High-Resolution Image Synthesis with Latent Diffusion Models." <em>Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</em>, 10684–10695.</li>
+              <li id="ref-20"><strong>Ouyang, Long, et al.</strong> (2022). "Training Language Models to Follow Instructions with Human Feedback." <em>Advances in Neural Information Processing Systems</em>, 35.</li>
+              <li id="ref-21"><strong>Christiano, Paul F., et al.</strong> (2017). "Deep Reinforcement Learning from Human Preferences." <em>Advances in Neural Information Processing Systems</em>, 30.</li>
+              <li id="ref-22"><strong>Bai, Yuntao, et al.</strong> (2022). "Constitutional AI: Harmlessness from AI Feedback." arXiv:2212.08073.</li>
+              <li id="ref-23"><strong>Grant, Nico &amp; Metz, Cade.</strong> (2022). "A New Chat Bot Is a ‘Code Red’ for Google’s Search Business." <em>The New York Times</em>, 21 December 2022.</li>
+              <li id="ref-24"><strong>Ji, Ziwei, et al.</strong> (2023). "Survey of Hallucination in Natural Language Generation." <em>ACM Computing Surveys</em>, 55(12): 1–38.</li>
+              <li id="ref-25"><strong>Tiku, Nitasha.</strong> (2022). "The Google Engineer Who Thinks the Company’s AI Has Come to Life." <em>The Washington Post</em>, 11 June 2022.</li>
+              <li id="ref-26"><strong>Bender, Emily M., Gebru, Timnit, McMillan-Major, Angelina &amp; Shmitchell, Shmargaret.</strong> (2021). "On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?" <em>Proceedings of the 2021 ACM Conference on Fairness, Accountability, and Transparency</em>, 610–623.</li>
+              <li id="ref-27"><strong>Li, Kenneth, et al.</strong> (2023). "Emergent World Representations: Exploring a Sequence Model Trained on a Synthetic Task." <em>International Conference on Learning Representations</em>.</li>
+              <li id="ref-28"><strong>Weiser, Benjamin.</strong> (2023). "Here’s What Happens When Your Lawyer Uses ChatGPT." <em>The New York Times</em>, 27 May 2023.</li>
+              <li id="ref-29"><strong>Heaven, Will Douglas.</strong> (2022). "Why Meta’s Latest Large Language Model Survived Only Three Days Online." <em>MIT Technology Review</em>, 18 November 2022.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/how-machines-learned-to-think.html">How Machines Learned to Think</a> (Part 6 of 8)</div>
+  <div class="series-banner-links">
+    <a href="the-deep-learning-revolution.html">← Part 5: The Deep Learning Revolution: ImageNet, AlphaGo and AlphaFold</a>
+    <span>Part 7 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/attention-is-all-you-need.js"></script>
+</body>
+</html>

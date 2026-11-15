@@ -2368,5 +2368,85 @@ window.RNLEARN_GLOSSARY = [
   "Protein folding",
   "The way a chain of amino acids folds into a precise 3-D shape, which determines what the protein does.",
   []
+ ],
+ [
+  "Transformer",
+  "A neural-network design, introduced in 2017, that processes all the words of a text at once using self-attention. The basis of modern language models.",
+  [
+   "transformers"
+  ]
+ ],
+ [
+  "Self-attention",
+  "The mechanism in a transformer by which each word weighs how relevant every other word in the passage is to its meaning.",
+  []
+ ],
+ [
+  "Language model",
+  "A model trained to predict the next piece of text given what came before. Large language models (LLMs) do this with billions of parameters.",
+  [
+   "language models",
+   "large language model",
+   "large language models",
+   "LLM",
+   "LLMs"
+  ]
+ ],
+ [
+  "Pre-training",
+  "The first, large-scale stage of training a model on huge amounts of unlabelled data, before it is adapted to particular tasks.",
+  [
+   "pre-trained"
+  ]
+ ],
+ [
+  "Fine-tuning",
+  "Further training of a pre-trained model on a smaller, specific dataset to adapt it to a particular job or style.",
+  [
+   "fine-tuned"
+  ]
+ ],
+ [
+  "Scaling laws",
+  "Regular relationships showing how a model’s error falls as its size, training data and computing power increase.",
+  [
+   "scaling law"
+  ]
+ ],
+ [
+  "In-context learning",
+  "A language model’s ability to pick up a new task from instructions or examples given in its prompt, without retraining.",
+  []
+ ],
+ [
+  "Chain-of-thought",
+  "Prompting or training a model to write out intermediate reasoning steps before giving its answer.",
+  []
+ ],
+ [
+  "Diffusion model",
+  "An image generator that learns to remove noise step by step, so it can turn random noise into a picture guided by a description.",
+  [
+   "diffusion models"
+  ]
+ ],
+ [
+  "RLHF",
+  "Reinforcement learning from human feedback: training a model to give answers that a reward model, learned from people’s rankings, scores highly.",
+  [
+   "reinforcement learning from human feedback"
+  ]
+ ],
+ [
+  "Reward model",
+  "A model trained to predict which of several answers people would prefer, used to guide another model’s training.",
+  []
+ ],
+ [
+  "Hallucination",
+  "When an AI model confidently states something false or made up, such as an invented fact or reference.",
+  [
+   "hallucinations"
+  ]
  ]
 ];

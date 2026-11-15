@@ -85,6 +85,23 @@
     "type": "tutorial"
   },
   {
+    "slug": "attention-is-all-you-need",
+    "url": "articles/attention-is-all-you-need.html",
+    "title": "Attention Is All You Need: Transformers, GPT and the Road to ChatGPT",
+    "summary": "How the transformer, next-word prediction, scaling laws and training with human feedback led from a 2017 Google paper to ChatGPT, and why language models make things up.",
+    "subject": "Technology",
+    "tags": [
+      "artificial-intelligence",
+      "large-language-models",
+      "transformers",
+      "chatgpt",
+      "rlhf",
+      "history-of-computing"
+    ],
+    "date": "2026-11-15",
+    "type": "tutorial"
+  },
+  {
     "slug": "what-is-science-really",
     "url": "articles/what-is-science-really.html",
     "title": "What is Science, Really? Demarcation, Revolutions, and the Fabric of Truth",
