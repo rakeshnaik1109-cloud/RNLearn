@@ -1,5 +1,31 @@
 [
   {
+    "slug": "big-promises-and-ai-winters",
+    "title": "Big Promises and AI Winters: ELIZA, Expert Systems and Two Crashes",
+    "summary": "From the golden years of SHRDLU, Shakey and ELIZA to the Perceptrons book, the Lighthill report, MYCIN and the expert-system boom, and the two AI winters that followed.",
+    "subject": "Technology",
+    "tags": [
+      "artificial-intelligence",
+      "history-of-computing",
+      "ai-winter",
+      "expert-systems",
+      "eliza",
+      "neural-networks"
+    ],
+    "date": "2026-11-15",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 22,
+    "series": {
+      "id": "how-machines-learned-to-think",
+      "part": 3
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": false
+  },
+  {
     "slug": "can-machines-think",
     "title": "Can Machines Think? Turing, the First Computers and the Birth of AI",
     "summary": "From Turing’s universal machine and the first electronic computers to model neurons, robot tortoises, the Turing test, learning matchboxes, Dartmouth and the perceptron.",

@@ -2187,5 +2187,60 @@
     "forms": [
       "stored-program"
     ]
+  },
+  {
+    "term": "AI winter",
+    "definition": "A period when disappointment after hype leads to sharp cuts in funding and interest in artificial intelligence.",
+    "forms": [
+      "AI winters"
+    ]
+  },
+  {
+    "term": "Expert system",
+    "definition": "A program that stores a human expert’s knowledge as many IF–THEN rules and chains them together to give advice.",
+    "forms": [
+      "expert systems"
+    ]
+  },
+  {
+    "term": "ELIZA effect",
+    "definition": "People’s tendency to read real understanding and feeling into a machine that produces human-sounding words.",
+    "forms": []
+  },
+  {
+    "term": "Microworld",
+    "definition": "A small, simplified setting, such as a table of blocks, in which an AI program can be tested because everything is precisely defined.",
+    "forms": [
+      "microworlds"
+    ]
+  },
+  {
+    "term": "XOR",
+    "definition": "'Exclusive or': a rule that outputs 1 when exactly one of two inputs is on. A single perceptron cannot learn it.",
+    "forms": []
+  },
+  {
+    "term": "Hidden layer",
+    "definition": "A layer of artificial neurons between a network’s inputs and its output, allowing it to learn patterns a single layer cannot.",
+    "forms": [
+      "hidden layers"
+    ]
+  },
+  {
+    "term": "Combinatorial explosion",
+    "definition": "The way the number of possibilities to check grows astronomically as a problem gets bigger.",
+    "forms": []
+  },
+  {
+    "term": "Moravec’s paradox",
+    "definition": "The observation that skills easy for a small child, like seeing and moving, are much harder for computers than skills like chess or algebra.",
+    "forms": [
+      "Moravec's paradox"
+    ]
+  },
+  {
+    "term": "Frame problem",
+    "definition": "The puzzle of how a reasoning program can know what stays the same when it acts, without checking every fact.",
+    "forms": []
   }
 ]

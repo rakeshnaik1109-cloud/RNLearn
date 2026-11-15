@@ -29,6 +29,7 @@ A 12-part master series chronicling the history, epistemology, and methodology o
 An 8-part history of artificial intelligence, from the first dreams of thinking machines to today's AI and where it may lead (in progress):
 1. **Part 1**: *Dreams of Thinking Machines: From Bronze Giants to Babbage's Engines* (Myths, automata, Llull, Leibniz, Babbage, Lovelace & Boole)
 2. **Part 2**: *Can Machines Think? Turing, the First Computers and the Birth of AI* (Turing, model neurons, cybernetics, the Turing test, Dartmouth & the perceptron)
+3. **Part 3**: *Big Promises and AI Winters: ELIZA, Expert Systems and Two Crashes* (SHRDLU, ELIZA, Perceptrons, Lighthill, MYCIN & the AI winters)
 
 ---
 

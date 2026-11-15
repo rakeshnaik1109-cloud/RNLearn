@@ -34,6 +34,23 @@
     "type": "tutorial"
   },
   {
+    "slug": "big-promises-and-ai-winters",
+    "url": "articles/big-promises-and-ai-winters.html",
+    "title": "Big Promises and AI Winters: ELIZA, Expert Systems and Two Crashes",
+    "summary": "From the golden years of SHRDLU, Shakey and ELIZA to the Perceptrons book, the Lighthill report, MYCIN and the expert-system boom, and the two AI winters that followed.",
+    "subject": "Technology",
+    "tags": [
+      "artificial-intelligence",
+      "history-of-computing",
+      "ai-winter",
+      "expert-systems",
+      "eliza",
+      "neural-networks"
+    ],
+    "date": "2026-11-15",
+    "type": "tutorial"
+  },
+  {
     "slug": "what-is-science-really",
     "url": "articles/what-is-science-really.html",
     "title": "What is Science, Really? Demarcation, Revolutions, and the Fabric of Truth",

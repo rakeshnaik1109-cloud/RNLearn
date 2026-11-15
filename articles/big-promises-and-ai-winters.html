@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Big Promises and AI Winters: ELIZA, Expert Systems and Two Crashes — RNLearn</title>
+  <meta name="description" content="From the golden years of SHRDLU, Shakey and ELIZA to the Perceptrons book, the Lighthill report, MYCIN and the expert-system boom, and the two AI winters that followed.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/big-promises-and-ai-winters.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Big Promises and AI Winters: ELIZA, Expert Systems and Two Crashes — RNLearn">
+  <meta property="og:description" content="From the golden years of SHRDLU, Shakey and ELIZA to the Perceptrons book, the Lighthill report, MYCIN and the expert-system boom, and the two AI winters that followed.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/big-promises-and-ai-winters.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Big Promises and AI Winters: ELIZA, Expert Systems and Two Crashes — RNLearn">
+  <meta name="twitter:description" content="From the golden years of SHRDLU, Shakey and ELIZA to the Perceptrons book, the Lighthill report, MYCIN and the expert-system boom, and the two AI winters that followed.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Big Promises and AI Winters: ELIZA, Expert Systems and Two Crashes",
+    "description": "From the golden years of SHRDLU, Shakey and ELIZA to the Perceptrons book, the Lighthill report, MYCIN and the expert-system boom, and the two AI winters that followed.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-15",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/big-promises-and-ai-winters.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/technology.html" class="post-subject-tag" data-subject="technology">Technology</a>
+        </div>
+        <h1 class="article-title">Big Promises and AI Winters: ELIZA, Expert Systems and Two Crashes</h1>
+        <p class="article-standfirst">
+          Thirty years of bold predictions, clever demonstrations and painful crashes taught AI a hard lesson: the things that seem easiest to us, like understanding a sentence or knowing what is obvious, are the hardest to put into a machine.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-15">15 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>22 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/how-machines-learned-to-think.html">How Machines Learned to Think</a> (Part 3 of 8)</div>
+  <div class="series-banner-links">
+    <a href="can-machines-think.html">← Part 2: Can Machines Think? Turing, the First Computers and the Birth of AI</a>
+    <span>Part 4 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. Great Expectations</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. The Golden Years</a></li>
+              <li><a class="toc-link" href="#section-4">4. Small Worlds: SHRDLU and Shakey</a></li>
+              <li><a class="toc-link" href="#section-5">5. ELIZA</a></li>
+              <li><a class="toc-link" href="#section-6">6. Lost in Translation</a></li>
+              <li><a class="toc-link" href="#section-7">7. What a Perceptron Can’t Do</a></li>
+              <li><a class="toc-link" href="#section-8">8. Why Was It So Hard?</a></li>
+              <li><a class="toc-link" href="#section-9">9. The First AI Winter</a></li>
+              <li><a class="toc-link" href="#section-10">10. Knowledge Is Power: Expert Systems</a></li>
+              <li><a class="toc-link" href="#section-11">11. The Boom of the 1980s</a></li>
+              <li><a class="toc-link" href="#section-12">12. The Second AI Winter</a></li>
+              <li><a class="toc-link" href="#section-13">13. How Did They Know?</a></li>
+              <li><a class="toc-link" href="#section-14">14. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-15">15. Philosophy Corner</a></li>
+              <li><a class="toc-link" href="#section-16">16. People in This Part</a></li>
+              <li><a class="toc-link" href="#section-17">17. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-18">18. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. Great Expectations</h2>
+            <p>Part 2 ended around 1960 with AI full of confidence. Programs played draughts, proved theorems and learned to recognise shapes. The people who built them believed human-level intelligence was perhaps twenty years away. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-3">3</a>]</span></p>
+            <p>This part covers the next thirty years, and it is a story of two booms and two busts. First came a "golden age" of generous funding and dazzling demonstrations, then a crash in the mid-1970s when the promises weren't kept. Then came a second boom, built on "expert systems" that captured human know-how as rules and made real money, followed by a second crash in the late 1980s. People in the field called these crashes <strong>AI winters</strong>.</p>
+            <p>The winters weren't just about money. Each taught a hard lesson about what intelligence actually involves. Things that seem easy to us, like understanding a sentence, recognising a face or knowing that water is wet, turned out to be extraordinarily hard to put into a machine. Those lessons shaped the very different approach that eventually worked, which is the subject of Parts 4 to 6.</p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-ai-timeline-3">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. Boom, bust, boom, bust: AI from 1963 to 1992.</strong> The points are in order but not to scale. Colours show the four phases of the story.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. The Golden Years</h2>
+            <p>In 1957 the Soviet Union launched Sputnik, the first artificial satellite, and the United States panicked about falling behind in science. One response was a new defence research agency, ARPA (later DARPA). From 1963 it gave millions of dollars a year to AI groups at MIT, Carnegie Mellon and Stanford, with remarkably few strings attached. Researchers were trusted to follow their own ideas. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <p>The leaders of the field made bold forecasts. In 1965 Herbert Simon wrote that "machines will be capable, within twenty years, of doing any work a man can do". In 1967 Marvin Minsky wrote that "within a generation ... the problem of creating 'artificial intelligence' will substantially be solved". <span class="cite-group">[<a class="cite" href="#ref-4">4</a>, <a class="cite" href="#ref-5">5</a>]</span></p>
+            <p>These weren't empty boasts. The researchers were extrapolating from genuinely impressive early results, and they assumed that the hard parts of intelligence were the things that are hard for educated adults: logic, mathematics, chess. Surely everyday skills like seeing and talking would be easier? As we'll see, that assumption was almost exactly backwards.</p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Small Worlds: SHRDLU and Shakey</h2>
+            <p>Real life is messy, so many researchers studied <strong>microworlds</strong>: small, simplified settings where everything could be described precisely. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+            <p>The most famous was <strong>SHRDLU</strong>, written by <strong>Terry Winograd</strong> at MIT around 1968–70. It controlled a simulated robot arm in a world of coloured blocks, pyramids and boxes on a table. You could type instructions and questions in ordinary English, and it would carry them out and answer sensibly: <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+            <blockquote>
+              <p>Person: Pick up a big red block.<br>Computer: OK.<br>Person: Find a block which is taller than the one you are holding and put it into the box.<br>Computer: By "it", I assume you mean the block which is taller than the one I am holding. OK.</p>
+            </blockquote>
+            <p>It could work out what "it" referred to, remember what had happened, and explain why it had done something. It looked like a breakthrough in understanding language. But it only worked because its world was tiny. Every object and every possible action had been spelled out in advance, and the methods couldn't be scaled up to the real world, where almost nothing is that tidy. Winograd himself later turned away from this approach.</p>
+            <p>At the Stanford Research Institute (SRI), a team built <strong>Shakey</strong> (1966–72), the first mobile robot that could reason about its own actions. Given a command like "push the block off the platform", it would use its camera to look around, make a plan, and carry it out, moving slowly and shakily (hence the name) through a few specially prepared rooms. To plan its routes, the team invented the <strong>A* search</strong> method (1968), which finds the shortest path by always exploring the most promising route first. A* is still used today in sat-nav systems and video games. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>, <a class="cite" href="#ref-8">8</a>]</span></p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. ELIZA: The Program People Confided In</h2>
+            <p>In 1964–66, <strong>Joseph Weizenbaum</strong> at MIT wrote a program called <strong>ELIZA</strong>, after Eliza Doolittle, the flower-seller taught to speak "properly" in Shaw's play <em>Pygmalion</em>. Its best-known script, DOCTOR, imitated a particular style of psychotherapist who mostly reflects the patient's words back as questions. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span></p>
+            <p>ELIZA understood nothing. It looked for keywords in what you typed, such as "mother", "I feel" or "always", and used simple templates to turn your own words into a reply. Type "I feel sad about my job" and it might answer "Do you often feel sad about your job?", just by swapping "my" for "your". If no keyword matched, it said something neutral like "Please go on."</p>
+            <figure class="fig" data-fig="fig-eliza">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Talk to an ELIZA-style program.</strong> Type anything, or tap a starter. The box below the chat shows exactly which keyword and template produced each reply. This is a small reconstruction in the spirit of Weizenbaum's DOCTOR script, not his original program.
+              </figcaption>
+            </figure>
+            <p>What shocked Weizenbaum was how people reacted. Some users became emotionally involved with the program and confided their private troubles to it. He later wrote that his own secretary, who had watched him build it and knew perfectly well it was just a program, asked him to leave the room so she could talk to it in private. Some psychiatrists even suggested that programs like it could one day provide therapy on a large scale. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span></p>
+            <p>The tendency to read understanding and feeling into a machine that produces human-sounding words is now called the <strong>ELIZA effect</strong>. It disturbed Weizenbaum so much that he became one of AI's sharpest critics (section 15). It is worth remembering whenever a modern chatbot seems to understand you.</p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Lost in Translation</h2>
+            <p>One of the first big promises was automatic translation. During the Cold War, the United States badly wanted to read Soviet scientific papers. On 7 January 1954, IBM and Georgetown University demonstrated a computer translating more than sixty Russian sentences into English. It was carefully staged: the system knew only 250 words and six grammar rules, and the sentences had been chosen to suit it. But newspapers were thrilled, and the organisers suggested that translation might be a solved problem within three to five years. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>, <a class="cite" href="#ref-1">1</a>]</span></p>
+            <p>The money flowed in, and the problem turned out to be far harder than anyone expected. Words have many meanings, and choosing the right one needs knowledge of the world. The linguist Yehoshua Bar-Hillel gave a famous example: "The box was in the pen". A person knows "pen" here must mean a playpen, not a writing pen, because a box can't fit inside a writing pen. A program that only knows dictionaries and grammar has no way to tell.</p>
+            <p>In 1966 a committee of the US National Academy of Sciences, the <strong>ALPAC</strong> report, concluded that machine translation was slower, less accurate and about twice as expensive as human translation, with no prospect of useful results soon. Funding was slashed. Machine translation would not become truly useful until it took a completely different, data-driven approach decades later (Parts 4 and 6). <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span></p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. What a Perceptron Can't Do</h2>
+            <p>Meanwhile, the neural-network road from Part 2 hit a wall. In 1969 Marvin Minsky and Seymour Papert of MIT published a book called <em>Perceptrons</em>. It was a careful mathematical study of what Rosenblatt's machines could and couldn't learn. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span></p>
+            <p>Their simplest example was a pattern called <strong>XOR</strong> ("exclusive or"): output 1 if exactly one of two inputs is on, and 0 if both are on or both are off. Draw the four possible inputs as the corners of a square, and the two "on" corners sit diagonally opposite each other. A single perceptron decides by drawing one straight line, and no straight line can put two opposite corners on one side and the other two on the other side. Minsky and Papert showed that this limitation affected more interesting tasks too, such as telling whether a shape is all in one piece.</p>
+            <figure class="fig" data-fig="fig-xor-hidden">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Why XOR needs more than one neuron.</strong> Turn and slide the line to try to separate the blue circles from the orange squares. With one neuron you can never get all four right. Switch to two hidden neurons: each draws its own line, and an output neuron combines them, so the network can pick out the band between the lines. Press "Show a solution" if you get stuck.
+              </figcaption>
+            </figure>
+            <p>As Figure 3 shows, the fix is to add a <strong>hidden layer</strong> of neurons between input and output. Minsky and Papert knew that such multi-layer networks could, in principle, compute XOR and much more. The trouble was that nobody knew how to <em>train</em> them: Rosenblatt's learning rule only worked for a single layer. The book was pessimistic about whether a training method would ever be found.</p>
+            <p>The effect was dramatic. Funding and interest in neural networks largely dried up for over a decade. Rosenblatt died in a boating accident in 1971, on his 43rd birthday. Historians still argue about how much the book itself was to blame, but neural networks became an unfashionable backwater. The training method that finally solved the problem, <strong>backpropagation</strong>, became widely known only in 1986. That comeback is the story of Part 4.</p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Why Was It So Hard?</h2>
+            <p>By the early 1970s it was clear that methods which shone in microworlds failed in the real world. Looking back, researchers identified several deep reasons. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>, <a class="cite" href="#ref-3">3</a>]</span></p>
+            <p><strong>1. The combinatorial explosion.</strong> Many AI programs worked by searching through possibilities: possible moves, possible proofs, possible plans. On toy problems there are few possibilities. But the number grows explosively with the size of the problem. With 4 choices at each step, looking 10 steps ahead means about a million possibilities; with 35 choices, as in chess, it's about 2.8 million billion. No computer could keep up.</p>
+            <figure class="fig" data-fig="fig-explosion">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. The combinatorial explosion.</strong> Change how many choices there are at each step and how far ahead to look, and see how many possibilities there are to check, and how long that would take. The "1970s" speed is a rough round figure for illustration.
+              </figcaption>
+            </figure>
+            <p><strong>2. Common sense.</strong> To understand even simple sentences, a program needs a vast amount of everyday knowledge that people never think to say: that things fall when dropped, that people can't be in two places at once, that a box can't fit in a writing pen. Nobody knew how to give a machine millions of such facts, or how to make it pick out the relevant ones. A related puzzle, the <strong>frame problem</strong> (McCarthy and Hayes, 1969), asked how a reasoning program can know what <em>doesn't</em> change when it acts. If a robot moves a cup, the colour of the walls stays the same, but a program needs some way of knowing that without checking every fact one by one. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span></p>
+            <p><strong>3. The easy things are hard.</strong> The roboticist Hans Moravec later put it memorably: it is "comparatively easy to make computers exhibit adult level performance on intelligence tests or playing checkers, and difficult or impossible to give them the skills of a one-year-old when it comes to perception and mobility". This is now called <strong>Moravec's paradox</strong>. Skills that evolution polished over hundreds of millions of years, like seeing and moving, feel effortless to us, which hides how complex they are. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span></p>
+            <p><strong>4. Too little computing power.</strong> The computers of the 1970s had memories millions of times smaller than a modern phone's. Some ideas that failed then would work decades later, given enough data and speed.</p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. The First AI Winter</h2>
+            <p>In 1973 the British government asked the mathematician <strong>Sir James Lighthill</strong> to review AI research. His report was damning. Outside a few narrow areas, he wrote, AI had failed to achieve its "grandiose objectives". He singled out the combinatorial explosion as a reason that methods working on small problems would never scale up. Funding for AI in Britain collapsed, except at a few universities. The report was even debated on BBC television, with Lighthill facing Donald Michie, John McCarthy and Richard Gregory. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span></p>
+            <p>In the United States, the mood had also changed. A 1969 law, the Mansfield Amendment, required defence research to have clear military uses, and DARPA's patience with open-ended research ran out. It was especially disappointed with a five-year programme to build computers that understood continuous speech, which fell well short of what DARPA wanted. By 1974 American AI funding had been sharply cut too. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+            <p>This was the <strong>first AI winter</strong>. Research continued, but on smaller budgets, and many researchers stopped calling their work "artificial intelligence" because the name had become an embarrassment. Instead they talked about "informatics", "pattern recognition" or "knowledge-based systems".</p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Knowledge Is Power: Expert Systems</h2>
+            <p>A new idea brought AI back. Early AI had looked for general methods of thinking that would work on any problem. But human experts aren't experts because they think in some general, superior way. They are experts because they know a lot about one particular subject. <strong>Edward Feigenbaum</strong> of Stanford summed up the new approach in three words: "knowledge is power". <span class="cite-group">[<a class="cite" href="#ref-17">17</a>, <a class="cite" href="#ref-19">19</a>]</span></p>
+            <p>An <strong>expert system</strong> stores an expert's knowledge as hundreds or thousands of <strong>IF–THEN rules</strong>, plus a reasoning engine that chains the rules together. The pioneers were:</p>
+            <ul>
+              <li><strong>DENDRAL</strong> (begun in 1965 by Feigenbaum, the Nobel prize-winning geneticist Joshua Lederberg and Bruce Buchanan), which worked out the structure of chemical molecules from mass-spectrometry data, using rules from expert chemists. <span class="cite-group">[<a class="cite" href="#ref-19">19</a>]</span></li>
+              <li><strong>MYCIN</strong> (developed at Stanford in the 1970s, mainly by Edward Shortliffe), which diagnosed serious blood infections and recommended antibiotics, using about 600 rules such as "IF the infection is in the blood AND the organism is rod-shaped AND ... THEN there is evidence (strength 0.6) that the organism is ...". It could also explain its reasoning: ask "why?" and it would show which rule it was trying. <span class="cite-group">[<a class="cite" href="#ref-17">17</a>]</span></li>
+              <li><strong>XCON</strong> (also called R1, from 1980), written by John McDermott for Digital Equipment Corporation, which worked out how to put together customers' computer orders. It grew to thousands of rules and was reported to save the company tens of millions of dollars a year. <span class="cite-group">[<a class="cite" href="#ref-20">20</a>]</span></li>
+            </ul>
+            <figure class="fig" data-fig="fig-expert">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. A tiny expert system.</strong> Think of one of seven animals (cheetah, tiger, giraffe, zebra, ostrich, penguin or albatross) and answer its questions. Like MYCIN, it works backwards from a possible conclusion to the facts it needs, can tell you why it is asking, and explains how it decided. The rules are a version of a classic textbook example. <span class="cite-group">[<a class="cite" href="#ref-24">24</a>]</span>
+              </figcaption>
+            </figure>
+            <p>For the first time, AI was making money. Companies set up "knowledge engineering" teams to interview experts and turn their know-how into rules. By the mid-1980s, hundreds of companies were building expert systems, and many large corporations had AI groups.</p>
+          </section>
+
+          <section id="section-11">
+            <h2>11. The Boom of the 1980s</h2>
+            <p>In 1982 Japan's Ministry of International Trade and Industry launched the <strong>Fifth Generation Computer Systems</strong> project: a ten-year national effort, eventually costing hundreds of millions of dollars, to build computers that could reason, converse and translate, using logic programming and massively parallel hardware. At the time Japanese industry was overtaking the West in cars and electronics, and the project caused alarm. <span class="cite-group">[<a class="cite" href="#ref-21">21</a>]</span></p>
+            <p>Other countries responded quickly. In 1983 Britain launched the Alvey Programme (£350 million, a remarkable change of heart ten years after Lighthill), the United States began DARPA's Strategic Computing Initiative, aiming at intelligent military systems, and the European Community soon followed with its ESPRIT programme. American companies formed research consortia. Specialised <strong>Lisp machines</strong>, computers designed to run AI software, were sold by companies such as Symbolics. AI was hot again. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+          </section>
+
+          <section id="section-12">
+            <h2>12. The Second AI Winter</h2>
+            <p>Some researchers could see trouble coming. At the 1984 meeting of the American Association for Artificial Intelligence, Roger Schank and Marvin Minsky warned that enthusiasm had got out of control and that disappointment would follow, just as it had a decade before. They called it an "AI winter", and the name stuck. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+            <p>They were right. Around 1987 several things went wrong at once:</p>
+            <ul>
+              <li><strong>The hardware market collapsed.</strong> Ordinary desktop workstations from companies like Sun became powerful enough to run AI software, and the expensive Lisp machines stopped selling almost overnight.</li>
+              <li><strong>Expert systems proved brittle.</strong> They worked inside their narrow speciality but gave absurd answers just outside it, with no common sense to notice. Getting rules out of experts' heads was slow and expensive (the "knowledge acquisition bottleneck"), and large rule sets became hard to update and to check.</li>
+              <li><strong>The grand projects fell short.</strong> DARPA scaled back the Strategic Computing Initiative, and Japan's Fifth Generation project closed in 1992 without reaching its ambitious goals, though it trained a generation of Japanese computer scientists.</li>
+            </ul>
+            <p>Hundreds of AI companies went bust or were absorbed. Expert-system techniques didn't disappear: they quietly became ordinary "business rules" software, used in banking, insurance and logistics, but without the AI label. Once again, researchers avoided the term.</p>
+            <p>Yet beneath the snow, new shoots were growing. In 1984 Douglas Lenat began <strong>Cyc</strong>, a decades-long effort to type the world's common sense into a computer by hand. At MIT, Rodney Brooks built insect-like robots that, like Grey Walter's tortoises, behaved cleverly using simple layered reactions rather than plans; his 1990 paper was titled "Elephants Don't Play Chess". And most important of all, a small group of researchers had found a way to train multi-layer neural networks. That is where Part 4 begins. <span class="cite-group">[<a class="cite" href="#ref-23">23</a>]</span></p>
+          </section>
+
+          <section id="section-13">
+            <h2>13. How Did They Know? Testing MYCIN Against Doctors</h2>
+            <div class="callout callout-method">
+              <div class="callout-header">How did they know? A blind test for a computer doctor</div>
+              <p>Claiming a program is as good as an expert is easy. Proving it is not. If experts know which advice came from a computer, they may judge it more harshly, or more kindly. In 1979 the MYCIN team, led by Victor Yu, designed a test that removed this bias. <span class="cite-group">[<a class="cite" href="#ref-18">18</a>, <a class="cite" href="#ref-17">17</a>]</span></p>
+              <ol>
+                <li><strong>Real, hard cases:</strong> they took ten real cases of meningitis, a dangerous infection, chosen to be varied and difficult.</li>
+                <li><strong>Many prescribers:</strong> for each case, treatment recommendations were collected from MYCIN and from nine people. These ranged from a medical student to Stanford faculty specialists in infectious disease. The doctors who had actually treated the patients were included too.</li>
+                <li><strong>Blind judges:</strong> eight infectious-disease experts from outside Stanford then rated every recommendation as acceptable or not, <em>without knowing which came from the computer</em>.</li>
+                <li><strong>Compare the scores.</strong></li>
+              </ol>
+              <p>MYCIN's recommendations were rated acceptable 65% of the time, at least as well as every one of the human prescribers, including the specialists. Yet MYCIN was never used to treat real patients. Doctors were wary of trusting a computer, questions of legal responsibility were unresolved, and entering each case into the computer took a long time. A working system needs more than good answers. It has to fit into how people actually work, a lesson that applies to today's AI as well.</p>
+            </div>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Legend and Record: "The Vodka Is Good but the Meat Is Rotten"</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: the most famous mistranslation that never happened</div>
+              <p><strong>The legend:</strong> during the Cold War, a translation program was given the Bible verse "The spirit is willing, but the flesh is weak". It translated it into Russian and back into English, producing "The vodka is good, but the meat is rotten". In another version, "Out of sight, out of mind" came back as "invisible idiot". These stories have been repeated in countless books and lectures as proof of how bad early machine translation was. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span></p>
+              <p><strong>The record:</strong> the translation historian John Hutchins went looking for the source and found no evidence that any machine ever produced these sentences. The stories appear to be jokes that circulated from the 1950s and 1960s onwards, and some early versions were about human translators, not computers.</p>
+              <p><strong>Why it matters:</strong> early machine translation really was poor, as the ALPAC report showed with real evidence. A good story doesn't need to be true to spread, which is a useful thing to remember about claims, both positive and negative, about today's AI.</p>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Philosophy Corner: Can Expertise Be Written as Rules?</h2>
+            <div class="callout callout-philosophy">
+              <div class="callout-header">Philosophy Corner: Dreyfus and Weizenbaum</div>
+              <p>Two critics of AI from this period still matter today. <span class="cite-group">[<a class="cite" href="#ref-22">22</a>, <a class="cite" href="#ref-10">10</a>]</span></p>
+              <p><strong>Hubert Dreyfus</strong>, a philosopher at MIT and later Berkeley, attacked AI's basic assumption in a 1965 report for the RAND Corporation and in his 1972 book <em>What Computers Can't Do</em>. AI researchers assumed that intelligence means following rules. Dreyfus argued that real expertise doesn't work like that. A beginner driver follows rules ("change gear at 20 miles per hour"); an expert driver just sees what to do, without thinking in rules at all. Human skill, he said, rests on having a body, on years of experience, and on a background of everyday understanding that can never be fully written down. AI researchers were furious. Some refused to be seen with him, and they delighted when he lost a game of chess to a program in 1967. But the failures of expert systems and common-sense reasoning bore out much of what he said. Interestingly, today's neural networks don't follow written rules either: they learn from examples, more like Dreyfus's expert.</p>
+              <p><strong>Joseph Weizenbaum</strong>, ELIZA's creator, raised a different question in <em>Computer Power and Human Reason</em> (1976). He didn't only ask whether computers <em>could</em> do certain things, but whether they <em>should</em>. Judging people, caring for the sick, offering therapy: these, he argued, need human respect, understanding and responsibility, and handing them to machines would be wrong even if the machines performed well.</p>
+              <p>Both questions are now urgent. Can modern AI, which learns from examples rather than rules, capture real expertise? And which decisions should we refuse to hand to machines, however capable they become? We return to them in Part 8.</p>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Marvin Minsky &amp; Seymour Papert</td>
+                <td style="padding:0.6rem 0.8rem;">1927–2016 / 1928–2016<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Perceptrons</em> (1969)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed precisely what single-layer neural networks cannot learn, turning the field towards symbolic AI.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Joseph Weizenbaum</td>
+                <td style="padding:0.6rem 0.8rem;">1923–2008<br>Germany / USA</td>
+                <td style="padding:0.6rem 0.8rem;">ELIZA (1966); <em>Computer Power and Human Reason</em> (1976)</td>
+                <td style="padding:0.6rem 0.8rem;">Built the first chatbot, then warned about the ELIZA effect and the limits of what machines should do.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Terry Winograd</td>
+                <td style="padding:0.6rem 0.8rem;">born 1946<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">SHRDLU (1968–70)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed a program understanding English in a microworld of blocks, then questioned the whole approach.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Nils Nilsson</td>
+                <td style="padding:0.6rem 0.8rem;">1933–2019<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Shakey the robot; A* search (1968)</td>
+                <td style="padding:0.6rem 0.8rem;">Co-led the first reasoning mobile robot and co-invented a search method still in daily use.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">James Lighthill</td>
+                <td style="padding:0.6rem 0.8rem;">1924–1998<br>Britain</td>
+                <td style="padding:0.6rem 0.8rem;">The Lighthill report (1973)</td>
+                <td style="padding:0.6rem 0.8rem;">His critical review triggered the first AI winter in Britain.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Hans Moravec</td>
+                <td style="padding:0.6rem 0.8rem;">born 1948<br>Austria / USA</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Mind Children</em> (1988)</td>
+                <td style="padding:0.6rem 0.8rem;">Pointed out that skills easy for a child are the hardest for machines.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Edward Feigenbaum</td>
+                <td style="padding:0.6rem 0.8rem;">born 1936<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">DENDRAL (from 1965); "knowledge is power"</td>
+                <td style="padding:0.6rem 0.8rem;">Founded expert systems, the first commercially successful kind of AI.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Edward Shortliffe</td>
+                <td style="padding:0.6rem 0.8rem;">born 1947<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">MYCIN (1970s)</td>
+                <td style="padding:0.6rem 0.8rem;">Built the medical expert system that matched specialists in a blind test.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John McDermott</td>
+                <td style="padding:0.6rem 0.8rem;">USA</td>
+                <td style="padding:0.6rem 0.8rem;">XCON / R1 (1980)</td>
+                <td style="padding:0.6rem 0.8rem;">Built the expert system that showed AI could save a company millions.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Hubert Dreyfus</td>
+                <td style="padding:0.6rem 0.8rem;">1929–2017<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;"><em>What Computers Can’t Do</em> (1972)</td>
+                <td style="padding:0.6rem 0.8rem;">Argued that human expertise is intuitive and embodied, not rule-following.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Rodney Brooks</td>
+                <td style="padding:0.6rem 0.8rem;">born 1954<br>Australia / USA</td>
+                <td style="padding:0.6rem 0.8rem;">"Elephants Don’t Play Chess" (1990)</td>
+                <td style="padding:0.6rem 0.8rem;">Built robots that acted cleverly through simple reactions rather than plans.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-17">
+            <h2>17. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember, from ELIZA to the second AI winter.</p>
+            <figure class="fig" data-fig="fig-quiz-ai3">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-18">
+            <h2>18. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>McCorduck, Pamela.</strong> (2004). <em>Machines Who Think</em>. 2nd ed. Natick, MA: A K Peters.</li>
+              <li id="ref-2"><strong>Nilsson, Nils J.</strong> (2010). <em>The Quest for Artificial Intelligence: A History of Ideas and Achievements</em>. Cambridge: Cambridge University Press.</li>
+              <li id="ref-3"><strong>Crevier, Daniel.</strong> (1993). <em>AI: The Tumultuous History of the Search for Artificial Intelligence</em>. New York: Basic Books.</li>
+              <li id="ref-4"><strong>Simon, Herbert A.</strong> (1965). <em>The Shape of Automation for Men and Management</em>. New York: Harper &amp; Row.</li>
+              <li id="ref-5"><strong>Minsky, Marvin.</strong> (1967). <em>Computation: Finite and Infinite Machines</em>. Englewood Cliffs, NJ: Prentice-Hall.</li>
+              <li id="ref-6"><strong>Winograd, Terry.</strong> (1972). <em>Understanding Natural Language</em>. New York: Academic Press.</li>
+              <li id="ref-7"><strong>Nilsson, Nils J. (ed.).</strong> (1984). <em>Shakey the Robot</em>. Technical Note 323. Menlo Park, CA: SRI International.</li>
+              <li id="ref-8"><strong>Hart, Peter E., Nilsson, Nils J. &amp; Raphael, Bertram.</strong> (1968). "A Formal Basis for the Heuristic Determination of Minimum Cost Paths." <em>IEEE Transactions on Systems Science and Cybernetics</em>, 4(2): 100–107.</li>
+              <li id="ref-9"><strong>Weizenbaum, Joseph.</strong> (1966). "ELIZA: A Computer Program for the Study of Natural Language Communication between Man and Machine." <em>Communications of the ACM</em>, 9(1): 36–45.</li>
+              <li id="ref-10"><strong>Weizenbaum, Joseph.</strong> (1976). <em>Computer Power and Human Reason: From Judgment to Calculation</em>. San Francisco: W. H. Freeman.</li>
+              <li id="ref-11"><strong>ALPAC (Automatic Language Processing Advisory Committee).</strong> (1966). <em>Language and Machines: Computers in Translation and Linguistics</em>. Publication 1416. Washington, DC: National Academy of Sciences.</li>
+              <li id="ref-12"><strong>Hutchins, W. John.</strong> (1995). "‘The whisky was invisible’, or Persistent Myths of MT." <em>MT News International</em>, 11: 17–18.</li>
+              <li id="ref-13"><strong>Minsky, Marvin &amp; Papert, Seymour.</strong> (1969). <em>Perceptrons: An Introduction to Computational Geometry</em>. Cambridge, MA: MIT Press.</li>
+              <li id="ref-14"><strong>Lighthill, James.</strong> (1973). "Artificial Intelligence: A General Survey." In <em>Artificial Intelligence: A Paper Symposium</em>. London: Science Research Council.</li>
+              <li id="ref-15"><strong>McCarthy, John &amp; Hayes, Patrick J.</strong> (1969). "Some Philosophical Problems from the Standpoint of Artificial Intelligence." In <em>Machine Intelligence 4</em>, 463–502. Edinburgh: Edinburgh University Press.</li>
+              <li id="ref-16"><strong>Moravec, Hans.</strong> (1988). <em>Mind Children: The Future of Robot and Human Intelligence</em>. Cambridge, MA: Harvard University Press.</li>
+              <li id="ref-17"><strong>Buchanan, Bruce G. &amp; Shortliffe, Edward H. (eds.).</strong> (1984). <em>Rule-Based Expert Systems: The MYCIN Experiments of the Stanford Heuristic Programming Project</em>. Reading, MA: Addison-Wesley.</li>
+              <li id="ref-18"><strong>Yu, Victor L., et al.</strong> (1979). "Antimicrobial Selection by a Computer: A Blinded Evaluation by Infectious Diseases Experts." <em>JAMA</em>, 242(12): 1279–1282.</li>
+              <li id="ref-19"><strong>Lindsay, Robert K., Buchanan, Bruce G., Feigenbaum, Edward A. &amp; Lederberg, Joshua.</strong> (1993). "DENDRAL: A Case Study of the First Expert System for Scientific Hypothesis Formation." <em>Artificial Intelligence</em>, 61(2): 209–261.</li>
+              <li id="ref-20"><strong>McDermott, John.</strong> (1982). "R1: A Rule-Based Configurer of Computer Systems." <em>Artificial Intelligence</em>, 19(1): 39–88.</li>
+              <li id="ref-21"><strong>Feigenbaum, Edward A. &amp; McCorduck, Pamela.</strong> (1983). <em>The Fifth Generation: Artificial Intelligence and Japan’s Computer Challenge to the World</em>. Reading, MA: Addison-Wesley.</li>
+              <li id="ref-22"><strong>Dreyfus, Hubert L.</strong> (1972). <em>What Computers Can’t Do: A Critique of Artificial Reason</em>. New York: Harper &amp; Row.</li>
+              <li id="ref-23"><strong>Brooks, Rodney A.</strong> (1990). "Elephants Don’t Play Chess." <em>Robotics and Autonomous Systems</em>, 6(1–2): 3–15.</li>
+              <li id="ref-24"><strong>Winston, Patrick Henry.</strong> (1992). <em>Artificial Intelligence</em>. 3rd ed. Reading, MA: Addison-Wesley. (Source of the animal-identification rules used in Figure 5.)</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/how-machines-learned-to-think.html">How Machines Learned to Think</a> (Part 3 of 8)</div>
+  <div class="series-banner-links">
+    <a href="can-machines-think.html">← Part 2: Can Machines Think? Turing, the First Computers and the Birth of AI</a>
+    <span>Part 4 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/big-promises-and-ai-winters.js"></script>
+</body>
+</html>

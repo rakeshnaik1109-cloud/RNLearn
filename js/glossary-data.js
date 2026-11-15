@@ -2189,5 +2189,60 @@ window.RNLEARN_GLOSSARY = [
   [
    "stored-program"
   ]
+ ],
+ [
+  "AI winter",
+  "A period when disappointment after hype leads to sharp cuts in funding and interest in artificial intelligence.",
+  [
+   "AI winters"
+  ]
+ ],
+ [
+  "Expert system",
+  "A program that stores a human expert’s knowledge as many IF–THEN rules and chains them together to give advice.",
+  [
+   "expert systems"
+  ]
+ ],
+ [
+  "ELIZA effect",
+  "People’s tendency to read real understanding and feeling into a machine that produces human-sounding words.",
+  []
+ ],
+ [
+  "Microworld",
+  "A small, simplified setting, such as a table of blocks, in which an AI program can be tested because everything is precisely defined.",
+  [
+   "microworlds"
+  ]
+ ],
+ [
+  "XOR",
+  "'Exclusive or': a rule that outputs 1 when exactly one of two inputs is on. A single perceptron cannot learn it.",
+  []
+ ],
+ [
+  "Hidden layer",
+  "A layer of artificial neurons between a network’s inputs and its output, allowing it to learn patterns a single layer cannot.",
+  [
+   "hidden layers"
+  ]
+ ],
+ [
+  "Combinatorial explosion",
+  "The way the number of possibilities to check grows astronomically as a problem gets bigger.",
+  []
+ ],
+ [
+  "Moravec’s paradox",
+  "The observation that skills easy for a small child, like seeing and moving, are much harder for computers than skills like chess or algebra.",
+  [
+   "Moravec's paradox"
+  ]
+ ],
+ [
+  "Frame problem",
+  "The puzzle of how a reasoning program can know what stays the same when it acts, without checking every fact.",
+  []
  ]
 ];
