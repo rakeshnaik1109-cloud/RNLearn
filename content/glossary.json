@@ -2446,5 +2446,66 @@
     "forms": [
       "hallucinations"
     ]
+  },
+  {
+    "term": "Multimodal",
+    "definition": "Able to take in or produce more than one kind of data, such as text, images, audio and video.",
+    "forms": []
+  },
+  {
+    "term": "Open-weight model",
+    "definition": "An AI model whose trained weights are published so anyone can download, run and modify it.",
+    "forms": [
+      "open-weight models",
+      "open-weight"
+    ]
+  },
+  {
+    "term": "Reasoning model",
+    "definition": "A language model trained to work through a problem in a long chain of reasoning before giving its answer.",
+    "forms": [
+      "reasoning models"
+    ]
+  },
+  {
+    "term": "Self-consistency",
+    "definition": "Improving an AI’s answer by making several independent attempts and taking the most common result.",
+    "forms": []
+  },
+  {
+    "term": "AI agent",
+    "definition": "An AI system that carries out multi-step tasks by planning, using tools, checking results and deciding what to do next.",
+    "forms": [
+      "AI agents"
+    ]
+  },
+  {
+    "term": "Prompt injection",
+    "definition": "An attack in which hidden instructions placed in text an AI reads (such as a web page or email) trick it into doing something unintended.",
+    "forms": []
+  },
+  {
+    "term": "Time horizon",
+    "definition": "METR’s measure of AI progress: the length of task, in skilled-human time, that an AI agent can complete with a given success rate.",
+    "forms": []
+  },
+  {
+    "term": "Deepfake",
+    "definition": "A realistic fake image, video or voice recording of a real person, made with AI.",
+    "forms": [
+      "deepfakes"
+    ]
+  },
+  {
+    "term": "Sycophancy",
+    "definition": "An AI model’s tendency to tell people what they want to hear rather than what is accurate.",
+    "forms": []
+  },
+  {
+    "term": "AGI",
+    "definition": "Artificial general intelligence: AI that could do most intellectual tasks as well as a capable human, across many fields. There is no agreed definition.",
+    "forms": [
+      "artificial general intelligence"
+    ]
   }
 ]

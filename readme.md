@@ -33,6 +33,7 @@ An 8-part history of artificial intelligence, from the first dreams of thinking 
 4. **Part 4**: *Learning from Examples: Backpropagation, Big Data and Deep Blue* (Backpropagation, LeCun, statistical NLP, spam filters, TD-Gammon, Deep Blue & overfitting)
 5. **Part 5**: *The Deep Learning Revolution: ImageNet, AlphaGo and AlphaFold* (AlexNet, GPUs, word2vec, attention, GANs, AlphaGo, AlphaFold & bias)
 6. **Part 6**: *Attention Is All You Need: Transformers, GPT and the Road to ChatGPT* (Transformers, next-word prediction, scaling laws, RLHF, ChatGPT & hallucination)
+7. **Part 7**: *Where We Are Now: Reasoning Models, Agents and the AI Boom* (2023 to November 2026: multimodal and open models, reasoning, DeepSeek, agents, costs & limits)
 
 ---
 

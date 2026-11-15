@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Where We Are Now: Reasoning Models, Agents and the AI Boom — RNLearn</title>
+  <meta name="description" content="AI from 2023 to November 2026: multimodal and open models, reasoning models, DeepSeek, maths olympiad gold, agents, the cost in chips and power, and what still goes wrong.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/where-we-are-now.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Where We Are Now: Reasoning Models, Agents and the AI Boom — RNLearn">
+  <meta property="og:description" content="AI from 2023 to November 2026: multimodal and open models, reasoning models, DeepSeek, maths olympiad gold, agents, the cost in chips and power, and what still goes wrong.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/where-we-are-now.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Where We Are Now: Reasoning Models, Agents and the AI Boom — RNLearn">
+  <meta name="twitter:description" content="AI from 2023 to November 2026: multimodal and open models, reasoning models, DeepSeek, maths olympiad gold, agents, the cost in chips and power, and what still goes wrong.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Where We Are Now: Reasoning Models, Agents and the AI Boom",
+    "description": "AI from 2023 to November 2026: multimodal and open models, reasoning models, DeepSeek, maths olympiad gold, agents, the cost in chips and power, and what still goes wrong.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-15",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/where-we-are-now.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/technology.html" class="post-subject-tag" data-subject="technology">Technology</a>
+        </div>
+        <h1 class="article-title">Where We Are Now: Reasoning Models, Agents and the AI Boom</h1>
+        <p class="article-standfirst">
+          In four years AI went from a novelty to a tool used by hundreds of millions of people every week. Models learned to see, hear, reason and act, while the old problems of reliability, cost and trust remained.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-15">15 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>22 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/how-machines-learned-to-think.html">How Machines Learned to Think</a> (Part 7 of 8)</div>
+  <div class="series-banner-links">
+    <a href="attention-is-all-you-need.html">← Part 6: Attention Is All You Need: Transformers, GPT and the Road to ChatGPT</a>
+    <span>Part 8 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. The Present, as of November 2026</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Bigger, Faster, Multimodal</a></li>
+              <li><a class="toc-link" href="#section-4">4. Models That Think Before Answering</a></li>
+              <li><a class="toc-link" href="#section-5">5. The DeepSeek Moment</a></li>
+              <li><a class="toc-link" href="#section-6">6. Mathematics and Science</a></li>
+              <li><a class="toc-link" href="#section-7">7. Agents: From Chatting to Doing</a></li>
+              <li><a class="toc-link" href="#section-8">8. How Fast Is It Improving?</a></li>
+              <li><a class="toc-link" href="#section-9">9. Pictures, Video and Voice</a></li>
+              <li><a class="toc-link" href="#section-10">10. AI in Everyday Life and Work</a></li>
+              <li><a class="toc-link" href="#section-11">11. The Cost: Chips, Power and Money</a></li>
+              <li><a class="toc-link" href="#section-12">12. What Still Goes Wrong</a></li>
+              <li><a class="toc-link" href="#section-13">13. How Did They Know?</a></li>
+              <li><a class="toc-link" href="#section-14">14. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-15">15. Philosophy Corner</a></li>
+              <li><a class="toc-link" href="#section-16">16. People and Organisations</a></li>
+              <li><a class="toc-link" href="#section-17">17. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-18">18. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. The Present, as of November 2026</h2>
+            <div class="callout callout-info">
+              <div class="callout-header">A note on dates</div>
+              <p>This part describes a field that changes month by month. It was written in November 2026, and focuses on developments that are well documented. New models appear so often that specific names and rankings go out of date quickly; the broad trends described here are what matter.</p>
+            </div>
+            <p>In the four years since ChatGPT arrived, AI has moved from a curiosity to something hundreds of millions of people use every week. OpenAI said in October 2025 that 800 million people used ChatGPT each week, and it is only one of several popular assistants. AI writes software, drafts documents, tutors students, transcribes meetings, generates images and video, and helps scientists. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <p>Four big shifts stand out, and this part takes them in turn:</p>
+            <ul>
+              <li><strong>Models that see, hear and speak</strong>, not just read and write text.</li>
+              <li><strong>Models that reason</strong>, working through a problem at length before answering.</li>
+              <li><strong>Agents</strong>: AI that doesn't just answer but acts, using tools to carry out long, multi-step tasks.</li>
+              <li><strong>Enormous investment</strong> in chips, data centres and electricity, with real questions about cost and limits.</li>
+            </ul>
+            <p>Alongside the progress, old problems persist: models still make things up, still fail in surprising ways, and still raise hard questions about copyright, jobs and trust. This part tries to give an honest picture of both.</p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-ai-timeline-7">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. AI from 2023 to 2026.</strong> A selection of well-documented milestones, in order but not to scale. Colours show the four threads of the story.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Bigger, Faster, and Able to See and Hear</h2>
+            <p>In March 2023 OpenAI released <strong>GPT-4</strong>. It was much more capable than the model behind the original ChatGPT, and it could read images: show it a photo of the inside of your fridge and it could suggest recipes. OpenAI reported strong results on many professional and academic exams (section 14 looks at one of those claims closely). <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+            <p>Rivals followed quickly. Google DeepMind's <strong>Gemini</strong> (December 2023) was designed from the start to handle text, images, audio and video together. Anthropic's <strong>Claude</strong> models, xAI's <strong>Grok</strong> and others joined a race in which the lead changed hands every few months. In May 2024 OpenAI's GPT-4o could hold a spoken conversation with almost no delay, and look through a phone's camera while doing so. Models that handle several kinds of data are called <strong>multimodal</strong>. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span></p>
+            <p>A second trend was <strong>open-weight</strong> models. In July 2023 Meta released Llama 2, whose weights anyone could download and run on their own computers. The French company Mistral, China's DeepSeek and Alibaba (with its Qwen models) and many others released capable open models. These let researchers, companies and governments build on AI without depending on a few providers, but they also make it impossible to recall a model, or stop it being misused, once it has been released. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span></p>
+            <p>Models also became much cheaper to use. Stanford's 2025 AI Index found that the price of running a model as good as the original ChatGPT model fell more than 280-fold between November 2022 and October 2024. Capabilities once limited to the largest systems spread to small models that can run on a laptop or phone. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Models That Think Before Answering</h2>
+            <p>Part 6 described chain-of-thought prompting: asking a model to show its working improves its answers. In September 2024 OpenAI released <strong>o1</strong>, a model trained to do this by itself, at length. Before answering a hard question it produces a long internal chain of reasoning, trying approaches, checking them and backtracking from mistakes, sometimes for minutes. On competition maths and difficult coding problems, it did far better than earlier models. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+            <p>The key was reinforcement learning on problems whose answers can be checked automatically, such as maths problems with a known answer, or code that either passes its tests or doesn't. The model is rewarded when its reasoning reaches a correct answer, and over many problems it learns better ways of reasoning. In January 2025 the Chinese company DeepSeek published a detailed account of how it trained a similar model, <strong>R1</strong>, including the striking finding that behaviours like re-checking its own work emerged during this training without being specifically taught. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span></p>
+            <p>These models introduced a new way to get better answers: spend more computing power <em>while answering</em>, not just while training. Thinking longer helps, and so does making several attempts and comparing them. A simple version, called <strong>self-consistency</strong>, takes the most common answer from many independent attempts: right answers tend to agree with each other, while mistakes scatter. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span></p>
+            <figure class="fig" data-fig="fig-think-longer">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. More attempts, better answers.</strong> Each attempt at a problem is right with some chance; wrong attempts land on one of several different wrong answers. Taking the majority answer of many attempts is right far more often than a single attempt, as long as a single attempt beats each wrong answer. This is a simplified simulation; real reasoning models also learn to check and correct their own work.
+              </figcaption>
+            </figure>
+            <p>By 2025 most leading systems combined both modes. GPT-5 (August 2025), for example, decides for itself whether to answer quickly or to reason at length, depending on how hard a question seems.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. The DeepSeek Moment</h2>
+            <p>Until 2025 many assumed that only a handful of American companies, spending billions of dollars on chips, could build frontier AI. DeepSeek challenged that. Its V3 model (December 2024) and R1 reasoning model (January 2025) matched leading Western systems on many tests, were released with open weights, and came with detailed technical reports. DeepSeek said the final training run of V3 cost about $5.6 million in computing time, a small fraction of what rivals were thought to spend, although that figure excluded earlier research and experiments. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>, <a class="cite" href="#ref-7">7</a>]</span></p>
+            <p>The reaction was dramatic. On 27 January 2025, shares in the chip maker Nvidia fell by about 17 per cent, wiping nearly $600 billion off its value in a single day, the largest one-day loss for any company in US stock-market history. Investors wondered whether the huge spending on chips was really necessary. It was also a reminder that US export controls on advanced chips had not stopped Chinese labs from competing. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span></p>
+            <p>The panic was short-lived: cheaper AI tended to mean more use of AI, not less demand for chips. But the episode showed that clever engineering could partly substitute for raw computing power, and that open models could be close to the frontier.</p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Mathematics and Science</h2>
+            <p>The International Mathematical Olympiad (IMO) is the world's hardest maths competition for school students. In July 2024 Google DeepMind's AlphaProof and AlphaGeometry 2 scored at silver-medal level, though the problems had to be translated into a formal mathematical language first and some took days. A year later, in July 2025, an advanced version of Google DeepMind's Gemini solved five of the six problems, working in ordinary language within the competition's time limit, a score of 35 out of 42 that the IMO's organisers confirmed was at gold-medal level. OpenAI reported the same score for one of its experimental models, graded by former medallists it recruited. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>, <a class="cite" href="#ref-12">12</a>]</span></p>
+            <p>Science benefited too. In May 2024 <strong>AlphaFold 3</strong> extended protein-structure prediction (Part 5) to how proteins interact with DNA, RNA and potential drug molecules. AI weather models such as Google DeepMind's GraphCast, trained on decades of past weather records, began producing ten-day forecasts that matched or beat traditional physics-based forecasts on many measures, using a tiny fraction of the computing power, and national weather services started using such models alongside their own. Researchers also began using language models to suggest hypotheses, search the scientific literature and write analysis code. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>, <a class="cite" href="#ref-14">14</a>]</span></p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Agents: From Chatting to Doing</h2>
+            <p>A chatbot answers questions. An <strong>agent</strong> carries out tasks. Given a goal, it plans steps, uses <strong>tools</strong> (searching the web, running code, reading and editing files, operating a web browser), looks at the results, and decides what to do next, repeating this loop until the job is done or it gets stuck. The basic recipe, interleaving reasoning with actions, was described by researchers in 2022. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span></p>
+            <figure class="fig" data-fig="fig-agent-loop">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. An agent at work.</strong> Step through a simple example of a coding agent fixing a bug: it thinks, uses a tool, observes the result, and repeats. This is an illustrative script, not a recording of a particular product; real agents may take hundreds of such steps on larger tasks.
+              </figcaption>
+            </figure>
+            <p>In October 2024 Anthropic released a model that could use a computer as a person does, by looking at screenshots and controlling the mouse and keyboard; OpenAI and Google followed with similar tools. In November 2024 Anthropic published the <strong>Model Context Protocol</strong>, an open standard for connecting AI models to tools and data, which other companies soon adopted. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>, <a class="cite" href="#ref-17">17</a>]</span></p>
+            <p>The biggest impact by far has been in software. Coding agents from several companies can read a large codebase, make changes across many files, run tests and fix their own errors. In February 2025 the AI researcher Andrej Karpathy coined the phrase "vibe coding" for building software by describing what you want and letting AI write the code; it became Collins Dictionary's word of the year for 2025. Through 2026, much of the competition between leading labs has centred on how long and complex a task their agents can handle reliably.</p>
+            <p>Agents also bring new risks. An agent that reads web pages or emails can be tricked by hidden instructions planted in them, an attack called <strong>prompt injection</strong>. And the more an agent can do, from spending money to deleting files, the more a single mistake can cost. Most systems therefore ask a person to approve important actions. <span class="cite-group">[<a class="cite" href="#ref-18">18</a>]</span></p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. How Fast Is It Improving?</h2>
+            <p>Measuring AI progress has become surprisingly hard. Standard tests (benchmarks) keep getting "saturated": models score close to 100 per cent, and the test stops telling us anything. Some test questions also leak into training data. Researchers have responded with harder tests, such as <strong>Humanity's Last Exam</strong> (2025), a set of very difficult questions written by experts across many fields, and <strong>ARC-AGI-2</strong> (2025), visual puzzles that are easy for people but hard for AI. <span class="cite-group">[<a class="cite" href="#ref-19">19</a>, <a class="cite" href="#ref-20">20</a>]</span></p>
+            <p>One of the most informative measures comes from METR, a non-profit research group. Rather than counting right answers, it asks: how long a task, measured by how long it takes a skilled human, can an AI agent complete? In March 2025 it reported that this "time horizon", for tasks the agent completes half the time, had doubled about every seven months since 2019. Leading models at the time could reliably do some software tasks that took people about an hour. In January 2026 METR's updated measurements suggested that since 2023 the doubling had been faster, roughly every four months, though it cautioned that estimates for the longest tasks are uncertain. <span class="cite-group">[<a class="cite" href="#ref-21">21</a>, <a class="cite" href="#ref-22">22</a>]</span></p>
+            <figure class="fig" data-fig="fig-doubling">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. What a doubling trend implies.</strong> Choose a doubling time and see how long a task agents could handle a given number of years after they reach 1-hour tasks, if the trend simply continued. The vertical axis is logarithmic: each step is many times larger. This is a calculator, not a forecast.
+              </figcaption>
+            </figure>
+            <p>Exponential trends are powerful, and treacherous to extrapolate. The tasks in such studies are mostly self-contained software tasks with clear success criteria, which suit AI better than messy real-world work. Trends can slow as easy gains run out, or speed up as AI helps build better AI. Section 13 looks at how the measurement works.</p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Pictures, Video and Voice</h2>
+            <p>Image generators (Part 6) became photorealistic, and could follow detailed instructions and render text correctly. Video followed. In February 2024 OpenAI previewed <strong>Sora</strong>, which produced minute-long videos from text descriptions; in May 2025 Google's <strong>Veo 3</strong> generated video with matching sound and speech. AI voices became nearly indistinguishable from human ones, and AI music generators could produce complete songs. <span class="cite-group">[<a class="cite" href="#ref-23">23</a>]</span></p>
+            <p>These tools opened new creative possibilities, and new dangers. Deepfake voices were used to impersonate company executives and family members in scams. Fake images and videos circulated during elections and disasters. Non-consensual fake intimate images became a serious form of abuse, prompting new laws in several countries. Companies began adding invisible watermarks and "content credentials" to AI-generated media, but these can be removed, and detecting fakes reliably remains an unsolved problem.</p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. AI in Everyday Life and Work</h2>
+            <p>Hundreds of millions of people now use AI assistants for writing, learning, searching, coding and advice. What does it actually do to productivity? The evidence so far is mixed, and depends heavily on the task and the person. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+            <ul>
+              <li>A study of over 5,000 customer-support agents found that an AI assistant raised the number of problems resolved per hour by 14 per cent on average, and by 34 per cent for the least experienced workers. <span class="cite-group">[<a class="cite" href="#ref-24">24</a>]</span></li>
+              <li>In an experiment with management consultants, those using GPT-4 completed tasks within the AI's abilities faster and with higher-quality results. But on a task chosen to be just outside its abilities, consultants using AI were less likely to get the right answer than those working without it, because they trusted its confident but wrong output. The researchers called this a "jagged technological frontier". <span class="cite-group">[<a class="cite" href="#ref-25">25</a>]</span></li>
+              <li>In a 2025 trial by METR, experienced open-source programmers working on their own projects took on average 19 per cent <em>longer</em> when allowed to use AI tools, even though they believed the tools had made them about 20 per cent faster. <span class="cite-group">[<a class="cite" href="#ref-26">26</a>]</span></li>
+            </ul>
+            <p>The pattern that emerges: AI tends to help most with well-defined tasks, and with people who are less experienced in a field. It can hurt when people trust it outside its competence, and the gains people feel are not always the gains they get. In education, teachers face both opportunity, with patient AI tutors for every student, and difficulty, as essays and homework can be written by AI. Effects on jobs and wages are still emerging, and are a central topic of Part 8.</p>
+          </section>
+
+          <section id="section-11">
+            <h2>11. The Cost: Chips, Power and Money</h2>
+            <p>Training and running AI at this scale requires vast amounts of specialised computing. Demand for Nvidia's AI chips made it, in October 2025, the first company ever valued at $5 trillion. In January 2025 OpenAI, SoftBank and Oracle announced <strong>Stargate</strong>, a plan to invest up to $500 billion in US data centres; Microsoft, Google, Amazon and Meta each planned to spend tens of billions of dollars a year on AI infrastructure. <span class="cite-group">[<a class="cite" href="#ref-27">27</a>]</span></p>
+            <p>All that computing needs electricity. The International Energy Agency estimated that data centres used about 415 terawatt-hours of electricity in 2024, around 1.5 per cent of the world's total, and projected that this would roughly double to about 945 terawatt-hours by 2030, with AI the main driver. That is still a small share of global electricity, but growth is concentrated in particular regions, straining local power grids and water supplies, and some new demand is being met by gas-fired power. Technology companies have also signed deals for nuclear and renewable power. <span class="cite-group">[<a class="cite" href="#ref-28">28</a>]</span></p>
+            <p>Whether all this investment will pay off is hotly debated. Optimists point to rapidly growing revenues and usage. Sceptics point out that spending has run far ahead of profits, and draw comparisons with the dot-com bubble of the late 1990s, when the internet proved transformative even though many companies went bust.</p>
+          </section>
+
+          <section id="section-12">
+            <h2>12. What Still Goes Wrong</h2>
+            <p><strong>Hallucination.</strong> Models still state false things confidently, though less often than before. A 2025 OpenAI paper argued that a key cause lies in how models are trained and tested: most scoring gives no credit for saying "I don't know", so, like a student guessing on a multiple-choice exam, a model does better on average by guessing confidently. <span class="cite-group">[<a class="cite" href="#ref-29">29</a>]</span></p>
+            <p><strong>Sycophancy.</strong> Models trained on human approval can learn to tell people what they want to hear. In April 2025 OpenAI rolled back an update to GPT-4o after users found it excessively flattering, even agreeing with harmful ideas; the company said it had relied too much on short-term thumbs-up feedback. <span class="cite-group">[<a class="cite" href="#ref-30">30</a>]</span></p>
+            <p><strong>Jaggedness.</strong> A model that can solve olympiad maths may still make basic errors in counting, spatial reasoning or common sense, and it often doesn't know which is which. This makes it hard to know when to trust it.</p>
+            <p><strong>Copyright and consent.</strong> Most models were trained on text, images and code from the internet without their creators' permission. Lawsuits followed, including The New York Times against OpenAI and Microsoft (filed December 2023). In 2025 a US judge ruled in a case brought by authors against Anthropic that training on lawfully acquired books could be fair use, but that the company's use of pirated copies was not protected; Anthropic agreed to pay $1.5 billion to settle the authors' claims. Courts in different countries are reaching different conclusions, and the law remains unsettled. <span class="cite-group">[<a class="cite" href="#ref-31">31</a>, <a class="cite" href="#ref-32">32</a>]</span></p>
+          </section>
+
+          <section id="section-13">
+            <h2>13. How Did They Know? Measuring Progress by Task Length</h2>
+            <div class="callout callout-method">
+              <div class="callout-header">How did they know? METR's time-horizon method</div>
+              <p>Benchmark scores are hard to compare over time: a test that is too hard tells you nothing about weak models, and one that is too easy tells you nothing about strong ones. METR wanted a single scale that could compare models from 2019 to today. <span class="cite-group">[<a class="cite" href="#ref-21">21</a>]</span></p>
+              <ol>
+                <li><strong>Collect varied tasks:</strong> about 170 tasks in software engineering, cybersecurity and machine learning, from ones taking seconds to ones taking many hours.</li>
+                <li><strong>Time real experts:</strong> skilled professionals attempted the tasks, and METR recorded how long each took them. This gives each task a "length" in human time.</li>
+                <li><strong>Test the AI agents:</strong> each model, set up as an agent with tools, attempted every task several times.</li>
+                <li><strong>Fit a curve for each model:</strong> models succeed on short tasks and fail on long ones. The task length at which a model succeeds half the time is its <strong>50% time horizon</strong>.</li>
+                <li><strong>Plot horizons against release dates:</strong> on a logarithmic scale the points from 2019 to 2025 fell close to a straight line, meaning steady exponential growth, doubling about every seven months.</li>
+              </ol>
+              <p>METR was careful about the limits. Horizons at 80 per cent success are several times shorter than at 50 per cent. Its tasks are well defined, self-contained and automatically checkable, unlike much real work, which involves vague goals, other people and long-term context. And its own trial of experienced programmers (section 10) showed that impressive scores do not automatically translate into faster work. A single trend line is useful evidence, not a law of nature.</p>
+            </div>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Legend and Record: Did GPT-4 Score in the Top 10% on the Bar Exam?</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: a headline number, re-examined</div>
+              <p><strong>The legend:</strong> when GPT-4 was released in March 2023, OpenAI's technical report said it passed a simulated US bar exam (the test lawyers must pass to practise) with a score around the top 10 per cent of test takers. The claim was repeated everywhere as proof that AI could now do lawyers' work. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>, <a class="cite" href="#ref-33">33</a>, <a class="cite" href="#ref-34">34</a>]</span></p>
+              <p><strong>The record:</strong> GPT-4 really did pass, a remarkable result. But in 2024 Eric Martínez, then a researcher at MIT, re-examined the "top 10 per cent" figure. The percentile had been estimated against people taking a February exam, a group that includes many repeat takers who had failed before, and who tend to score lower. Compared with everyone taking the July exam, he estimated GPT-4 would rank below the 69th percentile overall, and around the 48th percentile on the written essay sections; compared only with first-time takers, its standing was lower still.</p>
+              <p><strong>Why it matters:</strong> GPT-4 was genuinely impressive, and later models have done better. But headline comparisons with humans depend on details: which test, which group of humans, which parts, and how the answers were graded. And passing an exam is not the same as doing the job: lawyers also interview clients, judge what matters and take responsibility. The same caution applies to every "beats humans" headline.</p>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Philosophy Corner: Is This Already AGI?</h2>
+            <div class="callout callout-philosophy">
+              <div class="callout-header">Philosophy Corner: what would count as general intelligence?</div>
+              <p><strong>Artificial general intelligence</strong> (AGI) usually means AI that can do most intellectual tasks as well as a capable human, across many fields, rather than being expert in just one. The leading labs say that building it is their goal. But there is no agreed definition, and so no agreed answer to whether we are close. <span class="cite-group">[<a class="cite" href="#ref-35">35</a>, <a class="cite" href="#ref-20">20</a>]</span></p>
+              <p><strong>Some say it is nearly here:</strong> today's models write, code, reason, pass professional exams and hold conversations on almost any subject, in dozens of languages. By the standards of the Dartmouth proposal of 1955 (Part 2), much of the original dream has been met. Some argue that if you had shown today's systems to anyone in 2015, they would have called them AGI.</p>
+              <p><strong>Some say it is still far off:</strong> models are jagged, unreliable and easily confused by tasks that are simple for people. They learn far less efficiently than a child, who learns language from a tiny fraction of the text a model sees. They struggle to keep learning after training, to plan over long periods, and to act in the physical world. Tests like ARC-AGI were designed to show this gap.</p>
+              <p><strong>Perhaps the question is badly posed:</strong> a Google DeepMind group proposed treating generality and performance as separate scales, with "levels" of AGI, rather than a single finish line. Others argue that what matters is not a label but specific capabilities, such as whether AI can do a particular job, carry out scientific research, or improve itself, because those are what will change the world. Turing, who replaced "Can machines think?" with a practical test (Part 2), might have agreed.</p>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. People and Organisations</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">OpenAI</td>
+                <td style="padding:0.6rem 0.8rem;">Founded 2015<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">ChatGPT; GPT-4 (2023); o1 (2024); GPT-5 (2025)</td>
+                <td style="padding:0.6rem 0.8rem;">Started the chatbot boom and introduced reasoning models.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Google DeepMind</td>
+                <td style="padding:0.6rem 0.8rem;">Merged 2023<br>Britain / USA</td>
+                <td style="padding:0.6rem 0.8rem;">Gemini (2023 onwards); AlphaFold 3 (2024); IMO gold (2025)</td>
+                <td style="padding:0.6rem 0.8rem;">Leads in multimodal models and AI for science.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Anthropic</td>
+                <td style="padding:0.6rem 0.8rem;">Founded 2021<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Claude models; computer use (2024); Model Context Protocol (2024)</td>
+                <td style="padding:0.6rem 0.8rem;">Developed early computer-using agents and an open standard for connecting models to tools.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Meta</td>
+                <td style="padding:0.6rem 0.8rem;">USA</td>
+                <td style="padding:0.6rem 0.8rem;">Llama models (2023 onwards)</td>
+                <td style="padding:0.6rem 0.8rem;">Popularised downloadable open-weight models.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">DeepSeek</td>
+                <td style="padding:0.6rem 0.8rem;">Founded 2023<br>China</td>
+                <td style="padding:0.6rem 0.8rem;">DeepSeek-V3 (2024); R1 (2025)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed that a frontier-level open reasoning model could be built at far lower reported cost.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Mistral AI</td>
+                <td style="padding:0.6rem 0.8rem;">Founded 2023<br>France</td>
+                <td style="padding:0.6rem 0.8rem;">Open and commercial models</td>
+                <td style="padding:0.6rem 0.8rem;">A leading European developer of open-weight models.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Nvidia</td>
+                <td style="padding:0.6rem 0.8rem;">USA</td>
+                <td style="padding:0.6rem 0.8rem;">AI chips (GPUs)</td>
+                <td style="padding:0.6rem 0.8rem;">Supplies most of the chips used to train AI; first company valued at $5 trillion (2025).</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">METR</td>
+                <td style="padding:0.6rem 0.8rem;">Non-profit<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Time-horizon measurements (2025–26); developer productivity trial (2025)</td>
+                <td style="padding:0.6rem 0.8rem;">Measures what AI agents can actually do, and how fast that is changing.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Andrej Karpathy</td>
+                <td style="padding:0.6rem 0.8rem;">born 1986<br>Slovakia / USA</td>
+                <td style="padding:0.6rem 0.8rem;">Human ImageNet benchmark (2014); "vibe coding" (2025)</td>
+                <td style="padding:0.6rem 0.8rem;">Researcher and educator whose phrases and explanations shape how people think about AI.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Erik Brynjolfsson</td>
+                <td style="padding:0.6rem 0.8rem;">born 1962<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">"Generative AI at Work" (with Li and Raymond)</td>
+                <td style="padding:0.6rem 0.8rem;">Economist measuring AI’s real effects on workers and productivity.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-17">
+            <h2>17. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about AI today.</p>
+            <figure class="fig" data-fig="fig-quiz-ai7">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-18">
+            <h2>18. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Stanford Institute for Human-Centered AI.</strong> (2025). <em>Artificial Intelligence Index Report 2025</em>. Stanford, CA: Stanford University.</li>
+              <li id="ref-2"><strong>OpenAI.</strong> (2025). DevDay 2025 keynote, 6 October 2025 (announcement of 800 million weekly ChatGPT users).</li>
+              <li id="ref-3"><strong>OpenAI.</strong> (2023). "GPT-4 Technical Report." arXiv:2303.08774.</li>
+              <li id="ref-4"><strong>Gemini Team, Google.</strong> (2023). "Gemini: A Family of Highly Capable Multimodal Models." arXiv:2312.11805.</li>
+              <li id="ref-5"><strong>Touvron, Hugo, et al.</strong> (2023). "Llama 2: Open Foundation and Fine-Tuned Chat Models." arXiv:2307.09288.</li>
+              <li id="ref-6"><strong>OpenAI.</strong> (2024). "Learning to Reason with LLMs." OpenAI blog, 12 September 2024.</li>
+              <li id="ref-7"><strong>DeepSeek-AI.</strong> (2025). "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning." arXiv:2501.12948.</li>
+              <li id="ref-8"><strong>Wang, Xuezhi, et al.</strong> (2023). "Self-Consistency Improves Chain of Thought Reasoning in Language Models." <em>International Conference on Learning Representations</em>.</li>
+              <li id="ref-9"><strong>DeepSeek-AI.</strong> (2024). "DeepSeek-V3 Technical Report." arXiv:2412.19437.</li>
+              <li id="ref-10"><strong>CNBC.</strong> (2025). "Nvidia Sheds Almost $600 Billion in Market Cap, Biggest One-Day Loss in U.S. History." 27 January 2025.</li>
+              <li id="ref-11"><strong>Google DeepMind.</strong> (2024). "AI Achieves Silver-Medal Standard Solving International Mathematical Olympiad Problems." Google DeepMind blog, 25 July 2024.</li>
+              <li id="ref-12"><strong>Google DeepMind.</strong> (2025). "Advanced Version of Gemini with Deep Think Officially Achieves Gold-Medal Standard at the International Mathematical Olympiad." Google DeepMind blog, 21 July 2025.</li>
+              <li id="ref-13"><strong>Abramson, Josh, et al.</strong> (2024). "Accurate Structure Prediction of Biomolecular Interactions with AlphaFold 3." <em>Nature</em>, 630: 493–500.</li>
+              <li id="ref-14"><strong>Lam, Remi, et al.</strong> (2023). "Learning Skillful Medium-Range Global Weather Forecasting." <em>Science</em>, 382(6677): 1416–1421.</li>
+              <li id="ref-15"><strong>Yao, Shunyu, et al.</strong> (2023). "ReAct: Synergizing Reasoning and Acting in Language Models." <em>International Conference on Learning Representations</em>.</li>
+              <li id="ref-16"><strong>Anthropic.</strong> (2024). "Introducing Computer Use, a New Claude 3.5 Sonnet, and Claude 3.5 Haiku." Anthropic news, 22 October 2024.</li>
+              <li id="ref-17"><strong>Anthropic.</strong> (2024). "Introducing the Model Context Protocol." Anthropic news, 25 November 2024.</li>
+              <li id="ref-18"><strong>Greshake, Kai, et al.</strong> (2023). "Not What You’ve Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection." <em>Proceedings of the 16th ACM Workshop on Artificial Intelligence and Security</em>, 79–90.</li>
+              <li id="ref-19"><strong>Phan, Long, et al.</strong> (2025). "Humanity’s Last Exam." arXiv:2501.14249.</li>
+              <li id="ref-20"><strong>Chollet, François, et al.</strong> (2025). "ARC-AGI-2: A New Challenge for Frontier AI Reasoning Systems." arXiv:2505.11831.</li>
+              <li id="ref-21"><strong>Kwa, Thomas, et al.</strong> (2025). "Measuring AI Ability to Complete Long Tasks." arXiv:2503.14499.</li>
+              <li id="ref-22"><strong>METR.</strong> (2026). "Time Horizon 1.1." METR blog, 29 January 2026.</li>
+              <li id="ref-23"><strong>OpenAI.</strong> (2024). "Video Generation Models as World Simulators." OpenAI research, 15 February 2024.</li>
+              <li id="ref-24"><strong>Brynjolfsson, Erik, Li, Danielle &amp; Raymond, Lindsey.</strong> (2025). "Generative AI at Work." <em>The Quarterly Journal of Economics</em>, 140(2): 889–942.</li>
+              <li id="ref-25"><strong>Dell’Acqua, Fabrizio, et al.</strong> (2023). "Navigating the Jagged Technological Frontier: Field Experimental Evidence of the Effects of AI on Knowledge Worker Productivity and Quality." Harvard Business School Working Paper 24-013.</li>
+              <li id="ref-26"><strong>Becker, Joel, Rush, Nate, Barnes, Elizabeth &amp; Rein, David.</strong> (2025). "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity." arXiv:2507.09089.</li>
+              <li id="ref-27"><strong>OpenAI.</strong> (2025). "Announcing The Stargate Project." OpenAI blog, 21 January 2025.</li>
+              <li id="ref-28"><strong>International Energy Agency.</strong> (2025). <em>Energy and AI</em>. Paris: IEA.</li>
+              <li id="ref-29"><strong>Kalai, Adam Tauman, Nachum, Ofir, Vempala, Santosh S. &amp; Zhang, Edwin.</strong> (2025). "Why Language Models Hallucinate." arXiv:2509.04664.</li>
+              <li id="ref-30"><strong>OpenAI.</strong> (2025). "Sycophancy in GPT-4o: What Happened and What We’re Doing About It." OpenAI blog, 29 April 2025.</li>
+              <li id="ref-31"><strong><em>The New York Times Company v. Microsoft Corporation and OpenAI</em>.</strong> No. 1:23-cv-11195 (S.D.N.Y., filed 27 December 2023).</li>
+              <li id="ref-32"><strong><em>Bartz v. Anthropic PBC</em>.</strong> No. 3:24-cv-05417 (N.D. Cal.): order on fair use, June 2025; class settlement, September 2025.</li>
+              <li id="ref-33"><strong>Katz, Daniel Martin, Bommarito, Michael James, Gao, Shang &amp; Arredondo, Pablo.</strong> (2024). "GPT-4 Passes the Bar Exam." <em>Philosophical Transactions of the Royal Society A</em>, 382: 20230254.</li>
+              <li id="ref-34"><strong>Martínez, Eric.</strong> (2024). "Re-evaluating GPT-4’s Bar Exam Performance." <em>Artificial Intelligence and Law</em>.</li>
+              <li id="ref-35"><strong>Morris, Meredith Ringel, et al.</strong> (2024). "Position: Levels of AGI for Operationalizing Progress on the Path to AGI." <em>Proceedings of the 41st International Conference on Machine Learning</em>, PMLR 235.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/how-machines-learned-to-think.html">How Machines Learned to Think</a> (Part 7 of 8)</div>
+  <div class="series-banner-links">
+    <a href="attention-is-all-you-need.html">← Part 6: Attention Is All You Need: Transformers, GPT and the Road to ChatGPT</a>
+    <span>Part 8 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/where-we-are-now.js"></script>
+</body>
+</html>

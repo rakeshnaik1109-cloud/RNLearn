@@ -2448,5 +2448,66 @@ window.RNLEARN_GLOSSARY = [
   [
    "hallucinations"
   ]
+ ],
+ [
+  "Multimodal",
+  "Able to take in or produce more than one kind of data, such as text, images, audio and video.",
+  []
+ ],
+ [
+  "Open-weight model",
+  "An AI model whose trained weights are published so anyone can download, run and modify it.",
+  [
+   "open-weight models",
+   "open-weight"
+  ]
+ ],
+ [
+  "Reasoning model",
+  "A language model trained to work through a problem in a long chain of reasoning before giving its answer.",
+  [
+   "reasoning models"
+  ]
+ ],
+ [
+  "Self-consistency",
+  "Improving an AI’s answer by making several independent attempts and taking the most common result.",
+  []
+ ],
+ [
+  "AI agent",
+  "An AI system that carries out multi-step tasks by planning, using tools, checking results and deciding what to do next.",
+  [
+   "AI agents"
+  ]
+ ],
+ [
+  "Prompt injection",
+  "An attack in which hidden instructions placed in text an AI reads (such as a web page or email) trick it into doing something unintended.",
+  []
+ ],
+ [
+  "Time horizon",
+  "METR’s measure of AI progress: the length of task, in skilled-human time, that an AI agent can complete with a given success rate.",
+  []
+ ],
+ [
+  "Deepfake",
+  "A realistic fake image, video or voice recording of a real person, made with AI.",
+  [
+   "deepfakes"
+  ]
+ ],
+ [
+  "Sycophancy",
+  "An AI model’s tendency to tell people what they want to hear rather than what is accurate.",
+  []
+ ],
+ [
+  "AGI",
+  "Artificial general intelligence: AI that could do most intellectual tasks as well as a capable human, across many fields. There is no agreed definition.",
+  [
+   "artificial general intelligence"
+  ]
  ]
 ];

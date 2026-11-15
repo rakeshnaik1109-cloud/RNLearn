@@ -1,5 +1,22 @@
 [
   {
+    "slug": "where-we-are-now",
+    "url": "articles/where-we-are-now.html",
+    "title": "Where We Are Now: Reasoning Models, Agents and the AI Boom",
+    "summary": "AI from 2023 to November 2026: multimodal and open models, reasoning models, DeepSeek, maths olympiad gold, agents, the cost in chips and power, and what still goes wrong.",
+    "subject": "Technology",
+    "tags": [
+      "artificial-intelligence",
+      "large-language-models",
+      "ai-agents",
+      "reasoning-models",
+      "ai-policy",
+      "history-of-computing"
+    ],
+    "date": "2026-11-15",
+    "type": "tutorial"
+  },
+  {
     "slug": "the-deep-learning-revolution",
     "url": "articles/the-deep-learning-revolution.html",
     "title": "The Deep Learning Revolution: ImageNet, AlphaGo and AlphaFold",

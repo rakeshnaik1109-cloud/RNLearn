@@ -1,5 +1,31 @@
 [
   {
+    "slug": "where-we-are-now",
+    "title": "Where We Are Now: Reasoning Models, Agents and the AI Boom",
+    "summary": "AI from 2023 to November 2026: multimodal and open models, reasoning models, DeepSeek, maths olympiad gold, agents, the cost in chips and power, and what still goes wrong.",
+    "subject": "Technology",
+    "tags": [
+      "artificial-intelligence",
+      "large-language-models",
+      "ai-agents",
+      "reasoning-models",
+      "ai-policy",
+      "history-of-computing"
+    ],
+    "date": "2026-11-15",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 22,
+    "series": {
+      "id": "how-machines-learned-to-think",
+      "part": 7
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": false
+  },
+  {
     "slug": "attention-is-all-you-need",
     "title": "Attention Is All You Need: Transformers, GPT and the Road to ChatGPT",
     "summary": "How the transformer, next-word prediction, scaling laws and training with human feedback led from a 2017 Google paper to ChatGPT, and why language models make things up.",
