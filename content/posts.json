@@ -1,5 +1,31 @@
 [
   {
+    "slug": "how-far-is-the-sun",
+    "title": "How Far Is the Sun? Half Moons, Transits of Venus and Radar Echoes",
+    "summary": "From Aristarchus’s half Moon and Kepler’s scaleless map to the transits of Venus that sent Cook to Tahiti and Le Gentil to Pondicherry, and radar echoes that finally fixed the Sun’s distance.",
+    "subject": "Science",
+    "tags": [
+      "measurement",
+      "astronomy",
+      "parallax",
+      "transit-of-venus",
+      "astronomical-unit",
+      "history-of-science"
+    ],
+    "date": "2026-11-19",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 23,
+    "series": {
+      "id": "how-we-measured-the-universe",
+      "part": 4
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": false
+  },
+  {
     "slug": "why-is-my-laser-spot-grainy",
     "title": "Why Is My Laser Spot Grainy? Speckle, Stray Fringes and Other Gremlins of the Optics Lab",
     "summary": "Why laser light looks grainy, why stripes drift across your images and why lasers get noisy: speckle, etalons, ghosts, dust rings, fibre noise and vibration, and how to beat each one.",

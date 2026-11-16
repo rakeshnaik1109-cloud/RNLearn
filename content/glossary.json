@@ -2807,5 +2807,51 @@
     "term": "Lock-in detection",
     "definition": "Measuring only the part of a signal that rises and falls at the frequency at which the light source is switched, rejecting other light and noise.",
     "forms": []
+  },
+  {
+    "term": "Astronomical unit",
+    "definition": "The average distance between the Earth and the Sun, now defined as exactly 149,597,870,700 metres. Symbol: AU.",
+    "forms": [
+      "astronomical units",
+      "AU"
+    ]
+  },
+  {
+    "term": "Solar parallax",
+    "definition": "The angle the Earth’s radius makes as seen from the Sun, about 8.79 seconds of arc; historically the way the Sun’s distance was expressed.",
+    "forms": []
+  },
+  {
+    "term": "Transit of Venus",
+    "definition": "A rare event when Venus passes directly between the Earth and the Sun and is seen as a black dot crossing the Sun.",
+    "forms": [
+      "transits of Venus"
+    ]
+  },
+  {
+    "term": "Black drop effect",
+    "definition": "A dark band that seems to join Venus to the Sun’s edge during a transit, caused mainly by optical blurring and limb darkening; it made contact times uncertain.",
+    "forms": [
+      "black drop"
+    ]
+  },
+  {
+    "term": "Kepler’s third law",
+    "definition": "The square of a planet’s orbital period is proportional to the cube of its average distance from the Sun.",
+    "forms": []
+  },
+  {
+    "term": "Arcsecond",
+    "definition": "One sixtieth of a minute of arc, or 1/3600 of a degree: the width of a coin seen from about 5 km.",
+    "forms": [
+      "arcseconds",
+      "seconds of arc",
+      "second of arc"
+    ]
+  },
+  {
+    "term": "Opposition",
+    "definition": "The time when a planet is on the opposite side of the Earth from the Sun, and usually at its closest and brightest.",
+    "forms": []
   }
 ]

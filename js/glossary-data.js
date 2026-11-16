@@ -2809,5 +2809,51 @@ window.RNLEARN_GLOSSARY = [
   "Lock-in detection",
   "Measuring only the part of a signal that rises and falls at the frequency at which the light source is switched, rejecting other light and noise.",
   []
+ ],
+ [
+  "Astronomical unit",
+  "The average distance between the Earth and the Sun, now defined as exactly 149,597,870,700 metres. Symbol: AU.",
+  [
+   "astronomical units",
+   "AU"
+  ]
+ ],
+ [
+  "Solar parallax",
+  "The angle the Earth’s radius makes as seen from the Sun, about 8.79 seconds of arc; historically the way the Sun’s distance was expressed.",
+  []
+ ],
+ [
+  "Transit of Venus",
+  "A rare event when Venus passes directly between the Earth and the Sun and is seen as a black dot crossing the Sun.",
+  [
+   "transits of Venus"
+  ]
+ ],
+ [
+  "Black drop effect",
+  "A dark band that seems to join Venus to the Sun’s edge during a transit, caused mainly by optical blurring and limb darkening; it made contact times uncertain.",
+  [
+   "black drop"
+  ]
+ ],
+ [
+  "Kepler’s third law",
+  "The square of a planet’s orbital period is proportional to the cube of its average distance from the Sun.",
+  []
+ ],
+ [
+  "Arcsecond",
+  "One sixtieth of a minute of arc, or 1/3600 of a degree: the width of a coin seen from about 5 km.",
+  [
+   "arcseconds",
+   "seconds of arc",
+   "second of arc"
+  ]
+ ],
+ [
+  "Opposition",
+  "The time when a planet is on the opposite side of the Earth from the Sun, and usually at its closest and brightest.",
+  []
  ]
 ];

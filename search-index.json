@@ -34,6 +34,23 @@
     "type": "tutorial"
   },
   {
+    "slug": "how-far-is-the-sun",
+    "url": "articles/how-far-is-the-sun.html",
+    "title": "How Far Is the Sun? Half Moons, Transits of Venus and Radar Echoes",
+    "summary": "From Aristarchus’s half Moon and Kepler’s scaleless map to the transits of Venus that sent Cook to Tahiti and Le Gentil to Pondicherry, and radar echoes that finally fixed the Sun’s distance.",
+    "subject": "Science",
+    "tags": [
+      "measurement",
+      "astronomy",
+      "parallax",
+      "transit-of-venus",
+      "astronomical-unit",
+      "history-of-science"
+    ],
+    "date": "2026-11-19",
+    "type": "tutorial"
+  },
+  {
     "slug": "how-far-is-the-moon",
     "url": "articles/how-far-is-the-moon.html",
     "title": "How Far Is the Moon? Shadows, Parallax and Mirrors on the Moon",
