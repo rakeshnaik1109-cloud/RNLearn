@@ -2879,5 +2879,47 @@ window.RNLEARN_GLOSSARY = [
   "Cavity resonator",
   "A closed metal box in which microwaves bounce back and forth and build up only at particular frequencies set by its size.",
   []
+ ],
+ [
+  "Gravitational constant",
+  "The number G in Newton’s law of gravity, setting how strongly two masses attract: about 6.674 × 10⁻¹¹ m³ kg⁻¹ s⁻².",
+  []
+ ],
+ [
+  "Acceleration due to gravity",
+  "The rate at which falling objects speed up near a body’s surface; about 9.8 m/s² on Earth. Symbol: g.",
+  []
+ ],
+ [
+  "Torsion balance",
+  "A rod hung from a thin wire or fibre, which twists slightly when tiny forces act on the rod; used to measure very small forces.",
+  [
+   "torsion balances"
+  ]
+ ],
+ [
+  "Plumb line",
+  "A weight hung on a string, which hangs along the local direction of gravity: the vertical.",
+  [
+   "plumb lines",
+   "plumb bob"
+  ]
+ ],
+ [
+  "Contour line",
+  "A line on a map joining points of equal height above sea level.",
+  [
+   "contour lines"
+  ]
+ ],
+ [
+  "Isostasy",
+  "The way the Earth’s crust floats on the denser rock beneath, so that mountains have deep roots of lighter rock, like icebergs in water.",
+  []
+ ],
+ [
+  "Density",
+  "Mass divided by volume; how much matter is packed into a given space. Water has a density of 1 g/cm³.",
+  []
  ]
 ];
