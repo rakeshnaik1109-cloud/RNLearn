@@ -2702,5 +2702,110 @@
     "term": "Chain of custody",
     "definition": "The documented record of who collected, handled and stored a sample, needed for it to be accepted as legal evidence.",
     "forms": []
+  },
+  {
+    "term": "Coherence",
+    "definition": "The ability of light waves to keep a steady phase relationship, so that they can interfere and form fringes.",
+    "forms": [
+      "coherent"
+    ]
+  },
+  {
+    "term": "Coherence length",
+    "definition": "The largest path difference over which two parts of a light beam can still interfere; roughly the wavelength squared divided by the spectral width.",
+    "forms": [
+      "coherence lengths"
+    ]
+  },
+  {
+    "term": "Interference",
+    "definition": "The adding together of two or more waves, giving bright bands where crests meet crests and dark bands where crests meet troughs.",
+    "forms": []
+  },
+  {
+    "term": "Speckle",
+    "definition": "A random pattern of bright and dark grains formed when coherent light is scattered by a rough surface or a random medium.",
+    "forms": [
+      "laser speckle"
+    ]
+  },
+  {
+    "term": "Speckle contrast",
+    "definition": "The spread of brightness in a speckle pattern divided by its average; 1 for fully developed speckle.",
+    "forms": []
+  },
+  {
+    "term": "Etalon",
+    "definition": "Two parallel, partly reflecting surfaces that make light interfere with itself; also an accidental one formed by any window or plate.",
+    "forms": [
+      "etalons",
+      "Fabry–Pérot etalon"
+    ]
+  },
+  {
+    "term": "Numerical aperture",
+    "definition": "A measure of the range of angles a lens or fibre accepts; larger values give finer detail and smaller speckle grains.",
+    "forms": []
+  },
+  {
+    "term": "Anti-reflection coating",
+    "definition": "Thin layers on an optical surface designed so that reflected waves cancel, reducing the reflection.",
+    "forms": [
+      "AR coating",
+      "AR coatings",
+      "anti-reflection coatings"
+    ]
+  },
+  {
+    "term": "Optical isolator",
+    "definition": "A one-way valve for light, using the Faraday effect and polarisers to block light travelling backwards.",
+    "forms": [
+      "isolator",
+      "isolators",
+      "optical isolators"
+    ]
+  },
+  {
+    "term": "Brewster’s angle",
+    "definition": "The angle of incidence at which light polarised in the plane of incidence is not reflected; about 56° for glass.",
+    "forms": [
+      "Brewster angle"
+    ]
+  },
+  {
+    "term": "Spatial filter",
+    "definition": "A lens and a small pinhole used to remove unwanted scattered light from a laser beam, leaving a smooth beam.",
+    "forms": [
+      "spatial filters"
+    ]
+  },
+  {
+    "term": "Beam dump",
+    "definition": "A light-absorbing trap used to safely catch unwanted laser beams and reflections.",
+    "forms": [
+      "beam dumps"
+    ]
+  },
+  {
+    "term": "Modal noise",
+    "definition": "Fluctuations caused by speckle inside a multimode optical fibre when the fibre moves or changes temperature.",
+    "forms": []
+  },
+  {
+    "term": "Multimode fibre",
+    "definition": "An optical fibre with a core wide enough to carry light along many different paths, or modes.",
+    "forms": [
+      "multimode fibres"
+    ]
+  },
+  {
+    "term": "Polarisation-maintaining fibre",
+    "definition": "An optical fibre with built-in stress that preserves one direction of polarisation.",
+    "forms": []
+  },
+  {
+    "term": "Lock-in detection",
+    "definition": "Measuring only the part of a signal that rises and falls at the frequency at which the light source is switched, rejecting other light and noise.",
+    "forms": []
   }
 ]

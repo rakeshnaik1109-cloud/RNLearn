@@ -1,5 +1,22 @@
 [
   {
+    "slug": "why-is-my-laser-spot-grainy",
+    "url": "articles/why-is-my-laser-spot-grainy.html",
+    "title": "Why Is My Laser Spot Grainy? Speckle, Stray Fringes and Other Gremlins of the Optics Lab",
+    "summary": "Why laser light looks grainy, why stripes drift across your images and why lasers get noisy: speckle, etalons, ghosts, dust rings, fibre noise and vibration, and how to beat each one.",
+    "subject": "Science",
+    "tags": [
+      "optics",
+      "physics",
+      "experiments",
+      "coherence",
+      "speckle",
+      "lasers"
+    ],
+    "date": "2026-11-29",
+    "type": "tutorial"
+  },
+  {
     "slug": "how-dna-paternity-tests-work",
     "url": "articles/how-dna-paternity-tests-work.html",
     "title": "Who’s the Father? How a DNA Paternity Test Works",

@@ -44,6 +44,7 @@ A 12-part series on how people measured the Earth, the Moon, the Sun, light, gra
 
 ### Standalone Tutorials
 - *Who's the Father? How a DNA Paternity Test Works* (DNA basics, inheritance, blood groups & the Chaplin case, Jeffreys, STRs, PCR & capillary electrophoresis, the paternity index & Bayes, tricky cases, Indian law)
+- *Why Is My Laser Spot Grainy? Speckle, Stray Fringes and Other Gremlins of the Optics Lab* (coherence, speckle statistics & reduction, accidental etalons, ghosts & back-reflections, dust rings & spatial filters, fibre noise, vibration, detector artifacts, speckle as a tool, troubleshooting guide)
 
 ---
 

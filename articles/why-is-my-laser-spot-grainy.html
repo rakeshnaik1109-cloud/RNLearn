@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why Is My Laser Spot Grainy? Speckle, Stray Fringes and Other Gremlins of the Optics Lab — RNLearn</title>
+  <meta name="description" content="Why laser light looks grainy, why stripes drift across your images and why lasers get noisy: speckle, etalons, ghosts, dust rings, fibre noise and vibration, and how to beat each one.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/why-is-my-laser-spot-grainy.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Why Is My Laser Spot Grainy? Speckle, Stray Fringes and Other Gremlins of the Optics Lab — RNLearn">
+  <meta property="og:description" content="Why laser light looks grainy, why stripes drift across your images and why lasers get noisy: speckle, etalons, ghosts, dust rings, fibre noise and vibration, and how to beat each one.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/why-is-my-laser-spot-grainy.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Why Is My Laser Spot Grainy? Speckle, Stray Fringes and Other Gremlins of the Optics Lab — RNLearn">
+  <meta name="twitter:description" content="Why laser light looks grainy, why stripes drift across your images and why lasers get noisy: speckle, etalons, ghosts, dust rings, fibre noise and vibration, and how to beat each one.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Why Is My Laser Spot Grainy? Speckle, Stray Fringes and Other Gremlins of the Optics Lab",
+    "description": "Why laser light looks grainy, why stripes drift across your images and why lasers get noisy: speckle, etalons, ghosts, dust rings, fibre noise and vibration, and how to beat each one.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-29",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/why-is-my-laser-spot-grainy.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/science.html" class="post-subject-tag" data-subject="science">Science</a>
+        </div>
+        <h1 class="article-title">Why Is My Laser Spot Grainy? Speckle, Stray Fringes and Other Gremlins of the Optics Lab</h1>
+        <p class="article-standfirst">
+          Speckle, unwanted fringes, ghost spots and rings around dust: most of the gremlins of the optics lab share one cause. Here is what it is, how to recognise each problem, and how to make it go away.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-29">29 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>31 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. The Grainy Spot</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Coherence in Five Minutes</a></li>
+              <li><a class="toc-link" href="#section-4">4. Speckle: Light Interfering with Itself</a></li>
+              <li><a class="toc-link" href="#section-5">5. Try It Yourself: Speckle and Your Eyesight</a></li>
+              <li><a class="toc-link" href="#section-6">6. How to Get Rid of Speckle</a></li>
+              <li><a class="toc-link" href="#section-7">7. Unwanted Fringes: The Accidental Etalon</a></li>
+              <li><a class="toc-link" href="#section-8">8. Ghosts and Back-Reflections</a></li>
+              <li><a class="toc-link" href="#section-9">9. Dust Rings and the Spatial Filter</a></li>
+              <li><a class="toc-link" href="#section-10">10. Gremlins in Optical Fibres</a></li>
+              <li><a class="toc-link" href="#section-11">11. Shaking, Heat and Stray Light</a></li>
+              <li><a class="toc-link" href="#section-12">12. The Detector Lies Too</a></li>
+              <li><a class="toc-link" href="#section-13">13. When Noise Becomes the Signal</a></li>
+              <li><a class="toc-link" href="#section-14">14. What’s That Artifact? A Troubleshooting Guide</a></li>
+              <li><a class="toc-link" href="#section-15">15. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-16">16. Philosophy Corner</a></li>
+              <li><a class="toc-link" href="#section-17">17. People in This Story</a></li>
+              <li><a class="toc-link" href="#section-18">18. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-19">19. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. The Grainy Spot</h2>
+            <p>Shine a laser pointer at a plain white wall and look closely at the spot. It is not a smooth red disc. It is a restless field of bright and dark grains that seems to sparkle and shimmer, and it changes when you move your head. Now shine a torch at the same wall. The patch of light is perfectly smooth. Same wall, same eyes: so why does the laser look grainy?</p>
+            <p>The grains are called <strong>speckle</strong>, and they are one of the first surprises anyone meets in a laser laboratory. They are also a good introduction to a whole family of problems that make optical experiments harder than they look: unwanted stripes that drift across an image, ghostly second spots, rings around specks of dust, lasers that become noisy when you add a lens, and fringes that vanish when someone walks past the table.</p>
+            <p>This tutorial explains where these "gremlins" come from and how to get rid of them. The surprising thing is how many of them share a single cause. The property that makes laser light so useful, its ability to interfere with itself, is the same property that creates most of these problems. Once you understand that, you can usually work out what is going on in your own experiment, and which trick will cure it. We will finish with the hurdles that have other causes, a troubleshooting guide, and the clever ways scientists have turned some of these "noises" into useful signals.</p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-speckle-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. From Newton’s rings to focusing light through fog, 1704–2007.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Coherence in Five Minutes</h2>
+            <p>Light is a wave. When two light waves meet, they add up. If their crests arrive together, they reinforce each other and make a bright spot; if a crest meets a trough, they cancel and make a dark spot. This is <strong>interference</strong>, and the pattern of bright and dark bands it produces is called a set of <strong>fringes</strong>. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>, <a class="cite" href="#ref-3">3</a>]</span></p>
+            <p>But interference only shows up if the two waves keep a steady relationship with each other. Light from a light bulb is a jumble of countless short wave trains, each lasting a tiny fraction of a nanosecond, with random starting points. Two parts of such a beam keep in step only if they have travelled almost exactly the same distance. If one part has taken a longer route, it meets a <em>different</em>, unrelated wave train, the bright and dark spots shift around randomly billions of times a second, and all we see is the average: no fringes at all. The property of keeping in step is called <strong>coherence</strong>.</p>
+            <p>There are two kinds. <strong>Temporal coherence</strong> asks how much extra path one wave can travel and still interfere with the other. This distance is the <strong>coherence length</strong>, and it depends on how pure the colour is. A source with wavelength λ and spectral width Δλ has a coherence length of roughly <span style="white-space:nowrap">L<sub>c</sub> ≈ λ²/Δλ</span>. White light, spread over hundreds of nanometres, has a coherence length of about a micrometre. A single-frequency laser can have a coherence length of hundreds of metres. <strong>Spatial coherence</strong> asks whether light from different points across the beam keeps in step. A laser beam, coming from a tiny "point" source, is spatially coherent; light from a frosted bulb, coming from a large glowing area, is not. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>, <a class="cite" href="#ref-28">28</a>]</span></p>
+            <figure class="fig" data-fig="fig-coherence-length">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Coherence length decides whether two waves interfere.</strong> Choose a light source and change the extra distance travelled by one of two waves. The dotted lines mark path differences you meet in a real laboratory. A helium–neon laser makes fringes from a 1 mm window; an LED does not. Coherence lengths are typical values; the curve uses one common definition (other books differ by a small factor).
+              </figcaption>
+            </figure>
+            <p>Hold on to this figure, because it explains most of what follows. Every unwanted pattern in this tutorial needs two (or more) waves that have travelled different distances, and a source whose coherence length is longer than that difference. That gives us two general strategies: <strong>stop the second wave from existing</strong> (or from reaching the detector), or <strong>make sure it is no longer coherent</strong> with the first.</p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Speckle: Light Interfering with Itself</h2>
+            <p>A wall, a sheet of paper or a painted surface looks smooth to our fingers, but on the scale of a light wave (about half a micrometre) it is a mountain range. Every tiny patch of the surface scatters a little of the laser light towards your eye. Each patch is at a slightly different height, so the waves from different patches arrive with essentially random phases. At any point on your retina, hundreds of these waves add together. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-7">7</a>]</span></p>
+            <p>Adding waves with random phases is like a random walk. Imagine each wave as an arrow, all the same length, pointing in a random direction. Lay them head to tail. Sometimes, by chance, many arrows point roughly the same way, and the total is long: a bright grain. Often they mostly cancel, and the total is short: a dark grain. A tiny step to one side on your retina, the arrows are slightly different, and so is the total. The result is a random pattern of bright and dark grains.</p>
+            <figure class="fig" data-fig="fig-phasor-walk">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Speckle as a random walk of waves.</strong> Each blue arrow is the wave from one point on a rough surface; the red arrow is their total, whose length squared is the brightness. Press "New surface" a few times, then build a histogram of brightness from hundreds of surfaces.
+              </figcaption>
+            </figure>
+            <p>The statistics of this random walk were worked out in detail by Joseph Goodman, and they have some striking consequences. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>, <a class="cite" href="#ref-1">1</a>]</span></p>
+            <ul>
+              <li><strong>Dark is the most common brightness.</strong> In "fully developed" speckle, the brightness follows a negative exponential distribution: the darkest values are the most likely, and very bright grains are rare.</li>
+              <li><strong>The contrast is 100 per cent.</strong> The <strong>speckle contrast</strong>, defined as the spread of the brightness divided by its average, equals 1. Speckle is not a faint blemish on the image; it is as strong as the image itself.</li>
+              <li><strong>The grain size is set by the optics, not by the surface.</strong> Speckle formed in the space in front of a surface ("objective" speckle) has grains of about λz/D, where D is the size of the illuminated spot and z the viewing distance. Speckle seen through a lens or eye ("subjective" speckle) has grains about the size of the smallest spot the lens can resolve, roughly the wavelength divided by the lens’s <strong>numerical aperture</strong>. Closing down a camera's aperture makes the grains <em>bigger</em>.</li>
+            </ul>
+            <figure class="fig" data-fig="fig-speckle-generator">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. A speckle generator.</strong> The computer illuminates a patch of random surface with a laser and calculates the light pattern far away, the same calculation that nature does. Change the spot size and watch the grains change size. Switch to a smooth mirror and the speckle disappears. Then average several independent patterns and watch the contrast fall.
+              </figcaption>
+            </figure>
+            <p>Grainy patterns of this kind were studied long before the laser: physicists such as Karl Exner and Max von Laue described them in light scattered by many particles. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span> But with ordinary light they were faint and fleeting. Within two years of the first laser in 1960, everyone was seeing them. In 1962 J. D. Rigden and E. I. Gordon at Bell Telephone Laboratories described the "granularity of scattered optical maser light", and Bernard Oliver explained the "sparkling spots" as random diffraction the following year. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>, <a class="cite" href="#ref-5">5</a>, <a class="cite" href="#ref-6">6</a>]</span></p>
+            <p>Speckle is not only about walls. It appears whenever coherent light passes through or reflects from anything random: ground glass, a cloudy liquid, biological tissue, the inside of a multimode optical fibre, or even the dust on a lens. It is the bane of laser projectors, holograms and laser-illuminated microscopes, and it limits how precisely a laser beam's position can be measured on a rough target.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Try It Yourself: Speckle and Your Eyesight</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: does the speckle move with you?</div>
+              <p>Shine a low-power laser pointer at a matte (not shiny) wall a few metres away. Without glasses, look at the spot and move your head slowly from side to side.</p>
+              <ul>
+                <li>If the speckle pattern seems to <strong>move the opposite way</strong> to your head, you are probably <strong>short-sighted</strong>.</li>
+                <li>If it moves <strong>the same way</strong> as your head, you are probably <strong>long-sighted</strong>.</li>
+                <li>If it <strong>stays still</strong>, your eye is focused on the wall.</li>
+              </ul>
+              <p>Now put on your glasses, if you wear them: the motion should mostly stop. The speckle is formed in the space in front of your eye, so it is not "on" the wall. Your eye focuses on one plane, and when that plane is in front of or behind the wall, moving your head produces a parallax, just as a nearby lamp post shifts against distant hills when you walk past. The effect has been used to make simple eye tests. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span></p>
+              <p style="font-size:0.9rem;"><strong>Safety:</strong> use only a low-power pointer (class 1 or 2), point it at a matte wall, and never look into the beam or at its reflection from a mirror, glass or a shiny surface. This is a demonstration, not a substitute for an eye examination.</p>
+            </div>
+          </section>
+
+          <section id="section-6">
+            <h2>6. How to Get Rid of Speckle</h2>
+            <p>A rough surface always gives a speckle pattern with coherent light; we cannot stop the waves interfering. What we can do is <strong>add up many different speckle patterns</strong>, so that the bright grains of one fall on the dark grains of another. If we average N patterns that are truly independent of each other, the contrast falls as <span style="white-space:nowrap">1/√N</span>. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-9">9</a>]</span> That square root is the catch: halving the speckle takes four patterns, but cutting it to a tenth takes a hundred. Every method of reducing speckle is a way of producing many independent patterns within one exposure of the camera or the eye:</p>
+            <ul>
+              <li><strong>Move something.</strong> A rotating or vibrating diffuser in the beam, a vibrating multimode fibre, or a moving projection screen gives a new speckle pattern every few microseconds, and a camera exposure averages them. This is the most common laboratory cure. Commercial "speckle reducers" are often a diffuser on a wobbling mount.</li>
+              <li><strong>Use several wavelengths.</strong> A different colour gives a different pattern, if the surface roughness changes the paths by more than the new coherence length. Broad-spectrum sources such as LEDs and superluminescent diodes produce very little speckle for exactly this reason (see Figure 2).</li>
+              <li><strong>Use two polarisations.</strong> Light polarised one way and light polarised the other way do not interfere, so they make two independent patterns: contrast falls to 1/√2, about 0.71.</li>
+              <li><strong>Use several angles.</strong> Light arriving from different directions makes different patterns. Laser projectors combine angle, polarisation and wavelength diversity. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span></li>
+              <li><strong>Average in software.</strong> If you can take many images while changing the speckle (for example, by slightly moving the sample or the diffuser), averaging them afterwards works too.</li>
+              <li><strong>Use bigger pixels or a bigger aperture.</strong> If many speckle grains fall within one pixel, each pixel averages them. This is why speckle is less obvious with a wide-open camera lens.</li>
+            </ul>
+            <div class="callout callout-warn">
+              <div class="callout-header">The trade-off</div>
+              <p>Every one of these cures works by destroying coherence, or by averaging over it. That is fine for illumination and imaging, but fatal for experiments that <em>need</em> coherence, such as interferometry, holography or coupling light into a single-mode fibre. A rotating diffuser also scatters light into a wider cone, so some power is lost. Choose the cure that removes the coherence you do not need while keeping the coherence you do.</p>
+            </div>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Unwanted Fringes: The Accidental Etalon</h2>
+            <p>Look at a laser beam on a camera, and you will often see faint stripes or rings that drift slowly across the image as the room warms or cools. These are usually caused by an <strong>accidental etalon</strong>.</p>
+            <p>Whenever light passes through a piece of glass, a little is reflected at each surface: about 4 per cent at each uncoated glass–air surface. A small part of the light therefore bounces back from the second surface, back again from the first, and finally goes forward with the main beam. It has travelled an extra distance of twice the glass thickness times its refractive index, 2<em>nd</em>. If that extra distance is shorter than the coherence length, the twice-reflected wave interferes with the main beam. Isaac Newton saw the same effect in the coloured rings between a lens and a flat plate, and in 1899 Charles Fabry and Alfred Pérot turned two parallel, partly reflecting surfaces into a precise instrument now called a <strong>Fabry–Pérot etalon</strong>. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>, <a class="cite" href="#ref-2">2</a>]</span> Every window, filter, cover slip, beamsplitter, lens and camera cover glass in your setup is a weak etalon, whether you want it or not.</p>
+            <figure class="fig" data-fig="fig-etalon">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. A glass plate as an accidental etalon.</strong> The curve shows how the transmitted brightness changes as the plate’s thickness changes by a few hundred nanometres, as happens when it warms up. Try an anti-reflection coating, a wedge, or a source with a short coherence length, and watch the ripple disappear.
+              </figcaption>
+            </figure>
+            <p>Two features make these fringes so troublesome. First, they are surprisingly strong: two uncoated surfaces with 4 per cent reflection give a ripple of about 15–16 per cent peak to peak, because interference adds <em>amplitudes</em>, not brightnesses, and the square root of 4 per cent is 20 per cent. Second, they drift. One full fringe passes whenever the optical thickness changes by half a wavelength, a few hundred nanometres. For a window 1 cm thick, a few degrees of warming is enough; so is a slight tilt. A slowly drifting stripe pattern across your data is very often an etalon.</p>
+            <p>The cures, roughly in order of preference:</p>
+            <ul>
+              <li><strong>Anti-reflection (AR) coatings.</strong> Thin layers designed to cancel the reflection at one wavelength or over a band. A single magnesium fluoride layer reduces the reflection to about 1–1.5 per cent; a multilayer "V-coat" optimised for one laser wavelength can reach below 0.25 per cent. Because the fringe strength depends on the amplitude, cutting the reflection by 16 times cuts the ripple by 16 times. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span></li>
+              <li><strong>Wedged optics.</strong> Windows and beamsplitters whose two faces are not parallel, typically by about half a degree. The twice-reflected beam leaves at an angle, separates from the main beam, and can no longer interfere with it.</li>
+              <li><strong>A small tilt.</strong> Tilting a window or a filter by a few degrees sends the reflections off sideways. (Be careful: tilting an interference filter shifts its colour.)</li>
+              <li><strong>Brewster windows.</strong> At Brewster’s angle, about 56° for glass, light polarised in the plane of incidence is not reflected at all. Gas lasers have used Brewster windows for decades. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span></li>
+              <li><strong>Index matching.</strong> A drop of fluid with the same refractive index as the glass, between a sample and a cover slip for example, removes the reflection at that surface entirely.</li>
+              <li><strong>Shorter coherence length.</strong> If you do not need a long coherence length, use a source that does not have one. A thick window gives no fringes with a superluminescent diode.</li>
+              <li><strong>Keep the temperature steady.</strong> If an etalon cannot be removed, at least stop it from drifting.</li>
+            </ul>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Ghosts and Back-Reflections</h2>
+            <p>The same small surface reflections cause two more problems.</p>
+            <p><strong>Ghosts.</strong> A double reflection inside a lens or window can form a faint second image or spot, slightly displaced from the real one. In a camera this appears as a ghost or a lens flare; in a laser setup it appears as a weak second beam that can hit a detector, interfere with the main beam, or make a stray spot that looks like a signal. A ghost usually moves differently from the real image when you tilt the guilty optic, which is how you find it. The cures are the same as for etalons: AR coatings, wedges and tilts. Unwanted stray beams should be caught in a <strong>beam dump</strong>, a black, light-absorbing trap, rather than left to bounce around the room.</p>
+            <p><strong>Back-reflections into the laser.</strong> Lasers, especially semiconductor diode lasers, are extremely sensitive to light reflected back into them. Even a fraction of a per cent of returning light can make the laser jump between frequencies ("mode hops"), increase its intensity noise, broaden or narrow its linewidth unpredictably, or in extreme cases become chaotic. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>, <a class="cite" href="#ref-15">15</a>]</span> A classic sign is that the laser becomes noisy as soon as you put a lens or fibre in front of it.</p>
+            <p>The cures:</p>
+            <ul>
+              <li><strong>An optical isolator.</strong> This is a one-way valve for light, based on an effect Michael Faraday discovered in 1845: a magnetic field along a piece of special glass rotates the polarisation of light passing through it. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span> The clever part is that the rotation is in the same direction whichever way the light travels. Light going forward through a polariser is rotated by 45° and passes a second polariser set at 45°. Reflected light coming back is rotated by another 45°, arrives at 90° to the first polariser, and is blocked. A single isolator typically cuts the returning light by a factor of a thousand to ten thousand (30–40 decibels).</li>
+              <li><strong>Angled fibre connectors.</strong> The flat end of an ordinary fibre connector reflects light straight back. "APC" connectors are polished at an angle of 8°, so the reflected light leaves the fibre core at an angle and is lost. They are usually coloured green.</li>
+              <li><strong>Tilt everything slightly.</strong> No surface should be exactly perpendicular to the beam unless it must be.</li>
+            </ul>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Dust Rings and the Spatial Filter</h2>
+            <p>Look carefully at an expanded laser beam on a white card and you will often see sets of concentric rings, like little targets, scattered over it. Each one is caused by a speck of dust, a scratch or a fingerprint on one of the optics. The speck scatters a small wave that spreads out in all directions and interferes with the main beam, drawing a "bullseye" of bright and dark rings. It is the same diffraction that produces the famous bright spot in the centre of a round shadow, predicted by Fresnel's wave theory and found by Arago in 1818. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+            <p>The first cure is to clean the optics, gently and with the right materials (dry blowing first, then lens tissue and solvent, never a dry wipe that grinds grit into a coating). But no beam is perfectly clean, so a second tool is used constantly: the <strong>spatial filter</strong>.</p>
+            <figure class="fig" data-fig="fig-spatial-filter">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. Cleaning a beam with a spatial filter.</strong> Dust adds rings to a smooth Gaussian laser beam. A lens focuses the beam onto a tiny pinhole: the smooth part of the beam goes through, while the light scattered by the dust is focused off to the side and blocked. Change the pinhole size: too small wastes power, too large lets the rings through.
+              </figcaption>
+            </figure>
+            <p>The idea is that a lens sorts light by direction. A smooth, parallel beam is focused to a tiny spot in the lens’s focal plane. Light that has been scattered by dust is travelling at slight angles, so it is focused to points away from the centre. A pinhole placed exactly at the focus passes the clean beam and blocks the scattered light. A second lens then makes the beam parallel again. A pinhole about one and a half to two times the diameter of the focused spot passes almost all the power while removing most of the noise. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>, <a class="cite" href="#ref-2">2</a>]</span> Spatial filters are delicate to align: the pinhole must be positioned to within a few micrometres. But the clean, smooth beam they produce is worth the effort for holography, interferometry and imaging.</p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Gremlins in Optical Fibres</h2>
+            <p>Optical fibres are wonderfully convenient, but they bring their own problems.</p>
+            <ul>
+              <li><strong>Modal noise.</strong> A <strong>multimode fibre</strong> has a large core in which light can travel along many different paths ("modes"), each with a slightly different length. At the far end these paths interfere, producing a speckle pattern. If the fibre is bent, warmed or touched, the path lengths change and the speckle pattern shifts. Anything that does not capture all the light equally, such as a small detector, a connector with a slight offset, or a polariser, then sees the power fluctuate. Richard Epworth named this <strong>modal noise</strong> in 1978. <span class="cite-group">[<a class="cite" href="#ref-17">17</a>]</span> The cures are a single-mode fibre, a broadband source (whose coherence is too short for the paths to interfere), capturing all the light, or a deliberately vibrated fibre that averages the speckle.</li>
+              <li><strong>Polarisation changes.</strong> An ordinary single-mode fibre does not keep light's polarisation. Bends, twists, stress and temperature changes turn it in unpredictable ways, so the light that leaves the fibre can drift between polarisation states as the fibre moves. After a polariser or a polarisation-sensitive component, this appears as a slowly drifting power. The cures are <strong>polarisation-maintaining fibre</strong>, which has built-in stress that holds one polarisation, taping fibres down, and controlling the temperature.</li>
+              <li><strong>Back-reflections at connectors.</strong> Flat connectors reflect light back towards the laser (section 8); angled APC connectors avoid this.</li>
+              <li><strong>Cladding light.</strong> Light launched into a fibre's cladding instead of its core can travel some distance and then leak out, adding a hazy background. A short loop of tightly coiled fibre, or a "cladding mode stripper", removes it.</li>
+            </ul>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Shaking, Heat and Stray Light</h2>
+            <p>Not every gremlin comes from coherence. Some come from the plain fact that optical experiments measure distances to a fraction of a wavelength.</p>
+            <p><strong>Vibration and air currents.</strong> In an interferometer, moving a mirror by half a wavelength, about 300 nanometres, shifts the fringe pattern by one whole fringe. That is about a hundredth of the width of a human hair. Footsteps, traffic, pumps, fans and air conditioning shake ordinary benches by far more than that. If the fringes move during a camera exposure, they blur and the contrast drops; if they move between measurements, the data jump around. Moving air is almost as bad, because warm and cool air bend light by slightly different amounts. In 1887 Albert Michelson and Edward Morley floated their interferometer on a massive stone slab resting on a bath of mercury, to isolate it from the vibrations of the building. <span class="cite-group">[<a class="cite" href="#ref-18">18</a>]</span> Today the same idea is built into the <strong>optical table</strong>: a heavy, stiff, damped honeycomb table resting on air-filled legs that soak up vibrations from the floor.</p>
+            <figure class="fig" data-fig="fig-vibration">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 7. Vibration washes out interference fringes.</strong> A mirror in an interferometer vibrates at 30 Hz. The live view shows the fringes jittering; the photo shows what the camera records during its exposure. Short exposures freeze the fringes at random positions; long exposures smear them out. A floating table reduces the vibration.
+              </figcaption>
+            </figure>
+            <p>The cures are a good optical table, short and rigid mounts close to the table surface, covers or tubes around the beam paths to stop air currents, keeping people and fans away during measurements, and short exposures or fast measurements where possible.</p>
+            <p><strong>Temperature drift.</strong> Metal mounts expand and contract with temperature, so alignment slowly "walks" over hours. Lasers change power and wavelength as they warm up, and etalon fringes drift. A good rule is to switch the laser on well before measuring, keep the room temperature steady, and record a reference measurement (for example, a small part of the beam split off to a second detector) so that you can correct for power drift. In high-power lasers the beam itself heats the optics, making them act as weak lenses that change the focus as the power changes: this is called <strong>thermal lensing</strong>. <span class="cite-group">[<a class="cite" href="#ref-29">29</a>]</span></p>
+            <p><strong>Stray light.</strong> Room lights, computer screens, indicator LEDs and scattered laser light can all reach a sensitive detector. Turning off the lights helps, but the professional answers are black baffles and tubes, filters that pass only the laser wavelength, and <strong>lock-in detection</strong>: switching the laser on and off at a known frequency and measuring only the part of the signal that follows it.</p>
+            <p><strong>Polarisation surprises.</strong> Mirrors used at an angle change the polarisation of light slightly, and stressed glass in lenses and windows acts as a weak wave plate. If an experiment depends on polarisation, check it at several points along the beam, not just at the laser.</p>
+          </section>
+
+          <section id="section-12">
+            <h2>12. The Detector Lies Too</h2>
+            <p>Finally, the camera or detector at the end of the experiment can create its own artifacts.</p>
+            <ul>
+              <li><strong>Saturation.</strong> Every detector has a maximum signal. Above it, peaks are flattened, and an intensity measurement is simply wrong. In some cameras, an over-exposed pixel spills charge into its neighbours, producing streaks called <strong>blooming</strong>. A simple test: halve the light with a filter. If the signal does not halve, the detector was saturated.</li>
+              <li><strong>Nonlinearity.</strong> Even below saturation, a detector's response may not be exactly proportional to the light. Check it with calibrated filters before trusting ratios of brightness.</li>
+              <li><strong>Hot pixels, dark current and fixed patterns.</strong> Some pixels always read high, and every pixel adds a little signal even in the dark. Taking a "dark frame" with the light blocked, and subtracting it, removes most of this.</li>
+              <li><strong>Aliasing and moiré.</strong> When an image contains detail finer than the pixel spacing, the camera records false, wavy patterns. The rule is that the finest detail you want to see must cover at least two pixels.</li>
+              <li><strong>Etalons inside the camera.</strong> A camera's protective cover glass is an etalon (section 7). Some thin, back-illuminated sensors also show fringes in the near infrared, where the silicon becomes partly transparent and the sensor itself acts as an etalon.</li>
+              <li><strong>Single-photon detectors.</strong> Detectors that count individual photons, used in quantum optics and very faint-light experiments, register occasional "dark counts" with no light at all, and some produce false "afterpulses" shortly after a real detection. Both must be measured and accounted for, and stray light must be controlled with extreme care, since a single stray photon is a signal. <span class="cite-group">[<a class="cite" href="#ref-19">19</a>]</span></li>
+            </ul>
+          </section>
+
+          <section id="section-13">
+            <h2>13. When Noise Becomes the Signal</h2>
+            <p>One scientist's noise is another's data. Several important techniques work precisely <em>because</em> of speckle and coherence.</p>
+            <ul>
+              <li><strong>Speckle interferometry in astronomy.</strong> The atmosphere breaks a star's image into a cloud of speckles that changes many times a second. In 1970 Antoine Labeyrie showed that by taking many very short exposures and analysing the speckle statistics mathematically, astronomers could recover detail down to the telescope's full theoretical resolution. In 1971 the method was used on the 200-inch telescope at Mount Palomar to study bright stars at the telescope’s full resolution. <span class="cite-group">[<a class="cite" href="#ref-20">20</a>, <a class="cite" href="#ref-21">21</a>]</span></li>
+              <li><strong>Electronic speckle pattern interferometry (ESPI).</strong> Compare the speckle pattern of an object before and after it is stressed, and the differences reveal deformations smaller than a micrometre. Developed at Loughborough by J. N. Butters and J. A. Leendertz around 1971, ESPI is used to test car parts, aircraft panels and works of art. <span class="cite-group">[<a class="cite" href="#ref-22">22</a>]</span></li>
+              <li><strong>Seeing blood flow.</strong> When laser light falls on living tissue, moving blood cells make the speckle pattern flicker. During a camera exposure, the flicker blurs the speckle, so its contrast drops where blood flows fastest. Fercher and Briers used this in 1981 to map blood flow in the retina, and today laser speckle contrast imaging is used to watch blood flow in the brain and skin. <span class="cite-group">[<a class="cite" href="#ref-23">23</a>, <a class="cite" href="#ref-24">24</a>]</span></li>
+              <li><strong>Seeing through fog.</strong> Light passing through a layer of white paint becomes a speckle pattern, not a focus. In 2007 Ivo Vellekoop and Allard Mosk shaped the incoming laser light with a programmable device so that all the scattered waves arrived in step at one point behind the layer, turning the speckle into a single bright focus. This "wavefront shaping" is now an active field of research aimed at imaging deep inside biological tissue. <span class="cite-group">[<a class="cite" href="#ref-25">25</a>]</span></li>
+            </ul>
+            <p>And, of course, the very same interference that creates unwanted etalon fringes is the basis of precise interferometers, laser cavities and optical filters. The physics is the same; what matters is whether you designed it in or let it sneak in.</p>
+          </section>
+
+          <section id="section-14">
+            <h2>14. What’s That Artifact? A Troubleshooting Guide</h2>
+            <p>When something odd appears in your data, choose the symptom below for its likely cause, a quick test and the usual fixes.</p>
+            <figure class="fig" data-fig="fig-artifact-doctor">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 8. A field guide to optical gremlins.</strong> Choose a symptom.
+              </figcaption>
+            </figure>
+            <p>A few general habits prevent most problems before they start:</p>
+            <ol>
+              <li><strong>Ask "what interferes with what?"</strong> For every pattern, find the two waves and their path difference, then compare it with the coherence length of your source.</li>
+              <li><strong>Change one thing at a time</strong>: tap, tilt, block or warm one component and watch what happens. An artifact that follows a component belongs to that component.</li>
+              <li><strong>Use the least coherent source that does the job</strong>, and AR-coated, wedged optics wherever possible.</li>
+              <li><strong>Tilt surfaces slightly</strong>, dump every stray beam, and isolate lasers from back-reflections.</li>
+              <li><strong>Keep it clean, stiff, short and covered</strong>: clean optics, rigid mounts, short beam paths and enclosures against air currents.</li>
+              <li><strong>Measure the background</strong>: take dark frames, block the beam, and check that the detector responds linearly.</li>
+            </ol>
+            <div class="callout callout-warn">
+              <div class="callout-header">Stray beams are a safety problem too</div>
+              <p>An unexpected reflection is not only bad for data: from a powerful laser it can blind. Keep beams at a fixed height well below eye level, never bend down to the level of the beam, remove watches and rings, block every stray reflection with a beam dump, and wear eye protection rated for your laser's wavelength and power. Follow your laboratory's laser safety rules and the international standard for laser classes. <span class="cite-group">[<a class="cite" href="#ref-27">27</a>]</span></p>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Legend and Record</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: is speckle a sign of dirty optics or a bad laser?</div>
+              <p><strong>The legend:</strong> speckle means your optics are dirty or your laser is poor, and a better, "cleaner" laser will make it go away.</p>
+              <p><strong>The record:</strong> it is the other way round. Speckle appears with perfectly clean optics, because it comes from the roughness of the surface being illuminated, and it is strongest with the <em>best</em> lasers. A single-frequency laser with a long coherence length produces speckle of the full 100 per cent contrast. Cheaper multimode lasers, which emit several wavelengths at once, can produce slightly less, if the surface is rough enough for the different wavelengths to make different patterns. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+              <p><strong>The grain of truth:</strong> dust and scratches really do add patterns of their own: the ring patterns of section 9. They are a different effect from speckle, with a different cure.</p>
+              <p><strong>A second legend:</strong> "the speckle is on the wall". It is not. It is formed in the space in front of the wall and depends on where you look from, which is why it moves when you move your head (section 5), and why two people see different speckle patterns on the same spot.</p>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Philosophy Corner</h2>
+            <div class="callout callout-philosophy">
+              <div class="callout-header">Philosophy Corner: artifact or discovery?</div>
+              <p>Every measuring instrument adds something of its own to what it measures. The difficult question is always: is this pattern telling me about the world, or about my apparatus?</p>
+              <p>History has painful examples. In 1990 the newly launched Hubble Space Telescope turned out to have a mirror ground very precisely to the wrong shape. The investigation traced it to a test instrument that had been set up using a laser reflection: the laser was supposed to reflect from the end of a measuring rod, but it reflected from a worn spot in the black paint on a cap over the rod instead. A lens in the test instrument ended up about 1.3 mm out of position. Other tests hinted at the problem, but they were set aside because the main instrument was trusted. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span> In 2011 the OPERA experiment reported neutrinos apparently travelling faster than light. Among the faults later identified was a badly connected optical fibre cable in the timing system, and the corrected measurement agreed with the speed of light. <span class="cite-group">[<a class="cite" href="#ref-26">26</a>]</span></p>
+              <p>Both stories show the same lesson: an artifact is most dangerous when it gives the answer you expect, or a very exciting one. Good experimenters therefore try to break their own results: they change one component, repeat with a different method, and ask what else could produce the same pattern. The speckle story adds a twist: the same pattern can be noise in one experiment and the measurement itself in another. Whether something is "signal" or "noise" is not a property of the light. It depends on the question you are asking.</p>
+              <p><strong>Questions to think about:</strong> If every instrument adds artifacts, how can we ever be sure we are seeing the world rather than our tools? Is it possible to know you have found <em>all</em> the artifacts in an experiment?</p>
+            </div>
+          </section>
+          <section id="section-17">
+            <h2>17. People in This Story</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">David Brewster</td>
+                <td style="padding:0.6rem 0.8rem;">1781–1868<br>Scotland</td>
+                <td style="padding:0.6rem 0.8rem;">Brewster’s angle (1815)</td>
+                <td style="padding:0.6rem 0.8rem;">Found the angle at which one polarisation is not reflected, used in reflection-free windows.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Augustin-Jean Fresnel</td>
+                <td style="padding:0.6rem 0.8rem;">1788–1827<br>France</td>
+                <td style="padding:0.6rem 0.8rem;">Wave theory of diffraction (1818)</td>
+                <td style="padding:0.6rem 0.8rem;">Explained diffraction patterns, including the rings around small obstacles.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Michael Faraday</td>
+                <td style="padding:0.6rem 0.8rem;">1791–1867<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">The Faraday effect (1845)</td>
+                <td style="padding:0.6rem 0.8rem;">Discovered magnetic rotation of polarisation, the basis of optical isolators.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Charles Fabry &amp; Alfred Pérot</td>
+                <td style="padding:0.6rem 0.8rem;">1867–1945 / 1863–1925<br>France</td>
+                <td style="padding:0.6rem 0.8rem;">The Fabry–Pérot etalon (1899)</td>
+                <td style="padding:0.6rem 0.8rem;">Turned interference between two parallel surfaces into a precise instrument.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Theodore Maiman</td>
+                <td style="padding:0.6rem 0.8rem;">1927–2007<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">The first laser (1960)</td>
+                <td style="padding:0.6rem 0.8rem;">Built the ruby laser, whose coherent light made speckle impossible to ignore.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Joseph W. Goodman</td>
+                <td style="padding:0.6rem 0.8rem;">born 1936<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Statistics of speckle</td>
+                <td style="padding:0.6rem 0.8rem;">Worked out the mathematics of speckle and how to reduce it.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Antoine Labeyrie</td>
+                <td style="padding:0.6rem 0.8rem;">born 1943<br>France</td>
+                <td style="padding:0.6rem 0.8rem;">Speckle interferometry (1970)</td>
+                <td style="padding:0.6rem 0.8rem;">Turned atmospheric speckle into a way to see fine detail in stars.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-18">
+            <h2>18. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about speckle, coherence and the other gremlins of the optics lab.</p>
+            <figure class="fig" data-fig="fig-quiz-speckle">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-19">
+            <h2>19. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Goodman, Joseph W.</strong> (2020). <em>Speckle Phenomena in Optics: Theory and Applications</em>. 2nd ed. Bellingham, WA: SPIE Press.</li>
+              <li id="ref-2"><strong>Hecht, Eugene.</strong> (2017). <em>Optics</em>. 5th ed. Harlow: Pearson.</li>
+              <li id="ref-3"><strong>Saleh, Bahaa E. A. &amp; Teich, Malvin C.</strong> (2019). <em>Fundamentals of Photonics</em>. 3rd ed. Hoboken, NJ: Wiley.</li>
+              <li id="ref-4"><strong>Maiman, T. H.</strong> (1960). "Stimulated optical radiation in ruby." <em>Nature</em>, 187: 493–494.</li>
+              <li id="ref-5"><strong>Rigden, J. D. &amp; Gordon, E. I.</strong> (1962). "The granularity of scattered optical maser light." <em>Proceedings of the IRE</em>, 50(11): 2367–2368.</li>
+              <li id="ref-6"><strong>Oliver, B. M.</strong> (1963). "Sparkling spots and random diffraction." <em>Proceedings of the IEEE</em>, 51(1): 220–221.</li>
+              <li id="ref-7"><strong>Goodman, J. W.</strong> (1975). "Statistical properties of laser speckle patterns." In J. C. Dainty (ed.), <em>Laser Speckle and Related Phenomena</em>, Topics in Applied Physics, vol. 9, pp. 9–75. Berlin: Springer.</li>
+              <li id="ref-8"><strong>University of Maryland Physics Lecture-Demonstration Facility.</strong> "O1-11: Test of nearsightedness vs. farsightedness."</li>
+              <li id="ref-9"><strong>Trisnadi, Jahja I.</strong> (2002). "Speckle contrast reduction in laser projection displays." In <em>Projection Displays VIII</em>, Proceedings of SPIE, vol. 4657.</li>
+              <li id="ref-10"><strong>Fabry, C. &amp; Pérot, A.</strong> (1899). "Théorie et applications d’une nouvelle méthode de spectroscopie interférentielle." <em>Annales de Chimie et de Physique</em>, 7th series, 16: 115–144.</li>
+              <li id="ref-11"><strong>Macleod, H. Angus.</strong> (2018). <em>Thin-Film Optical Filters</em>. 5th ed. Boca Raton: CRC Press.</li>
+              <li id="ref-12"><strong>Brewster, David.</strong> (1815). "On the laws which regulate the polarisation of light by reflexion from transparent bodies." <em>Philosophical Transactions of the Royal Society</em>, 105: 125–159.</li>
+              <li id="ref-13"><strong>Faraday, Michael.</strong> (1846). "On the magnetization of light and the illumination of magnetic lines of force." <em>Philosophical Transactions of the Royal Society</em>, 136: 1–20.</li>
+              <li id="ref-14"><strong>Lang, R. &amp; Kobayashi, K.</strong> (1980). "External optical feedback effects on semiconductor injection laser properties." <em>IEEE Journal of Quantum Electronics</em>, 16(3): 347–355.</li>
+              <li id="ref-15"><strong>Tkach, R. W. &amp; Chraplyvy, A. R.</strong> (1986). "Regimes of feedback effects in 1.5-µm distributed feedback lasers." <em>Journal of Lightwave Technology</em>, 4(11): 1655–1661.</li>
+              <li id="ref-16"><strong>Allen, Lew et al.</strong> (1990). <em>The Hubble Space Telescope Optical Systems Failure Report</em>. NASA Technical Memorandum 103443.</li>
+              <li id="ref-17"><strong>Epworth, R. E.</strong> (1978). "The phenomenon of modal noise in analogue and digital optical fibre systems." <em>Proceedings of the 4th European Conference on Optical Communication</em>, Genoa, pp. 492–501.</li>
+              <li id="ref-18"><strong>Michelson, Albert A. &amp; Morley, Edward W.</strong> (1887). "On the relative motion of the Earth and the luminiferous ether." <em>American Journal of Science</em>, 34(203): 333–345.</li>
+              <li id="ref-19"><strong>Hadfield, Robert H.</strong> (2009). "Single-photon detectors for optical quantum information applications." <em>Nature Photonics</em>, 3: 696–705.</li>
+              <li id="ref-20"><strong>Labeyrie, A.</strong> (1970). "Attainment of diffraction limited resolution in large telescopes by Fourier analysing speckle patterns in star images." <em>Astronomy and Astrophysics</em>, 6: 85–87.</li>
+              <li id="ref-21"><strong>Gezari, D. Y., Labeyrie, A. &amp; Stachnik, R. V.</strong> (1972). "Speckle interferometry: diffraction-limited measurements of nine stars with the 200-inch telescope." <em>Astrophysical Journal</em>, 173: L1–L5.</li>
+              <li id="ref-22"><strong>Butters, J. N. &amp; Leendertz, J. A.</strong> (1971). "Speckle pattern and holographic techniques in engineering metrology." <em>Optics &amp; Laser Technology</em>, 3(1): 26–30.</li>
+              <li id="ref-23"><strong>Fercher, A. F. &amp; Briers, J. D.</strong> (1981). "Flow visualization by means of single-exposure speckle photography." <em>Optics Communications</em>, 37(5): 326–330.</li>
+              <li id="ref-24"><strong>Boas, David A. &amp; Dunn, Andrew K.</strong> (2010). "Laser speckle contrast imaging in biomedical optics." <em>Journal of Biomedical Optics</em>, 15(1): 011109.</li>
+              <li id="ref-25"><strong>Vellekoop, I. M. &amp; Mosk, A. P.</strong> (2007). "Focusing coherent light through opaque strongly scattering media." <em>Optics Letters</em>, 32(16): 2309–2311.</li>
+              <li id="ref-26"><strong>OPERA Collaboration (Adam, T. et al.).</strong> (2012). "Measurement of the neutrino velocity with the OPERA detector in the CNGS beam." <em>Journal of High Energy Physics</em>, 2012(10): 093.</li>
+              <li id="ref-27"><strong>International Electrotechnical Commission.</strong> (2014). <em>IEC 60825-1: Safety of laser products – Part 1: Equipment classification and requirements</em>. Geneva: IEC.</li>
+              <li id="ref-28"><strong>Siegman, Anthony E.</strong> (1986). <em>Lasers</em>. Mill Valley, CA: University Science Books.</li>
+              <li id="ref-29"><strong>Koechner, Walter.</strong> (2006). <em>Solid-State Laser Engineering</em>. 6th ed. New York: Springer.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/why-is-my-laser-spot-grainy.js"></script>
+</body>
+</html>

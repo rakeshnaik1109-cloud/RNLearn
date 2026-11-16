@@ -2704,5 +2704,110 @@ window.RNLEARN_GLOSSARY = [
   "Chain of custody",
   "The documented record of who collected, handled and stored a sample, needed for it to be accepted as legal evidence.",
   []
+ ],
+ [
+  "Coherence",
+  "The ability of light waves to keep a steady phase relationship, so that they can interfere and form fringes.",
+  [
+   "coherent"
+  ]
+ ],
+ [
+  "Coherence length",
+  "The largest path difference over which two parts of a light beam can still interfere; roughly the wavelength squared divided by the spectral width.",
+  [
+   "coherence lengths"
+  ]
+ ],
+ [
+  "Interference",
+  "The adding together of two or more waves, giving bright bands where crests meet crests and dark bands where crests meet troughs.",
+  []
+ ],
+ [
+  "Speckle",
+  "A random pattern of bright and dark grains formed when coherent light is scattered by a rough surface or a random medium.",
+  [
+   "laser speckle"
+  ]
+ ],
+ [
+  "Speckle contrast",
+  "The spread of brightness in a speckle pattern divided by its average; 1 for fully developed speckle.",
+  []
+ ],
+ [
+  "Etalon",
+  "Two parallel, partly reflecting surfaces that make light interfere with itself; also an accidental one formed by any window or plate.",
+  [
+   "etalons",
+   "Fabry–Pérot etalon"
+  ]
+ ],
+ [
+  "Numerical aperture",
+  "A measure of the range of angles a lens or fibre accepts; larger values give finer detail and smaller speckle grains.",
+  []
+ ],
+ [
+  "Anti-reflection coating",
+  "Thin layers on an optical surface designed so that reflected waves cancel, reducing the reflection.",
+  [
+   "AR coating",
+   "AR coatings",
+   "anti-reflection coatings"
+  ]
+ ],
+ [
+  "Optical isolator",
+  "A one-way valve for light, using the Faraday effect and polarisers to block light travelling backwards.",
+  [
+   "isolator",
+   "isolators",
+   "optical isolators"
+  ]
+ ],
+ [
+  "Brewster’s angle",
+  "The angle of incidence at which light polarised in the plane of incidence is not reflected; about 56° for glass.",
+  [
+   "Brewster angle"
+  ]
+ ],
+ [
+  "Spatial filter",
+  "A lens and a small pinhole used to remove unwanted scattered light from a laser beam, leaving a smooth beam.",
+  [
+   "spatial filters"
+  ]
+ ],
+ [
+  "Beam dump",
+  "A light-absorbing trap used to safely catch unwanted laser beams and reflections.",
+  [
+   "beam dumps"
+  ]
+ ],
+ [
+  "Modal noise",
+  "Fluctuations caused by speckle inside a multimode optical fibre when the fibre moves or changes temperature.",
+  []
+ ],
+ [
+  "Multimode fibre",
+  "An optical fibre with a core wide enough to carry light along many different paths, or modes.",
+  [
+   "multimode fibres"
+  ]
+ ],
+ [
+  "Polarisation-maintaining fibre",
+  "An optical fibre with built-in stress that preserves one direction of polarisation.",
+  []
+ ],
+ [
+  "Lock-in detection",
+  "Measuring only the part of a signal that rises and falls at the frequency at which the light source is switched, rejecting other light and noise.",
+  []
  ]
 ];
