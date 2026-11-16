@@ -42,6 +42,7 @@ A 12-part series on how people measured the Earth, the Moon, the Sun, light, gra
 2. **Part 2**: *The Shape of the Earth: Squashed Planets, the Metre and Mount Everest* (Newton vs Cassini, Lapland & Peru, the metre, the Great Trigonometrical Survey & Everest)
 3. **Part 3**: *How Far Is the Moon? Shadows, Parallax and Mirrors on the Moon* (Aristarchus, Hipparchus, Ptolemy, Aryabhata, Lalande & Lacaille, radar & lunar laser ranging)
 4. **Part 4**: *How Far Is the Sun? Half Moons, Transits of Venus and Radar Echoes* (Aristarchus’s half Moon, Ptolemy, Kepler’s third law, Cassini & Richer, Halley’s method, the 1761 & 1769 transits, the black drop, Eros, radar & the 2012 AU definition)
+5. **Part 5**: *How Fast Is Light? Jupiter’s Moons, Spinning Wheels and a Defined Constant* (Galileo’s lanterns, Rømer & Huygens, Bradley’s aberration, Fizeau, Foucault, Maxwell, Michelson, Essen, lasers & the 1983 definition)
 
 ### Standalone Tutorials
 - *Who's the Father? How a DNA Paternity Test Works* (DNA basics, inheritance, blood groups & the Chaplin case, Jeffreys, STRs, PCR & capillary electrophoresis, the paternity index & Bayes, tricky cases, Indian law)

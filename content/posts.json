@@ -1,5 +1,31 @@
 [
   {
+    "slug": "how-fast-is-light",
+    "title": "How Fast Is Light? Jupiter’s Moons, Spinning Wheels and a Defined Constant",
+    "summary": "From Galileo’s lanterns and Rømer’s late eclipses of Io to Bradley’s tilted telescope, Fizeau’s toothed wheel, Michelson’s mountains and the laser that made the speed of light exact.",
+    "subject": "Science",
+    "tags": [
+      "measurement",
+      "speed-of-light",
+      "physics",
+      "optics",
+      "astronomy",
+      "history-of-science"
+    ],
+    "date": "2026-11-20",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 20,
+    "series": {
+      "id": "how-we-measured-the-universe",
+      "part": 5
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": false
+  },
+  {
     "slug": "how-far-is-the-sun",
     "title": "How Far Is the Sun? Half Moons, Transits of Venus and Radar Echoes",
     "summary": "From Aristarchus’s half Moon and Kepler’s scaleless map to the transits of Venus that sent Cook to Tahiti and Le Gentil to Pondicherry, and radar echoes that finally fixed the Sun’s distance.",

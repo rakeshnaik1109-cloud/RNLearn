@@ -2855,5 +2855,29 @@ window.RNLEARN_GLOSSARY = [
   "Opposition",
   "The time when a planet is on the opposite side of the Earth from the Sun, and usually at its closest and brightest.",
   []
+ ],
+ [
+  "Speed of light",
+  "The speed at which light travels in a vacuum: exactly 299,792,458 metres per second, by the definition of the metre. Symbol: c.",
+  []
+ ],
+ [
+  "Aberration of starlight",
+  "A small shift in the apparent direction of stars caused by the Earth’s motion through their light, like tilting an umbrella when walking through rain.",
+  [
+   "aberration"
+  ]
+ ],
+ [
+  "Standing wave",
+  "A wave pattern that stays in place, with fixed points of strong and weak vibration, formed when waves bounce back and forth.",
+  [
+   "standing waves"
+  ]
+ ],
+ [
+  "Cavity resonator",
+  "A closed metal box in which microwaves bounce back and forth and build up only at particular frequencies set by its size.",
+  []
  ]
 ];
