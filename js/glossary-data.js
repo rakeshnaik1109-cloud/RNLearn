@@ -2921,5 +2921,43 @@ window.RNLEARN_GLOSSARY = [
   "Density",
   "Mass divided by volume; how much matter is packed into a given space. Water has a density of 1 g/cm³.",
   []
+ ],
+ [
+  "Radioactive dating",
+  "Finding the age of a rock or object by comparing the amounts of a radioactive element and the atoms it decays into.",
+  [
+   "radiometric dating"
+  ]
+ ],
+ [
+  "Isotope",
+  "One of the forms of a chemical element that differ in the number of neutrons in their nuclei, and so in mass, such as uranium-235 and uranium-238.",
+  [
+   "isotopes"
+  ]
+ ],
+ [
+  "Zircon",
+  "A hard, durable mineral that traps uranium but almost no lead when it forms, making it an excellent natural clock.",
+  [
+   "zircons"
+  ]
+ ],
+ [
+  "Mass spectrometer",
+  "An instrument that separates atoms or molecules by mass using electric and magnetic fields, so they can be counted.",
+  [
+   "mass spectrometers"
+  ]
+ ],
+ [
+  "Convection",
+  "The carrying of heat by a moving fluid, such as hot rock slowly rising inside the Earth.",
+  []
+ ],
+ [
+  "Residence time",
+  "The average time a substance stays in a reservoir, such as sodium in the sea, before being removed.",
+  []
  ]
 ];

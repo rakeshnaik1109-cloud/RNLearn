@@ -34,6 +34,23 @@
     "type": "tutorial"
   },
   {
+    "slug": "how-old-is-the-earth",
+    "url": "articles/how-old-is-the-earth.html",
+    "title": "How Old Is the Earth? Salt, Cooling Rocks and Radioactive Clocks",
+    "summary": "From Ussher’s 4004 BC and Buffon’s cooling iron balls to Kelvin’s 100 million years, radioactive clocks and Patterson’s meteorite: how we learned the Earth is 4.54 billion years old.",
+    "subject": "Science",
+    "tags": [
+      "measurement",
+      "geology",
+      "radioactivity",
+      "earth",
+      "deep-time",
+      "history-of-science"
+    ],
+    "date": "2026-11-22",
+    "type": "tutorial"
+  },
+  {
     "slug": "weighing-the-earth",
     "url": "articles/weighing-the-earth.html",
     "title": "Weighing the Earth: Pendulums, a Scottish Mountain and Two Lead Balls",

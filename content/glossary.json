@@ -2919,5 +2919,43 @@
     "term": "Density",
     "definition": "Mass divided by volume; how much matter is packed into a given space. Water has a density of 1 g/cm³.",
     "forms": []
+  },
+  {
+    "term": "Radioactive dating",
+    "definition": "Finding the age of a rock or object by comparing the amounts of a radioactive element and the atoms it decays into.",
+    "forms": [
+      "radiometric dating"
+    ]
+  },
+  {
+    "term": "Isotope",
+    "definition": "One of the forms of a chemical element that differ in the number of neutrons in their nuclei, and so in mass, such as uranium-235 and uranium-238.",
+    "forms": [
+      "isotopes"
+    ]
+  },
+  {
+    "term": "Zircon",
+    "definition": "A hard, durable mineral that traps uranium but almost no lead when it forms, making it an excellent natural clock.",
+    "forms": [
+      "zircons"
+    ]
+  },
+  {
+    "term": "Mass spectrometer",
+    "definition": "An instrument that separates atoms or molecules by mass using electric and magnetic fields, so they can be counted.",
+    "forms": [
+      "mass spectrometers"
+    ]
+  },
+  {
+    "term": "Convection",
+    "definition": "The carrying of heat by a moving fluid, such as hot rock slowly rising inside the Earth.",
+    "forms": []
+  },
+  {
+    "term": "Residence time",
+    "definition": "The average time a substance stays in a reservoir, such as sodium in the sea, before being removed.",
+    "forms": []
   }
 ]

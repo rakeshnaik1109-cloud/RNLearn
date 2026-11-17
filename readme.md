@@ -44,6 +44,7 @@ A 12-part series on how people measured the Earth, the Moon, the Sun, light, gra
 4. **Part 4**: *How Far Is the Sun? Half Moons, Transits of Venus and Radar Echoes* (Aristarchus’s half Moon, Ptolemy, Kepler’s third law, Cassini & Richer, Halley’s method, the 1761 & 1769 transits, the black drop, Eros, radar & the 2012 AU definition)
 5. **Part 5**: *How Fast Is Light? Jupiter’s Moons, Spinning Wheels and a Defined Constant* (Galileo’s lanterns, Rømer & Huygens, Bradley’s aberration, Fizeau, Foucault, Maxwell, Michelson, Essen, lasers & the 1983 definition)
 6. **Part 6**: *Weighing the Earth: Pendulums, a Scottish Mountain and Two Lead Balls* (Galileo, Newton’s guess, Schiehallion & Hutton’s contour lines, Cavendish, Poynting & Boys, the G problem, isostasy & GRACE, weighing the planets)
+7. **Part 7**: *How Old Is the Earth? Salt, Cooling Rocks and Radioactive Clocks* (Ussher, Hutton, Buffon, Halley & Joly’s salt clock, Kelvin & Perry, radioactivity, Boltwood & Holmes, Patterson’s meteorite, the oldest zircons)
 
 ### Standalone Tutorials
 - *Who's the Father? How a DNA Paternity Test Works* (DNA basics, inheritance, blood groups & the Chaplin case, Jeffreys, STRs, PCR & capillary electrophoresis, the paternity index & Bayes, tricky cases, Indian law)
