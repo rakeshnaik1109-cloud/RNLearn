@@ -3054,5 +3054,144 @@ window.RNLEARN_GLOSSARY = [
   "Bootstrap",
   "A way of estimating uncertainty by repeatedly resampling the data with replacement.",
   []
+ ],
+ [
+  "Confusion matrix",
+  "A table counting a classifier’s correct and incorrect predictions for each class: true positives, false positives, false negatives and true negatives in the binary case.",
+  [
+   "confusion matrices"
+  ]
+ ],
+ [
+  "True positive",
+  "A positive case correctly predicted as positive.",
+  [
+   "true positives"
+  ]
+ ],
+ [
+  "False positive",
+  "A negative case wrongly predicted as positive: a false alarm.",
+  [
+   "false positives"
+  ]
+ ],
+ [
+  "False negative",
+  "A positive case wrongly predicted as negative: a miss.",
+  [
+   "false negatives"
+  ]
+ ],
+ [
+  "True positive rate",
+  "Sensitivity or recall: the share of actual positives correctly identified, TP/(TP+FN).",
+  []
+ ],
+ [
+  "Specificity",
+  "The share of actual negatives correctly identified, TN/(TN+FP). Also called true negative rate.",
+  []
+ ],
+ [
+  "Positive predictive value",
+  "Precision: the share of positive predictions that are correct, TP/(TP+FP).",
+  []
+ ],
+ [
+  "Balanced accuracy",
+  "The average of sensitivity and specificity (or of the recalls of all classes), which gives each class equal weight.",
+  []
+ ],
+ [
+  "F1 score",
+  "The harmonic mean of precision and recall, 2TP/(2TP+FP+FN). It ignores true negatives.",
+  [
+   "F1"
+  ]
+ ],
+ [
+  "Matthews correlation coefficient",
+  "The correlation between predicted and actual classes, from −1 to +1, using all four cells of the confusion matrix; MCC.",
+  [
+   "MCC"
+  ]
+ ],
+ [
+  "ROC curve",
+  "A plot of true positive rate against false positive rate as the decision threshold varies; short for receiver operating characteristic.",
+  [
+   "ROC curves",
+   "receiver operating characteristic"
+  ]
+ ],
+ [
+  "AUC",
+  "Area under the ROC curve: the probability that a randomly chosen positive is scored higher than a randomly chosen negative.",
+  []
+ ],
+ [
+  "Precision–recall curve",
+  "A plot of precision against recall as the threshold varies; more informative than the ROC curve when positives are rare.",
+  [
+   "PR curve"
+  ]
+ ],
+ [
+  "Macro averaging",
+  "Averaging a metric over classes with equal weight per class.",
+  [
+   "macro-F1",
+   "macro-averaged"
+  ]
+ ],
+ [
+  "Micro averaging",
+  "Computing a metric from the pooled counts of all classes, so every prediction counts equally; micro-F1 equals accuracy in single-label problems.",
+  [
+   "micro-F1",
+   "micro-averaged"
+  ]
+ ],
+ [
+  "Brier score",
+  "The mean squared difference between predicted probabilities and actual outcomes (0 or 1); lower is better.",
+  []
+ ],
+ [
+  "Mean absolute error",
+  "The average absolute difference between predictions and true values; MAE.",
+  [
+   "MAE"
+  ]
+ ],
+ [
+  "Root mean squared error",
+  "The square root of the average squared error; RMSE. Penalises large errors more than MAE.",
+  [
+   "RMSE"
+  ]
+ ],
+ [
+  "Coefficient of determination",
+  "R²: the share of variation in the true values explained by a model, relative to always predicting the mean.",
+  [
+   "R²",
+   "R-squared"
+  ]
+ ],
+ [
+  "Prevalence",
+  "The share of cases that are actually positive; the base rate.",
+  [
+   "base rate"
+  ]
+ ],
+ [
+  "Expected calibration error",
+  "ECE: the average gap between predicted probabilities and observed frequencies, measuring how well a model’s probabilities can be trusted.",
+  [
+   "ECE"
+  ]
  ]
 ];

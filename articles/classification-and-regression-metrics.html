@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Is 99% Accuracy Good? A Complete Guide to Model Metrics, from the Confusion Matrix to MCC, AUC and R² — RNLearn</title>
+  <meta name="description" content="Accuracy, sensitivity, specificity, precision, F1, micro and macro F1, MCC, ROC and AUC, PR curves, calibration and regression errors, explained from scratch with worked examples.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/classification-and-regression-metrics.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Is 99% Accuracy Good? A Complete Guide to Model Metrics, from the Confusion Matrix to MCC, AUC and R² — RNLearn">
+  <meta property="og:description" content="Accuracy, sensitivity, specificity, precision, F1, micro and macro F1, MCC, ROC and AUC, PR curves, calibration and regression errors, explained from scratch with worked examples.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/classification-and-regression-metrics.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Is 99% Accuracy Good? A Complete Guide to Model Metrics, from the Confusion Matrix to MCC, AUC and R² — RNLearn">
+  <meta name="twitter:description" content="Accuracy, sensitivity, specificity, precision, F1, micro and macro F1, MCC, ROC and AUC, PR curves, calibration and regression errors, explained from scratch with worked examples.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Is 99% Accuracy Good? A Complete Guide to Model Metrics, from the Confusion Matrix to MCC, AUC and R²",
+    "description": "Accuracy, sensitivity, specificity, precision, F1, micro and macro F1, MCC, ROC and AUC, PR curves, calibration and regression errors, explained from scratch with worked examples.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-12-01",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/classification-and-regression-metrics.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/technology.html" class="post-subject-tag" data-subject="technology">Technology</a>
+        </div>
+        <h1 class="article-title">Is 99% Accuracy Good? A Complete Guide to Model Metrics, from the Confusion Matrix to MCC, AUC and R²</h1>
+        <p class="article-standfirst">
+          A model that is 99% accurate can be completely useless. Here is how to measure machine-learning models properly: what each metric means, how to calculate it, when to use it and how it can mislead.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-12-01">1 December 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>35 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. The 99% Accurate Useless Model</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. The Confusion Matrix</a></li>
+              <li><a class="toc-link" href="#section-4">4. Accuracy, and When It Lies</a></li>
+              <li><a class="toc-link" href="#section-5">5. Sensitivity and Specificity</a></li>
+              <li><a class="toc-link" href="#section-6">6. Precision, NPV and the Base-Rate Trap</a></li>
+              <li><a class="toc-link" href="#section-7">7. Balanced Accuracy and Youden’s J</a></li>
+              <li><a class="toc-link" href="#section-8">8. F1 and Fβ</a></li>
+              <li><a class="toc-link" href="#section-9">9. The Matthews Correlation Coefficient</a></li>
+              <li><a class="toc-link" href="#section-10">10. Cohen’s Kappa</a></li>
+              <li><a class="toc-link" href="#section-11">11. When Metrics Disagree</a></li>
+              <li><a class="toc-link" href="#section-12">12. Scores, Thresholds and the Trade-off</a></li>
+              <li><a class="toc-link" href="#section-13">13. The ROC Curve and AUC</a></li>
+              <li><a class="toc-link" href="#section-14">14. Precision–Recall Curves</a></li>
+              <li><a class="toc-link" href="#section-15">15. Choosing a Threshold</a></li>
+              <li><a class="toc-link" href="#section-16">16. Multiclass and Multilabel Problems</a></li>
+              <li><a class="toc-link" href="#section-17">17. Calibration</a></li>
+              <li><a class="toc-link" href="#section-18">18. Uncertainty and Comparing Models</a></li>
+              <li><a class="toc-link" href="#section-19">19. Pitfalls</a></li>
+              <li><a class="toc-link" href="#section-20">20. Regression Metrics</a></li>
+              <li><a class="toc-link" href="#section-21">21. Which Metric When?</a></li>
+              <li><a class="toc-link" href="#section-22">22. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-23">23. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-24">24. Philosophy Corner</a></li>
+              <li><a class="toc-link" href="#section-25">25. People in This Story</a></li>
+              <li><a class="toc-link" href="#section-26">26. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-27">27. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. The 99% Accurate Useless Model</h2>
+            <p>A start-up announces a breakthrough: its AI detects a rare disease with <strong>99% accuracy</strong>. Impressive? The disease affects 1 person in 100. A "model" that simply tells every patient "you are healthy" is right 99 times out of 100: 99% accuracy, and it never finds a single sick person.</p>
+            <p>That example captures why measuring a machine-learning model is harder than it looks. A single number can hide exactly the failures that matter most. Over the decades, statisticians, doctors, radar engineers, librarians and computer scientists have invented dozens of measures: sensitivity and specificity, precision and recall, F1, balanced accuracy, the Matthews correlation coefficient, ROC curves and AUC, calibration errors, and, for predicting numbers rather than categories, MAE, RMSE and R². Each answers a slightly different question.</p>
+            <p>This tutorial explains all of them from the ground up. The key idea is simple: <strong>almost every classification metric is a different summary of the same four numbers</strong>, the cells of the confusion matrix. Once you can read that small table, you can see what each metric looks at, what it ignores, and why two metrics can disagree about which model is better. We will work through many examples by hand, let you experiment with interactive figures, and finish with a guide to choosing the right metric. Optional Python snippets show how to compute everything with scikit-learn. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>, <a class="cite" href="#ref-34">34</a>]</span></p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-metrics-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. From least squares to the case for MCC, 1805–2020.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <p class="part-label" style="margin-top:2.5rem;font-family:var(--font-sans);font-size:0.85rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);">Part A: The Basics</p>
+
+          <section id="section-3">
+            <h2>3. The Confusion Matrix</h2>
+            <p>Suppose a spam filter has looked at 1,000 emails, 120 of which really are spam. For a <strong>binary classifier</strong>, one that sorts cases into two classes, we first decide which class to call "positive". Usually it is the class we are trying to detect: spam, disease, fraud. (The choice matters: several metrics change if you swap the labels.) Then every prediction falls into one of four boxes:</p>
+            <ul>
+              <li><strong>True positive (TP):</strong> spam, correctly flagged as spam. Here, 90.</li>
+              <li><strong>False negative (FN):</strong> spam that slipped through to the inbox. Here, 30. (A "miss", or Type II error.)</li>
+              <li><strong>False positive (FP):</strong> a genuine email wrongly sent to the spam folder. Here, 10. (A "false alarm", or Type I error.)</li>
+              <li><strong>True negative (TN):</strong> a genuine email correctly delivered. Here, 870.</li>
+            </ul>
+            <p>Arranged in a 2 × 2 table, these four counts form the <strong>confusion matrix</strong>, so called because it shows which classes the model confuses with which. Everything else in this tutorial, until we reach probabilities and regression, is calculated from these four numbers.</p>
+            <figure class="fig" data-fig="fig-confusion-calc">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. The confusion-matrix calculator.</strong> Choose an example or set the four counts yourself, and every metric in this tutorial updates with its formula. Try the "always healthy" and "always positive" models.
+              </figcaption>
+            </figure>
+            <p>A word on naming: different fields use different words for the same quantities. A table of synonyms follows in section 5.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">Try it in Python: the confusion matrix</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">from sklearn.metrics import confusion_matrix, classification_report
+
+y_true = [1, 1, 0, 0, 1, 0, 1, 0]   # 1 = spam (positive), 0 = genuine
+y_pred = [1, 0, 0, 1, 1, 0, 1, 0]
+tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()   # note the order!
+print(tp, fp, fn, tn)                                       # 3 1 1 3
+print(classification_report(y_true, y_pred, digits=3))</code></pre>
+            </details>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Accuracy, and When It Lies</h2>
+            <p>The most natural measure is <strong>accuracy</strong>: the share of all predictions that are correct.</p>
+            <p>$$\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}.$$</p>
+            <p>For the spam filter, (90 + 870)/1,000 = <strong>96%</strong>. Accuracy is easy to understand and works well when the classes are roughly balanced and both kinds of error matter equally. Its weakness is <strong>class imbalance</strong>. When one class is rare, accuracy is dominated by the common class. The "always healthy" model in section 1 has TP = 0, FN = 100, FP = 0, TN = 9,900 out of 10,000 people: accuracy 99%, and completely useless.</p>
+            <figure class="fig" data-fig="fig-imbalance">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. The imbalance trap.</strong> Compare a model that always says "negative" with a real model that finds 80% of positives and correctly clears 90% of negatives. Lower the prevalence and watch accuracy flatter the useless model.
+              </figcaption>
+            </figure>
+            <p>Always compare a model with simple <strong>baselines</strong>: always predicting the most common class, or guessing at random in proportion to the class frequencies. A metric that cannot distinguish your model from a baseline is the wrong metric for the job.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Sensitivity and Specificity</h2>
+            <p>The fix is to look at each class separately. <strong>Sensitivity</strong> asks: of the cases that really are positive, how many did we catch? <strong>Specificity</strong> asks: of the cases that really are negative, how many did we correctly clear?</p>
+            <p>$$\text{Sensitivity} = \frac{TP}{TP + FN}, \qquad \text{Specificity} = \frac{TN}{TN + FP}.$$</p>
+            <p>For the spam filter: sensitivity = 90/120 = <strong>75%</strong> (a quarter of the spam gets through) and specificity = 870/880 = <strong>98.9%</strong> (about 1 genuine email in 90 is wrongly filtered). The "always healthy" model has 0% sensitivity and 100% specificity, exposing it at once. Their complements are the <strong>false negative rate</strong> (1 − sensitivity, the miss rate) and the <strong>false positive rate</strong> (1 − specificity, the false-alarm rate).</p>
+            <p>There is almost always a <strong>trade-off</strong>. A model that flags more cases catches more positives (higher sensitivity) but also raises more false alarms (lower specificity). A good report gives both numbers. A useful memory aid from medicine: a highly <em>sensitive</em> test, when <em>negative</em>, helps rule a disease <em>out</em>; a highly <em>specific</em> test, when <em>positive</em>, helps rule it <em>in</em>.</p>
+            <div class="table-container" style="overflow-x:auto; margin:1.2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.9rem; line-height:1.5;">
+                <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.45rem;">Formula</th><th style="padding:0.45rem;">Medicine</th><th style="padding:0.45rem;">Machine learning / retrieval</th><th style="padding:0.45rem;">Statistics</th></tr></thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.45rem;">TP / (TP + FN)</td><td style="padding:0.45rem;">Sensitivity</td><td style="padding:0.45rem;">Recall, true positive rate (TPR), hit rate</td><td style="padding:0.45rem;">Power (1 − β)</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.45rem;">TN / (TN + FP)</td><td style="padding:0.45rem;">Specificity</td><td style="padding:0.45rem;">True negative rate (TNR), selectivity</td><td style="padding:0.45rem;">1 − α</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.45rem;">TP / (TP + FP)</td><td style="padding:0.45rem;">Positive predictive value (PPV)</td><td style="padding:0.45rem;">Precision</td><td style="padding:0.45rem;">1 − false discovery rate</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.45rem;">FP / (FP + TN)</td><td style="padding:0.45rem;">1 − specificity</td><td style="padding:0.45rem;">False positive rate (FPR), fall-out</td><td style="padding:0.45rem;">Type I error rate (α)</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.45rem;">FN / (FN + TP)</td><td style="padding:0.45rem;">1 − sensitivity</td><td style="padding:0.45rem;">False negative rate (FNR), miss rate</td><td style="padding:0.45rem;">Type II error rate (β)</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Precision, NPV and the Base-Rate Trap</h2>
+            <p>Sensitivity and specificity describe the test from the point of view of the <em>truth</em>: given that someone is sick, how likely is a positive result? Patients and users care about the reverse question: given a positive result, how likely is it to be true? That is <strong>precision</strong>, also called the <strong>positive predictive value</strong> (PPV). Its partner for negative results is the <strong>negative predictive value</strong> (NPV).</p>
+            <p>$$\text{Precision} = \frac{TP}{TP + FP}, \qquad \text{NPV} = \frac{TN}{TN + FN}.$$</p>
+            <p>For the spam filter, precision = 90/(90 + 10) = <strong>90%</strong>: 9 in 10 emails in the spam folder really are spam.</p>
+            <p>Now the trap. A screening test for a disease that affects 1% of people has 99% sensitivity and 95% specificity, which sounds excellent. Test 10,000 people. About 100 are sick, and the test catches 99 of them. But of the 9,900 healthy people, 5% (about 495) also test positive. So 99 + 495 = 594 people test positive, and only <strong>99 of them (16.7%) are actually sick</strong>. Five out of six positive results are false alarms. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+            <figure class="fig" data-fig="fig-base-rate">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. The base-rate trap, with 1,000 people.</strong> Each dot is a person. Change how common the disease is and how good the test is, and see what share of positive results are real.
+              </figcaption>
+            </figure>
+            <p>This is Bayes' theorem in action, and it explains a crucial difference between metrics. Sensitivity, specificity and the false positive rate do not depend on how common the positive class is (the <strong>prevalence</strong>, or base rate). Precision, NPV, accuracy and F1 <em>do</em>. A model evaluated on a balanced test set, then deployed where positives are rare, will have far lower precision in use. When you report precision, report the prevalence it was measured at.</p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Balanced Accuracy and Youden's J</h2>
+            <p>A simple way to make accuracy fair to both classes is to average sensitivity and specificity, giving each class equal weight regardless of its size: <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span></p>
+            <p>$$\text{Balanced accuracy} = \frac{\text{Sensitivity} + \text{Specificity}}{2}.$$</p>
+            <p>For the spam filter, (75% + 98.9%)/2 = <strong>86.9%</strong>, noticeably lower than the 96% accuracy. The "always healthy" model scores exactly 50%, the same as guessing, which is what it deserves. In 1950 the statistician William Youden proposed a closely related index for rating diagnostic tests: <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span></p>
+            <p>$$J = \text{Sensitivity} + \text{Specificity} - 1 = 2 \times \text{Balanced accuracy} - 1.$$</p>
+            <p>Youden's J runs from 0 (no better than chance) to 1 (perfect), and is also called <strong>informedness</strong>. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> Balanced accuracy is a good default when the classes are imbalanced and missing a positive and raising a false alarm are roughly equally bad. Because it ignores precision, it can still look respectable for a model that buries a few true positives under thousands of false alarms, so check precision too when positives are rare.</p>
+          </section>
+
+          <p class="part-label" style="margin-top:2.5rem;font-family:var(--font-sans);font-size:0.85rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);">Part B: Single-Number Summaries</p>
+
+          <section id="section-8">
+            <h2>8. F1 and Fβ</h2>
+            <p>In search engines and information retrieval, the classic pair of measures is precision (how many retrieved documents are relevant) and recall (how many relevant documents are retrieved). To combine them into one number, C. J. van Rijsbergen's work led to the <strong>F-measure</strong>. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> The <strong>F1 score</strong> is the <em>harmonic mean</em> of precision (P) and recall (R):</p>
+            <p>$$F_1 = \frac{2PR}{P + R} = \frac{2\,TP}{2\,TP + FP + FN}.$$</p>
+            <p>For the spam filter: 2 × 0.90 × 0.75 / (0.90 + 0.75) = <strong>0.818</strong>. Why the harmonic mean rather than the ordinary average? Because it stays low unless <em>both</em> are high. A model with precision 1.0 and recall 0.01 has an ordinary average of 0.505, which sounds decent, but an F1 of only 0.02, which correctly says it is nearly useless.</p>
+            <p>When the two kinds of error have different costs, the <strong>Fβ score</strong> weights recall β times as much as precision:</p>
+            <p>$$F_\beta = \frac{(1 + \beta^2)\,P\,R}{\beta^2 P + R}.$$</p>
+            <p>F2 (β = 2) is used when missing positives is worse than false alarms, as in screening; F0.5 when false alarms are worse, as in a spam filter that must never lose an important email. For the spam filter, F2 = 0.776, lower than F1 because its weaker side is recall.</p>
+            <p>F1 has one important blind spot: <strong>it never uses the true negatives</strong>. That is fine in retrieval, where "documents correctly not retrieved" are uncountable and uninteresting, but it means F1 changes if you swap which class is called positive, and that a model can score a high F1 while being useless at recognising negatives (section 11).</p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. The Matthews Correlation Coefficient</h2>
+            <p>In 1975 the biochemist Brian Matthews needed to judge computer predictions of protein structure, and used a correlation coefficient between predicted and actual classes. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span> Today's <strong>Matthews correlation coefficient</strong> (MCC) is:</p>
+            <p>$$\text{MCC} = \frac{TP \cdot TN - FP \cdot FN}{\sqrt{(TP + FP)(TP + FN)(TN + FP)(TN + FN)}}.$$</p>
+            <p>MCC is the ordinary Pearson correlation between the true labels and the predicted labels, each coded as 0 and 1. It runs from −1 (always wrong) through 0 (no better than chance) to +1 (perfect). For the spam filter, MCC = (90 × 870 − 10 × 30)/√(100 × 120 × 880 × 900) = <strong>0.800</strong>.</p>
+            <p>MCC's great virtue is that it uses all four cells, and it is high only if the model does well on both classes, in both directions (sensitivity and precision for positives, specificity and NPV for negatives). It gives the same value if you swap the class labels. Its square equals the product of Youden's informedness and its counterpart for predictions, called markedness. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> For these reasons, several researchers recommend MCC as the best single summary of a binary confusion matrix, especially with imbalanced classes. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span> Its drawbacks: it is less intuitive than accuracy, it is undefined (and conventionally set to 0) when a model predicts only one class, and like any single number it hides which kind of error is being made.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">Try it in Python: threshold-based metrics</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">from sklearn import metrics as m
+
+print(m.accuracy_score(y_true, y_pred))
+print(m.balanced_accuracy_score(y_true, y_pred))
+print(m.precision_score(y_true, y_pred), m.recall_score(y_true, y_pred))
+print(m.recall_score(y_true, y_pred, pos_label=0))     # specificity = recall of class 0
+print(m.f1_score(y_true, y_pred), m.fbeta_score(y_true, y_pred, beta=2))
+print(m.matthews_corrcoef(y_true, y_pred), m.cohen_kappa_score(y_true, y_pred))</code></pre>
+            </details>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Cohen's Kappa</h2>
+            <p>Cohen's kappa, introduced in 1960 to measure how well two human raters agree, asks how much better than chance the agreement between predictions and truth is: <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span></p>
+            <p>$$\kappa = \frac{p_o - p_e}{1 - p_e},$$</p>
+            <p>where $p_o$ is the observed agreement (the accuracy) and $p_e$ is the agreement expected if predictions were made at random with the same class frequencies. For the spam filter, $p_o$ = 0.960 and $p_e$ = 0.804, so κ = <strong>0.796</strong>. Kappa of 0 means chance-level agreement. It is widely used for comparing human annotators, for instance when labelling training data. As a model metric it is usually close to MCC, but it has some odd behaviours with highly imbalanced data, and many authors now prefer MCC for evaluating classifiers. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span></p>
+          </section>
+
+          <section id="section-11">
+            <h2>11. When Metrics Disagree</h2>
+            <p>Because each metric looks at different cells of the confusion matrix, they can rank the same two models in opposite orders. Explore three classic cases.</p>
+            <figure class="fig" data-fig="fig-metrics-disagree">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. When metrics disagree.</strong> Each scenario compares two models on the same data. The last column shows which model each metric prefers.
+              </figcaption>
+            </figure>
+            <p>The lesson is not that one metric is always right. It is that <strong>you should choose the metric before comparing models</strong>, based on what matters in the application, and look at the confusion matrix, not just a summary. A metric that can be fooled by a trivial model (accuracy with imbalance, F1 when negatives matter) should never be used alone.</p>
+          </section>
+
+          <p class="part-label" style="margin-top:2.5rem;font-family:var(--font-sans);font-size:0.85rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);">Part C: Thresholds and Curves</p>
+
+          <section id="section-12">
+            <h2>12. Scores, Thresholds and the Trade-off</h2>
+            <p>Most classifiers do not directly output "yes" or "no". They output a <strong>score</strong>, often a probability between 0 and 1, and we turn it into a decision with a <strong>threshold</strong>: "flag as spam if the score is above 0.5". Every threshold gives a different confusion matrix, and so different values of every metric in Parts A and B. Lowering the threshold catches more positives (higher sensitivity) at the cost of more false alarms (lower specificity and precision).</p>
+            <figure class="fig" data-fig="fig-threshold-roc">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. Threshold, ROC curve and precision–recall curve.</strong> Drag the threshold and watch the red dot move along both curves. Change how well the model separates the classes, then lower the prevalence and compare what happens to the two curves. Use the random-pairs button to see what AUC means.
+              </figcaption>
+            </figure>
+            <p>This is why it often makes sense to separate two questions: how good is the model at <em>ranking</em> cases (are positives generally scored higher than negatives?), and where should we put the threshold for a particular use? Curves answer the first question; costs answer the second.</p>
+          </section>
+
+          <section id="section-13">
+            <h2>13. The ROC Curve and AUC</h2>
+            <p>During the Second World War, radar operators had to decide whether a blip on the screen was an enemy aircraft or noise. Set the "receiver" too sensitive, and you get false alarms; too insensitive, and you miss planes. After the war this trade-off was formalised in <strong>signal detection theory</strong>, which plotted the hit rate against the false-alarm rate as the decision criterion varied: the <strong>receiver operating characteristic</strong>, or ROC curve. It spread to psychology in the 1960s, then to medicine and machine learning. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>, <a class="cite" href="#ref-12">12</a>, <a class="cite" href="#ref-1">1</a>]</span></p>
+            <p>To draw an ROC curve, sweep the threshold from high to low and plot, for each threshold, the true positive rate (sensitivity) against the false positive rate (1 − specificity). A perfect model goes straight up to the top-left corner; a random one follows the diagonal. Let us build one by hand. Ten cases have these scores:</p>
+            <ul>
+              <li>Positives: 0.95, 0.85, 0.70, 0.55, 0.40</li>
+              <li>Negatives: 0.60, 0.45, 0.30, 0.20, 0.10</li>
+            </ul>
+            <p>With a threshold above 0.95, nothing is flagged: the point (0, 0). Lower it past 0.95, 0.85 and 0.70: three positives are caught and no negatives, so (FPR 0, TPR 0.6). Past 0.60, the first negative: (0.2, 0.6). Past 0.55: (0.2, 0.8). Past 0.45: (0.4, 0.8). Past 0.40: (0.4, 1.0). Finally, everything is flagged: (1, 1). Joining the points gives the ROC curve, and the area beneath it, the <strong>AUC</strong>, is <strong>0.88</strong>.</p>
+            <p>The AUC has a beautiful interpretation, shown by James Hanley and Barbara McNeil in 1982: <strong>it is the probability that a randomly chosen positive gets a higher score than a randomly chosen negative.</strong> <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span> Check it: of the 5 × 5 = 25 positive–negative pairs, the positive scores higher in 22, and 22/25 = 0.88. This makes the AUC identical to the Mann–Whitney U statistic divided by the number of pairs, and it means that AUC = (Cliff's delta + 1)/2, where Cliff's delta compares the scores of positives and negatives (see our tutorial on null hypotheses and effect sizes). Here Cliff's delta is (22 − 3)/25 = 0.76, and (0.76 + 1)/2 = 0.88.</p>
+            <p>So AUC measures <strong>ranking quality</strong>, across all thresholds, independent of prevalence. A rough guide sometimes quoted: 0.5 is chance, 0.7–0.8 acceptable, 0.8–0.9 good, above 0.9 excellent, though what counts as good depends entirely on the problem. Common misreadings: AUC is <em>not</em> the accuracy at some threshold; a high AUC does <em>not</em> mean the probabilities are correct (section 17); and two models with the same AUC can behave very differently in the region of the curve you actually care about, such as very low false positive rates. For that, some fields report a <strong>partial AUC</strong> over a limited range, or simply the sensitivity at a fixed specificity.</p>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Precision–Recall Curves and Average Precision</h2>
+            <p>Because the ROC curve uses rates calculated within each class, it does not change at all when positives become rarer. Usually that is a strength. But when positives are very rare (fraud, rare diseases, finding relevant documents), what users experience is precision: how many of the flagged cases are real. A model with a false positive rate of just 1% looks superb on an ROC curve, but if only 1 case in 1,000 is positive, its flags are about 90% false alarms. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>, <a class="cite" href="#ref-15">15</a>]</span></p>
+            <p>The <strong>precision–recall (PR) curve</strong> plots precision against recall as the threshold varies, and does reveal this. Its summary, <strong>average precision</strong> (AP, closely related to the area under the PR curve), averages the precision obtained at each recall level. For the ten-case example above, AP = 0.903. Unlike AUC, the baseline for AP is not 0.5 but the prevalence: a random model has precision equal to the share of positives. Figure 6 shows the two curves side by side; lower the prevalence and watch only the PR curve fall. Takaya Saito and Marc Rehmsmeier showed in 2015 that PR curves are more informative than ROC curves for imbalanced problems. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span></p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">Try it in Python: ROC, AUC and average precision</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">y = [1, 1, 1, 1, 1, 0, 0, 0, 0, 0]
+scores = [0.95, 0.85, 0.70, 0.55, 0.40, 0.60, 0.45, 0.30, 0.20, 0.10]
+
+print(m.roc_auc_score(y, scores))            # 0.88
+print(m.average_precision_score(y, scores))  # about 0.903
+fpr, tpr, thresholds = m.roc_curve(y, scores)
+precision, recall, thr = m.precision_recall_curve(y, scores)</code></pre>
+            </details>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Choosing a Threshold</h2>
+            <p>The default threshold of 0.5 is rarely the right one. Common approaches:</p>
+            <ul>
+              <li><strong>Maximise Youden's J</strong>: pick the point on the ROC curve furthest above the diagonal. This treats sensitivity and specificity as equally important. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span></li>
+              <li><strong>Meet a requirement</strong>: for example, "at least 95% sensitivity", then take the threshold with the best specificity that achieves it. Common in medicine and safety.</li>
+              <li><strong>Maximise F1 or Fβ</strong>, common in retrieval and information extraction.</li>
+              <li><strong>Minimise expected cost</strong>: assign a cost to each false positive and each false negative, and choose the threshold with the lowest total expected cost. This is usually the most honest approach when costs can be estimated.</li>
+            </ul>
+            <figure class="fig" data-fig="fig-cost-threshold">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 7. Choosing a threshold by cost.</strong> Set how costly each kind of error is and how common positives are; the curve shows the expected cost at every threshold, and the red line marks the cheapest.
+              </figcaption>
+            </figure>
+            <p>One rule matters above all: <strong>choose the threshold on validation data, never on the test set</strong>. A threshold tuned on the test set makes every test-set metric optimistic.</p>
+          </section>
+
+          <p class="part-label" style="margin-top:2.5rem;font-family:var(--font-sans);font-size:0.85rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);">Part D: Many Classes, Probabilities and Practice</p>
+
+          <section id="section-16">
+            <h2>16. Multiclass and Multilabel Problems</h2>
+            <p>With more than two classes, say an image classifier for cats, dogs, birds and foxes, the confusion matrix becomes a K × K table: rows for the true class, columns for the predicted class, with correct predictions on the diagonal. Accuracy is still the share on the diagonal. For the other metrics, we treat each class in turn as "positive" and everything else as "negative" (<strong>one-vs-rest</strong>), giving a precision, recall and F1 for every class. Then we must combine them, and there are three common ways: <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+            <ul>
+              <li><strong>Micro averaging</strong>: add up the TP, FP and FN over all classes and compute the metric once. Every individual prediction counts equally, so common classes dominate. In a single-label problem (each case has exactly one class), every false positive for one class is a false negative for another, so micro-precision, micro-recall and <strong>micro-F1 all equal the accuracy</strong>.</li>
+              <li><strong>Macro averaging</strong>: compute the metric for each class and take the plain average. Every <em>class</em> counts equally, so a rare class that the model ignores pulls the score down sharply. Macro-averaged recall is the multiclass balanced accuracy.</li>
+              <li><strong>Weighted averaging</strong>: average the per-class metrics weighted by each class's size. It sits close to micro averaging and can hide poor performance on small classes.</li>
+            </ul>
+            <p>A worked example: on a test set of 50 cats, 45 dogs, 40 birds and 5 foxes, a model is 85% accurate, so micro-F1 is also 0.850. But it never recognises a single fox (fox F1 = 0), so macro-F1 is only <strong>0.653</strong>, while weighted F1 is 0.838. Balanced accuracy is 0.661 and the multiclass MCC 0.779. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span> Which number is "right" depends on whether the foxes matter. If they are the reason the system exists, macro-F1 tells the truth and accuracy hides it.</p>
+            <figure class="fig" data-fig="fig-multiclass">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 8. Micro, macro and weighted averages.</strong> The confusion matrix of a four-class image classifier, with per-class scores and every average. Teach the model to recognise more foxes, or add more foxes to the test set, and compare how the averages respond.
+              </figcaption>
+            </figure>
+            <p>Two subtleties for advanced readers. First, "macro-F1" is computed in two different ways in the literature: the average of per-class F1 scores (scikit-learn's method), or the F1 of the averaged precision and recall; they can differ noticeably, so say which you used. <span class="cite-group">[<a class="cite" href="#ref-17">17</a>]</span> Second, in <strong>multilabel</strong> problems, where a case can have several labels at once (a photo containing both a cat and a dog), micro-F1 no longer equals accuracy, "exact match" accuracy becomes very strict, and per-label metrics with macro or micro averaging are standard. For problems with many classes, <strong>top-k accuracy</strong> (is the true class among the model's k best guesses?) is also common.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">Try it in Python: multiclass averages</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">for avg in ['micro', 'macro', 'weighted']:
+    print(avg, m.f1_score(y_true_mc, y_pred_mc, average=avg, zero_division=0))
+print(m.balanced_accuracy_score(y_true_mc, y_pred_mc))   # = macro recall
+print(m.matthews_corrcoef(y_true_mc, y_pred_mc))         # multiclass MCC
+print(m.classification_report(y_true_mc, y_pred_mc, zero_division=0))
+# top_k_accuracy_score(y_true_mc, class_probabilities, k=3) needs predicted probabilities</code></pre>
+            </details>
+          </section>
+
+          <section id="section-17">
+            <h2>17. Are the Probabilities Right? Calibration</h2>
+            <p>Often we need more than a ranking or a decision: we need the probabilities themselves to be trustworthy. If a weather model says "70% chance of rain" on many days, it should rain on about 70% of them. A model with this property is <strong>calibrated</strong>. Calibration matters whenever probabilities feed into decisions, costs or further calculations, as in medicine, insurance and risk scoring.</p>
+            <p>Calibration is checked with a <strong>reliability diagram</strong>: group the predictions into bins (0–10%, 10–20%…), and plot the average predicted probability against how often the event actually happened in each bin. A calibrated model follows the diagonal. The <strong>expected calibration error</strong> (ECE) summarises the gaps, weighting each bin by how many predictions it contains. <span class="cite-group">[<a class="cite" href="#ref-20">20</a>]</span></p>
+            <p>Two classic scores reward probabilities that are both well calibrated and sharp. The <strong>Brier score</strong>, proposed in 1950 by the meteorologist Glenn Brier, is the mean squared difference between predicted probability $p_i$ and outcome $y_i$ (1 or 0); <strong>log loss</strong> (cross-entropy) heavily penalises confident wrong predictions: <span class="cite-group">[<a class="cite" href="#ref-18">18</a>]</span></p>
+            <p>$$\text{Brier} = \frac{1}{n}\sum_i (p_i - y_i)^2, \qquad \text{Log loss} = -\frac{1}{n}\sum_i \big[y_i \ln p_i + (1 - y_i)\ln(1 - p_i)\big].$$</p>
+            <p>For six predictions 0.9, 0.8, 0.7, 0.6, 0.3, 0.2 with outcomes 1, 1, 0, 1, 0, 0, the Brier score is 0.138 and the log loss 0.437 (lower is better for both). A crucial point: <strong>a model can have an excellent AUC and still be badly calibrated</strong>, because AUC depends only on the order of the scores. In 2017 Chuan Guo and colleagues showed that modern deep neural networks are often overconfident, and that a simple fix, "temperature scaling" on held-out data, greatly improves calibration without changing accuracy. <span class="cite-group">[<a class="cite" href="#ref-19">19</a>, <a class="cite" href="#ref-21">21</a>]</span></p>
+            <figure class="fig" data-fig="fig-calibration">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 9. Calibration and the reliability diagram.</strong> Make the model timid, overconfident or biased, and watch the reliability diagram, Brier score, log loss and ECE. Notice that the AUC never changes.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-18">
+            <h2>18. Uncertainty and Comparing Models</h2>
+            <p>Every metric computed on a test set is an <em>estimate</em>, with random error that depends on the size of the test set. A model with 90% accuracy on 200 test cases has a standard error of about 2 percentage points; on 50 rare positives, a recall of 80% is uncertain by about ±11 points (95% interval). Always ask how many cases a metric is based on, and report confidence intervals. <span class="cite-group">[<a class="cite" href="#ref-33">33</a>]</span></p>
+            <ul>
+              <li><strong>Bootstrap confidence intervals</strong> work for any metric: resample the test cases with replacement thousands of times, recompute the metric, and take the middle 95% of the results. <span class="cite-group">[<a class="cite" href="#ref-36">36</a>]</span></li>
+              <li><strong>Comparing two models on the same test set</strong>: use paired methods. McNemar's test compares accuracies using the cases where the models disagree; DeLong's test compares two correlated AUCs; a paired bootstrap works for anything. <span class="cite-group">[<a class="cite" href="#ref-37">37</a>, <a class="cite" href="#ref-22">22</a>]</span></li>
+              <li><strong>Across random seeds or cross-validation folds</strong>: compare the paired differences, and remember that cross-validation folds are not independent. (Our tutorial on null hypotheses and effect sizes covers these tests in detail.)</li>
+            </ul>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">Try it in Python: a bootstrap interval for any metric</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">import numpy as np
+rng = np.random.default_rng(0)
+y_true, y_pred = np.asarray(y_true), np.asarray(y_pred)
+stats = []
+for _ in range(2000):
+    idx = rng.integers(0, len(y_true), len(y_true))      # resample cases
+    stats.append(m.matthews_corrcoef(y_true[idx], y_pred[idx]))
+print(np.percentile(stats, [2.5, 97.5]))                 # 95% interval for MCC</code></pre>
+            </details>
+          </section>
+
+          <section id="section-19">
+            <h2>19. Pitfalls</h2>
+            <ul>
+              <li><strong>Data leakage.</strong> Information from the test set, or from the future, sneaking into training (duplicates, patients appearing in both sets, features computed using the label) makes every metric meaningless. <span class="cite-group">[<a class="cite" href="#ref-24">24</a>]</span></li>
+              <li><strong>Tuning on the test set.</strong> Choosing thresholds, hyperparameters or models by test-set score turns the test set into training data. Keep a separate validation set, and touch the test set once.</li>
+              <li><strong>Averaging across folds.</strong> F1 averaged over cross-validation folds is not the same as F1 computed on all predictions pooled together, and with rare classes the two can differ considerably; say which you report. <span class="cite-group">[<a class="cite" href="#ref-23">23</a>]</span></li>
+              <li><strong>Hiding per-class results.</strong> Report the confusion matrix and per-class metrics alongside any average.</li>
+              <li><strong>Prevalence mismatch.</strong> Precision, F1 and accuracy measured on a rebalanced test set will not hold where the real prevalence is different.</li>
+              <li><strong>Undefined values.</strong> Precision is undefined when nothing is predicted positive, and MCC when only one class is predicted; libraries silently replace these with 0, which can distort averages.</li>
+              <li><strong>Optimising the metric instead of the goal</strong> (see the Philosophy Corner).</li>
+            </ul>
+          </section>
+
+          <p class="part-label" style="margin-top:2.5rem;font-family:var(--font-sans);font-size:0.85rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);">Part E: Regression</p>
+
+          <section id="section-20">
+            <h2>20. Regression Metrics: Measuring Numerical Predictions</h2>
+            <p>When a model predicts a number (a price, a temperature, a delivery time) rather than a class, there is no confusion matrix. Instead, each prediction $\hat{y}_i$ has an <strong>error</strong>, or residual, $e_i = \hat{y}_i - y_i$. The method of fitting by minimising squared errors goes back to Adrien-Marie Legendre in 1805, and the word "regression" to Francis Galton's 1886 study of the heights of parents and children. <span class="cite-group">[<a class="cite" href="#ref-30">30</a>, <a class="cite" href="#ref-29">29</a>]</span></p>
+            <p>A worked example: a model predicts six delivery times (in minutes).</p>
+            <div class="table-container" style="overflow-x:auto; margin:1rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.9rem;">
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;"><strong>True</strong></td><td>30</td><td>45</td><td>25</td><td>60</td><td>35</td><td>50</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;"><strong>Predicted</strong></td><td>33</td><td>40</td><td>28</td><td>52</td><td>36</td><td>58</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;"><strong>Error</strong></td><td>+3</td><td>−5</td><td>+3</td><td>−8</td><td>+1</td><td>+8</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <ul>
+              <li><strong>Mean absolute error (MAE)</strong>: the average size of the errors, ignoring sign. (3 + 5 + 3 + 8 + 1 + 8)/6 = <strong>4.67 minutes</strong>. It is in the original units and easy to explain: "on average, we are about 4.7 minutes out".</li>
+              <li><strong>Mean squared error (MSE)</strong>: the average of the squared errors, (9 + 25 + 9 + 64 + 1 + 64)/6 = 28.7 minutes². Squaring makes large errors count much more. MSE is what least-squares fitting minimises.</li>
+              <li><strong>Root mean squared error (RMSE)</strong>: the square root of MSE, back in the original units: √28.7 = <strong>5.35 minutes</strong>. RMSE is always at least as large as MAE; a big gap between them signals a few large errors.</li>
+              <li><strong>Median absolute error</strong>: the middle of the absolute errors, here <strong>4.0 minutes</strong>. Very robust to outliers.</li>
+              <li><strong>Mean absolute percentage error (MAPE)</strong>: the average of |error|/|true value|, here <strong>10.9%</strong>. Intuitive and scale-free, but it explodes when true values are near zero, is undefined at zero, and penalises over-prediction more than under-prediction. Alternatives include the symmetric MAPE and the <strong>mean absolute scaled error</strong> (MASE), which compares the error with that of a simple naive forecast. <span class="cite-group">[<a class="cite" href="#ref-25">25</a>]</span></li>
+              <li><strong>R² (coefficient of determination)</strong>: the share of the variation in the true values that the model explains, compared with always predicting the average:
+                $$R^2 = 1 - \frac{\sum_i (y_i - \hat{y}_i)^2}{\sum_i (y_i - \bar{y})^2}.$$
+                Here R² = 1 − 172/870.8 = <strong>0.802</strong>. R² = 1 is perfect; 0 means no better than the mean; and on new data it can be <strong>negative</strong>, meaning the model is worse than the mean. R² is not a measure of error size, depends on how spread out the data are, and can be high for a model with systematic errors; adjusted R² penalises adding useless predictors. <span class="cite-group">[<a class="cite" href="#ref-27">27</a>]</span></li>
+            </ul>
+            <p>Which to use? MAE when all errors matter in proportion to their size and you want robustness; RMSE when large errors are disproportionately bad, or when the errors are roughly normal. (Statisticians have argued both sides of this. <span class="cite-group">[<a class="cite" href="#ref-26">26</a>, <a class="cite" href="#ref-35">35</a>]</span>) MAPE for business audiences when values are well away from zero; MASE for comparing forecasts across series of different scales; R² for explaining variation, never alone. And always <strong>plot the residuals</strong>: Francis Anscombe's famous quartet of 1973 showed four data sets with identical summary statistics, including R², that look completely different when plotted. <span class="cite-group">[<a class="cite" href="#ref-28">28</a>]</span> For problems where over- and under-prediction have different costs, quantile (pinball) loss evaluates predictions of a chosen percentile, and prediction intervals can be checked by how often they contain the true value.</p>
+            <figure class="fig" data-fig="fig-regression">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 10. The regression metrics lab.</strong> Each dot is one prediction; perfect predictions lie on the dashed line. Add noise, bias or outliers, switch to "always predict the average", or include true values near zero, and see which metrics react.
+              </figcaption>
+            </figure>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">Try it in Python: regression metrics</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">y_true = [30, 45, 25, 60, 35, 50]
+y_pred = [33, 40, 28, 52, 36, 58]
+print(m.mean_absolute_error(y_true, y_pred))            # 4.67
+print(m.mean_squared_error(y_true, y_pred))             # 28.67
+print(m.root_mean_squared_error(y_true, y_pred))        # 5.35 (scikit-learn 1.4+)
+print(m.median_absolute_error(y_true, y_pred))          # 4.0
+print(m.mean_absolute_percentage_error(y_true, y_pred)) # 0.109 (a fraction, not %)
+print(m.r2_score(y_true, y_pred))                       # 0.802</code></pre>
+            </details>
+          </section>
+
+          <section id="section-21">
+            <h2>21. Which Metric When?</h2>
+            <div class="table-container" style="overflow-x:auto; margin:1.2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.9rem; line-height:1.5;">
+                <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.5rem;">Situation</th><th style="padding:0.5rem;">Main metrics</th><th style="padding:0.5rem;">Also report</th></tr></thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Balanced classes, equal error costs</td><td style="padding:0.5rem;">Accuracy</td><td style="padding:0.5rem;">Confusion matrix; MCC</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Imbalanced classes, one summary number</td><td style="padding:0.5rem;">MCC, or balanced accuracy</td><td style="padding:0.5rem;">Sensitivity, specificity, precision</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Medical screening (missing cases is costly)</td><td style="padding:0.5rem;">Sensitivity at an acceptable specificity; F2</td><td style="padding:0.5rem;">PPV and NPV at the real prevalence</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Fraud, rare events, retrieval (false alarms are costly)</td><td style="padding:0.5rem;">Precision, recall, F1 or F0.5; PR curve and average precision</td><td style="padding:0.5rem;">Precision at a fixed number of alerts</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Ranking quality across thresholds</td><td style="padding:0.5rem;">ROC AUC (and PR AUC if imbalanced)</td><td style="padding:0.5rem;">Metrics at the chosen threshold</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Probabilities used for decisions</td><td style="padding:0.5rem;">Log loss, Brier score</td><td style="padding:0.5rem;">Reliability diagram, ECE</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Multiclass, all classes important</td><td style="padding:0.5rem;">Macro-F1, balanced accuracy, multiclass MCC</td><td style="padding:0.5rem;">Per-class table; confusion matrix</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Multiclass, overall correctness</td><td style="padding:0.5rem;">Accuracy (= micro-F1); top-k accuracy</td><td style="padding:0.5rem;">Macro-F1 to check rare classes</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Regression, typical error size</td><td style="padding:0.5rem;">MAE (robust) or RMSE (large errors matter)</td><td style="padding:0.5rem;">Residual plot; median error</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Regression, relative error or many series</td><td style="padding:0.5rem;">MAPE (values far from zero) or MASE</td><td style="padding:0.5rem;">MAE in original units</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Regression, variance explained</td><td style="padding:0.5rem;">R² (on held-out data)</td><td style="padding:0.5rem;">RMSE; residual plot</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Whatever the task: compare with baselines, choose the metric before comparing models, report uncertainty, and show the confusion matrix or residual plot behind the summary number.</p>
+          </section>
+
+          <section id="section-22">
+            <h2>22. Try It Yourself: A Guessing Game Confusion Matrix</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: be the classifier</div>
+              <p>Take a pack of playing cards and shuffle it. Your task is to predict whether each card is a <strong>heart</strong> (positive) before turning it over. You have no information, so you are a random classifier, but you can choose your "threshold".</p>
+              <ol>
+                <li><strong>Round 1:</strong> say "heart" for every card. Record TP, FP, FN and TN over the 52 cards.</li>
+                <li><strong>Round 2:</strong> say "heart" on every fourth card (the 4th, 8th, 12th and so on) without looking: still a random guess, but a more cautious one.</li>
+                <li><strong>Round 3:</strong> now cheat a little: look at the colour first, and say "heart" for every red card.</li>
+              </ol>
+              <p>Compute accuracy, sensitivity, specificity, precision, F1 and MCC for each round with Figure 2. Round 1 has 100% sensitivity but only 25% accuracy and MCC 0. Round 2 hovers around MCC 0 whatever happens. Round 3, with real information, has 100% sensitivity, about 67% specificity, 50% precision and a clearly positive MCC (about 0.58). Notice which metrics reward information, and which can be gamed by simply saying "yes" more often.</p>
+            </div>
+          </section>
+
+          <section id="section-23">
+            <h2>23. Legend and Record</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: is AUC the accuracy at the best threshold?</div>
+              <p><strong>The legend:</strong> an AUC of 0.85 means the model is 85% accurate, or will be at the right threshold.</p>
+              <p><strong>The record:</strong> AUC is not an accuracy at any threshold. It is the probability that a random positive is ranked above a random negative, averaged over all thresholds. A model with an AUC of 0.85 might have an accuracy of 95% or 60% at a particular threshold, depending on the prevalence and where the threshold is set. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>, <a class="cite" href="#ref-1">1</a>]</span></p>
+              <p><strong>The grain of truth:</strong> for a balanced test set, the balanced accuracy at a reasonable threshold is often in the same region as the AUC, which is why the two are confused.</p>
+              <p><strong>A second legend:</strong> "the ROC curve is named after an inventor called Roc". The name comes from radar: it describes the operating characteristic of a radio <em>receiver</em>, the trade-off between detecting real targets and being triggered by noise, as its sensitivity setting changes.</p>
+            </div>
+          </section>
+
+          <section id="section-24">
+            <h2>24. Philosophy Corner</h2>
+            <div class="callout callout-philosophy">
+              <div class="callout-header">Philosophy Corner: when a measure becomes a target</div>
+              <p>In 1975 the economist Charles Goodhart observed that statistical relationships tend to break down once they are used as targets for policy. The anthropologist Marilyn Strathern later put it in the form usually quoted: "When a measure becomes a target, it ceases to be a good measure." <span class="cite-group">[<a class="cite" href="#ref-32">32</a>, <a class="cite" href="#ref-31">31</a>]</span></p>
+              <p>Machine learning is full of examples. A model tuned to maximise accuracy learns to ignore the rare class. A system tuned to maximise clicks learns to recommend sensational content. A research field that ranks papers by a single benchmark number finds methods that improve the number without improving the real ability it was meant to measure. Every metric is a simplified picture of what we really care about, and optimising hard enough against any simplification will find its blind spots.</p>
+              <p>Choosing a metric is therefore not a technical detail but a value judgement: how bad is a missed cancer compared with an unnecessary biopsy? A blocked genuine customer compared with a successful fraud? A metric quietly answers those questions on our behalf. The best practice is to make the answers explicit, use several metrics, look at the cases the model gets wrong, and remember what the numbers stand for.</p>
+              <p><strong>Questions to think about:</strong> Can any single number capture whether a model is "good"? If two experts disagree about which metric to use, is one of them wrong, or do they value different outcomes?</p>
+            </div>
+          </section>
+          <section id="section-25">
+            <h2>25. People in This Story</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Adrien-Marie Legendre</td>
+                <td style="padding:0.6rem 0.8rem;">1752–1833<br>France</td>
+                <td style="padding:0.6rem 0.8rem;">Least squares (1805)</td>
+                <td style="padding:0.6rem 0.8rem;">Introduced fitting by minimising squared errors.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Francis Galton</td>
+                <td style="padding:0.6rem 0.8rem;">1822–1911<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">“Regression” (1886)</td>
+                <td style="padding:0.6rem 0.8rem;">Named regression towards the mean.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Glenn W. Brier</td>
+                <td style="padding:0.6rem 0.8rem;">1913–1998<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Brier score (1950)</td>
+                <td style="padding:0.6rem 0.8rem;">Proposed scoring probability forecasts by squared error.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">William J. Youden</td>
+                <td style="padding:0.6rem 0.8rem;">1900–1971<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Youden’s index (1950)</td>
+                <td style="padding:0.6rem 0.8rem;">Combined sensitivity and specificity into one index.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Jacob Cohen</td>
+                <td style="padding:0.6rem 0.8rem;">1923–1998<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Cohen’s kappa (1960)</td>
+                <td style="padding:0.6rem 0.8rem;">Measured agreement beyond chance.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">David M. Green &amp; John A. Swets</td>
+                <td style="padding:0.6rem 0.8rem;">1932–2019 / 1928–2016<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Signal detection theory (1966)</td>
+                <td style="padding:0.6rem 0.8rem;">Brought ROC analysis to psychology and medicine.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Brian W. Matthews</td>
+                <td style="padding:0.6rem 0.8rem;">born 1938<br>Australia / USA</td>
+                <td style="padding:0.6rem 0.8rem;">MCC (1975)</td>
+                <td style="padding:0.6rem 0.8rem;">Introduced the correlation measure now called MCC.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">C. J. van Rijsbergen</td>
+                <td style="padding:0.6rem 0.8rem;">born 1943<br>Netherlands / UK</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Information Retrieval</em> (1979)</td>
+                <td style="padding:0.6rem 0.8rem;">Set out the measure behind the F-score.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">James A. Hanley &amp; Barbara J. McNeil</td>
+                <td style="padding:0.6rem 0.8rem;">Canada / USA</td>
+                <td style="padding:0.6rem 0.8rem;">Meaning of AUC (1982)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed AUC is a probability of correct ranking.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-26">
+            <h2>26. Test Yourself</h2>
+            <p>Twelve questions to check what you remember about measuring classification and regression models.</p>
+            <figure class="fig" data-fig="fig-quiz-metrics">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-27">
+            <h2>27. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Fawcett, Tom.</strong> (2006). "An introduction to ROC analysis." <em>Pattern Recognition Letters</em>, 27(8): 861–874.</li>
+              <li id="ref-2"><strong>Sokolova, Marina &amp; Lapalme, Guy.</strong> (2009). "A systematic analysis of performance measures for classification tasks." <em>Information Processing &amp; Management</em>, 45(4): 427–437.</li>
+              <li id="ref-3"><strong>Powers, David M. W.</strong> (2011). "Evaluation: from precision, recall and F-measure to ROC, informedness, markedness and correlation." <em>Journal of Machine Learning Technologies</em>, 2(1): 37–63.</li>
+              <li id="ref-4"><strong>Youden, W. J.</strong> (1950). "Index for rating diagnostic tests." <em>Cancer</em>, 3(1): 32–35.</li>
+              <li id="ref-5"><strong>Brodersen, K. H., Ong, C. S., Stephan, K. E. &amp; Buhmann, J. M.</strong> (2010). "The balanced accuracy and its posterior distribution." <em>Proceedings of the 20th International Conference on Pattern Recognition</em>: 3121–3124.</li>
+              <li id="ref-6"><strong>Gigerenzer, Gerd &amp; Hoffrage, Ulrich.</strong> (1995). "How to improve Bayesian reasoning without instruction: frequency formats." <em>Psychological Review</em>, 102(4): 684–704.</li>
+              <li id="ref-7"><strong>van Rijsbergen, C. J.</strong> (1979). <em>Information Retrieval</em>. 2nd ed. London: Butterworths.</li>
+              <li id="ref-8"><strong>Matthews, B. W.</strong> (1975). "Comparison of the predicted and observed secondary structure of T4 phage lysozyme." <em>Biochimica et Biophysica Acta</em>, 405(2): 442–451.</li>
+              <li id="ref-9"><strong>Chicco, Davide &amp; Jurman, Giuseppe.</strong> (2020). "The advantages of the Matthews correlation coefficient (MCC) over F1 score and accuracy in binary classification evaluation." <em>BMC Genomics</em>, 21: 6.</li>
+              <li id="ref-10"><strong>Cohen, Jacob.</strong> (1960). "A coefficient of agreement for nominal scales." <em>Educational and Psychological Measurement</em>, 20(1): 37–46.</li>
+              <li id="ref-11"><strong>Peterson, W. W., Birdsall, T. G. &amp; Fox, W. C.</strong> (1954). "The theory of signal detectability." <em>Transactions of the IRE Professional Group on Information Theory</em>, 4(4): 171–212.</li>
+              <li id="ref-12"><strong>Green, David M. &amp; Swets, John A.</strong> (1966). <em>Signal Detection Theory and Psychophysics</em>. New York: Wiley.</li>
+              <li id="ref-13"><strong>Hanley, James A. &amp; McNeil, Barbara J.</strong> (1982). "The meaning and use of the area under a receiver operating characteristic (ROC) curve." <em>Radiology</em>, 143(1): 29–36.</li>
+              <li id="ref-14"><strong>Davis, Jesse &amp; Goadrich, Mark.</strong> (2006). "The relationship between precision-recall and ROC curves." <em>Proceedings of the 23rd International Conference on Machine Learning</em>: 233–240.</li>
+              <li id="ref-15"><strong>Saito, Takaya &amp; Rehmsmeier, Marc.</strong> (2015). "The precision-recall plot is more informative than the ROC plot when evaluating binary classifiers on imbalanced datasets." <em>PLoS ONE</em>, 10(3): e0118432.</li>
+              <li id="ref-16"><strong>Gorodkin, J.</strong> (2004). "Comparing two K-category assignments by a K-category correlation coefficient." <em>Computational Biology and Chemistry</em>, 28(5–6): 367–374.</li>
+              <li id="ref-17"><strong>Opitz, Juri &amp; Burst, Sebastian.</strong> (2019). "Macro F1 and macro F1." arXiv:1911.03347.</li>
+              <li id="ref-18"><strong>Brier, Glenn W.</strong> (1950). "Verification of forecasts expressed in terms of probability." <em>Monthly Weather Review</em>, 78(1): 1–3.</li>
+              <li id="ref-19"><strong>Guo, Chuan, Pleiss, Geoff, Sun, Yu &amp; Weinberger, Kilian Q.</strong> (2017). "On calibration of modern neural networks." <em>Proceedings of the 34th International Conference on Machine Learning</em>, PMLR 70: 1321–1330.</li>
+              <li id="ref-20"><strong>Naeini, Mahdi Pakdaman, Cooper, Gregory F. &amp; Hauskrecht, Milos.</strong> (2015). "Obtaining well calibrated probabilities using Bayesian binning." <em>Proceedings of the AAAI Conference on Artificial Intelligence</em>, 29(1): 2901–2907.</li>
+              <li id="ref-21"><strong>Niculescu-Mizil, Alexandru &amp; Caruana, Rich.</strong> (2005). "Predicting good probabilities with supervised learning." <em>Proceedings of the 22nd International Conference on Machine Learning</em>: 625–632.</li>
+              <li id="ref-22"><strong>DeLong, E. R., DeLong, D. M. &amp; Clarke-Pearson, D. L.</strong> (1988). "Comparing the areas under two or more correlated receiver operating characteristic curves: a nonparametric approach." <em>Biometrics</em>, 44(3): 837–845.</li>
+              <li id="ref-23"><strong>Forman, George &amp; Scholz, Martin.</strong> (2010). "Apples-to-apples in cross-validation studies: pitfalls in classifier performance measurement." <em>ACM SIGKDD Explorations</em>, 12(1): 49–57.</li>
+              <li id="ref-24"><strong>Kaufman, S., Rosset, S., Perlich, C. &amp; Stitelman, O.</strong> (2012). "Leakage in data mining: formulation, detection, and avoidance." <em>ACM Transactions on Knowledge Discovery from Data</em>, 6(4): 15.</li>
+              <li id="ref-25"><strong>Hyndman, Rob J. &amp; Koehler, Anne B.</strong> (2006). "Another look at measures of forecast accuracy." <em>International Journal of Forecasting</em>, 22(4): 679–688.</li>
+              <li id="ref-26"><strong>Willmott, Cort J. &amp; Matsuura, Kenji.</strong> (2005). "Advantages of the mean absolute error (MAE) over the root mean square error (RMSE) in assessing average model performance." <em>Climate Research</em>, 30(1): 79–82.</li>
+              <li id="ref-27"><strong>Kvålseth, Tarald O.</strong> (1985). "Cautionary note about R²." <em>The American Statistician</em>, 39(4): 279–285.</li>
+              <li id="ref-28"><strong>Anscombe, F. J.</strong> (1973). "Graphs in statistical analysis." <em>The American Statistician</em>, 27(1): 17–21.</li>
+              <li id="ref-29"><strong>Galton, Francis.</strong> (1886). "Regression towards mediocrity in hereditary stature." <em>Journal of the Anthropological Institute of Great Britain and Ireland</em>, 15: 246–263.</li>
+              <li id="ref-30"><strong>Legendre, A.-M.</strong> (1805). <em>Nouvelles méthodes pour la détermination des orbites des comètes</em>. Paris: Courcier.</li>
+              <li id="ref-31"><strong>Strathern, Marilyn.</strong> (1997). "‘Improving ratings’: audit in the British University system." <em>European Review</em>, 5(3): 305–321.</li>
+              <li id="ref-32"><strong>Goodhart, C. A. E.</strong> (1975). "Problems of monetary management: the U.K. experience." In <em>Papers in Monetary Economics</em>, vol. 1. Sydney: Reserve Bank of Australia.</li>
+              <li id="ref-33"><strong>Japkowicz, Nathalie &amp; Shah, Mohak.</strong> (2011). <em>Evaluating Learning Algorithms: A Classification Perspective</em>. Cambridge: Cambridge University Press.</li>
+              <li id="ref-34"><strong>Pedregosa, F. et al.</strong> (2011). "Scikit-learn: machine learning in Python." <em>Journal of Machine Learning Research</em>, 12: 2825–2830.</li>
+              <li id="ref-35"><strong>Chai, T. &amp; Draxler, R. R.</strong> (2014). "Root mean square error (RMSE) or mean absolute error (MAE)? Arguments against avoiding RMSE in the literature." <em>Geoscientific Model Development</em>, 7(3): 1247–1250.</li>
+              <li id="ref-36"><strong>Efron, Bradley.</strong> (1979). "Bootstrap methods: another look at the jackknife." <em>Annals of Statistics</em>, 7(1): 1–26.</li>
+              <li id="ref-37"><strong>McNemar, Quinn.</strong> (1947). "Note on the sampling error of the difference between correlated proportions or percentages." <em>Psychometrika</em>, 12(2): 153–157.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/classification-and-regression-metrics.js"></script>
+</body>
+</html>

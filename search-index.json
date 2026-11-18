@@ -1,5 +1,22 @@
 [
   {
+    "slug": "classification-and-regression-metrics",
+    "url": "articles/classification-and-regression-metrics.html",
+    "title": "Is 99% Accuracy Good? A Complete Guide to Model Metrics, from the Confusion Matrix to MCC, AUC and R²",
+    "summary": "Accuracy, sensitivity, specificity, precision, F1, micro and macro F1, MCC, ROC and AUC, PR curves, calibration and regression errors, explained from scratch with worked examples.",
+    "subject": "Technology",
+    "tags": [
+      "machine-learning",
+      "evaluation-metrics",
+      "classification",
+      "statistics",
+      "artificial-intelligence",
+      "regression"
+    ],
+    "date": "2026-12-01",
+    "type": "tutorial"
+  },
+  {
     "slug": "null-hypothesis-p-values-and-effect-sizes",
     "url": "articles/null-hypothesis-p-values-and-effect-sizes.html",
     "title": "Is It Real, or Just Luck? Null Hypotheses, p-Values and Effect Sizes, from Coin Flips to Comparing AI Models",

@@ -3052,5 +3052,144 @@
     "term": "Bootstrap",
     "definition": "A way of estimating uncertainty by repeatedly resampling the data with replacement.",
     "forms": []
+  },
+  {
+    "term": "Confusion matrix",
+    "definition": "A table counting a classifier’s correct and incorrect predictions for each class: true positives, false positives, false negatives and true negatives in the binary case.",
+    "forms": [
+      "confusion matrices"
+    ]
+  },
+  {
+    "term": "True positive",
+    "definition": "A positive case correctly predicted as positive.",
+    "forms": [
+      "true positives"
+    ]
+  },
+  {
+    "term": "False positive",
+    "definition": "A negative case wrongly predicted as positive: a false alarm.",
+    "forms": [
+      "false positives"
+    ]
+  },
+  {
+    "term": "False negative",
+    "definition": "A positive case wrongly predicted as negative: a miss.",
+    "forms": [
+      "false negatives"
+    ]
+  },
+  {
+    "term": "True positive rate",
+    "definition": "Sensitivity or recall: the share of actual positives correctly identified, TP/(TP+FN).",
+    "forms": []
+  },
+  {
+    "term": "Specificity",
+    "definition": "The share of actual negatives correctly identified, TN/(TN+FP). Also called true negative rate.",
+    "forms": []
+  },
+  {
+    "term": "Positive predictive value",
+    "definition": "Precision: the share of positive predictions that are correct, TP/(TP+FP).",
+    "forms": []
+  },
+  {
+    "term": "Balanced accuracy",
+    "definition": "The average of sensitivity and specificity (or of the recalls of all classes), which gives each class equal weight.",
+    "forms": []
+  },
+  {
+    "term": "F1 score",
+    "definition": "The harmonic mean of precision and recall, 2TP/(2TP+FP+FN). It ignores true negatives.",
+    "forms": [
+      "F1"
+    ]
+  },
+  {
+    "term": "Matthews correlation coefficient",
+    "definition": "The correlation between predicted and actual classes, from −1 to +1, using all four cells of the confusion matrix; MCC.",
+    "forms": [
+      "MCC"
+    ]
+  },
+  {
+    "term": "ROC curve",
+    "definition": "A plot of true positive rate against false positive rate as the decision threshold varies; short for receiver operating characteristic.",
+    "forms": [
+      "ROC curves",
+      "receiver operating characteristic"
+    ]
+  },
+  {
+    "term": "AUC",
+    "definition": "Area under the ROC curve: the probability that a randomly chosen positive is scored higher than a randomly chosen negative.",
+    "forms": []
+  },
+  {
+    "term": "Precision–recall curve",
+    "definition": "A plot of precision against recall as the threshold varies; more informative than the ROC curve when positives are rare.",
+    "forms": [
+      "PR curve"
+    ]
+  },
+  {
+    "term": "Macro averaging",
+    "definition": "Averaging a metric over classes with equal weight per class.",
+    "forms": [
+      "macro-F1",
+      "macro-averaged"
+    ]
+  },
+  {
+    "term": "Micro averaging",
+    "definition": "Computing a metric from the pooled counts of all classes, so every prediction counts equally; micro-F1 equals accuracy in single-label problems.",
+    "forms": [
+      "micro-F1",
+      "micro-averaged"
+    ]
+  },
+  {
+    "term": "Brier score",
+    "definition": "The mean squared difference between predicted probabilities and actual outcomes (0 or 1); lower is better.",
+    "forms": []
+  },
+  {
+    "term": "Mean absolute error",
+    "definition": "The average absolute difference between predictions and true values; MAE.",
+    "forms": [
+      "MAE"
+    ]
+  },
+  {
+    "term": "Root mean squared error",
+    "definition": "The square root of the average squared error; RMSE. Penalises large errors more than MAE.",
+    "forms": [
+      "RMSE"
+    ]
+  },
+  {
+    "term": "Coefficient of determination",
+    "definition": "R²: the share of variation in the true values explained by a model, relative to always predicting the mean.",
+    "forms": [
+      "R²",
+      "R-squared"
+    ]
+  },
+  {
+    "term": "Prevalence",
+    "definition": "The share of cases that are actually positive; the base rate.",
+    "forms": [
+      "base rate"
+    ]
+  },
+  {
+    "term": "Expected calibration error",
+    "definition": "ECE: the average gap between predicted probabilities and observed frequencies, measuring how well a model’s probabilities can be trusted.",
+    "forms": [
+      "ECE"
+    ]
   }
 ]
