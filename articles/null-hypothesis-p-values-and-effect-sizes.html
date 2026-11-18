@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Is It Real, or Just Luck? Null Hypotheses, p-Values and Effect Sizes, from Coin Flips to Comparing AI Models — RNLearn</title>
+  <meta name="description" content="From a suspicious coin to comparing AI models: null hypotheses, p-values, power, rank tests, Cliff’s delta, confidence intervals, FDR and q-values, and how to test ML results properly.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/null-hypothesis-p-values-and-effect-sizes.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Is It Real, or Just Luck? Null Hypotheses, p-Values and Effect Sizes, from Coin Flips to Comparing AI Models — RNLearn">
+  <meta property="og:description" content="From a suspicious coin to comparing AI models: null hypotheses, p-values, power, rank tests, Cliff’s delta, confidence intervals, FDR and q-values, and how to test ML results properly.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/null-hypothesis-p-values-and-effect-sizes.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Is It Real, or Just Luck? Null Hypotheses, p-Values and Effect Sizes, from Coin Flips to Comparing AI Models — RNLearn">
+  <meta name="twitter:description" content="From a suspicious coin to comparing AI models: null hypotheses, p-values, power, rank tests, Cliff’s delta, confidence intervals, FDR and q-values, and how to test ML results properly.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Is It Real, or Just Luck? Null Hypotheses, p-Values and Effect Sizes, from Coin Flips to Comparing AI Models",
+    "description": "From a suspicious coin to comparing AI models: null hypotheses, p-values, power, rank tests, Cliff’s delta, confidence intervals, FDR and q-values, and how to test ML results properly.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-30",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/null-hypothesis-p-values-and-effect-sizes.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/technology.html" class="post-subject-tag" data-subject="technology">Technology</a>
+        </div>
+        <h1 class="article-title">Is It Real, or Just Luck? Null Hypotheses, p-Values and Effect Sizes, from Coin Flips to Comparing AI Models</h1>
+        <p class="article-standfirst">
+          Every scientist, doctor and machine-learning engineer faces the same question: is this difference real, or just luck? Here is how the null hypothesis answers it, how big a difference is, and how to avoid fooling yourself.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-30">30 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>37 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. Lucky, or Loaded?</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. The Logic of a Test</a></li>
+              <li><a class="toc-link" href="#section-4">4. Imagining a World Where Nothing Happens</a></li>
+              <li><a class="toc-link" href="#section-5">5. The p-Value: What It Is, and What It Is Not</a></li>
+              <li><a class="toc-link" href="#section-6">6. Two Ways to Be Wrong: Errors and Power</a></li>
+              <li><a class="toc-link" href="#section-7">7. The Classic Tests: z, t and Chi-Square</a></li>
+              <li><a class="toc-link" href="#section-8">8. When the Assumptions Fail</a></li>
+              <li><a class="toc-link" href="#section-9">9. How Big Is the Difference? Effect Sizes and Cliff’s Delta</a></li>
+              <li><a class="toc-link" href="#section-10">10. Confidence Intervals</a></li>
+              <li><a class="toc-link" href="#section-11">11. Many Tests at Once: FDR and q-Values</a></li>
+              <li><a class="toc-link" href="#section-12">12. How p-Values Go Wrong</a></li>
+              <li><a class="toc-link" href="#section-13">13. Beyond p: Estimation and Bayes</a></li>
+              <li><a class="toc-link" href="#section-14">14. Comparing Machine-Learning Models</a></li>
+              <li><a class="toc-link" href="#section-15">15. Hypothesis Tests Elsewhere in AI</a></li>
+              <li><a class="toc-link" href="#section-16">16. A Worked Example: Two Classifiers, Ten Seeds</a></li>
+              <li><a class="toc-link" href="#section-17">17. Which Test When?</a></li>
+              <li><a class="toc-link" href="#section-18">18. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-19">19. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-20">20. Philosophy Corner</a></li>
+              <li><a class="toc-link" href="#section-21">21. People in This Story</a></li>
+              <li><a class="toc-link" href="#section-22">22. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-23">23. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. Lucky, or Loaded?</h2>
+            <p>A friend offers you a bet on a coin and flips it twelve times. It lands heads nine times. Is the coin loaded, or was your friend just lucky? Nine out of twelve is more than the six you would expect, but fair coins produce streaks all the time. How surprised should you be?</p>
+            <p>This little question contains the whole idea behind one of the most widely used, and most widely misunderstood, tools in science: the <strong>hypothesis test</strong>. Doctors use it to decide whether a drug works, biologists to find which of 20,000 genes respond to a treatment, companies to decide whether a new website design sells more, and machine-learning researchers to decide whether a new model is really better than the old one or just had lucky random seeds.</p>
+            <p>This tutorial starts from that coin and builds up, step by step, to the tools used in modern research and artificial intelligence. Part A explains the logic: null hypotheses, p-values, errors and power. Part B opens the toolbox: classic and rank-based tests, permutation tests and the bootstrap, effect sizes such as <strong>Cliff's delta</strong>, confidence intervals, and the <strong>q-values</strong> used when testing thousands of things at once. Part C shows how all of this is used, and misused, in machine learning and AI. Every example uses made-up data, and every figure lets you experiment. Optional Python snippets show how to do each step on your own data.</p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-stats-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. Three centuries of deciding what is real, 1710–2016.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <p class="part-label" style="margin-top:2.5rem;font-family:var(--font-sans);font-size:0.85rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);">Part A: The Logic</p>
+
+          <section id="section-3">
+            <h2>3. The Logic of a Test</h2>
+            <p>A hypothesis test is an argument by contradiction, softened by probability. We start by assuming the boring explanation: the coin is fair, the drug does nothing, the new model is no better than the old one. This boring assumption is called the <strong>null hypothesis</strong>, written H<sub>0</sub>. The interesting possibility, that there is a real effect, is the <strong>alternative hypothesis</strong>, H<sub>1</sub>.</p>
+            <p>Then we ask: <em>if the null hypothesis were true, how surprising would our data be?</em> If data like ours would be very unusual in a world where nothing is going on, we have reason to doubt that world, and we <strong>reject the null hypothesis</strong>. If data like ours would be quite ordinary, we <strong>fail to reject</strong> it. Notice the careful wording. A court that finds someone "not guilty" has not proved them innocent; it has found the evidence insufficient. In the same way, failing to reject the null hypothesis does not prove it true. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>, <a class="cite" href="#ref-5">5</a>]</span></p>
+            <p>The idea is older than the name. In 1710 John Arbuthnot noticed that in each of 82 consecutive years, more boys than girls had been christened in London. If boys and girls were equally likely to outnumber each other in any year, the chance of boys winning 82 years in a row would be (½)<sup>82</sup>, about 1 in 5 million billion billion. He concluded that chance could not explain it. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span> The term "null hypothesis" was coined by Ronald Fisher in 1935, in a book that begins with a lady who claimed she could taste whether the milk or the tea had been poured into the cup first. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>, <a class="cite" href="#ref-41">41</a>]</span></p>
+            <figure class="fig" data-fig="fig-coin-test">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Lucky or loaded?</strong> The bars show how often a fair coin gives each number of heads. The red bars are results at least as extreme as yours; their total is the p-value. Try 9 heads in 12, then 90 in 100, or flip a fair or loaded coin.
+              </figcaption>
+            </figure>
+            <p>For the coin, a fair coin gives 9 or more heads in 12 flips about 7.3% of the time. That is unusual, but not very: roughly once in every fourteen tries. By the common convention we will meet shortly, it is not strong enough evidence to call the coin loaded. Notice that the answer depends on the question. "Is it biased towards heads?" counts only results with many heads (a <strong>one-sided</strong> test). "Is it biased either way?" also counts results with very few heads, and doubles the probability to about 14.6% (a <strong>two-sided</strong> test). The question must be decided <em>before</em> looking at the data.</p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Imagining a World Where Nothing Happens</h2>
+            <p>For the coin, probability theory tells us exactly what a fair coin does. In most real problems we need a <strong>test statistic</strong>, a single number that summarises how far the data are from what the null hypothesis predicts, such as the difference between two averages, and the <strong>null distribution</strong>: the spread of values that statistic would take if the null hypothesis were true.</p>
+            <p>One of the clearest ways to see a null distribution is to build it. Suppose we grow ten plants with an old fertiliser and ten with a new one, and the new ones are 2.9 cm taller on average. If the fertiliser made no difference, the labels "old" and "new" would be arbitrary: any plant could just as well have had either label. So we shuffle the labels at random, recompute the difference, and repeat thousands of times. That is a <strong>permutation test</strong>, and the pile of shuffled differences is the null world, made visible.</p>
+            <figure class="fig" data-fig="fig-null-world">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. The null world, built by shuffling.</strong> Shuffle the "old" and "new" labels many times. The histogram shows the differences that chance alone produces; the red line is the real difference. The fraction of shuffles at least as extreme is the p-value.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-5">
+            <h2>5. The p-Value: What It Is, and What It Is Not</h2>
+            <p>We can now state the definition precisely. The <strong>p-value</strong> is the probability, calculated <em>assuming the null hypothesis is true</em>, of getting a test statistic at least as extreme as the one actually observed:</p>
+            <p>$$p = P(\text{statistic at least as extreme as observed} \mid H_0 \text{ true}).$$</p>
+            <p>A small p-value means the data would be surprising if nothing were going on. In 1925 Ronald Fisher suggested that a value of 1 in 20, p = 0.05, was "convenient" as a limit for judging whether a result deserves attention. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> That remark hardened, over the following decades, into a near-universal rule: results with p &lt; 0.05 are called <strong>statistically significant</strong>. The threshold is written α (alpha) and called the <strong>significance level</strong>.</p>
+            <p>The p-value is easy to define and astonishingly easy to misread. In 2016 the American Statistical Association took the unprecedented step of publishing a statement on it. Here, in plain words, are the most common misreadings. <span class="cite-group">[<a class="cite" href="#ref-19">19</a>]</span></p>
+            <ul>
+              <li><strong>It is not the probability that the null hypothesis is true.</strong> p = 0.03 does not mean "there is a 3% chance the coin is fair". The p-value is calculated <em>assuming</em> the null is true; it cannot also measure how likely that assumption is. (That would require a Bayesian calculation with prior beliefs; see section 13.)</li>
+              <li><strong>It is not the probability that the result is due to chance.</strong> That is the same mistake in different words.</li>
+              <li><strong>It does not measure the size or importance of an effect.</strong> A tiny, useless effect can have a minuscule p-value if the sample is huge (section 9).</li>
+              <li><strong>p &gt; 0.05 does not mean "no effect".</strong> The study may simply have been too small to detect it.</li>
+              <li><strong>1 − p is not the probability that the result will replicate.</strong> As Figure 8 shows, p-values vary enormously between identical experiments.</li>
+              <li><strong>0.05 is not a law of nature.</strong> Treating p = 0.049 and p = 0.051 as opposite conclusions makes no scientific sense.</li>
+            </ul>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Two Ways to Be Wrong: Errors and Power</h2>
+            <p>In 1933 Jerzy Neyman and Egon Pearson recast testing as a decision with two possible mistakes. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+            <div class="table-container" style="overflow-x:auto; margin:1.2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.93rem; line-height:1.5;">
+                <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.5rem 0.6rem;"></th><th style="padding:0.5rem 0.6rem;">No real effect (H<sub>0</sub> true)</th><th style="padding:0.5rem 0.6rem;">Real effect (H<sub>1</sub> true)</th></tr></thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem 0.6rem;"><strong>We reject H<sub>0</sub></strong></td><td style="padding:0.5rem 0.6rem;"><strong>Type I error</strong> (false alarm). Probability α</td><td style="padding:0.5rem 0.6rem;">Correct detection. Probability = <strong>power</strong></td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem 0.6rem;"><strong>We do not reject H<sub>0</sub></strong></td><td style="padding:0.5rem 0.6rem;">Correct</td><td style="padding:0.5rem 0.6rem;"><strong>Type II error</strong> (missed effect). Probability β</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>The significance level α is the false-alarm rate we accept when there is no effect. The <strong>power</strong>, 1 − β, is the chance of detecting an effect that really exists. Power depends on three things: how big the effect is, how much data we have, and how strict α is. In 1962 the psychologist Jacob Cohen surveyed published studies in his field and found that most had only about a 50:50 chance of detecting a medium-sized effect, even if it existed. <span class="cite-group">[<a class="cite" href="#ref-42">42</a>]</span> Underpowered studies are still common, and they cause a subtle problem: when such a study does find a "significant" result, the effect it reports is usually exaggerated, because only the lucky overestimates cross the threshold.</p>
+            <figure class="fig" data-fig="fig-power">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. False alarms, missed effects and power.</strong> The grey curve is what the test statistic does when there is no effect; the blue curve, when there is. Change the effect size, the sample size and α, and watch the two error rates trade off.
+              </figcaption>
+            </figure>
+          </section>
+
+          <p class="part-label" style="margin-top:2.5rem;font-family:var(--font-sans);font-size:0.85rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);">Part B: The Toolbox</p>
+
+          <section id="section-7">
+            <h2>7. The Classic Tests: z, t and Chi-Square</h2>
+            <p>Most classic tests follow the same recipe: compute how far the data are from the null hypothesis, measured in units of the expected random variation, and compare that with a known distribution.</p>
+            <p><strong>The t-test.</strong> In 1908 William Gosset, a chemist at the Guinness brewery in Dublin who had to make decisions from small batches of barley and hops, worked out what happens to this recipe when samples are small. Guinness did not allow its staff to publish under their own names, so he signed his paper "Student". <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> To compare the means of two groups, the <strong>t statistic</strong> is the difference between the means divided by its standard error:</p>
+            <p>$$t = \frac{\bar{x}_B - \bar{x}_A}{\sqrt{s_A^2/n_A + s_B^2/n_B}},$$</p>
+            <p>where $\bar{x}$ are the sample means, $s$ the standard deviations and $n$ the sample sizes. (This version, which does not assume the two groups have equal spread, is called <strong>Welch's t-test</strong>, and is a sensible default.) If the null hypothesis is true, t follows a known "t-distribution", from which the p-value is read. With large samples, the t-distribution becomes the normal distribution and the test becomes a <strong>z-test</strong>.</p>
+            <p><strong>Paired data.</strong> If each measurement in one group is naturally matched with one in the other, for example the same patient before and after treatment, or two models evaluated on the same data split, we should analyse the <em>differences</em> within each pair. The <strong>paired t-test</strong> is a one-sample t-test on those differences. As we will see in Part C, using an unpaired test on paired data throws away a great deal of information.</p>
+            <p><strong>The chi-square test.</strong> For counts, such as how many patients recovered in each group, Karl Pearson's chi-square test (1900) compares observed counts with those expected under the null hypothesis. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+            <p>These tests come with assumptions: roughly normal data (or large samples), independent observations, and, for some versions, equal spread in each group. The most important assumption is almost always <strong>independence</strong>: if observations are secretly linked, every test will be overconfident.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">Try it in Python: classic tests</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">import numpy as np
+from scipy import stats
+
+a = np.array([21, 25, 18, 23, 20, 22, 19, 24, 20, 23])   # group A
+b = np.array([24, 27, 22, 26, 21, 28, 23, 25, 26, 22])   # group B
+
+print(stats.binomtest(9, n=12, p=0.5, alternative='greater').pvalue)  # coin: about 0.073
+print(stats.ttest_ind(b, a, equal_var=False))   # Welch's t-test (unpaired)
+print(stats.ttest_rel(b, a))                    # paired t-test (only if pairs are matched!)
+print(stats.chi2_contingency([[30, 20], [18, 32]]))  # counts in a 2 x 2 table</code></pre>
+            </details>
+          </section>
+
+          <section id="section-8">
+            <h2>8. When the Assumptions Fail: Ranks, Permutations and the Bootstrap</h2>
+            <p>Real data are often skewed, contain outliers, or come from small samples where normality cannot be checked. Several families of methods avoid the normal-distribution assumption.</p>
+            <ul>
+              <li><strong>Rank-based tests.</strong> Replace each value by its rank (1st, 2nd, 3rd…) and test the ranks. The <strong>Mann–Whitney U test</strong> (also called the Wilcoxon rank-sum test) compares two independent groups; the <strong>Wilcoxon signed-rank test</strong> compares paired measurements using the ranks of their differences. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>, <a class="cite" href="#ref-8">8</a>]</span> Because a single extreme value only gets the top rank, however extreme it is, these tests are robust to outliers. Strictly, the Mann–Whitney test asks whether values from one group tend to be larger than values from the other, which is closely related to Cliff's delta (section 9).</li>
+              <li><strong>Permutation tests</strong> (Figure 3) build the null distribution by shuffling labels. They need very few assumptions, only that under the null hypothesis the labels are exchangeable, and they work with any test statistic you like: a difference in medians, in accuracy, in F1 score.</li>
+              <li><strong>The bootstrap</strong>, introduced by Bradley Efron in 1979, estimates uncertainty by resampling the data <em>with replacement</em>: draw a sample of the same size from your own data, compute the statistic, and repeat thousands of times. The spread of the results approximates the uncertainty of your estimate, and gives confidence intervals for almost anything. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span></li>
+            </ul>
+            <p>Rank tests have one cost: when the data really are normal, they are slightly less powerful than t-tests (about 95% as efficient for large samples). When the data are skewed or contain outliers, they can be far more powerful.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">Try it in Python: rank tests, permutations and the bootstrap</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">print(stats.mannwhitneyu(b, a, alternative='two-sided'))  # two independent groups
+print(stats.wilcoxon(b, a))                               # paired differences
+
+def diff_means(x, y, axis):
+    return np.mean(x, axis=axis) - np.mean(y, axis=axis)
+res = stats.permutation_test((b, a), diff_means, permutation_type='independent',
+                             n_resamples=10000, alternative='two-sided')
+print(res.pvalue)
+
+boot = stats.bootstrap((b,), np.median, confidence_level=0.95)
+print(boot.confidence_interval)                           # CI for the median of b</code></pre>
+            </details>
+          </section>
+
+          <section id="section-9">
+            <h2>9. How Big Is the Difference? Effect Sizes and Cliff's Delta</h2>
+            <p>A p-value answers "is there evidence of <em>some</em> difference?" It does not answer "how big is it?", and with enough data, even trivial differences become "significant". An <strong>effect size</strong> answers the second question, and does not shrink or grow just because you collected more data.</p>
+            <figure class="fig" data-fig="fig-big-n">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Significant but tiny.</strong> Keep the true difference small and increase the sample size. The p-value plunges towards zero; the effect size stays where it is.
+              </figcaption>
+            </figure>
+            <p><strong>Cohen's d</strong> expresses the difference in means in units of the standard deviation:</p>
+            <p>$$d = \frac{\bar{x}_B - \bar{x}_A}{s_{\text{pooled}}}.$$</p>
+            <p>Cohen suggested, with reluctance, that 0.2, 0.5 and 0.8 could be called "small", "medium" and "large" when nothing better was known. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span> Because it uses means and standard deviations, d is sensitive to skewed data and outliers.</p>
+            <p><strong>Cliff's delta</strong> takes a completely different, and very intuitive, approach. Take every possible pair of one value from group B and one from group A, and count how often B's value is larger, and how often smaller: <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span></p>
+            <p>$$\delta = \frac{\#(b_i > a_j) - \#(b_i < a_j)}{n_A \, n_B}.$$</p>
+            <p>Delta runs from −1 (every A value is larger than every B value) through 0 (complete overlap: each group wins half the comparisons) to +1 (every B value is larger). It answers a question anyone can understand: <em>if I pick one value from each group at random, how much more likely is B's to be the larger?</em> A closely related measure, the <strong>Vargha–Delaney A</strong>, is simply the probability that a random B value beats a random A value (counting ties as half): <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span></p>
+            <p>$$A = \frac{\delta + 1}{2}, \qquad \text{for example } \delta = 0.4 \Rightarrow A = 0.7.$$</p>
+            <p>Because delta only asks <em>which</em> value is bigger, never <em>by how much</em>, it is unaffected by outliers and by any stretching of the scale (for example, taking logarithms), and it works for ordinal data such as ratings from 1 to 5. A commonly used set of labels, proposed by Romano and colleagues, calls |δ| below 0.147 "negligible", below 0.33 "small", below 0.474 "medium", and anything larger "large". <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span> Like Cohen's labels, these are rules of thumb: whether an effect matters depends on the field and the stakes, not on a table.</p>
+            <figure class="fig" data-fig="fig-cliffs-delta">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. Cliff's delta, one comparison at a time.</strong> Each square compares one value from B with one from A: red if B is larger, blue if A is. Delta is the share of red minus the share of blue. Shift group B, then turn one value into an outlier and compare how Cohen's d and Cliff's delta respond.
+              </figcaption>
+            </figure>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">Try it in Python: effect sizes</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">def cliffs_delta(b, a):
+    """Cliff's delta: P(b > a) - P(b < a) over all pairs."""
+    b, a = np.asarray(b), np.asarray(a)
+    return np.sign(b[:, None] - a[None, :]).mean()
+
+def cohens_d(b, a):
+    pooled = np.sqrt((np.var(a, ddof=1) + np.var(b, ddof=1)) / 2)
+    return (np.mean(b) - np.mean(a)) / pooled
+
+delta = cliffs_delta(b, a)
+print(delta, (delta + 1) / 2, cohens_d(b, a))   # delta, Vargha-Delaney A, Cohen's d</code></pre>
+            </details>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Confidence Intervals: How Big, and How Sure?</h2>
+            <p>A <strong>confidence interval</strong> combines effect size and uncertainty in one statement. A 95% confidence interval for a difference is a range calculated by a method that, in repeated experiments, would contain the true difference 95% of the time. For the plants, we might report: "the new fertiliser added 2.9 cm (95% confidence interval 0.7 to 5.1 cm)".</p>
+            <p>This tells us far more than "p = 0.01". It shows the likely size of the effect, anywhere from small to substantial, and it shows the precision: a wide interval says we need more data. There is a direct link with testing: a 95% interval that excludes zero corresponds to p &lt; 0.05 for a two-sided test. Many statisticians now recommend reporting estimates with intervals as the main result, with p-values, if at all, in a supporting role. <span class="cite-group">[<a class="cite" href="#ref-19">19</a>, <a class="cite" href="#ref-40">40</a>]</span></p>
+            <p>One common misreading should be avoided: a particular 95% interval does not have a 95% probability of containing the true value in the Bayesian sense. The 95% describes how often the <em>method</em> succeeds over many experiments. In practice, for most simple problems, the two interpretations give similar numbers.</p>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Many Tests at Once: Bonferroni, False Discoveries and q-Values</h2>
+            <p>If you test one true null hypothesis at α = 0.05, you have a 5% chance of a false alarm. Test 20 of them, and you should expect about one "significant" result by pure chance; the probability of at least one is 1 − 0.95<sup>20</sup> ≈ 64%. A genomics study may test 20,000 genes; a machine-learning study may compare dozens of models on dozens of datasets. Without care, false discoveries are guaranteed.</p>
+            <p><strong>Controlling the family-wise error rate.</strong> The simplest fix, named after Carlo Emilio Bonferroni, is to divide α by the number of tests, m: with 20 tests, require p &lt; 0.0025. This controls the <strong>family-wise error rate</strong>, the chance of making even one false discovery. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span> Sture Holm's method (1979) does the same job a little more powerfully: sort the p-values, compare the smallest with α/m, the next with α/(m − 1), and so on, stopping at the first that fails. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span> Both are appropriate when even one false claim would be costly, but with thousands of tests they are so strict that they miss most real effects.</p>
+            <p><strong>Controlling the false discovery rate.</strong> In 1995 Yoav Benjamini and Yosef Hochberg proposed a different goal: rather than avoiding any false discovery, keep the <em>proportion</em> of false discoveries among all discoveries below a chosen level, such as 5%. This is the <strong>false discovery rate</strong> (FDR). <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span> Their procedure is simple: sort the m p-values from smallest to largest, find the largest rank k for which</p>
+            <p>$$p_{(k)} \le \frac{k}{m}\,\alpha,$$</p>
+            <p>and call the k smallest p-values discoveries. Graphically (Figure 7), you draw a sloping line through the sorted p-values and accept everything up to the last point below it.</p>
+            <p><strong>q-values.</strong> Just as a p-value tells you the smallest α at which a single test would be significant, a <strong>q-value</strong> tells you the smallest false discovery rate at which a test would be called a discovery. If a gene has q = 0.04, then declaring it, together with all genes with smaller p-values, as discoveries means accepting that about 4% of those discoveries are expected to be false. John Storey introduced the q-value in 2002, with a refinement that estimates how many of the null hypotheses are actually true, making it more powerful than the basic Benjamini–Hochberg adjustment. <span class="cite-group">[<a class="cite" href="#ref-17">17</a>, <a class="cite" href="#ref-18">18</a>]</span> (Many software packages simply report Benjamini–Hochberg "adjusted p-values" and also call them q-values.)</p>
+            <figure class="fig" data-fig="fig-multiple-tests">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 7. A thousand tests at once.</strong> Choose what share of the tests have a real effect. The table counts true and false discoveries for each method; the plot shows the smallest p-values and the Benjamini–Hochberg line. Set the share to 0% to see how many false alarms appear with no correction.
+              </figcaption>
+            </figure>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">Try it in Python: correcting for many tests</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">from statsmodels.stats.multitest import multipletests
+
+pvals = [0.0004, 0.012, 0.025, 0.035, 0.21]
+for method in ['bonferroni', 'holm', 'fdr_bh']:
+    reject, adjusted, _, _ = multipletests(pvals, alpha=0.05, method=method)
+    print(method, reject, adjusted.round(4))
+# bonferroni rejects 1, holm 2, fdr_bh 4; 'fdr_bh' adjusted values are BH q-values</code></pre>
+            </details>
+          </section>
+
+          <section id="section-12">
+            <h2>12. How p-Values Go Wrong</h2>
+            <p>In 2005 the epidemiologist John Ioannidis published a paper with a deliberately provocative title, "Why most published research findings are false". He showed that when studies are small, effects are modest, many hypotheses are tested and researchers have flexibility in their analyses, a large share of "significant" findings will be false. <span class="cite-group">[<a class="cite" href="#ref-20">20</a>]</span> Ten years later, a large collaboration tried to repeat 100 published psychology experiments. Although 97% of the originals had reported significant results, only about 36% of the repeats did. <span class="cite-group">[<a class="cite" href="#ref-21">21</a>]</span> Similar concerns have been raised in medicine, economics and other fields. Several practices contribute.</p>
+            <ul>
+              <li><strong>p-hacking.</strong> Trying several analyses (different outcomes, subgroups, outlier rules, covariates) and reporting the one that gives p &lt; 0.05. In a famous demonstration, three psychologists showed how such choices could "prove" that listening to a Beatles song made people younger. <span class="cite-group">[<a class="cite" href="#ref-22">22</a>]</span></li>
+              <li><strong>The garden of forking paths.</strong> Even without deliberate fishing, analysis decisions made after seeing the data inflate false positives, because a different data set would have led to different choices. <span class="cite-group">[<a class="cite" href="#ref-23">23</a>]</span></li>
+              <li><strong>Optional stopping.</strong> Checking the p-value repeatedly as data arrive and stopping as soon as it dips below 0.05 greatly increases the false-alarm rate. (A/B tests are particularly vulnerable.)</li>
+              <li><strong>Publication bias.</strong> Journals and authors prefer significant results, so the published record overrepresents lucky findings.</li>
+              <li><strong>Treating 0.05 as a cliff.</strong> p-values vary a lot between identical experiments, as Figure 8 shows. A result with p = 0.04 and one with p = 0.06 are, in practice, equally (weak) evidence.</li>
+            </ul>
+            <figure class="fig" data-fig="fig-p-dance">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 8. The dance of the p-values.</strong> Each dot is one experiment with the same design and the same true effect. With no effect, about 5% fall below 0.05 by chance. With a real effect, the p-value still jumps around by orders of magnitude.
+              </figcaption>
+            </figure>
+            <p>Remedies include <strong>pre-registration</strong> (publishing the hypothesis and analysis plan before collecting data), reporting effect sizes and confidence intervals, sharing data and code, correcting for multiple tests, and designing studies with enough power. Some researchers have proposed a stricter default threshold of p &lt; 0.005 for claims of new discoveries; others have argued for abandoning the label "statistically significant" altogether. <span class="cite-group">[<a class="cite" href="#ref-25">25</a>, <a class="cite" href="#ref-24">24</a>]</span></p>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Beyond p: Estimation and Bayes</h2>
+            <p>The p-value answers a narrow question: how surprising are the data, if the null is true? Often we want to know something else: how big is the effect, and how sure are we? Two approaches address this more directly.</p>
+            <ul>
+              <li><strong>Estimation.</strong> Report the effect size with a confidence interval (section 10), and judge whether the whole range of plausible values is important, negligible, or uncertain.</li>
+              <li><strong>Bayesian inference.</strong> Combine the data with prior knowledge to get the probability of different hypotheses or effect sizes given the data, which is what many people mistakenly think a p-value gives them. A <strong>Bayes factor</strong> compares how well two hypotheses predict the observed data: a Bayes factor of 10 means the data are ten times more likely under one hypothesis than the other. <span class="cite-group">[<a class="cite" href="#ref-26">26</a>]</span> Bayesian methods require choosing priors, which some see as a weakness and others as an honest statement of assumptions.</li>
+            </ul>
+            <p>These approaches are not enemies of the p-value; they answer different questions. A good analysis often uses more than one.</p>
+          </section>
+
+          <p class="part-label" style="margin-top:2.5rem;font-family:var(--font-sans);font-size:0.85rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);">Part C: In Machine Learning and AI</p>
+
+          <section id="section-14">
+            <h2>14. Comparing Machine-Learning Models</h2>
+            <p>Suppose a new model scores 81.5% accuracy and the old one 80.9%. Is the new one better? A single number on a single test set says surprisingly little, because machine-learning results are noisy in several ways: <span class="cite-group">[<a class="cite" href="#ref-32">32</a>]</span></p>
+            <ul>
+              <li><strong>Random seeds.</strong> Training with a different random initialisation, data order or dropout pattern gives a different model and a different score, sometimes varying by a percentage point or more.</li>
+              <li><strong>Data splits.</strong> A different train–test split, or a different fold in cross-validation, gives different numbers.</li>
+              <li><strong>Test-set size.</strong> On 1,000 test examples, an accuracy of 81% has a standard error of about 1.2 percentage points from sampling alone.</li>
+            </ul>
+            <p>So the null hypothesis is: "the two models (or training procedures) perform equally well on average, and the observed difference is due to this randomness". Several tools have become standard.</p>
+            <p><strong>Pair everything you can.</strong> Evaluate both models on the <em>same</em> seeds, splits or folds, and analyse the paired differences. Some splits are simply easier than others; both models do better on them. An unpaired test treats that shared variation as noise and loses power; a paired test cancels it out. Figure 9 shows how large the difference can be.</p>
+            <figure class="fig" data-fig="fig-model-compare">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 9. Comparing two models over seeds.</strong> Each line joins the scores of models A and B on the same seed. Increase how much the score depends on the seed, and compare the unpaired test with the two paired tests.
+              </figcaption>
+            </figure>
+            <p><strong>Two classifiers, one test set: McNemar's test.</strong> If you have only one test set, compare the two classifiers' predictions example by example. Only the examples where they disagree carry information: say model B is right and A wrong on 42 examples, and the reverse on 20. Under the null hypothesis, disagreements should split 50:50; McNemar's test (1947) asks whether 42 versus 20 is too lopsided for chance. Here p ≈ 0.007. <span class="cite-group">[<a class="cite" href="#ref-31">31</a>, <a class="cite" href="#ref-27">27</a>]</span></p>
+            <p><strong>Cross-validation needs special care.</strong> In k-fold cross-validation, the training sets of different folds overlap heavily, so the fold scores are not independent, and a naive paired t-test over folds gives far too many false positives. In 1998 Thomas Dietterich studied this and recommended McNemar's test or a "5×2 cross-validation" paired t-test; in 2003 Claude Nadeau and Yoshua Bengio proposed a <strong>corrected resampled t-test</strong> that inflates the variance to account for the overlap. <span class="cite-group">[<a class="cite" href="#ref-27">27</a>, <a class="cite" href="#ref-28">28</a>]</span></p>
+            <p><strong>Many datasets.</strong> To claim that one algorithm is generally better, evaluate both on many datasets and treat each dataset as one paired observation. Janez Demšar's influential 2006 paper recommended the <strong>Wilcoxon signed-rank test</strong> for two algorithms, and the <strong>Friedman test</strong> with follow-up comparisons for several, because scores on different datasets are not comparable in size and are rarely normal. <span class="cite-group">[<a class="cite" href="#ref-29">29</a>]</span> Bayesian alternatives, which estimate the probability that one model is practically better, are increasingly used. <span class="cite-group">[<a class="cite" href="#ref-30">30</a>]</span></p>
+            <p><strong>Report effect sizes and intervals.</strong> A bootstrap confidence interval for the difference in accuracy, F1 or AUC (resampling test examples or seeds) shows both the size and the uncertainty. Cliff's delta, or the simple fraction of seeds or datasets on which the new model wins, gives a robust, easily understood effect size, and is widely used in software-engineering and machine-learning comparisons for exactly that reason.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">Try it in Python: McNemar's test</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">from statsmodels.stats.contingency_tables import mcnemar
+
+#                 B right   B wrong
+table = [[850,      20],    # A right
+         [ 42,      88]]    # A wrong
+print(mcnemar(table, exact=True).pvalue)   # uses only the 20 vs 42 disagreements: about 0.007</code></pre>
+            </details>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Hypothesis Tests Elsewhere in AI</h2>
+            <ul>
+              <li><strong>A/B testing of deployed systems.</strong> Companies compare a new recommendation model or search ranking against the current one by randomly splitting users and testing whether a metric such as clicks changes. With millions of users, tiny effects become significant (Figure 5), so effect sizes and practical thresholds matter; checking results continuously requires methods designed for repeated looks. <span class="cite-group">[<a class="cite" href="#ref-33">33</a>]</span></li>
+              <li><strong>Benchmarks and leaderboards.</strong> When many teams, or one team with many hyperparameter settings, repeatedly evaluate on the same test set, the best scores are inflated by luck: the test set has been used for selection, a hidden multiple-comparisons problem. Methods such as the "reusable holdout" were developed to limit this. <span class="cite-group">[<a class="cite" href="#ref-34">34</a>]</span> When researchers built a fresh test set for the famous ImageNet benchmark, accuracies dropped by roughly 11–14 percentage points, although the ranking of models was largely preserved. <span class="cite-group">[<a class="cite" href="#ref-35">35</a>]</span></li>
+              <li><strong>Evaluating language models.</strong> Scores on benchmarks of a few hundred questions have sizeable sampling error, and results can change with the random seed, the prompt wording or the sampling temperature. Reporting standard errors or confidence intervals, and using paired comparisons on the same questions, is increasingly recommended. <span class="cite-group">[<a class="cite" href="#ref-36">36</a>]</span></li>
+              <li><strong>Detecting data drift.</strong> Two-sample tests check whether the data a model sees in use still look like its training data: the Kolmogorov–Smirnov test for single features, and kernel methods such as the maximum mean discrepancy (MMD) for high-dimensional data. <span class="cite-group">[<a class="cite" href="#ref-37">37</a>]</span></li>
+              <li><strong>Feature importance.</strong> Permutation importance shuffles one input feature and measures how much the model's performance drops, the same shuffling idea as the permutation test. <span class="cite-group">[<a class="cite" href="#ref-38">38</a>]</span></li>
+              <li><strong>Feature selection by p-values.</strong> Screening thousands of features with univariate tests is a massive multiple-testing problem; without FDR control, and without keeping the test data separate from the selection, it produces spurious features and over-optimistic models.</li>
+            </ul>
+          </section>
+
+          <section id="section-16">
+            <h2>16. A Worked Example: Two Classifiers, Ten Seeds</h2>
+            <p>Let us put the pieces together on a general, made-up example. Two image classifiers, A and B, are each trained with the same ten random seeds and evaluated on the same test split for each seed. Accuracies (%):</p>
+            <div class="table-container" style="overflow-x:auto; margin:1rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.9rem; line-height:1.4;">
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;"><strong>Seed</strong></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;"><strong>A</strong></td><td>81.2</td><td>80.4</td><td>82.0</td><td>79.8</td><td>81.5</td><td>80.9</td><td>81.8</td><td>80.1</td><td>81.0</td><td>80.6</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;"><strong>B</strong></td><td>81.9</td><td>80.8</td><td>82.6</td><td>80.6</td><td>81.7</td><td>81.6</td><td>82.5</td><td>80.3</td><td>81.9</td><td>81.2</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <ol>
+              <li><strong>State the question before looking.</strong> H<sub>0</sub>: the two training procedures have the same expected accuracy. Two-sided test, α = 0.05.</li>
+              <li><strong>Look at the data.</strong> Mean accuracy: A 80.93%, B 81.51%, a difference of 0.58 points. B is better on all 10 seeds, but the seed-to-seed spread (79.8 to 82.6) is larger than the difference.</li>
+              <li><strong>The wrong test.</strong> Treating the two columns as unrelated samples, Welch's t-test gives p ≈ 0.10, and the Mann–Whitney test p ≈ 0.14. "Not significant", but this ignores the pairing.</li>
+              <li><strong>The right tests.</strong> The paired differences B − A are 0.7, 0.4, 0.6, 0.8, 0.2, 0.7, 0.7, 0.2, 0.9, 0.6: mean 0.58, standard deviation 0.24. The paired t-test gives t ≈ 7.7 with 9 degrees of freedom, p ≈ 0.00003. The Wilcoxon signed-rank test, which does not assume normal differences, gives p ≈ 0.002 (all ten differences are positive, and with ten pairs that cannot happen by chance more than about 2 times in 1,000).</li>
+              <li><strong>How big?</strong> A bootstrap 95% confidence interval for the mean paired difference is about 0.43 to 0.71 accuracy points. B wins on 10 of 10 seeds. (Cliff's delta between the two columns, ignoring the pairing, is 0.40, "medium", diluted by the seed-to-seed variation; the paired win rate of 100% tells the clearer story.)</li>
+              <li><strong>Many comparisons?</strong> If B had been compared with five baseline models, giving p-values of 0.0004, 0.012, 0.025, 0.035 and 0.21, then Bonferroni would keep only the first, Holm the first two, and Benjamini–Hochberg (5% FDR) the first four. State which correction you used, and why.</li>
+              <li><strong>Report it honestly.</strong> "Across 10 seeds, B outperformed A by 0.58 accuracy points (95% bootstrap CI 0.43 to 0.71; paired t-test p &lt; 0.001; B better on all 10 seeds). All results are on a single test split; generalisation to other datasets was not tested."</li>
+            </ol>
+            <p>Notice what the example does <em>not</em> show: that B is better on other datasets, or that a 0.6-point gain is worth B's cost. Statistics can tell you whether a difference is likely to be real and how big it is; whether it matters is a separate judgement.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">Try it in Python: the whole worked example</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">a = np.array([81.2, 80.4, 82.0, 79.8, 81.5, 80.9, 81.8, 80.1, 81.0, 80.6])
+b = np.array([81.9, 80.8, 82.6, 80.6, 81.7, 81.6, 82.5, 80.3, 81.9, 81.2])
+d = b - a
+
+print(stats.ttest_ind(b, a, equal_var=False).pvalue)   # unpaired (wrong here): ~0.10
+print(stats.ttest_rel(b, a).pvalue)                    # paired t-test: ~3e-5
+print(stats.wilcoxon(b, a).pvalue)                     # Wilcoxon signed-rank: ~0.002
+ci = stats.bootstrap((d,), np.mean, confidence_level=0.95, random_state=0)
+print(ci.confidence_interval)                          # ~ (0.43, 0.71)
+print(cliffs_delta(b, a), (d > 0).mean())              # 0.40 and 1.0</code></pre>
+            </details>
+          </section>
+
+          <section id="section-17">
+            <h2>17. Which Test When?</h2>
+            <div class="table-container" style="overflow-x:auto; margin:1.2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.9rem; line-height:1.5;">
+                <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.5rem;">Situation</th><th style="padding:0.5rem;">Roughly normal data</th><th style="padding:0.5rem;">Skewed, ordinal or outliers</th><th style="padding:0.5rem;">Effect size</th></tr></thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Two independent groups</td><td style="padding:0.5rem;">Welch's t-test</td><td style="padding:0.5rem;">Mann–Whitney U, or permutation test</td><td style="padding:0.5rem;">Cohen's d; Cliff's delta</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Two paired measurements (same subjects, seeds, folds)</td><td style="padding:0.5rem;">Paired t-test</td><td style="padding:0.5rem;">Wilcoxon signed-rank</td><td style="padding:0.5rem;">Mean difference with CI; share of wins</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Three or more groups</td><td style="padding:0.5rem;">ANOVA</td><td style="padding:0.5rem;">Kruskal–Wallis (independent) or Friedman (paired)</td><td style="padding:0.5rem;">Pairwise deltas, with correction</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Counts or proportions</td><td style="padding:0.5rem;" colspan="2">Chi-square, or Fisher's exact test for small counts</td><td style="padding:0.5rem;">Difference in proportions; odds ratio</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Two classifiers, one test set</td><td style="padding:0.5rem;" colspan="2">McNemar's test; bootstrap over test examples</td><td style="padding:0.5rem;">Accuracy difference with CI</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Algorithms across many datasets</td><td style="padding:0.5rem;" colspan="2">Wilcoxon signed-rank (two); Friedman with post-hoc tests (several)</td><td style="padding:0.5rem;">Win rate; Cliff's delta; average rank</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Many hypotheses at once</td><td style="padding:0.5rem;" colspan="2">Holm (avoid any false claim) or Benjamini–Hochberg / q-values (control the share of false claims)</td><td style="padding:0.5rem;">Report effect sizes for discoveries</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Whatever the test, the same habits apply: decide the question and the analysis in advance, check independence, pair what can be paired, report effect sizes with intervals, and say how many things you tested.</p>
+          </section>
+
+          <section id="section-18">
+            <h2>18. Try It Yourself: A Permutation Test with Paper Slips</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: does it really help?</div>
+              <p>You need a small question with two groups, for example the time in seconds that eight friends take to solve a puzzle with music playing and eight without, and some slips of paper.</p>
+              <ol>
+                <li>Record the 16 times, and the difference between the two group averages.</li>
+                <li>Write each time on a slip of paper, mix them all in a bowl, and deal them at random into two piles of eight.</li>
+                <li>Compute the difference in averages between the two piles and write it down. This is one sample from the "no effect" world.</li>
+                <li>Repeat 20–30 times (or ask friends to help).</li>
+                <li>What fraction of the shuffled differences are at least as large as the real one? That fraction is your p-value.</li>
+              </ol>
+              <p>You have just carried out a permutation test, one of the most general and honest tests in statistics, with nothing but paper. Then compute Cliff's delta: compare every "music" time with every "no music" time, count which is faster, and see how lopsided the comparisons are.</p>
+            </div>
+          </section>
+
+          <section id="section-19">
+            <h2>19. Legend and Record</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: is 0.05 a scientific law?</div>
+              <p><strong>The legend:</strong> p &lt; 0.05 means a result is real with 95% certainty, and the 0.05 threshold was established by careful scientific reasoning.</p>
+              <p><strong>The record:</strong> neither part is true. The p-value is not the probability that a result is real (section 5). And the threshold comes from a passage in Fisher's 1925 textbook, where he remarked that the value p = 0.05, corresponding to about two standard deviations, was "convenient" to take as a limit for judging whether a deviation should be considered significant. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> Fisher himself later wrote that no scientist has a fixed level of significance at which, from year to year and in all circumstances, he rejects hypotheses. The rigid "p &lt; 0.05 = discovery" rule grew out of a later blending of Fisher's ideas with the very different decision framework of Neyman and Pearson, which the founders themselves argued about bitterly.</p>
+              <p><strong>The grain of truth:</strong> a fixed threshold, chosen in advance, does have a role in decision-making, and controls the false-alarm rate in the long run. The problem is treating it as a dividing line between truth and falsehood.</p>
+              <p><strong>A second legend:</strong> "a non-significant result proves there is no effect". It does not; it may only show that the study was too small. Equivalence testing and confidence intervals are the tools for showing that an effect is negligibly small.</p>
+            </div>
+          </section>
+
+          <section id="section-20">
+            <h2>20. Philosophy Corner</h2>
+            <div class="callout callout-philosophy">
+              <div class="callout-header">Philosophy Corner: evidence, decisions and falsification</div>
+              <p>There are really two philosophies hidden inside everyday hypothesis testing. For Fisher, the p-value was a continuous <em>measure of evidence</em> against the null hypothesis, to be weighed together with everything else the scientist knew. For Neyman and Pearson, testing was a <em>decision procedure</em>: fix α and β in advance, act according to the result, and accept that in the long run you will be wrong at known rates, without claiming anything about any single experiment. Modern practice mixes the two, often without noticing. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>, <a class="cite" href="#ref-41">41</a>]</span></p>
+              <p>Hypothesis testing also resembles Karl Popper's idea of falsification: science advances by trying to refute hypotheses, not by proving them. <span class="cite-group">[<a class="cite" href="#ref-39">39</a>]</span> But there is an ironic twist. Popper wanted scientists to try to refute their own <em>bold</em> theories. In a typical significance test, what we try to refute is the boring null hypothesis, and refuting it is taken as support for our favoured theory, even though many other explanations might also be consistent with the data. Rejecting "no effect" is not the same as confirming a particular explanation.</p>
+              <p>Finally, there is a question that every machine-learning practitioner meets: when a model is tested on a benchmark again and again, at what point does the test stop being a test? Each time we look at the test set and adjust, we use up some of its power to surprise us.</p>
+              <p><strong>Questions to think about:</strong> Should science keep the word "significant"? If a result can be found significant or not depending on how many other things were tested, is significance a property of the data or of the researcher's choices?</p>
+            </div>
+          </section>
+          <section id="section-21">
+            <h2>21. People in This Story</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John Arbuthnot</td>
+                <td style="padding:0.6rem 0.8rem;">1667–1735<br>Scotland / England</td>
+                <td style="padding:0.6rem 0.8rem;">Birth-ratio argument (1710)</td>
+                <td style="padding:0.6rem 0.8rem;">Made one of the earliest arguments that a pattern was too regular to be chance.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Karl Pearson</td>
+                <td style="padding:0.6rem 0.8rem;">1857–1936<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Chi-square test (1900)</td>
+                <td style="padding:0.6rem 0.8rem;">Founded much of modern statistics.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">William Sealy Gosset (“Student”)</td>
+                <td style="padding:0.6rem 0.8rem;">1876–1937<br>England / Ireland</td>
+                <td style="padding:0.6rem 0.8rem;">t-distribution (1908)</td>
+                <td style="padding:0.6rem 0.8rem;">Solved the small-sample problem while working for Guinness.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Ronald A. Fisher</td>
+                <td style="padding:0.6rem 0.8rem;">1890–1962<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">p-values, the null hypothesis, experimental design</td>
+                <td style="padding:0.6rem 0.8rem;">Popularised significance testing and the 0.05 convention.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Jerzy Neyman &amp; Egon Pearson</td>
+                <td style="padding:0.6rem 0.8rem;">1894–1981 / 1895–1980<br>Poland, USA / England</td>
+                <td style="padding:0.6rem 0.8rem;">Neyman–Pearson theory (1933)</td>
+                <td style="padding:0.6rem 0.8rem;">Framed tests as decisions with Type I and II errors and power.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Frank Wilcoxon; Henry Mann &amp; Donald Whitney</td>
+                <td style="padding:0.6rem 0.8rem;">1892–1965; 1905–2000 &amp; 1915–2007<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Rank tests (1945, 1947)</td>
+                <td style="padding:0.6rem 0.8rem;">Created tests that use only the order of the data.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Jacob Cohen</td>
+                <td style="padding:0.6rem 0.8rem;">1923–1998<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Power analysis and effect sizes</td>
+                <td style="padding:0.6rem 0.8rem;">Showed many studies were underpowered; introduced Cohen’s d.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Norman Cliff</td>
+                <td style="padding:0.6rem 0.8rem;">1930–2021<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Dominance statistics (1993)</td>
+                <td style="padding:0.6rem 0.8rem;">Championed Cliff’s delta for ordinal comparisons.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Yoav Benjamini &amp; Yosef Hochberg</td>
+                <td style="padding:0.6rem 0.8rem;">born 1949 / 1946–2023<br>Israel</td>
+                <td style="padding:0.6rem 0.8rem;">False discovery rate (1995)</td>
+                <td style="padding:0.6rem 0.8rem;">Made testing thousands of hypotheses practical.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-22">
+            <h2>22. Test Yourself</h2>
+            <p>Twelve questions to check what you remember about hypothesis testing, effect sizes and comparing models.</p>
+            <figure class="fig" data-fig="fig-quiz-nhst">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-23">
+            <h2>23. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Arbuthnot, John.</strong> (1710). "An argument for divine providence, taken from the constant regularity observ’d in the births of both sexes." <em>Philosophical Transactions of the Royal Society</em>, 27: 186–190.</li>
+              <li id="ref-2"><strong>Pearson, Karl.</strong> (1900). "On the criterion that a given system of deviations from the probable in the case of a correlated system of variables is such that it can be reasonably supposed to have arisen from random sampling." <em>Philosophical Magazine</em>, 50(302): 157–175.</li>
+              <li id="ref-3"><strong>Student [W. S. Gosset].</strong> (1908). "The probable error of a mean." <em>Biometrika</em>, 6(1): 1–25.</li>
+              <li id="ref-4"><strong>Fisher, R. A.</strong> (1925). <em>Statistical Methods for Research Workers</em>. Edinburgh: Oliver &amp; Boyd.</li>
+              <li id="ref-5"><strong>Fisher, R. A.</strong> (1935). <em>The Design of Experiments</em>. Edinburgh: Oliver &amp; Boyd.</li>
+              <li id="ref-6"><strong>Neyman, J. &amp; Pearson, E. S.</strong> (1933). "On the problem of the most efficient tests of statistical hypotheses." <em>Philosophical Transactions of the Royal Society A</em>, 231: 289–337.</li>
+              <li id="ref-7"><strong>Wilcoxon, Frank.</strong> (1945). "Individual comparisons by ranking methods." <em>Biometrics Bulletin</em>, 1(6): 80–83.</li>
+              <li id="ref-8"><strong>Mann, H. B. &amp; Whitney, D. R.</strong> (1947). "On a test of whether one of two random variables is stochastically larger than the other." <em>Annals of Mathematical Statistics</em>, 18(1): 50–60.</li>
+              <li id="ref-9"><strong>Efron, Bradley.</strong> (1979). "Bootstrap methods: another look at the jackknife." <em>Annals of Statistics</em>, 7(1): 1–26.</li>
+              <li id="ref-10"><strong>Cohen, Jacob.</strong> (1988). <em>Statistical Power Analysis for the Behavioral Sciences</em>. 2nd ed. Hillsdale, NJ: Lawrence Erlbaum.</li>
+              <li id="ref-11"><strong>Cliff, Norman.</strong> (1993). "Dominance statistics: ordinal analyses to answer ordinal questions." <em>Psychological Bulletin</em>, 114(3): 494–509.</li>
+              <li id="ref-12"><strong>Vargha, András &amp; Delaney, Harold D.</strong> (2000). "A critique and improvement of the CL common language effect size statistics of McGraw and Wong." <em>Journal of Educational and Behavioral Statistics</em>, 25(2): 101–132.</li>
+              <li id="ref-13"><strong>Romano, J., Kromrey, J. D., Coraggio, J. &amp; Skowronek, J.</strong> (2006). "Appropriate statistics for ordinal level data: should we really be using t-test and Cohen’s d for evaluating group differences on the NSSE and other surveys?" Annual meeting of the Florida Association of Institutional Research.</li>
+              <li id="ref-14"><strong>Bonferroni, C. E.</strong> (1936). "Teoria statistica delle classi e calcolo delle probabilità." <em>Pubblicazioni del R. Istituto Superiore di Scienze Economiche e Commerciali di Firenze</em>, 8: 3–62.</li>
+              <li id="ref-15"><strong>Holm, Sture.</strong> (1979). "A simple sequentially rejective multiple test procedure." <em>Scandinavian Journal of Statistics</em>, 6(2): 65–70.</li>
+              <li id="ref-16"><strong>Benjamini, Yoav &amp; Hochberg, Yosef.</strong> (1995). "Controlling the false discovery rate: a practical and powerful approach to multiple testing." <em>Journal of the Royal Statistical Society B</em>, 57(1): 289–300.</li>
+              <li id="ref-17"><strong>Storey, John D.</strong> (2002). "A direct approach to false discovery rates." <em>Journal of the Royal Statistical Society B</em>, 64(3): 479–498.</li>
+              <li id="ref-18"><strong>Storey, John D. &amp; Tibshirani, Robert.</strong> (2003). "Statistical significance for genomewide studies." <em>Proceedings of the National Academy of Sciences</em>, 100(16): 9440–9445.</li>
+              <li id="ref-19"><strong>Wasserstein, Ronald L. &amp; Lazar, Nicole A.</strong> (2016). "The ASA statement on p-values: context, process, and purpose." <em>The American Statistician</em>, 70(2): 129–133.</li>
+              <li id="ref-20"><strong>Ioannidis, John P. A.</strong> (2005). "Why most published research findings are false." <em>PLoS Medicine</em>, 2(8): e124.</li>
+              <li id="ref-21"><strong>Open Science Collaboration.</strong> (2015). "Estimating the reproducibility of psychological science." <em>Science</em>, 349(6251): aac4716.</li>
+              <li id="ref-22"><strong>Simmons, Joseph P., Nelson, Leif D. &amp; Simonsohn, Uri.</strong> (2011). "False-positive psychology: undisclosed flexibility in data collection and analysis allows presenting anything as significant." <em>Psychological Science</em>, 22(11): 1359–1366.</li>
+              <li id="ref-23"><strong>Gelman, Andrew &amp; Loken, Eric.</strong> (2014). "The statistical crisis in science." <em>American Scientist</em>, 102(6): 460–465.</li>
+              <li id="ref-24"><strong>Amrhein, Valentin, Greenland, Sander &amp; McShane, Blake.</strong> (2019). "Scientists rise up against statistical significance." <em>Nature</em>, 567: 305–307.</li>
+              <li id="ref-25"><strong>Benjamin, Daniel J. et al.</strong> (2018). "Redefine statistical significance." <em>Nature Human Behaviour</em>, 2: 6–10.</li>
+              <li id="ref-26"><strong>Kass, Robert E. &amp; Raftery, Adrian E.</strong> (1995). "Bayes factors." <em>Journal of the American Statistical Association</em>, 90(430): 773–795.</li>
+              <li id="ref-27"><strong>Dietterich, Thomas G.</strong> (1998). "Approximate statistical tests for comparing supervised classification learning algorithms." <em>Neural Computation</em>, 10(7): 1895–1923.</li>
+              <li id="ref-28"><strong>Nadeau, Claude &amp; Bengio, Yoshua.</strong> (2003). "Inference for the generalization error." <em>Machine Learning</em>, 52(3): 239–281.</li>
+              <li id="ref-29"><strong>Demšar, Janez.</strong> (2006). "Statistical comparisons of classifiers over multiple data sets." <em>Journal of Machine Learning Research</em>, 7: 1–30.</li>
+              <li id="ref-30"><strong>Benavoli, Alessio, Corani, Giorgio, Demšar, Janez &amp; Zaffalon, Marco.</strong> (2017). "Time for a change: a tutorial for comparing multiple classifiers through Bayesian analysis." <em>Journal of Machine Learning Research</em>, 18(77): 1–36.</li>
+              <li id="ref-31"><strong>McNemar, Quinn.</strong> (1947). "Note on the sampling error of the difference between correlated proportions or percentages." <em>Psychometrika</em>, 12(2): 153–157.</li>
+              <li id="ref-32"><strong>Bouthillier, Xavier et al.</strong> (2021). "Accounting for variance in machine learning benchmarks." <em>Proceedings of Machine Learning and Systems</em>, 3.</li>
+              <li id="ref-33"><strong>Kohavi, Ron, Tang, Diane &amp; Xu, Ya.</strong> (2020). <em>Trustworthy Online Controlled Experiments: A Practical Guide to A/B Testing</em>. Cambridge: Cambridge University Press.</li>
+              <li id="ref-34"><strong>Dwork, Cynthia et al.</strong> (2015). "The reusable holdout: preserving validity in adaptive data analysis." <em>Science</em>, 349(6248): 636–638.</li>
+              <li id="ref-35"><strong>Recht, Benjamin, Roelofs, Rebecca, Schmidt, Ludwig &amp; Shankar, Vaishaal.</strong> (2019). "Do ImageNet classifiers generalize to ImageNet?" <em>Proceedings of the 36th International Conference on Machine Learning</em>, PMLR 97: 5389–5400.</li>
+              <li id="ref-36"><strong>Miller, Evan.</strong> (2024). "Adding error bars to evals: a statistical approach to language model evaluations." arXiv:2411.00640.</li>
+              <li id="ref-37"><strong>Gretton, Arthur, Borgwardt, Karsten M., Rasch, Malte J., Schölkopf, Bernhard &amp; Smola, Alexander.</strong> (2012). "A kernel two-sample test." <em>Journal of Machine Learning Research</em>, 13: 723–773.</li>
+              <li id="ref-38"><strong>Breiman, Leo.</strong> (2001). "Random forests." <em>Machine Learning</em>, 45(1): 5–32.</li>
+              <li id="ref-39"><strong>Popper, Karl.</strong> (1959). <em>The Logic of Scientific Discovery</em>. London: Hutchinson.</li>
+              <li id="ref-40"><strong>Wasserstein, Ronald L., Schirm, Allen L. &amp; Lazar, Nicole A.</strong> (2019). "Moving to a world beyond ‘p &lt; 0.05’." <em>The American Statistician</em>, 73(sup1): 1–19.</li>
+              <li id="ref-41"><strong>Salsburg, David.</strong> (2001). <em>The Lady Tasting Tea: How Statistics Revolutionized Science in the Twentieth Century</em>. New York: W. H. Freeman.</li>
+              <li id="ref-42"><strong>Cohen, Jacob.</strong> (1962). "The statistical power of abnormal-social psychological research: a review." <em>Journal of Abnormal and Social Psychology</em>, 65(3): 145–153.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/null-hypothesis-p-values-and-effect-sizes.js"></script>
+</body>
+</html>

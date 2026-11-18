@@ -1,5 +1,27 @@
 [
   {
+    "slug": "null-hypothesis-p-values-and-effect-sizes",
+    "title": "Is It Real, or Just Luck? Null Hypotheses, p-Values and Effect Sizes, from Coin Flips to Comparing AI Models",
+    "summary": "From a suspicious coin to comparing AI models: null hypotheses, p-values, power, rank tests, Cliff’s delta, confidence intervals, FDR and q-values, and how to test ML results properly.",
+    "subject": "Technology",
+    "tags": [
+      "statistics",
+      "hypothesis-testing",
+      "probability",
+      "effect-size",
+      "machine-learning",
+      "artificial-intelligence"
+    ],
+    "date": "2026-11-30",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 37,
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
     "slug": "how-old-is-the-earth",
     "title": "How Old Is the Earth? Salt, Cooling Rocks and Radioactive Clocks",
     "summary": "From Ussher’s 4004 BC and Buffon’s cooling iron balls to Kelvin’s 100 million years, radioactive clocks and Patterson’s meteorite: how we learned the Earth is 4.54 billion years old.",

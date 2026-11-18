@@ -1,5 +1,22 @@
 [
   {
+    "slug": "null-hypothesis-p-values-and-effect-sizes",
+    "url": "articles/null-hypothesis-p-values-and-effect-sizes.html",
+    "title": "Is It Real, or Just Luck? Null Hypotheses, p-Values and Effect Sizes, from Coin Flips to Comparing AI Models",
+    "summary": "From a suspicious coin to comparing AI models: null hypotheses, p-values, power, rank tests, Cliff’s delta, confidence intervals, FDR and q-values, and how to test ML results properly.",
+    "subject": "Technology",
+    "tags": [
+      "statistics",
+      "hypothesis-testing",
+      "probability",
+      "effect-size",
+      "machine-learning",
+      "artificial-intelligence"
+    ],
+    "date": "2026-11-30",
+    "type": "tutorial"
+  },
+  {
     "slug": "why-is-my-laser-spot-grainy",
     "url": "articles/why-is-my-laser-spot-grainy.html",
     "title": "Why Is My Laser Spot Grainy? Speckle, Stray Fringes and Other Gremlins of the Optics Lab",

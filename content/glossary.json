@@ -2957,5 +2957,100 @@
     "term": "Residence time",
     "definition": "The average time a substance stays in a reservoir, such as sodium in the sea, before being removed.",
     "forms": []
+  },
+  {
+    "term": "Null hypothesis",
+    "definition": "The default assumption in a statistical test that there is no effect or no difference; written H0.",
+    "forms": [
+      "null hypotheses"
+    ]
+  },
+  {
+    "term": "Alternative hypothesis",
+    "definition": "The hypothesis that there is a real effect or difference; written H1.",
+    "forms": []
+  },
+  {
+    "term": "p-value",
+    "definition": "The probability, assuming the null hypothesis is true, of getting data at least as extreme as those observed. It is not the probability that the null hypothesis is true.",
+    "forms": [
+      "p-values"
+    ]
+  },
+  {
+    "term": "Statistical significance",
+    "definition": "A label for results with a p-value below a chosen threshold α, often 0.05. It does not mean the effect is large or important.",
+    "forms": [
+      "statistically significant"
+    ]
+  },
+  {
+    "term": "Significance level",
+    "definition": "The threshold α below which a p-value is called significant; also the false-alarm rate accepted when there is no effect.",
+    "forms": []
+  },
+  {
+    "term": "Type I error",
+    "definition": "Rejecting a true null hypothesis: a false alarm.",
+    "forms": []
+  },
+  {
+    "term": "Type II error",
+    "definition": "Failing to reject a false null hypothesis: missing a real effect.",
+    "forms": []
+  },
+  {
+    "term": "Effect size",
+    "definition": "A measure of how large a difference or relationship is, independent of sample size, such as Cohen’s d or Cliff’s delta.",
+    "forms": [
+      "effect sizes"
+    ]
+  },
+  {
+    "term": "Cliff’s delta",
+    "definition": "An effect size: the probability that a value from one group is larger than a value from the other, minus the reverse. It runs from −1 to +1 and is robust to outliers.",
+    "forms": [
+      "Cliff's delta"
+    ]
+  },
+  {
+    "term": "Cohen’s d",
+    "definition": "An effect size: the difference between two means divided by the pooled standard deviation.",
+    "forms": [
+      "Cohen's d"
+    ]
+  },
+  {
+    "term": "Confidence interval",
+    "definition": "A range of plausible values for a quantity, calculated by a method that captures the true value in a stated share (such as 95%) of repeated experiments.",
+    "forms": [
+      "confidence intervals"
+    ]
+  },
+  {
+    "term": "False discovery rate",
+    "definition": "The expected proportion of false positives among all results declared significant; FDR.",
+    "forms": [
+      "FDR"
+    ]
+  },
+  {
+    "term": "q-value",
+    "definition": "The smallest false discovery rate at which a test would be declared significant; the FDR counterpart of a p-value.",
+    "forms": [
+      "q-values"
+    ]
+  },
+  {
+    "term": "Permutation test",
+    "definition": "A test that builds the null distribution by repeatedly shuffling group labels and recomputing the statistic.",
+    "forms": [
+      "permutation tests"
+    ]
+  },
+  {
+    "term": "Bootstrap",
+    "definition": "A way of estimating uncertainty by repeatedly resampling the data with replacement.",
+    "forms": []
   }
 ]

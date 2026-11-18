@@ -2959,5 +2959,100 @@ window.RNLEARN_GLOSSARY = [
   "Residence time",
   "The average time a substance stays in a reservoir, such as sodium in the sea, before being removed.",
   []
+ ],
+ [
+  "Null hypothesis",
+  "The default assumption in a statistical test that there is no effect or no difference; written H0.",
+  [
+   "null hypotheses"
+  ]
+ ],
+ [
+  "Alternative hypothesis",
+  "The hypothesis that there is a real effect or difference; written H1.",
+  []
+ ],
+ [
+  "p-value",
+  "The probability, assuming the null hypothesis is true, of getting data at least as extreme as those observed. It is not the probability that the null hypothesis is true.",
+  [
+   "p-values"
+  ]
+ ],
+ [
+  "Statistical significance",
+  "A label for results with a p-value below a chosen threshold α, often 0.05. It does not mean the effect is large or important.",
+  [
+   "statistically significant"
+  ]
+ ],
+ [
+  "Significance level",
+  "The threshold α below which a p-value is called significant; also the false-alarm rate accepted when there is no effect.",
+  []
+ ],
+ [
+  "Type I error",
+  "Rejecting a true null hypothesis: a false alarm.",
+  []
+ ],
+ [
+  "Type II error",
+  "Failing to reject a false null hypothesis: missing a real effect.",
+  []
+ ],
+ [
+  "Effect size",
+  "A measure of how large a difference or relationship is, independent of sample size, such as Cohen’s d or Cliff’s delta.",
+  [
+   "effect sizes"
+  ]
+ ],
+ [
+  "Cliff’s delta",
+  "An effect size: the probability that a value from one group is larger than a value from the other, minus the reverse. It runs from −1 to +1 and is robust to outliers.",
+  [
+   "Cliff's delta"
+  ]
+ ],
+ [
+  "Cohen’s d",
+  "An effect size: the difference between two means divided by the pooled standard deviation.",
+  [
+   "Cohen's d"
+  ]
+ ],
+ [
+  "Confidence interval",
+  "A range of plausible values for a quantity, calculated by a method that captures the true value in a stated share (such as 95%) of repeated experiments.",
+  [
+   "confidence intervals"
+  ]
+ ],
+ [
+  "False discovery rate",
+  "The expected proportion of false positives among all results declared significant; FDR.",
+  [
+   "FDR"
+  ]
+ ],
+ [
+  "q-value",
+  "The smallest false discovery rate at which a test would be declared significant; the FDR counterpart of a p-value.",
+  [
+   "q-values"
+  ]
+ ],
+ [
+  "Permutation test",
+  "A test that builds the null distribution by repeatedly shuffling group labels and recomputing the statistic.",
+  [
+   "permutation tests"
+  ]
+ ],
+ [
+  "Bootstrap",
+  "A way of estimating uncertainty by repeatedly resampling the data with replacement.",
+  []
  ]
 ];
