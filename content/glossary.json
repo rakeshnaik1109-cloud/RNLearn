@@ -3708,5 +3708,135 @@
     "term": "General linear model",
     "definition": "The framework that includes t-tests, ANOVA and linear regression as special cases.",
     "forms": []
+  },
+  {
+    "term": "Factorial design",
+    "definition": "An experiment in which every level of each factor is combined with every level of the others.",
+    "forms": [
+      "factorial designs",
+      "factorial experiment",
+      "factorial experiments"
+    ]
+  },
+  {
+    "term": "Main effect",
+    "definition": "The effect of one factor averaged over the levels of the other factors.",
+    "forms": [
+      "main effects"
+    ]
+  },
+  {
+    "term": "Interaction effect",
+    "definition": "When the effect of one factor depends on the level of another factor.",
+    "forms": []
+  },
+  {
+    "term": "Interaction plot",
+    "definition": "A plot of mean responses for each combination of two factors; non-parallel lines indicate an interaction.",
+    "forms": []
+  },
+  {
+    "term": "Simple effect",
+    "definition": "The effect of one factor at a single level of another factor.",
+    "forms": [
+      "simple effects"
+    ]
+  },
+  {
+    "term": "Partial eta squared",
+    "definition": "An effect size for one term in a multi-factor ANOVA: SS effect ÷ (SS effect + SS residual).",
+    "forms": []
+  },
+  {
+    "term": "Blocking",
+    "definition": "Grouping experimental runs into similar sets (blocks) and including the block in the analysis to remove nuisance variation.",
+    "forms": []
+  },
+  {
+    "term": "Randomised complete block design",
+    "definition": "A design in which every treatment appears once in each block, in random order within the block.",
+    "forms": [
+      "randomized complete block design"
+    ]
+  },
+  {
+    "term": "Repeated measures",
+    "definition": "A design in which the same experimental units are measured under several conditions or at several times.",
+    "forms": []
+  },
+  {
+    "term": "Sphericity",
+    "definition": "The assumption in repeated-measures ANOVA that the differences between all pairs of conditions have equal variances.",
+    "forms": []
+  },
+  {
+    "term": "Greenhouse–Geisser correction",
+    "definition": "A reduction in the degrees of freedom of a repeated-measures ANOVA when sphericity is violated.",
+    "forms": [
+      "Greenhouse-Geisser correction"
+    ]
+  },
+  {
+    "term": "Analysis of covariance",
+    "definition": "An ANOVA that also adjusts for a continuous covariate, comparing groups at the same covariate value.",
+    "forms": [
+      "ANCOVA"
+    ]
+  },
+  {
+    "term": "Covariate",
+    "definition": "A continuous variable that affects the response but is not the main interest, included in a model to adjust for it.",
+    "forms": [
+      "covariates"
+    ]
+  },
+  {
+    "term": "Fixed effect",
+    "definition": "A factor whose levels were chosen deliberately; conclusions apply only to those levels.",
+    "forms": [
+      "fixed effects"
+    ]
+  },
+  {
+    "term": "Random effect",
+    "definition": "A factor whose levels are a sample from a larger population, such as subjects, days or batches.",
+    "forms": [
+      "random effects"
+    ]
+  },
+  {
+    "term": "Experimental unit",
+    "definition": "The smallest unit to which a treatment is independently applied; it determines the number of true replicates.",
+    "forms": [
+      "experimental units"
+    ]
+  },
+  {
+    "term": "Pseudoreplication",
+    "definition": "Treating measurements that are not independent, such as many cells from one animal, as if they were independent replicates.",
+    "forms": []
+  },
+  {
+    "term": "Intraclass correlation",
+    "definition": "The share of the total variation due to differences between groups such as tanks, animals or days.",
+    "forms": [
+      "ICC"
+    ]
+  },
+  {
+    "term": "Linear mixed model",
+    "definition": "A regression model with both fixed effects and random effects, used for grouped or repeated data.",
+    "forms": [
+      "linear mixed models",
+      "mixed model",
+      "mixed models"
+    ]
+  },
+  {
+    "term": "Restricted maximum likelihood",
+    "definition": "The standard method for estimating variance components in mixed models.",
+    "forms": [
+      "REML"
+    ]
   }
 ]

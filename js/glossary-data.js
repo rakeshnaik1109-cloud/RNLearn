@@ -3710,5 +3710,135 @@ window.RNLEARN_GLOSSARY = [
   "General linear model",
   "The framework that includes t-tests, ANOVA and linear regression as special cases.",
   []
+ ],
+ [
+  "Factorial design",
+  "An experiment in which every level of each factor is combined with every level of the others.",
+  [
+   "factorial designs",
+   "factorial experiment",
+   "factorial experiments"
+  ]
+ ],
+ [
+  "Main effect",
+  "The effect of one factor averaged over the levels of the other factors.",
+  [
+   "main effects"
+  ]
+ ],
+ [
+  "Interaction effect",
+  "When the effect of one factor depends on the level of another factor.",
+  []
+ ],
+ [
+  "Interaction plot",
+  "A plot of mean responses for each combination of two factors; non-parallel lines indicate an interaction.",
+  []
+ ],
+ [
+  "Simple effect",
+  "The effect of one factor at a single level of another factor.",
+  [
+   "simple effects"
+  ]
+ ],
+ [
+  "Partial eta squared",
+  "An effect size for one term in a multi-factor ANOVA: SS effect ÷ (SS effect + SS residual).",
+  []
+ ],
+ [
+  "Blocking",
+  "Grouping experimental runs into similar sets (blocks) and including the block in the analysis to remove nuisance variation.",
+  []
+ ],
+ [
+  "Randomised complete block design",
+  "A design in which every treatment appears once in each block, in random order within the block.",
+  [
+   "randomized complete block design"
+  ]
+ ],
+ [
+  "Repeated measures",
+  "A design in which the same experimental units are measured under several conditions or at several times.",
+  []
+ ],
+ [
+  "Sphericity",
+  "The assumption in repeated-measures ANOVA that the differences between all pairs of conditions have equal variances.",
+  []
+ ],
+ [
+  "Greenhouse–Geisser correction",
+  "A reduction in the degrees of freedom of a repeated-measures ANOVA when sphericity is violated.",
+  [
+   "Greenhouse-Geisser correction"
+  ]
+ ],
+ [
+  "Analysis of covariance",
+  "An ANOVA that also adjusts for a continuous covariate, comparing groups at the same covariate value.",
+  [
+   "ANCOVA"
+  ]
+ ],
+ [
+  "Covariate",
+  "A continuous variable that affects the response but is not the main interest, included in a model to adjust for it.",
+  [
+   "covariates"
+  ]
+ ],
+ [
+  "Fixed effect",
+  "A factor whose levels were chosen deliberately; conclusions apply only to those levels.",
+  [
+   "fixed effects"
+  ]
+ ],
+ [
+  "Random effect",
+  "A factor whose levels are a sample from a larger population, such as subjects, days or batches.",
+  [
+   "random effects"
+  ]
+ ],
+ [
+  "Experimental unit",
+  "The smallest unit to which a treatment is independently applied; it determines the number of true replicates.",
+  [
+   "experimental units"
+  ]
+ ],
+ [
+  "Pseudoreplication",
+  "Treating measurements that are not independent, such as many cells from one animal, as if they were independent replicates.",
+  []
+ ],
+ [
+  "Intraclass correlation",
+  "The share of the total variation due to differences between groups such as tanks, animals or days.",
+  [
+   "ICC"
+  ]
+ ],
+ [
+  "Linear mixed model",
+  "A regression model with both fixed effects and random effects, used for grouped or repeated data.",
+  [
+   "linear mixed models",
+   "mixed model",
+   "mixed models"
+  ]
+ ],
+ [
+  "Restricted maximum likelihood",
+  "The standard method for estimating variance components in mixed models.",
+  [
+   "REML"
+  ]
  ]
 ];

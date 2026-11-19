@@ -204,6 +204,23 @@
     "type": "tutorial"
   },
   {
+    "slug": "beyond-one-factor",
+    "url": "articles/beyond-one-factor.html",
+    "title": "Beyond One Factor: Interactions, Blocks, Repeated Measures and Mixed Models",
+    "summary": "Factorial designs and interactions, two-way ANOVA, blocking, repeated measures and sphericity, ANCOVA, fixed and random effects, pseudoreplication and linear mixed models.",
+    "subject": "Science",
+    "tags": [
+      "statistics",
+      "anova",
+      "experiments",
+      "data-analysis",
+      "experimental-design",
+      "mixed-models"
+    ],
+    "date": "2026-11-19",
+    "type": "tutorial"
+  },
+  {
     "slug": "analysis-of-variance",
     "url": "articles/analysis-of-variance.html",
     "title": "Analysis of Variance: Comparing Many Groups at Once",

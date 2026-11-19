@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beyond One Factor: Interactions, Blocks, Repeated Measures and Mixed Models — RNLearn</title>
+  <meta name="description" content="Factorial designs and interactions, two-way ANOVA, blocking, repeated measures and sphericity, ANCOVA, fixed and random effects, pseudoreplication and linear mixed models.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/beyond-one-factor.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Beyond One Factor: Interactions, Blocks, Repeated Measures and Mixed Models — RNLearn">
+  <meta property="og:description" content="Factorial designs and interactions, two-way ANOVA, blocking, repeated measures and sphericity, ANCOVA, fixed and random effects, pseudoreplication and linear mixed models.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/beyond-one-factor.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Beyond One Factor: Interactions, Blocks, Repeated Measures and Mixed Models — RNLearn">
+  <meta name="twitter:description" content="Factorial designs and interactions, two-way ANOVA, blocking, repeated measures and sphericity, ANCOVA, fixed and random effects, pseudoreplication and linear mixed models.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Beyond One Factor: Interactions, Blocks, Repeated Measures and Mixed Models",
+    "description": "Factorial designs and interactions, two-way ANOVA, blocking, repeated measures and sphericity, ANCOVA, fixed and random effects, pseudoreplication and linear mixed models.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-19",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/beyond-one-factor.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/science.html" class="post-subject-tag" data-subject="science">Science</a>
+        </div>
+        <h1 class="article-title">Beyond One Factor: Interactions, Blocks, Repeated Measures and Mixed Models</h1>
+        <p class="article-standfirst">
+          Real experiments vary several things at once, run on different days, and measure the same samples again and again. Here is how to analyse experiments with structure, and the traps that await those who ignore it.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-19">19 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>19 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/making-sense-of-data.html">Making Sense of Data</a> (Part 6 of 9)</div>
+  <div class="series-banner-links">
+    <a href="analysis-of-variance.html">← Part 5: Analysis of Variance: Comparing Many Groups at Once</a>
+    <span>Part 7 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. One Factor Is Rarely Enough</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Factorial Designs: Asking Several Questions at Once</a></li>
+              <li><a class="toc-link" href="#section-4">4. Main Effects and Interactions</a></li>
+              <li><a class="toc-link" href="#section-5">5. The Two-Way ANOVA Table</a></li>
+              <li><a class="toc-link" href="#section-6">6. Blocking: Removing Nuisance Variation</a></li>
+              <li><a class="toc-link" href="#section-7">7. Repeated Measures and Paired Designs</a></li>
+              <li><a class="toc-link" href="#section-8">8. ANCOVA: Adjusting for a Covariate</a></li>
+              <li><a class="toc-link" href="#section-9">9. Fixed and Random Effects, and Pseudoreplication</a></li>
+              <li><a class="toc-link" href="#section-10">10. Mixed Models</a></li>
+              <li><a class="toc-link" href="#section-11">11. Unbalanced Data and Types of Sums of Squares</a></li>
+              <li><a class="toc-link" href="#section-12">12. Reporting</a></li>
+              <li><a class="toc-link" href="#section-13">13. Worked Example: Catalyst and Temperature</a></li>
+              <li><a class="toc-link" href="#section-14">14. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-15">15. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-16">16. Philosophy Corner</a></li>
+              <li><a class="toc-link" href="#section-17">17. People in This Part</a></li>
+              <li><a class="toc-link" href="#section-18">18. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-19">19. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. One Factor Is Rarely Enough</h2>
+            <p>Real experiments seldom vary just one thing. A chemist wants the best combination of catalyst and temperature. A biologist tests a drug in both male and female animals. Measurements are made on different days, by different people, on the same samples at several time points, or on many cells from a few animals. Each of these situations has a structure, and the one-way ANOVA of Part 5 ignores it.</p>
+            <p>This part extends the analysis of variance to that structure: <strong>factorial designs</strong> with two or more factors and their <strong>interactions</strong>, <strong>blocking</strong> to remove nuisance variation, <strong>repeated measures</strong> on the same units, <strong>analysis of covariance</strong> to adjust for a continuous variable, <strong>random effects</strong> and the trap of <strong>pseudoreplication</strong>, and the modern, flexible framework of <strong>mixed models</strong>. Getting the structure right is often more important than any choice of test. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-factor-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. From field trials to mixed models, 1926–2015.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Factorial Designs: Asking Several Questions at Once</h2>
+            <p>The traditional advice is to change one thing at a time while holding everything else constant. In 1926 Ronald Fisher disagreed sharply: “No aphorism is more frequently repeated in connection with field trials, than that we must ask Nature few questions, or, ideally, one question, at a time. The writer is convinced that this view is wholly mistaken.” <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> Nature, he argued, responds best to a carefully thought-out set of questions asked together.</p>
+            <p>In a <strong>factorial design</strong>, every level of each factor is combined with every level of the others. Two catalysts at two temperatures make a 2 × 2 design with four combinations; adding three pressures makes 2 × 2 × 3 = 12. Factorial designs have two great advantages over changing one factor at a time: <span class="cite-group">[<a class="cite" href="#ref-4">4</a>, <a class="cite" href="#ref-5">5</a>]</span></p>
+            <ul>
+              <li><strong>Efficiency.</strong> Every run contributes to the estimate of every factor. In a 2 × 2 design with four runs per combination, the catalyst effect is estimated from all 16 runs (8 against 8), and so is the temperature effect. Studying the two factors in two separate experiments would need twice as many runs for the same precision.</li>
+              <li><strong>Interactions.</strong> Only a factorial design can reveal that the effect of one factor depends on the level of another. One-factor-at-a-time experiments can miss the best conditions entirely when such interactions exist, as the worked example in Section 13 shows.</li>
+            </ul>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Main Effects and Interactions</h2>
+            <p>With two factors, A and B, there are three questions:</p>
+            <ul>
+              <li>The <strong>main effect of A</strong>: averaged over the levels of B, does A make a difference?</li>
+              <li>The <strong>main effect of B</strong>: averaged over the levels of A, does B make a difference?</li>
+              <li>The <strong>interaction A × B</strong>: does the effect of A depend on the level of B?</li>
+            </ul>
+            <p>The clearest way to see an interaction is an <strong>interaction plot</strong>: the mean response for each combination, with one line for each level of one factor. Parallel lines mean no interaction; the effect of one factor is the same whatever the other does. Lines that diverge, converge or cross indicate an interaction.</p>
+            <figure class="fig" data-fig="fig-interaction">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Main effects and interactions in a 2 × 2 experiment.</strong> Set the effect of the catalyst at 60 °C, the effect of raising the temperature, and the extra effect of combining catalyst Y with 80 °C. The two-way ANOVA table updates as you go.
+              </figcaption>
+            </figure>
+            <p>When an interaction is present, main effects must be interpreted with care. A main effect is an average over the levels of the other factor, and an average of a large effect and no effect describes neither. Report the <strong>simple effects</strong> instead: the effect of each factor at each level of the other. In a crossover interaction, where the lines cross, a main effect can be close to zero even though each factor matters a great deal.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. The Two-Way ANOVA Table</h2>
+            <p>A two-way ANOVA splits the total sum of squares into four parts: factor A, factor B, the A × B interaction and the residual (within-cell) variation. With a levels of A, b levels of B and n replicates per combination, the degrees of freedom are a − 1, b − 1, (a − 1)(b − 1) and ab(n − 1). Each effect is tested with F = MS<sub>effect</sub>/MS<sub>residual</sub>. For the catalyst–temperature experiment of Section 13:</p>
+            <div class="table-container" style="overflow-x:auto; margin:1.2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.92rem; line-height:1.5;">
+                <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.5rem;">Source</th><th style="padding:0.5rem;">Sum of squares</th><th style="padding:0.5rem;">df</th><th style="padding:0.5rem;">F</th><th style="padding:0.5rem;">p</th><th style="padding:0.5rem;">Partial η²</th></tr></thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Catalyst</td><td style="padding:0.5rem;">26.01</td><td style="padding:0.5rem;">1</td><td style="padding:0.5rem;">51.8</td><td style="padding:0.5rem;">1.1 × 10⁻⁵</td><td style="padding:0.5rem;">0.81</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Temperature</td><td style="padding:0.5rem;">92.16</td><td style="padding:0.5rem;">1</td><td style="padding:0.5rem;">183.7</td><td style="padding:0.5rem;">1.2 × 10⁻⁸</td><td style="padding:0.5rem;">0.94</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Catalyst × temperature</td><td style="padding:0.5rem;">19.36</td><td style="padding:0.5rem;">1</td><td style="padding:0.5rem;">38.6</td><td style="padding:0.5rem;">4.5 × 10⁻⁵</td><td style="padding:0.5rem;">0.76</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Residual</td><td style="padding:0.5rem;">6.02</td><td style="padding:0.5rem;">12</td><td style="padding:0.5rem;"></td><td style="padding:0.5rem;"></td><td style="padding:0.5rem;"></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>With several effects in one model, <strong>partial η²</strong> = SS<sub>effect</sub>/(SS<sub>effect</sub> + SS<sub>residual</sub>) is the usual effect size. All three effects here are significant, but the interaction tells the main story: the catalyst matters at 80 °C but not at 60 °C.</p>
+            <p>When the design is <strong>balanced</strong> (the same number of replicates in every cell), the sums of squares add up exactly and the order of the factors does not matter. With unbalanced data that is no longer true (Section 11).</p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Blocking: Removing Nuisance Variation</h2>
+            <p>Some sources of variation are not of interest but cannot be avoided: different days, batches of reagent, operators, instruments, plots of land. If they are large, they swamp the effects you care about. The solution is <strong>blocking</strong>: group the experimental runs into blocks that are as similar as possible inside, and run every treatment within each block. The analysis then includes the block as a factor, which removes the block-to-block variation from the error term. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+            <p>The simplest version is the <strong>randomised complete block design</strong>: every treatment once in each block, in random order within the block. It was devised for field trials, where neighbouring plots share similar soil, and it is just as useful in the laboratory, where runs on the same day share the same conditions. The experimental designer’s rule of thumb is: <em>block what you can, randomise what you cannot</em>. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-blocking">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Blocking by day.</strong> Three treatments, each measured once on each of six days. Switch between ignoring the days and blocking by day, and change how large the day-to-day differences are.
+              </figcaption>
+            </figure>
+            <p>In this example the treatment means are 20.55, 21.37 and 21.78. Ignoring days, the one-way ANOVA gives p = 0.53: nothing to see. With day as a block, p = 0.005. The data are identical; the blocked analysis simply recognises that measurements on the same day belong together.</p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Repeated Measures and Paired Designs</h2>
+            <p>When the same experimental units are measured more than once, under different conditions or at several times, the design has <strong>repeated measures</strong>. The simplest case is the paired design of Part 4: before and after on the same samples. Each unit acts as its own control, so differences between units cancel out. Repeated-measures designs can be far more powerful than comparing separate groups, as Figure 4 shows.</p>
+            <figure class="fig" data-fig="fig-repeated">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Paired versus unpaired analysis.</strong> Eight samples measured before and after a treatment. Increase the differences between samples and compare the paired and unpaired p-values.
+              </figcaption>
+            </figure>
+            <p>For three or more conditions, a <strong>repeated-measures ANOVA</strong> treats the unit as a block. It adds one assumption: <strong>sphericity</strong>, that the differences between every pair of conditions have the same variance. It was the subject of a test published in 1940 by John Mauchly, better known as a co-designer of the ENIAC computer. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> Sphericity often fails in practice, for example when measurements close in time are more alike than distant ones. The <strong>Greenhouse–Geisser</strong> and <strong>Huynh–Feldt</strong> corrections then reduce the degrees of freedom by a factor ε (between 1/(k − 1) and 1) to keep the test honest. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>, <a class="cite" href="#ref-9">9</a>]</span> Many statisticians now prefer mixed models (Section 10) for repeated measures, because they also cope with missing time points.</p>
+            <p>The order of conditions matters too. If every unit receives the conditions in the same order, the effect of a condition cannot be separated from learning, fatigue or drift. Randomise or counterbalance the order.</p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. ANCOVA: Adjusting for a Covariate</h2>
+            <p>Sometimes a continuous variable affects the response but is not of interest itself: the starting weight of an animal, the initial height of a plant, a baseline measurement before treatment, the room temperature. <strong>Analysis of covariance (ANCOVA)</strong> includes it as a <strong>covariate</strong>. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span> It fits a regression line for each group with a common slope and compares the groups at the same value of the covariate.</p>
+            <p>ANCOVA has two benefits. It removes the variation explained by the covariate from the error, so the test is more powerful; and it corrects for chance imbalance, when one group happens to start higher than another. For randomised experiments with a baseline measurement, ANCOVA on the final value is usually more powerful than analysing the change from baseline. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span></p>
+            <figure class="fig" data-fig="fig-ancova">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Adjusting for a starting value.</strong> Final value against starting value for a control and a treated group, with parallel fitted lines. Change the true effect, the imbalance in starting values and how strongly the final value depends on the start.
+              </figcaption>
+            </figure>
+            <p>Two cautions. ANCOVA assumes the slopes are similar in all groups; if they are not, the treatment effect depends on the covariate, which is itself an interaction worth reporting. And the covariate must not be affected by the treatment: adjusting for something the treatment changes can remove part of the very effect you want to measure.</p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Fixed and Random Effects, and Pseudoreplication</h2>
+            <p>The factors so far have been <strong>fixed effects</strong>: their levels were chosen deliberately, and conclusions apply to those levels only. Some factors are different. The six days in Figure 3, eight patients, three batches of reagent or five laboratories are samples from a larger population of possible days, patients, batches or laboratories. Treated as <strong>random effects</strong>, they contribute a source of variation, and the conclusions can be generalised to that population. Churchill Eisenhart set out this distinction in 1947. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span></p>
+            <p>A crucial question in every experiment is: <em>what is the experimental unit?</em> It is the smallest unit to which a treatment is independently applied. If a drug is added to three tanks of fish and a placebo to three others, the tank is the experimental unit, and there are three replicates per treatment, not thirty, however many fish are measured. Treating the fish as independent replicates is called <strong>pseudoreplication</strong>. Stuart Hurlbert showed in 1984 that it was widespread in ecological field experiments; <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span> it remains common in laboratory science, where many cells, slices or readings are taken from a few animals or cultures. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span></p>
+            <figure class="fig" data-fig="fig-pseudorep">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. The cost of pseudoreplication.</strong> Three tanks per treatment, ten fish per tank, and no real treatment effect. Set how much of the variation comes from differences between tanks (the intraclass correlation, ICC) and simulate 2,000 experiments.
+              </figcaption>
+            </figure>
+            <p>Even when tanks account for only 10% of the variation, analysing fish as independent gives a false-positive rate of about 16% instead of 5%; at 30%, about one in three. The simplest valid analysis averages within each tank first. Better still is a mixed model with tank as a random effect.</p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Mixed Models</h2>
+            <p>A <strong>linear mixed model</strong> contains both fixed effects (the treatments you are comparing) and random effects (the grouping structure: animals, tanks, days, batches, subjects). <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span> For the fish, a mixed model would estimate the treatment effect as a fixed effect and the tank-to-tank variation as a variance component, giving correct standard errors while using every fish.</p>
+            <p>The ideas grew from animal breeding, where Charles Henderson developed methods for estimating variance components in the 1950s. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span> Restricted maximum likelihood (REML), introduced in 1971, became the standard way to estimate them, <span class="cite-group">[<a class="cite" href="#ref-17">17</a>]</span> and Nan Laird and James Ware popularised mixed models for repeated measurements over time in 1982. <span class="cite-group">[<a class="cite" href="#ref-18">18</a>]</span> Widely available software has since made them routine. <span class="cite-group">[<a class="cite" href="#ref-19">19</a>]</span></p>
+            <p>Mixed models have important advantages over classical repeated-measures ANOVA. They cope with missing measurements and unequal spacing in time, handle several crossed or nested random factors at once (say, cells within animals within litters), and allow covariates that change over time. They also <strong>shrink</strong> estimates for individual groups towards the overall mean, more strongly for groups with little data, which tends to make the estimates more accurate. The price is more modelling decisions to make and report, and assumptions (normal random effects, correct structure) that still need checking.</p>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Unbalanced Data and Types of Sums of Squares</h2>
+            <p>When cells have different numbers of replicates, perhaps because a run failed, the factors are no longer independent, and the variation they explain overlaps. Software then offers different <strong>types of sums of squares</strong>: <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+            <ul>
+              <li><strong>Type I</strong> (sequential): each term is tested after those listed before it, so the order of the factors changes the answer.</li>
+              <li><strong>Type II</strong>: each main effect is tested after the other main effects, assuming no interaction. A good choice when the interaction is negligible.</li>
+              <li><strong>Type III</strong>: each term is tested after all the others, including interactions. Common in some fields, but its main-effect tests are hard to interpret when an interaction is present, and it requires a particular coding of the factors.</li>
+            </ul>
+            <p>For balanced designs all three agree. For unbalanced ones, state which type you used. Better still, design for balance, and look at the interaction first.</p>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Reporting</h2>
+            <ul>
+              <li>Describe the design fully: the factors and their levels, blocks, which factors are within or between units, the experimental unit, and the randomisation.</li>
+              <li>Show an interaction plot or the cell means with intervals, and the individual data where possible.</li>
+              <li>Report each F with both degrees of freedom, its p-value and an effect size such as partial η². For repeated measures, state any sphericity correction; for mixed models, the random effects and the estimation method.</li>
+              <li>If there is an interaction, report simple effects with confidence intervals rather than relying on main effects.</li>
+              <li>Make the number of true replicates clear. “n = 60 fish from 6 tanks” is honest; “n = 60” is not.</li>
+            </ul>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Worked Example: Catalyst and Temperature</h2>
+            <p>A reaction is run with two catalysts (X and Y) at two temperatures (60 and 80 °C), four runs for each combination in random order. Mean yields (%), with SDs:</p>
+            <div class="table-container" style="overflow-x:auto; margin:1.2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.92rem; line-height:1.5;">
+                <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.5rem;"></th><th style="padding:0.5rem;">60 °C</th><th style="padding:0.5rem;">80 °C</th></tr></thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Catalyst X</td><td style="padding:0.5rem;">70.60 (0.75): 70.2, 71.5, 69.8, 70.9</td><td style="padding:0.5rem;">73.20 (0.66): 73.1, 72.4, 74.0, 73.3</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Catalyst Y</td><td style="padding:0.5rem;">70.95 (0.64): 71.0, 70.3, 71.8, 70.7</td><td style="padding:0.5rem;">77.95 (0.78): 78.2, 77.1, 78.9, 77.6</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <ol>
+              <li><strong>Plot.</strong> The interaction plot shows lines that diverge: raising the temperature helps both catalysts, but Y much more.</li>
+              <li><strong>Two-way ANOVA</strong> (table in Section 5): interaction F(1, 12) = 38.6, p &lt; 0.001; residual mean square 0.50, so the run-to-run SD is about 0.71 percentage points.</li>
+              <li><strong>Simple effects.</strong> At 60 °C, Y − X = 0.35 (95% CI −0.74 to 1.44, p = 0.50): no detectable difference. At 80 °C, Y − X = 4.75 (95% CI 3.66 to 5.84, p &lt; 0.001).</li>
+              <li><strong>Conclusion.</strong> Use catalyst Y at 80 °C, which gives about 78% yield. The catalyst only matters at the higher temperature.</li>
+              <li><strong>What one-factor-at-a-time would have done.</strong> Starting at X and 60 °C, a chemist tries Y at 60 °C, sees no gain (70.95 versus 70.60), and keeps X. Then they raise the temperature and reach 73.2%. They stop there, never testing Y at 80 °C, and miss nearly 5 percentage points of yield.</li>
+            </ol>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">Try it in Python: two-way ANOVA, blocking and a mixed model</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">import pandas as pd
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
+
+cells = {("X", 60): [70.2, 71.5, 69.8, 70.9], ("X", 80): [73.1, 72.4, 74.0, 73.3],
+         ("Y", 60): [71.0, 70.3, 71.8, 70.7], ("Y", 80): [78.2, 77.1, 78.9, 77.6]}
+df = pd.DataFrame([(c, t, y) for (c, t), ys in cells.items() for y in ys],
+                  columns=["catalyst", "temp", "yield_"])
+fit = smf.ols("yield_ ~ C(catalyst) * C(temp)", data=df).fit()
+print(sm.stats.anova_lm(fit, typ=2))      # interaction F = 38.6
+
+# Blocking: add the block as a factor, e.g. "y ~ C(treatment) + C(day)"
+# Mixed model with a random intercept for each tank:
+# smf.mixedlm("y ~ treatment", data=fish, groups=fish["tank"]).fit()</code></pre>
+            </details>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Try It Yourself: A Factorial Helicopter Experiment</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: two factors, blocks and an interaction</div>
+              <ol>
+                <li>Using the paper helicopters from Part 5, choose two factors with two levels each: rotor length (short, long) and weight (one paper clip, two). That makes four designs.</li>
+                <li>Recruit two or three people to drop and time. Each person is a <strong>block</strong>: every person times every design, three times each, in a random order.</li>
+                <li>Draw the interaction plot. Does adding weight shorten the flight more for long rotors than short ones?</li>
+                <li>Run a two-way ANOVA with person as a block: <code>time ~ C(length) * C(weight) + C(person)</code>. How much variation do the people account for? What happens to the p-values if you leave person out?</li>
+              </ol>
+              <p>Bonus: if each design is built once and dropped many times, what is the experimental unit? How would you change the experiment so that differences between individual helicopters are part of the replication?</p>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Legend and Record</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: should a good experiment change one thing at a time?</div>
+              <p><strong>The legend:</strong> the scientific method means changing one variable at a time while keeping everything else the same.</p>
+              <p><strong>The record:</strong> Fisher argued in 1926 that this advice, endlessly repeated, was “wholly mistaken”, and his factorial designs, worked out at Rothamsted with Frank Yates, became standard in agriculture and industry. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>, <a class="cite" href="#ref-4">4</a>]</span> Factorial experiments use every run to estimate every factor and can reveal interactions, which one-factor-at-a-time experiments cannot. Industrial case studies have repeatedly found that designed experiments reach better conditions with fewer runs. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span></p>
+              <p><strong>The grain of truth:</strong> the legend contains a real principle, <em>control</em>: anything that is not being studied should be held constant, blocked or randomised, so that it cannot be confused with the factors of interest. What it gets wrong is the idea that the factors you <em>are</em> studying should be varied separately.</p>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Philosophy Corner</h2>
+            <div class="callout callout-philosophy">
+              <div class="callout-header">Philosophy Corner: what does an experiment generalise to?</div>
+              <p>Suppose you test a new protocol on cells from three mice, measuring a thousand cells from each. Is your sample size three or three thousand? The answer depends on the question. If you want to know about these three mice, the cells are replicates. If you want to know about mice in general, the mice are the replicates, and three is a small sample of mice, however many cells you measure.</p>
+              <p>The distinction between fixed and random effects is, at heart, a statement about what you want to generalise to. Treat three reagent batches as fixed, and your conclusions apply only to those three batches; treat them as random, and you claim something about batches in general, at the cost of wider uncertainty. Hurlbert’s pseudoreplication and the debates about mixed models are really debates about this question: <em>what population does my experiment represent?</em> <span class="cite-group">[<a class="cite" href="#ref-13">13</a>, <a class="cite" href="#ref-15">15</a>]</span></p>
+              <p><strong>Questions to think about:</strong> In your own field, what is usually the experimental unit? When an experiment is repeated in another laboratory, with different people, equipment and suppliers, which of those differences should count as noise, and which as part of what the result claims to generalise over?</p>
+            </div>
+          </section>
+          <section id="section-17">
+            <h2>17. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Ronald A. Fisher</td>
+                <td style="padding:0.6rem 0.8rem;">1890–1962<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Factorial and block designs (1926, 1935)</td>
+                <td style="padding:0.6rem 0.8rem;">Argued for studying many factors at once, with randomisation and blocking.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Frank Yates</td>
+                <td style="padding:0.6rem 0.8rem;">1902–1994<br>England</td>
+                <td style="padding:0.6rem 0.8rem;"><em>The Design and Analysis of Factorial Experiments</em> (1937)</td>
+                <td style="padding:0.6rem 0.8rem;">Developed factorial designs and their analysis at Rothamsted.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John W. Mauchly</td>
+                <td style="padding:0.6rem 0.8rem;">1907–1980<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Test for sphericity (1940)</td>
+                <td style="padding:0.6rem 0.8rem;">Gave the sphericity test, and co-designed the ENIAC computer.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Churchill Eisenhart</td>
+                <td style="padding:0.6rem 0.8rem;">1913–1994<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Fixed and random models (1947)</td>
+                <td style="padding:0.6rem 0.8rem;">Clarified the difference between fixed and random effects.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Charles R. Henderson</td>
+                <td style="padding:0.6rem 0.8rem;">1911–1989<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Variance components (1953)</td>
+                <td style="padding:0.6rem 0.8rem;">Developed mixed-model methods for animal breeding.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Samuel Greenhouse &amp; Seymour Geisser</td>
+                <td style="padding:0.6rem 0.8rem;">1918–2000 / 1929–2004<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Greenhouse–Geisser correction (1959)</td>
+                <td style="padding:0.6rem 0.8rem;">Corrected repeated-measures tests when sphericity fails.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-18">
+            <h2>18. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about experiments with more than one factor.</p>
+            <figure class="fig" data-fig="fig-quiz-d6">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-19">
+            <h2>19. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Montgomery, Douglas C.</strong> (2017). <em>Design and Analysis of Experiments</em>. 9th ed. Hoboken, NJ: Wiley.</li>
+              <li id="ref-2"><strong>Box, George E. P., Hunter, J. Stuart &amp; Hunter, William G.</strong> (2005). <em>Statistics for Experimenters: Design, Innovation, and Discovery</em>. 2nd ed. Hoboken, NJ: Wiley.</li>
+              <li id="ref-3"><strong>Fisher, R. A.</strong> (1926). "The arrangement of field experiments." <em>Journal of the Ministry of Agriculture of Great Britain</em>, 33: 503–513.</li>
+              <li id="ref-4"><strong>Yates, F.</strong> (1937). <em>The Design and Analysis of Factorial Experiments</em>. Technical Communication No. 35. Harpenden: Imperial Bureau of Soil Science.</li>
+              <li id="ref-5"><strong>Czitrom, Veronica.</strong> (1999). "One-factor-at-a-time versus designed experiments." <em>The American Statistician</em>, 53(2): 126–131.</li>
+              <li id="ref-6"><strong>Fisher, R. A.</strong> (1935). <em>The Design of Experiments</em>. Edinburgh: Oliver &amp; Boyd.</li>
+              <li id="ref-7"><strong>Mauchly, John W.</strong> (1940). "Significance test for sphericity of a normal n-variate distribution." <em>The Annals of Mathematical Statistics</em>, 11(2): 204–209.</li>
+              <li id="ref-8"><strong>Greenhouse, Samuel W. &amp; Geisser, Seymour.</strong> (1959). "On methods in the analysis of profile data." <em>Psychometrika</em>, 24(2): 95–112.</li>
+              <li id="ref-9"><strong>Huynh, Huynh &amp; Feldt, Leonard S.</strong> (1976). "Estimation of the Box correction for degrees of freedom from sample data in randomized block and split-plot designs." <em>Journal of Educational Statistics</em>, 1(1): 69–82.</li>
+              <li id="ref-10"><strong>Snedecor, George W.</strong> (1934). <em>Calculation and Interpretation of Analysis of Variance and Covariance</em>. Ames, IA: Collegiate Press.</li>
+              <li id="ref-11"><strong>Vickers, Andrew J. &amp; Altman, Douglas G.</strong> (2001). "Analysing controlled trials with baseline and follow up measurements." <em>BMJ</em>, 323(7321): 1123–1124.</li>
+              <li id="ref-12"><strong>Eisenhart, Churchill.</strong> (1947). "The assumptions underlying the analysis of variance." <em>Biometrics</em>, 3(1): 1–21.</li>
+              <li id="ref-13"><strong>Hurlbert, Stuart H.</strong> (1984). "Pseudoreplication and the design of ecological field experiments." <em>Ecological Monographs</em>, 54(2): 187–211.</li>
+              <li id="ref-14"><strong>Lazic, Stanley E.</strong> (2010). "The problem of pseudoreplication in neuroscientific studies: is it affecting your analysis?" <em>BMC Neuroscience</em>, 11: 5.</li>
+              <li id="ref-15"><strong>Gelman, Andrew &amp; Hill, Jennifer.</strong> (2007). <em>Data Analysis Using Regression and Multilevel/Hierarchical Models</em>. Cambridge: Cambridge University Press.</li>
+              <li id="ref-16"><strong>Henderson, C. R.</strong> (1953). "Estimation of variance and covariance components." <em>Biometrics</em>, 9(2): 226–252.</li>
+              <li id="ref-17"><strong>Patterson, H. D. &amp; Thompson, R.</strong> (1971). "Recovery of inter-block information when block sizes are unequal." <em>Biometrika</em>, 58(3): 545–554.</li>
+              <li id="ref-18"><strong>Laird, Nan M. &amp; Ware, James H.</strong> (1982). "Random-effects models for longitudinal data." <em>Biometrics</em>, 38(4): 963–974.</li>
+              <li id="ref-19"><strong>Bates, Douglas, Mächler, Martin, Bolker, Ben &amp; Walker, Steve.</strong> (2015). "Fitting linear mixed-effects models using lme4." <em>Journal of Statistical Software</em>, 67(1): 1–48.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/making-sense-of-data.html">Making Sense of Data</a> (Part 6 of 9)</div>
+  <div class="series-banner-links">
+    <a href="analysis-of-variance.html">← Part 5: Analysis of Variance: Comparing Many Groups at Once</a>
+    <span>Part 7 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/beyond-one-factor.js"></script>
+</body>
+</html>
