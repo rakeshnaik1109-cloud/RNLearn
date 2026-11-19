@@ -3586,5 +3586,127 @@
     "forms": [
       "credible intervals"
     ]
+  },
+  {
+    "term": "Analysis of variance",
+    "definition": "A method for testing whether several group means differ, by comparing variation between groups with variation within them.",
+    "forms": [
+      "ANOVA"
+    ]
+  },
+  {
+    "term": "Multiple comparisons problem",
+    "definition": "The rising chance of at least one false positive when many statistical tests are carried out.",
+    "forms": []
+  },
+  {
+    "term": "Familywise error rate",
+    "definition": "The probability of at least one false positive among a family of statistical tests.",
+    "forms": []
+  },
+  {
+    "term": "Sum of squares",
+    "definition": "The sum of squared deviations from a mean; ANOVA splits the total sum of squares into between-group and within-group parts.",
+    "forms": [
+      "sums of squares"
+    ]
+  },
+  {
+    "term": "Mean square",
+    "definition": "A sum of squares divided by its degrees of freedom; an estimate of variance.",
+    "forms": [
+      "mean squares"
+    ]
+  },
+  {
+    "term": "F statistic",
+    "definition": "The ratio of the between-group to the within-group mean square in an ANOVA; near 1 when groups do not differ.",
+    "forms": [
+      "F ratio"
+    ]
+  },
+  {
+    "term": "F distribution",
+    "definition": "The distribution of a ratio of two independent variance estimates, used to obtain p-values in ANOVA.",
+    "forms": []
+  },
+  {
+    "term": "Eta squared",
+    "definition": "The share of the total variation explained by the groups in an ANOVA: SS between ÷ SS total.",
+    "forms": []
+  },
+  {
+    "term": "Omega squared",
+    "definition": "A less biased version of eta squared for estimating the effect size in an ANOVA.",
+    "forms": []
+  },
+  {
+    "term": "Residual",
+    "definition": "The difference between an observed value and the value predicted by a model, such as its group mean.",
+    "forms": [
+      "residuals"
+    ]
+  },
+  {
+    "term": "Levene’s test",
+    "definition": "A test of whether several groups have equal variances, using absolute deviations from each group’s centre.",
+    "forms": [
+      "Levene's test"
+    ]
+  },
+  {
+    "term": "Welch’s ANOVA",
+    "definition": "A one-way ANOVA that does not assume equal variances in the groups.",
+    "forms": [
+      "Welch's ANOVA"
+    ]
+  },
+  {
+    "term": "Kruskal–Wallis test",
+    "definition": "A rank-based alternative to one-way ANOVA that does not assume normal data.",
+    "forms": [
+      "Kruskal-Wallis test"
+    ]
+  },
+  {
+    "term": "Tukey’s HSD",
+    "definition": "Tukey’s honestly significant difference: a method for comparing all pairs of group means with a joint error rate.",
+    "forms": [
+      "Tukey's HSD",
+      "honestly significant difference"
+    ]
+  },
+  {
+    "term": "Bonferroni correction",
+    "definition": "Testing each of m comparisons at level α/m to keep the chance of any false positive at most α.",
+    "forms": []
+  },
+  {
+    "term": "Holm’s method",
+    "definition": "A step-down multiple-testing correction that is always at least as powerful as Bonferroni’s.",
+    "forms": [
+      "Holm's method"
+    ]
+  },
+  {
+    "term": "Dunnett’s test",
+    "definition": "A method for comparing several treatments with a single control group.",
+    "forms": [
+      "Dunnett's test"
+    ]
+  },
+  {
+    "term": "Dummy variable",
+    "definition": "A 0/1 variable used to represent membership of a group in a regression model.",
+    "forms": [
+      "dummy variables",
+      "indicator variable",
+      "indicator variables"
+    ]
+  },
+  {
+    "term": "General linear model",
+    "definition": "The framework that includes t-tests, ANOVA and linear regression as special cases.",
+    "forms": []
   }
 ]

@@ -204,6 +204,23 @@
     "type": "tutorial"
   },
   {
+    "slug": "analysis-of-variance",
+    "url": "articles/analysis-of-variance.html",
+    "title": "Analysis of Variance: Comparing Many Groups at Once",
+    "summary": "Why many t-tests mislead, between- and within-group variation, sums of squares, the F distribution, effect sizes, assumptions, Welch and Kruskal–Wallis, post-hoc tests and ANOVA as regression.",
+    "subject": "Science",
+    "tags": [
+      "statistics",
+      "anova",
+      "experiments",
+      "data-analysis",
+      "multiple-comparisons",
+      "hypothesis-testing"
+    ],
+    "date": "2026-11-19",
+    "type": "tutorial"
+  },
+  {
     "slug": "how-far-is-the-moon",
     "url": "articles/how-far-is-the-moon.html",
     "title": "How Far Is the Moon? Shadows, Parallax and Mirrors on the Moon",

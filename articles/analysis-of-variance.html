@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analysis of Variance: Comparing Many Groups at Once — RNLearn</title>
+  <meta name="description" content="Why many t-tests mislead, between- and within-group variation, sums of squares, the F distribution, effect sizes, assumptions, Welch and Kruskal–Wallis, post-hoc tests and ANOVA as regression.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/analysis-of-variance.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Analysis of Variance: Comparing Many Groups at Once — RNLearn">
+  <meta property="og:description" content="Why many t-tests mislead, between- and within-group variation, sums of squares, the F distribution, effect sizes, assumptions, Welch and Kruskal–Wallis, post-hoc tests and ANOVA as regression.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/analysis-of-variance.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Analysis of Variance: Comparing Many Groups at Once — RNLearn">
+  <meta name="twitter:description" content="Why many t-tests mislead, between- and within-group variation, sums of squares, the F distribution, effect sizes, assumptions, Welch and Kruskal–Wallis, post-hoc tests and ANOVA as regression.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Analysis of Variance: Comparing Many Groups at Once",
+    "description": "Why many t-tests mislead, between- and within-group variation, sums of squares, the F distribution, effect sizes, assumptions, Welch and Kruskal–Wallis, post-hoc tests and ANOVA as regression.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-19",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/analysis-of-variance.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/science.html" class="post-subject-tag" data-subject="science">Science</a>
+        </div>
+        <h1 class="article-title">Analysis of Variance: Comparing Many Groups at Once</h1>
+        <p class="article-standfirst">
+          Three catalysts, four fertilisers, five adhesives: do the groups really differ? Here is the analysis of variance, the workhorse of experimental science, from the idea of signal against noise to finding which groups differ.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-19">19 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>20 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/making-sense-of-data.html">Making Sense of Data</a> (Part 5 of 9)</div>
+  <div class="series-banner-links">
+    <a href="estimation-and-confidence-intervals.html">← Part 4: Estimation: Confidence Intervals and How Many Measurements You Need</a>
+    <span>Part 6 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. More Than Two Groups</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Why Not Lots of t-Tests?</a></li>
+              <li><a class="toc-link" href="#section-4">4. The Big Idea: Signal Against Noise</a></li>
+              <li><a class="toc-link" href="#section-5">5. Sums of Squares and the ANOVA Table</a></li>
+              <li><a class="toc-link" href="#section-6">6. The F Distribution</a></li>
+              <li><a class="toc-link" href="#section-7">7. How Big Is the Effect?</a></li>
+              <li><a class="toc-link" href="#section-8">8. Checking the Assumptions</a></li>
+              <li><a class="toc-link" href="#section-9">9. When Assumptions Fail: Welch and Kruskal–Wallis</a></li>
+              <li><a class="toc-link" href="#section-10">10. Which Groups Differ?</a></li>
+              <li><a class="toc-link" href="#section-11">11. ANOVA Is Regression in Disguise</a></li>
+              <li><a class="toc-link" href="#section-12">12. Reporting an ANOVA</a></li>
+              <li><a class="toc-link" href="#section-13">13. Worked Example: Four Catalysts</a></li>
+              <li><a class="toc-link" href="#section-14">14. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-15">15. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-16">16. Philosophy Corner</a></li>
+              <li><a class="toc-link" href="#section-17">17. People in This Part</a></li>
+              <li><a class="toc-link" href="#section-18">18. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-19">19. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. More Than Two Groups</h2>
+            <p>A chemist tries four catalysts and measures the yield of a reaction five times with each. A biologist grows seedlings under three light colours. An engineer tests the strength of joints made with five adhesives. In each case the question is the same: <em>do the groups really differ, or is the variation between their averages just the ordinary scatter of measurements?</em></p>
+            <p>For two groups, Part 4 compared means with a t-based interval or test. For three or more, the standard tool is the <strong>analysis of variance</strong>, or <strong>ANOVA</strong>, invented by Ronald Fisher in the 1920s to make sense of agricultural field trials. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span> It is one of the most widely used methods in experimental science. This part explains why it is needed, how it works, what the F ratio means, how to check its assumptions and what to do when they fail, how to find out <em>which</em> groups differ, and how to report the result.</p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-anova-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. From potato fields to false discovery rates, 1918–1995.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Why Not Lots of t-Tests?</h2>
+            <p>The obvious approach is to compare every pair of groups with a t-test. With four catalysts that is six tests; with five groups, ten; with ten groups, forty-five. The trouble is that each test has a 5% chance of a false positive when there is no real difference, and those chances add up. Run enough tests and you are almost guaranteed to “find” something.</p>
+            <p>The simple formula 1 − 0.95<sup>m</sup> for m independent tests gives 26% for six tests and 40% for ten. Pairwise tests are not quite independent, because each group takes part in several of them, so the real rate is a little lower, but still far above 5%: in simulations with 10 measurements per group and no true differences, at least one pairwise t-test comes out “significant” about 12% of the time with three groups, 28% with five and over 60% with ten. This is the <strong>multiple comparisons problem</strong>, and it is one of the main routes by which false findings enter the scientific literature.</p>
+            <figure class="fig" data-fig="fig-many-tests">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. The more tests, the more false alarms.</strong> Choose the number of groups and simulate 1,000 experiments in which nothing is really going on. Compare all pairwise t-tests, Bonferroni-corrected t-tests and a single ANOVA.
+              </figcaption>
+            </figure>
+            <p>ANOVA avoids the problem by asking a single question first: <em>is there any difference at all among the group means?</em> Only if the answer is yes do we go on to ask which groups differ, using methods that keep the overall error rate under control (Section 10).</p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. The Big Idea: Signal Against Noise</h2>
+            <p>Despite its name, the analysis of variance is a test about <strong>means</strong>. It gets there by comparing two kinds of variation.</p>
+            <ul>
+              <li><strong>Variation within groups</strong>: how much individual measurements scatter around their own group’s mean. This is the noise: the measurement error and natural variability that would be there even if every group were treated identically.</li>
+              <li><strong>Variation between groups</strong>: how far the group means sit from the overall (grand) mean. Even with no real effect, sample means differ a little by chance; if the treatments really matter, they differ more.</li>
+            </ul>
+            <p>If the between-group variation is much larger than you would expect from the within-group noise, the groups probably differ. The word <strong>variance</strong> itself, and the idea of splitting it into parts due to different causes, come from a 1918 paper by Fisher on inheritance. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> The following year he joined the Rothamsted Experimental Station, where decades of crop records gave him the problems that shaped the method.</p>
+            <figure class="fig" data-fig="fig-anova-explorer">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Signal against noise.</strong> Four groups of measurements. Change how far apart the true group means are, how much measurements scatter, and how many there are in each group. Show the between-group and within-group deviations, and watch how the total variation is split and how F responds.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Sums of Squares and the ANOVA Table</h2>
+            <p>The calculation partitions the total variation exactly. For k groups with N measurements in total, grand mean x̄, group means x̄<sub>j</sub> and group sizes n<sub>j</sub>:</p>
+            <p>$$\underbrace{\sum_{i,j}(x_{ij}-\bar{x})^2}_{SS_{\text{total}}} = \underbrace{\sum_j n_j(\bar{x}_j-\bar{x})^2}_{SS_{\text{between}}} + \underbrace{\sum_{i,j}(x_{ij}-\bar{x}_j)^2}_{SS_{\text{within}}}$$</p>
+            <p>Each sum of squares is divided by its <strong>degrees of freedom</strong> to give a <strong>mean square</strong>: k − 1 for between groups (k means around one grand mean) and N − k for within groups (N values around k group means). The ratio of the two mean squares is the <strong>F statistic</strong>:</p>
+            <p>$$F = \frac{MS_{\text{between}}}{MS_{\text{within}}} = \frac{SS_{\text{between}}/(k-1)}{SS_{\text{within}}/(N-k)}.$$</p>
+            <p>MS<sub>within</sub> estimates the noise variance σ² whatever the group means are. MS<sub>between</sub> also estimates σ² if the groups have the same true mean, but is inflated if they do not. So F is near 1 when there is no effect, and large when there is. The results are traditionally set out in an <strong>ANOVA table</strong>. Fisher and Winifred Mackenzie published the first analysis of variance in recognisably modern form in 1923, for an experiment on how potato varieties respond to fertilisers. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> For the catalyst experiment worked through in Section 13:</p>
+            <div class="table-container" style="overflow-x:auto; margin:1.2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.92rem; line-height:1.5;">
+                <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.5rem;">Source</th><th style="padding:0.5rem;">Sum of squares</th><th style="padding:0.5rem;">df</th><th style="padding:0.5rem;">Mean square</th><th style="padding:0.5rem;">F</th><th style="padding:0.5rem;">p</th></tr></thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Between catalysts</td><td style="padding:0.5rem;">62.09</td><td style="padding:0.5rem;">3</td><td style="padding:0.5rem;">20.70</td><td style="padding:0.5rem;">31.1</td><td style="padding:0.5rem;">6.5 × 10⁻⁷</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Within catalysts (error)</td><td style="padding:0.5rem;">10.63</td><td style="padding:0.5rem;">16</td><td style="padding:0.5rem;">0.664</td><td style="padding:0.5rem;"></td><td style="padding:0.5rem;"></td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Total</td><td style="padding:0.5rem;">72.72</td><td style="padding:0.5rem;">19</td><td style="padding:0.5rem;"></td><td style="padding:0.5rem;"></td><td style="padding:0.5rem;"></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Notice that the sums of squares and the degrees of freedom both add up: 62.09 + 10.63 = 72.72, and 3 + 16 = 19. The within-groups mean square, 0.664, is the pooled estimate of the measurement variance; its square root, 0.82 percentage points, is the typical scatter of a single run.</p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. The F Distribution</h2>
+            <p>How large must F be before we believe the groups differ? If the groups have the same true mean and the assumptions hold, F follows a known distribution, the <strong>F distribution</strong>, with two degrees of freedom: k − 1 and N − k. Fisher worked out its form in the 1920s, but he tabulated a transformed quantity, z = ½ ln F. In 1934 the American statistician George Snedecor published tables of the ratio itself and named it F in Fisher’s honour. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> The p-value is the area of the distribution beyond the observed F.</p>
+            <figure class="fig" data-fig="fig-f-dist">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. The F distribution.</strong> Set the two degrees of freedom and the observed F. The red area is the p-value; the dashed line marks the critical value for a 5% test.
+              </figcaption>
+            </figure>
+            <p>For the catalysts, F(3, 16) = 31.1, far beyond the 5% critical value of 3.24: p is less than one in a million. A significant F says that <em>at least one</em> group mean differs from the others. It does not say which, or by how much.</p>
+            <p>With only two groups, the ANOVA F equals the square of the pooled two-sample t statistic, and the two tests give identical p-values. ANOVA is the generalisation of the t-test to any number of groups.</p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. How Big Is the Effect?</h2>
+            <p>As with any test, a tiny p-value can come from a trivial effect measured very precisely. ANOVA results should therefore be reported with an <strong>effect size</strong>: <span class="cite-group">[<a class="cite" href="#ref-6">6</a>, <a class="cite" href="#ref-7">7</a>]</span></p>
+            <ul>
+              <li><strong>Eta squared</strong>, η² = SS<sub>between</sub>/SS<sub>total</sub>: the share of the total variation explained by the groups. It is simple, but slightly overestimates the effect in the population, especially for small samples.</li>
+              <li><strong>Omega squared</strong>, ω² = (SS<sub>between</sub> − (k − 1)MS<sub>within</sub>)/(SS<sub>total</sub> + MS<sub>within</sub>): a less biased version, preferred for reporting.</li>
+              <li><strong>Cohen’s f</strong> = √(η²/(1 − η²)), used in power calculations. Cohen suggested 0.10, 0.25 and 0.40 as rough guides to small, medium and large effects in the behavioural sciences, a convention that should not be applied blindly to physical measurements.</li>
+            </ul>
+            <p>For the catalysts, η² = 0.85 and ω² = 0.82: the choice of catalyst explains over 80% of the variation in yield, a very large effect, as is common for well-controlled laboratory experiments.</p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Checking the Assumptions</h2>
+            <p>The classical one-way ANOVA assumes three things:</p>
+            <ol>
+              <li><strong>Independence.</strong> Each measurement is independent of the others. This is the most important assumption and the one no test can check; it depends on how the experiment was done. Repeated measurements on the same sample, or runs done in batches on different days, violate it and need the methods of Part 6.</li>
+              <li><strong>Normality.</strong> Within each group, the measurements (equivalently, the <strong>residuals</strong>, each value minus its group mean) are roughly normal. Check with a histogram or Q–Q plot of the residuals (Part 2). ANOVA is fairly robust to non-normality, especially with equal group sizes of moderate size. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span></li>
+              <li><strong>Equal variances</strong> (homogeneity of variance). The scatter within each group is similar. Plot the data by group, or the residuals against the group means. A formal check is <strong>Levene’s test</strong> (1960), an ANOVA on the absolute deviations of each value from its group centre; the Brown–Forsythe version uses the median as the centre and is more robust. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>, <a class="cite" href="#ref-10">10</a>]</span></li>
+            </ol>
+            <p>How much do violations matter? It depends on the design. With <strong>equal group sizes</strong>, ANOVA tolerates moderately unequal variances and skewed data well. With <strong>unequal group sizes and unequal variances</strong>, it can fail badly: if the smallest group is the noisiest, the false-positive rate can be several times the nominal 5%. Figure 5 lets you see this.</p>
+            <figure class="fig" data-fig="fig-assumptions">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. What happens when the assumptions fail.</strong> In every scenario the groups have the same true mean, so any “significant” result is a false positive. Choose a scenario and simulate 2,000 experiments to compare the classical ANOVA, Welch’s ANOVA and the Kruskal–Wallis test.
+              </figcaption>
+            </figure>
+            <p>A caution about formal tests of assumptions: with small samples they have little power to detect real problems, and with large samples they flag trivial departures. Plots and knowledge of the measurement process are usually more informative than a p-value from a normality or variance test.</p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. When Assumptions Fail: Welch and Kruskal–Wallis</h2>
+            <p><strong>Welch’s ANOVA</strong> (1951) extends Welch’s unequal-variance t-test to several groups. It weights each group by n/s² and adjusts the degrees of freedom, so it does not assume equal variances. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span> When the variances are in fact equal, it loses very little power, so many statisticians now recommend it as the default for one-way comparisons.</p>
+            <p>The <strong>Kruskal–Wallis test</strong> (1952) replaces the values by their ranks and performs a rank-based analysis, so it does not assume normality and is resistant to outliers. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span> It is the many-group version of the Mann–Whitney (Wilcoxon rank-sum) test. It is often described as a test of medians, but strictly it tests whether the groups come from the same distribution. If the groups differ in spread, it can reject even when the medians are equal, as Figure 5 shows.</p>
+            <p>A third option, often the best, is to <strong>transform</strong> the data. If the spread grows with the mean, as with concentrations, counts or growth rates, taking logarithms often makes the variances equal and the distributions more symmetric at the same time (Part 2).</p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Which Groups Differ?</h2>
+            <p>A significant ANOVA invites the next question. Methods for answering it while controlling the <strong>familywise error rate</strong>, the probability of at least one false positive among all the comparisons, include:</p>
+            <ul>
+              <li><strong>Tukey’s honestly significant difference (HSD)</strong>, for comparing all pairs. It uses the distribution of the range of several means (the “studentised range”), so the whole set of intervals has a joint 95% confidence. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span> It is the standard choice for all pairwise comparisons.</li>
+              <li><strong>Bonferroni’s correction</strong>: test each of m comparisons at level 0.05/m. Simple and always valid, but conservative when m is large. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span></li>
+              <li><strong>Holm’s method</strong>: sort the p-values from smallest to largest and compare them with 0.05/m, 0.05/(m − 1), and so on, stopping at the first that fails. It controls the same error rate and is always at least as powerful as Bonferroni. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span></li>
+              <li><strong>Dunnett’s test</strong>, for comparing several treatments with one control, without spending error rate on treatment-versus-treatment comparisons that are not of interest. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span></li>
+              <li><strong>Planned contrasts</strong>: if before the experiment you had a specific question, such as “do the two new catalysts together beat the two old ones?”, test it directly. A few planned comparisons need little or no correction.</li>
+            </ul>
+            <figure class="fig" data-fig="fig-posthoc">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. Which catalysts differ?</strong> The six pairwise differences from the worked example, with unadjusted, Bonferroni and Tukey 95% intervals. Intervals that exclude zero indicate a difference.
+              </figcaption>
+            </figure>
+            <p>When there are hundreds or thousands of comparisons, as in genomics, imaging or screening many machine-learning models, controlling the chance of even one false positive becomes too strict. Benjamini and Hochberg’s <strong>false discovery rate</strong> (1995) instead controls the expected <em>proportion</em> of false positives among the results declared significant. <span class="cite-group">[<a class="cite" href="#ref-17">17</a>]</span></p>
+          </section>
+
+          <section id="section-11">
+            <h2>11. ANOVA Is Regression in Disguise</h2>
+            <p>A one-way ANOVA can be written as a linear regression. Code the groups with <strong>indicator (dummy) variables</strong>: x<sub>B</sub> = 1 for catalyst B and 0 otherwise, and similarly for C and D. Then</p>
+            <p>$$y = \beta_0 + \beta_B x_B + \beta_C x_C + \beta_D x_D + \varepsilon,$$</p>
+            <p>where β<sub>0</sub> is the mean of the reference group A and each other coefficient is a group’s difference from A. Fitting this regression gives exactly the same F test. For the catalysts, β<sub>0</sub> = 72.96, β<sub>B</sub> = 2.74, β<sub>C</sub> = 0.40 and β<sub>D</sub> = 4.32.</p>
+            <p>This is more than a curiosity. ANOVA, t-tests and regression are all special cases of the <strong>general linear model</strong>, which is how statistical software actually computes them. <span class="cite-group">[<a class="cite" href="#ref-18">18</a>]</span> It also shows how to extend ANOVA: add more factors, add continuous covariates, or allow for repeated measurements, which is the subject of Part 6. Part 7 treats regression in its own right.</p>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Reporting an ANOVA</h2>
+            <ul>
+              <li>Describe the design: the groups, the number of measurements in each, and how units were assigned to groups.</li>
+              <li>Give the group means with standard deviations or confidence intervals, ideally in a plot showing the individual data points.</li>
+              <li>Report the test with both degrees of freedom and an effect size: “F(3, 16) = 31.1, p &lt; 0.001, ω² = 0.82”. Say whether you used the classical or Welch’s ANOVA.</li>
+              <li>State how you checked the assumptions and what you found.</li>
+              <li>Name the follow-up method (Tukey, Holm, Dunnett or planned contrasts) and give the differences with their adjusted confidence intervals, not just stars.</li>
+            </ul>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Worked Example: Four Catalysts</h2>
+            <p>A reaction is run five times with each of four catalysts, in random order. Yields (%):</p>
+            <ul>
+              <li>A: 72.1, 74.3, 73.0, 71.8, 73.6 (mean 72.96, SD 1.04)</li>
+              <li>B: 75.2, 76.8, 74.9, 76.1, 75.5 (mean 75.70, SD 0.76)</li>
+              <li>C: 73.4, 72.6, 74.1, 73.9, 72.8 (mean 73.36, SD 0.66)</li>
+              <li>D: 77.0, 78.3, 76.4, 77.8, 76.9 (mean 77.28, SD 0.76)</li>
+            </ul>
+            <ol>
+              <li><strong>Look at the data.</strong> D and B look higher; A and C lower. The spreads are similar.</li>
+              <li><strong>ANOVA.</strong> Grand mean 74.825. SS<sub>between</sub> = 62.09 (df 3), SS<sub>within</sub> = 10.63 (df 16), so F = 20.70/0.664 = <strong>31.1</strong>, p = 6.5 × 10⁻⁷. The catalysts differ.</li>
+              <li><strong>Effect size.</strong> η² = 0.85, ω² = 0.82.</li>
+              <li><strong>Assumptions.</strong> Brown–Forsythe test for equal variances: p = 0.78. Shapiro–Wilk test on the residuals: p = 0.39. The residual plots show nothing alarming. Welch’s ANOVA agrees: F(3, 8.8) = 28.8, p = 7 × 10⁻⁵; so does Kruskal–Wallis: H = 15.9, p = 0.001.</li>
+              <li><strong>Which differ?</strong> Tukey’s HSD with MS<sub>within</sub> = 0.664 and n = 5 gives a critical difference of 4.05 × √(0.664/5) = <strong>1.48</strong> percentage points. Every pair differs except A and C (difference 0.40). The closest call is D versus B: 1.58, 95% Tukey interval 0.11 to 3.06.</li>
+              <li><strong>Report.</strong> “Yield differed between catalysts (F(3, 16) = 31.1, p &lt; 0.001, ω² = 0.82). Tukey comparisons showed D gave the highest yield, 1.6 points (95% CI 0.1 to 3.1) above B, which in turn exceeded A and C; A and C did not differ detectably.”</li>
+            </ol>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">Try it in Python: ANOVA, assumption checks and Tukey’s HSD</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">import numpy as np
+from scipy import stats
+from statsmodels.stats.multicomp import pairwise_tukeyhsd
+from statsmodels.stats.oneway import anova_oneway
+
+A = [72.1, 74.3, 73.0, 71.8, 73.6]; B = [75.2, 76.8, 74.9, 76.1, 75.5]
+C = [73.4, 72.6, 74.1, 73.9, 72.8]; D = [77.0, 78.3, 76.4, 77.8, 76.9]
+
+print(stats.f_oneway(A, B, C, D))                  # F = 31.14, p = 6.5e-07
+print(stats.levene(A, B, C, D))                    # Brown-Forsythe: p = 0.78
+print(anova_oneway([A, B, C, D], use_var="unequal"))  # Welch: F = 28.8
+print(stats.kruskal(A, B, C, D))                   # H = 15.87, p = 0.0012
+
+y = np.concatenate([A, B, C, D]); g = np.repeat(list("ABCD"), 5)
+print(pairwise_tukeyhsd(y, g))                     # all pairs differ except A-C</code></pre>
+            </details>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Try It Yourself: Paper Helicopters</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: does wing length change the flight time?</div>
+              <ol>
+                <li>Make paper helicopters (a strip of paper cut and folded into two rotor blades, with a paper clip as weight) with three rotor lengths: short, medium and long. Make at least two of each, so differences between individual helicopters are part of the noise.</li>
+                <li>Drop each from the same height (2 m or more) and time the fall. Get 6–10 timings per rotor length, in a random order rather than all short ones first.</li>
+                <li>Plot the times by group. Compute the group means and SDs, then the ANOVA table by hand or with the Python code above.</li>
+                <li>Is F large? Which lengths differ (use Tukey)? Calculate η²: how much of the variation is due to rotor length, and how much to timing error and wobble?</li>
+              </ol>
+              <p>The paper helicopter is a classic teaching experiment in design of experiments. Think about what else varies: the drop height, the person timing, air currents. Part 6 shows how to include such factors in the analysis, and Part 9 how to plan around them.</p>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Legend and Record</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: did Fisher invent the F-test?</div>
+              <p><strong>The legend:</strong> Fisher invented the F-test and named it after himself.</p>
+              <p><strong>The record:</strong> Fisher developed the analysis of variance and derived the distribution needed to test it. But he did not work with the ratio of mean squares directly: he used z = ½ ln(MS<sub>between</sub>/MS<sub>within</sub>), which suited his mathematics and his tables. In 1934 George Snedecor of Iowa State College, who did much to spread Fisher’s methods in the United States, published tables of the plain ratio, which is easier to use, and called it F in Fisher’s honour. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+              <p><strong>The grain of truth:</strong> the ideas are Fisher’s; the letter and the convenient tables are Snedecor’s. The analysis of variance itself grew out of very practical work at Rothamsted, where Fisher needed to separate the effects of fertilisers and varieties from the natural variation of soil across a field.</p>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Philosophy Corner</h2>
+            <div class="callout callout-philosophy">
+              <div class="callout-header">Philosophy Corner: should we correct for multiple comparisons?</div>
+              <p>Corrections for multiple comparisons seem like obvious good practice. Yet in 1990 the epidemiologist Kenneth Rothman argued that “no adjustments are needed”: nature does not know how many tests you ran, and a correction that makes each test stricter also makes you miss more real effects. <span class="cite-group">[<a class="cite" href="#ref-19">19</a>]</span> Whether a result is surprising should depend on the evidence for it, not on how many other questions happened to be asked in the same paper.</p>
+              <p>Others reply that without corrections, a scientist who tests twenty hypotheses will almost always find something to publish, and that is exactly how false findings accumulate. A different answer comes from Bayesian statistics: Andrew Gelman and colleagues argue that fitting all the comparisons together in one multilevel model, which pulls extreme estimates towards the overall mean, deals with the problem more naturally than adjusting p-values afterwards. <span class="cite-group">[<a class="cite" href="#ref-20">20</a>]</span></p>
+              <p>What everyone agrees on is honesty about the number of comparisons. The real danger is not the correction method but hidden flexibility: trying many analyses and reporting only the one that worked.</p>
+              <p><strong>Questions to think about:</strong> If two scientists test the same hypothesis on the same data, but one also tests nine other hypotheses, should their conclusions about the first hypothesis differ? What would you need to know to decide?</p>
+            </div>
+          </section>
+          <section id="section-17">
+            <h2>17. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Ronald A. Fisher</td>
+                <td style="padding:0.6rem 0.8rem;">1890–1962<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Analysis of variance (1918–1925)</td>
+                <td style="padding:0.6rem 0.8rem;">Invented ANOVA for agricultural experiments at Rothamsted.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">George W. Snedecor</td>
+                <td style="padding:0.6rem 0.8rem;">1881–1974<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Tables of F (1934)</td>
+                <td style="padding:0.6rem 0.8rem;">Named the F distribution and spread Fisher’s methods in America.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John W. Tukey</td>
+                <td style="padding:0.6rem 0.8rem;">1915–2000<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Honestly significant difference</td>
+                <td style="padding:0.6rem 0.8rem;">Developed methods for comparing many means, and much of exploratory data analysis.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Bernard L. Welch</td>
+                <td style="padding:0.6rem 0.8rem;">1911–1989<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Welch’s ANOVA (1951)</td>
+                <td style="padding:0.6rem 0.8rem;">Extended unequal-variance comparisons to several groups.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">William Kruskal &amp; W. Allen Wallis</td>
+                <td style="padding:0.6rem 0.8rem;">1919–2005 / 1912–1998<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Kruskal–Wallis test (1952)</td>
+                <td style="padding:0.6rem 0.8rem;">Gave a rank-based alternative to one-way ANOVA.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Charles W. Dunnett</td>
+                <td style="padding:0.6rem 0.8rem;">1921–2007<br>Canada</td>
+                <td style="padding:0.6rem 0.8rem;">Dunnett’s test (1955)</td>
+                <td style="padding:0.6rem 0.8rem;">Designed comparisons of several treatments with a control.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Howard Levene</td>
+                <td style="padding:0.6rem 0.8rem;">1914–2003<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Levene’s test (1960)</td>
+                <td style="padding:0.6rem 0.8rem;">Proposed a robust test for equal variances.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-18">
+            <h2>18. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about the analysis of variance.</p>
+            <figure class="fig" data-fig="fig-quiz-d5">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-19">
+            <h2>19. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Fisher, R. A.</strong> (1925). <em>Statistical Methods for Research Workers</em>. Edinburgh: Oliver &amp; Boyd.</li>
+              <li id="ref-2"><strong>Box, Joan Fisher.</strong> (1978). <em>R. A. Fisher: The Life of a Scientist</em>. New York: Wiley.</li>
+              <li id="ref-3"><strong>Fisher, R. A.</strong> (1918). "The correlation between relatives on the supposition of Mendelian inheritance." <em>Transactions of the Royal Society of Edinburgh</em>, 52(2): 399–433.</li>
+              <li id="ref-4"><strong>Fisher, R. A. &amp; Mackenzie, W. A.</strong> (1923). "Studies in crop variation. II. The manurial response of different potato varieties." <em>Journal of Agricultural Science</em>, 13(3): 311–320.</li>
+              <li id="ref-5"><strong>Snedecor, George W.</strong> (1934). <em>Calculation and Interpretation of Analysis of Variance and Covariance</em>. Ames, IA: Collegiate Press.</li>
+              <li id="ref-6"><strong>Lakens, Daniël.</strong> (2013). "Calculating and reporting effect sizes to facilitate cumulative science: a practical primer for t-tests and ANOVAs." <em>Frontiers in Psychology</em>, 4: 863.</li>
+              <li id="ref-7"><strong>Cohen, Jacob.</strong> (1988). <em>Statistical Power Analysis for the Behavioral Sciences</em>. 2nd ed. Hillsdale, NJ: Lawrence Erlbaum.</li>
+              <li id="ref-8"><strong>Glass, Gene V., Peckham, Percy D. &amp; Sanders, James R.</strong> (1972). "Consequences of failure to meet assumptions underlying the fixed effects analyses of variance and covariance." <em>Review of Educational Research</em>, 42(3): 237–288.</li>
+              <li id="ref-9"><strong>Levene, Howard.</strong> (1960). "Robust tests for equality of variances." In I. Olkin et al. (eds.), <em>Contributions to Probability and Statistics: Essays in Honor of Harold Hotelling</em>, pp. 278–292. Stanford, CA: Stanford University Press.</li>
+              <li id="ref-10"><strong>Brown, Morton B. &amp; Forsythe, Alan B.</strong> (1974). "Robust tests for the equality of variances." <em>Journal of the American Statistical Association</em>, 69(346): 364–367.</li>
+              <li id="ref-11"><strong>Welch, B. L.</strong> (1951). "On the comparison of several mean values: an alternative approach." <em>Biometrika</em>, 38(3–4): 330–336.</li>
+              <li id="ref-12"><strong>Kruskal, William H. &amp; Wallis, W. Allen.</strong> (1952). "Use of ranks in one-criterion variance analysis." <em>Journal of the American Statistical Association</em>, 47(260): 583–621.</li>
+              <li id="ref-13"><strong>Tukey, John W.</strong> (1949). "Comparing individual means in the analysis of variance." <em>Biometrics</em>, 5(2): 99–114.</li>
+              <li id="ref-14"><strong>Dunn, Olive Jean.</strong> (1961). "Multiple comparisons among means." <em>Journal of the American Statistical Association</em>, 56(293): 52–64.</li>
+              <li id="ref-15"><strong>Holm, Sture.</strong> (1979). "A simple sequentially rejective multiple test procedure." <em>Scandinavian Journal of Statistics</em>, 6(2): 65–70.</li>
+              <li id="ref-16"><strong>Dunnett, Charles W.</strong> (1955). "A multiple comparison procedure for comparing several treatments with a control." <em>Journal of the American Statistical Association</em>, 50(272): 1096–1121.</li>
+              <li id="ref-17"><strong>Benjamini, Yoav &amp; Hochberg, Yosef.</strong> (1995). "Controlling the false discovery rate: a practical and powerful approach to multiple testing." <em>Journal of the Royal Statistical Society: Series B</em>, 57(1): 289–300.</li>
+              <li id="ref-18"><strong>Montgomery, Douglas C.</strong> (2017). <em>Design and Analysis of Experiments</em>. 9th ed. Hoboken, NJ: Wiley.</li>
+              <li id="ref-19"><strong>Rothman, Kenneth J.</strong> (1990). "No adjustments are needed for multiple comparisons." <em>Epidemiology</em>, 1(1): 43–46.</li>
+              <li id="ref-20"><strong>Gelman, Andrew, Hill, Jennifer &amp; Yajima, Masanao.</strong> (2012). "Why we (usually) don’t have to worry about multiple comparisons." <em>Journal of Research on Educational Effectiveness</em>, 5(2): 189–211.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/making-sense-of-data.html">Making Sense of Data</a> (Part 5 of 9)</div>
+  <div class="series-banner-links">
+    <a href="estimation-and-confidence-intervals.html">← Part 4: Estimation: Confidence Intervals and How Many Measurements You Need</a>
+    <span>Part 6 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/analysis-of-variance.js"></script>
+</body>
+</html>

@@ -3588,5 +3588,127 @@ window.RNLEARN_GLOSSARY = [
   [
    "credible intervals"
   ]
+ ],
+ [
+  "Analysis of variance",
+  "A method for testing whether several group means differ, by comparing variation between groups with variation within them.",
+  [
+   "ANOVA"
+  ]
+ ],
+ [
+  "Multiple comparisons problem",
+  "The rising chance of at least one false positive when many statistical tests are carried out.",
+  []
+ ],
+ [
+  "Familywise error rate",
+  "The probability of at least one false positive among a family of statistical tests.",
+  []
+ ],
+ [
+  "Sum of squares",
+  "The sum of squared deviations from a mean; ANOVA splits the total sum of squares into between-group and within-group parts.",
+  [
+   "sums of squares"
+  ]
+ ],
+ [
+  "Mean square",
+  "A sum of squares divided by its degrees of freedom; an estimate of variance.",
+  [
+   "mean squares"
+  ]
+ ],
+ [
+  "F statistic",
+  "The ratio of the between-group to the within-group mean square in an ANOVA; near 1 when groups do not differ.",
+  [
+   "F ratio"
+  ]
+ ],
+ [
+  "F distribution",
+  "The distribution of a ratio of two independent variance estimates, used to obtain p-values in ANOVA.",
+  []
+ ],
+ [
+  "Eta squared",
+  "The share of the total variation explained by the groups in an ANOVA: SS between ÷ SS total.",
+  []
+ ],
+ [
+  "Omega squared",
+  "A less biased version of eta squared for estimating the effect size in an ANOVA.",
+  []
+ ],
+ [
+  "Residual",
+  "The difference between an observed value and the value predicted by a model, such as its group mean.",
+  [
+   "residuals"
+  ]
+ ],
+ [
+  "Levene’s test",
+  "A test of whether several groups have equal variances, using absolute deviations from each group’s centre.",
+  [
+   "Levene's test"
+  ]
+ ],
+ [
+  "Welch’s ANOVA",
+  "A one-way ANOVA that does not assume equal variances in the groups.",
+  [
+   "Welch's ANOVA"
+  ]
+ ],
+ [
+  "Kruskal–Wallis test",
+  "A rank-based alternative to one-way ANOVA that does not assume normal data.",
+  [
+   "Kruskal-Wallis test"
+  ]
+ ],
+ [
+  "Tukey’s HSD",
+  "Tukey’s honestly significant difference: a method for comparing all pairs of group means with a joint error rate.",
+  [
+   "Tukey's HSD",
+   "honestly significant difference"
+  ]
+ ],
+ [
+  "Bonferroni correction",
+  "Testing each of m comparisons at level α/m to keep the chance of any false positive at most α.",
+  []
+ ],
+ [
+  "Holm’s method",
+  "A step-down multiple-testing correction that is always at least as powerful as Bonferroni’s.",
+  [
+   "Holm's method"
+  ]
+ ],
+ [
+  "Dunnett’s test",
+  "A method for comparing several treatments with a single control group.",
+  [
+   "Dunnett's test"
+  ]
+ ],
+ [
+  "Dummy variable",
+  "A 0/1 variable used to represent membership of a group in a regression model.",
+  [
+   "dummy variables",
+   "indicator variable",
+   "indicator variables"
+  ]
+ ],
+ [
+  "General linear model",
+  "The framework that includes t-tests, ANOVA and linear regression as special cases.",
+  []
  ]
 ];

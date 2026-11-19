@@ -1,5 +1,31 @@
 [
   {
+    "slug": "analysis-of-variance",
+    "title": "Analysis of Variance: Comparing Many Groups at Once",
+    "summary": "Why many t-tests mislead, between- and within-group variation, sums of squares, the F distribution, effect sizes, assumptions, Welch and Kruskal–Wallis, post-hoc tests and ANOVA as regression.",
+    "subject": "Science",
+    "tags": [
+      "statistics",
+      "anova",
+      "experiments",
+      "data-analysis",
+      "multiple-comparisons",
+      "hypothesis-testing"
+    ],
+    "date": "2026-11-19",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 20,
+    "series": {
+      "id": "making-sense-of-data",
+      "part": 5
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
     "slug": "estimation-and-confidence-intervals",
     "title": "Estimation: Confidence Intervals and How Many Measurements You Need",
     "summary": "Populations and samples, unbiased estimators, confidence intervals, Student’s t, intervals for proportions, comparing groups, the bootstrap, error bars, sample size and power.",
