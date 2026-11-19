@@ -3514,5 +3514,79 @@ window.RNLEARN_GLOSSARY = [
   "Traceability",
   "The property of a measurement linked to the SI units through an unbroken, documented chain of calibrations.",
   []
+ ],
+ [
+  "Estimator",
+  "A rule for calculating an estimate of a population parameter from sample data.",
+  [
+   "estimators"
+  ]
+ ],
+ [
+  "Unbiased estimator",
+  "An estimator whose average over many samples equals the true value of the parameter.",
+  []
+ ],
+ [
+  "Sampling distribution",
+  "The distribution of a statistic, such as the sample mean, over all possible samples of the same size.",
+  []
+ ],
+ [
+  "t distribution",
+  "A bell-shaped distribution with heavier tails than the normal, used for means when the standard deviation is estimated from a small sample.",
+  [
+   "Student’s t distribution",
+   "Student's t distribution"
+  ]
+ ],
+ [
+  "Wilson interval",
+  "A confidence interval for a proportion that keeps close to its stated coverage even for small samples.",
+  []
+ ],
+ [
+  "Clopper–Pearson interval",
+  "An “exact” confidence interval for a proportion that never covers less than its stated level, at the cost of extra width.",
+  []
+ ],
+ [
+  "Rule of three",
+  "If an event is seen in none of n trials, a 95% upper limit for its probability is about 3/n.",
+  []
+ ],
+ [
+  "Welch’s t-test",
+  "A comparison of two means that does not assume the groups have equal variances.",
+  [
+   "Welch's t-test",
+   "Welch’s method"
+  ]
+ ],
+ [
+  "Power analysis",
+  "Calculating the sample size needed to detect an effect of a chosen size with a chosen power and significance level.",
+  []
+ ],
+ [
+  "Prediction interval",
+  "A range expected to contain the next single observation, wider than a confidence interval for the mean.",
+  [
+   "prediction intervals"
+  ]
+ ],
+ [
+  "Tolerance interval",
+  "A range expected, with stated confidence, to contain a stated fraction of the whole population.",
+  [
+   "tolerance intervals"
+  ]
+ ],
+ [
+  "Credible interval",
+  "In Bayesian statistics, a range with a stated probability of containing the parameter, given the data and a prior.",
+  [
+   "credible intervals"
+  ]
  ]
 ];

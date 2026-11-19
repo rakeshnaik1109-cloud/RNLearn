@@ -3512,5 +3512,79 @@
     "term": "Traceability",
     "definition": "The property of a measurement linked to the SI units through an unbroken, documented chain of calibrations.",
     "forms": []
+  },
+  {
+    "term": "Estimator",
+    "definition": "A rule for calculating an estimate of a population parameter from sample data.",
+    "forms": [
+      "estimators"
+    ]
+  },
+  {
+    "term": "Unbiased estimator",
+    "definition": "An estimator whose average over many samples equals the true value of the parameter.",
+    "forms": []
+  },
+  {
+    "term": "Sampling distribution",
+    "definition": "The distribution of a statistic, such as the sample mean, over all possible samples of the same size.",
+    "forms": []
+  },
+  {
+    "term": "t distribution",
+    "definition": "A bell-shaped distribution with heavier tails than the normal, used for means when the standard deviation is estimated from a small sample.",
+    "forms": [
+      "Student’s t distribution",
+      "Student's t distribution"
+    ]
+  },
+  {
+    "term": "Wilson interval",
+    "definition": "A confidence interval for a proportion that keeps close to its stated coverage even for small samples.",
+    "forms": []
+  },
+  {
+    "term": "Clopper–Pearson interval",
+    "definition": "An “exact” confidence interval for a proportion that never covers less than its stated level, at the cost of extra width.",
+    "forms": []
+  },
+  {
+    "term": "Rule of three",
+    "definition": "If an event is seen in none of n trials, a 95% upper limit for its probability is about 3/n.",
+    "forms": []
+  },
+  {
+    "term": "Welch’s t-test",
+    "definition": "A comparison of two means that does not assume the groups have equal variances.",
+    "forms": [
+      "Welch's t-test",
+      "Welch’s method"
+    ]
+  },
+  {
+    "term": "Power analysis",
+    "definition": "Calculating the sample size needed to detect an effect of a chosen size with a chosen power and significance level.",
+    "forms": []
+  },
+  {
+    "term": "Prediction interval",
+    "definition": "A range expected to contain the next single observation, wider than a confidence interval for the mean.",
+    "forms": [
+      "prediction intervals"
+    ]
+  },
+  {
+    "term": "Tolerance interval",
+    "definition": "A range expected, with stated confidence, to contain a stated fraction of the whole population.",
+    "forms": [
+      "tolerance intervals"
+    ]
+  },
+  {
+    "term": "Credible interval",
+    "definition": "In Bayesian statistics, a range with a stated probability of containing the parameter, given the data and a prior.",
+    "forms": [
+      "credible intervals"
+    ]
   }
 ]

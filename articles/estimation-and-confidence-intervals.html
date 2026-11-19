@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estimation: Confidence Intervals and How Many Measurements You Need — RNLearn</title>
+  <meta name="description" content="Populations and samples, unbiased estimators, confidence intervals, Student’s t, intervals for proportions, comparing groups, the bootstrap, error bars, sample size and power.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/estimation-and-confidence-intervals.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Estimation: Confidence Intervals and How Many Measurements You Need — RNLearn">
+  <meta property="og:description" content="Populations and samples, unbiased estimators, confidence intervals, Student’s t, intervals for proportions, comparing groups, the bootstrap, error bars, sample size and power.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/estimation-and-confidence-intervals.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Estimation: Confidence Intervals and How Many Measurements You Need — RNLearn">
+  <meta name="twitter:description" content="Populations and samples, unbiased estimators, confidence intervals, Student’s t, intervals for proportions, comparing groups, the bootstrap, error bars, sample size and power.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Estimation: Confidence Intervals and How Many Measurements You Need",
+    "description": "Populations and samples, unbiased estimators, confidence intervals, Student’s t, intervals for proportions, comparing groups, the bootstrap, error bars, sample size and power.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-19",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/estimation-and-confidence-intervals.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/science.html" class="post-subject-tag" data-subject="science">Science</a>
+        </div>
+        <h1 class="article-title">Estimation: Confidence Intervals and How Many Measurements You Need</h1>
+        <p class="article-standfirst">
+          A sample never tells you the true value, but it can tell you how far off you are likely to be. Here is how confidence intervals work, what they mean, and how to plan an experiment that can answer its question.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-19">19 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>20 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/making-sense-of-data.html">Making Sense of Data</a> (Part 4 of 9)</div>
+  <div class="series-banner-links">
+    <a href="measurement-error-and-uncertainty.html">← Part 3: Measurement, Error and Uncertainty: How Sure Are You?</a>
+    <span>Part 5 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. From a Sample to the World</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Populations, Samples and Estimates</a></li>
+              <li><a class="toc-link" href="#section-4">4. What a Confidence Interval Is</a></li>
+              <li><a class="toc-link" href="#section-5">5. Small Samples and Student’s t</a></li>
+              <li><a class="toc-link" href="#section-6">6. Intervals for a Proportion</a></li>
+              <li><a class="toc-link" href="#section-7">7. Comparing Two Groups</a></li>
+              <li><a class="toc-link" href="#section-8">8. The Bootstrap</a></li>
+              <li><a class="toc-link" href="#section-9">9. Error Bars: SD, SE or CI?</a></li>
+              <li><a class="toc-link" href="#section-10">10. Confidence Intervals and Hypothesis Tests</a></li>
+              <li><a class="toc-link" href="#section-11">11. How Many Measurements? Sample Size and Power</a></li>
+              <li><a class="toc-link" href="#section-12">12. Confidence, Prediction and Tolerance Intervals</a></li>
+              <li><a class="toc-link" href="#section-13">13. Worked Examples</a></li>
+              <li><a class="toc-link" href="#section-14">14. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-15">15. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-16">16. Philosophy Corner</a></li>
+              <li><a class="toc-link" href="#section-17">17. People in This Part</a></li>
+              <li><a class="toc-link" href="#section-18">18. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-19">19. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. From a Sample to the World</h2>
+            <p>You measure the resistance of ten resistors from a box of thousands and find an average of 100.05 Ω. A survey of 50 components finds 7 defective. A trial of a new fertiliser on 8 plots yields more than 8 control plots. In every case you have measured a <strong>sample</strong>, but what you really want to know is something about the whole box, the whole production line, or all the fields where the fertiliser might be used.</p>
+            <p>Statistics cannot tell you the true value from a sample. What it can do is tell you how far off your estimate is likely to be. This is <strong>estimation</strong>: a best guess together with a range of plausible values, the <strong>confidence interval</strong>. This part explains where confidence intervals come from, what they mean (and do not mean), the special methods for small samples and proportions, the computer-age bootstrap, how to read error bars, and how to decide <em>before</em> an experiment how many measurements you need. It builds on the standard error (Part 2) and on measurement uncertainty (Part 3). <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-est-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. From a brewery to the replication debate, 1908–2014.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Populations, Samples and Estimates</h2>
+            <p>A few words need to be clear first.</p>
+            <ul>
+              <li>The <strong>population</strong> is everything you want to know about: all the resistors in the box, all possible measurements of a quantity.</li>
+              <li>A <strong>parameter</strong> is a number describing the population, such as its true mean μ or true standard deviation σ. It is fixed but unknown.</li>
+              <li>A <strong>sample</strong> is the part you actually measure, ideally chosen at random.</li>
+              <li>A <strong>statistic</strong> is a number calculated from the sample, such as the sample mean x̄ or the sample standard deviation s. Used to estimate a parameter, it is called an <strong>estimate</strong>, and the recipe that produces it an <strong>estimator</strong>.</li>
+            </ul>
+            <p>A good estimator is <strong>unbiased</strong> (on average it hits the true value) and <strong>consistent</strong> (it gets closer as the sample grows). The sample mean is both. The sample variance is unbiased only if you divide the sum of squared deviations by <strong>n − 1</strong> rather than n. Deviations are measured from the sample mean, which always sits in the middle of the data, closer to the data than the true mean does, so dividing by n underestimates the spread. In a simulation of samples of 5 from a population with variance 1, dividing by n gives 0.80 on average; dividing by n − 1 gives 1.00. This is called <strong>Bessel’s correction</strong>, and n − 1 is the number of <strong>degrees of freedom</strong>: once the mean is fixed, only n − 1 deviations are free to vary.</p>
+            <p>Different samples give different estimates. The spread of an estimate across many possible samples, its <strong>sampling distribution</strong>, is described by its standard error. For a mean, SE = σ/√n, estimated by s/√n (Part 2). The confidence interval turns that standard error into a range.</p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. What a Confidence Interval Is</h2>
+            <p>By the central limit theorem, the sample mean x̄ is approximately normally distributed around the true mean μ with standard deviation SE. So in 95% of samples, x̄ falls within 1.96 SE of μ. Turn that around: in 95% of samples, μ lies within 1.96 SE of x̄. That gives the interval</p>
+            <p>$$\bar{x} \pm 1.96 \times \frac{\sigma}{\sqrt{n}}.$$</p>
+            <p>The theory of confidence intervals was set out by Jerzy Neyman in 1937. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span> His key point is about what the “95%” refers to. The true mean is fixed; it is the interval that varies from sample to sample. <strong>A 95% confidence interval is produced by a method that captures the true value in 95% of samples.</strong> Any particular interval either contains the true value or does not; we just do not know which.</p>
+            <figure class="fig" data-fig="fig-ci-coverage">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. One hundred confidence intervals.</strong> Each line is an interval from a different random sample from a population with true mean 50 and SD 10. Red intervals miss. Change the sample size, confidence level and multiplier, and tally many samples to see the long-run coverage.
+              </figcaption>
+            </figure>
+            <p>Three things control the width of the interval:</p>
+            <ul>
+              <li><strong>The spread of the data</strong>: noisier measurements give wider intervals.</li>
+              <li><strong>The sample size</strong>: width shrinks as 1/√n, so four times the data halves the width.</li>
+              <li><strong>The confidence level</strong>: 99% intervals are wider than 95% ones (multiplier 2.58 instead of 1.96); 90% intervals are narrower (1.64). More confidence costs precision.</li>
+            </ul>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Small Samples and Student’s t</h2>
+            <p>The formula above uses the true σ, which we almost never know. Replacing it with the sample s works well for large samples, but for small ones s is itself uncertain, sometimes much smaller than σ, and intervals built with 1.96 are too narrow. Figure 2 shows it: with n = 5 and the z multiplier, the coverage is only about 88%, not 95%.</p>
+            <p>The solution came from an unexpected place. William Sealy Gosset, a chemist at the Guinness brewery in Dublin, had to draw conclusions from very small samples of barley and hops. In 1908, under the pen name “Student”, he worked out the exact distribution of (x̄ − μ)/(s/√n) for normal data: the <strong>t distribution</strong>. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-3">3</a>]</span> It looks like the normal curve but with heavier tails, and it depends on the degrees of freedom, n − 1. Ronald Fisher’s textbook of 1925 made t tables a standard tool. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> The confidence interval becomes</p>
+            <p>$$\bar{x} \pm t^{*}_{n-1} \times \frac{s}{\sqrt{n}},$$</p>
+            <p>where t* is taken from the t distribution. For 95% confidence, t* is 12.71 for n = 2, 2.78 for n = 5, 2.26 for n = 10 and 2.05 for n = 30, approaching 1.96 for large samples.</p>
+            <figure class="fig" data-fig="fig-t-dist">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Student’s t distribution.</strong> Compare t (blue) with the normal (dashed) as the degrees of freedom change. The red areas hold the outer 5%, and t* marks where they begin.
+              </figcaption>
+            </figure>
+            <p>The t interval assumes the data are roughly normal. It is fairly robust to mild skewness, especially for n above about 15–30, but with small, very skewed or outlier-prone samples consider a transformation (Part 2) or the bootstrap (Section 8).</p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Intervals for a Proportion</h2>
+            <p>Many results are proportions: the fraction of defective parts, of cells that respond, of patients who recover. For x successes in n trials, the estimate is p̂ = x/n with standard error √(p̂(1 − p̂)/n). The textbook interval, called the <strong>Wald interval</strong>, is p̂ ± 1.96 × SE.</p>
+            <p>It is also surprisingly bad. For small samples or proportions near 0% or 100%, its true coverage can fall far below 95%. With 20 trials and a true proportion of 5%, it captures the truth only 64% of the time; and if you observe 0 successes, it gives the absurd interval 0% to 0%. A large review in 2001 recommended against using it. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>, <a class="cite" href="#ref-6">6</a>]</span> Better choices are:</p>
+            <ul>
+              <li>The <strong>Wilson interval</strong> (1927), which inverts the test rather than plugging in p̂, and keeps coverage close to 95% even for small n. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span></li>
+              <li>The <strong>Clopper–Pearson interval</strong> (1934), often called “exact”, which never covers less than 95%, at the cost of being wider than necessary. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span></li>
+            </ul>
+            <figure class="fig" data-fig="fig-proportion">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Three 95% intervals for a proportion, and how well they really work.</strong> Top: intervals for the observed data. Bottom: the actual coverage of each method for every possible true proportion, at the chosen sample size.
+              </figcaption>
+            </figure>
+            <p><strong>When nothing happens.</strong> If none of n trials shows the event (0 failures in 300 tests), the estimate is 0, but the true rate need not be. A handy approximation, the <strong>rule of three</strong>, says that the 95% upper limit is about 3/n: here 1%. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span></p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Comparing Two Groups</h2>
+            <p>Often the quantity of interest is a <strong>difference</strong>: treated minus control, new method minus old. For two independent groups, the standard error of the difference between means combines both groups’ standard errors in quadrature, just like uncertainties in Part 3:</p>
+            <p>$$SE_{\bar{x}_1-\bar{x}_2} = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}.$$</p>
+            <p>The interval is the difference ± t* × SE. When the two groups may have different variances, Bernard Welch’s 1947 method adjusts the degrees of freedom, and it is now the recommended default. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span> If the interval for the difference excludes zero, the difference is statistically significant at the matching level (Section 10). Its width also shows how precisely the size of the effect is known, which a p-value alone does not.</p>
+            <p>For <strong>paired</strong> data, such as the same samples measured before and after treatment, first compute each pair’s difference and then build a one-sample interval for the mean difference. Pairing removes the variation between samples and usually gives a much narrower interval.</p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. The Bootstrap</h2>
+            <p>The formulas so far work for means and proportions. What about a median, a ratio, a correlation, or the peak position of a fitted curve? In 1979 Bradley Efron proposed a startlingly simple idea, the <strong>bootstrap</strong>: treat the sample as a stand-in for the population, and draw many new samples from it, <em>with replacement</em>, each the same size as the original. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>, <a class="cite" href="#ref-12">12</a>]</span> Compute the statistic for each resample. The spread of those values estimates the standard error, and the middle 95% of them gives a confidence interval (the <strong>percentile interval</strong>).</p>
+            <figure class="fig" data-fig="fig-bootstrap">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. The bootstrap in action.</strong> A skewed sample of 15 values. Each resample draws 15 values with replacement; the histogram collects the statistic from every resample, and the green band is the 95% percentile interval.
+              </figcaption>
+            </figure>
+            <p>For the 15 skewed values in Figure 5, the median is 3.8 and 20,000 resamples give a 95% percentile interval of about 2.9 to 7.2: lopsided, as it should be for skewed data, where a symmetric formula would mislead. The bootstrap needs a reasonable sample (it cannot invent information missing from a tiny sample) and independent observations, but it has become one of the most widely used tools in data analysis, including for estimating the uncertainty of machine-learning performance scores.</p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Error Bars: SD, SE or CI?</h2>
+            <p>Graphs in papers are full of error bars, but they can mean three very different things:</p>
+            <ul>
+              <li><strong>± 1 standard deviation</strong>: the spread of individual measurements. Use it to describe variability.</li>
+              <li><strong>± 1 standard error</strong>: the uncertainty of the mean, about a 68% confidence interval for large samples. Short and flattering.</li>
+              <li><strong>95% confidence interval</strong>: the uncertainty of the mean at 95%, about ± 2 SE for large samples, wider for small ones.</li>
+            </ul>
+            <p>The same data can look convincing or unconvincing depending on which is drawn, so a figure caption must always say which. Reading them is also tricky. A 2005 study found that many published researchers believe two 95% CIs must not overlap for a difference to be significant at p &lt; 0.05. In fact, for independent groups of at least 10 or so, 95% CIs that overlap by about half an arm correspond to p ≈ 0.05; for SE bars, a gap of about one arm’s length corresponds to p ≈ 0.05. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>, <a class="cite" href="#ref-14">14</a>]</span> The safest approach is to calculate the confidence interval of the difference directly.</p>
+            <figure class="fig" data-fig="fig-error-bars">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. The same two groups with three kinds of error bar.</strong> Change the difference and the group size, and compare the overlap with the actual p-value and the confidence interval for the difference.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Confidence Intervals and Hypothesis Tests</h2>
+            <p>Confidence intervals and significance tests are two sides of the same coin. A 95% confidence interval contains exactly those values that would <em>not</em> be rejected by a two-sided test at the 5% level. So if a 95% interval for a difference excludes zero, the test gives p &lt; 0.05; if it includes zero, p &gt; 0.05. (Our standalone article on <a href="null-hypothesis-p-values-and-effect-sizes.html">null hypotheses, p-values and effect sizes</a> covers tests in depth.)</p>
+            <p>Intervals carry more information. A p-value says only whether zero is plausible; the interval shows <em>which</em> effect sizes are plausible. An interval of 0.1 to 0.2 units and one of 0.1 to 20 units could have the same p-value, but they tell very different stories. Many statisticians and journals now encourage reporting effect sizes with confidence intervals rather than p-values alone. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span></p>
+          </section>
+
+          <section id="section-11">
+            <h2>11. How Many Measurements? Sample Size and Power</h2>
+            <p>The best time to think about uncertainty is before the experiment. Two common planning questions:</p>
+            <p><strong>To estimate a mean to within ± E</strong> with 95% confidence, when the standard deviation is about σ (from earlier data or a pilot study):</p>
+            <p>$$n \approx \left(\frac{1.96\,\sigma}{E}\right)^2.$$</p>
+            <p>With σ = 2 and E = 0.5, n ≈ 62. To estimate a proportion to within ± 3 percentage points, the worst case (p near 50%) gives n ≈ 1.96² × 0.25 / 0.03² ≈ 1,068, which is why opinion polls often survey about a thousand people.</p>
+            <p><strong>To detect a difference</strong> between two groups, you choose the smallest effect worth detecting (often as an effect size d, the difference divided by the SD), the significance level α (usually 0.05) and the <strong>power</strong>: the probability of detecting the effect if it is real, usually 80% or 90%. Jacob Cohen’s book made such <strong>power analysis</strong> standard. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span> For 80% power at α = 0.05, about 26 per group are needed for a large effect (d = 0.8), 64 for a medium one (d = 0.5), and 394 for a small one (d = 0.2).</p>
+            <figure class="fig" data-fig="fig-sample-size">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 7. How many measurements?</strong> Choose a goal. For estimation, the curve shows the margin of error against sample size; for comparisons, the power against the number per group. The green point marks the required sample size.
+              </figcaption>
+            </figure>
+            <p>Underpowered studies are a serious problem. They miss real effects, and the effects they do detect tend to be exaggerated, because only the lucky overestimates cross the significance threshold. A 2013 analysis estimated that the median statistical power of studies in neuroscience was only about 20%. <span class="cite-group">[<a class="cite" href="#ref-17">17</a>]</span> Planning the sample size is one of the cheapest ways to make an experiment worth doing.</p>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Confidence, Prediction and Tolerance Intervals</h2>
+            <p>Three kinds of interval are easily confused: <span class="cite-group">[<a class="cite" href="#ref-18">18</a>]</span></p>
+            <ul>
+              <li>A <strong>confidence interval</strong> is about a parameter: where the true mean lies. It shrinks towards zero width as n grows.</li>
+              <li>A <strong>prediction interval</strong> is about the next single observation: where the next resistor’s value will fall. It is always wider, roughly x̄ ± t* × s√(1 + 1/n), and never shrinks below the spread of individual values.</li>
+              <li>A <strong>tolerance interval</strong> is about a stated fraction of the population: for example, an interval that contains 99% of all resistors, with 95% confidence. Manufacturing specifications need this one.</li>
+            </ul>
+            <p>Saying “the mean is 100.05 ± 0.26 Ω” is very different from saying “each resistor is within ± 0.26 Ω”. The first is a confidence interval; individual resistors vary far more.</p>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Worked Examples</h2>
+            <p><strong>A mean from ten measurements.</strong> Ten resistors measure 99.6, 100.4, 100.1, 99.8, 100.7, 99.9, 100.3, 100.0, 99.5 and 100.2 Ω. Mean 100.05 Ω, s = 0.369 Ω, SE = 0.369/√10 = 0.117 Ω. With 9 degrees of freedom, t* = 2.262, so the 95% interval is 100.05 ± 0.26, or <strong>99.79 to 100.31 Ω</strong>. The nominal value of 100 Ω is comfortably inside. (Using 1.96 would give 99.82 to 100.28: a little too narrow. The 99% interval, with t* = 3.25, is 99.67 to 100.43 Ω.)</p>
+            <p><strong>A proportion.</strong> 7 defective items in a sample of 50: p̂ = 14%. 95% intervals: Wald 4.4% to 23.6%, Wilson 7.0% to 26.2%, Clopper–Pearson 5.8% to 26.7%. Notice that the Wald interval is symmetric, while the better intervals stretch further upwards, away from the 0% boundary.</p>
+            <p><strong>A difference between two groups.</strong> Battery run times (hours) under two charging protocols, 8 batteries each: protocol A mean 12.66 (s = 0.69), protocol B mean 13.70 (s = 0.64). Difference 1.04 hours, SE = 0.333, Welch degrees of freedom 13.9, 95% interval <strong>0.32 to 1.75 hours</strong> (p = 0.008). Protocol B is better, but by somewhere between a quarter of an hour and nearly two hours: a more useful statement than “p &lt; 0.01”.</p>
+            <p><strong>Planning.</strong> For the next battery study, how many per group to detect a difference of half a standard deviation with 80% power? About 64 per group. With only 20 per group, the power would be only about a third: two times in three, a real difference of that size would be missed.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">Try it in Python: t intervals, Wilson intervals, the bootstrap and power</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">import numpy as np
+from scipy import stats
+from statsmodels.stats.proportion import proportion_confint
+from statsmodels.stats.power import TTestIndPower
+
+x = np.array([99.6, 100.4, 100.1, 99.8, 100.7, 99.9, 100.3, 100.0, 99.5, 100.2])
+print(stats.t.interval(0.95, len(x) - 1, loc=x.mean(), scale=stats.sem(x)))
+# (99.786, 100.314)
+
+print(proportion_confint(7, 50, method="wilson"))   # (0.0695, 0.2619)
+print(proportion_confint(7, 50, method="beta"))     # Clopper-Pearson: (0.0582, 0.2674)
+
+y = np.array([2.1, 2.4, 2.6, 2.9, 3.1, 3.3, 3.6, 3.8, 4.4, 5.0, 5.9, 7.2, 8.8, 12.5, 19.0])
+res = stats.bootstrap((y,), np.median, confidence_level=0.95, method="percentile")
+print(res.confidence_interval)                      # about (2.9, 7.2)
+
+print(TTestIndPower().solve_power(effect_size=0.5, alpha=0.05, power=0.8))
+# 63.8, so 64 per group</code></pre>
+            </details>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Try It Yourself: How Long Is a Second?</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: confidence intervals from your own reactions</div>
+              <ol>
+                <li>Without looking at a clock, try to press a stopwatch (most phones have one) for exactly 5 seconds. Record the time. Repeat 10 times.</li>
+                <li>Compute the mean and the sample standard deviation s of your 10 attempts, then the standard error s/√10.</li>
+                <li>Build a 95% confidence interval: mean ± 2.262 × SE. Does it contain 5.00 seconds? If not, your internal clock has a systematic bias.</li>
+                <li>Now take only your first 3 attempts and build the interval again with t* = 4.30. How much wider is it? Then ask friends to do the same and compare: do the intervals of different people overlap?</li>
+              </ol>
+              <p>A bonus: count how many of a class’s 95% intervals contain 5 seconds. If many miss, it is not bad statistics; it means most people’s timing is biased, and a confidence interval only describes random error, not bias (Part 3).</p>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Legend and Record</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: why was the t-test published by “Student”?</div>
+              <p><strong>The legend:</strong> Guinness banned its scientists from publishing anything, so Gosset had to sneak his discovery out under a secret pen name.</p>
+              <p><strong>The record:</strong> Guinness did allow its scientific staff to publish, but on conditions. Historian Stephen Ziliak found the rules in the company’s archives: papers could not mention beer or Guinness, and could not carry the author’s own surname. The policy followed concern that another employee’s publication had given away information useful to competitors. Gosset published almost all his statistical papers as “Student”, and his paper of 1908 described its method with examples that revealed nothing about brewing. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+              <p><strong>The grain of truth:</strong> the pen name was real, and Gosset’s identity was officially kept quiet for years, though it was widely known among statisticians. The deeper point is that the t distribution was born from a practical, commercial need: making reliable decisions from small, expensive samples. That need is shared by almost every laboratory today.</p>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Philosophy Corner</h2>
+            <div class="callout callout-philosophy">
+              <div class="callout-header">Philosophy Corner: what does “95% confident” really mean?</div>
+              <p>Suppose your interval for a mean is 4.2 to 5.8. Is there a 95% probability that the true mean lies between 4.2 and 5.8? In the framework of Neyman, strictly no. The true mean is a fixed number, so it is either inside or not; the 95% describes the <em>method</em>, which succeeds in 95% of samples. In 2014, researchers and students in psychology were shown six statements about a confidence interval, all of them false; on average, both groups endorsed more than three. <span class="cite-group">[<a class="cite" href="#ref-19">19</a>]</span> Some statisticians argue that the problem runs deeper, and that confidence intervals do not always mean what even careful users think. <span class="cite-group">[<a class="cite" href="#ref-20">20</a>]</span></p>
+              <p>An alternative is the <strong>Bayesian credible interval</strong>. Bayesian statistics treats unknown quantities as having probability distributions that express our knowledge. Combine prior knowledge with the data, and you get a posterior distribution; a 95% credible interval is a range with 95% probability of containing the parameter, given the data and the prior. That is exactly the statement most people want to make, but it requires stating a prior, which some see as subjective. For simple problems with plenty of data and vague priors, the two intervals are often almost identical; they differ when data are scarce or prior knowledge is strong.</p>
+              <p><strong>Questions to think about:</strong> Is it meaningful to talk about the probability of a fixed but unknown number? If two scientists with different prior beliefs analyse the same data, should they reach the same interval?</p>
+            </div>
+          </section>
+          <section id="section-17">
+            <h2>17. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">William Sealy Gosset (“Student”)</td>
+                <td style="padding:0.6rem 0.8rem;">1876–1937<br>England / Ireland</td>
+                <td style="padding:0.6rem 0.8rem;">“The probable error of a mean” (1908)</td>
+                <td style="padding:0.6rem 0.8rem;">Discovered the t distribution while working for the Guinness brewery.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Ronald A. Fisher</td>
+                <td style="padding:0.6rem 0.8rem;">1890–1962<br>England</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Statistical Methods for Research Workers</em> (1925)</td>
+                <td style="padding:0.6rem 0.8rem;">Spread small-sample methods and t tables through science.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Edwin Bidwell Wilson</td>
+                <td style="padding:0.6rem 0.8rem;">1879–1964<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Wilson interval (1927)</td>
+                <td style="padding:0.6rem 0.8rem;">Proposed a reliable interval for a proportion.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Jerzy Neyman</td>
+                <td style="padding:0.6rem 0.8rem;">1894–1981<br>Poland / USA</td>
+                <td style="padding:0.6rem 0.8rem;">Theory of confidence intervals (1937)</td>
+                <td style="padding:0.6rem 0.8rem;">Defined confidence intervals and their long-run meaning.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Egon S. Pearson</td>
+                <td style="padding:0.6rem 0.8rem;">1895–1980<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Clopper–Pearson interval (1934)</td>
+                <td style="padding:0.6rem 0.8rem;">With Charles Clopper, gave the “exact” binomial interval.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Bernard L. Welch</td>
+                <td style="padding:0.6rem 0.8rem;">1911–1989<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Welch’s t-test (1947)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed how to compare means when variances differ.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Bradley Efron</td>
+                <td style="padding:0.6rem 0.8rem;">born 1938<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">The bootstrap (1979)</td>
+                <td style="padding:0.6rem 0.8rem;">Invented resampling as a general way to estimate uncertainty.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Jacob Cohen</td>
+                <td style="padding:0.6rem 0.8rem;">1923–1998<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Statistical Power Analysis</em> (1969; 2nd ed. 1988)</td>
+                <td style="padding:0.6rem 0.8rem;">Made power and effect sizes central to planning research.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-18">
+            <h2>18. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about estimation and confidence intervals.</p>
+            <figure class="fig" data-fig="fig-quiz-d4">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-19">
+            <h2>19. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Student [Gosset, W. S.].</strong> (1908). "The probable error of a mean." <em>Biometrika</em>, 6(1): 1–25.</li>
+              <li id="ref-2"><strong>Neyman, Jerzy.</strong> (1937). "Outline of a theory of statistical estimation based on the classical theory of probability." <em>Philosophical Transactions of the Royal Society A</em>, 236(767): 333–380.</li>
+              <li id="ref-3"><strong>Ziliak, Stephen T.</strong> (2008). "Guinnessometrics: the economic foundation of “Student’s” t." <em>Journal of Economic Perspectives</em>, 22(4): 199–216.</li>
+              <li id="ref-4"><strong>Fisher, R. A.</strong> (1925). <em>Statistical Methods for Research Workers</em>. Edinburgh: Oliver &amp; Boyd.</li>
+              <li id="ref-5"><strong>Brown, Lawrence D., Cai, T. Tony &amp; DasGupta, Anirban.</strong> (2001). "Interval estimation for a binomial proportion." <em>Statistical Science</em>, 16(2): 101–133.</li>
+              <li id="ref-6"><strong>Agresti, Alan &amp; Coull, Brent A.</strong> (1998). "Approximate is better than “exact” for interval estimation of binomial proportions." <em>The American Statistician</em>, 52(2): 119–126.</li>
+              <li id="ref-7"><strong>Wilson, Edwin B.</strong> (1927). "Probable inference, the law of succession, and statistical inference." <em>Journal of the American Statistical Association</em>, 22(158): 209–212.</li>
+              <li id="ref-8"><strong>Clopper, C. J. &amp; Pearson, E. S.</strong> (1934). "The use of confidence or fiducial limits illustrated in the case of the binomial." <em>Biometrika</em>, 26(4): 404–413.</li>
+              <li id="ref-9"><strong>Hanley, James A. &amp; Lippman-Hand, Abby.</strong> (1983). "If nothing goes wrong, is everything all right? Interpreting zero numerators." <em>JAMA</em>, 249(13): 1743–1745.</li>
+              <li id="ref-10"><strong>Welch, B. L.</strong> (1947). "The generalization of “Student’s” problem when several different population variances are involved." <em>Biometrika</em>, 34(1–2): 28–35.</li>
+              <li id="ref-11"><strong>Efron, Bradley.</strong> (1979). "Bootstrap methods: another look at the jackknife." <em>The Annals of Statistics</em>, 7(1): 1–26.</li>
+              <li id="ref-12"><strong>Efron, Bradley &amp; Tibshirani, Robert J.</strong> (1993). <em>An Introduction to the Bootstrap</em>. New York: Chapman &amp; Hall.</li>
+              <li id="ref-13"><strong>Cumming, Geoff &amp; Finch, Sue.</strong> (2005). "Inference by eye: confidence intervals and how to read pictures of data." <em>American Psychologist</em>, 60(2): 170–180.</li>
+              <li id="ref-14"><strong>Belia, Sarah, Fidler, Fiona, Williams, Jennifer &amp; Cumming, Geoff.</strong> (2005). "Researchers misunderstand confidence intervals and standard error bars." <em>Psychological Methods</em>, 10(4): 389–396.</li>
+              <li id="ref-15"><strong>Cumming, Geoff.</strong> (2014). "The new statistics: why and how." <em>Psychological Science</em>, 25(1): 7–29.</li>
+              <li id="ref-16"><strong>Cohen, Jacob.</strong> (1988). <em>Statistical Power Analysis for the Behavioral Sciences</em>. 2nd ed. Hillsdale, NJ: Lawrence Erlbaum.</li>
+              <li id="ref-17"><strong>Button, Katherine S., Ioannidis, John P. A., Mokrysz, Claire, Nosek, Brian A., Flint, Jonathan, Robinson, Emma S. J. &amp; Munafò, Marcus R.</strong> (2013). "Power failure: why small sample size undermines the reliability of neuroscience." <em>Nature Reviews Neuroscience</em>, 14(5): 365–376.</li>
+              <li id="ref-18"><strong>Hahn, Gerald J. &amp; Meeker, William Q.</strong> (1991). <em>Statistical Intervals: A Guide for Practitioners</em>. New York: Wiley.</li>
+              <li id="ref-19"><strong>Hoekstra, Rink, Morey, Richard D., Rouder, Jeffrey N. &amp; Wagenmakers, Eric-Jan.</strong> (2014). "Robust misinterpretation of confidence intervals." <em>Psychonomic Bulletin &amp; Review</em>, 21(5): 1157–1164.</li>
+              <li id="ref-20"><strong>Morey, Richard D., Hoekstra, Rink, Rouder, Jeffrey N., Lee, Michael D. &amp; Wagenmakers, Eric-Jan.</strong> (2016). "The fallacy of placing confidence in confidence intervals." <em>Psychonomic Bulletin &amp; Review</em>, 23(1): 103–123.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/making-sense-of-data.html">Making Sense of Data</a> (Part 4 of 9)</div>
+  <div class="series-banner-links">
+    <a href="measurement-error-and-uncertainty.html">← Part 3: Measurement, Error and Uncertainty: How Sure Are You?</a>
+    <span>Part 5 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/estimation-and-confidence-intervals.js"></script>
+</body>
+</html>

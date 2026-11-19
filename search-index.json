@@ -170,6 +170,23 @@
     "type": "tutorial"
   },
   {
+    "slug": "estimation-and-confidence-intervals",
+    "url": "articles/estimation-and-confidence-intervals.html",
+    "title": "Estimation: Confidence Intervals and How Many Measurements You Need",
+    "summary": "Populations and samples, unbiased estimators, confidence intervals, Student’s t, intervals for proportions, comparing groups, the bootstrap, error bars, sample size and power.",
+    "subject": "Science",
+    "tags": [
+      "statistics",
+      "confidence-intervals",
+      "experiments",
+      "data-analysis",
+      "sample-size",
+      "bootstrap"
+    ],
+    "date": "2026-11-19",
+    "type": "tutorial"
+  },
+  {
     "slug": "describing-data",
     "url": "articles/describing-data.html",
     "title": "Describing Data: Averages, Spread and the Shape of Your Measurements",

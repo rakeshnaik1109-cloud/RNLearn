@@ -1,5 +1,31 @@
 [
   {
+    "slug": "estimation-and-confidence-intervals",
+    "title": "Estimation: Confidence Intervals and How Many Measurements You Need",
+    "summary": "Populations and samples, unbiased estimators, confidence intervals, Student’s t, intervals for proportions, comparing groups, the bootstrap, error bars, sample size and power.",
+    "subject": "Science",
+    "tags": [
+      "statistics",
+      "confidence-intervals",
+      "experiments",
+      "data-analysis",
+      "sample-size",
+      "bootstrap"
+    ],
+    "date": "2026-11-19",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 20,
+    "series": {
+      "id": "making-sense-of-data",
+      "part": 4
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
     "slug": "measurement-error-and-uncertainty",
     "title": "Measurement, Error and Uncertainty: How Sure Are You?",
     "summary": "Random and systematic errors, accuracy and precision, Type A and Type B uncertainty, uncertainty budgets, propagation, weighted means, calibration curves and limits of detection.",
