@@ -3840,5 +3840,159 @@ window.RNLEARN_GLOSSARY = [
   [
    "REML"
   ]
+ ],
+ [
+  "Scatter plot",
+  "A graph with one variable on each axis and one point per observation, used to see relationships.",
+  [
+   "scatter plots"
+  ]
+ ],
+ [
+  "Covariance",
+  "A measure of how two variables vary together; positive when they tend to rise together. Its size depends on the units.",
+  []
+ ],
+ [
+  "Pearson correlation coefficient",
+  "r: a unit-free measure of linear association between two variables, from −1 to +1.",
+  [
+   "Pearson’s r",
+   "Pearson's r"
+  ]
+ ],
+ [
+  "Fisher z transformation",
+  "z = ½ ln((1 + r)/(1 − r)), which makes a correlation coefficient approximately normal for confidence intervals.",
+  [
+   "Fisher’s z transformation",
+   "Fisher's z transformation"
+  ]
+ ],
+ [
+  "Spearman’s rank correlation",
+  "Spearman’s ρ: the Pearson correlation of the ranks, measuring monotonic association.",
+  [
+   "Spearman's rank correlation",
+   "Spearman’s ρ",
+   "Spearman's ρ"
+  ]
+ ],
+ [
+  "Kendall’s tau",
+  "A rank correlation based on how many pairs of observations are in the same order on both variables.",
+  [
+   "Kendall's tau",
+   "Kendall’s τ",
+   "Kendall's τ"
+  ]
+ ],
+ [
+  "Anscombe’s quartet",
+  "Four data sets with identical summary statistics but very different scatter plots, showing why data must be plotted.",
+  [
+   "Anscombe's quartet"
+  ]
+ ],
+ [
+  "Method of least squares",
+  "Fitting a model by choosing parameters that minimise the sum of squared residuals.",
+  [
+   "least squares",
+   "least-squares"
+  ]
+ ],
+ [
+  "Confidence band",
+  "The region around a fitted line where the true line probably lies.",
+  [
+   "confidence bands"
+  ]
+ ],
+ [
+  "Prediction band",
+  "The region around a fitted line where a new single observation would probably fall; wider than the confidence band.",
+  [
+   "prediction bands"
+  ]
+ ],
+ [
+  "Regression to the mean",
+  "The tendency of extreme measurements to be followed by less extreme ones when two measurements are imperfectly correlated.",
+  []
+ ],
+ [
+  "Heteroscedasticity",
+  "Unequal scatter of the residuals, for example scatter that grows with the response.",
+  []
+ ],
+ [
+  "Leverage",
+  "In regression, how far a point lies from the others in x, and hence how strongly it can pull the fitted line.",
+  []
+ ],
+ [
+  "Cook’s distance",
+  "A measure of how much a regression fit would change if one observation were removed.",
+  [
+   "Cook's distance"
+  ]
+ ],
+ [
+  "Inverse prediction",
+  "Using a fitted calibration line backwards to estimate x from a measured y.",
+  []
+ ],
+ [
+  "Multiple regression",
+  "Regression with several predictor variables, each coefficient giving its effect with the others held fixed.",
+  []
+ ],
+ [
+  "Confounding variable",
+  "A variable related to both the presumed cause and the effect, which can create or hide an apparent relationship.",
+  [
+   "confounding variables",
+   "confounder",
+   "confounders"
+  ]
+ ],
+ [
+  "Collinearity",
+  "Strong correlation between predictor variables, which makes their separate effects hard to estimate.",
+  [
+   "multicollinearity"
+  ]
+ ],
+ [
+  "Reduced chi-square",
+  "χ² divided by the degrees of freedom of a weighted fit; close to 1 when the model and the uncertainties are right.",
+  []
+ ],
+ [
+  "Logistic regression",
+  "A model for binary outcomes in which the log-odds of the outcome is a linear function of the predictors.",
+  []
+ ],
+ [
+  "Log-odds",
+  "The natural logarithm of the odds p/(1 − p); also called the logit.",
+  [
+   "logit"
+  ]
+ ],
+ [
+  "Odds ratio",
+  "The factor by which the odds of an outcome are multiplied, for example per unit increase in a predictor.",
+  [
+   "odds ratios"
+  ]
+ ],
+ [
+  "Simpson’s paradox",
+  "An association that appears in combined data but reverses or disappears within groups.",
+  [
+   "Simpson's paradox"
+  ]
  ]
 ];

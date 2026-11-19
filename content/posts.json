@@ -1,5 +1,31 @@
 [
   {
+    "slug": "correlation-and-regression",
+    "title": "Correlation and Regression: Lines, Curves and Causes",
+    "summary": "Covariance, Pearson and rank correlation, Anscombe’s quartet, least squares, confidence and prediction bands, residuals and influence, curve fitting with χ², logistic regression and causation.",
+    "subject": "Science",
+    "tags": [
+      "statistics",
+      "regression",
+      "correlation",
+      "data-analysis",
+      "curve-fitting",
+      "experiments"
+    ],
+    "date": "2026-11-19",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 18,
+    "series": {
+      "id": "making-sense-of-data",
+      "part": 7
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
     "slug": "beyond-one-factor",
     "title": "Beyond One Factor: Interactions, Blocks, Repeated Measures and Mixed Models",
     "summary": "Factorial designs and interactions, two-way ANOVA, blocking, repeated measures and sphericity, ANCOVA, fixed and random effects, pseudoreplication and linear mixed models.",

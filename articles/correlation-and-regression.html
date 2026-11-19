@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Correlation and Regression: Lines, Curves and Causes — RNLearn</title>
+  <meta name="description" content="Covariance, Pearson and rank correlation, Anscombe’s quartet, least squares, confidence and prediction bands, residuals and influence, curve fitting with χ², logistic regression and causation.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/correlation-and-regression.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Correlation and Regression: Lines, Curves and Causes — RNLearn">
+  <meta property="og:description" content="Covariance, Pearson and rank correlation, Anscombe’s quartet, least squares, confidence and prediction bands, residuals and influence, curve fitting with χ², logistic regression and causation.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/correlation-and-regression.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Correlation and Regression: Lines, Curves and Causes — RNLearn">
+  <meta name="twitter:description" content="Covariance, Pearson and rank correlation, Anscombe’s quartet, least squares, confidence and prediction bands, residuals and influence, curve fitting with χ², logistic regression and causation.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Correlation and Regression: Lines, Curves and Causes",
+    "description": "Covariance, Pearson and rank correlation, Anscombe’s quartet, least squares, confidence and prediction bands, residuals and influence, curve fitting with χ², logistic regression and causation.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-19",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/correlation-and-regression.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/science.html" class="post-subject-tag" data-subject="science">Science</a>
+        </div>
+        <h1 class="article-title">Correlation and Regression: Lines, Curves and Causes</h1>
+        <p class="article-standfirst">
+          How do two quantities move together, and how can we predict one from the other? Here is correlation and regression, from Legendre’s comets to dose–response curves, with the checks that keep a fitted line honest.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-19">19 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>18 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/making-sense-of-data.html">Making Sense of Data</a> (Part 7 of 9)</div>
+  <div class="series-banner-links">
+    <a href="beyond-one-factor.html">← Part 6: Beyond One Factor: Interactions, Blocks, Repeated Measures and Mixed Models</a>
+    <span>Part 8 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. Do Two Things Go Together?</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Scatter Plots and Covariance</a></li>
+              <li><a class="toc-link" href="#section-4">4. The Correlation Coefficient</a></li>
+              <li><a class="toc-link" href="#section-5">5. When Correlation Misleads</a></li>
+              <li><a class="toc-link" href="#section-6">6. Fitting a Line: Least Squares</a></li>
+              <li><a class="toc-link" href="#section-7">7. How Good Is the Line?</a></li>
+              <li><a class="toc-link" href="#section-8">8. Checking the Fit</a></li>
+              <li><a class="toc-link" href="#section-9">9. Calibration and Inverse Prediction</a></li>
+              <li><a class="toc-link" href="#section-10">10. Multiple Regression and Confounding</a></li>
+              <li><a class="toc-link" href="#section-11">11. Fitting Curves: Weighted Least Squares and χ²</a></li>
+              <li><a class="toc-link" href="#section-12">12. Yes or No: Logistic Regression</a></li>
+              <li><a class="toc-link" href="#section-13">13. Worked Example: Hooke’s Law</a></li>
+              <li><a class="toc-link" href="#section-14">14. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-15">15. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-16">16. Philosophy Corner</a></li>
+              <li><a class="toc-link" href="#section-17">17. People in This Part</a></li>
+              <li><a class="toc-link" href="#section-18">18. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-19">19. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. Do Two Things Go Together?</h2>
+            <p>Does a spring stretch in proportion to the load? Does reaction rate rise with temperature? Does a sensor’s signal follow the concentration? Do taller parents have taller children? Many scientific questions are about the <strong>relationship</strong> between two quantities rather than a difference between groups.</p>
+            <p>Two tools answer them. <strong>Correlation</strong> measures how strongly two variables move together. <strong>Regression</strong> goes further: it fits an equation that predicts one variable from another, with uncertainties on its parameters. This part covers both, from scatter plots to least squares, from checking a fit to fitting curves with χ², and from straight lines to the logistic curves used for yes-or-no outcomes and in machine learning. It ends where every discussion of correlation must: with causation. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-reg-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. From comet orbits to influential points, 1805–1977.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Scatter Plots and Covariance</h2>
+            <p>The first step is always a <strong>scatter plot</strong>: one variable on each axis, one point per observation. It shows at a glance whether there is a relationship, whether it is straight or curved, whether the scatter is even, and whether any points stand apart.</p>
+            <p>A number that captures how two variables move together is the <strong>covariance</strong>:</p>
+            <p>$$\operatorname{cov}(x,y) = \frac{1}{n-1}\sum_{i}(x_i-\bar{x})(y_i-\bar{y}).$$</p>
+            <p>When points above the mean in x also tend to be above the mean in y, the products are mostly positive and the covariance is positive; when high x goes with low y, it is negative. But its size depends on the units: measure length in millimetres instead of metres and the covariance grows a thousandfold. Hence the need for a standardised measure.</p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. The Correlation Coefficient</h2>
+            <p>Dividing the covariance by both standard deviations gives <strong>Pearson’s correlation coefficient</strong>:</p>
+            <p>$$r = \frac{\operatorname{cov}(x,y)}{s_x s_y}.$$</p>
+            <p>It has no units and always lies between −1 and +1. The idea of “co-relation” came from Francis Galton in 1888, while studying the link between forearm length and height; Karl Pearson gave the formula used today in 1896. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>, <a class="cite" href="#ref-4">4</a>]</span> Its square, <strong>r²</strong>, is the share of the variation in y that a straight line in x accounts for.</p>
+            <figure class="fig" data-fig="fig-correlation">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Correlation and its uncertainty.</strong> Choose the true correlation and the sample size, then draw new samples and watch how much r varies.
+              </figcaption>
+            </figure>
+            <p>Like any statistic, r is uncertain. Its sampling distribution is skewed near ±1, so confidence intervals use <strong>Fisher’s z transformation</strong>, z = ½ ln((1 + r)/(1 − r)), which is approximately normal with standard error 1/√(n − 3). <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> With 20 points and r = 0.6, the 95% interval is 0.21 to 0.82 (p = 0.005); with r = 0.3, it is −0.16 to 0.66 (p = 0.20). Small samples pin down correlations very loosely.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. When Correlation Misleads</h2>
+            <p>The correlation coefficient measures only <em>linear</em> association, and only if no single point dominates. In 1973 Francis Anscombe made the point unforgettably with four small data sets that have the same means, variances, correlation (0.816) and regression line, but look nothing alike. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+            <figure class="fig" data-fig="fig-anscombe">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Anscombe’s quartet.</strong> First see only the numbers, then reveal the plots.
+              </figcaption>
+            </figure>
+            <p>Common traps:</p>
+            <ul>
+              <li><strong>Curved relationships.</strong> A perfect U-shape can have r = 0. Zero correlation does not mean no relationship.</li>
+              <li><strong>Outliers and influential points.</strong> One extreme point can create a strong correlation from nothing or destroy a real one.</li>
+              <li><strong>Restricted range.</strong> Sampling only a narrow range of x (only the best students, only room temperature) weakens the observed correlation.</li>
+              <li><strong>Mixing groups.</strong> Combining groups with different means can create or reverse a correlation (Section 16).</li>
+            </ul>
+            <p>When the relation is monotonic but not straight, or outliers are a worry, <strong>rank correlations</strong> help. <strong>Spearman’s ρ</strong> (1904) is Pearson’s r computed on the ranks; <strong>Kendall’s τ</strong> (1938) counts how many pairs of points are in the same order on both variables. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>, <a class="cite" href="#ref-8">8</a>]</span> For Anscombe’s data set C, the outlier pulls Pearson’s r down to 0.82, while Spearman’s ρ is 0.99.</p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Fitting a Line: Least Squares</h2>
+            <p>Regression fits a line y = a + bx to predict y from x. Which line is best? The standard answer is the one that minimises the sum of the squared <strong>residuals</strong>, the vertical distances between the points and the line. This is the <strong>method of least squares</strong>, published by Adrien-Marie Legendre in 1805 for calculating comet orbits. Carl Friedrich Gauss published it in 1809, connected it to the normal distribution of errors, and claimed to have used it since 1795, which started one of the famous priority disputes in science. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>, <a class="cite" href="#ref-10">10</a>, <a class="cite" href="#ref-11">11</a>]</span> The solution is</p>
+            <p>$$b = \frac{\sum (x_i-\bar{x})(y_i-\bar{y})}{\sum (x_i-\bar{x})^2}, \qquad a = \bar{y} - b\,\bar{x}.$$</p>
+            <figure class="fig" data-fig="fig-least-squares">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Least squares.</strong> The extension of a spring under seven loads. Adjust the slope and intercept to make the total area of the squared residuals as small as you can, then compare with the best fit and show its confidence and prediction bands.
+              </figcaption>
+            </figure>
+            <p>Least squares treats x as known exactly and puts all the error in y. Regress x on y instead and you get a different line. When both variables have comparable errors, methods such as Deming regression or weighted orthogonal fitting are more appropriate; when x is set by the experimenter (loads, concentrations, times), ordinary least squares is the right choice.</p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. How Good Is the Line?</h2>
+            <p>A fitted line comes with uncertainties. The residual standard deviation s = √(Σ residuals² / (n − 2)) measures the scatter around the line (n − 2, because two parameters were estimated). From it:</p>
+            <ul>
+              <li>The <strong>standard error of the slope</strong> is s/√Σ(x − x̄)². It shrinks with more points and with a wider spread of x. Spreading the x values widely is the cheapest way to pin down a slope.</li>
+              <li>A <strong>confidence interval</strong> for the slope is b ± t* × SE with n − 2 degrees of freedom. If it excludes zero, the relationship is statistically significant.</li>
+              <li>The <strong>confidence band</strong> shows where the true line probably lies; the <strong>prediction band</strong> shows where a new single measurement would probably fall. Both are narrowest at the mean of x and widen towards the ends, a warning against <strong>extrapolation</strong>.</li>
+              <li><strong>R²</strong> is the share of the variation in y explained by the line. A high R² does not prove the model is right (Anscombe’s data set B has R² = 0.67 for a curve), and a low R² does not make a significant slope unimportant.</li>
+            </ul>
+            <p>A subtle consequence of imperfect correlation is <strong>regression to the mean</strong>. Galton noticed in 1886 that children of very tall parents were, on average, tall but less extreme than their parents. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span> Whenever two measurements are imperfectly correlated, extreme values on one tend to be less extreme on the other. Samples selected for a high first reading will, on average, read lower next time even if nothing has changed, a trap for anyone who tests a treatment only on the worst cases.</p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Checking the Fit</h2>
+            <p>The assumptions of ordinary least squares are like those of ANOVA: the relationship is linear, the errors are independent, have constant variance, and are roughly normal. The best check is a <strong>residual plot</strong>: residuals against fitted values (or against x). A good fit leaves a shapeless band around zero. Patterns reveal problems:</p>
+            <ul>
+              <li>A <strong>curve</strong> means the model is missing a term: the relation is not straight.</li>
+              <li>A <strong>funnel</strong> means the scatter grows with the response (heteroscedasticity): use weights, transform the data (often a logarithm), or use robust standard errors.</li>
+              <li>A <strong>trend over time</strong> in residuals plotted in measurement order means the errors are not independent, perhaps because of drift.</li>
+            </ul>
+            <p>Some points matter more than others. A point far from the others in x has high <strong>leverage</strong>: it can pull the line towards itself. If its y value is also unusual, it is <strong>influential</strong>. <strong>Cook’s distance</strong> (1977) measures how much the whole fit would change if a point were removed; values above about 1 deserve a close look. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span> Never delete a point just because it is influential; find out why.</p>
+            <figure class="fig" data-fig="fig-residuals">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Reading residual plots.</strong> Four scenarios: a good fit, a curved relation, a funnel of increasing scatter, and a single influential point (orange).
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Calibration and Inverse Prediction</h2>
+            <p>Part 3 introduced calibration curves: fit the instrument’s signal against known standards, then read the line backwards to find the value of an unknown. This <strong>inverse prediction</strong> inherits the uncertainty of the fitted line. For an unknown with mean signal ȳ<sub>0</sub> from m replicate readings, the standard uncertainty of the estimated value x̂<sub>0</sub> = (ȳ<sub>0</sub> − a)/b is approximately <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+            <p>$$u(\hat{x}_0) \approx \frac{s}{|b|}\sqrt{\frac{1}{m} + \frac{1}{n} + \frac{(\bar{y}_0-\bar{y})^2}{b^2\sum (x_i-\bar{x})^2}}.$$</p>
+            <p>The three terms show how to make calibration more precise: more replicate readings of the unknown, more calibration standards, and an unknown near the middle of the calibration range.</p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Multiple Regression and Confounding</h2>
+            <p>Most responses depend on more than one thing. <strong>Multiple regression</strong> fits y = b<sub>0</sub> + b<sub>1</sub>x<sub>1</sub> + b<sub>2</sub>x<sub>2</sub> + …, still by least squares. Each coefficient b<sub>j</sub> is the expected change in y for a unit change in x<sub>j</sub> <em>with the other variables held fixed</em>. This is how regression adjusts for <strong>confounding</strong>: a third variable related to both x and y that can create, hide or reverse an apparent relationship. ANOVA and ANCOVA (Parts 5 and 6) are special cases of the same model.</p>
+            <p>Two cautions. When predictors are strongly correlated with each other (<strong>collinearity</strong>), their separate effects cannot be told apart and their coefficients become very uncertain. And adjusting only works for confounders you have measured; only randomisation (Part 9) protects against the ones you have not.</p>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Fitting Curves: Weighted Least Squares and χ²</h2>
+            <p>Many physical laws are not straight lines: exponential decay, Gaussian peaks, power laws, Michaelis–Menten kinetics. <strong>Nonlinear least squares</strong> fits such models directly by adjusting their parameters to minimise the squared residuals, usually with an iterative algorithm. It is better to fit the curve directly than to <strong>linearise</strong> it (for example by taking logarithms or reciprocals), because transformations distort the errors: a double-reciprocal plot gives enormous weight to the least precise points at low concentration.</p>
+            <p>When measurements have different uncertainties σ<sub>i</sub>, each residual should be weighted by 1/σ<sub>i</sub>², as in the weighted mean of Part 3. The quantity minimised is then <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+            <p>$$\chi^2 = \sum_i \left(\frac{y_i - f(x_i)}{\sigma_i}\right)^2.$$</p>
+            <p>If the model is right and the uncertainties are correct, χ² should be about equal to the number of degrees of freedom ν = n − (number of parameters), so the <strong>reduced chi-square</strong> χ²/ν should be close to 1. Much larger means the model does not fit or the uncertainties are underestimated; much smaller means the uncertainties are overestimated or the model is <strong>overfitting</strong>, chasing the noise.</p>
+            <figure class="fig" data-fig="fig-curve-fit">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. Underfitting and overfitting.</strong> Twelve measurements with known uncertainty σ = 1, generated from a quadratic curve. Change the degree of the fitted polynomial and watch χ²/ν and the curve.
+              </figcaption>
+            </figure>
+            <p>For these data, a straight line gives χ²/ν = 1.58 (p = 0.10), a quadratic 1.13 and a cubic 0.86. More parameters always reduce χ², so adding terms must be justified by the physics or by a fair comparison such as an information criterion or cross-validation, not by χ² alone.</p>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Yes or No: Logistic Regression</h2>
+            <p>Many outcomes are binary: a seed germinates or not, a cell responds or not, a component fails or survives. The quantity to model is the probability p of the outcome, which must stay between 0 and 1. A straight line cannot do that. <strong>Logistic regression</strong> models the <strong>log-odds</strong> as a straight line:</p>
+            <p>$$\ln\frac{p}{1-p} = \beta_0 + \beta_1 x, \qquad p = \frac{1}{1+e^{-(\beta_0+\beta_1 x)}}.$$</p>
+            <p>The S-shaped logistic curve dates back to Pierre-François Verhulst’s 1838 model of population growth; Joseph Berkson championed its use for dose–response experiments in 1944 and coined the word “logit”, and David Cox developed the regression framework in 1958. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>, <a class="cite" href="#ref-15">15</a>, <a class="cite" href="#ref-16">16</a>]</span> The coefficient β<sub>1</sub> has a neat interpretation: e<sup>β<sub>1</sub></sup> is the <strong>odds ratio</strong>, the factor by which the odds of the outcome are multiplied for each unit increase in x. Parameters are estimated by maximum likelihood rather than least squares.</p>
+            <figure class="fig" data-fig="fig-logistic">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 7. A dose–response curve.</strong> At each of six doses, 20 units are tested and the number responding is counted. Move the dose to read off the predicted probability, and compare with a straight-line fit.
+              </figcaption>
+            </figure>
+            <p>For these data the odds ratio is 3.0 per unit of dose (95% CI 2.1 to 4.3), and the dose giving a 50% response is 3.6. Logistic regression is also one of the most widely used classifiers in machine learning: it predicts a probability, and a threshold turns that into a yes or no. Our article on <a href="classification-and-regression-metrics.html">classification and regression metrics</a> explains how to judge such predictions.</p>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Worked Example: Hooke’s Law</h2>
+            <p>A spring is loaded with masses from 0 to 300 g in steps of 50 g, and its extension is measured with a ruler: 2.0, 4.2, 5.7, 7.2, 9.5, 11.0 and 13.8 mm.</p>
+            <ol>
+              <li><strong>Plot.</strong> The points lie close to a straight line; the residual plot shows no pattern.</li>
+              <li><strong>Fit.</strong> Slope b = 0.03771 mm/g with standard error 0.00144; intercept 1.97 ± 0.26 mm (the pointer did not start at zero, a systematic offset that the intercept absorbs). Residual SD 0.38 mm, R² = 0.993.</li>
+              <li><strong>Slope interval.</strong> With 5 degrees of freedom, t* = 2.571, so the 95% CI for the slope is <strong>0.0340 to 0.0414 mm/g</strong>.</li>
+              <li><strong>Physics.</strong> Hooke’s law, F = kx, with F = mg: k = g/b = 9.81 N/kg ÷ 0.03771 mm/g = <strong>260 ± 10 N/m</strong> (the relative uncertainty of k equals that of the slope, 3.8%).</li>
+              <li><strong>Prediction.</strong> At 175 g, the predicted extension is 8.57 mm. The 95% confidence interval for the mean extension is 8.19 to 8.95 mm; the 95% prediction interval for a single new measurement is 7.52 to 9.62 mm.</li>
+            </ol>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">Try it in Python: correlation, linear and logistic regression</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">import numpy as np
+import statsmodels.api as sm
+from scipy import stats
+
+m = np.array([0, 50, 100, 150, 200, 250, 300])
+x = np.array([2.0, 4.2, 5.7, 7.2, 9.5, 11.0, 13.8])
+print(stats.pearsonr(m, x))                  # r = 0.996
+
+fit = sm.OLS(x, sm.add_constant(m)).fit()
+print(fit.params, fit.bse, fit.conf_int())   # slope 0.03771 +/- 0.00144
+print(fit.get_prediction([[1, 175]]).summary_frame())   # bands at 175 g
+print("k =", 9.81 / fit.params[1], "N/m")    # about 260 N/m
+
+dose = np.array([1, 2, 3, 4, 5, 6]); resp = np.array([1, 3, 7, 12, 16, 19])
+glm = sm.GLM(np.c_[resp, 20 - resp], sm.add_constant(dose),
+             family=sm.families.Binomial()).fit()
+print(np.exp(glm.params[1]))                 # odds ratio about 3.0</code></pre>
+            </details>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Try It Yourself: Measure g from a Slope</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: a pendulum and a straight line</div>
+              <ol>
+                <li>Make a pendulum from a string and a small heavy weight. Measure its period T (time 20 swings and divide) for five or six lengths L between about 0.2 and 1.2 m.</li>
+                <li>The period of a simple pendulum is T = 2π√(L/g), so T² = (4π²/g) L: a straight line through the origin with slope 4π²/g.</li>
+                <li>Plot T² against L and fit a straight line. Is the intercept consistent with zero? (If not, perhaps you measured L to the wrong point on the bob.)</li>
+                <li>Calculate g = 4π²/slope and its uncertainty from the standard error of the slope. Compare with the single-length measurement of Part 3: which method gives the smaller uncertainty, and why does the intercept help protect against a systematic error in L?</li>
+              </ol>
+              <p>Plotting data so that the expected law becomes a straight line is a classic laboratory technique. It lets you check the form of the law by eye, from the residuals, as well as estimate its constant.</p>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Legend and Record</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: why is it called “regression”?</div>
+              <p><strong>The legend:</strong> “regression” is just an old word for fitting a line to data.</p>
+              <p><strong>The record:</strong> the word described a biological finding before it described a method. In 1886 Francis Galton compared the heights of 928 adult children with those of their parents and found that the children of unusually tall or short parents were, on average, closer to the population mean. He called this “regression towards mediocrity”. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span> The line he drew through the data to describe it became the “regression line”, and the name stuck to the whole method, even for relationships that have nothing to do with heredity or a return to the mean.</p>
+              <p><strong>The grain of truth:</strong> Galton’s “regression” was not a biological force pulling families towards the average. It is a statistical consequence of imperfect correlation, and it appears in any repeated measurement with random error, which is why regression to the mean is still a frequent source of mistaken conclusions.</p>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Philosophy Corner</h2>
+            <div class="callout callout-philosophy">
+              <div class="callout-header">Philosophy Corner: when does correlation mean causation?</div>
+              <p>Across countries, chocolate consumption per person is strongly correlated with the number of Nobel laureates per head of population (r = 0.79), as a tongue-in-cheek paper pointed out in 2012. <span class="cite-group">[<a class="cite" href="#ref-17">17</a>]</span> Few would conclude that chocolate makes Nobel laureates. Wealth, education and research spending are obvious common causes. Correlation can arise from causation in either direction, from a common cause, from selection, or from chance.</p>
+              <p>Grouping can even reverse an association. In 1973 the University of California, Berkeley, admitted about 44% of male applicants to graduate school but only 35% of female applicants. Department by department, however, women were admitted at similar or higher rates; women had applied more often to departments that admitted few applicants of either sex. <span class="cite-group">[<a class="cite" href="#ref-18">18</a>]</span> This reversal is known as <strong>Simpson’s paradox</strong>. <span class="cite-group">[<a class="cite" href="#ref-19">19</a>]</span></p>
+              <p>Experiments, by randomising the cause, break these alternative explanations. When experiments are impossible, as for smoking and lung cancer, scientists weigh the evidence. In 1965 Austin Bradford Hill listed considerations including the strength and consistency of the association, the correct order in time, a dose–response gradient, and plausibility. <span class="cite-group">[<a class="cite" href="#ref-20">20</a>]</span> They are not a checklist, but they are a guide to reasoning carefully from correlation towards cause.</p>
+              <p><strong>Questions to think about:</strong> Can a correlation ever prove causation on its own? If not, how did science establish that smoking causes lung cancer without randomised experiments on people?</p>
+            </div>
+          </section>
+          <section id="section-17">
+            <h2>17. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Adrien-Marie Legendre</td>
+                <td style="padding:0.6rem 0.8rem;">1752–1833<br>France</td>
+                <td style="padding:0.6rem 0.8rem;">Least squares (1805)</td>
+                <td style="padding:0.6rem 0.8rem;">First published the method of least squares.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Carl Friedrich Gauss</td>
+                <td style="padding:0.6rem 0.8rem;">1777–1855<br>Germany</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Theoria motus</em> (1809)</td>
+                <td style="padding:0.6rem 0.8rem;">Linked least squares to the normal distribution of errors.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Francis Galton</td>
+                <td style="padding:0.6rem 0.8rem;">1822–1911<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Regression (1886), co-relation (1888)</td>
+                <td style="padding:0.6rem 0.8rem;">Discovered regression to the mean and introduced correlation.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Karl Pearson</td>
+                <td style="padding:0.6rem 0.8rem;">1857–1936<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Correlation coefficient (1896)</td>
+                <td style="padding:0.6rem 0.8rem;">Gave the product-moment formula for r and founded mathematical statistics as a discipline.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Charles Spearman</td>
+                <td style="padding:0.6rem 0.8rem;">1863–1945<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Rank correlation (1904)</td>
+                <td style="padding:0.6rem 0.8rem;">Introduced correlation based on ranks.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Francis Anscombe</td>
+                <td style="padding:0.6rem 0.8rem;">1918–2001<br>England / USA</td>
+                <td style="padding:0.6rem 0.8rem;">Anscombe’s quartet (1973)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed why data must be plotted, not just summarised.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Austin Bradford Hill</td>
+                <td style="padding:0.6rem 0.8rem;">1897–1991<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Considerations for causation (1965)</td>
+                <td style="padding:0.6rem 0.8rem;">Set out how to reason from association to cause.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-18">
+            <h2>18. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about correlation and regression.</p>
+            <figure class="fig" data-fig="fig-quiz-d7">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-19">
+            <h2>19. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Draper, Norman R. &amp; Smith, Harry.</strong> (1998). <em>Applied Regression Analysis</em>. 3rd ed. New York: Wiley.</li>
+              <li id="ref-2"><strong>Bevington, Philip R. &amp; Robinson, D. Keith.</strong> (2003). <em>Data Reduction and Error Analysis for the Physical Sciences</em>. 3rd ed. New York: McGraw-Hill.</li>
+              <li id="ref-3"><strong>Galton, Francis.</strong> (1888). "Co-relations and their measurement, chiefly from anthropometric data." <em>Proceedings of the Royal Society of London</em>, 45: 135–145.</li>
+              <li id="ref-4"><strong>Pearson, Karl.</strong> (1896). "Mathematical contributions to the theory of evolution. III. Regression, heredity, and panmixia." <em>Philosophical Transactions of the Royal Society A</em>, 187: 253–318.</li>
+              <li id="ref-5"><strong>Fisher, R. A.</strong> (1921). "On the “probable error” of a coefficient of correlation deduced from a small sample." <em>Metron</em>, 1: 3–32.</li>
+              <li id="ref-6"><strong>Anscombe, F. J.</strong> (1973). "Graphs in statistical analysis." <em>The American Statistician</em>, 27(1): 17–21.</li>
+              <li id="ref-7"><strong>Spearman, C.</strong> (1904). "The proof and measurement of association between two things." <em>American Journal of Psychology</em>, 15(1): 72–101.</li>
+              <li id="ref-8"><strong>Kendall, M. G.</strong> (1938). "A new measure of rank correlation." <em>Biometrika</em>, 30(1–2): 81–93.</li>
+              <li id="ref-9"><strong>Legendre, Adrien-Marie.</strong> (1805). <em>Nouvelles méthodes pour la détermination des orbites des comètes</em>. Paris: Courcier.</li>
+              <li id="ref-10"><strong>Gauss, Carl Friedrich.</strong> (1809). <em>Theoria motus corporum coelestium in sectionibus conicis solem ambientium</em>. Hamburg: Perthes &amp; Besser.</li>
+              <li id="ref-11"><strong>Stigler, Stephen M.</strong> (1981). "Gauss and the invention of least squares." <em>The Annals of Statistics</em>, 9(3): 465–474.</li>
+              <li id="ref-12"><strong>Galton, Francis.</strong> (1886). "Regression towards mediocrity in hereditary stature." <em>Journal of the Anthropological Institute of Great Britain and Ireland</em>, 15: 246–263.</li>
+              <li id="ref-13"><strong>Cook, R. Dennis.</strong> (1977). "Detection of influential observation in linear regression." <em>Technometrics</em>, 19(1): 15–18.</li>
+              <li id="ref-14"><strong>Verhulst, Pierre-François.</strong> (1838). "Notice sur la loi que la population suit dans son accroissement." <em>Correspondance Mathématique et Physique</em>, 10: 113–121.</li>
+              <li id="ref-15"><strong>Berkson, Joseph.</strong> (1944). "Application of the logistic function to bio-assay." <em>Journal of the American Statistical Association</em>, 39(227): 357–365.</li>
+              <li id="ref-16"><strong>Cox, D. R.</strong> (1958). "The regression analysis of binary sequences." <em>Journal of the Royal Statistical Society: Series B</em>, 20(2): 215–242.</li>
+              <li id="ref-17"><strong>Messerli, Franz H.</strong> (2012). "Chocolate consumption, cognitive function, and Nobel laureates." <em>New England Journal of Medicine</em>, 367(16): 1562–1564.</li>
+              <li id="ref-18"><strong>Bickel, P. J., Hammel, E. A. &amp; O’Connell, J. W.</strong> (1975). "Sex bias in graduate admissions: data from Berkeley." <em>Science</em>, 187(4175): 398–404.</li>
+              <li id="ref-19"><strong>Simpson, E. H.</strong> (1951). "The interpretation of interaction in contingency tables." <em>Journal of the Royal Statistical Society: Series B</em>, 13(2): 238–241.</li>
+              <li id="ref-20"><strong>Hill, Austin Bradford.</strong> (1965). "The environment and disease: association or causation?" <em>Proceedings of the Royal Society of Medicine</em>, 58(5): 295–300.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/making-sense-of-data.html">Making Sense of Data</a> (Part 7 of 9)</div>
+  <div class="series-banner-links">
+    <a href="beyond-one-factor.html">← Part 6: Beyond One Factor: Interactions, Blocks, Repeated Measures and Mixed Models</a>
+    <span>Part 8 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/correlation-and-regression.js"></script>
+</body>
+</html>

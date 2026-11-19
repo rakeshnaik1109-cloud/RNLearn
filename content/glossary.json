@@ -3838,5 +3838,159 @@
     "forms": [
       "REML"
     ]
+  },
+  {
+    "term": "Scatter plot",
+    "definition": "A graph with one variable on each axis and one point per observation, used to see relationships.",
+    "forms": [
+      "scatter plots"
+    ]
+  },
+  {
+    "term": "Covariance",
+    "definition": "A measure of how two variables vary together; positive when they tend to rise together. Its size depends on the units.",
+    "forms": []
+  },
+  {
+    "term": "Pearson correlation coefficient",
+    "definition": "r: a unit-free measure of linear association between two variables, from −1 to +1.",
+    "forms": [
+      "Pearson’s r",
+      "Pearson's r"
+    ]
+  },
+  {
+    "term": "Fisher z transformation",
+    "definition": "z = ½ ln((1 + r)/(1 − r)), which makes a correlation coefficient approximately normal for confidence intervals.",
+    "forms": [
+      "Fisher’s z transformation",
+      "Fisher's z transformation"
+    ]
+  },
+  {
+    "term": "Spearman’s rank correlation",
+    "definition": "Spearman’s ρ: the Pearson correlation of the ranks, measuring monotonic association.",
+    "forms": [
+      "Spearman's rank correlation",
+      "Spearman’s ρ",
+      "Spearman's ρ"
+    ]
+  },
+  {
+    "term": "Kendall’s tau",
+    "definition": "A rank correlation based on how many pairs of observations are in the same order on both variables.",
+    "forms": [
+      "Kendall's tau",
+      "Kendall’s τ",
+      "Kendall's τ"
+    ]
+  },
+  {
+    "term": "Anscombe’s quartet",
+    "definition": "Four data sets with identical summary statistics but very different scatter plots, showing why data must be plotted.",
+    "forms": [
+      "Anscombe's quartet"
+    ]
+  },
+  {
+    "term": "Method of least squares",
+    "definition": "Fitting a model by choosing parameters that minimise the sum of squared residuals.",
+    "forms": [
+      "least squares",
+      "least-squares"
+    ]
+  },
+  {
+    "term": "Confidence band",
+    "definition": "The region around a fitted line where the true line probably lies.",
+    "forms": [
+      "confidence bands"
+    ]
+  },
+  {
+    "term": "Prediction band",
+    "definition": "The region around a fitted line where a new single observation would probably fall; wider than the confidence band.",
+    "forms": [
+      "prediction bands"
+    ]
+  },
+  {
+    "term": "Regression to the mean",
+    "definition": "The tendency of extreme measurements to be followed by less extreme ones when two measurements are imperfectly correlated.",
+    "forms": []
+  },
+  {
+    "term": "Heteroscedasticity",
+    "definition": "Unequal scatter of the residuals, for example scatter that grows with the response.",
+    "forms": []
+  },
+  {
+    "term": "Leverage",
+    "definition": "In regression, how far a point lies from the others in x, and hence how strongly it can pull the fitted line.",
+    "forms": []
+  },
+  {
+    "term": "Cook’s distance",
+    "definition": "A measure of how much a regression fit would change if one observation were removed.",
+    "forms": [
+      "Cook's distance"
+    ]
+  },
+  {
+    "term": "Inverse prediction",
+    "definition": "Using a fitted calibration line backwards to estimate x from a measured y.",
+    "forms": []
+  },
+  {
+    "term": "Multiple regression",
+    "definition": "Regression with several predictor variables, each coefficient giving its effect with the others held fixed.",
+    "forms": []
+  },
+  {
+    "term": "Confounding variable",
+    "definition": "A variable related to both the presumed cause and the effect, which can create or hide an apparent relationship.",
+    "forms": [
+      "confounding variables",
+      "confounder",
+      "confounders"
+    ]
+  },
+  {
+    "term": "Collinearity",
+    "definition": "Strong correlation between predictor variables, which makes their separate effects hard to estimate.",
+    "forms": [
+      "multicollinearity"
+    ]
+  },
+  {
+    "term": "Reduced chi-square",
+    "definition": "χ² divided by the degrees of freedom of a weighted fit; close to 1 when the model and the uncertainties are right.",
+    "forms": []
+  },
+  {
+    "term": "Logistic regression",
+    "definition": "A model for binary outcomes in which the log-odds of the outcome is a linear function of the predictors.",
+    "forms": []
+  },
+  {
+    "term": "Log-odds",
+    "definition": "The natural logarithm of the odds p/(1 − p); also called the logit.",
+    "forms": [
+      "logit"
+    ]
+  },
+  {
+    "term": "Odds ratio",
+    "definition": "The factor by which the odds of an outcome are multiplied, for example per unit increase in a predictor.",
+    "forms": [
+      "odds ratios"
+    ]
+  },
+  {
+    "term": "Simpson’s paradox",
+    "definition": "An association that appears in combined data but reverses or disappears within groups.",
+    "forms": [
+      "Simpson's paradox"
+    ]
   }
 ]
