@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Probability and Distributions: Dice, Photons and the Bell Curve — RNLearn</title>
+  <meta name="description" content="Probability rules, expected value, the binomial, Poisson, exponential, normal and log-normal distributions, z-scores, the law of large numbers, the central limit theorem and Q–Q plots.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/probability-and-distributions.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Probability and Distributions: Dice, Photons and the Bell Curve — RNLearn">
+  <meta property="og:description" content="Probability rules, expected value, the binomial, Poisson, exponential, normal and log-normal distributions, z-scores, the law of large numbers, the central limit theorem and Q–Q plots.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/probability-and-distributions.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Probability and Distributions: Dice, Photons and the Bell Curve — RNLearn">
+  <meta name="twitter:description" content="Probability rules, expected value, the binomial, Poisson, exponential, normal and log-normal distributions, z-scores, the law of large numbers, the central limit theorem and Q–Q plots.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Probability and Distributions: Dice, Photons and the Bell Curve",
+    "description": "Probability rules, expected value, the binomial, Poisson, exponential, normal and log-normal distributions, z-scores, the law of large numbers, the central limit theorem and Q–Q plots.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-12-03",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/probability-and-distributions.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/science.html" class="post-subject-tag" data-subject="science">Science</a>
+        </div>
+        <h1 class="article-title">Probability and Distributions: Dice, Photons and the Bell Curve</h1>
+        <p class="article-standfirst">
+          Single events are unpredictable, but their patterns are not. Here is the language of chance behind every experiment: probability, distributions, the bell curve, and why averaging works.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-12-03">3 December 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>21 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/making-sense-of-data.html">Making Sense of Data</a> (Part 2 of 9)</div>
+  <div class="series-banner-links">
+    <a href="describing-data.html">← Part 1: Describing Data: Averages, Spread and the Shape of Your Measurements</a>
+    <span>Part 3 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. Dice, Defects and Photons</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. What Is Probability?</a></li>
+              <li><a class="toc-link" href="#section-4">4. Random Variables and Expected Value</a></li>
+              <li><a class="toc-link" href="#section-5">5. Binomial and Poisson</a></li>
+              <li><a class="toc-link" href="#section-6">6. Continuous Distributions</a></li>
+              <li><a class="toc-link" href="#section-7">7. The Normal Distribution</a></li>
+              <li><a class="toc-link" href="#section-8">8. z-Scores and the 68–95–99.7 Rule</a></li>
+              <li><a class="toc-link" href="#section-9">9. Log-Normal and Other Skewed Data</a></li>
+              <li><a class="toc-link" href="#section-10">10. The Law of Large Numbers</a></li>
+              <li><a class="toc-link" href="#section-11">11. The Central Limit Theorem</a></li>
+              <li><a class="toc-link" href="#section-12">12. Is My Data Normal?</a></li>
+              <li><a class="toc-link" href="#section-13">13. Which Distribution When?</a></li>
+              <li><a class="toc-link" href="#section-14">14. Worked Examples</a></li>
+              <li><a class="toc-link" href="#section-15">15. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-16">16. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-17">17. Philosophy Corner</a></li>
+              <li><a class="toc-link" href="#section-18">18. People in This Part</a></li>
+              <li><a class="toc-link" href="#section-19">19. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-20">20. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. Dice, Defects and Photons</h2>
+            <p>Roll two dice, and you cannot say what the total will be. Roll them a thousand times, and you can say with confidence that about one roll in six will total 7. Measure a resistor twenty times, and each reading differs slightly; yet the readings form a predictable bell-shaped pattern. Point a detector at a faint light, and the number of photons it counts each millisecond jumps around, but in a way that follows a precise mathematical law.</p>
+            <p>This is the strange gift of <strong>probability</strong>: individual events are unpredictable, but their patterns are not. In Part 1 we described data we had already collected. In this part we learn the language of chance that explains where such data come from: probability rules, random variables and expected values, the handful of <strong>probability distributions</strong> (binomial, Poisson, uniform, exponential, normal, log-normal) that turn up again and again in experiments, z-scores, and two great theorems, the <strong>law of large numbers</strong> and the <strong>central limit theorem</strong>, which explain why averaging works and why the bell curve is everywhere. We finish with how to check whether your data are normal.</p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-prob-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. From gamblers' questions to modern foundations, c. 1564–1965.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. What Is Probability?</h2>
+            <p>Probability theory began at the gambling table. Around 1564 the Italian physician and gambler Gerolamo Cardano wrote the first analysis of dice games. In 1654 the French mathematicians Blaise Pascal and Pierre de Fermat, in a famous exchange of letters, solved the "problem of points": how to divide the stakes fairly when a game is interrupted before the end. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <p>A <strong>probability</strong> is a number between 0 (impossible) and 1 (certain) that measures how likely an event is. There are three common ways to arrive at one:</p>
+            <ul>
+              <li><strong>Classical:</strong> count equally likely outcomes. A die has six faces, so the chance of a 4 is 1/6.</li>
+              <li><strong>Frequency:</strong> the long-run share of times an event happens in repeated trials. If 2% of a factory's parts are defective over many years, the probability that the next part is defective is 0.02.</li>
+              <li><strong>Subjective (Bayesian):</strong> a degree of belief, updated by evidence. "There is a 70% chance this hypothesis is correct."</li>
+            </ul>
+            <p>Whatever their meaning, probabilities obey the same few rules, set out rigorously by Andrey Kolmogorov in 1933: <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span></p>
+            <ul>
+              <li><strong>Complement:</strong> P(not A) = 1 − P(A). The chance of not rolling a 6 is 5/6.</li>
+              <li><strong>Addition:</strong> for events that cannot happen together, P(A or B) = P(A) + P(B). In general, P(A or B) = P(A) + P(B) − P(A and B).</li>
+              <li><strong>Multiplication:</strong> for <strong>independent</strong> events (one does not affect the other), P(A and B) = P(A) × P(B). The chance of two sixes in a row is 1/6 × 1/6 = 1/36.</li>
+              <li><strong>Conditional probability:</strong> P(A given B) = P(A and B)/P(B). This is the rule behind Bayes' theorem and the base-rate trap in our tutorial on model metrics.</li>
+            </ul>
+            <p>With two dice there are 6 × 6 = 36 equally likely outcomes. Six of them add to 7 (1+6, 2+5, 3+4, 4+3, 5+2, 6+1), so P(total = 7) = 6/36 = 1/6, while only one gives 2 (1+1) and one gives 12 (6+6).</p>
+            <figure class="fig" data-fig="fig-two-dice">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Probability as long-run frequency.</strong> Roll two dice and compare the share of each total (bars) with the exact probability (black lines). The second panel tracks the share of 7s as the rolls pile up.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Random Variables and Expected Value</h2>
+            <p>A <strong>random variable</strong> is a number whose value depends on chance: the total of two dice, the number of defective parts in a batch, the voltage of a noisy sensor. Its <strong>probability distribution</strong> lists the possible values and how likely each is. <span class="cite-group">[<a class="cite" href="#ref-20">20</a>]</span></p>
+            <p>The <strong>expected value</strong> (or mean) of a random variable is the average value it would take over many repetitions, each possible value weighted by its probability:</p>
+            <p>$$E[X] = \sum_x x \, P(X = x).$$</p>
+            <p>For one fair die, E[X] = (1 + 2 + 3 + 4 + 5 + 6)/6 = <strong>3.5</strong>: a value that no single roll can produce, but the long-run average of many rolls. The idea goes back to Christiaan Huygens's 1657 book on games of chance, the first printed work on probability. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> The <strong>variance</strong> of a random variable is the expected squared distance from its mean, Var(X) = E[(X − E[X])²]; for a die it is 35/12 ≈ 2.92, so its standard deviation is about 1.71.</p>
+            <p>Two properties are used constantly. Expected values add: the expected total of two dice is 3.5 + 3.5 = 7. And for <em>independent</em> random variables, variances also add: the variance of the total of two dice is 2.92 + 2.92 = 5.83. This second fact, applied to many measurements, is why averaging reduces noise (section 11) and how uncertainties combine (Part 3).</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Counting Successes and Rare Events: Binomial and Poisson</h2>
+            <p><strong>The binomial distribution</strong> counts successes in a fixed number n of independent trials, each with the same probability p: heads in coin tosses, defective parts in a batch, patients who respond to a treatment. The probability of exactly k successes is</p>
+            <p>$$P(K = k) = \binom{n}{k} p^k (1-p)^{n-k},$$</p>
+            <p>with mean np and variance np(1 − p). Example: a machine makes parts with a 2% defect rate, and you inspect a batch of 50. The expected number of defects is 50 × 0.02 = 1. The probability of finding <em>no</em> defects is 0.98<sup>50</sup> ≈ <strong>36.4%</strong>, so a clean batch is quite likely even from a machine with a real defect problem. The chance of 3 or more defects is about 7.8%.</p>
+            <p><strong>The Poisson distribution</strong> describes counts of rare, independent events in a fixed interval of time or space: radioactive decays per second, photons arriving at a detector, typing errors per page, cars passing a point per minute. It has a single parameter λ, the average count:</p>
+            <p>$$P(K = k) = \frac{\lambda^k e^{-\lambda}}{k!}.$$</p>
+            <p>Siméon Denis Poisson described it in 1837, in a book on the probability of court verdicts. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span> Its most famous demonstration came in 1898, when Ladislaus Bortkiewicz showed that the number of soldiers killed by horse kicks each year in the corps of the Prussian army followed Poisson's formula with remarkable precision. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span> The Poisson distribution is also the binomial distribution in the limit of many trials and a small probability: for the defective parts, it gives 36.8% for no defects, very close to the exact 36.4%.</p>
+            <p>A special property of the Poisson distribution matters greatly in experiments: <strong>its variance equals its mean</strong>. If a detector counts on average λ photons, the counts fluctuate with standard deviation √λ. This "shot noise", analysed by Walter Schottky in 1918, means that the relative noise is 1/√λ: about 10% for 100 photons, 1% for 10,000. <span class="cite-group">[<a class="cite" href="#ref-21">21</a>]</span> To halve the relative noise of a counting measurement, you must count four times as long.</p>
+            <figure class="fig" data-fig="fig-poisson">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Counting rare events.</strong> Simulate a photon detector, or look at Bortkiewicz's horse-kick data, and compare with the Poisson prediction (red dots). Notice that the mean and variance come out almost equal.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Continuous Distributions</h2>
+            <p>For continuous quantities such as voltage or time, the probability of any exact value is zero; instead we speak of the probability of a value falling in a range. A <strong>probability density</strong> curve describes this: the probability of a range is the area under the curve over that range, and the total area is 1.</p>
+            <ul>
+              <li><strong>Uniform:</strong> all values in a range equally likely. Rounding errors are roughly uniform, which is why the standard uncertainty of a reading rounded to the nearest unit is 1/√12 ≈ 0.29 units (Part 3).</li>
+              <li><strong>Exponential:</strong> the waiting time until the next random event occurring at a constant rate λ. If customers arrive at 2 per minute, the chance of waiting more than a minute for the next is e<sup>−2</sup> ≈ 13.5%. It describes the time to radioactive decay, and is "memoryless": a radioactive atom that has survived a thousand years is no more likely to decay tomorrow than a new one. (The exponential decay of a large number of atoms is the half-life law behind the radioactive clocks of our article on the age of the Earth.)</li>
+              <li><strong>Normal</strong> and <strong>log-normal:</strong> sections 7 and 9.</li>
+            </ul>
+            <figure class="fig" data-fig="fig-dist-explorer">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. A distribution explorer.</strong> Choose a distribution, change its parameters, and shade the probability of values up to any point. The red dashed line marks the mean.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-7">
+            <h2>7. The Normal Distribution</h2>
+            <p>In 1733 Abraham de Moivre, a French Protestant refugee earning his living in London coffee houses by solving gamblers' problems, noticed that the binomial distribution for a large number of coin tosses is closely approximated by a smooth, symmetric, bell-shaped curve. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> In 1809 Carl Friedrich Gauss derived the same curve as the law of errors in astronomical measurements, and in 1810 Pierre-Simon Laplace showed why it appears so often (section 11). <span class="cite-group">[<a class="cite" href="#ref-6">6</a>, <a class="cite" href="#ref-7">7</a>, <a class="cite" href="#ref-15">15</a>]</span> It is now called the <strong>normal</strong> or <strong>Gaussian distribution</strong>:</p>
+            <p>$$f(x) = \frac{1}{\sigma\sqrt{2\pi}} \exp\!\left(-\frac{(x - \mu)^2}{2\sigma^2}\right).$$</p>
+            <p>It is completely described by two numbers: its mean μ (the centre, which is also the median and the mode) and its standard deviation σ (the width). It is symmetric, its tails fall off very fast, and it extends in principle to infinity in both directions, although values more than a few standard deviations from the mean are extremely rare. Measurement noise from many small independent sources, heights of adults of one sex, and, above all, averages of many measurements are approximately normal.</p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. z-Scores and the 68–95–99.7 Rule</h2>
+            <p>Every normal distribution has the same shape, just shifted and stretched. Converting a value to a <strong>z-score</strong>, the number of standard deviations it lies from the mean,</p>
+            <p>$$z = \frac{x - \mu}{\sigma},$$</p>
+            <p>turns any normal distribution into the <strong>standard normal</strong>, with mean 0 and SD 1, for which areas are tabulated (or computed). The most useful facts:</p>
+            <ul>
+              <li>About <strong>68%</strong> of values lie within 1 SD of the mean.</li>
+              <li>About <strong>95%</strong> within 2 SD (exactly 95% within 1.96 SD).</li>
+              <li>About <strong>99.7%</strong> within 3 SD.</li>
+            </ul>
+            <p>Examples. An exam has mean 65 and SD 8. A score of 78 has z = (78 − 65)/8 = 1.625; if the marks are roughly normal, that beats about <strong>95%</strong> of the class. Resistors from a batch have mean 100 Ω and SD 0.5 Ω; the share outside a tolerance of 99–101 Ω, that is beyond ±2 SD, is about <strong>4.6%</strong>.</p>
+            <figure class="fig" data-fig="fig-normal-z">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. The standard normal curve.</strong> Set two z-values to find the probability between them, or try the buttons for the 68–95–99.7 rule and the exam example.
+              </figcaption>
+            </figure>
+            <p>A caution: the 68–95–99.7 rule holds only for normal data. For skewed or heavy-tailed data, many more (or fewer) values may lie far from the mean, and rules such as "3 SD means an outlier" can be badly wrong.</p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Log-Normal and Other Skewed Data</h2>
+            <p>Many quantities in nature and the laboratory are not normal but <strong>right-skewed</strong>: particle sizes, concentrations of pollutants, bacterial counts, incomes, reaction times, survival times. Often these are quantities built up by <em>multiplying</em> many small random factors rather than adding them, and their logarithms are normally distributed. Such a distribution is called <strong>log-normal</strong>. Donald McAlister described it in 1879, at the suggestion of Francis Galton. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>, <a class="cite" href="#ref-17">17</a>]</span></p>
+            <p>For log-normal data, the median is the geometric mean (Part 1), and it is smaller than the arithmetic mean. A useful practical trick is to take logarithms, analyse the logs with the methods for normal data, and transform the results back. Many statistical methods in later parts assume normality; transforming skewed data is often better than applying those methods blindly.</p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. The Law of Large Numbers</h2>
+            <p>Why does the share of 7s in Figure 2 settle down to 1/6? In 1713, in his posthumously published <em>Ars Conjectandi</em>, Jacob Bernoulli proved the first version of the <strong>law of large numbers</strong>: as the number of independent trials grows, the observed frequency of an event becomes ever more likely to be close to its true probability, and the average of many measurements approaches the true mean. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> It is why casinos are profitable in the long run, why insurance works, and why repeating measurements helps.</p>
+            <p>The law is often misunderstood as a law of "balancing out". It is not. Independent events have no memory: after eight heads in a row, a fair coin is still 50:50 for the next toss. The law works not because tails catch up, but because the early excess of heads becomes an ever smaller fraction of an ever larger total. Expecting a reversal after a streak is the <strong>gambler's fallacy</strong>, one of the best-documented errors of human judgement. <span class="cite-group">[<a class="cite" href="#ref-18">18</a>]</span> In a famous story from the Monte Carlo casino in 1913, the ball is said to have landed on black 26 times in a row, while gamblers lost fortunes betting that red was "due".</p>
+          </section>
+
+          <section id="section-11">
+            <h2>11. The Central Limit Theorem</h2>
+            <p>Why is the normal distribution so common? The answer is one of the most remarkable results in mathematics, the <strong>central limit theorem</strong> (CLT), developed by Laplace from 1810: <span class="cite-group">[<a class="cite" href="#ref-7">7</a>, <a class="cite" href="#ref-15">15</a>]</span></p>
+            <div class="callout callout-key">
+              <div class="callout-header">The central limit theorem</div>
+              <p>The sum, or average, of many independent random values, from almost any distribution with a finite variance, is approximately normally distributed. The approximation improves as more values are added. The average of n values has the same mean μ as the individual values, and a standard deviation of σ/√n.</p>
+            </div>
+            <p>Measurement errors are usually the sum of many small independent disturbances (vibrations, temperature changes, electronic noise), so they tend to be normal. Heights depend on many genes and environmental factors. And, most importantly for experimenters, <strong>averages of repeated measurements are approximately normal even when the individual measurements are not</strong>. This is what makes confidence intervals and many tests in later parts work.</p>
+            <p>Francis Galton built a beautiful demonstration, the "quincunx" or Galton board: balls fall through rows of pins, bouncing left or right at each, and pile up in a bell shape at the bottom. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span></p>
+            <figure class="fig" data-fig="fig-galton">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. The Galton board.</strong> Drop balls through rows of pins. Each ball's final position is the sum of many random left–right bounces, and the pile builds up into a bell shape.
+              </figcaption>
+            </figure>
+            <p>The quantity σ/√n, the spread of averages, is called the <strong>standard error of the mean</strong>. It shows that averaging 4 measurements halves the noise, and averaging 100 cuts it to a tenth: the same square-root law as photon counting. The CLT machine below shows it in action, even for a strongly skewed population or one with two separate peaks.</p>
+            <figure class="fig" data-fig="fig-clt">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 7. The central limit theorem machine.</strong> Choose a population, then take many samples and plot the histogram of their averages. Increase the number of values in each sample and watch the histogram become normal and narrower.
+              </figcaption>
+            </figure>
+            <p>Two cautions. The CLT needs independent values and a finite variance; for some heavy-tailed distributions, averages never become normal. And "large enough n" depends on the population: for symmetric data a handful of values may suffice, for very skewed data dozens may be needed.</p>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Is My Data Normal?</h2>
+            <p>Many methods in this series assume normally distributed data or errors. How can you check?</p>
+            <ul>
+              <li><strong>Look at a histogram</strong>: roughly symmetric and bell-shaped? But with small samples, histograms are too noisy to judge.</li>
+              <li><strong>Use a Q–Q plot</strong> (quantile–quantile plot): plot the sorted data against the values a normal distribution would predict. Normal data lie close to a straight line, and the shape of any departure tells you how the data differ. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span></li>
+              <li><strong>Formal tests</strong>, such as the Shapiro–Wilk test (1965), test the null hypothesis that the data are normal. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span> Use them with care: with small samples they rarely detect real departures, and with large samples they flag tiny, harmless ones. A Q–Q plot plus knowledge of how the data arise is usually more useful. <span class="cite-group">[<a class="cite" href="#ref-22">22</a>]</span></li>
+            </ul>
+            <figure class="fig" data-fig="fig-qq">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 8. Reading a Q–Q plot.</strong> Compare the Q–Q plot patterns for normal, skewed, heavy-tailed, uniform and two-group data. Try small samples of normal data too: even genuinely normal data wander from the line.
+              </figcaption>
+            </figure>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">Try it in Python: distributions and normality checks</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">import numpy as np
+from scipy import stats
+
+print(stats.binom(50, 0.02).pmf(0))          # P(no defects) = 0.364
+print(stats.poisson(400).std())              # photon shot noise: 20.0
+print(stats.norm.cdf(1.625))                 # z = 1.625 -> 0.948
+print(2 * stats.norm.sf(2))                  # outside +/-2 SD: 0.0455
+rng = np.random.default_rng(1)
+x = rng.lognormal(mean=0, sigma=0.6, size=200)
+print(stats.shapiro(x).pvalue, stats.shapiro(np.log(x)).pvalue)  # skewed vs logged
+stats.probplot(x, dist="norm")               # data for a Q-Q plot (plot with matplotlib)</code></pre>
+            </details>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Which Distribution When?</h2>
+            <div class="table-container" style="overflow-x:auto; margin:1.2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.92rem; line-height:1.5;">
+                <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.5rem;">Distribution</th><th style="padding:0.5rem;">Describes</th><th style="padding:0.5rem;">Examples</th><th style="padding:0.5rem;">Mean; variance</th></tr></thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Binomial</td><td style="padding:0.5rem;">Successes in n independent trials</td><td style="padding:0.5rem;">Defects in a batch; patients cured</td><td style="padding:0.5rem;">np; np(1 − p)</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Poisson</td><td style="padding:0.5rem;">Rare independent events in an interval</td><td style="padding:0.5rem;">Photon counts; decays; arrivals</td><td style="padding:0.5rem;">λ; λ</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Uniform</td><td style="padding:0.5rem;">All values in a range equally likely</td><td style="padding:0.5rem;">Rounding errors; random phases</td><td style="padding:0.5rem;">(a + b)/2; (b − a)²/12</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Exponential</td><td style="padding:0.5rem;">Waiting time to a random event</td><td style="padding:0.5rem;">Decay times; failures; gaps between arrivals</td><td style="padding:0.5rem;">1/λ; 1/λ²</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Normal</td><td style="padding:0.5rem;">Sums of many small independent effects</td><td style="padding:0.5rem;">Measurement noise; averages; heights</td><td style="padding:0.5rem;">μ; σ²</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Log-normal</td><td style="padding:0.5rem;">Products of many small independent factors</td><td style="padding:0.5rem;">Particle sizes; concentrations; incomes</td><td style="padding:0.5rem;">Skewed; analyse the logarithms</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Later parts will add a few more that arise from analysing samples: the t-distribution (Part 4), the F-distribution (Part 5) and the chi-square distribution (Part 8).</p>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Worked Examples</h2>
+            <ol>
+              <li><strong>Acceptance sampling.</strong> A supplier claims a defect rate of 2%. You inspect 50 parts and find 3 defects. If the claim is true, the number of defects is binomial (n = 50, p = 0.02): the chance of 3 or more is 7.8%. Unusual, but not proof that the claim is false; finding 5 or more would happen only about 0.3% of the time.</li>
+              <li><strong>Photon counting.</strong> A spectrometer pixel collects 2,500 photons per exposure. Shot noise is √2,500 = 50 photons, a relative noise of 2%. To reach 0.5%, you need 40,000 photons: 16 times the exposure, or 16 exposures added together.</li>
+              <li><strong>Tolerance.</strong> Resistors have mean 100 Ω and SD 0.5 Ω, normally distributed. The share within ±1% (99–101 Ω) is 95.4%; within ±0.5% (99.5–100.5 Ω), only 68.3%.</li>
+              <li><strong>Averaging.</strong> A sensor reading has noise SD 0.20 V. Averaging 16 readings gives a standard error of 0.20/√16 = 0.05 V, whatever the shape of the noise distribution, as long as the readings are independent.</li>
+            </ol>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Try It Yourself: The Five-Dice Experiment</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: watch the central limit theorem</div>
+              <ol>
+                <li>Roll <strong>one</strong> die 30 times and draw a histogram of the results. It should be roughly flat: each face about 5 times.</li>
+                <li>Now roll <strong>five</strong> dice at once, 30 times, and record the <em>average</em> of the five each time.</li>
+                <li>Draw a histogram of the 30 averages, with bins of width 0.4.</li>
+              </ol>
+              <p>The single rolls are spread evenly from 1 to 6. The averages cluster around 3.5 in a rough bell shape, with a standard deviation near 1.71/√5 ≈ 0.76, much narrower than the 1.71 of a single die. You have just seen both the central limit theorem and the square-root law of averaging, with nothing but dice. (Combine results with friends to get a smoother picture.)</p>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Legend and Record</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: is everything normally distributed?</div>
+              <p><strong>The legend:</strong> data in nature follow the normal distribution; that is why it is called "normal".</p>
+              <p><strong>The record:</strong> many real data sets are noticeably non-normal. A 1989 survey of 440 large data sets of test scores and psychological measurements found that almost none passed tests of normality; most were skewed or had heavier tails. <span class="cite-group">[<a class="cite" href="#ref-23">23</a>]</span> The name "normal" came into use in the late nineteenth century and does not mean that other distributions are abnormal. The mathematician Henri Poincaré reported a remark by the physicist Gabriel Lippmann: "Everybody believes in the law of errors: the experimenters because they think it is a mathematical theorem, the mathematicians because they think it is an experimental fact." <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span></p>
+              <p><strong>The grain of truth:</strong> the central limit theorem guarantees that <em>averages</em> of many independent values are approximately normal, and many measurement errors behave that way. So methods based on normality often work well for means, even when individual values are not normal. But always look at your data.</p>
+            </div>
+          </section>
+
+          <section id="section-17">
+            <h2>17. Philosophy Corner</h2>
+            <div class="callout callout-philosophy">
+              <div class="callout-header">Philosophy Corner: what does "probability" mean?</div>
+              <p>When a weather forecast says "70% chance of rain tomorrow", what does it mean? There will only be one tomorrow. A <strong>frequentist</strong> interprets it as: on days with conditions like these, it rains 70% of the time. A <strong>Bayesian</strong> interprets it as a degree of belief, rationally updated by evidence. A <strong>propensity</strong> view treats probability as a physical tendency of the system itself, like the tendency of a radioactive atom to decay. <span class="cite-group">[<a class="cite" href="#ref-19">19</a>]</span></p>
+              <p>A deeper question lurks: is anything truly random? In 1814 Laplace imagined an intellect that knew the position and motion of every particle in the universe; for it, nothing would be uncertain, and probability would only measure our ignorance. A die is "random" only because we cannot track its motion precisely enough. But quantum mechanics suggests that some events, such as the moment a particular atom decays or which way a single photon goes at a beam splitter, may be random in a fundamental sense, with no hidden cause to discover.</p>
+              <p>Remarkably, the mathematics of probability works the same whichever interpretation you choose. The disagreements matter, though, for how we interpret statistical results, as we saw with p-values in our tutorial on null hypotheses, and as we will see again in later parts.</p>
+              <p><strong>Questions to think about:</strong> If you flip a coin and hide the result, is the probability of heads still 50%? Is a single-event probability, such as "the chance this patient recovers", meaningful?</p>
+            </div>
+          </section>
+          <section id="section-18">
+            <h2>18. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Gerolamo Cardano</td>
+                <td style="padding:0.6rem 0.8rem;">1501–1576<br>Italy</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Liber de ludo aleae</em></td>
+                <td style="padding:0.6rem 0.8rem;">Wrote the first analysis of games of chance.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Blaise Pascal &amp; Pierre de Fermat</td>
+                <td style="padding:0.6rem 0.8rem;">1623–1662 / 1607–1665<br>France</td>
+                <td style="padding:0.6rem 0.8rem;">Correspondence of 1654</td>
+                <td style="padding:0.6rem 0.8rem;">Founded probability theory by solving the problem of points.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Christiaan Huygens</td>
+                <td style="padding:0.6rem 0.8rem;">1629–1695<br>Netherlands</td>
+                <td style="padding:0.6rem 0.8rem;"><em>De ratiociniis in ludo aleae</em> (1657)</td>
+                <td style="padding:0.6rem 0.8rem;">Introduced expected value in the first printed book on probability.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Jacob Bernoulli</td>
+                <td style="padding:0.6rem 0.8rem;">1655–1705<br>Switzerland</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Ars Conjectandi</em> (1713)</td>
+                <td style="padding:0.6rem 0.8rem;">Proved the law of large numbers.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Abraham de Moivre</td>
+                <td style="padding:0.6rem 0.8rem;">1667–1754<br>France / England</td>
+                <td style="padding:0.6rem 0.8rem;"><em>The Doctrine of Chances</em></td>
+                <td style="padding:0.6rem 0.8rem;">Discovered the normal curve as an approximation to the binomial.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Pierre-Simon Laplace</td>
+                <td style="padding:0.6rem 0.8rem;">1749–1827<br>France</td>
+                <td style="padding:0.6rem 0.8rem;">Central limit theorem (from 1810)</td>
+                <td style="padding:0.6rem 0.8rem;">Explained why sums of errors are normally distributed.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Siméon Denis Poisson</td>
+                <td style="padding:0.6rem 0.8rem;">1781–1840<br>France</td>
+                <td style="padding:0.6rem 0.8rem;">Poisson distribution (1837)</td>
+                <td style="padding:0.6rem 0.8rem;">Described the distribution of rare events.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Ladislaus Bortkiewicz</td>
+                <td style="padding:0.6rem 0.8rem;">1868–1931<br>Russia / Germany</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Das Gesetz der kleinen Zahlen</em> (1898)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed horse-kick deaths follow the Poisson law.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Andrey Kolmogorov</td>
+                <td style="padding:0.6rem 0.8rem;">1903–1987<br>Russia</td>
+                <td style="padding:0.6rem 0.8rem;">Axioms of probability (1933)</td>
+                <td style="padding:0.6rem 0.8rem;">Put probability on a rigorous mathematical foundation.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-19">
+            <h2>19. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about probability and distributions.</p>
+            <figure class="fig" data-fig="fig-quiz-d2">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-20">
+            <h2>20. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Cardano, Gerolamo.</strong> (1663). <em>Liber de ludo aleae</em>. In <em>Opera omnia</em>, vol. 1. Lyon. (Written c. 1564.)</li>
+              <li id="ref-2"><strong>Devlin, Keith.</strong> (2008). <em>The Unfinished Game: Pascal, Fermat, and the Seventeenth-Century Letter that Made the World Modern</em>. New York: Basic Books.</li>
+              <li id="ref-3"><strong>Huygens, Christiaan.</strong> (1657). <em>De ratiociniis in ludo aleae</em>. In F. van Schooten, <em>Exercitationum mathematicarum libri quinque</em>. Leiden.</li>
+              <li id="ref-4"><strong>Bernoulli, Jacob.</strong> (1713). <em>Ars Conjectandi</em>. Basel: Thurneysen.</li>
+              <li id="ref-5"><strong>de Moivre, Abraham.</strong> (1738). <em>The Doctrine of Chances</em>. 2nd ed. London: H. Woodfall. (Includes his 1733 result on the normal approximation.)</li>
+              <li id="ref-6"><strong>Gauss, Carl Friedrich.</strong> (1809). <em>Theoria motus corporum coelestium in sectionibus conicis solem ambientium</em>. Hamburg: Perthes &amp; Besser.</li>
+              <li id="ref-7"><strong>Laplace, Pierre-Simon.</strong> (1812). <em>Théorie analytique des probabilités</em>. Paris: Courcier.</li>
+              <li id="ref-8"><strong>Poisson, Siméon Denis.</strong> (1837). <em>Recherches sur la probabilité des jugements en matière criminelle et en matière civile</em>. Paris: Bachelier.</li>
+              <li id="ref-9"><strong>Bortkiewicz, Ladislaus von.</strong> (1898). <em>Das Gesetz der kleinen Zahlen</em>. Leipzig: Teubner.</li>
+              <li id="ref-10"><strong>Galton, Francis.</strong> (1889). <em>Natural Inheritance</em>. London: Macmillan.</li>
+              <li id="ref-11"><strong>Kolmogorov, A. N.</strong> (1933). <em>Grundbegriffe der Wahrscheinlichkeitsrechnung</em>. Berlin: Springer.</li>
+              <li id="ref-12"><strong>Shapiro, S. S. &amp; Wilk, M. B.</strong> (1965). "An analysis of variance test for normality (complete samples)." <em>Biometrika</em>, 52(3–4): 591–611.</li>
+              <li id="ref-13"><strong>Wilk, M. B. &amp; Gnanadesikan, R.</strong> (1968). "Probability plotting methods for the analysis of data." <em>Biometrika</em>, 55(1): 1–17.</li>
+              <li id="ref-14"><strong>Poincaré, Henri.</strong> (1912). <em>Calcul des probabilités</em>. 2nd ed. Paris: Gauthier-Villars.</li>
+              <li id="ref-15"><strong>Stigler, Stephen M.</strong> (1986). <em>The History of Statistics: The Measurement of Uncertainty before 1900</em>. Cambridge, MA: Harvard University Press.</li>
+              <li id="ref-16"><strong>McAlister, Donald.</strong> (1879). "The law of the geometric mean." <em>Proceedings of the Royal Society of London</em>, 29: 367–376.</li>
+              <li id="ref-17"><strong>Limpert, Eckhard, Stahel, Werner A. &amp; Abbt, Markus.</strong> (2001). "Log-normal distributions across the sciences: keys and clues." <em>BioScience</em>, 51(5): 341–352.</li>
+              <li id="ref-18"><strong>Tversky, Amos &amp; Kahneman, Daniel.</strong> (1974). "Judgment under uncertainty: heuristics and biases." <em>Science</em>, 185(4157): 1124–1131.</li>
+              <li id="ref-19"><strong>Hacking, Ian.</strong> (1975). <em>The Emergence of Probability</em>. Cambridge: Cambridge University Press.</li>
+              <li id="ref-20"><strong>Feller, William.</strong> (1968). <em>An Introduction to Probability Theory and Its Applications</em>, vol. 1. 3rd ed. New York: Wiley.</li>
+              <li id="ref-21"><strong>Schottky, W.</strong> (1918). "Über spontane Stromschwankungen in verschiedenen Elektrizitätsleitern." <em>Annalen der Physik</em>, 57: 541–567.</li>
+              <li id="ref-22"><strong>Ghasemi, Asghar &amp; Zahediasl, Saleh.</strong> (2012). "Normality tests for statistical analysis: a guide for non-statisticians." <em>International Journal of Endocrinology and Metabolism</em>, 10(2): 486–489.</li>
+              <li id="ref-23"><strong>Micceri, Theodore.</strong> (1989). "The unicorn, the normal curve, and other improbable creatures." <em>Psychological Bulletin</em>, 105(1): 156–166.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/making-sense-of-data.html">Making Sense of Data</a> (Part 2 of 9)</div>
+  <div class="series-banner-links">
+    <a href="describing-data.html">← Part 1: Describing Data: Averages, Spread and the Shape of Your Measurements</a>
+    <span>Part 3 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/probability-and-distributions.js"></script>
+</body>
+</html>

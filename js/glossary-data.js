@@ -3324,5 +3324,103 @@ window.RNLEARN_GLOSSARY = [
   "Degrees of freedom",
   "The number of independent values that are free to vary in a calculation; for a sample variance, n − 1.",
   []
+ ],
+ [
+  "Random variable",
+  "A quantity whose value depends on chance, such as the total of two dice or a noisy measurement.",
+  [
+   "random variables"
+  ]
+ ],
+ [
+  "Probability distribution",
+  "A description of the possible values of a random variable and how likely each is.",
+  [
+   "probability distributions"
+  ]
+ ],
+ [
+  "Expected value",
+  "The long-run average of a random variable: each possible value weighted by its probability.",
+  []
+ ],
+ [
+  "Independent events",
+  "Events where the outcome of one does not change the probability of the other.",
+  []
+ ],
+ [
+  "Binomial distribution",
+  "The distribution of the number of successes in a fixed number of independent trials with the same probability.",
+  []
+ ],
+ [
+  "Poisson distribution",
+  "The distribution of counts of rare, independent events in a fixed interval; its mean and variance are equal.",
+  []
+ ],
+ [
+  "Exponential distribution",
+  "The distribution of waiting times between random events occurring at a constant rate.",
+  []
+ ],
+ [
+  "Normal distribution",
+  "The symmetric, bell-shaped distribution described by a mean and standard deviation; also called Gaussian.",
+  [
+   "Gaussian distribution",
+   "bell curve"
+  ]
+ ],
+ [
+  "Log-normal distribution",
+  "A right-skewed distribution whose logarithm is normally distributed.",
+  [
+   "log-normal"
+  ]
+ ],
+ [
+  "z-score",
+  "The number of standard deviations a value lies from the mean: z = (x − μ)/σ.",
+  [
+   "z-scores"
+  ]
+ ],
+ [
+  "Shot noise",
+  "Random fluctuations in counts of discrete particles such as photons or electrons, with standard deviation equal to the square root of the mean count.",
+  []
+ ],
+ [
+  "Law of large numbers",
+  "As the number of trials grows, observed frequencies and averages approach the true probabilities and means.",
+  []
+ ],
+ [
+  "Central limit theorem",
+  "Sums and averages of many independent random values are approximately normally distributed, whatever the original distribution.",
+  []
+ ],
+ [
+  "Standard error",
+  "The standard deviation of an estimate such as a sample mean; for the mean, σ/√n.",
+  [
+   "standard error of the mean"
+  ]
+ ],
+ [
+  "Q–Q plot",
+  "A plot of sorted data against the quantiles expected from a reference distribution, used to check normality.",
+  [
+   "Q-Q plot",
+   "quantile–quantile plot"
+  ]
+ ],
+ [
+  "Gambler’s fallacy",
+  "The mistaken belief that after a run of one outcome, the opposite outcome becomes more likely.",
+  [
+   "gambler's fallacy"
+  ]
  ]
 ];

@@ -3322,5 +3322,103 @@
     "term": "Degrees of freedom",
     "definition": "The number of independent values that are free to vary in a calculation; for a sample variance, n − 1.",
     "forms": []
+  },
+  {
+    "term": "Random variable",
+    "definition": "A quantity whose value depends on chance, such as the total of two dice or a noisy measurement.",
+    "forms": [
+      "random variables"
+    ]
+  },
+  {
+    "term": "Probability distribution",
+    "definition": "A description of the possible values of a random variable and how likely each is.",
+    "forms": [
+      "probability distributions"
+    ]
+  },
+  {
+    "term": "Expected value",
+    "definition": "The long-run average of a random variable: each possible value weighted by its probability.",
+    "forms": []
+  },
+  {
+    "term": "Independent events",
+    "definition": "Events where the outcome of one does not change the probability of the other.",
+    "forms": []
+  },
+  {
+    "term": "Binomial distribution",
+    "definition": "The distribution of the number of successes in a fixed number of independent trials with the same probability.",
+    "forms": []
+  },
+  {
+    "term": "Poisson distribution",
+    "definition": "The distribution of counts of rare, independent events in a fixed interval; its mean and variance are equal.",
+    "forms": []
+  },
+  {
+    "term": "Exponential distribution",
+    "definition": "The distribution of waiting times between random events occurring at a constant rate.",
+    "forms": []
+  },
+  {
+    "term": "Normal distribution",
+    "definition": "The symmetric, bell-shaped distribution described by a mean and standard deviation; also called Gaussian.",
+    "forms": [
+      "Gaussian distribution",
+      "bell curve"
+    ]
+  },
+  {
+    "term": "Log-normal distribution",
+    "definition": "A right-skewed distribution whose logarithm is normally distributed.",
+    "forms": [
+      "log-normal"
+    ]
+  },
+  {
+    "term": "z-score",
+    "definition": "The number of standard deviations a value lies from the mean: z = (x − μ)/σ.",
+    "forms": [
+      "z-scores"
+    ]
+  },
+  {
+    "term": "Shot noise",
+    "definition": "Random fluctuations in counts of discrete particles such as photons or electrons, with standard deviation equal to the square root of the mean count.",
+    "forms": []
+  },
+  {
+    "term": "Law of large numbers",
+    "definition": "As the number of trials grows, observed frequencies and averages approach the true probabilities and means.",
+    "forms": []
+  },
+  {
+    "term": "Central limit theorem",
+    "definition": "Sums and averages of many independent random values are approximately normally distributed, whatever the original distribution.",
+    "forms": []
+  },
+  {
+    "term": "Standard error",
+    "definition": "The standard deviation of an estimate such as a sample mean; for the mean, σ/√n.",
+    "forms": [
+      "standard error of the mean"
+    ]
+  },
+  {
+    "term": "Q–Q plot",
+    "definition": "A plot of sorted data against the quantiles expected from a reference distribution, used to check normality.",
+    "forms": [
+      "Q-Q plot",
+      "quantile–quantile plot"
+    ]
+  },
+  {
+    "term": "Gambler’s fallacy",
+    "definition": "The mistaken belief that after a run of one outcome, the opposite outcome becomes more likely.",
+    "forms": [
+      "gambler's fallacy"
+    ]
   }
 ]

@@ -49,6 +49,7 @@ A 12-part series on how people measured the Earth, the Moon, the Sun, light, gra
 ### New Series: *Making Sense of Data*
 A nine-part series on the statistics used in real experiments:
 1. **Part 1**: *Describing Data: Averages, Spread and the Shape of Your Measurements* (levels of measurement, histograms, mean/median/mode, geometric/harmonic/trimmed/weighted means, variance & SD with Bessel’s correction, MAD, CV, quartiles & box plots, skewness & kurtosis, Anscombe’s quartet, outliers, reporting)
+2. **Part 2**: *Probability and Distributions: Dice, Photons and the Bell Curve* (probability rules, expected value, binomial & Poisson with horse kicks and shot noise, uniform, exponential, normal & log-normal, z-scores, law of large numbers, central limit theorem, Q–Q plots)
 
 ### Standalone Tutorials
 - *Who's the Father? How a DNA Paternity Test Works* (DNA basics, inheritance, blood groups & the Chaplin case, Jeffreys, STRs, PCR & capillary electrophoresis, the paternity index & Bayes, tricky cases, Indian law)

@@ -1,5 +1,31 @@
 [
   {
+    "slug": "probability-and-distributions",
+    "title": "Probability and Distributions: Dice, Photons and the Bell Curve",
+    "summary": "Probability rules, expected value, the binomial, Poisson, exponential, normal and log-normal distributions, z-scores, the law of large numbers, the central limit theorem and Q–Q plots.",
+    "subject": "Science",
+    "tags": [
+      "statistics",
+      "probability",
+      "experiments",
+      "data-analysis",
+      "normal-distribution",
+      "central-limit-theorem"
+    ],
+    "date": "2026-12-03",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 21,
+    "series": {
+      "id": "making-sense-of-data",
+      "part": 2
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
     "slug": "describing-data",
     "title": "Describing Data: Averages, Spread and the Shape of Your Measurements",
     "summary": "Types of data, mean, median, mode and other averages, standard deviation, IQR and MAD, percentiles and box plots, skewness, outliers and honest reporting, with a full worked example.",
