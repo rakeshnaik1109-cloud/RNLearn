@@ -46,6 +46,10 @@ A 12-part series on how people measured the Earth, the Moon, the Sun, light, gra
 6. **Part 6**: *Weighing the Earth: Pendulums, a Scottish Mountain and Two Lead Balls* (Galileo, Newton’s guess, Schiehallion & Hutton’s contour lines, Cavendish, Poynting & Boys, the G problem, isostasy & GRACE, weighing the planets)
 7. **Part 7**: *How Old Is the Earth? Salt, Cooling Rocks and Radioactive Clocks* (Ussher, Hutton, Buffon, Halley & Joly’s salt clock, Kelvin & Perry, radioactivity, Boltwood & Holmes, Patterson’s meteorite, the oldest zircons)
 
+### New Series: *Making Sense of Data*
+A nine-part series on the statistics used in real experiments:
+1. **Part 1**: *Describing Data: Averages, Spread and the Shape of Your Measurements* (levels of measurement, histograms, mean/median/mode, geometric/harmonic/trimmed/weighted means, variance & SD with Bessel’s correction, MAD, CV, quartiles & box plots, skewness & kurtosis, Anscombe’s quartet, outliers, reporting)
+
 ### Standalone Tutorials
 - *Who's the Father? How a DNA Paternity Test Works* (DNA basics, inheritance, blood groups & the Chaplin case, Jeffreys, STRs, PCR & capillary electrophoresis, the paternity index & Bayes, tricky cases, Indian law)
 - *Why Is My Laser Spot Grainy? Speckle, Stray Fringes and Other Gremlins of the Optics Lab* (coherence, speckle statistics & reduction, accidental etalons, ghosts & back-reflections, dust rings & spatial filters, fibre noise, vibration, detector artifacts, speckle as a tool, troubleshooting guide)

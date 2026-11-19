@@ -3193,5 +3193,136 @@ window.RNLEARN_GLOSSARY = [
   [
    "ECE"
   ]
+ ],
+ [
+  "Descriptive statistics",
+  "Numbers and graphs that summarise a data set: its centre, spread and shape.",
+  []
+ ],
+ [
+  "Level of measurement",
+  "Whether data are nominal (unordered categories), ordinal (ordered categories), interval (equal gaps, arbitrary zero) or ratio (equal gaps, true zero).",
+  [
+   "levels of measurement"
+  ]
+ ],
+ [
+  "Arithmetic mean",
+  "The sum of the values divided by how many there are: the everyday average.",
+  []
+ ],
+ [
+  "Median",
+  "The middle value of sorted data; half the values lie below it. Robust to outliers.",
+  []
+ ],
+ [
+  "Geometric mean",
+  "The n-th root of the product of n values; the right average for growth rates and ratios.",
+  []
+ ],
+ [
+  "Harmonic mean",
+  "The reciprocal of the mean of reciprocals; the right average for rates over equal amounts.",
+  []
+ ],
+ [
+  "Trimmed mean",
+  "The mean after discarding a fixed share of the smallest and largest values.",
+  []
+ ],
+ [
+  "Weighted mean",
+  "A mean in which each value is multiplied by a weight reflecting its importance or precision.",
+  []
+ ],
+ [
+  "Standard deviation",
+  "The square root of the variance: roughly the typical distance of values from their mean.",
+  [
+   "standard deviations"
+  ]
+ ],
+ [
+  "Variance",
+  "The average squared deviation from the mean; for a sample, the sum of squared deviations divided by n − 1.",
+  []
+ ],
+ [
+  "Interquartile range",
+  "The range of the middle 50% of the data: third quartile minus first quartile (IQR).",
+  [
+   "IQR"
+  ]
+ ],
+ [
+  "Median absolute deviation",
+  "The median of the distances of the values from their median (MAD): a robust measure of spread.",
+  []
+ ],
+ [
+  "Coefficient of variation",
+  "The standard deviation divided by the mean, often as a percentage.",
+  []
+ ],
+ [
+  "Percentile",
+  "The value below which a given percentage of the data falls.",
+  [
+   "percentiles"
+  ]
+ ],
+ [
+  "Quartile",
+  "One of the three values that split sorted data into four equal parts.",
+  [
+   "quartiles"
+  ]
+ ],
+ [
+  "Box plot",
+  "A plot of the median, quartiles and range of data, with possible outliers marked individually.",
+  [
+   "box plots",
+   "box-and-whisker plot"
+  ]
+ ],
+ [
+  "Histogram",
+  "A bar chart of how many values fall into each of a series of equal intervals.",
+  [
+   "histograms"
+  ]
+ ],
+ [
+  "Skewness",
+  "A measure of how asymmetric a distribution is; positive when there is a long tail to the right.",
+  [
+   "skewed"
+  ]
+ ],
+ [
+  "Kurtosis",
+  "A measure of how heavy the tails of a distribution are, i.e. how prone it is to extreme values.",
+  []
+ ],
+ [
+  "Outlier",
+  "A value that lies unusually far from the rest of the data.",
+  [
+   "outliers"
+  ]
+ ],
+ [
+  "Bessel’s correction",
+  "Dividing by n − 1 instead of n when computing a sample variance, to remove its bias.",
+  [
+   "Bessel's correction"
+  ]
+ ],
+ [
+  "Degrees of freedom",
+  "The number of independent values that are free to vary in a calculation; for a sample variance, n − 1.",
+  []
  ]
 ];

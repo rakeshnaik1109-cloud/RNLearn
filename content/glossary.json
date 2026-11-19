@@ -3191,5 +3191,136 @@
     "forms": [
       "ECE"
     ]
+  },
+  {
+    "term": "Descriptive statistics",
+    "definition": "Numbers and graphs that summarise a data set: its centre, spread and shape.",
+    "forms": []
+  },
+  {
+    "term": "Level of measurement",
+    "definition": "Whether data are nominal (unordered categories), ordinal (ordered categories), interval (equal gaps, arbitrary zero) or ratio (equal gaps, true zero).",
+    "forms": [
+      "levels of measurement"
+    ]
+  },
+  {
+    "term": "Arithmetic mean",
+    "definition": "The sum of the values divided by how many there are: the everyday average.",
+    "forms": []
+  },
+  {
+    "term": "Median",
+    "definition": "The middle value of sorted data; half the values lie below it. Robust to outliers.",
+    "forms": []
+  },
+  {
+    "term": "Geometric mean",
+    "definition": "The n-th root of the product of n values; the right average for growth rates and ratios.",
+    "forms": []
+  },
+  {
+    "term": "Harmonic mean",
+    "definition": "The reciprocal of the mean of reciprocals; the right average for rates over equal amounts.",
+    "forms": []
+  },
+  {
+    "term": "Trimmed mean",
+    "definition": "The mean after discarding a fixed share of the smallest and largest values.",
+    "forms": []
+  },
+  {
+    "term": "Weighted mean",
+    "definition": "A mean in which each value is multiplied by a weight reflecting its importance or precision.",
+    "forms": []
+  },
+  {
+    "term": "Standard deviation",
+    "definition": "The square root of the variance: roughly the typical distance of values from their mean.",
+    "forms": [
+      "standard deviations"
+    ]
+  },
+  {
+    "term": "Variance",
+    "definition": "The average squared deviation from the mean; for a sample, the sum of squared deviations divided by n − 1.",
+    "forms": []
+  },
+  {
+    "term": "Interquartile range",
+    "definition": "The range of the middle 50% of the data: third quartile minus first quartile (IQR).",
+    "forms": [
+      "IQR"
+    ]
+  },
+  {
+    "term": "Median absolute deviation",
+    "definition": "The median of the distances of the values from their median (MAD): a robust measure of spread.",
+    "forms": []
+  },
+  {
+    "term": "Coefficient of variation",
+    "definition": "The standard deviation divided by the mean, often as a percentage.",
+    "forms": []
+  },
+  {
+    "term": "Percentile",
+    "definition": "The value below which a given percentage of the data falls.",
+    "forms": [
+      "percentiles"
+    ]
+  },
+  {
+    "term": "Quartile",
+    "definition": "One of the three values that split sorted data into four equal parts.",
+    "forms": [
+      "quartiles"
+    ]
+  },
+  {
+    "term": "Box plot",
+    "definition": "A plot of the median, quartiles and range of data, with possible outliers marked individually.",
+    "forms": [
+      "box plots",
+      "box-and-whisker plot"
+    ]
+  },
+  {
+    "term": "Histogram",
+    "definition": "A bar chart of how many values fall into each of a series of equal intervals.",
+    "forms": [
+      "histograms"
+    ]
+  },
+  {
+    "term": "Skewness",
+    "definition": "A measure of how asymmetric a distribution is; positive when there is a long tail to the right.",
+    "forms": [
+      "skewed"
+    ]
+  },
+  {
+    "term": "Kurtosis",
+    "definition": "A measure of how heavy the tails of a distribution are, i.e. how prone it is to extreme values.",
+    "forms": []
+  },
+  {
+    "term": "Outlier",
+    "definition": "A value that lies unusually far from the rest of the data.",
+    "forms": [
+      "outliers"
+    ]
+  },
+  {
+    "term": "Bessel’s correction",
+    "definition": "Dividing by n − 1 instead of n when computing a sample variance, to remove its bias.",
+    "forms": [
+      "Bessel's correction"
+    ]
+  },
+  {
+    "term": "Degrees of freedom",
+    "definition": "The number of independent values that are free to vary in a calculation; for a sample variance, n − 1.",
+    "forms": []
   }
 ]

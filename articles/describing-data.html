@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Describing Data: Averages, Spread and the Shape of Your Measurements — RNLearn</title>
+  <meta name="description" content="Types of data, mean, median, mode and other averages, standard deviation, IQR and MAD, percentiles and box plots, skewness, outliers and honest reporting, with a full worked example.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/describing-data.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Describing Data: Averages, Spread and the Shape of Your Measurements — RNLearn">
+  <meta property="og:description" content="Types of data, mean, median, mode and other averages, standard deviation, IQR and MAD, percentiles and box plots, skewness, outliers and honest reporting, with a full worked example.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/describing-data.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Describing Data: Averages, Spread and the Shape of Your Measurements — RNLearn">
+  <meta name="twitter:description" content="Types of data, mean, median, mode and other averages, standard deviation, IQR and MAD, percentiles and box plots, skewness, outliers and honest reporting, with a full worked example.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Describing Data: Averages, Spread and the Shape of Your Measurements",
+    "description": "Types of data, mean, median, mode and other averages, standard deviation, IQR and MAD, percentiles and box plots, skewness, outliers and honest reporting, with a full worked example.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-12-02",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/describing-data.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/science.html" class="post-subject-tag" data-subject="science">Science</a>
+        </div>
+        <h1 class="article-title">Describing Data: Averages, Spread and the Shape of Your Measurements</h1>
+        <p class="article-standfirst">
+          Every experiment ends in a list of numbers. Before any test or model, you need to describe them: where the middle is, how much they vary, what shape they make, and which values look wrong.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-12-02">2 December 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>24 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/making-sense-of-data.html">Making Sense of Data</a> (Part 1 of 9)</div>
+  <div class="series-banner-links">
+    <span>First part</span>
+    <span>Part 2 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. Twenty Resistors</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. What Kind of Data Is It?</a></li>
+              <li><a class="toc-link" href="#section-4">4. Look Before You Calculate</a></li>
+              <li><a class="toc-link" href="#section-5">5. The Mean</a></li>
+              <li><a class="toc-link" href="#section-6">6. The Median</a></li>
+              <li><a class="toc-link" href="#section-7">7. The Mode</a></li>
+              <li><a class="toc-link" href="#section-8">8. Other Averages</a></li>
+              <li><a class="toc-link" href="#section-9">9. Which Average When?</a></li>
+              <li><a class="toc-link" href="#section-10">10. Measuring Spread</a></li>
+              <li><a class="toc-link" href="#section-11">11. Percentiles, Quartiles and Box Plots</a></li>
+              <li><a class="toc-link" href="#section-12">12. Shape: Skewness, Kurtosis and Why You Must Plot</a></li>
+              <li><a class="toc-link" href="#section-13">13. Outliers</a></li>
+              <li><a class="toc-link" href="#section-14">14. Reporting Descriptive Statistics</a></li>
+              <li><a class="toc-link" href="#section-15">15. Worked Example: The Twenty Resistors</a></li>
+              <li><a class="toc-link" href="#section-16">16. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-17">17. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-18">18. Philosophy Corner</a></li>
+              <li><a class="toc-link" href="#section-19">19. People in This Part</a></li>
+              <li><a class="toc-link" href="#section-20">20. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-21">21. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. Twenty Resistors</h2>
+            <p>A technician measures twenty resistors from a batch labelled "100 Ω". The meter shows 99.2, 100.4, 99.8, 100.1, 99.5, 100.9, 100.0, 99.7, 100.3, 99.9, 100.2, 99.6, 100.6, 99.4, 100.0, 100.8, 99.3, 100.5, 103.9 and 99.8 Ω. Is the batch good? What is a "typical" resistor? How much do they vary? Is that 103.9 a faulty part, a misread meter, or just bad luck?</p>
+            <p>Every experiment produces a list of numbers like this, and the first job is always the same: to <strong>describe</strong> it. Where is the middle? How spread out are the values? What shape do they make? Are there any strange ones? This is <strong>descriptive statistics</strong>, and it is the foundation for everything else in this series. It is also where many mistakes begin: the wrong average, a misleading spread, an outlier deleted without reason, or a summary that hides what the data really look like.</p>
+            <p>This first part of <em>Making Sense of Data</em> covers the types of data, the many kinds of average (mean, median, mode and some lesser-known cousins), the measures of spread (range, standard deviation, interquartile range and more), percentiles and box plots, the shape of distributions, outliers, and how to report it all honestly. People have been summarising data this way since John Graunt turned London's weekly death records into tables in 1662. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span> We will return to the twenty resistors at the end, with all the tools in hand.</p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-data-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. From death records to the Datasaurus, 1662–2017.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. What Kind of Data Is It?</h2>
+            <p>Before calculating anything, ask what kind of numbers (or labels) you have. In 1946 the psychologist Stanley Smith Stevens proposed four <strong>levels of measurement</strong>, still widely used: <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span></p>
+            <ul>
+              <li><strong>Nominal:</strong> categories with no order, such as blood group, colour or species. You can count them and find the most common one, nothing more.</li>
+              <li><strong>Ordinal:</strong> categories with an order but unequal or unknown gaps, such as star ratings, pain scores or exam grades. Medians and percentiles make sense; means are a rough approximation at best.</li>
+              <li><strong>Interval:</strong> numbers with equal gaps but an arbitrary zero, such as temperature in °C or calendar years. Differences and means make sense; ratios do not.</li>
+              <li><strong>Ratio:</strong> numbers with equal gaps and a true zero, such as mass, length, time, temperature in kelvin, or counts. Everything is allowed, including saying "twice as much".</li>
+            </ul>
+            <p>A second distinction is between <strong>discrete</strong> data, which can only take separate values (number of defects, number of photons), and <strong>continuous</strong> data, which can take any value in a range (voltage, length), limited only by the measuring instrument.</p>
+            <figure class="fig" data-fig="fig-data-types">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. What kind of data is it?</strong> Choose a variable to see its level of measurement and which summaries make sense.
+              </figcaption>
+            </figure>
+            <p>The classification is a guide, not a law: statisticians still argue about whether averaging ordinal scores is acceptable. But it prevents the worst mistakes, like averaging PIN codes or saying that 20 °C is twice as warm as 10 °C.</p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Look Before You Calculate</h2>
+            <p>The single most useful habit in data analysis is to <strong>plot the data before summarising it</strong>. For a list of numbers, the simplest plots are:</p>
+            <ul>
+              <li>A <strong>dot plot</strong>: one dot per value along a line. Perfect for small data sets, because nothing is hidden.</li>
+              <li>A <strong>histogram</strong>: divide the range into equal intervals ("bins") and draw a bar for how many values fall in each. It shows the shape of larger data sets.</li>
+              <li>A <strong>stem-and-leaf plot</strong>: a text version of a histogram that keeps every digit, popularised by John Tukey. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span></li>
+            </ul>
+            <p>A histogram's appearance depends on the bin width. Too few bins hide important features; too many turn random noise into fake peaks. Rules of thumb help: Herbert Sturges suggested in 1926 about log₂(n) + 1 bins, and David Freedman and Persi Diaconis in 1981 proposed a bin width based on the spread of the middle half of the data, which works better for skewed data. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>, <a class="cite" href="#ref-12">12</a>]</span> In practice, try a few widths and see which features persist.</p>
+            <figure class="fig" data-fig="fig-histogram-bins">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. The same data, different bins.</strong> Choose a data set and change the number of bins. Do the two peaks in the heights survive? The ticks below the axis show every individual measurement.
+              </figcaption>
+            </figure>
+            <p>Good pictures of data have a long history. In 1858 Florence Nightingale used her "rose" diagrams to show the British government that most soldiers in the Crimean War died of preventable disease rather than wounds, and to win reforms in army hospitals. <span class="cite-group">[<a class="cite" href="#ref-21">21</a>]</span></p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. The Mean</h2>
+            <p>The <strong>arithmetic mean</strong>, the everyday "average", adds up all the values and divides by how many there are:</p>
+            <p>$$\bar{x} = \frac{x_1 + x_2 + \dots + x_n}{n} = \frac{1}{n}\sum_{i=1}^{n} x_i.$$</p>
+            <p>For the numbers 4, 7, 7, 9 and 13, the mean is 40/5 = 8. The mean has a physical picture: it is the balance point. If each value were a weight on a ruler, the ruler would balance at the mean. It uses every value, which is its strength (it captures all the information) and its weakness (one wild value can drag it far away).</p>
+            <p>Why average repeated measurements at all? Astronomers had long done it, but it was not obvious that it helped: some argued that one careful observation was as good as the average of many. In 1755 the mathematician Thomas Simpson gave a mathematical argument that the mean of several observations is less likely to be badly wrong than a single one. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span> In 1809 Carl Friedrich Gauss went further, connecting the mean with the bell-shaped "normal" distribution of measurement errors that we will meet in Part 2. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> The mean also has a precise mathematical property: it is the value that makes the sum of <em>squared</em> deviations as small as possible, the root of the "least squares" method.</p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. The Median</h2>
+            <p>The <strong>median</strong> is the middle value when the data are sorted. For 4, 7, 7, 9, 13 the median is 7. With an even number of values, it is halfway between the two middle ones: for 4, 7, 9, 13 it is (7 + 9)/2 = 8. Half the values lie below the median and half above.</p>
+            <p>The median's great virtue is <strong>robustness</strong>. Change the 13 to 1,300, and the mean leaps from 8 to 265.4, while the median stays at 7. Statisticians describe this with the <strong>breakdown point</strong>: the share of the data that can be made arbitrarily wrong before the estimate becomes arbitrarily wrong. For the mean, a single value is enough (breakdown point 0%); the median survives until half the data are corrupted (breakdown point 50%). <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span> That is why economists report median income and median house prices, where a few billionaires or mansions would distort the mean. The median minimises the sum of <em>absolute</em> deviations.</p>
+            <figure class="fig" data-fig="fig-mean-median">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Mean, median and mode.</strong> Drag the largest value to the right and watch which average follows it. Then switch to two separate groups.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-7">
+            <h2>7. The Mode</h2>
+            <p>The <strong>mode</strong> is the most frequent value. For 4, 7, 7, 9, 13 it is 7. It is the only average that works for nominal data ("the most common blood group is O"), and it is what a shop cares about when stocking shoe sizes. For continuous data, where no two values may be exactly equal, the mode refers to the highest peak of the histogram.</p>
+            <p>A distribution can have one peak (<strong>unimodal</strong>), two (<strong>bimodal</strong>) or more. Bimodality is often a clue that two different groups have been mixed together: men and women, two batches from different machines, healthy and diseased samples. As Figure 4 shows, the mean and median of a bimodal distribution can fall in the empty gap between the peaks and describe no actual case at all.</p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Other Averages</h2>
+            <p>The arithmetic mean is not always the right way to average. Several others are used in real work:</p>
+            <ul>
+              <li><strong>Weighted mean:</strong> when values have different importance or come from groups of different size, multiply each by its weight $w_i$: $\bar{x}_w = \sum w_i x_i / \sum w_i$. Course grades, and combining measurements with different uncertainties (Part 3), use weighted means.</li>
+              <li><strong>Trimmed mean:</strong> discard a fixed share of the smallest and largest values, say 10% at each end, and average the rest. A compromise between the mean and the median, used in some sports judging and economic statistics.</li>
+              <li><strong>Geometric mean:</strong> the n-th root of the product of n values, $\sqrt[n]{x_1 x_2 \cdots x_n}$. The right average for growth rates, ratios and quantities that multiply, and for data spread over orders of magnitude, such as bacterial counts or concentrations.</li>
+              <li><strong>Harmonic mean:</strong> the reciprocal of the average of reciprocals, $n / \sum (1/x_i)$. The right average for rates over equal amounts, such as speeds over equal distances. (The F1 score in our metrics tutorial is a harmonic mean.)</li>
+              <li><strong>Root mean square (RMS):</strong> the square root of the mean of the squares, used for alternating currents and noise.</li>
+            </ul>
+            <p>For positive numbers that are not all equal, these always come in the same order: harmonic &lt; geometric &lt; arithmetic &lt; RMS.</p>
+            <figure class="fig" data-fig="fig-which-average">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Which average?</strong> Five everyday situations, each needing a different average. Check the "check" rows to see why the right one is right.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Which Average When?</h2>
+            <div class="table-container" style="overflow-x:auto; margin:1.2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.92rem; line-height:1.5;">
+                <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.5rem;">Situation</th><th style="padding:0.5rem;">Use</th><th style="padding:0.5rem;">Why</th></tr></thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Roughly symmetric data, no wild values</td><td style="padding:0.5rem;">Mean</td><td style="padding:0.5rem;">Uses all the information; basis for most later methods</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Skewed data, or outliers (incomes, prices, reaction times)</td><td style="padding:0.5rem;">Median (or trimmed mean)</td><td style="padding:0.5rem;">Robust to extreme values</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Categories, or "most common"</td><td style="padding:0.5rem;">Mode</td><td style="padding:0.5rem;">The only average for nominal data</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Ordinal ratings</td><td style="padding:0.5rem;">Median (and the distribution)</td><td style="padding:0.5rem;">Gaps between categories are not equal</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Growth rates, ratios, values over orders of magnitude</td><td style="padding:0.5rem;">Geometric mean</td><td style="padding:0.5rem;">The quantities multiply</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Rates over equal amounts (speed over equal distances)</td><td style="padding:0.5rem;">Harmonic mean</td><td style="padding:0.5rem;">Time spent depends on the reciprocal</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Values of different importance or precision</td><td style="padding:0.5rem;">Weighted mean</td><td style="padding:0.5rem;">Each value counts according to its weight</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>A quick diagnostic: in a symmetric distribution the mean and median are close; if the mean is much larger than the median, the data are probably skewed to the right (a long tail of large values), and if it is smaller, skewed to the left. When in doubt, report both.</p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Measuring Spread</h2>
+            <p>Two batches of resistors can have the same average and very different quality. To describe <strong>spread</strong> (also called dispersion or variability), we have several tools: <span class="cite-group">[<a class="cite" href="#ref-24">24</a>]</span></p>
+            <ul>
+              <li><strong>Range:</strong> largest minus smallest. Simple, but determined entirely by the two most extreme values.</li>
+              <li><strong>Variance:</strong> the average squared distance from the mean. For a sample, we divide by n − 1 rather than n (see below):
+                $$s^2 = \frac{1}{n-1}\sum_{i=1}^{n} (x_i - \bar{x})^2.$$
+                Ronald Fisher gave it the name "variance" in 1918. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span></li>
+              <li><strong>Standard deviation (SD):</strong> the square root of the variance, $s = \sqrt{s^2}$, back in the original units. Karl Pearson introduced the term in 1894. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span> Roughly, it is the typical distance of a value from the mean. For the numbers 4, 7, 7, 9, 13 (mean 8), the squared deviations are 16, 1, 1, 1 and 25, summing to 44; the variance is 44/4 = 11 and the SD is √11 ≈ 3.32.</li>
+              <li><strong>Median absolute deviation (MAD):</strong> the median of the distances from the median. A robust alternative to the SD; multiplied by about 1.4826, it estimates the SD for normally distributed data while ignoring outliers. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span></li>
+              <li><strong>Interquartile range (IQR):</strong> the range of the middle 50% of the data (section 11).</li>
+              <li><strong>Coefficient of variation (CV):</strong> the SD divided by the mean, often as a percentage. It compares variability across quantities of different size or units, and is widely used for the precision of laboratory assays. It only makes sense for ratio data with a true zero.</li>
+            </ul>
+            <p><strong>Why n − 1?</strong> The deviations in the formula are measured from the sample mean, which is calculated from the same data and therefore sits slightly closer to them than the true population mean does. As a result, the average squared deviation from the sample mean is, on average, a little too small. Dividing by n − 1 instead of n exactly corrects this bias in the variance. This adjustment is known as <strong>Bessel's correction</strong>. Another way to see it: once the mean is known, only n − 1 of the deviations are free to vary, because they must add up to zero; statisticians say the variance has n − 1 <strong>degrees of freedom</strong>.</p>
+            <figure class="fig" data-fig="fig-bessel">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. Why divide by n − 1?</strong> Draw many small samples from a population whose true variance is exactly 1, and compare the average of the two versions of the sample variance.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Percentiles, Quartiles and Box Plots</h2>
+            <p>A <strong>percentile</strong> is the value below which a given percentage of the data falls: the 90th percentile of reaction times is the time that 90% of people beat. The <strong>quartiles</strong> split the data into four equal parts: the first quartile Q1 (25th percentile), the median Q2 (50th), and the third quartile Q3 (75th). The <strong>interquartile range</strong> is IQR = Q3 − Q1. Francis Galton did much to popularise describing data by medians and percentiles. <span class="cite-group">[<a class="cite" href="#ref-22">22</a>]</span> A practical warning: there are at least nine slightly different ways to compute sample quantiles, and different software uses different defaults, so small data sets can give slightly different quartiles in Excel, R and Python. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span></p>
+            <p>The <strong>five-number summary</strong> (minimum, Q1, median, Q3, maximum) is drawn as a <strong>box plot</strong>, popularised by John Tukey in 1977: a box from Q1 to Q3 with a line at the median, and "whiskers" extending to the most extreme values within 1.5 × IQR of the box. Points beyond those limits, called <strong>Tukey's fences</strong>, are drawn individually as possible outliers. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span> Box plots are excellent for comparing several groups side by side, but they cannot show multiple peaks, so a dot plot or histogram is a useful companion.</p>
+            <figure class="fig" data-fig="fig-box-plot">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 7. Spread and the box plot.</strong> Choose a data set to see its box plot, every individual value, and all the measures of spread. Compare the resistors with and without the bad reading.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Shape: Skewness, Kurtosis and Why You Must Plot</h2>
+            <p>Beyond centre and spread, the <strong>shape</strong> of a distribution matters. <strong>Skewness</strong> measures asymmetry: positive when there is a long tail to the right (incomes, reaction times, particle sizes), negative when the tail is on the left (exam scores on an easy test). <strong>Kurtosis</strong> measures how heavy the tails are, that is, how prone the data are to producing extreme values. It is often described as "peakedness", but that description is misleading: kurtosis is really about the tails. <span class="cite-group">[<a class="cite" href="#ref-26">26</a>]</span> A normal distribution has skewness 0 and an "excess kurtosis" of 0. Both measures are sensitive to outliers and need fairly large samples to be reliable. <span class="cite-group">[<a class="cite" href="#ref-25">25</a>]</span></p>
+            <p>But no set of summary numbers can replace a plot. In 1973 the statistician Francis Anscombe constructed four small data sets with the same means, variances, correlation and best-fit line, which look completely different when drawn. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span> In 2017 Justin Matejka and George Fitzmaurice took the idea further, generating a dozen data sets with identical summary statistics, one of them shaped like a dinosaur: the "Datasaurus Dozen". <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span></p>
+            <figure class="fig" data-fig="fig-anscombe">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 8. Anscombe's quartet.</strong> Four data sets with the same statistics. Read the table, guess what they look like, then show the plots.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Outliers: Finding Them and What to Do</h2>
+            <p>An <strong>outlier</strong> is a value that lies unusually far from the rest. Common ways to flag one:</p>
+            <ul>
+              <li><strong>Tukey's fences:</strong> below Q1 − 1.5 × IQR or above Q3 + 1.5 × IQR.</li>
+              <li><strong>z-scores:</strong> more than about 3 standard deviations from the mean. This has a catch: an outlier inflates the SD itself, which can hide it. With small samples, a value can never be more than (n − 1)/√n SDs from the mean, so this rule cannot flag anything in a sample of 10 or fewer.</li>
+              <li><strong>Robust z-scores:</strong> distance from the median measured in units of the MAD; values above about 3.5 are often flagged. Much more reliable than the ordinary z-score. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>, <a class="cite" href="#ref-27">27</a>]</span></li>
+            </ul>
+            <p>Finding an outlier is the easy part. Deciding what to do needs thought. An outlier may be an <strong>error</strong> (a misread meter, a typing mistake, a faulty instrument), in which case it should be corrected or removed, with a note saying so. It may be a <strong>genuine but rare</strong> value, in which case removing it hides the truth and makes your data look more consistent than they are. Or it may be the most <strong>important discovery</strong> in the data set. Good practice:</p>
+            <ol>
+              <li>Investigate every outlier: check lab notebooks, instruments and data entry.</li>
+              <li>Decide your rules for excluding data <em>before</em> seeing the results, ideally in a written plan.</li>
+              <li>Never delete a value just because it is inconvenient.</li>
+              <li>Report what was excluded and why, and if possible show results with and without it.</li>
+              <li>Prefer robust methods (median, IQR, MAD) when outliers are expected.</li>
+            </ol>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Reporting Descriptive Statistics</h2>
+            <ul>
+              <li><strong>Always give n</strong>, the number of values.</li>
+              <li><strong>Pair the centre with a matching spread:</strong> mean with SD, median with IQR (or Q1 and Q3).</li>
+              <li><strong>SD is not the standard error.</strong> The SD describes how much individual values vary. The <strong>standard error of the mean</strong> (SEM = SD/√n) describes how precisely the mean is known, and shrinks as n grows (Part 4). Many published papers label error bars without saying which they show; always say which. <span class="cite-group">[<a class="cite" href="#ref-23">23</a>]</span></li>
+              <li><strong>Sensible precision:</strong> do not report more digits than the measurements justify. A mean of resistances measured to 0.1 Ω might be reported as 100.2 Ω, not 100.195 Ω; the uncertainty usually needs only one or two significant figures (Part 3).</li>
+              <li><strong>Show the data:</strong> for small samples, plot every point (dot plots or strip plots) rather than only a bar with an error bar.</li>
+              <li><strong>Say what you did with outliers and missing values.</strong></li>
+            </ul>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Worked Example: The Twenty Resistors</h2>
+            <p>Let us describe the twenty resistors from section 1 properly.</p>
+            <ol>
+              <li><strong>Type of data:</strong> resistance is a continuous ratio quantity, so every summary is allowed.</li>
+              <li><strong>Plot it:</strong> a dot plot (Figure 7) shows nineteen values between 99.2 and 100.9 Ω, and one at 103.9 Ω, far from the rest.</li>
+              <li><strong>Centre:</strong> mean 100.195 Ω, median 100.0 Ω, mode 99.8 Ω (and 100.0 Ω; both appear twice: with continuous data, the mode is not very meaningful). The 10% trimmed mean is 100.04 Ω.</li>
+              <li><strong>Spread:</strong> range 4.7 Ω, SD 0.997 Ω, IQR 0.75 Ω (Q1 = 99.675, Q3 = 100.425 Ω, using the common "linear interpolation" method), MAD 0.40 Ω, CV 1.0%.</li>
+              <li><strong>Shape:</strong> skewness 2.9: strongly right-skewed, but entirely because of one value.</li>
+              <li><strong>Outlier check:</strong> Tukey's upper fence is 100.425 + 1.5 × 0.75 = 101.55 Ω, so 103.9 Ω is flagged. Its robust z-score is (103.9 − 100.0)/(1.4826 × 0.40) ≈ 6.6, far above 3.5.</li>
+              <li><strong>Investigate:</strong> suppose the lab notebook shows that this resistor was measured before the meter had been zeroed. It is an error, and we exclude it, and say so. Without it: mean 100.00 Ω, SD 0.50 Ω, median 100.0 Ω.</li>
+            </ol>
+            <p>Notice what the outlier did: it moved the mean by 0.2 Ω and <strong>doubled the standard deviation</strong>, from 0.50 to 1.00 Ω, while leaving the median, IQR and MAD almost untouched. A report might say: "Resistance of 19 resistors: mean 100.0 Ω, SD 0.5 Ω (one reading excluded: meter not zeroed)."</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">Try it in Python: descriptive statistics</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">import numpy as np
+from scipy import stats
+
+r = np.array([99.2, 100.4, 99.8, 100.1, 99.5, 100.9, 100.0, 99.7, 100.3, 99.9,
+              100.2, 99.6, 100.6, 99.4, 100.0, 100.8, 99.3, 100.5, 103.9, 99.8])
+print(r.mean(), np.median(r))                  # 100.195  100.0
+print(r.std(ddof=1), r.var(ddof=1))            # 0.997 (ddof=1 divides by n - 1!)
+q1, q3 = np.percentile(r, [25, 75])
+print(q1, q3, q3 - q1)                         # 99.675 100.425 0.75
+print(stats.median_abs_deviation(r))           # 0.40
+print(stats.trim_mean(r, 0.1))                 # 100.04
+print(stats.skew(r, bias=False))               # 2.86
+print(stats.gmean([1.10, 1.50, 0.80]), stats.hmean([60, 40]))  # 1.097  48.0</code></pre>
+            </details>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Try It Yourself: The Ruler-Drop Reaction Test</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: measure your reaction time</div>
+              <ol>
+                <li>Ask a friend to hold a 30 cm ruler vertically, with the zero end between your open thumb and finger (not touching).</li>
+                <li>Without warning, they let go; you catch it as fast as you can. Note the centimetre mark where you caught it.</li>
+                <li>Convert distance to time with $t = \sqrt{2d/g}$: with d in metres and g = 9.8 m/s². For example, 15 cm gives about 0.175 s.</li>
+                <li>Repeat 20 times (and swap roles).</li>
+              </ol>
+              <p>Now describe your 20 times: draw a dot plot, find the mean, median and mode, the SD and IQR, and the five-number summary. Are your times skewed? (Reaction times usually are.) Did any catch fail completely, and how will you treat it? Compare your median with your friend's using side-by-side box plots. You have just done a complete descriptive analysis of a real experiment.</p>
+            </div>
+          </section>
+
+          <section id="section-17">
+            <h2>17. Legend and Record</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: did a computer throw away the ozone hole?</div>
+              <p><strong>The legend:</strong> NASA's satellites recorded the Antarctic ozone hole years before it was discovered, but the computer program treated the very low readings as outliers and automatically threw them away, so British scientists using a ground instrument found it first.</p>
+              <p><strong>The record:</strong> the British Antarctic Survey team of Joseph Farman, Brian Gardiner and Jonathan Shanklin did publish the discovery first, in May 1985, from ground-based measurements at Halley station. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span> NASA's processing software did not delete the low satellite values: it <em>flagged</em> readings below a set level as possibly unreliable, which kept them out of the standard data products. NASA scientists noticed a large increase in flagged data for October 1983 and were investigating it when the British paper appeared; their satellite maps of the hole were published in 1986. <span class="cite-group">[<a class="cite" href="#ref-17">17</a>, <a class="cite" href="#ref-18">18</a>]</span></p>
+              <p><strong>The grain of truth:</strong> automatic outlier rules did delay recognition of a real and alarming phenomenon. Rules that treat "unexpected" as "wrong" can hide exactly the discoveries we most need. Flag outliers; investigate them; do not let a threshold make the decision for you.</p>
+            </div>
+          </section>
+
+          <section id="section-18">
+            <h2>18. Philosophy Corner</h2>
+            <div class="callout callout-philosophy">
+              <div class="callout-header">Philosophy Corner: does the average person exist?</div>
+              <p>In 1835 the Belgian astronomer and statistician Adolphe Quetelet applied the methods of astronomy to people. Measuring the chests of Scottish soldiers and the heights of French conscripts, he found that they clustered around an average, and described <em>l'homme moyen</em>, "the average man", as a kind of ideal type of which real individuals were imperfect copies. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span></p>
+              <p>More than a century later, in 1952, Lieutenant Gilbert Daniels of the US Air Force examined body measurements of over 4,000 airmen. He defined an "average" range for each of ten body dimensions used in designing cockpits, and asked how many men were average on all ten. The answer was none. <span class="cite-group">[<a class="cite" href="#ref-19">19</a>, <a class="cite" href="#ref-20">20</a>]</span> A cockpit built for the average pilot fitted nobody well. (Popular accounts credit the study with leading to adjustable seats; that part of the story is less certain.)</p>
+              <p>An average is a summary of a group, not a description of any member of it. The mean family may have 2.3 children; no family does. A drug that lowers blood pressure "on average" may help some patients a lot, others not at all. Statistics describes populations; whether and how it applies to an individual is a separate, and often harder, question.</p>
+              <p><strong>Questions to think about:</strong> When a doctor says a treatment works "on average", what should you ask next? Is the average of a group a real thing, or only a useful fiction?</p>
+            </div>
+          </section>
+          <section id="section-19">
+            <h2>19. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John Graunt</td>
+                <td style="padding:0.6rem 0.8rem;">1620–1674<br>England</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Bills of Mortality</em> (1662)</td>
+                <td style="padding:0.6rem 0.8rem;">Turned death records into tables: an early founder of statistics.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Thomas Simpson</td>
+                <td style="padding:0.6rem 0.8rem;">1710–1761<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">The mean of observations (1755)</td>
+                <td style="padding:0.6rem 0.8rem;">Argued that averaging repeated measurements reduces error.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Carl Friedrich Gauss</td>
+                <td style="padding:0.6rem 0.8rem;">1777–1855<br>Germany</td>
+                <td style="padding:0.6rem 0.8rem;">Theory of errors (1809)</td>
+                <td style="padding:0.6rem 0.8rem;">Linked the mean with the normal distribution of errors.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Adolphe Quetelet</td>
+                <td style="padding:0.6rem 0.8rem;">1796–1874<br>Belgium</td>
+                <td style="padding:0.6rem 0.8rem;">The “average man” (1835)</td>
+                <td style="padding:0.6rem 0.8rem;">Applied averages and distributions to people.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Florence Nightingale</td>
+                <td style="padding:0.6rem 0.8rem;">1820–1910<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Statistical diagrams (1858)</td>
+                <td style="padding:0.6rem 0.8rem;">Used data graphics to reform army hospitals.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Francis Galton</td>
+                <td style="padding:0.6rem 0.8rem;">1822–1911<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Medians and percentiles</td>
+                <td style="padding:0.6rem 0.8rem;">Popularised describing data by ranks and percentiles.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Karl Pearson</td>
+                <td style="padding:0.6rem 0.8rem;">1857–1936<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">“Standard deviation” (1894)</td>
+                <td style="padding:0.6rem 0.8rem;">Named and developed many measures of spread and shape.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John W. Tukey</td>
+                <td style="padding:0.6rem 0.8rem;">1915–2000<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Exploratory Data Analysis</em> (1977)</td>
+                <td style="padding:0.6rem 0.8rem;">Invented the box plot and championed looking at data.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Francis Anscombe</td>
+                <td style="padding:0.6rem 0.8rem;">1918–2001<br>England / USA</td>
+                <td style="padding:0.6rem 0.8rem;">Anscombe’s quartet (1973)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed why data must be plotted, not just summarised.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-20">
+            <h2>20. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about describing data.</p>
+            <figure class="fig" data-fig="fig-quiz-d1">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-21">
+            <h2>21. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Graunt, John.</strong> (1662). <em>Natural and Political Observations Mentioned in a Following Index, and Made upon the Bills of Mortality</em>. London.</li>
+              <li id="ref-2"><strong>Simpson, Thomas.</strong> (1755). "A letter to the Right Honourable George Earl of Macclesfield, President of the Royal Society, on the advantage of taking the mean of a number of observations, in practical astronomy." <em>Philosophical Transactions of the Royal Society</em>, 49: 82–93.</li>
+              <li id="ref-3"><strong>Gauss, Carl Friedrich.</strong> (1809). <em>Theoria motus corporum coelestium in sectionibus conicis solem ambientium</em>. Hamburg: Perthes &amp; Besser.</li>
+              <li id="ref-4"><strong>Quetelet, Adolphe.</strong> (1835). <em>Sur l’homme et le développement de ses facultés, ou essai de physique sociale</em>. Paris: Bachelier.</li>
+              <li id="ref-5"><strong>Stevens, S. S.</strong> (1946). "On the theory of scales of measurement." <em>Science</em>, 103(2684): 677–680.</li>
+              <li id="ref-6"><strong>Pearson, Karl.</strong> (1894). "Contributions to the mathematical theory of evolution." <em>Philosophical Transactions of the Royal Society A</em>, 185: 71–110.</li>
+              <li id="ref-7"><strong>Fisher, R. A.</strong> (1918). "The correlation between relatives on the supposition of Mendelian inheritance." <em>Transactions of the Royal Society of Edinburgh</em>, 52: 399–433.</li>
+              <li id="ref-8"><strong>Tukey, John W.</strong> (1977). <em>Exploratory Data Analysis</em>. Reading, MA: Addison-Wesley.</li>
+              <li id="ref-9"><strong>Anscombe, F. J.</strong> (1973). "Graphs in statistical analysis." <em>The American Statistician</em>, 27(1): 17–21.</li>
+              <li id="ref-10"><strong>Matejka, Justin &amp; Fitzmaurice, George.</strong> (2017). "Same stats, different graphs: generating datasets with varied appearance and identical statistics through simulated annealing." <em>Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems</em>: 1290–1294.</li>
+              <li id="ref-11"><strong>Sturges, Herbert A.</strong> (1926). "The choice of a class interval." <em>Journal of the American Statistical Association</em>, 21(153): 65–66.</li>
+              <li id="ref-12"><strong>Freedman, David &amp; Diaconis, Persi.</strong> (1981). "On the histogram as a density estimator: L2 theory." <em>Zeitschrift für Wahrscheinlichkeitstheorie und verwandte Gebiete</em>, 57: 453–476.</li>
+              <li id="ref-13"><strong>Hyndman, Rob J. &amp; Fan, Yanan.</strong> (1996). "Sample quantiles in statistical packages." <em>The American Statistician</em>, 50(4): 361–365.</li>
+              <li id="ref-14"><strong>Leys, C., Ley, C., Klein, O., Bernard, P. &amp; Licata, L.</strong> (2013). "Detecting outliers: do not use standard deviation around the mean, use absolute deviation around the median." <em>Journal of Experimental Social Psychology</em>, 49(4): 764–766.</li>
+              <li id="ref-15"><strong>Huber, Peter J.</strong> (1981). <em>Robust Statistics</em>. New York: Wiley.</li>
+              <li id="ref-16"><strong>Farman, J. C., Gardiner, B. G. &amp; Shanklin, J. D.</strong> (1985). "Large losses of total ozone in Antarctica reveal seasonal ClOx/NOx interaction." <em>Nature</em>, 315: 207–210.</li>
+              <li id="ref-17"><strong>Stolarski, R. S. et al.</strong> (1986). "Nimbus 7 satellite measurements of the springtime Antarctic ozone decrease." <em>Nature</em>, 322: 808–811.</li>
+              <li id="ref-18"><strong>RealClimate.</strong> (2017). "What did NASA know? and when did they know it?" (including a note by NASA scientist Richard McPeters on how low ozone values were flagged).</li>
+              <li id="ref-19"><strong>Daniels, Gilbert S.</strong> (1952). <em>The “Average Man”?</em> Technical Note WCRD 53-7. Wright-Patterson Air Force Base: Wright Air Development Center.</li>
+              <li id="ref-20"><strong>Rose, Todd.</strong> (2016). <em>The End of Average: How We Succeed in a World That Values Sameness</em>. New York: HarperOne.</li>
+              <li id="ref-21"><strong>Nightingale, Florence.</strong> (1858). <em>Notes on Matters Affecting the Health, Efficiency, and Hospital Administration of the British Army</em>. London: Harrison and Sons.</li>
+              <li id="ref-22"><strong>Galton, Francis.</strong> (1875). "Statistics by intercomparison, with remarks on the law of frequency of error." <em>Philosophical Magazine</em>, 4th series, 49: 33–46.</li>
+              <li id="ref-23"><strong>Cumming, Geoff, Fidler, Fiona &amp; Vaux, David L.</strong> (2007). "Error bars in experimental biology." <em>Journal of Cell Biology</em>, 177(1): 7–11.</li>
+              <li id="ref-24"><strong>Freedman, David, Pisani, Robert &amp; Purves, Roger.</strong> (2007). <em>Statistics</em>. 4th ed. New York: W. W. Norton.</li>
+              <li id="ref-25"><strong>Joanes, D. N. &amp; Gill, C. A.</strong> (1998). "Comparing measures of sample skewness and kurtosis." <em>Journal of the Royal Statistical Society D (The Statistician)</em>, 47(1): 183–189.</li>
+              <li id="ref-26"><strong>Westfall, Peter H.</strong> (2014). "Kurtosis as peakedness, 1905–2014. R.I.P." <em>The American Statistician</em>, 68(3): 191–195.</li>
+              <li id="ref-27"><strong>Iglewicz, Boris &amp; Hoaglin, David C.</strong> (1993). <em>How to Detect and Handle Outliers</em>. Milwaukee: ASQC Quality Press.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/making-sense-of-data.html">Making Sense of Data</a> (Part 1 of 9)</div>
+  <div class="series-banner-links">
+    <span>First part</span>
+    <span>Part 2 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/describing-data.js"></script>
+</body>
+</html>

@@ -1,5 +1,22 @@
 [
   {
+    "slug": "describing-data",
+    "url": "articles/describing-data.html",
+    "title": "Describing Data: Averages, Spread and the Shape of Your Measurements",
+    "summary": "Types of data, mean, median, mode and other averages, standard deviation, IQR and MAD, percentiles and box plots, skewness, outliers and honest reporting, with a full worked example.",
+    "subject": "Science",
+    "tags": [
+      "statistics",
+      "descriptive-statistics",
+      "experiments",
+      "data-analysis",
+      "measurement",
+      "probability"
+    ],
+    "date": "2026-12-02",
+    "type": "tutorial"
+  },
+  {
     "slug": "classification-and-regression-metrics",
     "url": "articles/classification-and-regression-metrics.html",
     "title": "Is 99% Accuracy Good? A Complete Guide to Model Metrics, from the Confusion Matrix to MCC, AUC and R²",
