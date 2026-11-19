@@ -1,56 +1,5 @@
 [
   {
-    "slug": "measurement-error-and-uncertainty",
-    "url": "articles/measurement-error-and-uncertainty.html",
-    "title": "Measurement, Error and Uncertainty: How Sure Are You?",
-    "summary": "Random and systematic errors, accuracy and precision, Type A and Type B uncertainty, uncertainty budgets, propagation, weighted means, calibration curves and limits of detection.",
-    "subject": "Science",
-    "tags": [
-      "statistics",
-      "measurement-uncertainty",
-      "experiments",
-      "data-analysis",
-      "metrology",
-      "measurement"
-    ],
-    "date": "2026-12-04",
-    "type": "tutorial"
-  },
-  {
-    "slug": "probability-and-distributions",
-    "url": "articles/probability-and-distributions.html",
-    "title": "Probability and Distributions: Dice, Photons and the Bell Curve",
-    "summary": "Probability rules, expected value, the binomial, Poisson, exponential, normal and log-normal distributions, z-scores, the law of large numbers, the central limit theorem and Q–Q plots.",
-    "subject": "Science",
-    "tags": [
-      "statistics",
-      "probability",
-      "experiments",
-      "data-analysis",
-      "normal-distribution",
-      "central-limit-theorem"
-    ],
-    "date": "2026-12-03",
-    "type": "tutorial"
-  },
-  {
-    "slug": "describing-data",
-    "url": "articles/describing-data.html",
-    "title": "Describing Data: Averages, Spread and the Shape of Your Measurements",
-    "summary": "Types of data, mean, median, mode and other averages, standard deviation, IQR and MAD, percentiles and box plots, skewness, outliers and honest reporting, with a full worked example.",
-    "subject": "Science",
-    "tags": [
-      "statistics",
-      "descriptive-statistics",
-      "experiments",
-      "data-analysis",
-      "measurement",
-      "probability"
-    ],
-    "date": "2026-12-02",
-    "type": "tutorial"
-  },
-  {
     "slug": "classification-and-regression-metrics",
     "url": "articles/classification-and-regression-metrics.html",
     "title": "Is 99% Accuracy Good? A Complete Guide to Model Metrics, from the Confusion Matrix to MCC, AUC and R²",
@@ -170,6 +119,40 @@
     "type": "tutorial"
   },
   {
+    "slug": "probability-and-distributions",
+    "url": "articles/probability-and-distributions.html",
+    "title": "Probability and Distributions: Dice, Photons and the Bell Curve",
+    "summary": "Probability rules, expected value, the binomial, Poisson, exponential, normal and log-normal distributions, z-scores, the law of large numbers, the central limit theorem and Q–Q plots.",
+    "subject": "Science",
+    "tags": [
+      "statistics",
+      "probability",
+      "experiments",
+      "data-analysis",
+      "normal-distribution",
+      "central-limit-theorem"
+    ],
+    "date": "2026-11-19",
+    "type": "tutorial"
+  },
+  {
+    "slug": "measurement-error-and-uncertainty",
+    "url": "articles/measurement-error-and-uncertainty.html",
+    "title": "Measurement, Error and Uncertainty: How Sure Are You?",
+    "summary": "Random and systematic errors, accuracy and precision, Type A and Type B uncertainty, uncertainty budgets, propagation, weighted means, calibration curves and limits of detection.",
+    "subject": "Science",
+    "tags": [
+      "statistics",
+      "measurement-uncertainty",
+      "experiments",
+      "data-analysis",
+      "metrology",
+      "measurement"
+    ],
+    "date": "2026-11-19",
+    "type": "tutorial"
+  },
+  {
     "slug": "how-far-is-the-sun",
     "url": "articles/how-far-is-the-sun.html",
     "title": "How Far Is the Sun? Half Moons, Transits of Venus and Radar Echoes",
@@ -182,6 +165,23 @@
       "transit-of-venus",
       "astronomical-unit",
       "history-of-science"
+    ],
+    "date": "2026-11-19",
+    "type": "tutorial"
+  },
+  {
+    "slug": "describing-data",
+    "url": "articles/describing-data.html",
+    "title": "Describing Data: Averages, Spread and the Shape of Your Measurements",
+    "summary": "Types of data, mean, median, mode and other averages, standard deviation, IQR and MAD, percentiles and box plots, skewness, outliers and honest reporting, with a full worked example.",
+    "subject": "Science",
+    "tags": [
+      "statistics",
+      "descriptive-statistics",
+      "experiments",
+      "data-analysis",
+      "measurement",
+      "probability"
     ],
     "date": "2026-11-19",
     "type": "tutorial"
