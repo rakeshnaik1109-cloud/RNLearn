@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Counts and Categories: Chi-Square, Exact Tests and Overdispersion — RNLearn</title>
+  <meta name="description" content="Categorical data, χ² goodness of fit and independence, Fisher’s exact test, McNemar’s test, risk and odds ratios, Poisson counts and overdispersion, trend tests and Cohen’s kappa.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/counts-and-categories.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Counts and Categories: Chi-Square, Exact Tests and Overdispersion — RNLearn">
+  <meta property="og:description" content="Categorical data, χ² goodness of fit and independence, Fisher’s exact test, McNemar’s test, risk and odds ratios, Poisson counts and overdispersion, trend tests and Cohen’s kappa.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/counts-and-categories.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Counts and Categories: Chi-Square, Exact Tests and Overdispersion — RNLearn">
+  <meta name="twitter:description" content="Categorical data, χ² goodness of fit and independence, Fisher’s exact test, McNemar’s test, risk and odds ratios, Poisson counts and overdispersion, trend tests and Cohen’s kappa.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Counts and Categories: Chi-Square, Exact Tests and Overdispersion",
+    "description": "Categorical data, χ² goodness of fit and independence, Fisher’s exact test, McNemar’s test, risk and odds ratios, Poisson counts and overdispersion, trend tests and Cohen’s kappa.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-19",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/counts-and-categories.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/science.html" class="post-subject-tag" data-subject="science">Science</a>
+        </div>
+        <h1 class="article-title">Counts and Categories: Chi-Square, Exact Tests and Overdispersion</h1>
+        <p class="article-standfirst">
+          Seeds germinate or not; plates carry so many colonies; raters say yes or no. Here is how to analyse counts and categories, from Pearson’s chi-square and Mendel’s peas to exact tests, odds ratios and kappa.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-19">19 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>18 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/making-sense-of-data.html">Making Sense of Data</a> (Part 8 of 9)</div>
+  <div class="series-banner-links">
+    <a href="correlation-and-regression.html">← Part 7: Correlation and Regression: Lines, Curves and Causes</a>
+    <span>Part 9 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. Counting Things</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Kinds of Categorical Data</a></li>
+              <li><a class="toc-link" href="#section-4">4. Does It Fit? The Chi-Square Goodness-of-Fit Test</a></li>
+              <li><a class="toc-link" href="#section-5">5. Contingency Tables and the Test of Independence</a></li>
+              <li><a class="toc-link" href="#section-6">6. Small Samples: Fisher’s Exact Test and Yates’s Correction</a></li>
+              <li><a class="toc-link" href="#section-7">7. Paired Categories: McNemar’s Test</a></li>
+              <li><a class="toc-link" href="#section-8">8. Risk, Odds and Confounders</a></li>
+              <li><a class="toc-link" href="#section-9">9. Counts and Rates: Poisson and Overdispersion</a></li>
+              <li><a class="toc-link" href="#section-10">10. Ordered Categories</a></li>
+              <li><a class="toc-link" href="#section-11">11. Agreement Between Raters: Cohen’s Kappa</a></li>
+              <li><a class="toc-link" href="#section-12">12. Reporting</a></li>
+              <li><a class="toc-link" href="#section-13">13. Worked Example: Seed Germination</a></li>
+              <li><a class="toc-link" href="#section-14">14. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-15">15. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-16">16. Philosophy Corner</a></li>
+              <li><a class="toc-link" href="#section-17">17. People in This Part</a></li>
+              <li><a class="toc-link" href="#section-18">18. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-19">19. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. Counting Things</h2>
+            <p>Not every measurement is a number on a scale. Seeds germinate or they do not. Cells are classified as normal, damaged or dead. Pea plants have round or wrinkled seeds. A detector counts photons; a microbiologist counts colonies on a plate. Such data are <strong>counts</strong> and <strong>categories</strong>, and they need their own methods.</p>
+            <p>This part covers them: the χ² test for whether counts fit a theory and whether two classifications are related, Fisher’s exact test for small samples, McNemar’s test for paired yes/no data, the risk ratio and odds ratio, Poisson counts and the common trap of overdispersion, and Cohen’s kappa for agreement between raters. Proportions and their confidence intervals were introduced in Part 4; here we compare and test them. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-count-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. From pea plants to generalised linear models, 1866–1972.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Kinds of Categorical Data</h2>
+            <ul>
+              <li><strong>Nominal</strong> categories have no order: blood group, species, colour, which of four catalysts was used.</li>
+              <li><strong>Ordinal</strong> categories have a natural order but no fixed spacing: mild, moderate or severe; a damage score from 0 to 4; a five-point rating.</li>
+              <li><strong>Binary</strong> (dichotomous) data have just two categories: yes or no, alive or dead, pass or fail. They are summarised by a proportion.</li>
+              <li><strong>Counts</strong> record how many events happen in a fixed time, area or volume: decays per minute, colonies per plate, photons per pixel.</li>
+            </ul>
+            <p>Categorical data are usually summarised in a <strong>frequency table</strong> or, for two variables, a <strong>contingency table</strong> (cross-tabulation), which counts how many observations fall into each combination of categories. Means and standard deviations make little sense for nominal categories; proportions and counts do.</p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Does It Fit? The Chi-Square Goodness-of-Fit Test</h2>
+            <p>Suppose a theory predicts how counts should be shared among categories. Do the observed counts fit? In 1900 Karl Pearson proposed comparing each observed count O with the count E expected under the theory: <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+            <p>$$\chi^2 = \sum \frac{(O - E)^2}{E}.$$</p>
+            <p>If the theory is right, χ² approximately follows a chi-square distribution with (number of categories − 1) degrees of freedom; a large value means the observed counts are further from the expected ones than chance would usually produce. Dividing by E makes sense because counts with larger expected values naturally vary more: for Poisson-like counts the variance equals the mean (Part 2).</p>
+            <p>A classic test is Gregor Mendel’s 1866 experiment on pea plants. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> Crossing plants that differed in seed shape and seed colour, he obtained 315 round yellow, 108 round green, 101 wrinkled yellow and 32 wrinkled green seeds, 556 in all. His theory predicted a ratio of 9:3:3:1, or expected counts of 312.75, 104.25, 104.25 and 34.75. The χ² statistic is 0.47 with 3 degrees of freedom, p = 0.93: an excellent fit.</p>
+            <figure class="fig" data-fig="fig-gof">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. The χ² goodness-of-fit test.</strong> Observed (blue) and expected (grey) counts for Mendel’s peas and for three sets of die rolls. The number under each category is its contribution to χ².
+              </figcaption>
+            </figure>
+            <p>For 60 rolls of a die giving 8, 9, 12, 7, 10 and 14 of each face, χ² = 3.4 with 5 degrees of freedom, p = 0.64: uneven-looking counts, but no evidence of bias. For 6, 7, 8, 9, 10 and 20, χ² = 13.0, p = 0.023: too many sixes to blame on chance. If any parameters of the expected distribution are estimated from the data (such as the mean of a Poisson distribution), subtract one more degree of freedom for each.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Contingency Tables and the Test of Independence</h2>
+            <p>The most common question about categorical data is whether two classifications are related: does germination depend on treatment? Does the type of defect depend on the production line? Arrange the counts in a contingency table. If the two variables were <strong>independent</strong>, the expected count in each cell would be</p>
+            <p>$$E = \frac{\text{row total} \times \text{column total}}{\text{grand total}}.$$</p>
+            <p>The χ² statistic is calculated over all cells as before. For a table with r rows and c columns it has (r − 1)(c − 1) degrees of freedom, a result Ronald Fisher established in 1922, correcting Pearson’s original count. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> For a 2 × 2 table that is 1 degree of freedom.</p>
+            <figure class="fig" data-fig="fig-contingency">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. A 2 × 2 table.</strong> Seeds with and without a treatment, germinated or not. Change the four counts and compare the χ² test, Yates’s correction and Fisher’s exact test, along with the risk ratio and odds ratio.
+              </figcaption>
+            </figure>
+            <p>A significant χ² says only that the variables are associated, not how strongly or in what way. For larger tables, look at the <strong>standardised residuals</strong>, (O − E)/√E, to see which cells deviate most, and report an effect size: for 2 × 2 tables the difference in proportions, the risk ratio or the odds ratio (Section 8).</p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Small Samples: Fisher’s Exact Test and Yates’s Correction</h2>
+            <p>The χ² distribution is only an approximation to the true distribution of the statistic, and it fails when expected counts are small. The usual guidance, from William Cochran in 1954, is that no expected count should be below 1 and no more than 20% should be below 5. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span></p>
+            <p>For small 2 × 2 tables, <strong>Fisher’s exact test</strong> avoids the approximation altogether. Given the row and column totals, it calculates the exact probability of every possible table (from the hypergeometric distribution) and adds up those at least as extreme as the one observed. Fisher described it in 1935 with the example of a lady who claimed she could tell whether milk had been poured into the cup before or after the tea. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span> For a table with 7 of 8 successes in one group and 2 of 8 in the other, the χ² test gives p = 0.012 but Fisher’s exact test gives p = 0.041: with expected counts of 3.5 and 4.5, the approximation exaggerates the evidence.</p>
+            <p>An older fix is <strong>Yates’s continuity correction</strong> (1934), which reduces each |O − E| by 0.5 before squaring. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> It brings the χ² test closer to the exact test but tends to be conservative, and with modern computers Fisher’s exact test (or the N − 1 version of the χ² test recommended in some comparisons) is usually preferred for small tables. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span> For large tables all of these give very similar answers.</p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Paired Categories: McNemar’s Test</h2>
+            <p>If the same subjects are classified twice, for example the same 100 samples tested by an old and a new detection method, the two classifications are not independent, and the ordinary χ² test is wrong. Arrange the data by pairs:</p>
+            <div class="table-container" style="overflow-x:auto; margin:1.2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.92rem; line-height:1.5;">
+                <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.5rem;"></th><th style="padding:0.5rem;">New method positive</th><th style="padding:0.5rem;">New method negative</th></tr></thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Old method positive</td><td style="padding:0.5rem;">40</td><td style="padding:0.5rem;">12</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Old method negative</td><td style="padding:0.5rem;">3</td><td style="padding:0.5rem;">45</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>The 85 samples on which the methods agree say nothing about which method detects more. <strong>McNemar’s test</strong> (1947) uses only the <strong>discordant pairs</strong>: 12 detected by the old method alone and 3 by the new method alone. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span> If the methods were equally sensitive, these 15 should split roughly evenly. An exact binomial test gives p = 0.035; the χ² version, (|12 − 3| − 1)²/(12 + 3) = 4.27, gives p = 0.039. The old method detects more samples.</p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Risk, Odds and Confounders</h2>
+            <p>For a 2 × 2 table comparing two groups, three effect sizes are common. Suppose 75% of treated seeds and 50% of control seeds germinate:</p>
+            <ul>
+              <li>The <strong>difference in proportions</strong> (risk difference): 75% − 50% = 25 percentage points. Its reciprocal, 1/0.25 = 4, is the <strong>number needed to treat</strong>: on average, treating 4 seeds produces one extra germination.</li>
+              <li>The <strong>risk ratio</strong> (relative risk): 0.75/0.50 = 1.5. Treated seeds are 1.5 times as likely to germinate.</li>
+              <li>The <strong>odds ratio</strong>: the odds of germination are 0.75/0.25 = 3 for treated seeds and 0.50/0.50 = 1 for control seeds, so the odds ratio is 3.0. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span></li>
+            </ul>
+            <p>The odds ratio and risk ratio are similar when the outcome is rare, but diverge when it is common, as here: an odds ratio of 3 does not mean “three times as likely”. Odds ratios are nevertheless widely used, because they are what logistic regression estimates (Part 7) and because they can be estimated from case–control studies, where risks cannot. Confidence intervals for both ratios are calculated on the log scale.</p>
+            <p>Associations in tables are vulnerable to confounding and to Simpson’s paradox (Part 7). When the data fall into strata, such as several batches, sites or age groups, the <strong>Mantel–Haenszel</strong> method (1959) combines the 2 × 2 tables from each stratum into a single adjusted odds ratio and test. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span></p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Counts and Rates: Poisson and Overdispersion</h2>
+            <p>Counts of independent events in a fixed interval, such as radioactive decays, photons, colonies or cells in a counting chamber, often follow the Poisson distribution, for which the variance equals the mean. In 1907 Gosset showed that counts of yeast cells in the squares of a haemacytometer behave this way, giving brewers a way to judge the precision of their counts. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span> For a count x, the standard error is about √x, so counting 100 events gives a relative uncertainty of about 10%, and 10,000 events about 1%.</p>
+            <p>Two rates measured over equal times can be compared simply: if 30 events occur in one sample and 50 in another, then under equal rates each of the 80 events is equally likely to come from either sample, and a binomial test gives p = 0.033. With unequal times or covariates, <strong>Poisson regression</strong> models the logarithm of the rate as a linear function of predictors. It belongs, with linear and logistic regression, to the family of <strong>generalised linear models</strong> introduced by John Nelder and Robert Wedderburn in 1972. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span></p>
+            <p>The Poisson assumption often fails in biology and the laboratory. Plates, animals or samples differ for reasons beyond counting noise, so the counts vary more than the mean predicts: <strong>overdispersion</strong>. Ten plates with counts 12, 9, 15, 11, 8, 14, 10, 13, 9 and 11 have mean 11.2 and variance 5.3, consistent with Poisson noise. Ten others with counts 3, 22, 7, 15, 1, 30, 9, 4, 18 and 6 have a similar mean, 11.5, but variance 89. Treating them as Poisson would make standard errors far too small and p-values far too optimistic. A <strong>dispersion test</strong> compares Σ(x − x̄)²/x̄ with a χ² distribution on n − 1 degrees of freedom; remedies include negative binomial or quasi-Poisson models.</p>
+            <figure class="fig" data-fig="fig-overdispersion">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Poisson counts and overdispersion.</strong> Simulated colony counts on a set of plates, compared with the Poisson distribution with the same mean. Add extra plate-to-plate variation and watch the variance outgrow the mean.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Ordered Categories</h2>
+            <p>When categories have a natural order, such as increasing dose or severity, the ordinary χ² test throws that information away: it would give the same answer if the categories were shuffled. A <strong>test for trend</strong> uses the order. For proportions across ordered groups (for instance, the share of seeds germinating at four increasing doses), the <strong>Cochran–Armitage trend test</strong> asks whether the proportion rises or falls steadily, and it is much more powerful than the general χ² test when it does. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>, <a class="cite" href="#ref-14">14</a>]</span> For an ordinal outcome compared between groups, rank-based tests such as the Mann–Whitney or Kruskal–Wallis tests (Part 5) are natural choices, and ordinal logistic regression offers a full model.</p>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Agreement Between Raters: Cohen’s Kappa</h2>
+            <p>Many classifications involve judgement: is this cell damaged? Is this X-ray abnormal? Is this image in focus? To check reliability, two raters classify the same samples, and their agreement is measured. Raw agreement is misleading, because two raters guessing at random would still agree some of the time. <strong>Cohen’s kappa</strong> (1960) corrects for this: <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span></p>
+            <p>$$\kappa = \frac{p_o - p_e}{1 - p_e},$$</p>
+            <p>where p<sub>o</sub> is the observed agreement and p<sub>e</sub> the agreement expected by chance from each rater’s overall proportions. κ = 1 is perfect agreement, κ = 0 is no better than chance. Kappa has a well-known paradox: when one category is very common, chance agreement is high, so excellent raw agreement can give a modest kappa. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span> Two raters who agree on 90% of samples have κ = 0.80 if half the samples are positive, but only κ = 0.44 if 90% are positive.</p>
+            <figure class="fig" data-fig="fig-kappa">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Cohen’s kappa and chance agreement.</strong> Two raters classify 100 samples. Set their raw agreement and how common positive samples are, and watch kappa respond.
+              </figcaption>
+            </figure>
+            <p>The same chance-correction idea appears in machine learning, where kappa and the related Matthews correlation coefficient are used to judge classifiers on unbalanced data; see our article on <a href="classification-and-regression-metrics.html">classification and regression metrics</a>.</p>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Reporting</h2>
+            <ul>
+              <li>Give the full table of counts, not just percentages; readers can then recompute any statistic.</li>
+              <li>Report an effect size with a confidence interval: the difference in proportions, the risk ratio or the odds ratio, saying which.</li>
+              <li>Name the test (χ², with or without correction, Fisher’s exact, McNemar’s) with its degrees of freedom and p-value.</li>
+              <li>For counts, check for overdispersion before trusting Poisson standard errors.</li>
+              <li>Make sure each observation is counted once and is independent: one seed, one sample, one patient, not repeated readings of the same unit.</li>
+            </ul>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Worked Example: Seed Germination</h2>
+            <p>Sixty seeds are soaked in a growth solution and sixty in water, assigned at random; after a week, 45 treated and 30 control seeds have germinated.</p>
+            <ol>
+              <li><strong>Table.</strong> Treated: 45 germinated, 15 not (75%). Control: 30 germinated, 30 not (50%).</li>
+              <li><strong>Expected counts</strong> under independence: 75 germinated in total out of 120, so 37.5 expected in each group, and 22.5 not germinated. All are well above 5.</li>
+              <li><strong>χ² test:</strong> χ² = (45 − 37.5)²/37.5 + (15 − 22.5)²/22.5 + (30 − 37.5)²/37.5 + (30 − 22.5)²/22.5 = 8.0, with 1 degree of freedom, p = 0.005. With Yates’s correction, p = 0.008; Fisher’s exact test, p = 0.008.</li>
+              <li><strong>Effect sizes.</strong> Difference 25 percentage points (95% CI 8 to 42); risk ratio 1.50 (95% CI 1.12 to 2.01); odds ratio 3.0 (95% CI 1.38 to 6.50); number needed to treat 4.</li>
+              <li><strong>Report.</strong> “Germination was higher with the growth solution (45/60, 75%) than with water (30/60, 50%); risk ratio 1.50, 95% CI 1.12 to 2.01; χ²(1) = 8.0, p = 0.005.”</li>
+            </ol>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">Try it in Python: χ², Fisher, McNemar and kappa</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">import numpy as np
+from scipy import stats
+from statsmodels.stats.contingency_tables import Table2x2, mcnemar
+
+print(stats.chisquare([315, 108, 101, 32], f_exp=np.array([9, 3, 3, 1]) * 556 / 16))
+# Mendel: chi2 = 0.47, p = 0.93
+
+t = np.array([[45, 15], [30, 30]])
+print(stats.chi2_contingency(t, correction=False))   # chi2 = 8.0, p = 0.0047
+print(stats.fisher_exact(t))                         # p = 0.0080
+tab = Table2x2(t)
+print(tab.riskratio, tab.riskratio_confint())        # 1.5 (1.12, 2.01)
+print(tab.oddsratio, tab.oddsratio_confint())        # 3.0 (1.38, 6.50)
+
+print(mcnemar([[40, 12], [3, 45]], exact=True))      # p = 0.035</code></pre>
+            </details>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Try It Yourself: Is the Bag Fair?</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: a goodness-of-fit test with sweets or dice</div>
+              <ol>
+                <li>Open a bag of coloured sweets (or roll a die 60 times) and count each colour (or face).</li>
+                <li>Write down what you expect: equal numbers of each colour, or the proportions the manufacturer states, if it does.</li>
+                <li>Compute χ² = Σ(O − E)²/E and compare it with the 5% critical value for (categories − 1) degrees of freedom: 9.49 for 4, 11.07 for 5.</li>
+                <li>Pool the counts of several bags or several friends. Does the conclusion change with more data? Which colours contribute most to χ²?</li>
+              </ol>
+              <p>A bonus: if everyone in a class tests a fair die, about one in twenty should get p &lt; 0.05 by chance. Collect everyone’s p-values: are they spread evenly between 0 and 1, as they should be when the null hypothesis is true?</p>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Legend and Record</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: were Mendel’s results too good to be true?</div>
+              <p><strong>The legend:</strong> Gregor Mendel faked his pea data.</p>
+              <p><strong>The record:</strong> in 1936 Ronald Fisher re-analysed all of Mendel’s experiments and found that, taken together, the counts agreed with Mendel’s expected ratios more closely than chance would usually allow: the total χ² was so small that Fisher put the chance of agreement this good at roughly 7 in 100,000. <span class="cite-group">[<a class="cite" href="#ref-17">17</a>]</span> Fisher did not accuse Mendel of fraud; he suggested that an assistant who knew what was expected might have influenced the counts. Later scholars have proposed other explanations, including unconscious bias in classifying ambiguous seeds, selective reporting of experiments, or stopping counts when the ratio looked right, and the debate has never been fully settled. <span class="cite-group">[<a class="cite" href="#ref-18">18</a>]</span></p>
+              <p><strong>The grain of truth:</strong> Mendel’s theory was right, and his experiments were real. But the episode carries a statistical lesson: a χ² value that is too <em>small</em> is suspicious too. Real data are noisy, and results that match theory too perfectly suggest that something other than chance has shaped them.</p>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Philosophy Corner</h2>
+            <div class="callout callout-philosophy">
+              <div class="callout-header">Philosophy Corner: who decides the categories?</div>
+              <p>Some categories are given by nature: a seed has germinated or it has not. Many others are made by us. Continuous measurements are often cut into groups: “high” and “low” expression, “responders” and “non-responders”, “obese” and “not obese”. This makes results easy to tabulate, but it throws information away. Statisticians have long warned that dichotomising a continuous variable loses power, treats values just either side of the cut-off as completely different and values far apart within a group as identical, and invites choosing the cut-off that gives the best result. <span class="cite-group">[<a class="cite" href="#ref-19">19</a>]</span></p>
+              <p>Categories also shape what we see. A classification scheme decides which differences count and which are ignored, and two raters can disagree not because either is careless but because the boundary between categories is genuinely fuzzy, which is exactly what kappa measures.</p>
+              <p><strong>Questions to think about:</strong> When does splitting a measurement into categories help understanding, and when does it hide it? If a cut-off is chosen after seeing the data, what happens to the meaning of the p-value?</p>
+            </div>
+          </section>
+          <section id="section-17">
+            <h2>17. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Gregor Mendel</td>
+                <td style="padding:0.6rem 0.8rem;">1822–1884<br>Austria (Moravia)</td>
+                <td style="padding:0.6rem 0.8rem;">Experiments on plant hybrids (1866)</td>
+                <td style="padding:0.6rem 0.8rem;">Discovered the laws of inheritance by counting pea plants.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Karl Pearson</td>
+                <td style="padding:0.6rem 0.8rem;">1857–1936<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Chi-square test (1900)</td>
+                <td style="padding:0.6rem 0.8rem;">Introduced the χ² test of goodness of fit.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Ronald A. Fisher</td>
+                <td style="padding:0.6rem 0.8rem;">1890–1962<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Degrees of freedom (1922), exact test (1935)</td>
+                <td style="padding:0.6rem 0.8rem;">Corrected the χ² test for tables and devised the exact test.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Frank Yates</td>
+                <td style="padding:0.6rem 0.8rem;">1902–1994<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Continuity correction (1934)</td>
+                <td style="padding:0.6rem 0.8rem;">Adjusted χ² for small 2 × 2 tables.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Quinn McNemar</td>
+                <td style="padding:0.6rem 0.8rem;">1900–1986<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">McNemar’s test (1947)</td>
+                <td style="padding:0.6rem 0.8rem;">Gave the test for paired proportions.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">William G. Cochran</td>
+                <td style="padding:0.6rem 0.8rem;">1909–1980<br>Scotland / USA</td>
+                <td style="padding:0.6rem 0.8rem;">Strengthening χ² tests (1954)</td>
+                <td style="padding:0.6rem 0.8rem;">Set out when χ² approximations can be trusted, and tests for trend.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Jacob Cohen</td>
+                <td style="padding:0.6rem 0.8rem;">1923–1998<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Kappa (1960)</td>
+                <td style="padding:0.6rem 0.8rem;">Introduced chance-corrected agreement between raters.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-18">
+            <h2>18. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about counts and categories.</p>
+            <figure class="fig" data-fig="fig-quiz-d8">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-19">
+            <h2>19. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Agresti, Alan.</strong> (2013). <em>Categorical Data Analysis</em>. 3rd ed. Hoboken, NJ: Wiley.</li>
+              <li id="ref-2"><strong>Pearson, Karl.</strong> (1900). "On the criterion that a given system of deviations from the probable in the case of a correlated system of variables is such that it can be reasonably supposed to have arisen from random sampling." <em>Philosophical Magazine</em>, Series 5, 50(302): 157–175.</li>
+              <li id="ref-3"><strong>Mendel, Gregor.</strong> (1866). "Versuche über Pflanzen-Hybriden." <em>Verhandlungen des naturforschenden Vereines in Brünn</em>, 4: 3–47.</li>
+              <li id="ref-4"><strong>Fisher, R. A.</strong> (1922). "On the interpretation of χ² from contingency tables, and the calculation of P." <em>Journal of the Royal Statistical Society</em>, 85(1): 87–94.</li>
+              <li id="ref-5"><strong>Cochran, William G.</strong> (1954). "Some methods for strengthening the common χ² tests." <em>Biometrics</em>, 10(4): 417–451.</li>
+              <li id="ref-6"><strong>Fisher, R. A.</strong> (1935). <em>The Design of Experiments</em>. Edinburgh: Oliver &amp; Boyd.</li>
+              <li id="ref-7"><strong>Yates, F.</strong> (1934). "Contingency tables involving small numbers and the χ² test." <em>Supplement to the Journal of the Royal Statistical Society</em>, 1(2): 217–235.</li>
+              <li id="ref-8"><strong>Campbell, Ian.</strong> (2007). "Chi-squared and Fisher–Irwin tests of two-by-two tables with small sample recommendations." <em>Statistics in Medicine</em>, 26(19): 3661–3675.</li>
+              <li id="ref-9"><strong>McNemar, Quinn.</strong> (1947). "Note on the sampling error of the difference between correlated proportions or percentages." <em>Psychometrika</em>, 12(2): 153–157.</li>
+              <li id="ref-10"><strong>Bland, J. Martin &amp; Altman, Douglas G.</strong> (2000). "The odds ratio." <em>BMJ</em>, 320(7247): 1468.</li>
+              <li id="ref-11"><strong>Mantel, Nathan &amp; Haenszel, William.</strong> (1959). "Statistical aspects of the analysis of data from retrospective studies of disease." <em>Journal of the National Cancer Institute</em>, 22(4): 719–748.</li>
+              <li id="ref-12"><strong>Student [Gosset, W. S.].</strong> (1907). "On the error of counting with a haemacytometer." <em>Biometrika</em>, 5(3): 351–360.</li>
+              <li id="ref-13"><strong>Nelder, J. A. &amp; Wedderburn, R. W. M.</strong> (1972). "Generalized linear models." <em>Journal of the Royal Statistical Society: Series A</em>, 135(3): 370–384.</li>
+              <li id="ref-14"><strong>Armitage, P.</strong> (1955). "Tests for linear trends in proportions and frequencies." <em>Biometrics</em>, 11(3): 375–386.</li>
+              <li id="ref-15"><strong>Cohen, Jacob.</strong> (1960). "A coefficient of agreement for nominal scales." <em>Educational and Psychological Measurement</em>, 20(1): 37–46.</li>
+              <li id="ref-16"><strong>Feinstein, Alvan R. &amp; Cicchetti, Domenic V.</strong> (1990). "High agreement but low kappa: I. The problems of two paradoxes." <em>Journal of Clinical Epidemiology</em>, 43(6): 543–549.</li>
+              <li id="ref-17"><strong>Fisher, R. A.</strong> (1936). "Has Mendel’s work been rediscovered?" <em>Annals of Science</em>, 1(2): 115–137.</li>
+              <li id="ref-18"><strong>Franklin, Allan, Edwards, A. W. F., Fairbanks, Daniel J., Hartl, Daniel L. &amp; Seidenfeld, Teddy.</strong> (2008). <em>Ending the Mendel–Fisher Controversy</em>. Pittsburgh: University of Pittsburgh Press.</li>
+              <li id="ref-19"><strong>Altman, Douglas G. &amp; Royston, Patrick.</strong> (2006). "The cost of dichotomising continuous variables." <em>BMJ</em>, 332(7549): 1080.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/making-sense-of-data.html">Making Sense of Data</a> (Part 8 of 9)</div>
+  <div class="series-banner-links">
+    <a href="correlation-and-regression.html">← Part 7: Correlation and Regression: Lines, Curves and Causes</a>
+    <span>Part 9 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/counts-and-categories.js"></script>
+</body>
+</html>

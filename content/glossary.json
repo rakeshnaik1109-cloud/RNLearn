@@ -3992,5 +3992,129 @@
     "forms": [
       "Simpson's paradox"
     ]
+  },
+  {
+    "term": "Nominal data",
+    "definition": "Categories with no natural order, such as species or blood group.",
+    "forms": []
+  },
+  {
+    "term": "Ordinal data",
+    "definition": "Categories with a natural order but no fixed spacing, such as mild, moderate and severe.",
+    "forms": []
+  },
+  {
+    "term": "Contingency table",
+    "definition": "A table counting observations in each combination of two or more categorical variables.",
+    "forms": [
+      "contingency tables",
+      "cross-tabulation"
+    ]
+  },
+  {
+    "term": "Chi-square test",
+    "definition": "A test comparing observed counts with expected counts using Σ(O − E)²/E.",
+    "forms": [
+      "chi-square tests",
+      "χ² test",
+      "χ² tests"
+    ]
+  },
+  {
+    "term": "Goodness-of-fit test",
+    "definition": "A test of whether observed counts agree with those predicted by a theory or distribution.",
+    "forms": []
+  },
+  {
+    "term": "Expected count",
+    "definition": "The count predicted in a category or cell if the null hypothesis were true.",
+    "forms": [
+      "expected counts"
+    ]
+  },
+  {
+    "term": "Fisher’s exact test",
+    "definition": "An exact test for a 2 × 2 table, based on the probabilities of all tables with the same row and column totals.",
+    "forms": [
+      "Fisher's exact test"
+    ]
+  },
+  {
+    "term": "Yates’s continuity correction",
+    "definition": "A correction that reduces each |O − E| by 0.5 in a 2 × 2 χ² test; it tends to be conservative.",
+    "forms": [
+      "Yates's continuity correction",
+      "Yates’s correction",
+      "Yates's correction"
+    ]
+  },
+  {
+    "term": "McNemar’s test",
+    "definition": "A test for paired yes/no data, using only the pairs in which the two classifications disagree.",
+    "forms": [
+      "McNemar's test"
+    ]
+  },
+  {
+    "term": "Risk ratio",
+    "definition": "The ratio of the probability of an outcome in one group to that in another; also called relative risk.",
+    "forms": [
+      "relative risk",
+      "risk ratios"
+    ]
+  },
+  {
+    "term": "Number needed to treat",
+    "definition": "The reciprocal of the difference in proportions: how many units must be treated for one extra success.",
+    "forms": []
+  },
+  {
+    "term": "Mantel–Haenszel method",
+    "definition": "A way of combining 2 × 2 tables from several strata into one adjusted odds ratio and test.",
+    "forms": [
+      "Mantel-Haenszel method"
+    ]
+  },
+  {
+    "term": "Overdispersion",
+    "definition": "More variation in counts than a Poisson model predicts; the variance exceeds the mean.",
+    "forms": []
+  },
+  {
+    "term": "Poisson regression",
+    "definition": "A regression model for counts in which the logarithm of the expected rate is a linear function of predictors.",
+    "forms": []
+  },
+  {
+    "term": "Generalised linear model",
+    "definition": "A family of regression models, including linear, logistic and Poisson regression, linked by a common framework.",
+    "forms": [
+      "generalised linear models",
+      "generalized linear model",
+      "generalized linear models",
+      "GLM"
+    ]
+  },
+  {
+    "term": "Cochran–Armitage trend test",
+    "definition": "A test for a steady rise or fall in a proportion across ordered groups.",
+    "forms": [
+      "Cochran-Armitage trend test"
+    ]
+  },
+  {
+    "term": "Cohen’s kappa",
+    "definition": "A measure of agreement between two raters corrected for the agreement expected by chance.",
+    "forms": [
+      "Cohen's kappa"
+    ]
+  },
+  {
+    "term": "Dichotomisation",
+    "definition": "Splitting a continuous variable into two categories, such as high and low; it loses information and power.",
+    "forms": [
+      "dichotomising",
+      "dichotomizing"
+    ]
   }
 ]

@@ -3994,5 +3994,129 @@ window.RNLEARN_GLOSSARY = [
   [
    "Simpson's paradox"
   ]
+ ],
+ [
+  "Nominal data",
+  "Categories with no natural order, such as species or blood group.",
+  []
+ ],
+ [
+  "Ordinal data",
+  "Categories with a natural order but no fixed spacing, such as mild, moderate and severe.",
+  []
+ ],
+ [
+  "Contingency table",
+  "A table counting observations in each combination of two or more categorical variables.",
+  [
+   "contingency tables",
+   "cross-tabulation"
+  ]
+ ],
+ [
+  "Chi-square test",
+  "A test comparing observed counts with expected counts using Σ(O − E)²/E.",
+  [
+   "chi-square tests",
+   "χ² test",
+   "χ² tests"
+  ]
+ ],
+ [
+  "Goodness-of-fit test",
+  "A test of whether observed counts agree with those predicted by a theory or distribution.",
+  []
+ ],
+ [
+  "Expected count",
+  "The count predicted in a category or cell if the null hypothesis were true.",
+  [
+   "expected counts"
+  ]
+ ],
+ [
+  "Fisher’s exact test",
+  "An exact test for a 2 × 2 table, based on the probabilities of all tables with the same row and column totals.",
+  [
+   "Fisher's exact test"
+  ]
+ ],
+ [
+  "Yates’s continuity correction",
+  "A correction that reduces each |O − E| by 0.5 in a 2 × 2 χ² test; it tends to be conservative.",
+  [
+   "Yates's continuity correction",
+   "Yates’s correction",
+   "Yates's correction"
+  ]
+ ],
+ [
+  "McNemar’s test",
+  "A test for paired yes/no data, using only the pairs in which the two classifications disagree.",
+  [
+   "McNemar's test"
+  ]
+ ],
+ [
+  "Risk ratio",
+  "The ratio of the probability of an outcome in one group to that in another; also called relative risk.",
+  [
+   "relative risk",
+   "risk ratios"
+  ]
+ ],
+ [
+  "Number needed to treat",
+  "The reciprocal of the difference in proportions: how many units must be treated for one extra success.",
+  []
+ ],
+ [
+  "Mantel–Haenszel method",
+  "A way of combining 2 × 2 tables from several strata into one adjusted odds ratio and test.",
+  [
+   "Mantel-Haenszel method"
+  ]
+ ],
+ [
+  "Overdispersion",
+  "More variation in counts than a Poisson model predicts; the variance exceeds the mean.",
+  []
+ ],
+ [
+  "Poisson regression",
+  "A regression model for counts in which the logarithm of the expected rate is a linear function of predictors.",
+  []
+ ],
+ [
+  "Generalised linear model",
+  "A family of regression models, including linear, logistic and Poisson regression, linked by a common framework.",
+  [
+   "generalised linear models",
+   "generalized linear model",
+   "generalized linear models",
+   "GLM"
+  ]
+ ],
+ [
+  "Cochran–Armitage trend test",
+  "A test for a steady rise or fall in a proportion across ordered groups.",
+  [
+   "Cochran-Armitage trend test"
+  ]
+ ],
+ [
+  "Cohen’s kappa",
+  "A measure of agreement between two raters corrected for the agreement expected by chance.",
+  [
+   "Cohen's kappa"
+  ]
+ ],
+ [
+  "Dichotomisation",
+  "Splitting a continuous variable into two categories, such as high and low; it loses information and power.",
+  [
+   "dichotomising",
+   "dichotomizing"
+  ]
  ]
 ];

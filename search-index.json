@@ -204,6 +204,23 @@
     "type": "tutorial"
   },
   {
+    "slug": "counts-and-categories",
+    "url": "articles/counts-and-categories.html",
+    "title": "Counts and Categories: Chi-Square, Exact Tests and Overdispersion",
+    "summary": "Categorical data, χ² goodness of fit and independence, Fisher’s exact test, McNemar’s test, risk and odds ratios, Poisson counts and overdispersion, trend tests and Cohen’s kappa.",
+    "subject": "Science",
+    "tags": [
+      "statistics",
+      "chi-square",
+      "categorical-data",
+      "data-analysis",
+      "hypothesis-testing",
+      "experiments"
+    ],
+    "date": "2026-11-19",
+    "type": "tutorial"
+  },
+  {
     "slug": "correlation-and-regression",
     "url": "articles/correlation-and-regression.html",
     "title": "Correlation and Regression: Lines, Curves and Causes",

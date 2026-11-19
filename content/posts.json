@@ -1,5 +1,31 @@
 [
   {
+    "slug": "counts-and-categories",
+    "title": "Counts and Categories: Chi-Square, Exact Tests and Overdispersion",
+    "summary": "Categorical data, χ² goodness of fit and independence, Fisher’s exact test, McNemar’s test, risk and odds ratios, Poisson counts and overdispersion, trend tests and Cohen’s kappa.",
+    "subject": "Science",
+    "tags": [
+      "statistics",
+      "chi-square",
+      "categorical-data",
+      "data-analysis",
+      "hypothesis-testing",
+      "experiments"
+    ],
+    "date": "2026-11-19",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 18,
+    "series": {
+      "id": "making-sense-of-data",
+      "part": 8
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
     "slug": "correlation-and-regression",
     "title": "Correlation and Regression: Lines, Curves and Causes",
     "summary": "Covariance, Pearson and rank correlation, Anscombe’s quartet, least squares, confidence and prediction bands, residuals and influence, curve fitting with χ², logistic regression and causation.",
