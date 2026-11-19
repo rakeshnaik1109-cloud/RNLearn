@@ -3422,5 +3422,97 @@ window.RNLEARN_GLOSSARY = [
   [
    "gambler's fallacy"
   ]
+ ],
+ [
+  "Measurement uncertainty",
+  "A number that quantifies doubt about a measurement result: a range in which the true value is believed to lie, at a stated confidence.",
+  []
+ ],
+ [
+  "Systematic error",
+  "An error that shifts every reading in the same way, such as a miscalibrated instrument; averaging cannot remove it.",
+  [
+   "systematic errors"
+  ]
+ ],
+ [
+  "Random error",
+  "An error that varies unpredictably from reading to reading; it can be reduced by repeating and averaging.",
+  [
+   "random errors"
+  ]
+ ],
+ [
+  "Trueness",
+  "How close the average of many measurements is to the true value; the absence of systematic error.",
+  []
+ ],
+ [
+  "Type A evaluation",
+  "Evaluating an uncertainty component by statistics on repeated observations, for example the standard error of the mean.",
+  []
+ ],
+ [
+  "Type B evaluation",
+  "Evaluating an uncertainty component from other information, such as certificates, specifications or instrument resolution.",
+  []
+ ],
+ [
+  "Combined standard uncertainty",
+  "The total standard uncertainty of a result, found by combining all components, usually in quadrature.",
+  []
+ ],
+ [
+  "Expanded uncertainty",
+  "The combined standard uncertainty multiplied by a coverage factor k, often 2, to give an interval of about 95% confidence.",
+  []
+ ],
+ [
+  "Coverage factor",
+  "The multiplier k used to turn a combined standard uncertainty into an expanded uncertainty.",
+  []
+ ],
+ [
+  "Uncertainty budget",
+  "A table listing every source of uncertainty in a measurement, its size and its contribution to the total.",
+  [
+   "uncertainty budgets"
+  ]
+ ],
+ [
+  "Propagation of uncertainty",
+  "Working out the uncertainty of a calculated result from the uncertainties of the quantities used to calculate it.",
+  []
+ ],
+ [
+  "Birge ratio",
+  "√(χ²/(n − 1)) for a set of measurements combined by weighted mean; values much larger than 1 signal inconsistent results.",
+  []
+ ],
+ [
+  "Calibration curve",
+  "A fitted relation between an instrument’s signal and known standards, used to convert the signal of an unknown into a value.",
+  [
+   "calibration curves"
+  ]
+ ],
+ [
+  "Limit of detection",
+  "The smallest amount that can be reliably distinguished from a blank, often 3 × the blank standard deviation divided by the calibration slope.",
+  [
+   "LOD"
+  ]
+ ],
+ [
+  "Limit of quantification",
+  "The smallest amount that can be measured with acceptable precision, often 10 × the blank standard deviation divided by the calibration slope.",
+  [
+   "LOQ"
+  ]
+ ],
+ [
+  "Traceability",
+  "The property of a measurement linked to the SI units through an unbroken, documented chain of calibrations.",
+  []
  ]
 ];

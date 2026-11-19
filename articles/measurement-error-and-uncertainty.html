@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Measurement, Error and Uncertainty: How Sure Are You? — RNLearn</title>
+  <meta name="description" content="Random and systematic errors, accuracy and precision, Type A and Type B uncertainty, uncertainty budgets, propagation, weighted means, calibration curves and limits of detection.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/measurement-error-and-uncertainty.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Measurement, Error and Uncertainty: How Sure Are You? — RNLearn">
+  <meta property="og:description" content="Random and systematic errors, accuracy and precision, Type A and Type B uncertainty, uncertainty budgets, propagation, weighted means, calibration curves and limits of detection.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/measurement-error-and-uncertainty.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Measurement, Error and Uncertainty: How Sure Are You? — RNLearn">
+  <meta name="twitter:description" content="Random and systematic errors, accuracy and precision, Type A and Type B uncertainty, uncertainty budgets, propagation, weighted means, calibration curves and limits of detection.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Measurement, Error and Uncertainty: How Sure Are You?",
+    "description": "Random and systematic errors, accuracy and precision, Type A and Type B uncertainty, uncertainty budgets, propagation, weighted means, calibration curves and limits of detection.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-12-04",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/measurement-error-and-uncertainty.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/science.html" class="post-subject-tag" data-subject="science">Science</a>
+        </div>
+        <h1 class="article-title">Measurement, Error and Uncertainty: How Sure Are You?</h1>
+        <p class="article-standfirst">
+          Every measurement is imperfect. Here is how to say exactly how imperfect: error and uncertainty, uncertainty budgets, propagation through formulas, and how to report a result honestly.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-12-04">4 December 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>21 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/making-sense-of-data.html">Making Sense of Data</a> (Part 3 of 9)</div>
+  <div class="series-banner-links">
+    <a href="probability-and-distributions.html">← Part 2: Probability and Distributions: Dice, Photons and the Bell Curve</a>
+    <span>Part 4 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. A Number Is Not Enough</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Error and Uncertainty</a></li>
+              <li><a class="toc-link" href="#section-4">4. Random and Systematic Errors</a></li>
+              <li><a class="toc-link" href="#section-5">5. Accuracy, Precision and Trueness</a></li>
+              <li><a class="toc-link" href="#section-6">6. Type A: Uncertainty from Repeated Measurements</a></li>
+              <li><a class="toc-link" href="#section-7">7. Type B: Uncertainty from Everything Else</a></li>
+              <li><a class="toc-link" href="#section-8">8. Combining Uncertainties: The Budget</a></li>
+              <li><a class="toc-link" href="#section-9">9. Propagation of Uncertainty</a></li>
+              <li><a class="toc-link" href="#section-10">10. Reporting a Result</a></li>
+              <li><a class="toc-link" href="#section-11">11. Combining Measurements: The Weighted Mean</a></li>
+              <li><a class="toc-link" href="#section-12">12. Calibration Curves</a></li>
+              <li><a class="toc-link" href="#section-13">13. Limits of Detection and Quantification</a></li>
+              <li><a class="toc-link" href="#section-14">14. Worked Example: Measuring g with a Pendulum</a></li>
+              <li><a class="toc-link" href="#section-15">15. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-16">16. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-17">17. Philosophy Corner</a></li>
+              <li><a class="toc-link" href="#section-18">18. People in This Part</a></li>
+              <li><a class="toc-link" href="#section-19">19. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-20">20. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. A Number Is Not Enough</h2>
+            <p>A student times a pendulum and announces that the acceleration due to gravity is 9.792817 m/s². Another reports 9.83 m/s². Who is right? Both numbers are meaningless as they stand, because neither says <em>how well</em> it is known. If the first result is uncertain by ±0.5 m/s², its six decimal places are fiction; if the second is uncertain by ±0.01 m/s², it disagrees with the accepted local value and something is wrong.</p>
+            <p>Every measurement is imperfect. Scales are slightly miscalibrated, hands shake, thermometers lag, digital displays round, and repeated readings scatter. Metrology, the science of measurement, has developed a careful language for this: <strong>error</strong> and <strong>uncertainty</strong>, random and systematic effects, accuracy and precision, Type A and Type B evaluations, and rules for <strong>propagating</strong> uncertainty through calculations. This part of the series explains that language and how to use it, from the pendulum in a school laboratory to the international comparisons that define the units of measurement. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <p>The guiding principle is simple: <strong>a measurement result is a value together with its uncertainty</strong>. Without the uncertainty, the value cannot be compared with anything.</p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-uncert-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. From a sacked astronomer's assistant to the new SI, 1796–2019.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Error and Uncertainty</h2>
+            <p>The two words are often used interchangeably, but metrologists distinguish them carefully. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+            <ul>
+              <li>The <strong>error</strong> of a measurement is the difference between the measured value and the true value. Since we never know the true value exactly, we never know the error exactly either.</li>
+              <li>The <strong>uncertainty</strong> is a number that quantifies our doubt about the result: a range within which the true value is believed to lie, with a stated level of confidence.</li>
+            </ul>
+            <p>A measurement can be very close to the true value by luck (small error) and still have a large uncertainty; or it can have a small stated uncertainty and a large error, if something has been overlooked. The goal of uncertainty analysis is an honest, well-founded statement of how much we know.</p>
+            <p>Measurement rests on agreed <strong>standards</strong>. In 1875 seventeen nations signed the Metre Convention, creating the International Bureau of Weights and Measures. Since 2019, the units of the International System (SI) have been defined by fixing the values of fundamental constants, such as the speed of light and the Planck constant, so that any well-equipped laboratory can realise them. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> Every measurement is ultimately linked to these definitions through a chain of calibrations, a property called <strong>traceability</strong>.</p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Random and Systematic Errors</h2>
+            <p>Errors come in two broad kinds.</p>
+            <ul>
+              <li><strong>Random errors</strong> vary unpredictably from one reading to the next: electronic noise, small air currents, the exact moment you press a stopwatch. They scatter results in both directions and can be reduced by repeating the measurement and averaging.</li>
+              <li><strong>Systematic errors</strong> shift every reading in the same way: a balance that reads 0.3 g too high, a ruler that has stretched, a thermometer that lags behind a rising temperature, reading a scale at an angle (parallax), or always pressing the stopwatch a little late. Averaging cannot remove them. They are found only by calibration, by comparing different methods, and by careful thought.</li>
+            </ul>
+            <p>A third category, <strong>blunders</strong>, covers outright mistakes: misreading a dial, writing down the wrong number, using the wrong units. They are not part of the uncertainty and should be found and corrected (Part 1 discussed how to treat suspicious values).</p>
+            <p>The discovery of human systematic error has a famous history. In 1796 Nevil Maskelyne, the Astronomer Royal, dismissed his assistant David Kinnebrook, whose timings of stars crossing the telescope's crosshairs were consistently about 0.8 seconds later than his own. Decades later, Friedrich Bessel investigated and found that every observer has a characteristic delay, which he called the <strong>personal equation</strong>. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> Kinnebrook had not been careless; he simply had a different reaction time. Astronomers began measuring and correcting for each observer's personal equation, and eventually replaced human timing with automatic recording.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Accuracy, Precision and Trueness</h2>
+            <p>In everyday speech "accurate" and "precise" mean the same thing. In measurement they do not. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>, <a class="cite" href="#ref-6">6</a>]</span></p>
+            <ul>
+              <li><strong>Precision</strong> describes how closely repeated measurements agree with each other: small scatter, small random error.</li>
+              <li><strong>Trueness</strong> describes how close the <em>average</em> of many measurements is to the true value: small systematic error.</li>
+              <li><strong>Accuracy</strong> describes how close a single result is to the true value, and requires both trueness and precision.</li>
+            </ul>
+            <p>Precision itself has two flavours: <strong>repeatability</strong> (the same person, instrument and conditions, over a short time) and <strong>reproducibility</strong> (different people, instruments, laboratories or days). Reproducibility is almost always worse, because it includes effects that stay constant within one session. A method that is repeatable but not reproducible is hiding a systematic effect.</p>
+            <figure class="fig" data-fig="fig-target">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Accuracy and precision on a target.</strong> Adjust the systematic and random errors and see how twenty measurements land. The cross marks their average.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Type A: Uncertainty from Repeated Measurements</h2>
+            <p>The <em>Guide to the Expression of Uncertainty in Measurement</em> (the GUM, first published in 1993 and now the international standard approach) classifies uncertainty components by how they are evaluated, not by where they come from. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-7">7</a>]</span> A <strong>Type A</strong> evaluation uses statistics on repeated observations.</p>
+            <p>If you make n independent readings with sample standard deviation s, the best estimate of the quantity is their mean, and its <strong>standard uncertainty</strong> is the standard error of the mean:</p>
+            <p>$$u(\bar{x}) = \frac{s}{\sqrt{n}}.$$</p>
+            <p>For five timings of 20 swings of a pendulum, 40.05, 40.12, 39.98, 40.10 and 40.03 s, the mean is 40.056 s, s = 0.056 s, and u = 0.056/√5 = 0.025 s. The standard deviation describes the scatter of single readings and does not shrink with more data; the standard error of the mean does, as 1/√n (Part 2). But averaging only beats random error. As Figure 3 shows, it brings you ever closer to the true value <em>plus</em> any systematic offset.</p>
+            <figure class="fig" data-fig="fig-averaging">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. What averaging can and cannot do.</strong> Single readings (grey) scatter around the true value plus an offset. The running mean (blue) and its standard error shrink towards the offset value, not the true value.
+              </figcaption>
+            </figure>
+            <p>With very few readings, s itself is uncertain, and the standard error underestimates the true spread of possible means; Part 4 shows how the t-distribution corrects for this.</p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Type B: Uncertainty from Everything Else</h2>
+            <p>A <strong>Type B</strong> evaluation uses any other information: calibration certificates, manufacturer specifications, the resolution of a display, previous data, published values, or scientific judgement. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-8">8</a>]</span> The skill is turning that information into a standard uncertainty, comparable with a standard deviation. Common cases:</p>
+            <ul>
+              <li><strong>A stated range, equally likely anywhere</strong> (a rectangular distribution, ±a): u = a/√3. A digital display with resolution 0.01 V rounds by at most ±0.005 V, so u = 0.005/√3 ≈ 0.0029 V. Reading a ruler marked in millimetres to the nearest mark: ±0.5 mm, so u ≈ 0.29 mm.</li>
+              <li><strong>A range where the centre is more likely</strong> (a triangular distribution, ±a): u = a/√6.</li>
+              <li><strong>A calibration certificate</strong> stating an expanded uncertainty U with coverage factor k (for example "U = 0.6 mm, k = 2"): u = U/k = 0.3 mm.</li>
+              <li><strong>A manufacturer's specification</strong> such as "accuracy ±(0.5% of reading + 2 digits)": usually treated as rectangular, u = limit/√3, unless the manufacturer says otherwise.</li>
+            </ul>
+            <p>Type A and Type B uncertainties are treated identically once evaluated. The distinction is only about how the number was obtained. In 1980 an international working group made this the basis of a common approach, eventually written into the GUM. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span></p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Combining Uncertainties: The Budget</h2>
+            <p>A real measurement has several uncertainty components. If they are independent, their standard uncertainties combine by <strong>adding in quadrature</strong>, the square root of the sum of squares:</p>
+            <p>$$u_c = \sqrt{u_1^2 + u_2^2 + \dots + u_k^2}.$$</p>
+            <p>This follows from the fact that variances of independent quantities add (Part 2). It has a striking consequence: <strong>the largest component dominates</strong>. Components of 3 and 4 units combine to 5, but components of 1 and 10 combine to 10.05: the small one hardly matters.</p>
+            <p>The combined standard uncertainty u<sub>c</sub> corresponds roughly to one standard deviation. For reporting, it is usually multiplied by a <strong>coverage factor</strong> k to give an <strong>expanded uncertainty</strong> U = k·u<sub>c</sub>. With k = 2, the interval ±U covers the true value with about 95% confidence, if the distribution is roughly normal. Always state which k you used.</p>
+            <p>A table listing every component, its source, type, value and contribution is called an <strong>uncertainty budget</strong>. Its greatest value is practical: it shows where the uncertainty comes from, and therefore where effort to improve the measurement will pay off.</p>
+            <figure class="fig" data-fig="fig-budget">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. An uncertainty budget for a pendulum measurement of g.</strong> Each bar shows how much of the total variance comes from one component. Change the components, or replace the stopwatch with a light gate, and watch the total.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Propagation of Uncertainty</h2>
+            <p>Most results are calculated from several measured quantities: density from mass and volume, g from length and period. How do the input uncertainties carry through to the result? For a result q = f(x, y, …) with independent inputs and small uncertainties, the general rule (the "law of propagation of uncertainty") is <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-9">9</a>]</span></p>
+            <p>$$u_q^2 = \left(\frac{\partial f}{\partial x}\right)^2 u_x^2 + \left(\frac{\partial f}{\partial y}\right)^2 u_y^2 + \cdots$$</p>
+            <p>Each input's uncertainty is multiplied by how sensitive the result is to that input (the partial derivative, or <strong>sensitivity coefficient</strong>). For common formulas this simplifies to easy rules:</p>
+            <div class="table-container" style="overflow-x:auto; margin:1.2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.92rem; line-height:1.5;">
+                <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.5rem;">Calculation</th><th style="padding:0.5rem;">Rule</th><th style="padding:0.5rem;">Example</th></tr></thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">q = a + b or a − b</td><td style="padding:0.5rem;">Absolute uncertainties add in quadrature: u<sub>q</sub> = √(u<sub>a</sub>² + u<sub>b</sub>²)</td><td style="padding:0.5rem;">(12.0 ± 0.3) − (11.5 ± 0.4) = 0.5 ± 0.5: a 100% relative uncertainty from two good measurements</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">q = a × b or a ÷ b</td><td style="padding:0.5rem;">Relative uncertainties add in quadrature</td><td style="padding:0.5rem;">Density = (12.35 ± 0.01 g) ÷ (4.56 ± 0.05 cm³) = 2.708 ± 0.030 g/cm³</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">q = aⁿ</td><td style="padding:0.5rem;">Relative uncertainty × |n|</td><td style="padding:0.5rem;">Volume of a sphere ∝ r³: 1% in r gives 3% in volume</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">q = c × a (c exact)</td><td style="padding:0.5rem;">u<sub>q</sub> = |c| × u<sub>a</sub></td><td style="padding:0.5rem;">Period from 20 swings: T = t/20, so u<sub>T</sub> = u<sub>t</sub>/20</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Two practical lessons follow. Subtracting two nearly equal numbers can destroy precision, so design experiments to measure differences directly when possible. And quantities raised to high powers deserve the most care: in g = 4π²L/T², the period counts twice as much as the length.</p>
+            <p>The formula is an approximation that assumes small uncertainties and nearly linear behaviour. When those fail, for example when dividing by a quantity with a large relative uncertainty, the modern alternative is <strong>Monte Carlo propagation</strong>: simulate thousands of possible values of each input from its distribution, compute the result for each, and look at the spread. A 2008 supplement to the GUM describes the method. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span></p>
+            <figure class="fig" data-fig="fig-propagation">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Propagation: formula versus simulation.</strong> Choose a calculation and set the inputs and their uncertainties. The histogram shows 20,000 simulated results; the red curve is the formula's prediction. Increase the uncertainty of b in a quotient and watch them part company.
+              </figcaption>
+            </figure>
+            <p>One important caveat: the quadrature rules assume the input errors are <strong>independent</strong>. If two inputs share a systematic error, for example two lengths measured with the same miscalibrated ruler, their errors are correlated, and the formula must include an extra covariance term. Ignoring it can either overstate or understate the uncertainty.</p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Reporting a Result</h2>
+            <ul>
+              <li><strong>Round the uncertainty</strong> to one or two significant figures (two is common when the first digit is 1 or 2), and <strong>round the value to the same decimal place</strong>. Not 9.792817 ± 0.03155 m/s², but 9.793 ± 0.032 m/s².</li>
+              <li><strong>State what the uncertainty means</strong>: standard uncertainty (k = 1) or expanded uncertainty (k = 2, about 95%).</li>
+              <li>The <strong>concise notation</strong> puts the uncertainty in the last digits in brackets: 9.793(32) m/s² means 9.793 ± 0.032. Fundamental constants are often written this way.</li>
+              <li><strong>Carry extra digits during calculations</strong>, and round only the final result, to avoid accumulating rounding errors.</li>
+              <li><strong>Describe the main components</strong>, ideally with an uncertainty budget, so others can judge and reproduce your result.</li>
+            </ul>
+            <p>Two results agree if their difference is small compared with the combined uncertainty of the difference. For results x<sub>1</sub> ± u<sub>1</sub> and x<sub>2</sub> ± u<sub>2</sub>, a difference larger than about 2√(u<sub>1</sub>² + u<sub>2</sub>²) is a warning sign worth investigating.</p>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Combining Measurements: The Weighted Mean</h2>
+            <p>When several independent measurements of the same quantity have different uncertainties, the best combined estimate gives more weight to the more precise ones. The weights are the inverse squares of the uncertainties, w<sub>i</sub> = 1/u<sub>i</sub>²: <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span></p>
+            <p>$$\bar{x}_w = \frac{\sum w_i x_i}{\sum w_i}, \qquad u(\bar{x}_w) = \frac{1}{\sqrt{\sum w_i}}.$$</p>
+            <p>A measurement ten times more precise counts a hundred times more. But a weighted mean is only meaningful if the measurements are consistent. A check is to compute χ² = Σ w<sub>i</sub>(x<sub>i</sub> − x̄<sub>w</sub>)² and compare it with the number of degrees of freedom, n − 1. Their ratio's square root, √(χ²/(n − 1)), is known as the <strong>Birge ratio</strong>, after Raymond Birge, who pioneered the systematic combination of measurements of the fundamental constants from 1929. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>, <a class="cite" href="#ref-12">12</a>]</span> A Birge ratio near 1 means the scatter matches the stated uncertainties; much larger than 1 means at least one measurement has an unrecognised error. For four consistent measurements of g of 9.807(4), 9.815(6), 9.801(5) and 9.812(3) m/s², the weighted mean is 9.8092(20) m/s², with a Birge ratio of 1.26.</p>
+            <figure class="fig" data-fig="fig-weighted-mean">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. The weighted mean and its consistency check.</strong> Each bar shows one laboratory's result and standard uncertainty. Add a discrepant laboratory, or a very precise one, and watch the weighted mean and Birge ratio.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Calibration Curves</h2>
+            <p>Many instruments do not measure the quantity you want directly. A spectrophotometer measures how much light a solution absorbs; a sensor outputs a voltage; you want a concentration, a temperature or a pressure. The link is a <strong>calibration curve</strong>: measure the instrument's signal for several standards of known value, fit a line (or curve) through them, and then read it backwards to convert the signal of an unknown sample into a value.</p>
+            <p>The calibration contributes its own uncertainty: from the standards themselves, from the scatter of the points about the fitted line, and from how far the unknown lies from the centre of the calibration range. Results are most reliable in the middle of the range covered by the standards; <strong>extrapolating</strong> beyond the highest or lowest standard is risky, because the instrument's response may not stay linear. Part 7 covers fitting lines and their uncertainties properly.</p>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Limits of Detection and Quantification</h2>
+            <p>Every instrument gives a small, noisy signal even for a sample containing none of the substance (a <strong>blank</strong>). How small an amount can be detected at all? In 1968 the chemist Lloyd Currie set out a clear statistical framework, and the common practical definitions are: <span class="cite-group">[<a class="cite" href="#ref-13">13</a>, <a class="cite" href="#ref-14">14</a>]</span></p>
+            <ul>
+              <li><strong>Limit of detection (LOD):</strong> the smallest amount whose signal can be reliably distinguished from the blank, often taken as 3 × the standard deviation of the blank signal, divided by the slope of the calibration curve.</li>
+              <li><strong>Limit of quantification (LOQ):</strong> the smallest amount that can be measured with acceptable precision, often 10 × the blank standard deviation divided by the slope.</li>
+            </ul>
+            <p>Between the LOD and the LOQ, you can say a substance is present but not how much with confidence. Below the LOD, report "not detected", with the LOD ("&lt; 0.4 mg/L"), never "zero". Definitions vary between fields and regulators, so always state how your limits were calculated.</p>
+            <figure class="fig" data-fig="fig-calibration-lod">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 7. A calibration curve with detection and quantification limits.</strong> Change the instrument noise and the unknown sample's signal. The green lines show the sample's signal read back to a concentration; shading marks the regions below the LOD and LOQ.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Worked Example: Measuring g with a Pendulum</h2>
+            <p>A pendulum of length L is timed for 20 swings, five times. The model is g = 4π²L/T², with T the period.</p>
+            <ol>
+              <li><strong>Length.</strong> L = 0.9950 m from the pivot to the centre of the bob. Components: tape resolution ±0.5 mm (u = 0.29 mm, rectangular); judging the bob's centre ±1 mm (u = 0.58 mm); tape calibration certificate U = 0.6 mm, k = 2 (u = 0.30 mm). Combined: u(L) = √(0.29² + 0.58² + 0.30²) = 0.71 mm, a relative uncertainty of 0.072%.</li>
+              <li><strong>Time.</strong> Five timings of 20 swings: mean 40.056 s, SD 0.056 s, so Type A u = 0.025 s. Reaction time at start and stop: a possible systematic offset of up to ±0.1 s per timing that does not average out, treated as rectangular: u = 0.058 s. Combined u(t) = √(0.025² + 0.058²) = 0.063 s, so T = 2.0028 s with u(T) = 0.0031 s (0.157%).</li>
+              <li><strong>Propagate.</strong> g = 4π² × 0.9950/2.0028² = 9.7928 m/s². Relative uncertainty: √(0.072%² + (2 × 0.157%)²) = 0.32%, so u(g) = 0.032 m/s². A Monte Carlo simulation with 200,000 trials gives the same: 0.0316 m/s².</li>
+              <li><strong>Report.</strong> g = 9.793 ± 0.032 m/s² (k = 1), or 9.79 ± 0.06 m/s² (k = 2, about 95%). The accepted value near sea level at mid-latitudes is about 9.80–9.81 m/s², within the expanded uncertainty.</li>
+              <li><strong>Learn from the budget.</strong> The reaction-time component contributes about 80% of the variance, the timing scatter 15%, and the length only 5%. A better tape measure is pointless; a light gate or timing more swings would help most. (Real pendulums also have small systematic effects, such as the finite size of the bob and the swing amplitude, which a careful budget would include.)</li>
+            </ol>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">Try it in Python: an uncertainty budget and Monte Carlo propagation</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">import numpy as np
+t20 = np.array([40.05, 40.12, 39.98, 40.10, 40.03])          # s, 20 swings each
+uA = t20.std(ddof=1) / np.sqrt(len(t20))                     # 0.025 s (Type A)
+uB = 0.1 / np.sqrt(3)                                        # 0.058 s (reaction, Type B)
+T, uT = t20.mean() / 20, np.hypot(uA, uB) / 20
+L = 0.9950
+uL = np.sqrt((0.0005/np.sqrt(3))**2 + (0.001/np.sqrt(3))**2 + 0.0003**2)
+g = 4 * np.pi**2 * L / T**2
+ug = g * np.sqrt((uL/L)**2 + (2*uT/T)**2)
+print(round(g, 4), round(ug, 4))                             # 9.7928 0.0316
+
+rng = np.random.default_rng(0)                               # Monte Carlo check
+gs = 4*np.pi**2 * rng.normal(L, uL, 200_000) / rng.normal(T, uT, 200_000)**2
+print(gs.std())                                              # about 0.0316</code></pre>
+            </details>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Try It Yourself: The Thickness of a Sheet of Paper</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: beat your ruler's resolution</div>
+              <ol>
+                <li>Try to measure the thickness of one sheet of printer paper with a ruler marked in millimetres. The reading is "less than 1 mm": the resolution (u ≈ 0.29 mm) is larger than the thing you are measuring.</li>
+                <li>Now measure the thickness of a stack of 200 sheets (a new ream is usually 500). Suppose it reads 21 mm ± 0.5 mm (resolution), u = 0.29 mm.</li>
+                <li>Divide: one sheet is 21/200 = 0.105 mm, with u = 0.29/200 ≈ 0.0015 mm. The rule "q = a/c" divides the uncertainty too.</li>
+                <li>Repeat with different stacks, or squeeze the stack differently, and compare. Is the reproducibility as good as the calculation suggests? (Air gaps between sheets are a systematic effect: how could you check for them?)</li>
+              </ol>
+              <p>Draw up a small uncertainty budget: resolution, squeezing, and the count of sheets. You have just used propagation of uncertainty, and a classic trick of experimental physics: measure many identical things together, or many cycles of a repeating event, to divide the uncertainty.</p>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Legend and Record</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: did a simple maths error lose a spacecraft?</div>
+              <p><strong>The legend:</strong> NASA lost the Mars Climate Orbiter in 1999 because an engineer forgot to convert from imperial to metric units.</p>
+              <p><strong>The record:</strong> the spacecraft was lost on 23 September 1999 as it arrived at Mars. The investigation found that ground software supplied by one team produced thruster impulse data in pound-force seconds, while the navigation software of another team expected newton seconds, a factor of 4.45. The resulting small errors in each trajectory correction accumulated over months, and the orbiter passed far too close to the planet. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span></p>
+              <p><strong>The grain of truth:</strong> it was a units error, but not one person's slip. The investigation blamed the processes that should have caught it: interface checks, verification, and the navigators' unease about trajectory anomalies that was not acted on. It is a perfect example of a <strong>systematic error</strong>: every correction was wrong in the same direction, so repetition reinforced it instead of averaging it away.</p>
+            </div>
+          </section>
+
+          <section id="section-17">
+            <h2>17. Philosophy Corner</h2>
+            <div class="callout callout-philosophy">
+              <div class="callout-header">Philosophy Corner: are our uncertainties honest?</div>
+              <p>In 1986 Max Henrion and Baruch Fischhoff studied the history of measurements of physical constants, such as the speed of light. They found that published uncertainties were systematically too small: successive measurements often differed by many times their stated uncertainties, and new values frequently lay outside the error bars of previous ones. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span> Scientists, it seems, tend to overlook sources of systematic error and to be overconfident.</p>
+              <p>There is also a subtler bias. In his 1974 talk "Cargo Cult Science", Richard Feynman described how measurements of the electron's charge crept slowly from Robert Millikan's slightly low value towards the modern one, rather than jumping. When later experimenters got a value far from Millikan's, Feynman suggested, they looked for something wrong; when they got a value close to it, they did not look so hard. <span class="cite-group">[<a class="cite" href="#ref-17">17</a>]</span> The previous answer acted as an anchor.</p>
+              <p>These stories suggest that uncertainty is not only a property of instruments but of people. Honest uncertainty analysis means actively hunting for systematic errors, deciding analysis methods before seeing the answer (some experiments now hide the result until the analysis is fixed, a practice called blind analysis), and remembering that the true value does not care what we expect.</p>
+              <p><strong>Questions to think about:</strong> Can we ever be sure that all systematic errors have been found? If every measurement is uncertain, in what sense do we "know" the value of a physical constant?</p>
+            </div>
+          </section>
+          <section id="section-18">
+            <h2>18. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Nevil Maskelyne</td>
+                <td style="padding:0.6rem 0.8rem;">1732–1811<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Greenwich Observatory records (1796)</td>
+                <td style="padding:0.6rem 0.8rem;">Noticed his assistant’s consistently late star timings.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Friedrich Wilhelm Bessel</td>
+                <td style="padding:0.6rem 0.8rem;">1784–1846<br>Germany</td>
+                <td style="padding:0.6rem 0.8rem;">The personal equation (1823)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed that every observer has a characteristic timing delay.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Carl Friedrich Gauss</td>
+                <td style="padding:0.6rem 0.8rem;">1777–1855<br>Germany</td>
+                <td style="padding:0.6rem 0.8rem;">Theory of errors and least squares</td>
+                <td style="padding:0.6rem 0.8rem;">Developed the mathematics of combining uncertain observations.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Raymond T. Birge</td>
+                <td style="padding:0.6rem 0.8rem;">1887–1980<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Probable values of the constants (1929)</td>
+                <td style="padding:0.6rem 0.8rem;">Pioneered the consistent combination of measurements of fundamental constants.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Lloyd A. Currie</td>
+                <td style="padding:0.6rem 0.8rem;">1930–2021<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Limits of detection (1968)</td>
+                <td style="padding:0.6rem 0.8rem;">Gave a clear statistical framework for detection and quantification limits.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Richard Feynman</td>
+                <td style="padding:0.6rem 0.8rem;">1918–1988<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">“Cargo Cult Science” (1974)</td>
+                <td style="padding:0.6rem 0.8rem;">Warned scientists against fooling themselves, with the Millikan example.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-19">
+            <h2>19. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about measurement error and uncertainty.</p>
+            <figure class="fig" data-fig="fig-quiz-d3">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-20">
+            <h2>20. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>JCGM 100:2008.</strong> <em>Evaluation of Measurement Data: Guide to the Expression of Uncertainty in Measurement</em> (GUM 1995 with minor corrections). Joint Committee for Guides in Metrology. (First published by ISO in 1993.)</li>
+              <li id="ref-2"><strong>Taylor, John R.</strong> (1997). <em>An Introduction to Error Analysis: The Study of Uncertainties in Physical Measurements</em>. 2nd ed. Sausalito, CA: University Science Books.</li>
+              <li id="ref-3"><strong>JCGM 200:2012.</strong> <em>International Vocabulary of Metrology: Basic and General Concepts and Associated Terms</em> (VIM, 3rd ed.). Joint Committee for Guides in Metrology.</li>
+              <li id="ref-4"><strong>BIPM.</strong> (2019). <em>The International System of Units (SI)</em>. 9th ed. Sèvres: Bureau International des Poids et Mesures.</li>
+              <li id="ref-5"><strong>Schaffer, Simon.</strong> (1988). "Astronomers mark time: discipline and the personal equation." <em>Science in Context</em>, 2(1): 115–145.</li>
+              <li id="ref-6"><strong>ISO 5725-1:1994.</strong> <em>Accuracy (Trueness and Precision) of Measurement Methods and Results, Part 1: General Principles and Definitions</em>. Geneva: International Organization for Standardization.</li>
+              <li id="ref-7"><strong>Kaarls, R.</strong> (1981). "Rapport du groupe de travail sur l’expression des incertitudes" (Recommendation INC-1, 1980). <em>Procès-Verbaux des Séances du Comité International des Poids et Mesures</em>, 49: A1–A12.</li>
+              <li id="ref-8"><strong>Taylor, Barry N. &amp; Kuyatt, Chris E.</strong> (1994). <em>Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results</em>. NIST Technical Note 1297. Gaithersburg, MD: National Institute of Standards and Technology.</li>
+              <li id="ref-9"><strong>Bevington, Philip R. &amp; Robinson, D. Keith.</strong> (2003). <em>Data Reduction and Error Analysis for the Physical Sciences</em>. 3rd ed. New York: McGraw-Hill.</li>
+              <li id="ref-10"><strong>JCGM 101:2008.</strong> <em>Evaluation of Measurement Data, Supplement 1 to the GUM: Propagation of Distributions Using a Monte Carlo Method</em>. Joint Committee for Guides in Metrology.</li>
+              <li id="ref-11"><strong>Birge, Raymond T.</strong> (1929). "Probable values of the general physical constants." <em>Reviews of Modern Physics</em>, 1(1): 1–73.</li>
+              <li id="ref-12"><strong>Birge, Raymond T.</strong> (1932). "The calculation of errors by the method of least squares." <em>Physical Review</em>, 40(2): 207–227.</li>
+              <li id="ref-13"><strong>Currie, Lloyd A.</strong> (1968). "Limits for qualitative detection and quantitative determination: application to radiochemistry." <em>Analytical Chemistry</em>, 40(3): 586–593.</li>
+              <li id="ref-14"><strong>Long, Gary L. &amp; Winefordner, J. D.</strong> (1983). "Limit of detection: a closer look at the IUPAC definition." <em>Analytical Chemistry</em>, 55(7): 712A–724A.</li>
+              <li id="ref-15"><strong>Mars Climate Orbiter Mishap Investigation Board.</strong> (1999). <em>Phase I Report</em>, 10 November 1999. Washington, DC: NASA.</li>
+              <li id="ref-16"><strong>Henrion, Max &amp; Fischhoff, Baruch.</strong> (1986). "Assessing uncertainty in physical constants." <em>American Journal of Physics</em>, 54(9): 791–798.</li>
+              <li id="ref-17"><strong>Feynman, Richard P.</strong> (1974). "Cargo cult science." <em>Engineering and Science</em>, 37(7): 10–13. (Caltech commencement address.)</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/making-sense-of-data.html">Making Sense of Data</a> (Part 3 of 9)</div>
+  <div class="series-banner-links">
+    <a href="probability-and-distributions.html">← Part 2: Probability and Distributions: Dice, Photons and the Bell Curve</a>
+    <span>Part 4 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/measurement-error-and-uncertainty.js"></script>
+</body>
+</html>

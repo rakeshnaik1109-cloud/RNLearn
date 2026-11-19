@@ -1,5 +1,22 @@
 [
   {
+    "slug": "measurement-error-and-uncertainty",
+    "url": "articles/measurement-error-and-uncertainty.html",
+    "title": "Measurement, Error and Uncertainty: How Sure Are You?",
+    "summary": "Random and systematic errors, accuracy and precision, Type A and Type B uncertainty, uncertainty budgets, propagation, weighted means, calibration curves and limits of detection.",
+    "subject": "Science",
+    "tags": [
+      "statistics",
+      "measurement-uncertainty",
+      "experiments",
+      "data-analysis",
+      "metrology",
+      "measurement"
+    ],
+    "date": "2026-12-04",
+    "type": "tutorial"
+  },
+  {
     "slug": "probability-and-distributions",
     "url": "articles/probability-and-distributions.html",
     "title": "Probability and Distributions: Dice, Photons and the Bell Curve",

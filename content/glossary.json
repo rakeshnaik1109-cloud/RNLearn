@@ -3420,5 +3420,97 @@
     "forms": [
       "gambler's fallacy"
     ]
+  },
+  {
+    "term": "Measurement uncertainty",
+    "definition": "A number that quantifies doubt about a measurement result: a range in which the true value is believed to lie, at a stated confidence.",
+    "forms": []
+  },
+  {
+    "term": "Systematic error",
+    "definition": "An error that shifts every reading in the same way, such as a miscalibrated instrument; averaging cannot remove it.",
+    "forms": [
+      "systematic errors"
+    ]
+  },
+  {
+    "term": "Random error",
+    "definition": "An error that varies unpredictably from reading to reading; it can be reduced by repeating and averaging.",
+    "forms": [
+      "random errors"
+    ]
+  },
+  {
+    "term": "Trueness",
+    "definition": "How close the average of many measurements is to the true value; the absence of systematic error.",
+    "forms": []
+  },
+  {
+    "term": "Type A evaluation",
+    "definition": "Evaluating an uncertainty component by statistics on repeated observations, for example the standard error of the mean.",
+    "forms": []
+  },
+  {
+    "term": "Type B evaluation",
+    "definition": "Evaluating an uncertainty component from other information, such as certificates, specifications or instrument resolution.",
+    "forms": []
+  },
+  {
+    "term": "Combined standard uncertainty",
+    "definition": "The total standard uncertainty of a result, found by combining all components, usually in quadrature.",
+    "forms": []
+  },
+  {
+    "term": "Expanded uncertainty",
+    "definition": "The combined standard uncertainty multiplied by a coverage factor k, often 2, to give an interval of about 95% confidence.",
+    "forms": []
+  },
+  {
+    "term": "Coverage factor",
+    "definition": "The multiplier k used to turn a combined standard uncertainty into an expanded uncertainty.",
+    "forms": []
+  },
+  {
+    "term": "Uncertainty budget",
+    "definition": "A table listing every source of uncertainty in a measurement, its size and its contribution to the total.",
+    "forms": [
+      "uncertainty budgets"
+    ]
+  },
+  {
+    "term": "Propagation of uncertainty",
+    "definition": "Working out the uncertainty of a calculated result from the uncertainties of the quantities used to calculate it.",
+    "forms": []
+  },
+  {
+    "term": "Birge ratio",
+    "definition": "√(χ²/(n − 1)) for a set of measurements combined by weighted mean; values much larger than 1 signal inconsistent results.",
+    "forms": []
+  },
+  {
+    "term": "Calibration curve",
+    "definition": "A fitted relation between an instrument’s signal and known standards, used to convert the signal of an unknown into a value.",
+    "forms": [
+      "calibration curves"
+    ]
+  },
+  {
+    "term": "Limit of detection",
+    "definition": "The smallest amount that can be reliably distinguished from a blank, often 3 × the blank standard deviation divided by the calibration slope.",
+    "forms": [
+      "LOD"
+    ]
+  },
+  {
+    "term": "Limit of quantification",
+    "definition": "The smallest amount that can be measured with acceptable precision, often 10 × the blank standard deviation divided by the calibration slope.",
+    "forms": [
+      "LOQ"
+    ]
+  },
+  {
+    "term": "Traceability",
+    "definition": "The property of a measurement linked to the SI units through an unbroken, documented chain of calibrations.",
+    "forms": []
   }
 ]

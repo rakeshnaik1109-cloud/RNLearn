@@ -1,5 +1,31 @@
 [
   {
+    "slug": "measurement-error-and-uncertainty",
+    "title": "Measurement, Error and Uncertainty: How Sure Are You?",
+    "summary": "Random and systematic errors, accuracy and precision, Type A and Type B uncertainty, uncertainty budgets, propagation, weighted means, calibration curves and limits of detection.",
+    "subject": "Science",
+    "tags": [
+      "statistics",
+      "measurement-uncertainty",
+      "experiments",
+      "data-analysis",
+      "metrology",
+      "measurement"
+    ],
+    "date": "2026-12-04",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 21,
+    "series": {
+      "id": "making-sense-of-data",
+      "part": 3
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
     "slug": "probability-and-distributions",
     "title": "Probability and Distributions: Dice, Photons and the Bell Curve",
     "summary": "Probability rules, expected value, the binomial, Poisson, exponential, normal and log-normal distributions, z-scores, the law of large numbers, the central limit theorem and Q–Q plots.",
