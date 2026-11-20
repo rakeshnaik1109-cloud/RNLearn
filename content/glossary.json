@@ -4823,5 +4823,67 @@
     "forms": [
       "He initialization"
     ]
+  },
+  {
+    "term": "Surrogate loss",
+    "definition": "A smooth or convex loss minimised in place of a measure, such as accuracy, that gradient descent cannot use directly.",
+    "forms": [
+      "surrogate losses"
+    ]
+  },
+  {
+    "term": "Mean squared error",
+    "definition": "The average of the squared differences between predictions and true values; minimised by the mean.",
+    "forms": [
+      "MSE"
+    ]
+  },
+  {
+    "term": "Huber loss",
+    "definition": "A loss that is squared for small errors and linear for large ones, limiting the influence of outliers.",
+    "forms": [
+      "smooth L1"
+    ]
+  },
+  {
+    "term": "Negative log-likelihood",
+    "definition": "Minus the logarithm of the probability a model gives to the observed data; minimising it is maximum likelihood.",
+    "forms": []
+  },
+  {
+    "term": "KL divergence",
+    "definition": "The Kullback–Leibler divergence, a measure of how one probability distribution differs from another.",
+    "forms": [
+      "Kullback–Leibler divergence"
+    ]
+  },
+  {
+    "term": "Label smoothing",
+    "definition": "Training with targets slightly less than 1 for the true class, spreading a little probability over all classes.",
+    "forms": []
+  },
+  {
+    "term": "Focal loss",
+    "definition": "Cross-entropy multiplied by (1 − p)^γ, which down-weights examples the model already classifies well.",
+    "forms": []
+  },
+  {
+    "term": "Proper scoring rule",
+    "definition": "A way of scoring probability forecasts under which reporting your true belief gives the best expected score.",
+    "forms": [
+      "proper scoring rules"
+    ]
+  },
+  {
+    "term": "Temperature scaling",
+    "definition": "Dividing a trained network’s logits by a single constant fitted on validation data to make its probabilities calibrated.",
+    "forms": []
+  },
+  {
+    "term": "Pinball loss",
+    "definition": "The tilted absolute loss of quantile regression, whose minimiser is a chosen quantile.",
+    "forms": [
+      "quantile loss"
+    ]
   }
 ]

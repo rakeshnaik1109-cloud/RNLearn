@@ -37,7 +37,7 @@
     "slug": "neurons-and-activation-functions",
     "url": "articles/neurons-and-activation-functions.html",
     "title": "Neurons and Activation Functions: How Neural Networks Compute and Learn",
-    "summary": "The artificial neuron, XOR and hidden layers, sigmoid, tanh, ReLU, GELU and Swish, universal approximation, backpropagation, vanishing gradients, and a network you can train in your browser.",
+    "summary": "The artificial neuron, XOR and hidden layers, sigmoid, tanh, ReLU, GELU and Swish, universal approximation, backpropagation, vanishing gradients, and a small network you can train yourself.",
     "subject": "AI & Machine Learning",
     "tags": [
       "machine-learning",
@@ -79,6 +79,22 @@
       "kernels",
       "gaussian-processes",
       "classification",
+      "data-analysis"
+    ],
+    "date": "2026-11-20",
+    "type": "tutorial"
+  },
+  {
+    "slug": "loss-functions",
+    "url": "articles/loss-functions.html",
+    "title": "Loss Functions: What Machine Learning Models Minimise",
+    "summary": "Squared, absolute and Huber error, losses as likelihoods, cross-entropy and softmax, hinge and exponential losses, focal loss, proper scoring rules, calibration and quantile loss.",
+    "subject": "AI & Machine Learning",
+    "tags": [
+      "machine-learning",
+      "neural-networks",
+      "deep-learning",
+      "loss-functions",
       "data-analysis"
     ],
     "date": "2026-11-20",

@@ -4825,5 +4825,67 @@ window.RNLEARN_GLOSSARY = [
   [
    "He initialization"
   ]
+ ],
+ [
+  "Surrogate loss",
+  "A smooth or convex loss minimised in place of a measure, such as accuracy, that gradient descent cannot use directly.",
+  [
+   "surrogate losses"
+  ]
+ ],
+ [
+  "Mean squared error",
+  "The average of the squared differences between predictions and true values; minimised by the mean.",
+  [
+   "MSE"
+  ]
+ ],
+ [
+  "Huber loss",
+  "A loss that is squared for small errors and linear for large ones, limiting the influence of outliers.",
+  [
+   "smooth L1"
+  ]
+ ],
+ [
+  "Negative log-likelihood",
+  "Minus the logarithm of the probability a model gives to the observed data; minimising it is maximum likelihood.",
+  []
+ ],
+ [
+  "KL divergence",
+  "The Kullback–Leibler divergence, a measure of how one probability distribution differs from another.",
+  [
+   "Kullback–Leibler divergence"
+  ]
+ ],
+ [
+  "Label smoothing",
+  "Training with targets slightly less than 1 for the true class, spreading a little probability over all classes.",
+  []
+ ],
+ [
+  "Focal loss",
+  "Cross-entropy multiplied by (1 − p)^γ, which down-weights examples the model already classifies well.",
+  []
+ ],
+ [
+  "Proper scoring rule",
+  "A way of scoring probability forecasts under which reporting your true belief gives the best expected score.",
+  [
+   "proper scoring rules"
+  ]
+ ],
+ [
+  "Temperature scaling",
+  "Dividing a trained network’s logits by a single constant fitted on validation data to make its probabilities calibrated.",
+  []
+ ],
+ [
+  "Pinball loss",
+  "The tilted absolute loss of quantile regression, whose minimiser is a chosen quantile.",
+  [
+   "quantile loss"
+  ]
  ]
 ];

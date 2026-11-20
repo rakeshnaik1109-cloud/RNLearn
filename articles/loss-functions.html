@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loss Functions: What Machine Learning Models Minimise — RNLearn</title>
+  <meta name="description" content="Squared, absolute and Huber error, losses as likelihoods, cross-entropy and softmax, hinge and exponential losses, focal loss, proper scoring rules, calibration and quantile loss.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/loss-functions.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Loss Functions: What Machine Learning Models Minimise — RNLearn">
+  <meta property="og:description" content="Squared, absolute and Huber error, losses as likelihoods, cross-entropy and softmax, hinge and exponential losses, focal loss, proper scoring rules, calibration and quantile loss.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/loss-functions.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Loss Functions: What Machine Learning Models Minimise — RNLearn">
+  <meta name="twitter:description" content="Squared, absolute and Huber error, losses as likelihoods, cross-entropy and softmax, hinge and exponential losses, focal loss, proper scoring rules, calibration and quantile loss.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Loss Functions: What Machine Learning Models Minimise",
+    "description": "Squared, absolute and Huber error, losses as likelihoods, cross-entropy and softmax, hinge and exponential losses, focal loss, proper scoring rules, calibration and quantile loss.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-20",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/loss-functions.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/ai-machine-learning.html" class="post-subject-tag" data-subject="ai-machine-learning">AI &amp; Machine Learning</a>
+        </div>
+        <h1 class="article-title">Loss Functions: What Machine Learning Models Minimise</h1>
+        <p class="article-standfirst">
+          Every model is trained to make one number as small as possible. Choose that number well and the model predicts what you need; choose badly and it chases outliers, learns slowly or gives probabilities you cannot trust.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-20">20 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>25 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/inside-the-machine.html">Inside the Machine</a> (Part 7 of 10)</div>
+  <div class="series-banner-links">
+    <a href="neurons-and-activation-functions.html">← Part 6: Neurons and Activation Functions: How Neural Networks Compute and Learn</a>
+    <span>Part 8 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. What Does a Network Minimise?</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Loss, Cost and Risk</a></li>
+              <li><a class="toc-link" href="#section-4">4. Squared and Absolute Error</a></li>
+              <li><a class="toc-link" href="#section-5">5. Huber and Robust Losses</a></li>
+              <li><a class="toc-link" href="#section-6">6. Losses as Likelihoods</a></li>
+              <li><a class="toc-link" href="#section-7">7. Cross-Entropy for Classification</a></li>
+              <li><a class="toc-link" href="#section-8">8. Softmax and Many Classes</a></li>
+              <li><a class="toc-link" href="#section-9">9. Margin Losses</a></li>
+              <li><a class="toc-link" href="#section-10">10. Imbalanced Data and Focal Loss</a></li>
+              <li><a class="toc-link" href="#section-11">11. Probabilities You Can Trust</a></li>
+              <li><a class="toc-link" href="#section-12">12. Beyond Prediction Error</a></li>
+              <li><a class="toc-link" href="#section-13">13. Choosing a Loss</a></li>
+              <li><a class="toc-link" href="#section-14">14. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-15">15. Worked Example: How Much Do Easy Examples Count?</a></li>
+              <li><a class="toc-link" href="#section-16">16. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-17">17. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-18">18. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-19">19. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-20">20. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-21">21. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>You will learn:</strong> what a loss function is and how it differs from the metric you report; why squared error gives the mean and absolute error the median; robust losses such as Huber’s; how every common loss is a negative log-likelihood; why classifiers are trained with cross-entropy and not squared error; softmax, temperature and label smoothing; the margin losses behind SVMs and boosting; the focal loss for imbalanced data; proper scoring rules and calibration; and quantile and other special-purpose losses.</p>
+            <p><strong>You need:</strong> Part 2 (linear and logistic regression, gradient descent) and Part 6 (neurons, the sigmoid, backpropagation). The fold-outs use logarithms and a little calculus.</p>
+            <p><strong>Try:</strong> eight interactive figures, including a classifier that starts confidently wrong and has to recover, a softmax you can tune, and a forecaster you can tempt to exaggerate.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. What Does a Network Minimise?</h2>
+            <p>Part 6 showed how a network computes and how backpropagation finds the direction that lowers its error. But “error” was taken for granted. Every model in this series is trained by making one number as small as possible, the <strong>loss</strong>, and the choice of that number decides what the model learns. Change the loss and the same network, on the same data, will predict a mean instead of a median, a probability instead of a yes-or-no, or will ignore a few strange points instead of chasing them.</p>
+            <p>This part is about that choice: where the common losses come from, what each one assumes, and how to pick one. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-ml-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Part 7 explains the quantity every model in Parts 1–10 is trained to minimise.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-ml7-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Losses from least squares to the focal loss, 1805–2017.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Loss, Cost and Risk</h2>
+            <p>A <strong>loss function</strong> L(ŷ, y) scores a single prediction ŷ against the true value y: zero for a perfect prediction, larger for worse ones. Training minimises the average loss over the training set, sometimes called the <em>cost</em> or the <em>empirical risk</em>, often with a penalty on large weights added (Part 2):</p>
+            <p>$$J(\theta) = \frac{1}{n}\sum_{i=1}^{n} L\big(f_\theta(\mathbf{x}_i),\, y_i\big) \;+\; \lambda\,\Omega(\theta).$$</p>
+            <p>What we really want is a low loss on <em>new</em> data, the expected or true risk; the training average is our estimate of it, which is why Part 1 insisted on held-out data. A second distinction matters just as much: the loss used for training is often not the measure we finally report. Accuracy, the F1 score and the area under the ROC curve are what people care about, but they change in jumps as predictions cross a threshold, so their gradient is zero almost everywhere and gradient descent cannot use them. Training therefore minimises a smooth stand-in, a <strong>surrogate loss</strong>, chosen so that pushing it down also improves the real target.</p>
+            <div class="callout callout-method">
+              <div class="callout-header">Running example</div>
+              <p>As in earlier parts, the regression examples use simple data on the interval 0 to 1, and the classification examples use the series’ 200-point data sets (140 for training, 60 for testing). Figures 3 and 4 add a few deliberate outliers to show how losses react to them.</p>
+            </div>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Squared and Absolute Error</h2>
+            <p>The oldest loss in science is the <strong>squared error</strong> (ŷ − y)². Adrien-Marie Legendre published the method of least squares in 1805, for fitting the orbits of comets: choose the curve that makes the sum of squared errors smallest. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> Its average over a data set is the <strong>mean squared error</strong> (MSE). Its rival is the <strong>absolute error</strong> |ŷ − y|, whose average is the mean absolute error (MAE).</p>
+            <p>The difference between them shows up most clearly in the simplest possible model: a single number c that predicts every value. The c that minimises the total squared error is the <strong>mean</strong> of the data; the c that minimises the total absolute error is the <strong>median</strong>. A model trained with squared error therefore predicts the average outcome for each input, and one trained with absolute error the middle outcome.</p>
+            <figure class="fig" data-fig="fig-ml-onenum">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Fitting one number.</strong> Twelve typical values and one outlier. Move the outlier and watch the mean, the median and the Huber estimate, and the shape of the total loss each one minimises.
+              </figcaption>
+            </figure>
+            <p>Twelve values between 4.1 and 6.7 have mean and median both 5.5. Add a thirteenth at 15 and the mean jumps to 6.23 while the median moves only to 5.6; put the outlier at 40 and the mean is 8.15, larger than every typical value, while the median stays at 5.6. Squaring makes big errors count enormously, so the squared error bends over backwards to reduce the largest ones.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">The maths: why the mean and the median</summary>
+              <p style="margin-top:0.6rem;">The derivative of Σ(y<sub>i</sub> − c)² with respect to c is −2Σ(y<sub>i</sub> − c), which is zero when c is the mean. The derivative of Σ|y<sub>i</sub> − c| is (number of values below c) − (number above c), which is zero when c has as many values on each side: the median. Each point’s “pull” on c is proportional to its error under squared loss, but is the same size, ±1, under absolute loss.</p>
+            </details>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Huber and Robust Losses</h2>
+            <p>Absolute error resists outliers but has drawbacks of its own: its gradient jumps from −1 to +1 at zero error, which can make optimisation jittery near the solution, and it estimates the median, which is not always what is wanted. In 1964 Peter Huber proposed a compromise: a loss that is squared for errors smaller than a threshold δ and grows only linearly beyond it. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span></p>
+            <p>$$L_\delta(r) = \begin{cases} \tfrac12 r^2 & |r| \le \delta \\ \delta\big(|r| - \tfrac12\delta\big) & |r| > \delta \end{cases}$$</p>
+            <p>Near the solution it behaves like squared error, smooth and efficient; far away it behaves like absolute error, so no point can pull with more than a fixed force. The <strong>Huber loss</strong> (called “smooth L1” in some libraries) is widely used in regression with noisy data, in object detectors that predict box coordinates, and in reinforcement learning.</p>
+            <figure class="fig" data-fig="fig-ml-robust">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. A line fitted with three losses.</strong> Thirty points follow y = 1 + 2x with noise. Add outliers and compare the lines fitted by squared error, the Huber loss and absolute error.
+              </figcaption>
+            </figure>
+            <p>Without outliers all three lines have slopes close to the true value of 2 (1.95 for squared and Huber loss, 1.88 for absolute error). With four outliers among the 34 points, the least-squares slope collapses to 0.75, while Huber (δ = 0.5) gives 1.74 and absolute error 1.81. With six outliers the least-squares line is nearly flat (slope 0.22).</p>
+            <div class="callout callout-warn">
+              <div class="callout-header">Watch out: a robust loss is not a data cleaner</div>
+              <p>A robust loss limits how hard each point can pull, but it does not make an outlier disappear. A flexible network trained for long enough can still bend itself to pass through a few wild points, whatever the loss. Look at the data first: an outlier may be a recording error to fix, or the most interesting observation you have.</p>
+            </div>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Losses as Likelihoods</h2>
+            <p>Are losses just a matter of taste? No: almost every standard loss can be derived from a probability model of the data. In 1809 Carl Friedrich Gauss justified least squares by assuming that measurement errors follow the normal (bell-shaped) distribution; <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> in 1922 Ronald Fisher set out the general principle of <strong>maximum likelihood</strong>: choose the parameters that make the observed data most probable. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+            <p>Maximising the likelihood is the same as minimising its negative logarithm, the <strong>negative log-likelihood</strong>, and that turns out to be a familiar loss in each case:</p>
+            <ul>
+              <li>Normal errors give the <strong>squared error</strong>.</li>
+              <li>Laplace (double-exponential) errors, which have heavier tails, give the <strong>absolute error</strong>.</li>
+              <li>A yes-or-no outcome with probability p (a Bernoulli variable) gives the <strong>binary cross-entropy</strong>.</li>
+              <li>One of K classes (a categorical variable) gives the <strong>categorical cross-entropy</strong>.</li>
+              <li>Counts (a Poisson variable) give the Poisson loss ŷ − y log ŷ.</li>
+            </ul>
+            <p>Choosing a loss therefore amounts to choosing what you believe about the noise in your data. It also tells you what the trained model predicts: the mean of a normal distribution, the median of a Laplace distribution, a probability for a Bernoulli outcome.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">The maths: from the normal density to squared error</summary>
+              <p style="margin-top:0.6rem;">If y = f(x) + ε with ε normal, mean 0 and standard deviation σ, the density of one observation is (2πσ²)<sup>−½</sup> exp(−(y − f(x))²/2σ²). Its negative logarithm is</p>
+              <p>$$-\log p(y \mid x) = \frac{(y - f(x))^2}{2\sigma^2} + \tfrac12\log(2\pi\sigma^2),$$</p>
+              <p>a scaled squared error plus a constant. Summing over independent observations, maximising the likelihood is exactly minimising the sum of squared errors. If the network also predicts σ, the same formula gives a loss that learns how uncertain each prediction is.</p>
+            </details>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Cross-Entropy for Classification</h2>
+            <p>A classifier with a sigmoid output (Part 6) predicts a probability p that the label is 1. Its negative log-likelihood is the <strong>binary cross-entropy</strong>, also called log loss:</p>
+            <p>$$L(p, y) = -\big[\,y\log p + (1-y)\log(1-p)\,\big].$$</p>
+            <p>If the true label is 1, the loss is −log p: 0.105 for p = 0.9, 0.693 for p = 0.5, 2.30 for p = 0.1 and 4.6 for p = 0.01, growing without limit as a confident prediction turns out wrong. The name comes from information theory: Claude Shannon’s 1948 <em>entropy</em> measures the average surprise of a source, and the cross-entropy measures the average surprise when outcomes from one distribution are predicted with another. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> The difference between the two is the Kullback–Leibler divergence, introduced in 1951, which is zero only when the predicted distribution matches the true one. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span></p>
+            <p>Why not simply use squared error on the probability? Because of how the gradient flows back through the sigmoid. With cross-entropy, the sigmoid’s slope cancels and the gradient with respect to the logit z is just p − y: the more wrong the prediction, the harder the push. With squared error, the gradient carries an extra factor p(1 − p), the sigmoid’s slope, which is almost zero when the network is confidently wrong.</p>
+            <figure class="fig" data-fig="fig-ml-ce">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Cross-entropy and squared error on a sigmoid output.</strong> The true class is 1. Move the logit and compare the two losses and the size of the gradients that push the prediction towards the truth.
+              </figcaption>
+            </figure>
+            <p>At z = −5 the network gives the true class a probability of 0.0067. The cross-entropy gradient is 0.993, nearly the maximum; the squared-error gradient is 0.013, about 75 times smaller. The consequences are easy to see in training.</p>
+            <figure class="fig" data-fig="fig-ml-wrong">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. Starting confidently wrong.</strong> The same one-neuron classifier, trained by plain gradient descent from the same badly wrong starting weights, with cross-entropy (first panel) and squared error (second panel). Press Train and compare their training accuracy.
+              </figcaption>
+            </figure>
+            <p>From a neutral start, both losses reach about 95% training accuracy on the two clouds within 50 steps (96% with cross-entropy, 94% with squared error). From weights pointing the wrong way, cross-entropy is back at 94% after 50 steps; squared error is still at 6% after 250 steps and only 10% after 500. In speech-recognition experiments, Pavel Golik, Patrick Doetsch and Hermann Ney found the same at scale: networks trained with squared error from random starting weights did not reach a good solution, whereas cross-entropy did. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span> This is why classifiers are trained with cross-entropy.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">The maths: the sigmoid’s slope cancels</summary>
+              <p style="margin-top:0.6rem;">With p = σ(z) and dp/dz = p(1 − p):</p>
+              <p>$$\frac{\partial}{\partial z}\big[-y\log p-(1-y)\log(1-p)\big] = \Big(-\frac{y}{p}+\frac{1-y}{1-p}\Big)p(1-p) = p - y,$$</p>
+              <p>$$\frac{\partial}{\partial z}(p-y)^2 = 2(p-y)\,p(1-p).$$</p>
+              <p>The same cancellation happens for a softmax output with categorical cross-entropy, and for a linear output with squared error: each output activation has a “matching” loss whose gradient is simply prediction minus target.</p>
+            </details>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">In code: use the numerically stable versions</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">import torch
+from torch import nn
+
+logits = torch.tensor([-5.0, 0.3, 4.0])     # raw network outputs, no sigmoid
+y      = torch.tensor([ 1.0, 0.0, 1.0])
+
+# Binary: sigmoid and cross-entropy fused, stable for large |z|
+print(nn.BCEWithLogitsLoss()(logits, y))
+
+# Multi-class: softmax and cross-entropy fused; targets are class indices
+scores = torch.tensor([[2.0, 1.0, 0.1]])
+print(nn.CrossEntropyLoss(label_smoothing=0.1)(scores, torch.tensor([0])))
+
+# Robust regression
+print(nn.HuberLoss(delta=0.5)(torch.tensor([1.0, 9.0]), torch.tensor([1.2, 2.0])))</code></pre>
+              <p>Passing raw logits to these fused losses avoids taking the logarithm of a probability that has rounded to exactly 0 or 1.</p>
+            </details>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Softmax and Many Classes</h2>
+            <p>For K classes, the network outputs one score per class, the <strong>logits</strong> z<sub>1</sub>, …, z<sub>K</sub>, and the <strong>softmax</strong> turns them into probabilities that are positive and sum to 1:</p>
+            <p>$$p_k = \frac{e^{z_k/T}}{\sum_j e^{z_j/T}},$$</p>
+            <p>with temperature T = 1 in ordinary training. John Bridle gave the function its name in 1990, interpreting a network’s outputs as class probabilities trained by maximum likelihood. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span> The <strong>categorical cross-entropy</strong> is −log p<sub>true</sub>, the negative log of the probability given to the correct class, and its gradient with respect to each logit is again prediction minus target, p<sub>k</sub> − t<sub>k</sub>.</p>
+            <figure class="fig" data-fig="fig-ml-softmax">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 7. Softmax, temperature and label smoothing.</strong> Three classes. Set the logits, the temperature and the amount of label smoothing, and see the probabilities, the targets, the loss and the gradient for each logit.
+              </figcaption>
+            </figure>
+            <p>Logits of 2, 1 and 0.1 give probabilities 0.659, 0.242 and 0.099, and a loss of 0.417 if the first class is correct. Raising the temperature flattens the probabilities without changing their order; lowering it sharpens them. Temperature is used to tune how adventurous a language model’s sampled text is, and, after training, to correct overconfident probabilities (Section 11).</p>
+            <p>Cross-entropy with hard 0/1 targets keeps rewarding the network for pushing the correct logit ever higher, which can make it overconfident. <strong>Label smoothing</strong>, introduced by Christian Szegedy and colleagues for image classification in 2016, replaces the target 1 with 1 − ε and spreads ε evenly over all classes. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span> With ε = 0.1 and three classes, the target becomes 0.933, 0.033 and 0.033. Rafael Müller, Simon Kornblith and Geoffrey Hinton later showed that label smoothing tends to improve calibration, but can make the trained network a worse teacher for distilling knowledge into a smaller one. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span></p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Margin Losses</h2>
+            <p>With labels written as y = ±1 and a score f(x) whose sign gives the predicted class, the <strong>margin</strong> m = y·f(x) is positive for a correct prediction and negative for a mistake. The loss we would really like is the 0–1 loss: 1 for a mistake, 0 otherwise. It has no useful gradient, so each method in this series replaces it with a different smooth or convex stand-in, and all of them can be drawn on the same axis.</p>
+            <figure class="fig" data-fig="fig-ml-margin">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 8. Classification losses as functions of the margin.</strong> Switch the losses on and off and move the margin to compare them.
+              </figcaption>
+            </figure>
+            <ul>
+              <li>The <strong>hinge loss</strong> max(0, 1 − m) of the support vector machine (Part 5) is zero for points safely beyond the margin, so only the support vectors matter. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span></li>
+              <li>The <strong>logistic loss</strong> log(1 + e<sup>−m</sup>) is the binary cross-entropy written in terms of the margin: logistic regression and neural networks.</li>
+              <li>The <strong>exponential loss</strong> e<sup>−m</sup> is what AdaBoost (Part 4) minimises, as Jerome Friedman, Trevor Hastie and Robert Tibshirani showed in 2000. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span> At m = −2 it is 7.4, against 3 for the hinge, so boosting is especially sensitive to mislabelled points.</li>
+            </ul>
+            <p>Peter Bartlett, Michael Jordan and Jon McAuliffe identified in 2006 the condition under which minimising such a convex surrogate also minimises the misclassification rate, given enough data; the hinge, logistic and exponential losses all satisfy it. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span> So the choice between them is less about getting the boundary right in the limit and more about robustness to label noise, sparsity and whether you need probabilities. Only the logistic loss yields probabilities directly.</p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Imbalanced Data and Focal Loss</h2>
+            <p>When one class is rare (fraud, disease, defects), the average loss is dominated by the common class, and a model can score well by mostly ignoring the rare one. The simplest remedy is a <strong>weighted cross-entropy</strong>, which multiplies the loss of each rare-class example by a weight, often the inverse of its frequency. Resampling the data has a similar effect.</p>
+            <p>A subtler problem appears when most examples are not just common but <em>easy</em>. A one-stage object detector evaluates tens of thousands of candidate locations per image, almost all of them obviously background. Each contributes a small loss, but together they swamp the few hard examples that matter. In 2017 Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He and Piotr Dollár proposed the <strong>focal loss</strong>, which multiplies the cross-entropy by (1 − p<sub>t</sub>)<sup>γ</sup>, where p<sub>t</sub> is the probability given to the true class. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span> Well-classified examples are down-weighted heavily, poorly classified ones hardly at all; they found γ = 2 worked best.</p>
+            <p>$$\text{FL}(p_t) = -(1-p_t)^{\gamma}\,\log p_t.$$</p>
+            <figure class="fig" data-fig="fig-ml-focal">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 9. Focal loss and the weight of easy examples.</strong> Left: the loss per example for several values of γ. Right: how much of the total loss comes from many easy examples versus ten hard ones.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Probabilities You Can Trust</h2>
+            <p>If a model says “70% chance of rain”, it should rain on about 70% of such days. A model whose probabilities match observed frequencies is <strong>calibrated</strong>. Calibration depends on the loss used to judge probabilities. Glenn Brier proposed scoring weather forecasts by their squared error in 1950; <span class="cite-group">[<a class="cite" href="#ref-17">17</a>]</span> the <strong>Brier score</strong> and the log loss are both <strong>proper scoring rules</strong>: a forecaster minimises the expected score by reporting their true belief. <span class="cite-group">[<a class="cite" href="#ref-18">18</a>]</span> Not every plausible score has this property.</p>
+            <figure class="fig" data-fig="fig-ml-proper">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 10. Proper and improper scoring rules.</strong> Set the true probability of rain and see which reported probability gives the best expected score under each rule.
+              </figcaption>
+            </figure>
+            <p>If rain has probability 0.7, both log loss and the Brier score are best when the forecaster reports 0.7. Under absolute error, reporting 1 gives an expected score of 0.30, better than the honest 0.7, which scores 0.42. A model trained with an improper loss learns to exaggerate.</p>
+            <p>Training with cross-entropy, a proper rule, does not guarantee calibration on new data, though. In 2017 Chuan Guo, Geoff Pleiss, Yu Sun and Kilian Weinberger found that modern deep networks, unlike those of a decade earlier, are systematically overconfident, and that the cross-entropy on validation data can rise while accuracy keeps improving. <span class="cite-group">[<a class="cite" href="#ref-19">19</a>]</span> Their remedy, <strong>temperature scaling</strong>, divides all logits by a single temperature T fitted on validation data: it leaves every predicted class unchanged and makes the probabilities honest.</p>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Beyond Prediction Error</h2>
+            <ul>
+              <li><strong>Quantile (pinball) loss.</strong> To predict the 90th percentile rather than the average, for example a delivery time you can promise, penalise under-prediction by τ = 0.9 and over-prediction by 1 − τ = 0.1. Roger Koenker and Gilbert Bassett introduced this tilted absolute loss in 1978; with τ = 0.5 it is half the absolute error and gives the median. <span class="cite-group">[<a class="cite" href="#ref-20">20</a>]</span> Training several quantiles gives a prediction interval.</li>
+              <li><strong>KL divergence.</strong> When the target is a whole distribution rather than one label, as in distilling a large model into a small one, or in the variational autoencoders of Part 9, the loss compares distributions with the Kullback–Leibler divergence. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span></li>
+              <li><strong>Losses on pairs and triplets.</strong> For face recognition or search, what matters is that similar items end up close together. The triplet loss of FaceNet pulls an image towards another image of the same person and pushes it away from a different person by at least a margin. <span class="cite-group">[<a class="cite" href="#ref-21">21</a>]</span></li>
+              <li><strong>Penalties.</strong> The L1 and L2 penalties of Part 2 are added to the loss to prefer simpler models; Part 8 returns to them as weight decay.</li>
+              <li><strong>Several tasks at once.</strong> A network that predicts a class and a bounding box minimises a weighted sum of a classification loss and a regression loss; the weights are extra hyperparameters.</li>
+            </ul>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Choosing a Loss</h2>
+            <div class="table-container" style="overflow-x:auto; margin:1.2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.92rem; line-height:1.5;">
+                <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.5rem;">Task</th><th style="padding:0.5rem;">Output layer</th><th style="padding:0.5rem;">Loss</th><th style="padding:0.5rem;">The model predicts</th></tr></thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Regression</td><td style="padding:0.5rem;">Linear</td><td style="padding:0.5rem;">Squared error</td><td style="padding:0.5rem;">The mean</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Regression with outliers</td><td style="padding:0.5rem;">Linear</td><td style="padding:0.5rem;">Huber or absolute error</td><td style="padding:0.5rem;">Between mean and median; the median</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">A percentile or interval</td><td style="padding:0.5rem;">Linear (one per quantile)</td><td style="padding:0.5rem;">Pinball loss</td><td style="padding:0.5rem;">The chosen quantile</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Counts</td><td style="padding:0.5rem;">Exponential</td><td style="padding:0.5rem;">Poisson loss</td><td style="padding:0.5rem;">The expected count</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Binary classification</td><td style="padding:0.5rem;">Sigmoid</td><td style="padding:0.5rem;">Binary cross-entropy</td><td style="padding:0.5rem;">A probability</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Multi-class</td><td style="padding:0.5rem;">Softmax</td><td style="padding:0.5rem;">Categorical cross-entropy (± label smoothing)</td><td style="padding:0.5rem;">A probability per class</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Multi-label</td><td style="padding:0.5rem;">One sigmoid per label</td><td style="padding:0.5rem;">Binary cross-entropy per label</td><td style="padding:0.5rem;">A probability per label</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Rare or easy-dominated classes</td><td style="padding:0.5rem;">Sigmoid or softmax</td><td style="padding:0.5rem;">Weighted cross-entropy or focal loss</td><td style="padding:0.5rem;">Probabilities, needing recalibration</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Similarity, retrieval</td><td style="padding:0.5rem;">An embedding vector</td><td style="padding:0.5rem;">Contrastive or triplet loss</td><td style="padding:0.5rem;">Distances between items</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Start from the question “what should the model predict for each input: a mean, a median, a quantile, a probability?” and the loss usually follows. Then evaluate with the metric you actually care about, on held-out data.</p>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: does the loss have to match the goal?</div>
+              <p>The theory of surrogate losses guarantees that, with unlimited data and a flexible enough model, minimising cross-entropy or the hinge loss also minimises the error rate. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span> Real networks have neither unlimited data nor perfect optimisation, and practice is full of puzzles. Losses whose minimisers are identical in theory often give different results; networks trained with a proper loss are nonetheless overconfident on new data; <span class="cite-group">[<a class="cite" href="#ref-19">19</a>]</span> and label smoothing, which deliberately distorts the targets, often improves accuracy. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>, <a class="cite" href="#ref-12">12</a>]</span> How the choice of loss interacts with the network’s architecture, the optimiser and the amount of data, and how best to train directly for measures such as F1 or ranking quality, remain active research questions.</p>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Worked Example: How Much Do Easy Examples Count?</h2>
+            <p>Imagine an image with 10 objects and 10,000 background locations. The detector already handles the background well, giving the right answer probability 0.99, but struggles with the objects, giving them only 0.3.</p>
+            <ol>
+              <li><strong>Cross-entropy, background:</strong> each easy example costs −ln 0.99 = 0.01005; all 10,000 together cost 100.5.</li>
+              <li><strong>Cross-entropy, objects:</strong> each costs −ln 0.3 = 1.204; the 10 together cost 12.0. The easy background makes up <strong>89%</strong> of the total loss, and of the gradient that trains the network.</li>
+              <li><strong>Focal loss, γ = 2, background:</strong> each loss is multiplied by (1 − 0.99)² = 0.0001, so the 10,000 together cost 0.010.</li>
+              <li><strong>Focal loss, objects:</strong> each is multiplied by (1 − 0.3)² = 0.49, so the 10 together cost 5.90.</li>
+              <li><strong>Result:</strong> the background’s share falls from 89% to <strong>0.17%</strong>. Training now concentrates on the objects. Figure 9 lets you vary the number of easy examples and γ.</li>
+            </ol>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: losses</div>
+              <ol>
+                <li>In Figure 3, put the outlier at 40, choose the Huber loss and slide δ from 0.2 to 4. How far does the Huber estimate move, and why does it stay so far from the mean of 8.15?</li>
+                <li>In Figure 4, add outliers one at a time. How many does it take for the least-squares slope to fall below 1? And for the Huber slope?</li>
+                <li>In Figure 6, find the smallest “how wrong” setting at which squared error is still below 50% accuracy after 500 steps.</li>
+                <li>In Figure 7, set all three logits equal. What is the loss, and why is it ln 3 = 1.099 whichever class is true?</li>
+                <li>In Figure 10, set the true probability to exactly 0.5. What does absolute error now say is the best report?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-17">
+            <h2>17. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “a lower loss means a better model”</div>
+              <p><strong>The myth:</strong> the training loss measures how good a model is, so a lower loss is always better and the loss is what we should report.</p>
+              <p><strong>The reality:</strong> the loss is a tool for training, not a verdict. A training loss can be pushed towards zero by memorising the data (Part 1). Losses with different scales cannot be compared: a cross-entropy of 0.3 and a squared error of 0.3 mean quite different things. Even on held-out data, the loss and the measure that matters can disagree: Guo and colleagues found validation cross-entropy rising while classification error kept falling, as networks became overconfident rather than less accurate. <span class="cite-group">[<a class="cite" href="#ref-19">19</a>]</span></p>
+              <p><strong>Why it matters:</strong> train with a loss chosen for good gradients and the right kind of prediction, then judge the model with the measure that reflects the real cost of its mistakes, on data it has not seen.</p>
+            </div>
+          </section>
+
+          <section id="section-18">
+            <h2>18. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>A model learns whatever its loss rewards: squared error gives the mean, absolute error the median, the pinball loss a quantile, cross-entropy a probability.</li>
+                <li>Squared error is very sensitive to outliers; the Huber and absolute losses cap the pull of each point.</li>
+                <li>Most standard losses are negative log-likelihoods, so choosing a loss means choosing a noise model.</li>
+                <li>Train classifiers with cross-entropy: with a sigmoid or softmax output its gradient is simply prediction minus target, while squared error stalls when the model is confidently wrong.</li>
+                <li>Hinge, logistic and exponential losses are convex stand-ins for the 0–1 loss used by SVMs, logistic regression and boosting.</li>
+                <li>Focal and weighted losses rebalance training when easy or common examples dominate.</li>
+                <li>Log loss and the Brier score are proper scoring rules, but deep networks still need calibration checks; temperature scaling is a simple fix.</li>
+              </ul>
+              <div class="table-container" style="overflow-x:auto; margin:1rem 0 0;">
+                <table style="width:100%; border-collapse:collapse; font-size:0.9rem; line-height:1.5;">
+                  <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.4rem;">Loss</th><th style="padding:0.4rem;">Formula (error r, margin m, probability p)</th><th style="padding:0.4rem;">Used by</th></tr></thead>
+                  <tbody>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">Squared</td><td style="padding:0.4rem;">r²</td><td style="padding:0.4rem;">Linear regression, most regression networks</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">Absolute</td><td style="padding:0.4rem;">|r|</td><td style="padding:0.4rem;">Median regression</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">Huber</td><td style="padding:0.4rem;">½r² if |r| ≤ δ, else δ(|r| − ½δ)</td><td style="padding:0.4rem;">Robust regression, box coordinates</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">Cross-entropy</td><td style="padding:0.4rem;">−log p<sub>true</sub></td><td style="padding:0.4rem;">Logistic regression, classification networks</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">Hinge</td><td style="padding:0.4rem;">max(0, 1 − m)</td><td style="padding:0.4rem;">Support vector machines</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">Exponential</td><td style="padding:0.4rem;">e<sup>−m</sup></td><td style="padding:0.4rem;">AdaBoost</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">Focal</td><td style="padding:0.4rem;">−(1 − p<sub>true</sub>)<sup>γ</sup> log p<sub>true</sub></td><td style="padding:0.4rem;">Dense object detection, imbalanced data</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">Pinball</td><td style="padding:0.4rem;">τr if r ≥ 0, else (τ − 1)r, with r = y − ŷ</td><td style="padding:0.4rem;">Quantile regression, forecasting</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section id="section-19">
+            <h2>19. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Adrien-Marie Legendre</td>
+                <td style="padding:0.6rem 0.8rem;">1752–1833<br>France</td>
+                <td style="padding:0.6rem 0.8rem;">Least squares (1805)</td>
+                <td style="padding:0.6rem 0.8rem;">Published the method of minimising the sum of squared errors.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Carl Friedrich Gauss</td>
+                <td style="padding:0.6rem 0.8rem;">1777–1855<br>Germany</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Theoria motus</em> (1809)</td>
+                <td style="padding:0.6rem 0.8rem;">Linked least squares to normally distributed errors.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Ronald Fisher</td>
+                <td style="padding:0.6rem 0.8rem;">1890–1962<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Maximum likelihood (1922)</td>
+                <td style="padding:0.6rem 0.8rem;">Set out the principle from which most losses can be derived.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Claude Shannon</td>
+                <td style="padding:0.6rem 0.8rem;">1916–2001<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Information theory (1948)</td>
+                <td style="padding:0.6rem 0.8rem;">Defined entropy, the basis of cross-entropy.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Solomon Kullback &amp; Richard Leibler</td>
+                <td style="padding:0.6rem 0.8rem;">1907–1994 / 1914–2003<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">KL divergence (1951)</td>
+                <td style="padding:0.6rem 0.8rem;">Measured how far one probability distribution is from another.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Glenn Brier</td>
+                <td style="padding:0.6rem 0.8rem;">1913–1998<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">The Brier score (1950)</td>
+                <td style="padding:0.6rem 0.8rem;">Scored probability forecasts of the weather.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Peter Huber</td>
+                <td style="padding:0.6rem 0.8rem;">born 1934<br>Switzerland</td>
+                <td style="padding:0.6rem 0.8rem;">Robust estimation (1964)</td>
+                <td style="padding:0.6rem 0.8rem;">Proposed the loss that is squared for small errors and linear for large ones.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Roger Koenker &amp; Gilbert Bassett</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Regression quantiles (1978)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed how to estimate any quantile with a tilted absolute loss.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John Bridle</td>
+                <td style="padding:0.6rem 0.8rem;"><br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Softmax (1990)</td>
+                <td style="padding:0.6rem 0.8rem;">Named the softmax and interpreted network outputs as probabilities.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Tsung-Yi Lin and colleagues</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Focal loss (2017)</td>
+                <td style="padding:0.6rem 0.8rem;">Down-weighted easy examples to train dense object detectors.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Chuan Guo and colleagues</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Calibration (2017)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed that modern networks are overconfident and proposed temperature scaling.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-20">
+            <h2>20. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about loss functions.</p>
+            <figure class="fig" data-fig="fig-quiz-ml7">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-21">
+            <h2>21. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Goodfellow, Ian, Bengio, Yoshua &amp; Courville, Aaron.</strong> (2016). <em>Deep Learning</em>. Cambridge, MA: MIT Press.</li>
+              <li id="ref-2"><strong>Hastie, Trevor, Tibshirani, Robert &amp; Friedman, Jerome.</strong> (2009). <em>The Elements of Statistical Learning</em>, 2nd edition. New York: Springer.</li>
+              <li id="ref-3"><strong>Legendre, Adrien-Marie.</strong> (1805). <em>Nouvelles méthodes pour la détermination des orbites des comètes</em>. Paris: Firmin Didot.</li>
+              <li id="ref-4"><strong>Huber, Peter J.</strong> (1964). "Robust estimation of a location parameter." <em>Annals of Mathematical Statistics</em>, 35(1): 73–101.</li>
+              <li id="ref-5"><strong>Gauss, Carl Friedrich.</strong> (1809). <em>Theoria motus corporum coelestium in sectionibus conicis solem ambientium</em>. Hamburg: Perthes &amp; Besser.</li>
+              <li id="ref-6"><strong>Fisher, R. A.</strong> (1922). "On the mathematical foundations of theoretical statistics." <em>Philosophical Transactions of the Royal Society of London, Series A</em>, 222: 309–368.</li>
+              <li id="ref-7"><strong>Shannon, Claude E.</strong> (1948). "A mathematical theory of communication." <em>Bell System Technical Journal</em>, 27: 379–423 and 623–656.</li>
+              <li id="ref-8"><strong>Kullback, S. &amp; Leibler, R. A.</strong> (1951). "On information and sufficiency." <em>Annals of Mathematical Statistics</em>, 22(1): 79–86.</li>
+              <li id="ref-9"><strong>Golik, Pavel, Doetsch, Patrick &amp; Ney, Hermann.</strong> (2013). "Cross-entropy vs. squared error training: a theoretical and experimental comparison." In <em>Proceedings of Interspeech 2013</em>, pp. 1756–1760.</li>
+              <li id="ref-10"><strong>Bridle, John S.</strong> (1990). "Probabilistic interpretation of feedforward classification network outputs, with relationships to statistical pattern recognition." In F. Fogelman Soulié &amp; J. Hérault (eds), <em>Neurocomputing: Algorithms, Architectures and Applications</em>, NATO ASI Series F68, pp. 227–236. Berlin: Springer.</li>
+              <li id="ref-11"><strong>Szegedy, Christian, Vanhoucke, Vincent, Ioffe, Sergey, Shlens, Jon &amp; Wojna, Zbigniew.</strong> (2016). "Rethinking the Inception architecture for computer vision." In <em>Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</em>, pp. 2818–2826.</li>
+              <li id="ref-12"><strong>Müller, Rafael, Kornblith, Simon &amp; Hinton, Geoffrey E.</strong> (2019). "When does label smoothing help?" In <em>Advances in Neural Information Processing Systems 32 (NeurIPS)</em>.</li>
+              <li id="ref-13"><strong>Cortes, Corinna &amp; Vapnik, Vladimir.</strong> (1995). "Support-vector networks." <em>Machine Learning</em>, 20(3): 273–297.</li>
+              <li id="ref-14"><strong>Friedman, Jerome, Hastie, Trevor &amp; Tibshirani, Robert.</strong> (2000). "Additive logistic regression: a statistical view of boosting." <em>Annals of Statistics</em>, 28(2): 337–407.</li>
+              <li id="ref-15"><strong>Bartlett, Peter L., Jordan, Michael I. &amp; McAuliffe, Jon D.</strong> (2006). "Convexity, classification, and risk bounds." <em>Journal of the American Statistical Association</em>, 101(473): 138–156.</li>
+              <li id="ref-16"><strong>Lin, Tsung-Yi, Goyal, Priya, Girshick, Ross, He, Kaiming &amp; Dollár, Piotr.</strong> (2017). "Focal loss for dense object detection." In <em>Proceedings of the IEEE International Conference on Computer Vision (ICCV)</em>, pp. 2980–2988.</li>
+              <li id="ref-17"><strong>Brier, Glenn W.</strong> (1950). "Verification of forecasts expressed in terms of probability." <em>Monthly Weather Review</em>, 78(1): 1–3.</li>
+              <li id="ref-18"><strong>Gneiting, Tilmann &amp; Raftery, Adrian E.</strong> (2007). "Strictly proper scoring rules, prediction, and estimation." <em>Journal of the American Statistical Association</em>, 102(477): 359–378.</li>
+              <li id="ref-19"><strong>Guo, Chuan, Pleiss, Geoff, Sun, Yu &amp; Weinberger, Kilian Q.</strong> (2017). "On calibration of modern neural networks." In <em>Proceedings of the 34th International Conference on Machine Learning (ICML)</em>, PMLR 70: 1321–1330.</li>
+              <li id="ref-20"><strong>Koenker, Roger &amp; Bassett, Gilbert.</strong> (1978). "Regression quantiles." <em>Econometrica</em>, 46(1): 33–50.</li>
+              <li id="ref-21"><strong>Schroff, Florian, Kalenichenko, Dmitry &amp; Philbin, James.</strong> (2015). "FaceNet: a unified embedding for face recognition and clustering." In <em>Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</em>, pp. 815–823.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/inside-the-machine.html">Inside the Machine</a> (Part 7 of 10)</div>
+  <div class="series-banner-links">
+    <a href="neurons-and-activation-functions.html">← Part 6: Neurons and Activation Functions: How Neural Networks Compute and Learn</a>
+    <span>Part 8 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/loss-functions.js"></script>
+</body>
+</html>

@@ -4,19 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Neurons and Activation Functions: How Neural Networks Compute and Learn — RNLearn</title>
-  <meta name="description" content="The artificial neuron, XOR and hidden layers, sigmoid, tanh, ReLU, GELU and Swish, universal approximation, backpropagation, vanishing gradients, and a network you can train in your browser.">
+  <meta name="description" content="The artificial neuron, XOR and hidden layers, sigmoid, tanh, ReLU, GELU and Swish, universal approximation, backpropagation, vanishing gradients, and a small network you can train yourself.">
   <meta name="author" content="Rakesh Naik">
   <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/neurons-and-activation-functions.html">
 
   <!-- Open Graph / Social -->
   <meta property="og:type" content="article">
   <meta property="og:title" content="Neurons and Activation Functions: How Neural Networks Compute and Learn — RNLearn">
-  <meta property="og:description" content="The artificial neuron, XOR and hidden layers, sigmoid, tanh, ReLU, GELU and Swish, universal approximation, backpropagation, vanishing gradients, and a network you can train in your browser.">
+  <meta property="og:description" content="The artificial neuron, XOR and hidden layers, sigmoid, tanh, ReLU, GELU and Swish, universal approximation, backpropagation, vanishing gradients, and a small network you can train yourself.">
   <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/neurons-and-activation-functions.html">
   <meta property="og:site_name" content="RNLearn">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Neurons and Activation Functions: How Neural Networks Compute and Learn — RNLearn">
-  <meta name="twitter:description" content="The artificial neuron, XOR and hidden layers, sigmoid, tanh, ReLU, GELU and Swish, universal approximation, backpropagation, vanishing gradients, and a network you can train in your browser.">
+  <meta name="twitter:description" content="The artificial neuron, XOR and hidden layers, sigmoid, tanh, ReLU, GELU and Swish, universal approximation, backpropagation, vanishing gradients, and a small network you can train yourself.">
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="../css/site.css">
@@ -35,7 +35,7 @@
     "@context": "https://schema.org",
     "@type": "TechArticle",
     "headline": "Neurons and Activation Functions: How Neural Networks Compute and Learn",
-    "description": "The artificial neuron, XOR and hidden layers, sigmoid, tanh, ReLU, GELU and Swish, universal approximation, backpropagation, vanishing gradients, and a network you can train in your browser.",
+    "description": "The artificial neuron, XOR and hidden layers, sigmoid, tanh, ReLU, GELU and Swish, universal approximation, backpropagation, vanishing gradients, and a small network you can train yourself.",
     "author": {
       "@type": "Person",
       "name": "Rakesh Naik",
@@ -109,7 +109,7 @@
   <div class="series-banner-title">Series: <a href="../series/inside-the-machine.html">Inside the Machine</a> (Part 6 of 10)</div>
   <div class="series-banner-links">
     <a href="margins-and-kernels.html">← Part 5: Margins and Kernels: Support Vector Machines and Gaussian Processes</a>
-    <span>Part 7 coming soon</span>
+    <a href="loss-functions.html">Part 7: Loss Functions: What Machine Learning Models Minimise →</a>
   </div>
 </div>
 <!-- build:end series-top -->
@@ -129,7 +129,7 @@
               <li><a class="toc-link" href="#section-7">7. Universal Approximation</a></li>
               <li><a class="toc-link" href="#section-8">8. Backpropagation</a></li>
               <li><a class="toc-link" href="#section-9">9. Vanishing and Exploding Gradients</a></li>
-              <li><a class="toc-link" href="#section-10">10. Training a Network in Your Browser</a></li>
+              <li><a class="toc-link" href="#section-10">10. Training a Small Network</a></li>
               <li><a class="toc-link" href="#section-11">11. Output Layers</a></li>
               <li><a class="toc-link" href="#section-12">12. Choosing an Activation</a></li>
               <li><a class="toc-link" href="#section-13">13. Open Questions</a></li>
@@ -150,7 +150,7 @@
             <div class="callout-header">At a glance</div>
             <p><strong>You will learn:</strong> what an artificial neuron computes; why one neuron cannot solve XOR and hidden layers can; the main activation functions (sigmoid, tanh, ReLU and its variants, GELU, Swish) and how to choose; why nonlinearity is essential; the universal approximation theorem; how backpropagation computes gradients; vanishing and exploding gradients; and how a small network learns.</p>
             <p><strong>You need:</strong> Part 2 (logistic regression, gradient descent). The fold-outs use the chain rule from calculus.</p>
-            <p><strong>Try:</strong> six interactive figures, including a neuron you wire by hand, a step-by-step backpropagation, and a neural network you can train in your browser.</p>
+            <p><strong>Try:</strong> six interactive figures, including a neuron you wire by hand, a step-by-step backpropagation, and a neural network you can train yourself.</p>
           </div>
 
           <section id="section-1">
@@ -286,7 +286,7 @@ print(loss.item())</code></pre>
           </section>
 
           <section id="section-10">
-            <h2>10. Training a Network in Your Browser</h2>
+            <h2>10. Training a Small Network</h2>
             <p>Figure 8 puts the pieces together: a network with two inputs, one hidden layer and a sigmoid output, trained with backpropagation and gradient descent on the series’ classification data. Watch the decision boundary bend into shape as the loss falls.</p>
             <figure class="fig" data-fig="fig-ml-playground">
               <div class="fig-container"></div>
@@ -501,7 +501,7 @@ print(loss.item())</code></pre>
   <div class="series-banner-title">Series: <a href="../series/inside-the-machine.html">Inside the Machine</a> (Part 6 of 10)</div>
   <div class="series-banner-links">
     <a href="margins-and-kernels.html">← Part 5: Margins and Kernels: Support Vector Machines and Gaussian Processes</a>
-    <span>Part 7 coming soon</span>
+    <a href="loss-functions.html">Part 7: Loss Functions: What Machine Learning Models Minimise →</a>
   </div>
 </div>
 <!-- build:end series-bottom -->
