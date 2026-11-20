@@ -4758,5 +4758,72 @@ window.RNLEARN_GLOSSARY = [
   "Neural tangent kernel",
   "The kernel describing how an infinitely wide neural network behaves during gradient-descent training.",
   []
+ ],
+ [
+  "Artificial neuron",
+  "A unit that computes a weighted sum of its inputs plus a bias and passes it through an activation function.",
+  [
+   "artificial neurons"
+  ]
+ ],
+ [
+  "Activation function",
+  "The function a neuron applies to its weighted input, such as ReLU or the sigmoid; it makes networks nonlinear.",
+  [
+   "activation functions"
+  ]
+ ],
+ [
+  "XOR problem",
+  "The exclusive-or function, which a single neuron cannot compute because its classes are not linearly separable.",
+  []
+ ],
+ [
+  "Leaky ReLU",
+  "A ReLU with a small positive slope for negative inputs, so units never switch off completely.",
+  []
+ ],
+ [
+  "GELU",
+  "The Gaussian error linear unit z·Φ(z), a smooth ReLU-like activation standard in transformers.",
+  []
+ ],
+ [
+  "Swish",
+  "The activation z·σ(z), also called SiLU, found by automated search.",
+  [
+   "SiLU"
+  ]
+ ],
+ [
+  "Tanh",
+  "The hyperbolic tangent, an S-shaped activation with outputs between −1 and 1.",
+  []
+ ],
+ [
+  "Universal approximation theorem",
+  "The result that a network with one hidden layer and enough units can approximate any continuous function as closely as desired.",
+  []
+ ],
+ [
+  "Automatic differentiation",
+  "Computing exact derivatives of a program by applying the chain rule to its elementary operations.",
+  [
+   "reverse-mode automatic differentiation"
+  ]
+ ],
+ [
+  "Exploding gradient",
+  "Gradients growing exponentially through many layers, making training unstable.",
+  [
+   "exploding gradients"
+  ]
+ ],
+ [
+  "He initialisation",
+  "Initialising weights with standard deviation √(2/n) so that signals keep their size through ReLU layers.",
+  [
+   "He initialization"
+  ]
  ]
 ];

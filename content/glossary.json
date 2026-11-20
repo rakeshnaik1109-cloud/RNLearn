@@ -4756,5 +4756,72 @@
     "term": "Neural tangent kernel",
     "definition": "The kernel describing how an infinitely wide neural network behaves during gradient-descent training.",
     "forms": []
+  },
+  {
+    "term": "Artificial neuron",
+    "definition": "A unit that computes a weighted sum of its inputs plus a bias and passes it through an activation function.",
+    "forms": [
+      "artificial neurons"
+    ]
+  },
+  {
+    "term": "Activation function",
+    "definition": "The function a neuron applies to its weighted input, such as ReLU or the sigmoid; it makes networks nonlinear.",
+    "forms": [
+      "activation functions"
+    ]
+  },
+  {
+    "term": "XOR problem",
+    "definition": "The exclusive-or function, which a single neuron cannot compute because its classes are not linearly separable.",
+    "forms": []
+  },
+  {
+    "term": "Leaky ReLU",
+    "definition": "A ReLU with a small positive slope for negative inputs, so units never switch off completely.",
+    "forms": []
+  },
+  {
+    "term": "GELU",
+    "definition": "The Gaussian error linear unit z·Φ(z), a smooth ReLU-like activation standard in transformers.",
+    "forms": []
+  },
+  {
+    "term": "Swish",
+    "definition": "The activation z·σ(z), also called SiLU, found by automated search.",
+    "forms": [
+      "SiLU"
+    ]
+  },
+  {
+    "term": "Tanh",
+    "definition": "The hyperbolic tangent, an S-shaped activation with outputs between −1 and 1.",
+    "forms": []
+  },
+  {
+    "term": "Universal approximation theorem",
+    "definition": "The result that a network with one hidden layer and enough units can approximate any continuous function as closely as desired.",
+    "forms": []
+  },
+  {
+    "term": "Automatic differentiation",
+    "definition": "Computing exact derivatives of a program by applying the chain rule to its elementary operations.",
+    "forms": [
+      "reverse-mode automatic differentiation"
+    ]
+  },
+  {
+    "term": "Exploding gradient",
+    "definition": "Gradients growing exponentially through many layers, making training unstable.",
+    "forms": [
+      "exploding gradients"
+    ]
+  },
+  {
+    "term": "He initialisation",
+    "definition": "Initialising weights with standard deviation √(2/n) so that signals keep their size through ReLU layers.",
+    "forms": [
+      "He initialization"
+    ]
   }
 ]
