@@ -1,5 +1,31 @@
 [
   {
+    "slug": "socrates-plato-and-aristotle",
+    "title": "Socrates, Plato and Aristotle: How Should We Ask Questions About the World?",
+    "summary": "The Socratic method and the trial of Socrates, Plato’s Forms, the cave and the doubled square, the Platonic solids, Aristotle’s logic, biology, four causes and physics.",
+    "subject": "Philosophy & Ideas",
+    "tags": [
+      "philosophy",
+      "history-of-science",
+      "ancient-greece",
+      "logic",
+      "epistemology",
+      "biology"
+    ],
+    "date": "2026-11-20",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 18,
+    "series": {
+      "id": "minds-that-changed-how-we-know",
+      "part": 1
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
     "slug": "designing-experiments",
     "title": "Designing Experiments: Randomise, Replicate, Block and Blind",
     "summary": "Questions and experimental units, controls, randomisation, replication, blocking and Latin squares, blinding, screening and response surfaces, optional stopping, pre-registration and a checklist.",

@@ -4233,5 +4233,70 @@ window.RNLEARN_GLOSSARY = [
   [
    "registered reports"
   ]
+ ],
+ [
+  "Socratic method",
+  "Testing a claim by questioning and counterexamples until its weaknesses appear; also called the elenchus.",
+  [
+   "elenchus"
+  ]
+ ],
+ [
+  "Aporia",
+  "A state of puzzlement reached when every proposed answer to a question has been refuted.",
+  []
+ ],
+ [
+  "Socratic problem",
+  "The difficulty of separating the historical Socrates from the character in Plato’s and others’ writings.",
+  []
+ ],
+ [
+  "Theory of Forms",
+  "Plato’s view that perfect, unchanging patterns (Forms) are the true reality, of which physical things are imperfect copies.",
+  []
+ ],
+ [
+  "Allegory of the cave",
+  "Plato’s image of prisoners who mistake shadows for reality, illustrating the difference between the senses and true knowledge.",
+  []
+ ],
+ [
+  "Theory of recollection",
+  "Plato’s idea that learning is remembering knowledge the soul had before birth.",
+  [
+   "anamnesis"
+  ]
+ ],
+ [
+  "Platonic solid",
+  "One of the five convex solids with identical regular faces and the same number of faces at every vertex.",
+  [
+   "Platonic solids"
+  ]
+ ],
+ [
+  "Final cause",
+  "In Aristotle’s philosophy, the purpose or end for which something exists or happens.",
+  [
+   "final causes"
+  ]
+ ],
+ [
+  "Natural place",
+  "In Aristotle’s physics, the place in the cosmos towards which each element naturally moves.",
+  []
+ ],
+ [
+  "Terminal velocity",
+  "The steady speed reached by a body falling through a fluid, when drag balances its weight.",
+  [
+   "terminal speed"
+  ]
+ ],
+ [
+  "Rationalism",
+  "The view that reason, rather than the senses, is the main source of knowledge.",
+  []
  ]
 ];

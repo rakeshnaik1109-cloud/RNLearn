@@ -58,6 +58,10 @@ A nine-part series on the statistics used in real experiments:
 8. **Part 8**: *Counts and Categories: Chi-Square, Exact Tests and Overdispersion* (nominal, ordinal & binary data, Pearson’s χ² with Mendel’s peas, contingency tables & degrees of freedom, Fisher’s exact test & Yates’s correction, McNemar’s test, risk difference, risk & odds ratios, Mantel–Haenszel, Poisson counts, overdispersion & GLMs, trend tests, Cohen’s kappa & its paradox)
 9. **Part 9**: *Designing Experiments: Randomise, Replicate, Block and Blind* (questions, experimental units & primary outcomes, negative, vehicle & positive controls, randomisation from Peirce to the streptomycin trial, technical vs biological replicates, blocking & Latin squares, blinding, fractional factorial & Plackett–Burman screening, response surfaces, optional stopping & researcher degrees of freedom, pre-registration & reproducibility, a design checklist, the lady tasting tea)
 
+### New Series: *Minds That Changed How We Know*
+A twelve-part series on scientists and philosophers, told in pairs and groups around one big question each, with interactive figures that let readers try their ideas.
+1. **Part 1**: *Socrates, Plato and Aristotle: How Should We Ask Questions About the World?* (the Socratic method & an interactive Theaetetus dialogue, the trial of Socrates, Plato’s Forms & the cave, doubling the square in the Meno, the Platonic solids, Aristotle’s syllogisms, biology & four causes, and why his physics fits motion in honey but not in air)
+
 ### Standalone Tutorials
 - *Who's the Father? How a DNA Paternity Test Works* (DNA basics, inheritance, blood groups & the Chaplin case, Jeffreys, STRs, PCR & capillary electrophoresis, the paternity index & Bayes, tricky cases, Indian law)
 - *Why Is My Laser Spot Grainy? Speckle, Stray Fringes and Other Gremlins of the Optics Lab* (coherence, speckle statistics & reduction, accidental etalons, ghosts & back-reflections, dust rings & spatial filters, fibre noise, vibration, detector artifacts, speckle as a tool, troubleshooting guide)

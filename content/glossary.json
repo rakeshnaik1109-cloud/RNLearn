@@ -4231,5 +4231,70 @@
     "forms": [
       "registered reports"
     ]
+  },
+  {
+    "term": "Socratic method",
+    "definition": "Testing a claim by questioning and counterexamples until its weaknesses appear; also called the elenchus.",
+    "forms": [
+      "elenchus"
+    ]
+  },
+  {
+    "term": "Aporia",
+    "definition": "A state of puzzlement reached when every proposed answer to a question has been refuted.",
+    "forms": []
+  },
+  {
+    "term": "Socratic problem",
+    "definition": "The difficulty of separating the historical Socrates from the character in Plato’s and others’ writings.",
+    "forms": []
+  },
+  {
+    "term": "Theory of Forms",
+    "definition": "Plato’s view that perfect, unchanging patterns (Forms) are the true reality, of which physical things are imperfect copies.",
+    "forms": []
+  },
+  {
+    "term": "Allegory of the cave",
+    "definition": "Plato’s image of prisoners who mistake shadows for reality, illustrating the difference between the senses and true knowledge.",
+    "forms": []
+  },
+  {
+    "term": "Theory of recollection",
+    "definition": "Plato’s idea that learning is remembering knowledge the soul had before birth.",
+    "forms": [
+      "anamnesis"
+    ]
+  },
+  {
+    "term": "Platonic solid",
+    "definition": "One of the five convex solids with identical regular faces and the same number of faces at every vertex.",
+    "forms": [
+      "Platonic solids"
+    ]
+  },
+  {
+    "term": "Final cause",
+    "definition": "In Aristotle’s philosophy, the purpose or end for which something exists or happens.",
+    "forms": [
+      "final causes"
+    ]
+  },
+  {
+    "term": "Natural place",
+    "definition": "In Aristotle’s physics, the place in the cosmos towards which each element naturally moves.",
+    "forms": []
+  },
+  {
+    "term": "Terminal velocity",
+    "definition": "The steady speed reached by a body falling through a fluid, when drag balances its weight.",
+    "forms": [
+      "terminal speed"
+    ]
+  },
+  {
+    "term": "Rationalism",
+    "definition": "The view that reason, rather than the senses, is the main source of knowledge.",
+    "forms": []
   }
 ]

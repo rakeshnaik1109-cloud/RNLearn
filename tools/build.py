@@ -59,6 +59,12 @@ SERIES = {
         "label": "Data Part",
         "lede": "A nine-part series on the statistics used in real experiments, from averages and spread to uncertainty, ANOVA, regression and experimental design, with interactive figures and worked examples.",
     },
+    "minds-that-changed-how-we-know": {
+        "title": "Minds That Changed How We Know",
+        "parts": 12,
+        "label": "Minds Part",
+        "lede": "A twelve-part series on the scientists and philosophers who changed how we know, told in pairs and groups around one big question each, from Socrates, Plato and Aristotle to Popper, Kuhn and Turing.",
+    },
 }
 
 def series_meta(s_id, n_posts=0):
@@ -404,6 +410,9 @@ def build_site(root_dir, check_mode=False):
             lede = "How We Measured the Universe: a twelve-part series on how people measured the Earth, the Moon, the Sun, the stars, light, time and atoms, with experiments you can try yourself."
             if any((x.get("series") or {}).get("id") == "making-sense-of-data" for x in posts):
                 lede += " Making Sense of Data: a nine-part series on the statistics used in real experiments."
+        elif subj == "Philosophy & Ideas" and any((x.get("series") or {}).get("id") == "minds-that-changed-how-we-know" for x in posts):
+            eyebrow = "Subject Archive • Series"
+            lede = "Minds That Changed How We Know: a twelve-part series on scientists and philosophers, from Socrates, Plato and Aristotle to Popper, Kuhn and Turing, with interactive figures that let you try their ideas."
         elif subj == "Technology" and any((x.get("series") or {}).get("id") == "how-machines-learned-to-think" for x in posts):
             eyebrow = "Subject Archive • Series"
             lede = "How Machines Learned to Think: an eight-part history of artificial intelligence, from the first dreams of thinking machines to today’s AI and where it may lead."
