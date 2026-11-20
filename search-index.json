@@ -119,6 +119,23 @@
     "type": "tutorial"
   },
   {
+    "slug": "ensembles",
+    "url": "articles/ensembles.html",
+    "title": "Ensembles: Bagging, Random Forests and Boosting",
+    "summary": "Why combining models works, bagging and random forests, out-of-bag error and feature importance, AdaBoost, gradient boosting and XGBoost, stacking, and how to compare ensembles fairly.",
+    "subject": "AI & Machine Learning",
+    "tags": [
+      "machine-learning",
+      "random-forests",
+      "boosting",
+      "ensembles",
+      "decision-trees",
+      "data-analysis"
+    ],
+    "date": "2026-11-20",
+    "type": "tutorial"
+  },
+  {
     "slug": "designing-experiments",
     "url": "articles/designing-experiments.html",
     "title": "Designing Experiments: Randomise, Replicate, Block and Blind",

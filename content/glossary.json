@@ -4584,5 +4584,96 @@
     "term": "CART",
     "definition": "Classification and regression trees: the tree-growing and pruning method of Breiman, Friedman, Olshen and Stone (1984).",
     "forms": []
+  },
+  {
+    "term": "Ensemble",
+    "definition": "A model that combines the predictions of many models, often of the same simple kind.",
+    "forms": [
+      "ensembles",
+      "ensemble methods"
+    ]
+  },
+  {
+    "term": "Condorcet’s jury theorem",
+    "definition": "The result that a majority of many independent voters, each more likely right than wrong, is almost certainly right.",
+    "forms": [
+      "Condorcet's jury theorem",
+      "jury theorem"
+    ]
+  },
+  {
+    "term": "Bagging",
+    "definition": "Bootstrap aggregating: training models on bootstrap samples of the data and averaging their predictions.",
+    "forms": [
+      "bootstrap aggregating"
+    ]
+  },
+  {
+    "term": "Out-of-bag estimate",
+    "definition": "An estimate of test performance using, for each training point, only the ensemble members that did not see it.",
+    "forms": [
+      "out-of-bag error",
+      "out-of-bag"
+    ]
+  },
+  {
+    "term": "Permutation importance",
+    "definition": "A feature’s importance measured by how much performance drops when its values are randomly shuffled.",
+    "forms": []
+  },
+  {
+    "term": "Boosting",
+    "definition": "Building a strong model from a sequence of weak ones, each trained to correct the errors of those before.",
+    "forms": []
+  },
+  {
+    "term": "Weak learner",
+    "definition": "A model only slightly better than random guessing, used as a building block in boosting.",
+    "forms": [
+      "weak learners"
+    ]
+  },
+  {
+    "term": "Decision stump",
+    "definition": "A decision tree with a single split.",
+    "forms": [
+      "stump",
+      "stumps"
+    ]
+  },
+  {
+    "term": "AdaBoost",
+    "definition": "Adaptive boosting: reweighting training points so each new weak learner focuses on earlier mistakes.",
+    "forms": []
+  },
+  {
+    "term": "Gradient boosting",
+    "definition": "Boosting in which each new tree is fitted to the negative gradient of the loss, the residuals for squared error.",
+    "forms": [
+      "gradient-boosted trees"
+    ]
+  },
+  {
+    "term": "Shrinkage",
+    "definition": "In gradient boosting, scaling each new tree by a small learning rate to improve generalisation.",
+    "forms": []
+  },
+  {
+    "term": "Early stopping",
+    "definition": "Stopping training when performance on validation data stops improving.",
+    "forms": []
+  },
+  {
+    "term": "XGBoost",
+    "definition": "A widely used, scalable gradient-boosting library introduced in 2016.",
+    "forms": []
+  },
+  {
+    "term": "Stacking",
+    "definition": "Combining different models by training a meta-model on their out-of-fold predictions.",
+    "forms": [
+      "stacked generalisation",
+      "stacked generalization"
+    ]
   }
 ]

@@ -1,5 +1,31 @@
 [
   {
+    "slug": "ensembles",
+    "title": "Ensembles: Bagging, Random Forests and Boosting",
+    "summary": "Why combining models works, bagging and random forests, out-of-bag error and feature importance, AdaBoost, gradient boosting and XGBoost, stacking, and how to compare ensembles fairly.",
+    "subject": "AI & Machine Learning",
+    "tags": [
+      "machine-learning",
+      "random-forests",
+      "boosting",
+      "ensembles",
+      "decision-trees",
+      "data-analysis"
+    ],
+    "date": "2026-11-20",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 18,
+    "series": {
+      "id": "inside-the-machine",
+      "part": 4
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
     "slug": "neighbours-bayes-and-trees",
     "title": "Neighbours, Bayes and Trees: Three Classic Ways to Classify",
     "summary": "k-nearest neighbours and the curse of dimensionality, naive Bayes and why its naive assumption works, decision trees with Gini impurity, entropy and pruning, and regression trees.",

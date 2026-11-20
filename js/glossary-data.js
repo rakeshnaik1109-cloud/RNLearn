@@ -4586,5 +4586,96 @@ window.RNLEARN_GLOSSARY = [
   "CART",
   "Classification and regression trees: the tree-growing and pruning method of Breiman, Friedman, Olshen and Stone (1984).",
   []
+ ],
+ [
+  "Ensemble",
+  "A model that combines the predictions of many models, often of the same simple kind.",
+  [
+   "ensembles",
+   "ensemble methods"
+  ]
+ ],
+ [
+  "Condorcet’s jury theorem",
+  "The result that a majority of many independent voters, each more likely right than wrong, is almost certainly right.",
+  [
+   "Condorcet's jury theorem",
+   "jury theorem"
+  ]
+ ],
+ [
+  "Bagging",
+  "Bootstrap aggregating: training models on bootstrap samples of the data and averaging their predictions.",
+  [
+   "bootstrap aggregating"
+  ]
+ ],
+ [
+  "Out-of-bag estimate",
+  "An estimate of test performance using, for each training point, only the ensemble members that did not see it.",
+  [
+   "out-of-bag error",
+   "out-of-bag"
+  ]
+ ],
+ [
+  "Permutation importance",
+  "A feature’s importance measured by how much performance drops when its values are randomly shuffled.",
+  []
+ ],
+ [
+  "Boosting",
+  "Building a strong model from a sequence of weak ones, each trained to correct the errors of those before.",
+  []
+ ],
+ [
+  "Weak learner",
+  "A model only slightly better than random guessing, used as a building block in boosting.",
+  [
+   "weak learners"
+  ]
+ ],
+ [
+  "Decision stump",
+  "A decision tree with a single split.",
+  [
+   "stump",
+   "stumps"
+  ]
+ ],
+ [
+  "AdaBoost",
+  "Adaptive boosting: reweighting training points so each new weak learner focuses on earlier mistakes.",
+  []
+ ],
+ [
+  "Gradient boosting",
+  "Boosting in which each new tree is fitted to the negative gradient of the loss, the residuals for squared error.",
+  [
+   "gradient-boosted trees"
+  ]
+ ],
+ [
+  "Shrinkage",
+  "In gradient boosting, scaling each new tree by a small learning rate to improve generalisation.",
+  []
+ ],
+ [
+  "Early stopping",
+  "Stopping training when performance on validation data stops improving.",
+  []
+ ],
+ [
+  "XGBoost",
+  "A widely used, scalable gradient-boosting library introduced in 2016.",
+  []
+ ],
+ [
+  "Stacking",
+  "Combining different models by training a meta-model on their out-of-fold predictions.",
+  [
+   "stacked generalisation",
+   "stacked generalization"
+  ]
  ]
 ];

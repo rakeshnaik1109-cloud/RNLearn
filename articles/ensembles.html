@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ensembles: Bagging, Random Forests and Boosting — RNLearn</title>
+  <meta name="description" content="Why combining models works, bagging and random forests, out-of-bag error and feature importance, AdaBoost, gradient boosting and XGBoost, stacking, and how to compare ensembles fairly.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/ensembles.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Ensembles: Bagging, Random Forests and Boosting — RNLearn">
+  <meta property="og:description" content="Why combining models works, bagging and random forests, out-of-bag error and feature importance, AdaBoost, gradient boosting and XGBoost, stacking, and how to compare ensembles fairly.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/ensembles.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ensembles: Bagging, Random Forests and Boosting — RNLearn">
+  <meta name="twitter:description" content="Why combining models works, bagging and random forests, out-of-bag error and feature importance, AdaBoost, gradient boosting and XGBoost, stacking, and how to compare ensembles fairly.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Ensembles: Bagging, Random Forests and Boosting",
+    "description": "Why combining models works, bagging and random forests, out-of-bag error and feature importance, AdaBoost, gradient boosting and XGBoost, stacking, and how to compare ensembles fairly.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-20",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/ensembles.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/ai-machine-learning.html" class="post-subject-tag" data-subject="ai-machine-learning">AI &amp; Machine Learning</a>
+        </div>
+        <h1 class="article-title">Ensembles: Bagging, Random Forests and Boosting</h1>
+        <p class="article-standfirst">
+          A crowd of imperfect guesses can beat almost every individual. Ensembles turn that idea into the most successful methods for tabular data, by averaging many different trees or by building strong models from a sequence of weak ones.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-20">20 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>18 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/inside-the-machine.html">Inside the Machine</a> (Part 4 of 10)</div>
+  <div class="series-banner-links">
+    <a href="neighbours-bayes-and-trees.html">← Part 3: Neighbours, Bayes and Trees: Three Classic Ways to Classify</a>
+    <span>Part 5 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. The Wisdom of Crowds</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Why Combining Works, and When It Does Not</a></li>
+              <li><a class="toc-link" href="#section-4">4. Bagging: Bootstrap Aggregating</a></li>
+              <li><a class="toc-link" href="#section-5">5. Random Forests</a></li>
+              <li><a class="toc-link" href="#section-6">6. Free Gifts of the Forest: Out-of-Bag Error and Feature Importance</a></li>
+              <li><a class="toc-link" href="#section-7">7. Boosting: Strength from Weakness</a></li>
+              <li><a class="toc-link" href="#section-8">8. Gradient Boosting</a></li>
+              <li><a class="toc-link" href="#section-9">9. Modern Boosting Libraries</a></li>
+              <li><a class="toc-link" href="#section-10">10. Bagging versus Boosting</a></li>
+              <li><a class="toc-link" href="#section-11">11. Stacking and Blending</a></li>
+              <li><a class="toc-link" href="#section-12">12. Tuning and Using Ensembles</a></li>
+              <li><a class="toc-link" href="#section-13">13. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-14">14. Worked Example: Comparing Ensembles Fairly</a></li>
+              <li><a class="toc-link" href="#section-15">15. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-16">16. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-17">17. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-18">18. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-19">19. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-20">20. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>You will learn:</strong> why combining many models beats one; how bagging and random forests average away the instability of trees; out-of-bag error and feature importance; how boosting builds a strong model from weak ones, from AdaBoost to gradient boosting and XGBoost; stacking; and how to tune and choose ensembles.</p>
+            <p><strong>You need:</strong> Part 1 (bias and variance) and Part 3 (decision trees). The bootstrap from <em>Making Sense of Data</em> Part 4 helps.</p>
+            <p><strong>Try:</strong> four interactive figures: the mathematics of averaging, a tree-versus-forest comparison, AdaBoost building a circle from straight lines, and gradient boosting fitting residuals.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. The Wisdom of Crowds</h2>
+            <p>In 1907 Francis Galton visited a country fair where 787 people paid to guess the weight of an ox once slaughtered and dressed. Individually the guesses were all over the place, but the middle (median) guess, 1,207 pounds, was within 1% of the true weight of 1,198 pounds. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span> A crowd of imperfect estimates, combined, beat almost every individual.</p>
+            <p>The same idea powers some of the most successful methods in machine learning. An <strong>ensemble</strong> combines many models, often of the same simple kind, into one. Random forests and gradient-boosted trees, the subjects of this part, are the methods most likely to win on ordinary tables of data, as Part 3’s Open Questions noted. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>, <a class="cite" href="#ref-3">3</a>]</span></p>
+            <figure class="fig" data-fig="fig-ml-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Tap any part to see what it covers.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-ml4-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Ensembles from Condorcet to XGBoost, 1785–2018.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Why Combining Works, and When It Does Not</h2>
+            <p>Averaging helps for the same reason that the mean of many measurements is more precise than one (<em>Making Sense of Data</em> Part 2): random errors partly cancel. But there is a catch. Errors cancel only if they <em>differ</em>. A hundred copies of the same model make the same mistakes, and averaging them gains nothing. What matters is how <strong>correlated</strong> the models’ errors are.</p>
+            <p>For voting, the same insight goes back to the Marquis de Condorcet’s jury theorem of 1785: if each voter is independently more likely to be right than wrong, a majority of many voters is almost certainly right. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> Independence is the hard part. Ensemble methods are, in essence, clever ways of making models that are individually good but different from one another.</p>
+            <figure class="fig" data-fig="fig-ml-ensavg">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. The mathematics of combining.</strong> Averaging: how the variance of an average falls with the number of models for a given correlation between their errors. Voting: how a majority of independent voters improves with group size.
+              </figcaption>
+            </figure>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">The maths: the variance of an average</summary>
+              <p style="margin-top:0.6rem;">If B models each have prediction variance σ² and every pair has error correlation ρ, the variance of their average is</p>
+              <p>$$\operatorname{Var}\Big(\frac{1}{B}\sum_{b=1}^{B}\hat f_b\Big) = \rho\,\sigma^2 + \frac{1-\rho}{B}\,\sigma^2.$$</p>
+              <p>The second term vanishes as B grows; the first does not. Adding models reduces only the uncorrelated part of the error; reducing ρ, by making the models more different, lowers the floor. Averaging does not reduce bias: an ensemble of models that are all wrong in the same way is still wrong.</p>
+            </details>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Bagging: Bootstrap Aggregating</h2>
+            <p>How do you train many different models from one data set? In 1996 Leo Breiman proposed <strong>bagging</strong>, short for bootstrap aggregating. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> Draw a <strong>bootstrap sample</strong>: as many points as the training set, chosen at random <em>with replacement</em>, so some appear twice or more and about 37% not at all (the bootstrap of <em>Making Sense of Data</em> Part 4). Train a model on it. Repeat many times, and average the predictions (or take a majority vote).</p>
+            <p>Bagging helps most with models that are unstable, whose predictions change a lot with small changes to the data. Decision trees, as Part 3 showed, are the classic example: low bias but high variance. Bagging keeps their low bias and averages away much of the variance.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Random Forests</h2>
+            <p>Bagged trees grown on similar data still tend to make the same first splits on the strongest features, so their errors stay correlated. A <strong>random forest</strong> adds a second source of randomness: at each split, a tree may consider only a random subset of the features. This decorrelates the trees, lowering the floor in Figure 3. Tin Kam Ho had grown forests of trees on random feature subsets in 1995, and in 2001 Breiman combined the idea with bagging in the method now known as the random forest. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>, <a class="cite" href="#ref-7">7</a>]</span> A common default is to consider √d of the d features at each split for classification.</p>
+            <figure class="fig" data-fig="fig-ml-forest">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. One tree, bagging and a random forest.</strong> Compare the decision boundary of a single fully grown tree with the averaged vote of many bagged or randomised trees. With only two features, the random forest considers one randomly chosen feature at each split.
+              </figcaption>
+            </figure>
+            <p>On the particular two moons of this series, a single deep tree, 100 bagged trees and a 100-tree random forest all score 92–93% on the 60 test points: with so few test points, one data set cannot show the difference. Repeating the experiment on 30 freshly generated sets of moons tells the real story. The average test accuracy is 93.1% for a single tree (standard deviation 4.3 points), 95.0% for bagging (3.0) and 94.6% for the random forest (2.9). On the circles, it rises from 94.8% for a tree to 96.9% for the forest. The ensembles are more accurate on average and, just as important, much less variable from one data set to the next.</p>
+            <div class="callout callout-warn">
+              <div class="callout-header">Watch out: one test set is one draw</div>
+              <p>Comparing models on a single small test set can mislead in either direction. Repeat the comparison over several splits or data sets, or use cross-validation, before concluding that one method is better (Part 1).</p>
+            </div>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Free Gifts of the Forest: Out-of-Bag Error and Feature Importance</h2>
+            <p>Each bootstrap sample leaves out about a third of the training points. For any point, the trees that never saw it form a mini-ensemble that can predict it honestly. Averaging these <strong>out-of-bag</strong> predictions over all points gives an estimate of test accuracy without a separate validation set or cross-validation, as Breiman noted. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> In Figure 4, the out-of-bag estimate for the 100-tree forest on the moons is 92%, close to the test accuracy.</p>
+            <p>Forests also rank features by importance. The quick way adds up how much each feature reduces impurity across all splits; the more reliable way, <strong>permutation importance</strong>, measures how much accuracy drops when a feature’s values are shuffled. Impurity-based importance is biased towards features with many possible split points, such as continuous variables or identifiers, a problem documented by Carolin Strobl and colleagues. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span> Importance measures association with the prediction, not cause, and correlated features share or steal each other’s importance (Part 10).</p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Boosting: Strength from Weakness</h2>
+            <p>Bagging trains its models independently and in parallel. <strong>Boosting</strong> trains them in sequence, each one focusing on the mistakes of those before. The idea began as a theoretical question posed by Michael Kearns and Leslie Valiant: can a “weak” learner, only slightly better than guessing, be turned into a strong one? In 1990 Robert Schapire proved that it can. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span></p>
+            <p>The practical breakthrough was <strong>AdaBoost</strong> (adaptive boosting), published by Yoav Freund and Schapire in 1997, work later honoured with the Gödel Prize. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span> AdaBoost gives every training point a weight. Each round fits a weak learner, often a <strong>stump</strong> (a tree with a single split), to the weighted data; then it raises the weights of the points the stump got wrong and lowers the others. The final prediction is a weighted vote, with more accurate stumps getting more say.</p>
+            <figure class="fig" data-fig="fig-ml-adaboost">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. AdaBoost builds a circle from straight lines.</strong> Each round adds a stump, a single vertical or horizontal cut. Rings show the points currently carrying the most weight: the hard cases the next stump will concentrate on.
+              </figcaption>
+            </figure>
+            <p>On the circles, a single stump manages 53% on test: no single straight cut can separate a ring. Five rounds reach 82%, twenty 87%, and a hundred 93%. Each stump is barely better than guessing on its own weighted data, yet together they draw a closed boundary.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">The maths: AdaBoost’s update</summary>
+              <p style="margin-top:0.6rem;">With labels y<sub>i</sub> = ±1 and weights w<sub>i</sub> summing to 1, round t fits a weak learner h<sub>t</sub> with weighted error ε<sub>t</sub>, gives it the vote</p>
+              <p>$$\alpha_t = \tfrac{1}{2}\ln\frac{1-\varepsilon_t}{\varepsilon_t},$$</p>
+              <p>and updates w<sub>i</sub> ← w<sub>i</sub> exp(−α<sub>t</sub> y<sub>i</sub> h<sub>t</sub>(x<sub>i</sub>)), then renormalises. The final classifier is sign(Σ<sub>t</sub> α<sub>t</sub> h<sub>t</sub>(x)). AdaBoost turns out to be gradient descent on the exponential loss e<sup>−yF(x)</sup>, the insight that led to gradient boosting.</p>
+            </details>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Gradient Boosting</h2>
+            <p>In 2001 Jerome Friedman recast boosting as gradient descent, not on parameters as in Part 2, but on the predictions themselves. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span> For squared error the recipe is simple: start with a constant (the mean); compute the <strong>residuals</strong>, the errors still left; fit a small tree to the residuals; add a fraction ν of it to the model; repeat. Each new tree corrects what the ensemble so far gets wrong. For other losses, the trees are fitted to the negative gradient of the loss, which for squared error is exactly the residual, so the same machinery handles classification, ranking and robust regression.</p>
+            <figure class="fig" data-fig="fig-ml-gboost">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. Gradient boosting on the running example.</strong> Left: the boosted model and the residuals (purple) that the next tree will fit. Right: training and test error by round. Change the learning rate and the depth of each tree.
+              </figcaption>
+            </figure>
+            <p>The <strong>learning rate</strong> ν (also called shrinkage) matters a great deal. With ν = 1 and stumps, the test error is best after just 10 rounds (0.117), then rises as later stumps chase noise. With ν = 0.1, progress is slower but steadier: 0.130 after 50 rounds and about 0.12 from 100 rounds on. Small learning rates with many trees, stopped early using a validation set, usually generalise best.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">The maths: boosting as gradient descent in function space</summary>
+              <p style="margin-top:0.6rem;">For a loss L(y, F), start from F<sub>0</sub> = argmin<sub>c</sub> Σ L(y<sub>i</sub>, c). At round m compute the pseudo-residuals and fit a tree h<sub>m</sub> to them:</p>
+              <p>$$r_{im} = -\left.\frac{\partial L(y_i, F)}{\partial F}\right|_{F=F_{m-1}(x_i)}, \qquad F_m(x) = F_{m-1}(x) + \nu\,h_m(x).$$</p>
+              <p>For squared error L = ½(y − F)², the pseudo-residual is simply y − F. For log loss in classification, it is y − p, the gap between label and predicted probability.</p>
+            </details>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Modern Boosting Libraries</h2>
+            <p>Gradient boosting became the workhorse of applied machine learning through fast, carefully engineered libraries:</p>
+            <ul>
+              <li><strong>XGBoost</strong> (2016) adds regularisation of the trees, clever handling of missing values, and parallel, cache-aware computation. Its authors reported that 17 of the 29 winning solutions published on the Kaggle competition platform in 2015 used it. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span></li>
+              <li><strong>LightGBM</strong> (2017) speeds up training on large data sets by binning feature values into histograms and growing trees leaf by leaf. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span></li>
+              <li><strong>CatBoost</strong> (2018) handles categorical features natively and uses an ordering scheme that avoids a subtle form of target leakage. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span></li>
+            </ul>
+            <p>All three, and scikit-learn’s <code>HistGradientBoostingClassifier</code>, share the same core ideas: many shallow trees, a small learning rate, row and column subsampling for extra randomness, and early stopping on validation data.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">In code: forests and boosting with scikit-learn</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">from sklearn.datasets import make_moons
+from sklearn.model_selection import cross_val_score
+from sklearn.ensemble import (RandomForestClassifier, AdaBoostClassifier,
+                              HistGradientBoostingClassifier)
+
+X, y = make_moons(n_samples=1000, noise=0.3, random_state=0)
+
+forest = RandomForestClassifier(n_estimators=300, oob_score=True, random_state=0).fit(X, y)
+print("OOB accuracy:", forest.oob_score_)
+
+ada = AdaBoostClassifier(n_estimators=200, random_state=0)       # stumps by default
+gbm = HistGradientBoostingClassifier(learning_rate=0.1, max_iter=500,
+                                     early_stopping=True, random_state=0)
+for name, model in [("AdaBoost", ada), ("Gradient boosting", gbm)]:
+    print(name, cross_val_score(model, X, y, cv=5).mean())</code></pre>
+            </details>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Bagging versus Boosting</h2>
+            <div class="table-container" style="overflow-x:auto; margin:1.2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.92rem; line-height:1.5;">
+                <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.5rem;"></th><th style="padding:0.5rem;">Bagging and random forests</th><th style="padding:0.5rem;">Boosting</th></tr></thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;font-weight:600;">Models trained</td><td style="padding:0.5rem;">Independently, in parallel</td><td style="padding:0.5rem;">In sequence, each correcting the last</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;font-weight:600;">Base models</td><td style="padding:0.5rem;">Deep, low-bias, high-variance trees</td><td style="padding:0.5rem;">Shallow, high-bias trees or stumps</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;font-weight:600;">Mainly reduces</td><td style="padding:0.5rem;">Variance</td><td style="padding:0.5rem;">Bias (and variance)</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;font-weight:600;">More models</td><td style="padding:0.5rem;">Never hurts, just costs time</td><td style="padding:0.5rem;">Can overfit: use early stopping</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;font-weight:600;">Tuning</td><td style="padding:0.5rem;">Works well with defaults</td><td style="padding:0.5rem;">Needs learning rate, depth and rounds tuned</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;font-weight:600;">Typical accuracy</td><td style="padding:0.5rem;">Very good</td><td style="padding:0.5rem;">Often the best on tabular data</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Stacking and Blending</h2>
+            <p>Bagging and boosting combine many models of one kind. <strong>Stacking</strong>, proposed by David Wolpert in 1992, combines different kinds: a logistic regression, a forest, a k-NN, a neural network. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span> A second-level <strong>meta-model</strong> learns how to weigh their predictions. The crucial detail is that the meta-model must be trained on predictions the base models made for data they did not train on, usually out-of-fold predictions from cross-validation; otherwise it learns to trust whichever base model overfits most, a form of leakage (Part 1).</p>
+            <p>Stacking and its simpler cousin, <strong>blending</strong>, are favourites of machine-learning competitions, where tiny gains in accuracy decide the winner. Whether those gains are worth their cost outside a competition is another matter, as Section 16 shows.</p>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Tuning and Using Ensembles</h2>
+            <ul>
+              <li><strong>Random forests:</strong> more trees is always at least as good (a few hundred usually suffice); tune the number of features per split and the minimum leaf size; trees are usually grown deep.</li>
+              <li><strong>Gradient boosting:</strong> set a small learning rate (0.05–0.1), use shallow trees (depth 3–8, or a limit on leaves), subsample rows and columns, and pick the number of rounds by early stopping on validation data. Tune with cross-validation (Part 10).</li>
+              <li><strong>Costs:</strong> ensembles are larger and slower to predict than single models, and harder to explain. Tree ensembles still cannot extrapolate beyond the range of the training targets, like the regression trees of Part 3.</li>
+              <li><strong>Probabilities:</strong> forest votes and boosted scores are often poorly calibrated; recalibrate if probabilities matter (see our <a href="classification-and-regression-metrics.html">metrics article</a>).</li>
+            </ul>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: why does boosting not overfit sooner?</div>
+              <p>Early experiments surprised researchers: AdaBoost’s test error often kept falling for hundreds of rounds after its training error reached zero, as if adding more complexity did no harm. In 1998 Schapire, Freund, Peter Bartlett and Wee Sun Lee proposed an explanation in terms of <strong>margins</strong>: even after every training point is classified correctly, boosting keeps pushing points further from the boundary, which their theory linked to better generalisation. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span> Later work showed that boosting can overfit noisy data, and that the margin explanation is incomplete. The question of when adding complexity helps or hurts generalisation connects boosting to the double descent of Part 1 and the puzzles of deep learning in Part 8.</p>
+            </div>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Worked Example: Comparing Ensembles Fairly</h2>
+            <ol>
+              <li><strong>One data set.</strong> On the series’ moons, test accuracy: single deep tree 92%, bagging (100 trees) 93%, random forest (100 trees) 92%, AdaBoost (100 stumps) 92%. Logistic regression with polynomial features (Part 2) scored 95%. Taken at face value, the ensembles look useless.</li>
+              <li><strong>Many data sets.</strong> Over 30 freshly generated moons data sets, average test accuracy: tree 93.1% ± 4.3, bagging 95.0% ± 3.0, random forest 94.6% ± 2.9, AdaBoost 93.7% ± 2.7. The ensembles are better on average and more consistent.</li>
+              <li><strong>Regression.</strong> On the running example, gradient boosting with stumps reaches a test error of about 0.12 (ν = 0.1, 100 rounds), better than a single regression tree (0.125 at depth 2, Part 3) but not the smooth cubic (0.075): with one feature and 15 points, a smooth model with the right shape is hard to beat.</li>
+              <li><strong>Lesson.</strong> Ensembles shine with many features, many examples and complex interactions. On tiny, low-dimensional problems a well-chosen simple model can match them, and only careful, repeated evaluation can tell.</li>
+            </ol>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: crowds, forests and boosting</div>
+              <ol>
+                <li>Galton’s experiment: ask a group of friends to guess the number of sweets in a jar, independently and without discussion. Compare the median guess with individual guesses. Then let them discuss first and guess again: does correlation hurt the crowd?</li>
+                <li>In Figure 3, set ρ = 0.5. How many models does it take to get within 10% of the floor?</li>
+                <li>In Figure 4, set the number of trees to 1, 5 and 50 with the random forest. How does the boundary change?</li>
+                <li>In Figure 6, set ν = 1 and depth 3. How many rounds before the training error is zero? What happens to the test error?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: the million-dollar ensemble</div>
+              <p><strong>The myth:</strong> the team that won the $1 million Netflix Prize in 2009 handed Netflix the algorithm that powers its recommendations.</p>
+              <p><strong>The reality:</strong> the winning entry, which beat Netflix’s own rating predictor by more than the target of 10%, was a blend of hundreds of models built by several teams. Netflix did adopt two of the core methods from an earlier stage of the contest. But for the final ensemble, its engineers wrote in 2012 that the additional accuracy gains “did not seem to justify the engineering effort needed to bring them into a production environment”, and by then the business had shifted from mailing DVDs to streaming, which changed what recommendations needed to do. <span class="cite-group">[<a class="cite" href="#ref-17">17</a>, <a class="cite" href="#ref-18">18</a>]</span></p>
+              <p><strong>Why it matters:</strong> in practice, accuracy competes with speed, cost, maintainability and explainability. The best model on a leaderboard is not always the best model to deploy.</p>
+            </div>
+          </section>
+
+          <section id="section-17">
+            <h2>17. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>Combining models helps when their errors differ; correlation sets a floor on what averaging can achieve.</li>
+                <li>Bagging trains models on bootstrap samples and averages them, reducing the variance of unstable models such as deep trees.</li>
+                <li>Random forests add random feature selection at each split to decorrelate the trees; they work well with little tuning and give out-of-bag estimates.</li>
+                <li>Boosting trains weak models in sequence, each focusing on the errors of the last; gradient boosting fits each tree to the residuals.</li>
+                <li>Boosting needs a small learning rate and early stopping; XGBoost, LightGBM and CatBoost are the standard tools for tabular data.</li>
+                <li>Stacking combines different models through a meta-model trained on out-of-fold predictions.</li>
+                <li>Judge ensembles over repeated splits; their advantage is often consistency as much as average accuracy.</li>
+              </ul>
+            </div>
+          </section>
+          <section id="section-18">
+            <h2>18. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Marquis de Condorcet</td>
+                <td style="padding:0.6rem 0.8rem;">1743–1794<br>France</td>
+                <td style="padding:0.6rem 0.8rem;">Jury theorem (1785)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed why majorities of independent voters are reliable.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Francis Galton</td>
+                <td style="padding:0.6rem 0.8rem;">1822–1911<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">“Vox populi” (1907)</td>
+                <td style="padding:0.6rem 0.8rem;">Found that the crowd’s middle estimate of an ox’s weight was within 1%.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Leo Breiman</td>
+                <td style="padding:0.6rem 0.8rem;">1928–2005<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Bagging (1996), random forests (2001)</td>
+                <td style="padding:0.6rem 0.8rem;">Invented bagging and random forests, with out-of-bag error and variable importance.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Tin Kam Ho</td>
+                <td style="padding:0.6rem 0.8rem;"><br>Hong Kong / USA</td>
+                <td style="padding:0.6rem 0.8rem;">Random decision forests (1995)</td>
+                <td style="padding:0.6rem 0.8rem;">Built forests of trees on random subsets of features.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Robert Schapire &amp; Yoav Freund</td>
+                <td style="padding:0.6rem 0.8rem;">born 1963 / born 1961<br>USA / Israel</td>
+                <td style="padding:0.6rem 0.8rem;">Boosting (1990), AdaBoost (1997)</td>
+                <td style="padding:0.6rem 0.8rem;">Proved that weak learners can be boosted and created AdaBoost.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Jerome Friedman</td>
+                <td style="padding:0.6rem 0.8rem;">born 1939<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Gradient boosting (2001)</td>
+                <td style="padding:0.6rem 0.8rem;">Recast boosting as gradient descent and co-created CART.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">David Wolpert</td>
+                <td style="padding:0.6rem 0.8rem;">born 1961<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Stacked generalisation (1992)</td>
+                <td style="padding:0.6rem 0.8rem;">Proposed learning how to combine models.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Tianqi Chen</td>
+                <td style="padding:0.6rem 0.8rem;"><br>China / USA</td>
+                <td style="padding:0.6rem 0.8rem;">XGBoost (2016)</td>
+                <td style="padding:0.6rem 0.8rem;">Created the scalable boosting system that dominated competitions.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-19">
+            <h2>19. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about ensembles.</p>
+            <figure class="fig" data-fig="fig-quiz-ml4">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-20">
+            <h2>20. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Galton, Francis.</strong> (1907). "Vox populi." <em>Nature</em>, 75: 450–451.</li>
+              <li id="ref-2"><strong>Hastie, Trevor, Tibshirani, Robert &amp; Friedman, Jerome.</strong> (2009). <em>The Elements of Statistical Learning</em>. 2nd ed. New York: Springer.</li>
+              <li id="ref-3"><strong>Grinsztajn, Léo, Oyallon, Edouard &amp; Varoquaux, Gaël.</strong> (2022). "Why do tree-based models still outperform deep learning on typical tabular data?" <em>Advances in Neural Information Processing Systems 35 (NeurIPS 2022), Datasets and Benchmarks Track</em>.</li>
+              <li id="ref-4"><strong>Condorcet, Marquis de.</strong> (1785). <em>Essai sur l’application de l’analyse à la probabilité des décisions rendues à la pluralité des voix</em>. Paris: Imprimerie Royale.</li>
+              <li id="ref-5"><strong>Breiman, Leo.</strong> (1996). "Bagging predictors." <em>Machine Learning</em>, 24(2): 123–140.</li>
+              <li id="ref-6"><strong>Ho, Tin Kam.</strong> (1995). "Random decision forests." In <em>Proceedings of the 3rd International Conference on Document Analysis and Recognition</em>, pp. 278–282. Montreal: IEEE.</li>
+              <li id="ref-7"><strong>Breiman, Leo.</strong> (2001). "Random forests." <em>Machine Learning</em>, 45(1): 5–32.</li>
+              <li id="ref-8"><strong>Strobl, Carolin, Boulesteix, Anne-Laure, Zeileis, Achim &amp; Hothorn, Torsten.</strong> (2007). "Bias in random forest variable importance measures: illustrations, sources and a solution." <em>BMC Bioinformatics</em>, 8: 25.</li>
+              <li id="ref-9"><strong>Schapire, Robert E.</strong> (1990). "The strength of weak learnability." <em>Machine Learning</em>, 5(2): 197–227.</li>
+              <li id="ref-10"><strong>Freund, Yoav &amp; Schapire, Robert E.</strong> (1997). "A decision-theoretic generalization of on-line learning and an application to boosting." <em>Journal of Computer and System Sciences</em>, 55(1): 119–139.</li>
+              <li id="ref-11"><strong>Friedman, Jerome H.</strong> (2001). "Greedy function approximation: a gradient boosting machine." <em>The Annals of Statistics</em>, 29(5): 1189–1232.</li>
+              <li id="ref-12"><strong>Chen, Tianqi &amp; Guestrin, Carlos.</strong> (2016). "XGBoost: a scalable tree boosting system." In <em>Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</em>, pp. 785–794.</li>
+              <li id="ref-13"><strong>Ke, Guolin, Meng, Qi, Finley, Thomas, et al.</strong> (2017). "LightGBM: a highly efficient gradient boosting decision tree." <em>Advances in Neural Information Processing Systems 30 (NIPS 2017)</em>.</li>
+              <li id="ref-14"><strong>Prokhorenkova, Liudmila, Gusev, Gleb, Vorobev, Aleksandr, Dorogush, Anna Veronika &amp; Gulin, Andrey.</strong> (2018). "CatBoost: unbiased boosting with categorical features." <em>Advances in Neural Information Processing Systems 31 (NeurIPS 2018)</em>.</li>
+              <li id="ref-15"><strong>Wolpert, David H.</strong> (1992). "Stacked generalization." <em>Neural Networks</em>, 5(2): 241–259.</li>
+              <li id="ref-16"><strong>Schapire, Robert E., Freund, Yoav, Bartlett, Peter &amp; Lee, Wee Sun.</strong> (1998). "Boosting the margin: a new explanation for the effectiveness of voting methods." <em>The Annals of Statistics</em>, 26(5): 1651–1686.</li>
+              <li id="ref-17"><strong>Amatriain, Xavier &amp; Basilico, Justin.</strong> (2012). "Netflix recommendations: beyond the 5 stars (Part 1)." <em>Netflix Technology Blog</em>, 6 April 2012.</li>
+              <li id="ref-18"><strong>Bell, Robert M. &amp; Koren, Yehuda.</strong> (2007). "Lessons from the Netflix prize challenge." <em>ACM SIGKDD Explorations Newsletter</em>, 9(2): 75–79.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/inside-the-machine.html">Inside the Machine</a> (Part 4 of 10)</div>
+  <div class="series-banner-links">
+    <a href="neighbours-bayes-and-trees.html">← Part 3: Neighbours, Bayes and Trees: Three Classic Ways to Classify</a>
+    <span>Part 5 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/ensembles.js"></script>
+</body>
+</html>
