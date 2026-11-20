@@ -60,6 +60,12 @@ SERIES = {
         "label": "Data Part",
         "lede": "A nine-part series on the statistics used in real experiments, from averages and spread to uncertainty, ANOVA, regression and experimental design, with interactive figures and worked examples.",
     },
+    "inside-the-machine": {
+        "title": "Inside the Machine",
+        "parts": 10,
+        "label": "ML Part",
+        "lede": "A ten-part series on how machine learning works, from learning from data and classical algorithms to activation and loss functions, optimisers, deep architectures and choosing a model, with interactive playgrounds in every part.",
+    },
     "minds-that-changed-how-we-know": {
         "title": "Minds That Changed How We Know",
         "parts": 12,
@@ -417,6 +423,8 @@ def build_site(root_dir, check_mode=False):
         elif subj == "AI & Machine Learning" and any((x.get("series") or {}).get("id") == "how-machines-learned-to-think" for x in posts):
             eyebrow = "Subject Archive • Series"
             lede = "How Machines Learned to Think: an eight-part history of artificial intelligence, from the first dreams of thinking machines to today’s AI and where it may lead."
+            if any((x.get("series") or {}).get("id") == "inside-the-machine" for x in posts):
+                lede += " Inside the Machine: a ten-part series on how machine learning works, with interactive playgrounds."
         posts.sort(key=reading_order)
         html = generate_listing_page(title, eyebrow, lede, posts, f"subjects/{s_slug}.html")
         files_to_write[os.path.join("subjects", f"{s_slug}.html")] = html

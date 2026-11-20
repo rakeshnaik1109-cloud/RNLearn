@@ -4296,5 +4296,113 @@
     "term": "Rationalism",
     "definition": "The view that reason, rather than the senses, is the main source of knowledge.",
     "forms": []
+  },
+  {
+    "term": "Supervised learning",
+    "definition": "Learning from examples that come with the correct answers (labels), to predict labels for new examples.",
+    "forms": []
+  },
+  {
+    "term": "Unsupervised learning",
+    "definition": "Finding structure, such as clusters, in data without labels.",
+    "forms": []
+  },
+  {
+    "term": "Self-supervised learning",
+    "definition": "Learning from labels created automatically from the data itself, such as predicting a hidden word.",
+    "forms": []
+  },
+  {
+    "term": "Hyperparameter",
+    "definition": "A setting chosen before training rather than learned, such as polynomial degree, tree depth or learning rate.",
+    "forms": [
+      "hyperparameters"
+    ]
+  },
+  {
+    "term": "Inductive bias",
+    "definition": "The built-in assumptions a learning method uses to generalise beyond its training examples.",
+    "forms": []
+  },
+  {
+    "term": "Loss function",
+    "definition": "A function measuring how wrong a prediction is; training minimises its average over the data.",
+    "forms": [
+      "loss functions"
+    ]
+  },
+  {
+    "term": "Empirical risk minimisation",
+    "definition": "Choosing model parameters that minimise the average loss on the training data.",
+    "forms": [
+      "empirical risk minimization",
+      "empirical risk"
+    ]
+  },
+  {
+    "term": "Generalisation",
+    "definition": "How well a model performs on new data it was not trained on.",
+    "forms": [
+      "generalization"
+    ]
+  },
+  {
+    "term": "Underfitting",
+    "definition": "When a model is too simple to capture the pattern, performing poorly even on its training data.",
+    "forms": []
+  },
+  {
+    "term": "Bias–variance trade-off",
+    "definition": "The balance between error from wrong assumptions (bias) and error from sensitivity to the training sample (variance).",
+    "forms": [
+      "bias-variance trade-off",
+      "bias–variance dilemma"
+    ]
+  },
+  {
+    "term": "Validation set",
+    "definition": "Data held out from training and used to compare models and choose hyperparameters.",
+    "forms": [
+      "validation sets"
+    ]
+  },
+  {
+    "term": "Cross-validation",
+    "definition": "Estimating performance by repeatedly training on part of the data and validating on the rest, as in k-fold cross-validation.",
+    "forms": [
+      "k-fold cross-validation",
+      "leave-one-out cross-validation"
+    ]
+  },
+  {
+    "term": "Data leakage",
+    "definition": "When information from the test data, or not available at prediction time, gets into training and inflates measured performance.",
+    "forms": [
+      "leakage"
+    ]
+  },
+  {
+    "term": "Learning curve",
+    "definition": "A plot of training and validation error against the number of training examples.",
+    "forms": [
+      "learning curves"
+    ]
+  },
+  {
+    "term": "No-free-lunch theorem",
+    "definition": "The result that, averaged over all possible problems, no learning algorithm outperforms any other.",
+    "forms": [
+      "no free lunch"
+    ]
+  },
+  {
+    "term": "PAC learning",
+    "definition": "Valiant’s framework of probably approximately correct learning: learning a good hypothesis with high probability from enough examples.",
+    "forms": []
+  },
+  {
+    "term": "Double descent",
+    "definition": "Test error that falls, rises near the point where the model can fit the training data exactly, then falls again as the model grows.",
+    "forms": []
   }
 ]

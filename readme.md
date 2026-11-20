@@ -62,6 +62,10 @@ A nine-part series on the statistics used in real experiments:
 A twelve-part series on scientists and philosophers, told in pairs and groups around one big question each, with interactive figures that let readers try their ideas.
 1. **Part 1**: *Socrates, Plato and Aristotle: How Should We Ask Questions About the World?* (the Socratic method & an interactive Theaetetus dialogue, the trial of Socrates, Plato’s Forms & the cave, doubling the square in the Meno, the Platonic solids, Aristotle’s syllogisms, biology & four causes, and why his physics fits motion in honey but not in air)
 
+### New Series: *Inside the Machine* (subject: AI & Machine Learning)
+A ten-part series on how machine learning works, with a new structure: an at-a-glance card, a series map, layered concepts (intuition, fold-out maths and code, pitfalls), inline self-checks, a running example shared across parts, Myth vs Reality, Open Questions, key takeaways and a cheat table.
+1. **Part 1**: *Learning from Data: Models, Loss, Overfitting and Honest Evaluation* (what learning is, supervised/unsupervised/self-supervised, parameters & hyperparameters, inductive bias, loss & empirical risk, overfitting playground, bias–variance, train/validation/test, cross-validation, the data-leakage trap, learning curves, no free lunch, double descent)
+
 ### Standalone Tutorials
 - *Who's the Father? How a DNA Paternity Test Works* (DNA basics, inheritance, blood groups & the Chaplin case, Jeffreys, STRs, PCR & capillary electrophoresis, the paternity index & Bayes, tricky cases, Indian law)
 - *Why Is My Laser Spot Grainy? Speckle, Stray Fringes and Other Gremlins of the Optics Lab* (coherence, speckle statistics & reduction, accidental etalons, ghosts & back-reflections, dust rings & spatial filters, fibre noise, vibration, detector artifacts, speckle as a tool, troubleshooting guide)

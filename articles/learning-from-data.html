@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning from Data: Models, Loss, Overfitting and Honest Evaluation — RNLearn</title>
+  <meta name="description" content="What it means for a machine to learn: features, labels, models and loss, overfitting and the bias–variance trade-off, validation and cross-validation, data leakage and learning curves.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/learning-from-data.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Learning from Data: Models, Loss, Overfitting and Honest Evaluation — RNLearn">
+  <meta property="og:description" content="What it means for a machine to learn: features, labels, models and loss, overfitting and the bias–variance trade-off, validation and cross-validation, data leakage and learning curves.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/learning-from-data.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Learning from Data: Models, Loss, Overfitting and Honest Evaluation — RNLearn">
+  <meta name="twitter:description" content="What it means for a machine to learn: features, labels, models and loss, overfitting and the bias–variance trade-off, validation and cross-validation, data leakage and learning curves.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Learning from Data: Models, Loss, Overfitting and Honest Evaluation",
+    "description": "What it means for a machine to learn: features, labels, models and loss, overfitting and the bias–variance trade-off, validation and cross-validation, data leakage and learning curves.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-20",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/learning-from-data.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/ai-machine-learning.html" class="post-subject-tag" data-subject="ai-machine-learning">AI &amp; Machine Learning</a>
+        </div>
+        <h1 class="article-title">Learning from Data: Models, Loss, Overfitting and Honest Evaluation</h1>
+        <p class="article-standfirst">
+          A model that fits its training data perfectly can be useless. The first part of the series lays the foundations of machine learning: what learning is, why generalisation is the real goal, and how to measure it without fooling yourself.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-20">20 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>21 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/inside-the-machine.html">Inside the Machine</a> (Part 1 of 10)</div>
+  <div class="series-banner-links">
+    <span>First part</span>
+    <span>Part 2 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. What Does It Mean for a Machine to Learn?</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. The Vocabulary of Machine Learning</a></li>
+              <li><a class="toc-link" href="#section-4">4. A Model Is a Function with Knobs</a></li>
+              <li><a class="toc-link" href="#section-5">5. Loss: Measuring How Wrong a Model Is</a></li>
+              <li><a class="toc-link" href="#section-6">6. Fitting the Knobs</a></li>
+              <li><a class="toc-link" href="#section-7">7. Generalisation, Overfitting and Underfitting</a></li>
+              <li><a class="toc-link" href="#section-8">8. The Bias–Variance Trade-off</a></li>
+              <li><a class="toc-link" href="#section-9">9. Train, Validation and Test</a></li>
+              <li><a class="toc-link" href="#section-10">10. Cross-Validation</a></li>
+              <li><a class="toc-link" href="#section-11">11. Data Leakage: How to Fool Yourself</a></li>
+              <li><a class="toc-link" href="#section-12">12. Learning Curves: More Data or a Better Model?</a></li>
+              <li><a class="toc-link" href="#section-13">13. No Free Lunch, and Open Questions</a></li>
+              <li><a class="toc-link" href="#section-14">14. Worked Example: Choosing a Model Honestly</a></li>
+              <li><a class="toc-link" href="#section-15">15. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-16">16. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-17">17. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-18">18. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-19">19. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-20">20. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>You will learn:</strong> what it means for a machine to learn; the vocabulary of features, labels, models, parameters and loss; why a model that fits its training data perfectly can be useless; the bias–variance trade-off; how to split data and use cross-validation; how data leakage creates fake results; and how to read a learning curve.</p>
+            <p><strong>You need:</strong> school algebra and the idea of a graph. Statistics from <em>Making Sense of Data</em> helps but is not required. Maths and code are in fold-out boxes you can skip.</p>
+            <p><strong>Try:</strong> six interactive figures, including an overfitting playground and a data-leakage trap.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. What Does It Mean for a Machine to Learn?</h2>
+            <p>A traditional program follows rules written by a person: if the temperature is above 30 °C, switch on the fan. A machine learning program is different. It is given <strong>examples</strong>, and it works out the rules itself. Show it thousands of photographs labelled “cat” or “dog”, and it learns to label new photographs. Show it past house sales, and it learns to estimate the price of a house it has never seen.</p>
+            <p>In 1950 Alan Turing suggested that rather than programming an adult mind, we might build a “child machine” and educate it. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span> In the 1950s Arthur Samuel wrote a checkers program that improved by playing against itself, and his 1959 paper popularised the phrase “machine learning”. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span> The definition most often quoted today comes from Tom Mitchell’s 1997 textbook: a program learns from experience E with respect to a task T and a performance measure P, if its performance at T, as measured by P, improves with experience E. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+            <p>Every part of this series is about one or more pieces of that definition: the task (classification or regression), the experience (data), the performance measure (loss and metrics), and the machinery that turns experience into improvement (the algorithm). This first part lays the foundation that all the others build on.</p>
+            <figure class="fig" data-fig="fig-ml-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Tap any part to see what it covers. Parts 1–5 are classical machine learning; Parts 6–10 are neural networks and deep learning.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it. The history of AI as a whole is told in our series <em>How Machines Learned to Think</em>; this timeline follows the ideas in this part.</p>
+            <figure class="fig" data-fig="fig-ml1-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Learning from data, 1950–2023.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. The Vocabulary of Machine Learning</h2>
+            <p>A few words appear in every part of this series:</p>
+            <ul>
+              <li>An <strong>example</strong> (or sample, or instance) is one item: one house, one image, one patient.</li>
+              <li>Its <strong>features</strong> are the measurements that describe it: floor area, number of rooms, location. Together they form a feature vector <strong>x</strong>.</li>
+              <li>Its <strong>label</strong> or <strong>target</strong> y is the answer we want to predict: the price, or “cat”.</li>
+              <li>A <strong>data set</strong> is a collection of examples, usually arranged as a table with one row per example and one column per feature.</li>
+            </ul>
+            <p>Machine learning problems come in several kinds:</p>
+            <ul>
+              <li><strong>Supervised learning</strong>: every training example has a label, and the goal is to predict labels for new examples. If the label is a category (spam or not spam, which of ten digits), the task is <strong>classification</strong>. If it is a number (price, temperature, yield), the task is <strong>regression</strong>. These are the focus of this series.</li>
+              <li><strong>Unsupervised learning</strong>: there are no labels, and the goal is to find structure, such as clusters of similar customers or a simpler description of the data.</li>
+              <li><strong>Self-supervised learning</strong>: the labels are made from the data itself, for example by hiding a word in a sentence and asking the model to predict it. This is how large language models are pre-trained.</li>
+              <li><strong>Reinforcement learning</strong>: an agent learns by trial and error from rewards, as in game-playing programs.</li>
+            </ul>
+            <div class="callout callout-method">
+              <div class="callout-header">The running example</div>
+              <p>To make comparisons easy, the series reuses the same small data sets. For regression: 15 training points and 60 test points drawn from the curve y = sin(2πx), with random noise of standard deviation 0.25 added to each. We know the truth, so we can see exactly how well each method recovers it. Even a perfect model would have an average squared error of 0.25² = 0.0625 on new points, because the noise cannot be predicted. A classification data set joins in Part 2.</p>
+            </div>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">Check yourself: classification or regression?</summary>
+              <p style="margin-top:0.6rem;">Predicting tomorrow’s maximum temperature: <strong>regression</strong> (a number). Predicting whether it will rain tomorrow: <strong>classification</strong> (yes or no). Predicting how many millimetres of rain will fall: regression again. The same situation can give either kind of problem, depending on the question.</p>
+            </details>
+          </section>
+
+          <section id="section-4">
+            <h2>4. A Model Is a Function with Knobs</h2>
+            <p>A <strong>model</strong> is a function that turns features into a prediction: ŷ = f(<strong>x</strong>; θ). The symbols θ stand for its <strong>parameters</strong>, the adjustable knobs that learning will set. For a straight line ŷ = θ<sub>0</sub> + θ<sub>1</sub>x, there are two knobs: the intercept and the slope. A polynomial of degree 9 has ten. A modern neural network has millions or billions.</p>
+            <p>Some settings are not learned but chosen before learning starts: the degree of the polynomial, the depth of a decision tree, the number of layers in a network, how fast to learn. These are <strong>hyperparameters</strong>. Choosing them well is a central practical problem, and Sections 9–10 show how.</p>
+            <p>Every choice of model type restricts what can be learned. A straight line can never capture a curve; a model that assumes smoothness will struggle with sudden jumps. These built-in assumptions are the model’s <strong>inductive bias</strong>. Far from being a flaw, some inductive bias is essential: without assumptions, there is no reason to prefer any prediction for an unseen case over any other (Section 13). Frank Rosenblatt’s perceptron of 1958, an early learning machine with adjustable connection weights, built in the assumption that classes can be separated by a straight boundary. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span></p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Loss: Measuring How Wrong a Model Is</h2>
+            <p>To improve, a model needs a way to measure its mistakes. A <strong>loss function</strong> compares a prediction with the true answer and returns a number: zero when the prediction is perfect, larger when it is worse. For regression, the most common is the <strong>squared error</strong>, (ŷ − y)²: big mistakes count much more than small ones. Averaged over the training examples, it is the mean squared error (MSE).</p>
+            <p>Learning is then an optimisation problem: find the parameters that make the average loss over the training data as small as possible. This principle, called <strong>empirical risk minimisation</strong>, was put on a mathematical footing by Vladimir Vapnik, who also studied when the training loss is a reliable guide to the loss on new data. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> Part 7 is devoted to loss functions: why squared error, when to use absolute error or cross-entropy, and how the choice changes what a model learns.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">The maths: empirical risk</summary>
+              <p style="margin-top:0.6rem;">The quantity we really care about is the <em>expected</em> loss on new data drawn from the same distribution, the <strong>risk</strong>:</p>
+              <p>$$R(\theta) = \mathbb{E}_{(x,y)}\big[\,L(f(x;\theta),\,y)\,\big].$$</p>
+              <p>We cannot compute it, because we do not know the distribution. Instead we minimise the average over the n training examples, the <strong>empirical risk</strong>:</p>
+              <p>$$\hat{R}(\theta) = \frac{1}{n}\sum_{i=1}^{n} L(f(x_i;\theta),\,y_i), \qquad \hat\theta = \arg\min_\theta \hat{R}(\theta).$$</p>
+              <p>The gap between R and R̂ is the generalisation gap. Everything in Sections 7–12 is about keeping it small, or at least measuring it honestly.</p>
+            </details>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Fitting the Knobs</h2>
+            <p>How are the best parameters found? For some models, such as a straight line with squared error, there is an exact formula: the method of least squares (Part 7 of <em>Making Sense of Data</em>). For most models there is not, and the parameters are found step by step: start with a guess, see which direction reduces the loss, take a small step that way, and repeat. This is <strong>gradient descent</strong>, the engine behind almost all modern machine learning, introduced properly in Part 2 and refined in Part 8.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">In code: fitting a model with scikit-learn</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">import numpy as np
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
+from sklearn.pipeline import make_pipeline
+
+rng = np.random.default_rng(42)
+x = np.sort(rng.uniform(0, 1, 15)); y = np.sin(2*np.pi*x) + rng.normal(0, 0.25, 15)
+
+model = make_pipeline(PolynomialFeatures(degree=3), LinearRegression())
+model.fit(x.reshape(-1, 1), y)          # learn the parameters
+print(model.predict([[0.25]]))           # predict for a new x</code></pre>
+            </details>
+            <p>Almost every library follows this pattern: create a model, call <code>fit</code> on training data, call <code>predict</code> on new data. The rest of this part is about the question that matters most: how do we know whether the predictions will be any good?</p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Generalisation, Overfitting and Underfitting</h2>
+            <p>The goal of learning is not to do well on the training data, which we already have, but to <strong>generalise</strong>: to do well on new data. These are different. A model can fit its training examples perfectly by memorising them, noise and all, and still predict new cases badly. This is <strong>overfitting</strong>. A model that is too simple to capture the real pattern does badly on both, which is <strong>underfitting</strong>.</p>
+            <figure class="fig" data-fig="fig-ml-overfit">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. The overfitting playground.</strong> Fit polynomials of increasing degree to the 15 training points of the running example. The right-hand chart shows training error (blue) and test error on 60 new points (orange) for every degree.
+              </figcaption>
+            </figure>
+            <p>For the running example, a straight line (degree 1) has a training error of 0.20 and a test error of 0.23: underfitting. A cubic (degree 3) brings both down, to 0.022 and 0.075, close to the noise floor of 0.0625. Beyond that, the training error keeps falling, to 0.0006 at degree 12, but the test error explodes, to millions, because the curve swings wildly between and beyond the training points.</p>
+            <div class="callout callout-warn">
+              <div class="callout-header">Watch out: training error is not a measure of quality</div>
+              <p>Training error almost always falls as a model grows more complex, so it cannot tell you when to stop. Always judge a model on data it has not seen.</p>
+            </div>
+          </section>
+
+          <section id="section-8">
+            <h2>8. The Bias–Variance Trade-off</h2>
+            <p>Why does test error fall and then rise? Imagine collecting many different training sets from the same source and fitting the same kind of model to each. Two things can go wrong:</p>
+            <ul>
+              <li><strong>Bias</strong>: the models are wrong <em>on average</em>, because the model family cannot represent the truth. A straight line fitted to a sine curve is biased however much data you have.</li>
+              <li><strong>Variance</strong>: the models differ a lot from one training set to another, because they are flexible enough to follow the quirks of each particular sample.</li>
+            </ul>
+            <p>Simple models have high bias and low variance; flexible models the reverse. The best model balances the two. Stuart Geman, Elie Bienenstock and René Doursat called this the bias–variance dilemma in a 1992 analysis of neural networks. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+            <figure class="fig" data-fig="fig-ml-biasvar">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Bias and variance made visible.</strong> The same kind of model fitted to 30 different training sets of 15 points. Low degrees agree with each other but miss the truth; high degrees are right on average but disagree wildly.
+              </figcaption>
+            </figure>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">The maths: the bias–variance decomposition</summary>
+              <p style="margin-top:0.6rem;">For squared-error loss, with data y = f(x) + ε where the noise ε has variance σ², the expected error of a fitted model f̂ at a point x, averaged over training sets, splits exactly into three parts:</p>
+              <p>$$\mathbb{E}\big[(y-\hat f(x))^2\big] = \underbrace{\big(\mathbb{E}[\hat f(x)]-f(x)\big)^2}_{\text{bias}^2} + \underbrace{\mathbb{E}\big[(\hat f(x)-\mathbb{E}[\hat f(x)])^2\big]}_{\text{variance}} + \underbrace{\sigma^2}_{\text{noise}}.$$</p>
+              <p>The noise term sets a floor that no model can beat. For other losses, such as classification error, the decomposition is less tidy, but the intuition carries over.</p>
+            </details>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">Check yourself: which is it?</summary>
+              <p style="margin-top:0.6rem;">Your model’s predictions change completely when you retrain it on a slightly different sample. Is that bias or variance? <strong>Variance.</strong> Your model gives almost the same predictions on any sample, but they are consistently too low for large houses. <strong>Bias.</strong></p>
+            </details>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Train, Validation and Test</h2>
+            <p>To measure generalisation honestly, we hold back data the model never learns from. The standard arrangement uses three parts:</p>
+            <ul>
+              <li>The <strong>training set</strong>, used to fit the parameters.</li>
+              <li>The <strong>validation set</strong>, used to compare models and choose hyperparameters, such as the polynomial degree.</li>
+              <li>The <strong>test set</strong>, locked away until the very end and used once, to estimate how the final model will perform on new data.</li>
+            </ul>
+            <p>Why three? Because every time we use data to make a choice, we fit that data a little. If we try twenty models and pick the one with the best validation score, that score is optimistic: we picked it partly for its luck. The test set, untouched by any choice, gives an unbiased estimate.</p>
+            <p>How to split matters as much as how much. Shuffle at random only if examples are independent. If they come in time order, train on the past and test on the future, or the model will “predict” using information from later. If several examples come from the same patient, machine or batch, keep each group entirely in one split, or the model will be tested on near-copies of what it trained on (the same issue as pseudoreplication in <em>Making Sense of Data</em> Part 6).</p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Cross-Validation</h2>
+            <p>With small data sets, setting aside a validation set wastes precious examples, and the estimate depends heavily on which examples happen to land in it. <strong>k-fold cross-validation</strong> solves both problems. Split the training data into k equal folds. Train on k − 1 folds and validate on the one left out; repeat k times, so that every example is used for validation exactly once; and average the k validation errors. Mervyn Stone set out the method for choosing and assessing predictions in 1974. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span></p>
+            <figure class="fig" data-fig="fig-ml-cv">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Cross-validation in action.</strong> Left: the 15 training points coloured by fold. Right: the cross-validated error for each polynomial degree (purple), using only the training data, compared with the true error on the 60 test points (orange).
+              </figcaption>
+            </figure>
+            <p>For the running example, 5-fold cross-validation picks degree 3, with an estimated error of 0.046, the same choice the hidden test set would have made. Common choices are k = 5 or 10; with k equal to the number of examples, it is called <strong>leave-one-out</strong> cross-validation. After choosing the hyperparameters, the final model is refitted on all the training data, and only then evaluated once on the test set.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">In code: choosing the degree by cross-validation</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">from sklearn.model_selection import GridSearchCV, KFold
+
+search = GridSearchCV(
+    make_pipeline(PolynomialFeatures(), LinearRegression()),
+    param_grid={"polynomialfeatures__degree": range(0, 9)},
+    cv=KFold(n_splits=5, shuffle=True, random_state=0),
+    scoring="neg_mean_squared_error")
+search.fit(x.reshape(-1, 1), y)
+print(search.best_params_)               # refits on all training data</code></pre>
+            </details>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Data Leakage: How to Fool Yourself</h2>
+            <p><strong>Data leakage</strong> happens when information that would not be available at prediction time, or information from the test data, finds its way into training. The model then looks excellent in evaluation and fails in use. A study of data-mining competitions described many forms of it, <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span> and a 2023 review found leakage affecting hundreds of published scientific papers that used machine learning, across more than a dozen fields. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span></p>
+            <p>A classic trap is selecting features before cross-validation. Suppose you have 50 samples and thousands of measurements, say gene expression levels, and you first pick the 20 measurements most associated with the outcome using all the data, then cross-validate a classifier on those 20. The selection step has already seen the validation folds. In 2002 Christophe Ambroise and Geoffrey McLachlan showed that this selection bias made published classifiers based on microarray data look far more accurate than they were. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>, <a class="cite" href="#ref-11">11</a>]</span></p>
+            <figure class="fig" data-fig="fig-ml-leak">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. The leakage trap.</strong> Random features and random labels, so the true accuracy of any classifier is 50%. Compare choosing the “best” features using all the data with choosing them inside each training fold.
+              </figcaption>
+            </figure>
+            <p>In simulations like Figure 6, the leaky analysis reports about 93% accuracy on pure noise, while the honest one gives about 49%. Other common leaks: scaling or filling in missing values using statistics from the whole data set; features that are recorded only after the outcome is known; duplicates or near-duplicates that land in both training and test sets; and testing on the past after training on the future.</p>
+            <div class="callout callout-warn">
+              <div class="callout-header">Watch out: every learning step belongs inside the fold</div>
+              <p>Anything that learns from data (feature selection, scaling, imputation, resampling, tuning) must be fitted on the training folds only. In scikit-learn, putting all these steps in a <code>Pipeline</code> and cross-validating the whole pipeline does this automatically.</p>
+            </div>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Learning Curves: More Data or a Better Model?</h2>
+            <p>When a model disappoints, should you collect more data or change the model? A <strong>learning curve</strong>, which plots training and validation error against the number of training examples, often answers the question.</p>
+            <figure class="fig" data-fig="fig-ml-learncurve">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 7. Learning curves.</strong> Training (blue) and validation (orange) error as the training set grows, for a model that is too simple, one that is about right, and one that is very flexible.
+              </figcaption>
+            </figure>
+            <ul>
+              <li>If the two curves meet quickly at a high error, the model has <strong>high bias</strong>: more data will not help, but a richer model or better features will.</li>
+              <li>If there is a large gap that narrows slowly, the model has <strong>high variance</strong>: more data or regularisation will help.</li>
+              <li>If both approach the noise floor, you are near the best that is possible with these features.</li>
+            </ul>
+          </section>
+
+          <section id="section-13">
+            <h2>13. No Free Lunch, and Open Questions</h2>
+            <p>Is there a best learning algorithm? In 1996 David Wolpert proved that, averaged over all possible problems, every learning algorithm performs equally well: for any problem where one algorithm wins, there is another where it loses. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span> This <strong>no-free-lunch theorem</strong> does not mean all algorithms are equal on the problems we actually meet, which are far from random. It means that an algorithm succeeds when its inductive bias matches the structure of the problem. Choosing well, the subject of Part 10, means knowing what each method assumes.</p>
+            <p>Theory also asks when good training performance guarantees good test performance. Leslie Valiant’s 1984 framework of “probably approximately correct” (PAC) learning, and Vapnik’s statistical learning theory, give guarantees that depend on how flexible the model family is. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>, <a class="cite" href="#ref-5">5</a>]</span></p>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: why do huge networks generalise?</div>
+              <p>Classical theory says that a model with far more parameters than training examples should overfit badly. Yet modern neural networks, with millions of parameters trained on fewer examples, often generalise well. In 2017 researchers showed that such networks can even fit completely random labels perfectly, so their capacity alone cannot explain their success. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span> In 2019 Mikhail Belkin and colleagues described <strong>double descent</strong>: as model size grows, test error first follows the classical U-shape, peaks when the model is just big enough to fit the training data exactly, and then falls again as the model grows further. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span> Why training methods such as gradient descent find solutions that generalise remains an active research question, revisited in Part 8.</p>
+            </div>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Worked Example: Choosing a Model Honestly</h2>
+            <p>Putting the pieces together on the running example:</p>
+            <ol>
+              <li><strong>Split.</strong> Keep the 60 test points locked away. Use only the 15 training points for every decision.</li>
+              <li><strong>Choose a model family and a loss.</strong> Polynomials of degree 0 to 8, with squared error.</li>
+              <li><strong>Cross-validate.</strong> 5-fold cross-validated errors: 0.43 (degree 0), 0.23 (1), 0.29 (2), <strong>0.046 (3)</strong>, 0.063 (4), 0.17 (5), 0.40 (6), and enormous beyond. Choose degree 3.</li>
+              <li><strong>Refit</strong> the degree-3 model on all 15 training points.</li>
+              <li><strong>Test once.</strong> Error on the 60 test points: 0.075, close to the noise floor of 0.0625 and in line with the cross-validated estimate. Report this number.</li>
+            </ol>
+            <p>Had we instead chosen the degree by training error, we would have picked degree 12 and reported a training error of 0.0006, while the model’s real error on new data was millions of times larger.</p>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: overfit on purpose</div>
+              <ol>
+                <li>In Figure 3, find the degree with the lowest test error. Then find the degree with the lowest training error. How different are they?</li>
+                <li>In Figure 4, set the degree to 0, then 3, then 9. Describe what happens to bias and variance in your own words.</li>
+                <li>In Figure 6, increase the number of random features. Why does the leaky accuracy get even better as you add more noise?</li>
+                <li>With the code in Section 10, generate your own data from a different curve, such as y = x² or a step, and see which degree cross-validation picks.</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “machine learning just lets the data speak”</div>
+              <p><strong>The myth:</strong> machine learning needs no assumptions. Given enough data, it discovers the truth objectively.</p>
+              <p><strong>The reality:</strong> data alone never determine a prediction for a case not in the data. Every learner adds assumptions: that the relationship is smooth, or linear, or that nearby examples behave alike, or that simpler explanations are better. Tom Mitchell argued in 1980 that these biases are what make generalisation possible at all, <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span> and the no-free-lunch theorem makes the point precise. The data also carry the assumptions and blind spots of whoever collected and labelled them.</p>
+              <p><strong>Why it matters:</strong> understanding a model’s assumptions tells you when to trust it and when it will fail, which is why every later part of this series spells them out.</p>
+            </div>
+          </section>
+
+          <section id="section-17">
+            <h2>17. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>A model is a function with parameters; learning means choosing the parameters that minimise a loss on training data.</li>
+                <li>The goal is generalisation to new data, which training error cannot measure.</li>
+                <li>Too simple means high bias (underfitting); too flexible means high variance (overfitting).</li>
+                <li>Use a training set to fit, a validation set or cross-validation to choose, and a test set, once, to report.</li>
+                <li>Every data-dependent step must happen inside the training folds, or leakage will flatter your results.</li>
+                <li>Learning curves tell you whether to get more data or a better model.</li>
+                <li>No algorithm is best for everything: success depends on matching assumptions to the problem.</li>
+              </ul>
+            </div>
+            <div class="table-container" style="overflow-x:auto; margin:1.2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.92rem; line-height:1.5;">
+                <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.5rem;">Symptom</th><th style="padding:0.5rem;">Diagnosis</th><th style="padding:0.5rem;">Try</th></tr></thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">High training and validation error</td><td style="padding:0.5rem;">Underfitting (bias)</td><td style="padding:0.5rem;">More flexible model, better features, less regularisation</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Low training error, high validation error</td><td style="padding:0.5rem;">Overfitting (variance)</td><td style="padding:0.5rem;">More data, simpler model, regularisation</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Validation score far better than real-world performance</td><td style="padding:0.5rem;">Leakage or a mismatched split</td><td style="padding:0.5rem;">Pipelines, group or time-based splits, audit the features</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Both errors near the noise floor</td><td style="padding:0.5rem;">Near the limit</td><td style="padding:0.5rem;">New information (features) or accept the result</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <section id="section-18">
+            <h2>18. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Alan Turing</td>
+                <td style="padding:0.6rem 0.8rem;">1912–1954<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">“Computing Machinery and Intelligence” (1950)</td>
+                <td style="padding:0.6rem 0.8rem;">Proposed educating a “child machine” instead of programming an adult mind.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Arthur Samuel</td>
+                <td style="padding:0.6rem 0.8rem;">1901–1990<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Checkers program (1959)</td>
+                <td style="padding:0.6rem 0.8rem;">Built a program that improved by playing and popularised the term machine learning.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Frank Rosenblatt</td>
+                <td style="padding:0.6rem 0.8rem;">1928–1971<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">The perceptron (1958)</td>
+                <td style="padding:0.6rem 0.8rem;">Built one of the first machines that learned its weights from examples.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Mervyn Stone</td>
+                <td style="padding:0.6rem 0.8rem;">born 1932<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Cross-validation (1974)</td>
+                <td style="padding:0.6rem 0.8rem;">Set out cross-validation for choosing and assessing predictions.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Leslie Valiant</td>
+                <td style="padding:0.6rem 0.8rem;">born 1949<br>Hungary / England / USA</td>
+                <td style="padding:0.6rem 0.8rem;">PAC learning (1984)</td>
+                <td style="padding:0.6rem 0.8rem;">Founded the computational theory of what can be learned.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Vladimir Vapnik</td>
+                <td style="padding:0.6rem 0.8rem;">born 1936<br>USSR / USA</td>
+                <td style="padding:0.6rem 0.8rem;">Statistical learning theory</td>
+                <td style="padding:0.6rem 0.8rem;">Formalised learning as risk minimisation and co-invented support vector machines.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">David Wolpert</td>
+                <td style="padding:0.6rem 0.8rem;">born 1961<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">No-free-lunch theorems (1996)</td>
+                <td style="padding:0.6rem 0.8rem;">Proved that no learning algorithm is best for all problems.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Tom Mitchell</td>
+                <td style="padding:0.6rem 0.8rem;">born 1951<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Machine Learning</em> (1997)</td>
+                <td style="padding:0.6rem 0.8rem;">Gave the standard definition of learning and the case for inductive bias.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-19">
+            <h2>19. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about learning from data.</p>
+            <figure class="fig" data-fig="fig-quiz-ml1">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-20">
+            <h2>20. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Turing, A. M.</strong> (1950). "Computing machinery and intelligence." <em>Mind</em>, 59(236): 433–460.</li>
+              <li id="ref-2"><strong>Samuel, A. L.</strong> (1959). "Some studies in machine learning using the game of checkers." <em>IBM Journal of Research and Development</em>, 3(3): 210–229.</li>
+              <li id="ref-3"><strong>Mitchell, Tom M.</strong> (1997). <em>Machine Learning</em>. New York: McGraw-Hill.</li>
+              <li id="ref-4"><strong>Rosenblatt, F.</strong> (1958). "The perceptron: a probabilistic model for information storage and organization in the brain." <em>Psychological Review</em>, 65(6): 386–408.</li>
+              <li id="ref-5"><strong>Vapnik, Vladimir N.</strong> (1995). <em>The Nature of Statistical Learning Theory</em>. New York: Springer.</li>
+              <li id="ref-6"><strong>Geman, Stuart, Bienenstock, Elie &amp; Doursat, René.</strong> (1992). "Neural networks and the bias/variance dilemma." <em>Neural Computation</em>, 4(1): 1–58.</li>
+              <li id="ref-7"><strong>Stone, M.</strong> (1974). "Cross-validatory choice and assessment of statistical predictions." <em>Journal of the Royal Statistical Society: Series B</em>, 36(2): 111–147.</li>
+              <li id="ref-8"><strong>Kaufman, Shachar, Rosset, Saharon, Perlich, Claudia &amp; Stitelman, Ori.</strong> (2012). "Leakage in data mining: formulation, detection, and avoidance." <em>ACM Transactions on Knowledge Discovery from Data</em>, 6(4): 15.</li>
+              <li id="ref-9"><strong>Kapoor, Sayash &amp; Narayanan, Arvind.</strong> (2023). "Leakage and the reproducibility crisis in machine-learning-based science." <em>Patterns</em>, 4(9): 100804.</li>
+              <li id="ref-10"><strong>Ambroise, Christophe &amp; McLachlan, Geoffrey J.</strong> (2002). "Selection bias in gene extraction on the basis of microarray gene-expression data." <em>Proceedings of the National Academy of Sciences</em>, 99(10): 6562–6566.</li>
+              <li id="ref-11"><strong>Hastie, Trevor, Tibshirani, Robert &amp; Friedman, Jerome.</strong> (2009). <em>The Elements of Statistical Learning</em>. 2nd ed. New York: Springer.</li>
+              <li id="ref-12"><strong>Wolpert, David H.</strong> (1996). "The lack of a priori distinctions between learning algorithms." <em>Neural Computation</em>, 8(7): 1341–1390.</li>
+              <li id="ref-13"><strong>Valiant, L. G.</strong> (1984). "A theory of the learnable." <em>Communications of the ACM</em>, 27(11): 1134–1142.</li>
+              <li id="ref-14"><strong>Zhang, Chiyuan, Bengio, Samy, Hardt, Moritz, Recht, Benjamin &amp; Vinyals, Oriol.</strong> (2017). "Understanding deep learning requires rethinking generalization." <em>International Conference on Learning Representations (ICLR)</em>.</li>
+              <li id="ref-15"><strong>Belkin, Mikhail, Hsu, Daniel, Ma, Siyuan &amp; Mandal, Soumik.</strong> (2019). "Reconciling modern machine-learning practice and the classical bias–variance trade-off." <em>Proceedings of the National Academy of Sciences</em>, 116(32): 15849–15854.</li>
+              <li id="ref-16"><strong>Mitchell, Tom M.</strong> (1980). <em>The Need for Biases in Learning Generalizations</em>. Technical Report CBM-TR-117. New Brunswick, NJ: Rutgers University.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/inside-the-machine.html">Inside the Machine</a> (Part 1 of 10)</div>
+  <div class="series-banner-links">
+    <span>First part</span>
+    <span>Part 2 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/learning-from-data.js"></script>
+</body>
+</html>

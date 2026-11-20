@@ -34,6 +34,23 @@
     "type": "tutorial"
   },
   {
+    "slug": "learning-from-data",
+    "url": "articles/learning-from-data.html",
+    "title": "Learning from Data: Models, Loss, Overfitting and Honest Evaluation",
+    "summary": "What it means for a machine to learn: features, labels, models and loss, overfitting and the bias–variance trade-off, validation and cross-validation, data leakage and learning curves.",
+    "subject": "AI & Machine Learning",
+    "tags": [
+      "machine-learning",
+      "overfitting",
+      "cross-validation",
+      "bias-variance",
+      "data-leakage",
+      "data-analysis"
+    ],
+    "date": "2026-11-20",
+    "type": "tutorial"
+  },
+  {
     "slug": "how-old-is-the-earth",
     "url": "articles/how-old-is-the-earth.html",
     "title": "How Old Is the Earth? Salt, Cooling Rocks and Radioactive Clocks",

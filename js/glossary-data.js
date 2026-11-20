@@ -4298,5 +4298,113 @@ window.RNLEARN_GLOSSARY = [
   "Rationalism",
   "The view that reason, rather than the senses, is the main source of knowledge.",
   []
+ ],
+ [
+  "Supervised learning",
+  "Learning from examples that come with the correct answers (labels), to predict labels for new examples.",
+  []
+ ],
+ [
+  "Unsupervised learning",
+  "Finding structure, such as clusters, in data without labels.",
+  []
+ ],
+ [
+  "Self-supervised learning",
+  "Learning from labels created automatically from the data itself, such as predicting a hidden word.",
+  []
+ ],
+ [
+  "Hyperparameter",
+  "A setting chosen before training rather than learned, such as polynomial degree, tree depth or learning rate.",
+  [
+   "hyperparameters"
+  ]
+ ],
+ [
+  "Inductive bias",
+  "The built-in assumptions a learning method uses to generalise beyond its training examples.",
+  []
+ ],
+ [
+  "Loss function",
+  "A function measuring how wrong a prediction is; training minimises its average over the data.",
+  [
+   "loss functions"
+  ]
+ ],
+ [
+  "Empirical risk minimisation",
+  "Choosing model parameters that minimise the average loss on the training data.",
+  [
+   "empirical risk minimization",
+   "empirical risk"
+  ]
+ ],
+ [
+  "Generalisation",
+  "How well a model performs on new data it was not trained on.",
+  [
+   "generalization"
+  ]
+ ],
+ [
+  "Underfitting",
+  "When a model is too simple to capture the pattern, performing poorly even on its training data.",
+  []
+ ],
+ [
+  "Bias–variance trade-off",
+  "The balance between error from wrong assumptions (bias) and error from sensitivity to the training sample (variance).",
+  [
+   "bias-variance trade-off",
+   "bias–variance dilemma"
+  ]
+ ],
+ [
+  "Validation set",
+  "Data held out from training and used to compare models and choose hyperparameters.",
+  [
+   "validation sets"
+  ]
+ ],
+ [
+  "Cross-validation",
+  "Estimating performance by repeatedly training on part of the data and validating on the rest, as in k-fold cross-validation.",
+  [
+   "k-fold cross-validation",
+   "leave-one-out cross-validation"
+  ]
+ ],
+ [
+  "Data leakage",
+  "When information from the test data, or not available at prediction time, gets into training and inflates measured performance.",
+  [
+   "leakage"
+  ]
+ ],
+ [
+  "Learning curve",
+  "A plot of training and validation error against the number of training examples.",
+  [
+   "learning curves"
+  ]
+ ],
+ [
+  "No-free-lunch theorem",
+  "The result that, averaged over all possible problems, no learning algorithm outperforms any other.",
+  [
+   "no free lunch"
+  ]
+ ],
+ [
+  "PAC learning",
+  "Valiant’s framework of probably approximately correct learning: learning a good hypothesis with high probability from enough examples.",
+  []
+ ],
+ [
+  "Double descent",
+  "Test error that falls, rises near the point where the model can fit the training data exactly, then falls again as the model grows.",
+  []
  ]
 ];

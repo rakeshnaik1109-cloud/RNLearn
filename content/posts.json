@@ -1,5 +1,31 @@
 [
   {
+    "slug": "learning-from-data",
+    "title": "Learning from Data: Models, Loss, Overfitting and Honest Evaluation",
+    "summary": "What it means for a machine to learn: features, labels, models and loss, overfitting and the bias–variance trade-off, validation and cross-validation, data leakage and learning curves.",
+    "subject": "AI & Machine Learning",
+    "tags": [
+      "machine-learning",
+      "overfitting",
+      "cross-validation",
+      "bias-variance",
+      "data-leakage",
+      "data-analysis"
+    ],
+    "date": "2026-11-20",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 21,
+    "series": {
+      "id": "inside-the-machine",
+      "part": 1
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
     "slug": "socrates-plato-and-aristotle",
     "title": "Socrates, Plato and Aristotle: How Should We Ask Questions About the World?",
     "summary": "The Socratic method and the trial of Socrates, Plato’s Forms, the cave and the doubled square, the Platonic solids, Aristotle’s logic, biology, four causes and physics.",
