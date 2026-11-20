@@ -4885,5 +4885,76 @@
     "forms": [
       "quantile loss"
     ]
+  },
+  {
+    "term": "Mini-batch",
+    "definition": "A small random subset of the training data used to estimate the gradient for one step.",
+    "forms": [
+      "mini-batches"
+    ]
+  },
+  {
+    "term": "Adam optimiser",
+    "definition": "An optimiser combining momentum with per-parameter step sizes scaled by recent gradient magnitudes.",
+    "forms": [
+      "AdamW"
+    ]
+  },
+  {
+    "term": "RMSProp",
+    "definition": "An optimiser that divides each parameter’s step by a running average of its recent gradient sizes.",
+    "forms": []
+  },
+  {
+    "term": "Learning-rate schedule",
+    "definition": "A rule for changing the learning rate during training, such as step decay or cosine decay.",
+    "forms": [
+      "learning-rate schedules"
+    ]
+  },
+  {
+    "term": "Learning-rate warm-up",
+    "definition": "Starting training with a small learning rate and increasing it over the first steps.",
+    "forms": []
+  },
+  {
+    "term": "Batch normalisation",
+    "definition": "Normalising each unit’s input over the mini-batch to mean 0 and standard deviation 1, then rescaling with learned parameters.",
+    "forms": [
+      "batch normalization",
+      "batch norm"
+    ]
+  },
+  {
+    "term": "Layer normalisation",
+    "definition": "Normalising across the units of a layer for each example separately; standard in transformers.",
+    "forms": [
+      "layer normalization",
+      "layer norm"
+    ]
+  },
+  {
+    "term": "Skip connection",
+    "definition": "A connection that adds a block’s input directly to its output, easing the training of very deep networks.",
+    "forms": [
+      "skip connections",
+      "residual connection",
+      "residual connections"
+    ]
+  },
+  {
+    "term": "Gradient clipping",
+    "definition": "Rescaling the gradient when its size exceeds a threshold, to prevent a single huge step.",
+    "forms": []
+  },
+  {
+    "term": "Weight decay",
+    "definition": "Shrinking every weight slightly towards zero at each step, equivalent to an L2 penalty for plain gradient descent.",
+    "forms": []
+  },
+  {
+    "term": "Data augmentation",
+    "definition": "Enlarging a training set with modified copies of examples, such as flipped or cropped images.",
+    "forms": []
   }
 ]

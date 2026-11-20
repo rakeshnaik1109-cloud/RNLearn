@@ -17,6 +17,23 @@
     "type": "tutorial"
   },
   {
+    "slug": "training-deep-networks",
+    "url": "articles/training-deep-networks.html",
+    "title": "Training Deep Networks: Optimisers, Learning Rates, Normalisation and Regularisation",
+    "summary": "SGD and mini-batches, learning rates, momentum, RMSProp and Adam, schedules and warm-up, the range test, normalisation, skip connections, clipping, weight decay, dropout, early stopping.",
+    "subject": "AI & Machine Learning",
+    "tags": [
+      "machine-learning",
+      "neural-networks",
+      "deep-learning",
+      "optimisation",
+      "regularisation",
+      "data-analysis"
+    ],
+    "date": "2026-11-20",
+    "type": "tutorial"
+  },
+  {
     "slug": "socrates-plato-and-aristotle",
     "url": "articles/socrates-plato-and-aristotle.html",
     "title": "Socrates, Plato and Aristotle: How Should We Ask Questions About the World?",

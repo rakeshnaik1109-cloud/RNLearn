@@ -4887,5 +4887,76 @@ window.RNLEARN_GLOSSARY = [
   [
    "quantile loss"
   ]
+ ],
+ [
+  "Mini-batch",
+  "A small random subset of the training data used to estimate the gradient for one step.",
+  [
+   "mini-batches"
+  ]
+ ],
+ [
+  "Adam optimiser",
+  "An optimiser combining momentum with per-parameter step sizes scaled by recent gradient magnitudes.",
+  [
+   "AdamW"
+  ]
+ ],
+ [
+  "RMSProp",
+  "An optimiser that divides each parameter’s step by a running average of its recent gradient sizes.",
+  []
+ ],
+ [
+  "Learning-rate schedule",
+  "A rule for changing the learning rate during training, such as step decay or cosine decay.",
+  [
+   "learning-rate schedules"
+  ]
+ ],
+ [
+  "Learning-rate warm-up",
+  "Starting training with a small learning rate and increasing it over the first steps.",
+  []
+ ],
+ [
+  "Batch normalisation",
+  "Normalising each unit’s input over the mini-batch to mean 0 and standard deviation 1, then rescaling with learned parameters.",
+  [
+   "batch normalization",
+   "batch norm"
+  ]
+ ],
+ [
+  "Layer normalisation",
+  "Normalising across the units of a layer for each example separately; standard in transformers.",
+  [
+   "layer normalization",
+   "layer norm"
+  ]
+ ],
+ [
+  "Skip connection",
+  "A connection that adds a block’s input directly to its output, easing the training of very deep networks.",
+  [
+   "skip connections",
+   "residual connection",
+   "residual connections"
+  ]
+ ],
+ [
+  "Gradient clipping",
+  "Rescaling the gradient when its size exceeds a threshold, to prevent a single huge step.",
+  []
+ ],
+ [
+  "Weight decay",
+  "Shrinking every weight slightly towards zero at each step, equivalent to an L2 penalty for plain gradient descent.",
+  []
+ ],
+ [
+  "Data augmentation",
+  "Enlarging a training set with modified copies of examples, such as flipped or cropped images.",
+  []
  ]
 ];

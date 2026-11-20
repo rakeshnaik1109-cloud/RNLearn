@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Training Deep Networks: Optimisers, Learning Rates, Normalisation and Regularisation — RNLearn</title>
+  <meta name="description" content="SGD and mini-batches, learning rates, momentum, RMSProp and Adam, schedules and warm-up, the range test, normalisation, skip connections, clipping, weight decay, dropout, early stopping.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/training-deep-networks.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Training Deep Networks: Optimisers, Learning Rates, Normalisation and Regularisation — RNLearn">
+  <meta property="og:description" content="SGD and mini-batches, learning rates, momentum, RMSProp and Adam, schedules and warm-up, the range test, normalisation, skip connections, clipping, weight decay, dropout, early stopping.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/training-deep-networks.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Training Deep Networks: Optimisers, Learning Rates, Normalisation and Regularisation — RNLearn">
+  <meta name="twitter:description" content="SGD and mini-batches, learning rates, momentum, RMSProp and Adam, schedules and warm-up, the range test, normalisation, skip connections, clipping, weight decay, dropout, early stopping.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Training Deep Networks: Optimisers, Learning Rates, Normalisation and Regularisation",
+    "description": "SGD and mini-batches, learning rates, momentum, RMSProp and Adam, schedules and warm-up, the range test, normalisation, skip connections, clipping, weight decay, dropout, early stopping.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-20",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/training-deep-networks.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/ai-machine-learning.html" class="post-subject-tag" data-subject="ai-machine-learning">AI &amp; Machine Learning</a>
+        </div>
+        <h1 class="article-title">Training Deep Networks: Optimisers, Learning Rates, Normalisation and Regularisation</h1>
+        <p class="article-standfirst">
+          Backpropagation tells a network which way is downhill. Everything else, from how big each step is to how the network is kept from memorising its data, decides whether training takes an hour or never works at all.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-20">20 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>21 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/inside-the-machine.html">Inside the Machine</a> (Part 8 of 10)</div>
+  <div class="series-banner-links">
+    <a href="loss-functions.html">← Part 7: Loss Functions: What Machine Learning Models Minimise</a>
+    <span>Part 9 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. From Gradients to a Trained Network</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. The Training Loop</a></li>
+              <li><a class="toc-link" href="#section-4">4. The Learning Rate</a></li>
+              <li><a class="toc-link" href="#section-5">5. Momentum and Adaptive Optimisers</a></li>
+              <li><a class="toc-link" href="#section-6">6. Mini-Batches and Noise</a></li>
+              <li><a class="toc-link" href="#section-7">7. Schedules and Warm-up</a></li>
+              <li><a class="toc-link" href="#section-8">8. Finding a Learning Rate</a></li>
+              <li><a class="toc-link" href="#section-9">9. Initialisation and Normalisation</a></li>
+              <li><a class="toc-link" href="#section-10">10. Skip Connections and Gradient Clipping</a></li>
+              <li><a class="toc-link" href="#section-11">11. Overfitting and Regularisation</a></li>
+              <li><a class="toc-link" href="#section-12">12. A Practical Recipe</a></li>
+              <li><a class="toc-link" href="#section-13">13. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-14">14. Worked Example: Taming an Overfitting Network</a></li>
+              <li><a class="toc-link" href="#section-15">15. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-16">16. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-17">17. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-18">18. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-19">19. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-20">20. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>You will learn:</strong> how the training loop works (epochs, mini-batches, stochastic gradient descent); how to choose a learning rate; momentum, RMSProp and Adam; how batch size trades noise against speed; learning-rate schedules and warm-up; the learning-rate range test; initialisation, batch and layer normalisation; skip connections and gradient clipping; and how weight decay, early stopping, dropout and data augmentation prevent overfitting.</p>
+            <p><strong>You need:</strong> Part 2 (gradient descent, regularisation), Part 6 (backpropagation, vanishing gradients) and Part 7 (loss functions).</p>
+            <p><strong>Try:</strong> seven interactive figures, including a race between four optimisers, a deep network whose signal you can shrink or explode, and a network that overfits until you stop it.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. From Gradients to a Trained Network</h2>
+            <p>Part 6 showed how backpropagation computes the gradient of the loss, and Part 7 how to choose the loss. In principle, training is then simple: step downhill, repeatedly. In practice, the difference between a network that trains in an hour and one that never learns at all lies in a set of choices made around that simple loop: how big the steps are, how they adapt, how much data each one uses, how the weights start, and how the network is kept from memorising its training data.</p>
+            <p>This part covers those choices, the craft knowledge that turned deep learning from a curiosity into a dependable tool. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-ml-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Part 8 turns the ingredients of Parts 6 and 7 into a working training procedure.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-ml8-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Optimisation and regularisation, 1951–2019.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. The Training Loop</h2>
+            <p>Computing the exact gradient of the loss means a pass through the whole training set, which may hold millions of examples. Instead, deep networks are trained by <strong>stochastic gradient descent</strong> (SGD): estimate the gradient from a small random <strong>mini-batch</strong> of examples, take a step, and repeat with a fresh batch. One full pass through the training data is an <strong>epoch</strong>. The estimate is noisy, but it is cheap, and many cheap noisy steps beat a few expensive exact ones. Herbert Robbins and Sutton Monro proved in 1951 that such noisy steps still converge, provided the step size shrinks suitably over time. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">In code: the training loop in PyTorch</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">import torch
+from torch import nn
+
+model = nn.Sequential(nn.Linear(20, 64), nn.LayerNorm(64), nn.ReLU(),
+                      nn.Dropout(0.1), nn.Linear(64, 1))
+opt = torch.optim.AdamW(model.parameters(), lr=1e-3, weight_decay=0.01)
+sched = torch.optim.lr_scheduler.OneCycleLR(opt, max_lr=3e-3, total_steps=10_000)
+loss_fn = nn.MSELoss()
+
+for xb, yb in train_loader:                 # one mini-batch at a time
+    model.train()                           # dropout on
+    loss = loss_fn(model(xb), yb)
+    opt.zero_grad(); loss.backward()
+    nn.utils.clip_grad_norm_(model.parameters(), 1.0)   # gradient clipping
+    opt.step(); sched.step()                # update weights, then learning rate</code></pre>
+              <p>Every line beyond the forward pass, the backward pass and the step corresponds to a section of this part.</p>
+            </details>
+          </section>
+
+          <section id="section-4">
+            <h2>4. The Learning Rate</h2>
+            <p>The <strong>learning rate</strong> sets the size of each step: new weights = old weights − learning rate × gradient. It is the single most important setting in training. Too small, and training crawls; too large, and each step overshoots the minimum by more than the last, so the loss explodes.</p>
+            <p>Loss surfaces of real networks are rarely round bowls. They contain long, narrow valleys: some directions are steep, others nearly flat. The steep directions limit how large the learning rate can be; the flat directions then need a great many of those small steps.</p>
+            <figure class="fig" data-fig="fig-ml-lr">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. The learning rate on a narrow valley.</strong> A loss 50 times steeper across the valley than along it. Change the learning rate and watch 60 steps of gradient descent.
+              </figcaption>
+            </figure>
+            <p>Starting from a loss of 25.7, a learning rate of 0.002 reaches only 2.4 after 60 steps; 0.02 reaches 0.27; 0.036, just below the limit, reaches 0.037 while zigzagging across the valley. At 0.04 and above, the path diverges. The limit is 2 divided by the curvature of the steepest direction, here 2/50. The ratio of steepest to flattest curvature, the <strong>condition number</strong>, measures how hard a problem is for plain gradient descent.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Momentum and Adaptive Optimisers</h2>
+            <p>Two ideas fix the narrow valley. The first is <strong>momentum</strong>: Boris Polyak’s 1964 “heavy ball” method adds a fraction (typically 0.9) of the previous step to the current one. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> In the steep direction, successive gradients point back and forth and largely cancel; along the valley floor, they agree and build up speed. Yurii Nesterov’s 1983 variant evaluates the gradient at the point where momentum is about to carry it, which improves the theoretical rate of convergence. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span></p>
+            <p>The second idea is to give every parameter its own step size. AdaGrad, proposed by John Duchi, Elad Hazan and Yoram Singer in 2011, divides each parameter’s step by the accumulated size of its past gradients. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span> Because that sum only grows, AdaGrad’s steps eventually become tiny; <strong>RMSProp</strong>, introduced by Tijmen Tieleman and Geoffrey Hinton in a 2012 online course, uses a running average of recent squared gradients instead. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> <strong>Adam</strong>, by Diederik Kingma and Jimmy Ba (2015), combines RMSProp’s scaling with momentum and corrects both running averages for their start at zero. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span> It is the default optimiser for most deep learning.</p>
+            <figure class="fig" data-fig="fig-ml-optim">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. An optimiser race.</strong> Four optimisers start from the same point on the narrow valley, each with a typical step size. Scale all step sizes together, switch on noisy gradients, and press Run.
+              </figcaption>
+            </figure>
+            <p>With exact gradients, SGD (learning rate 0.03) needs 136 steps to bring the loss below 0.001; momentum (0.02) needs 62 and Adam (0.1) 81. RMSProp makes fast early progress but, without a decaying learning rate, keeps oscillating around a loss of about 0.01. With noisy gradients, none settles below 0.001 in 150 steps: they all wander around the minimum, which is why learning rates are lowered during training (Section 7).</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">The maths: the update rules</summary>
+              <p style="margin-top:0.6rem;">With gradient g<sub>t</sub> and learning rate η:</p>
+              <p>$$\text{Momentum: } m_t = \beta m_{t-1} + g_t, \quad \theta_t = \theta_{t-1} - \eta\, m_t$$</p>
+              <p>$$\text{Adam: } m_t = \beta_1 m_{t-1} + (1-\beta_1) g_t,\quad v_t = \beta_2 v_{t-1} + (1-\beta_2) g_t^2,\quad \theta_t = \theta_{t-1} - \eta\,\frac{m_t/(1-\beta_1^t)}{\sqrt{v_t/(1-\beta_2^t)}+\epsilon}$$</p>
+              <p>with typical values β = β<sub>1</sub> = 0.9, β<sub>2</sub> = 0.999 and ε = 10<sup>−8</sup>, all operations applied separately to each parameter. Dividing by √v<sub>t</sub> makes Adam’s step roughly η in size whatever the scale of the gradient, which is why it is less sensitive to the learning rate than SGD.</p>
+            </details>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Mini-Batches and Noise</h2>
+            <p>The <strong>batch size</strong> decides how much data each step sees. A larger batch gives a more accurate gradient and uses parallel hardware efficiently, but makes fewer updates per epoch. A smaller batch updates more often, with more noise.</p>
+            <figure class="fig" data-fig="fig-ml-batch">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Mini-batch size.</strong> Fitting a straight line to 512 points by SGD for three epochs. Each point in the plane is a possible line (intercept across, slope up). Choose the batch size and the learning rate.
+              </figcaption>
+            </figure>
+            <p>With a learning rate of 0.05 and three epochs, a batch of 1 makes 1,536 noisy updates and ends with an excess loss of 0.009; a batch of 4 makes 384 and gets closest (0.0009); a batch of 64 makes only 24 updates and is still far away (0.57); the full batch of 512 makes just 3. Larger batches can use larger learning rates, though: Priya Goyal and colleagues trained an image classifier on ImageNet in one hour with batches of 8,192 images by scaling the learning rate in proportion to the batch size. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span> Very large batches can find solutions that generalise slightly worse, which Nitish Keskar and colleagues linked to “sharp” minima of the loss. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span></p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Schedules and Warm-up</h2>
+            <p>Robbins and Monro’s condition, that the step size must shrink, is the reason for <strong>learning-rate schedules</strong>. A large rate early on makes fast progress; a small rate later lets the weights settle instead of bouncing around the minimum. Common choices are step decay (divide the rate by 10 at fixed points), the smooth <strong>cosine</strong> schedule of Ilya Loshchilov and Frank Hutter, <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span> and Leslie Smith’s cyclical and “one-cycle” schedules, which first raise the rate and then lower it. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span></p>
+            <p><strong>Warm-up</strong> starts with a small learning rate and raises it over the first few hundred or thousand steps. Early on, the weights are random and the gradients can be large and erratic; full-size steps then risk throwing training off course. Warm-up was essential for Goyal’s large batches and for the original transformer, <span class="cite-group">[<a class="cite" href="#ref-9">9</a>, <a class="cite" href="#ref-13">13</a>]</span> and is now standard for large models.</p>
+            <figure class="fig" data-fig="fig-ml-sched">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. Learning-rate schedules.</strong> SGD with noisy gradients on the narrow valley for 400 steps. Choose a schedule and its peak learning rate; the grey curve uses a constant rate.
+              </figcaption>
+            </figure>
+            <p>With a peak learning rate of 0.03, a constant rate ends with an average loss of 0.31 over the last 50 steps; step decay reaches 0.015, cosine 0.027, warm-up plus cosine 0.025 and one-cycle 0.020, between 10 and 20 times lower. But the schedule cannot rescue a poor peak rate: with a peak of 0.01, the decaying schedules shrink the rate before the weights have even arrived, and finish worse than the constant rate.</p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Finding a Learning Rate</h2>
+            <p>How do you find a good learning rate for a new problem? Leslie Smith proposed a quick test: run a few hundred steps while multiplying the learning rate by a constant factor at every step, from very small to very large, and plot the loss. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span> The loss barely changes at first, falls steeply over a middle range, then explodes. A good learning rate lies in the steep region, a few times below the point of lowest loss.</p>
+            <figure class="fig" data-fig="fig-ml-lrfind">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 7. The learning-rate range test.</strong> A network with 40 hidden units trained by SGD with momentum while the learning rate rises from 0.0001 to 10 over 300 steps. Read off the loss at any rate.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Initialisation and Normalisation</h2>
+            <p>Part 6 showed that gradients vanish or explode in deep networks unless the initial weights are scaled carefully: by √(1/n) for tanh units (Xavier Glorot and Yoshua Bengio) or √(2/n) for ReLU units (Kaiming He and colleagues), where n is the number of inputs to each unit. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>, <a class="cite" href="#ref-15">15</a>]</span> The same applies to the forward signal.</p>
+            <p>Initialisation only sets the starting point; as weights change during training, the scale of each layer’s inputs drifts. <strong>Batch normalisation</strong>, introduced by Sergey Ioffe and Christian Szegedy in 2015, normalises each unit’s input to mean 0 and standard deviation 1 over the current mini-batch, then rescales it with two learned parameters. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span> It allowed much higher learning rates and made very deep convolutional networks trainable. Because it depends on batch statistics, it behaves differently in training and in use, and poorly with tiny batches; <strong>layer normalisation</strong>, by Jimmy Ba, Jamie Kiros and Geoffrey Hinton, normalises across the units of each example instead, and is the choice in transformers. <span class="cite-group">[<a class="cite" href="#ref-17">17</a>]</span></p>
+            <figure class="fig" data-fig="fig-ml-deep">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 8. The signal through 20 layers.</strong> A random network 64 units wide. Choose the activation, the scale of the initial weights and whether each layer is normalised, and see the size of the activations at every layer.
+              </figcaption>
+            </figure>
+            <p>With ReLU units and He’s scaling √(2/n), the signal stays near 0.6 through all 20 layers. With weights half that size it shrinks to about 6 × 10<sup>−7</sup> by layer 20; with weights twice that size it grows to about 6 × 10<sup>5</sup>, since each layer multiplies the size by roughly the same factor. With normalisation, it stays near 0.6 whatever the initial scale. Why batch normalisation helps so much is debated: Ioffe and Szegedy attributed it to reducing “internal covariate shift”, the changing distribution of each layer’s inputs, but Shibani Santurkar and colleagues found in 2018 that its main benefit is making the loss surface smoother, so that larger steps are safe. <span class="cite-group">[<a class="cite" href="#ref-18">18</a>]</span></p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Skip Connections and Gradient Clipping</h2>
+            <p>Two more tools keep very deep networks stable. <strong>Skip</strong> (or residual) <strong>connections</strong>, introduced by Kaiming He and colleagues in 2016, add each block’s input directly to its output, so a block only has to learn a correction. <span class="cite-group">[<a class="cite" href="#ref-19">19</a>]</span> Gradients then have a direct path back to the early layers, and networks with over a hundred layers became trainable. Part 9 shows how they are built into modern architectures.</p>
+            <p><strong>Gradient clipping</strong> rescales the gradient whenever its overall size exceeds a threshold. Recurrent networks, in particular, occasionally hit “cliffs” in the loss surface where the gradient is enormous; a single unclipped step can undo hours of training. Razvan Pascanu, Tomas Mikolov and Yoshua Bengio analysed the problem and proposed clipping by the gradient norm in 2013. <span class="cite-group">[<a class="cite" href="#ref-20">20</a>]</span> It is now routine in training language models.</p>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Overfitting and Regularisation</h2>
+            <p>A large network can memorise its training data, as Part 1 warned. Chiyuan Zhang and colleagues showed in 2017 that standard image classifiers can fit even randomly shuffled labels perfectly. <span class="cite-group">[<a class="cite" href="#ref-21">21</a>]</span> Training error then says nothing about performance on new data, and the techniques that keep a network general are called <strong>regularisation</strong>.</p>
+            <ul>
+              <li><strong>Early stopping:</strong> monitor the error on a validation set during training and keep the weights from the point where it was lowest. <span class="cite-group">[<a class="cite" href="#ref-22">22</a>]</span></li>
+              <li><strong>Weight decay:</strong> shrink every weight slightly towards zero at each step, the L2 penalty of Part 2. Anders Krogh and John Hertz showed in 1992 how it improves generalisation. <span class="cite-group">[<a class="cite" href="#ref-23">23</a>]</span> For Adam, Ilya Loshchilov and Frank Hutter showed that the decay should be applied directly to the weights rather than added to the gradient, where Adam’s scaling distorts it: the <strong>AdamW</strong> optimiser. <span class="cite-group">[<a class="cite" href="#ref-24">24</a>]</span></li>
+              <li><strong>Dropout:</strong> during training, set each hidden unit’s output to zero with some probability (such as 0.1 to 0.5), so that no unit can rely on particular others. Nitish Srivastava, Geoffrey Hinton and colleagues described it in 2014; at test time all units are used. <span class="cite-group">[<a class="cite" href="#ref-25">25</a>]</span> It can be seen as training a huge ensemble of thinned networks that share weights.</li>
+              <li><strong>Data augmentation:</strong> enlarge the training set with modified copies, such as flipped, cropped or recoloured images, that should keep their labels. It is often the most effective regulariser of all.</li>
+            </ul>
+            <figure class="fig" data-fig="fig-ml-reg">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 9. Overfitting and regularisation.</strong> A network with 40 hidden units trained on the series’ 15 training points; 60 further points serve for validation. Set the weight decay and the dropout rate, and train.
+              </figcaption>
+            </figure>
+            <div class="callout callout-warn">
+              <div class="callout-header">Watch out: tuning on the test set</div>
+              <p>Early stopping, weight decay and dropout rate are all chosen by looking at validation error. Use that validation set for those choices, and keep a separate test set untouched until the very end. Otherwise the reported performance is optimistic, a form of the leakage described in Part 1.</p>
+            </div>
+          </section>
+
+          <section id="section-12">
+            <h2>12. A Practical Recipe</h2>
+            <div class="table-container" style="overflow-x:auto; margin:1.2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.92rem; line-height:1.5;">
+                <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.5rem;">Step</th><th style="padding:0.5rem;">What to do</th><th style="padding:0.5rem;">Why</th></tr></thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">1. Baseline</td><td style="padding:0.5rem;">Start with a simple model and a known architecture; standardise the inputs</td><td style="padding:0.5rem;">Know what “good” looks like</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">2. Overfit a little</td><td style="padding:0.5rem;">Check the network can drive the loss near zero on a handful of examples</td><td style="padding:0.5rem;">Catches bugs before long runs</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">3. Optimiser</td><td style="padding:0.5rem;">AdamW (learning rate around 10<sup>−3</sup> to 10<sup>−4</sup>) or SGD with momentum 0.9</td><td style="padding:0.5rem;">Robust defaults</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">4. Learning rate</td><td style="padding:0.5rem;">Run a range test; add warm-up and a cosine or one-cycle decay</td><td style="padding:0.5rem;">The most important setting</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">5. Stability</td><td style="padding:0.5rem;">He or Xavier initialisation, normalisation layers, skip connections, gradient clipping</td><td style="padding:0.5rem;">Keeps signals and gradients a steady size</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">6. Regularise</td><td style="padding:0.5rem;">Data augmentation, weight decay, dropout, early stopping</td><td style="padding:0.5rem;">Closes the gap between training and validation</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">7. Watch the curves</td><td style="padding:0.5rem;">Plot training and validation loss; change one thing at a time</td><td style="padding:0.5rem;">Diagnoses underfitting versus overfitting</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: why do huge networks generalise?</div>
+              <p>Classical statistics (Part 1) says that a model with far more parameters than data points should overfit badly. Modern networks often have exactly that, and can memorise random labels, <span class="cite-group">[<a class="cite" href="#ref-21">21</a>]</span> yet they generalise well on real data. Mikhail Belkin and colleagues described a “double descent” curve: as model size grows, test error first rises as the model starts to interpolate the training data, then falls again for still larger models. <span class="cite-group">[<a class="cite" href="#ref-26">26</a>]</span> Part of the explanation seems to lie in the training procedure itself: stochastic gradient descent, with its noise, learning-rate schedule and implicit preference among the many solutions that fit the data, acts as a regulariser that no one designed. How exactly optimisation and generalisation interact remains one of the central open questions of deep learning.</p>
+            </div>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Worked Example: Taming an Overfitting Network</h2>
+            <p>Figure 9’s network has 40 tanh units, 121 parameters, and only 15 training points. The noise in the data has variance 0.0625, so the best possible validation error is about 0.06.</p>
+            <ol>
+              <li><strong>No regularisation, 4,000 steps:</strong> training error 0.001, validation error 0.40. The curve threads every training point and swings wildly between them.</li>
+              <li><strong>Early stopping:</strong> the validation error was lowest, 0.061, at step 600. Keeping those weights gives an almost ideal model, with no other change.</li>
+              <li><strong>Weight decay 0.3:</strong> after all 4,000 steps, training error 0.019 and validation error 0.059: the network can no longer fit the noise.</li>
+              <li><strong>Too much weight decay (3):</strong> training error 0.16 and validation error 0.20: the curve is now too stiff to follow the sine wave. This is underfitting.</li>
+              <li><strong>Dropout 0.1 alone:</strong> validation error 0.083 after 4,000 steps, much better than none, though here not as good as tuned weight decay.</li>
+            </ol>
+            <p>The lesson is general: regularisation strength is a dial between overfitting and underfitting, and the validation curve tells you where to set it.</p>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: training</div>
+              <ol>
+                <li>In Figure 3, find the learning rate that gives the lowest loss after 60 steps. How close to the divergence limit of 0.04 is it?</li>
+                <li>In Figure 4, set the multiplier to 1.5×. Which optimiser diverges, and why does Adam survive?</li>
+                <li>In Figure 5, choose a batch of 512 and raise the learning rate. Can the full batch catch up with a batch of 4 in three epochs?</li>
+                <li>In Figure 8, find the combination of activation and initial weights that does worst, then switch on normalisation. Does it rescue every case?</li>
+                <li>In Figure 9, combine weight decay 0.1 with dropout 0.1. Is the result better than either alone?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “Adam is always better than SGD”</div>
+              <p><strong>The myth:</strong> adaptive optimisers such as Adam have made plain stochastic gradient descent obsolete.</p>
+              <p><strong>The reality:</strong> Adam is a robust default that needs less tuning, and it dominates in transformers. But in 2017 Ashia Wilson and colleagues found that on several image-classification and language tasks, carefully tuned SGD with momentum reached solutions that generalised better than adaptive methods, even when the adaptive methods trained faster. <span class="cite-group">[<a class="cite" href="#ref-27">27</a>]</span> Many state-of-the-art image models were long trained with SGD and momentum, and part of Adam’s apparent weakness turned out to come from how weight decay was applied, which AdamW fixed. <span class="cite-group">[<a class="cite" href="#ref-24">24</a>]</span></p>
+              <p><strong>Why it matters:</strong> no optimiser wins everywhere. Tuning the learning rate and its schedule usually matters more than the choice of optimiser.</p>
+            </div>
+          </section>
+
+          <section id="section-17">
+            <h2>17. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>Networks are trained by stochastic gradient descent on mini-batches; one pass through the data is an epoch.</li>
+                <li>The learning rate is the most important setting: too large diverges, too small crawls. Find it with a range test.</li>
+                <li>Momentum speeds progress along narrow valleys; RMSProp and Adam adapt each parameter’s step size.</li>
+                <li>Batch size trades gradient noise against the number of updates; larger batches allow larger learning rates.</li>
+                <li>Decay the learning rate during training, and warm it up at the start for large models.</li>
+                <li>Careful initialisation, normalisation layers, skip connections and gradient clipping keep deep networks stable.</li>
+                <li>Early stopping, weight decay (AdamW), dropout and data augmentation prevent overfitting; tune them on validation data.</li>
+              </ul>
+              <div class="table-container" style="overflow-x:auto; margin:1rem 0 0;">
+                <table style="width:100%; border-collapse:collapse; font-size:0.9rem; line-height:1.5;">
+                  <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.4rem;">Symptom</th><th style="padding:0.4rem;">Likely cause</th><th style="padding:0.4rem;">Try</th></tr></thead>
+                  <tbody>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">Loss becomes NaN or explodes</td><td style="padding:0.4rem;">Learning rate too high; exploding gradients</td><td style="padding:0.4rem;">Lower rate, warm-up, clipping</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">Loss falls very slowly</td><td style="padding:0.4rem;">Rate too low; poor initialisation; vanishing gradients</td><td style="padding:0.4rem;">Range test, He init, normalisation</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">Loss plateaus, noisy</td><td style="padding:0.4rem;">Rate not decayed</td><td style="padding:0.4rem;">Cosine or step schedule</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">Training low, validation high</td><td style="padding:0.4rem;">Overfitting</td><td style="padding:0.4rem;">Augmentation, weight decay, dropout, early stopping</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">Both high</td><td style="padding:0.4rem;">Underfitting</td><td style="padding:0.4rem;">Bigger model, less regularisation, train longer</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section id="section-18">
+            <h2>18. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Herbert Robbins &amp; Sutton Monro</td>
+                <td style="padding:0.6rem 0.8rem;">1915–2001 / 1919–1995<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Stochastic approximation (1951)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed that noisy steps with shrinking step sizes converge.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Boris Polyak</td>
+                <td style="padding:0.6rem 0.8rem;">1935–2023<br>Russia</td>
+                <td style="padding:0.6rem 0.8rem;">Heavy-ball momentum (1964)</td>
+                <td style="padding:0.6rem 0.8rem;">Introduced momentum for gradient methods.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Yurii Nesterov</td>
+                <td style="padding:0.6rem 0.8rem;">born 1956<br>Russia / Belgium</td>
+                <td style="padding:0.6rem 0.8rem;">Accelerated gradient (1983)</td>
+                <td style="padding:0.6rem 0.8rem;">Devised the optimal accelerated first-order method.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Diederik Kingma &amp; Jimmy Ba</td>
+                <td style="padding:0.6rem 0.8rem;"><br>Netherlands / Canada</td>
+                <td style="padding:0.6rem 0.8rem;">Adam (2015)</td>
+                <td style="padding:0.6rem 0.8rem;">Created the most widely used optimiser in deep learning.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Sergey Ioffe &amp; Christian Szegedy</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Batch normalisation (2015)</td>
+                <td style="padding:0.6rem 0.8rem;">Made very deep networks far easier and faster to train.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Nitish Srivastava &amp; Geoffrey Hinton</td>
+                <td style="padding:0.6rem 0.8rem;"><br>Canada</td>
+                <td style="padding:0.6rem 0.8rem;">Dropout (2014)</td>
+                <td style="padding:0.6rem 0.8rem;">Introduced randomly silencing units as a regulariser.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Leslie Smith</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Cyclical learning rates (2017)</td>
+                <td style="padding:0.6rem 0.8rem;">Proposed the learning-rate range test and one-cycle schedules.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Ilya Loshchilov &amp; Frank Hutter</td>
+                <td style="padding:0.6rem 0.8rem;"><br>Germany</td>
+                <td style="padding:0.6rem 0.8rem;">Cosine schedules (2017), AdamW (2019)</td>
+                <td style="padding:0.6rem 0.8rem;">Popularised cosine decay and fixed weight decay for Adam.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-19">
+            <h2>19. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about training deep networks.</p>
+            <figure class="fig" data-fig="fig-quiz-ml8">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-20">
+            <h2>20. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Goodfellow, Ian, Bengio, Yoshua &amp; Courville, Aaron.</strong> (2016). <em>Deep Learning</em>, chapters 7–8. Cambridge, MA: MIT Press.</li>
+              <li id="ref-2"><strong>Bottou, Léon, Curtis, Frank E. &amp; Nocedal, Jorge.</strong> (2018). "Optimization methods for large-scale machine learning." <em>SIAM Review</em>, 60(2): 223–311.</li>
+              <li id="ref-3"><strong>Robbins, Herbert &amp; Monro, Sutton.</strong> (1951). "A stochastic approximation method." <em>Annals of Mathematical Statistics</em>, 22(3): 400–407.</li>
+              <li id="ref-4"><strong>Polyak, B. T.</strong> (1964). "Some methods of speeding up the convergence of iteration methods." <em>USSR Computational Mathematics and Mathematical Physics</em>, 4(5): 1–17.</li>
+              <li id="ref-5"><strong>Nesterov, Yu. E.</strong> (1983). "A method for solving the convex programming problem with convergence rate O(1/k²)." <em>Soviet Mathematics Doklady</em>, 27: 372–376.</li>
+              <li id="ref-6"><strong>Duchi, John, Hazan, Elad &amp; Singer, Yoram.</strong> (2011). "Adaptive subgradient methods for online learning and stochastic optimization." <em>Journal of Machine Learning Research</em>, 12: 2121–2159.</li>
+              <li id="ref-7"><strong>Tieleman, Tijmen &amp; Hinton, Geoffrey.</strong> (2012). "Lecture 6.5 — RMSProp: divide the gradient by a running average of its recent magnitude." <em>Neural Networks for Machine Learning</em> (Coursera course).</li>
+              <li id="ref-8"><strong>Kingma, Diederik P. &amp; Ba, Jimmy.</strong> (2015). "Adam: a method for stochastic optimization." In <em>International Conference on Learning Representations (ICLR)</em>. arXiv: 1412.6980.</li>
+              <li id="ref-9"><strong>Goyal, Priya, Dollár, Piotr, Girshick, Ross, Noordhuis, Pieter, Wesolowski, Lukasz, Kyrola, Aapo, Tulloch, Andrew, Jia, Yangqing &amp; He, Kaiming.</strong> (2017). "Accurate, large minibatch SGD: training ImageNet in 1 hour." <em>arXiv</em>: 1706.02677.</li>
+              <li id="ref-10"><strong>Keskar, Nitish Shirish, Mudigere, Dheevatsa, Nocedal, Jorge, Smelyanskiy, Mikhail &amp; Tang, Ping Tak Peter.</strong> (2017). "On large-batch training for deep learning: generalization gap and sharp minima." In <em>International Conference on Learning Representations (ICLR)</em>.</li>
+              <li id="ref-11"><strong>Loshchilov, Ilya &amp; Hutter, Frank.</strong> (2017). "SGDR: stochastic gradient descent with warm restarts." In <em>International Conference on Learning Representations (ICLR)</em>.</li>
+              <li id="ref-12"><strong>Smith, Leslie N.</strong> (2017). "Cyclical learning rates for training neural networks." In <em>IEEE Winter Conference on Applications of Computer Vision (WACV)</em>, pp. 464–472.</li>
+              <li id="ref-13"><strong>Vaswani, Ashish, Shazeer, Noam, Parmar, Niki, Uszkoreit, Jakob, Jones, Llion, Gomez, Aidan N., Kaiser, Łukasz &amp; Polosukhin, Illia.</strong> (2017). "Attention is all you need." In <em>Advances in Neural Information Processing Systems 30 (NeurIPS)</em>.</li>
+              <li id="ref-14"><strong>Glorot, Xavier &amp; Bengio, Yoshua.</strong> (2010). "Understanding the difficulty of training deep feedforward neural networks." In <em>Proceedings of the 13th International Conference on Artificial Intelligence and Statistics (AISTATS)</em>, pp. 249–256.</li>
+              <li id="ref-15"><strong>He, Kaiming, Zhang, Xiangyu, Ren, Shaoqing &amp; Sun, Jian.</strong> (2015). "Delving deep into rectifiers: surpassing human-level performance on ImageNet classification." In <em>Proceedings of the IEEE International Conference on Computer Vision (ICCV)</em>, pp. 1026–1034.</li>
+              <li id="ref-16"><strong>Ioffe, Sergey &amp; Szegedy, Christian.</strong> (2015). "Batch normalization: accelerating deep network training by reducing internal covariate shift." In <em>Proceedings of the 32nd International Conference on Machine Learning (ICML)</em>, PMLR 37: 448–456.</li>
+              <li id="ref-17"><strong>Ba, Jimmy Lei, Kiros, Jamie Ryan &amp; Hinton, Geoffrey E.</strong> (2016). "Layer normalization." <em>arXiv</em>: 1607.06450.</li>
+              <li id="ref-18"><strong>Santurkar, Shibani, Tsipras, Dimitris, Ilyas, Andrew &amp; Mądry, Aleksander.</strong> (2018). "How does batch normalization help optimization?" In <em>Advances in Neural Information Processing Systems 31 (NeurIPS)</em>.</li>
+              <li id="ref-19"><strong>He, Kaiming, Zhang, Xiangyu, Ren, Shaoqing &amp; Sun, Jian.</strong> (2016). "Deep residual learning for image recognition." In <em>Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</em>, pp. 770–778.</li>
+              <li id="ref-20"><strong>Pascanu, Razvan, Mikolov, Tomas &amp; Bengio, Yoshua.</strong> (2013). "On the difficulty of training recurrent neural networks." In <em>Proceedings of the 30th International Conference on Machine Learning (ICML)</em>, PMLR 28(3): 1310–1318.</li>
+              <li id="ref-21"><strong>Zhang, Chiyuan, Bengio, Samy, Hardt, Moritz, Recht, Benjamin &amp; Vinyals, Oriol.</strong> (2017). "Understanding deep learning requires rethinking generalization." In <em>International Conference on Learning Representations (ICLR)</em>.</li>
+              <li id="ref-22"><strong>Prechelt, Lutz.</strong> (1998). "Early stopping — but when?" In G. B. Orr &amp; K.-R. Müller (eds), <em>Neural Networks: Tricks of the Trade</em>, Lecture Notes in Computer Science 1524, pp. 55–69. Berlin: Springer.</li>
+              <li id="ref-23"><strong>Krogh, Anders &amp; Hertz, John A.</strong> (1992). "A simple weight decay can improve generalization." In <em>Advances in Neural Information Processing Systems 4 (NIPS)</em>, pp. 950–957.</li>
+              <li id="ref-24"><strong>Loshchilov, Ilya &amp; Hutter, Frank.</strong> (2019). "Decoupled weight decay regularization." In <em>International Conference on Learning Representations (ICLR)</em>.</li>
+              <li id="ref-25"><strong>Srivastava, Nitish, Hinton, Geoffrey, Krizhevsky, Alex, Sutskever, Ilya &amp; Salakhutdinov, Ruslan.</strong> (2014). "Dropout: a simple way to prevent neural networks from overfitting." <em>Journal of Machine Learning Research</em>, 15: 1929–1958.</li>
+              <li id="ref-26"><strong>Belkin, Mikhail, Hsu, Daniel, Ma, Siyuan &amp; Mandal, Soumik.</strong> (2019). "Reconciling modern machine-learning practice and the classical bias–variance trade-off." <em>Proceedings of the National Academy of Sciences</em>, 116(32): 15849–15854.</li>
+              <li id="ref-27"><strong>Wilson, Ashia C., Roelofs, Rebecca, Stern, Mitchell, Srebro, Nathan &amp; Recht, Benjamin.</strong> (2017). "The marginal value of adaptive gradient methods in machine learning." In <em>Advances in Neural Information Processing Systems 30 (NeurIPS)</em>.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/inside-the-machine.html">Inside the Machine</a> (Part 8 of 10)</div>
+  <div class="series-banner-links">
+    <a href="loss-functions.html">← Part 7: Loss Functions: What Machine Learning Models Minimise</a>
+    <span>Part 9 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/training-deep-networks.js"></script>
+</body>
+</html>

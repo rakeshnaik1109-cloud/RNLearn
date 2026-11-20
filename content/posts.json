@@ -1,5 +1,31 @@
 [
   {
+    "slug": "training-deep-networks",
+    "title": "Training Deep Networks: Optimisers, Learning Rates, Normalisation and Regularisation",
+    "summary": "SGD and mini-batches, learning rates, momentum, RMSProp and Adam, schedules and warm-up, the range test, normalisation, skip connections, clipping, weight decay, dropout, early stopping.",
+    "subject": "AI & Machine Learning",
+    "tags": [
+      "machine-learning",
+      "neural-networks",
+      "deep-learning",
+      "optimisation",
+      "regularisation",
+      "data-analysis"
+    ],
+    "date": "2026-11-20",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 21,
+    "series": {
+      "id": "inside-the-machine",
+      "part": 8
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
     "slug": "loss-functions",
     "title": "Loss Functions: What Machine Learning Models Minimise",
     "summary": "Squared, absolute and Huber error, losses as likelihoods, cross-entropy and softmax, hinge and exponential losses, focal loss, proper scoring rules, calibration and quantile loss.",
