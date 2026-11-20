@@ -49,6 +49,8 @@
   --subject-research-bg: #f6effc;
   --subject-technology: #0f766e;
   --subject-technology-bg: #eefaf8;
+  --subject-ai-machine-learning: #a21caf;
+  --subject-ai-machine-learning-bg: #fdf4ff;
   --subject-finance-and-economics: #15803d;
   --subject-finance-and-economics-bg: #f0fdf4;
   --subject-history: #b45309;
@@ -102,6 +104,8 @@
   --subject-research-bg: #29183d;
   --subject-technology: #2dd4bf;
   --subject-technology-bg: #112d2b;
+  --subject-ai-machine-learning: #e879f9;
+  --subject-ai-machine-learning-bg: #3b0d3f;
   --subject-finance-and-economics: #4ade80;
   --subject-finance-and-economics-bg: #14321e;
   --subject-history: #fb923c;
@@ -522,6 +526,8 @@ pre code {
 .subject-chip[data-subject="science"] .subject-chip-dot { background-color: var(--subject-science); }
 .subject-chip[data-subject="research"] .subject-chip-dot { background-color: var(--subject-research); }
 .subject-chip[data-subject="technology"] .subject-chip-dot { background-color: var(--subject-technology); }
+.subject-chip[data-subject="ai-machine-learning"] .subject-chip-dot { background-color: var(--subject-ai-machine-learning); }
+.subject-chip[data-subject="philosophy-ideas"] .subject-chip-dot { background-color: var(--subject-philosophy-and-ideas); }
 .subject-chip[data-subject="finance-and-economics"] .subject-chip-dot { background-color: var(--subject-finance-and-economics); }
 .subject-chip[data-subject="history"] .subject-chip-dot { background-color: var(--subject-history); }
 .subject-chip[data-subject="geography"] .subject-chip-dot { background-color: var(--subject-geography); }
@@ -672,6 +678,8 @@ pre code {
 .post-subject-tag[data-subject="science"] { color: var(--subject-science); background: var(--subject-science-bg); }
 .post-subject-tag[data-subject="research"] { color: var(--subject-research); background: var(--subject-research-bg); }
 .post-subject-tag[data-subject="technology"] { color: var(--subject-technology); background: var(--subject-technology-bg); }
+.post-subject-tag[data-subject="ai-machine-learning"] { color: var(--subject-ai-machine-learning); background: var(--subject-ai-machine-learning-bg); }
+.post-subject-tag[data-subject="philosophy-ideas"] { color: var(--subject-philosophy-and-ideas); background: var(--subject-philosophy-and-ideas-bg); }
 .post-subject-tag[data-subject="finance-and-economics"] { color: var(--subject-finance-and-economics); background: var(--subject-finance-and-economics-bg); }
 .post-subject-tag[data-subject="history"] { color: var(--subject-history); background: var(--subject-history-bg); }
 .post-subject-tag[data-subject="geography"] { color: var(--subject-geography); background: var(--subject-geography-bg); }

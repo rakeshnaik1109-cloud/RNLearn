@@ -23,6 +23,7 @@ CANONICAL_SUBJECTS = [
     "Science",
     "Research",
     "Technology",
+    "AI & Machine Learning",
     "Finance & Economics",
     "History",
     "Geography",
@@ -413,7 +414,7 @@ def build_site(root_dir, check_mode=False):
         elif subj == "Philosophy & Ideas" and any((x.get("series") or {}).get("id") == "minds-that-changed-how-we-know" for x in posts):
             eyebrow = "Subject Archive • Series"
             lede = "Minds That Changed How We Know: a twelve-part series on scientists and philosophers, from Socrates, Plato and Aristotle to Popper, Kuhn and Turing, with interactive figures that let you try their ideas."
-        elif subj == "Technology" and any((x.get("series") or {}).get("id") == "how-machines-learned-to-think" for x in posts):
+        elif subj == "AI & Machine Learning" and any((x.get("series") or {}).get("id") == "how-machines-learned-to-think" for x in posts):
             eyebrow = "Subject Archive • Series"
             lede = "How Machines Learned to Think: an eight-part history of artificial intelligence, from the first dreams of thinking machines to today’s AI and where it may lead."
         posts.sort(key=reading_order)

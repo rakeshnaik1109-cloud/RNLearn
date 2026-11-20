@@ -263,7 +263,7 @@
     "slug": "classification-and-regression-metrics",
     "title": "Is 99% Accuracy Good? A Complete Guide to Model Metrics, from the Confusion Matrix to MCC, AUC and R²",
     "summary": "Accuracy, sensitivity, specificity, precision, F1, micro and macro F1, MCC, ROC and AUC, PR curves, calibration and regression errors, explained from scratch with worked examples.",
-    "subject": "Technology",
+    "subject": "AI & Machine Learning",
     "tags": [
       "machine-learning",
       "evaluation-metrics",
@@ -533,7 +533,7 @@
     "slug": "where-is-it-leading-us",
     "title": "Where Is It Leading Us? Work, Safety, Rules and the Future of AI",
     "summary": "The final part: five views of AI’s future, the evidence on jobs, education and misinformation, the alignment problem, how big the risks are, the rules being written, and lessons from seventy years.",
-    "subject": "Technology",
+    "subject": "AI & Machine Learning",
     "tags": [
       "artificial-intelligence",
       "ai-safety",
@@ -559,7 +559,7 @@
     "slug": "where-we-are-now",
     "title": "Where We Are Now: Reasoning Models, Agents and the AI Boom",
     "summary": "AI from 2023 to November 2026: multimodal and open models, reasoning models, DeepSeek, maths olympiad gold, agents, the cost in chips and power, and what still goes wrong.",
-    "subject": "Technology",
+    "subject": "AI & Machine Learning",
     "tags": [
       "artificial-intelligence",
       "large-language-models",
@@ -585,7 +585,7 @@
     "slug": "attention-is-all-you-need",
     "title": "Attention Is All You Need: Transformers, GPT and the Road to ChatGPT",
     "summary": "How the transformer, next-word prediction, scaling laws and training with human feedback led from a 2017 Google paper to ChatGPT, and why language models make things up.",
-    "subject": "Technology",
+    "subject": "AI & Machine Learning",
     "tags": [
       "artificial-intelligence",
       "large-language-models",
@@ -611,7 +611,7 @@
     "slug": "the-deep-learning-revolution",
     "title": "The Deep Learning Revolution: ImageNet, AlphaGo and AlphaFold",
     "summary": "How deep networks, graphics chips and big data transformed AI after 2012: AlexNet, word vectors, neural translation, GANs, AlphaGo, AlphaFold, and the problems of bias and fragility.",
-    "subject": "Technology",
+    "subject": "AI & Machine Learning",
     "tags": [
       "artificial-intelligence",
       "deep-learning",
@@ -637,7 +637,7 @@
     "slug": "learning-from-examples",
     "title": "Learning from Examples: Backpropagation, Big Data and Deep Blue",
     "summary": "How AI stopped writing rules and started learning from data: backpropagation, LeCun’s digit reader, statistical translation, spam filters, TD-Gammon, Deep Blue and overfitting.",
-    "subject": "Technology",
+    "subject": "AI & Machine Learning",
     "tags": [
       "artificial-intelligence",
       "machine-learning",
@@ -663,7 +663,7 @@
     "slug": "big-promises-and-ai-winters",
     "title": "Big Promises and AI Winters: ELIZA, Expert Systems and Two Crashes",
     "summary": "From the golden years of SHRDLU, Shakey and ELIZA to the Perceptrons book, the Lighthill report, MYCIN and the expert-system boom, and the two AI winters that followed.",
-    "subject": "Technology",
+    "subject": "AI & Machine Learning",
     "tags": [
       "artificial-intelligence",
       "history-of-computing",
@@ -689,7 +689,7 @@
     "slug": "can-machines-think",
     "title": "Can Machines Think? Turing, the First Computers and the Birth of AI",
     "summary": "From Turing’s universal machine and the first electronic computers to model neurons, robot tortoises, the Turing test, learning matchboxes, Dartmouth and the perceptron.",
-    "subject": "Technology",
+    "subject": "AI & Machine Learning",
     "tags": [
       "artificial-intelligence",
       "history-of-computing",
@@ -715,7 +715,7 @@
     "slug": "dreams-of-thinking-machines",
     "title": "Dreams of Thinking Machines: From Bronze Giants to Babbage’s Engines",
     "summary": "From Talos and golden robots in Greek myth to programmable automata, Llull’s wheels, Leibniz’s “Let us calculate”, Babbage, Ada Lovelace and Boole’s logic.",
-    "subject": "Technology",
+    "subject": "AI & Machine Learning",
     "tags": [
       "artificial-intelligence",
       "history-of-computing",
