@@ -4118,5 +4118,120 @@ window.RNLEARN_GLOSSARY = [
    "dichotomising",
    "dichotomizing"
   ]
+ ],
+ [
+  "Primary outcome",
+  "The single outcome, chosen in advance, on which an experiment’s main conclusion rests.",
+  []
+ ],
+ [
+  "Negative control",
+  "A group that receives no treatment or an inactive one, showing what happens without the effect being studied.",
+  [
+   "negative controls"
+  ]
+ ],
+ [
+  "Positive control",
+  "A group given a treatment known to work, confirming that the assay can detect an effect.",
+  [
+   "positive controls"
+  ]
+ ],
+ [
+  "Vehicle control",
+  "A control that receives everything except the active ingredient, such as the solvent alone.",
+  [
+   "vehicle controls",
+   "sham control"
+  ]
+ ],
+ [
+  "Confounding",
+  "When the effect of a treatment cannot be separated from that of another factor that varies with it.",
+  [
+   "confounded"
+  ]
+ ],
+ [
+  "Randomisation",
+  "Assigning treatments to units, and ordering runs, by a random process, so that hidden factors cannot line up with treatments.",
+  [
+   "randomization",
+   "randomised",
+   "randomized"
+  ]
+ ],
+ [
+  "Technical replicate",
+  "A repeated measurement of the same sample; it shows measurement precision, not variation between units.",
+  [
+   "technical replicates"
+  ]
+ ],
+ [
+  "Biological replicate",
+  "An independent experimental unit, such as a separate animal, culture or batch.",
+  [
+   "biological replicates"
+  ]
+ ],
+ [
+  "Latin square",
+  "A design in which each treatment appears once in every row and every column, blocking two nuisance factors.",
+  [
+   "Latin squares"
+  ]
+ ],
+ [
+  "Blinding",
+  "Keeping those who run, measure or score an experiment unaware of which treatment each unit received.",
+  [
+   "blinded",
+   "masking"
+  ]
+ ],
+ [
+  "Fractional factorial design",
+  "A design that runs a chosen fraction of all factor combinations, to screen many factors in few runs.",
+  [
+   "fractional factorial designs",
+   "fractional factorial"
+  ]
+ ],
+ [
+  "Aliasing",
+  "In a fractional design, when two effects cannot be estimated separately because they are confused with each other.",
+  []
+ ],
+ [
+  "Plackett–Burman design",
+  "A two-level screening design that studies up to n − 1 factors in n runs.",
+  [
+   "Plackett-Burman design",
+   "Plackett–Burman designs"
+  ]
+ ],
+ [
+  "Response surface methodology",
+  "Fitting simple surfaces to designed experiments and moving step by step towards optimum conditions.",
+  []
+ ],
+ [
+  "Optional stopping",
+  "Deciding when to stop collecting data based on interim results, which inflates false positives unless planned for.",
+  []
+ ],
+ [
+  "Researcher degrees of freedom",
+  "The many choices in collecting and analysing data that, if made after seeing results, can produce false positives.",
+  []
+ ],
+ [
+  "Registered report",
+  "A publication format in which the study plan is peer reviewed and accepted before the results are known.",
+  [
+   "registered reports"
+  ]
  ]
 ];

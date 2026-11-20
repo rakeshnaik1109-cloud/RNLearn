@@ -51,6 +51,23 @@
     "type": "tutorial"
   },
   {
+    "slug": "designing-experiments",
+    "url": "articles/designing-experiments.html",
+    "title": "Designing Experiments: Randomise, Replicate, Block and Blind",
+    "summary": "Questions and experimental units, controls, randomisation, replication, blocking and Latin squares, blinding, screening and response surfaces, optional stopping, pre-registration and a checklist.",
+    "subject": "Science",
+    "tags": [
+      "statistics",
+      "experimental-design",
+      "experiments",
+      "randomisation",
+      "reproducibility",
+      "data-analysis"
+    ],
+    "date": "2026-11-20",
+    "type": "tutorial"
+  },
+  {
     "slug": "probability-and-distributions",
     "url": "articles/probability-and-distributions.html",
     "title": "Probability and Distributions: Dice, Photons and the Bell Curve",

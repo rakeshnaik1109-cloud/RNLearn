@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Designing Experiments: Randomise, Replicate, Block and Blind — RNLearn</title>
+  <meta name="description" content="Questions and experimental units, controls, randomisation, replication, blocking and Latin squares, blinding, screening and response surfaces, optional stopping, pre-registration and a checklist.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/designing-experiments.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Designing Experiments: Randomise, Replicate, Block and Blind — RNLearn">
+  <meta property="og:description" content="Questions and experimental units, controls, randomisation, replication, blocking and Latin squares, blinding, screening and response surfaces, optional stopping, pre-registration and a checklist.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/designing-experiments.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Designing Experiments: Randomise, Replicate, Block and Blind — RNLearn">
+  <meta name="twitter:description" content="Questions and experimental units, controls, randomisation, replication, blocking and Latin squares, blinding, screening and response surfaces, optional stopping, pre-registration and a checklist.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Designing Experiments: Randomise, Replicate, Block and Blind",
+    "description": "Questions and experimental units, controls, randomisation, replication, blocking and Latin squares, blinding, screening and response surfaces, optional stopping, pre-registration and a checklist.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-20",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/designing-experiments.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/science.html" class="post-subject-tag" data-subject="science">Science</a>
+        </div>
+        <h1 class="article-title">Designing Experiments: Randomise, Replicate, Block and Blind</h1>
+        <p class="article-standfirst">
+          No analysis can rescue a badly designed experiment. The final part of the series brings together the principles of good design, from Fisher’s randomisation to pre-registration, with a checklist for planning your own.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-20">20 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>20 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/making-sense-of-data.html">Making Sense of Data</a> (Part 9 of 9)</div>
+  <div class="series-banner-links">
+    <a href="counts-and-categories.html">← Part 8: Counts and Categories: Chi-Square, Exact Tests and Overdispersion</a>
+    <span>Final part</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. Plan Before You Measure</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. The Question, the Unit and the Response</a></li>
+              <li><a class="toc-link" href="#section-4">4. Controls</a></li>
+              <li><a class="toc-link" href="#section-5">5. Randomisation</a></li>
+              <li><a class="toc-link" href="#section-6">6. Replication: How Many, and of What?</a></li>
+              <li><a class="toc-link" href="#section-7">7. Blocking, Balance and Latin Squares</a></li>
+              <li><a class="toc-link" href="#section-8">8. Blinding</a></li>
+              <li><a class="toc-link" href="#section-9">9. Many Factors: Factorial and Screening Designs</a></li>
+              <li><a class="toc-link" href="#section-10">10. Finding the Best Conditions: Response Surfaces</a></li>
+              <li><a class="toc-link" href="#section-11">11. Peeking, Stopping and Flexibility</a></li>
+              <li><a class="toc-link" href="#section-12">12. Pre-registration and Reproducibility</a></li>
+              <li><a class="toc-link" href="#section-13">13. A Checklist for Designing an Experiment</a></li>
+              <li><a class="toc-link" href="#section-14">14. Worked Example: Planning a Coating Experiment</a></li>
+              <li><a class="toc-link" href="#section-15">15. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-16">16. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-17">17. Philosophy Corner</a></li>
+              <li><a class="toc-link" href="#section-18">18. Where to Go from Here</a></li>
+              <li><a class="toc-link" href="#section-19">19. People in This Part</a></li>
+              <li><a class="toc-link" href="#section-20">20. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-21">21. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. Plan Before You Measure</h2>
+            <p>The previous eight parts of this series were about analysing data. This last part is about something more important: collecting data worth analysing. No statistical method can rescue an experiment whose treatments were confounded with the order of measurement, whose replicates were not independent, whose scorer knew which samples were treated, or which was too small to detect the effect it was looking for. Good design prevents these problems; analysis can only describe them.</p>
+            <p>The principles of experimental design were set out by Ronald Fisher in the 1920s and 1930s, at the same agricultural research station where he developed the analysis of variance: <strong>replication</strong>, <strong>randomisation</strong> and <strong>local control</strong> (blocking). <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span> To these, later work has added controls, blinding, efficient multi-factor designs, sequential optimisation and, most recently, pre-registration. This part brings them together, with a checklist for planning your own experiments. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>, <a class="cite" href="#ref-4">4</a>]</span></p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-design-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. From shuffled cards to the replication debate, 1885–2015.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. The Question, the Unit and the Response</h2>
+            <p>Every experiment should start with three decisions written down before any measurement is made:</p>
+            <ul>
+              <li><strong>The question.</strong> A specific, answerable hypothesis: “Does coating X reduce corrosion compared with the standard coating under humid conditions?”, not “Let’s see what the coating does.” Decide which outcome is the <strong>primary outcome</strong>, the one the conclusion will rest on.</li>
+              <li><strong>The experimental unit.</strong> The smallest thing to which a treatment is independently applied: a plot, a tank, an animal, a culture flask, a metal sample. The number of experimental units per treatment is the true sample size (Part 6).</li>
+              <li><strong>The response and how it is measured.</strong> What exactly will be recorded, with what instrument, with what precision (Part 3), and by whom.</li>
+            </ul>
+            <p>Writing these down forces clarity. It also distinguishes the factors you will deliberately vary (<strong>treatment factors</strong>), the ones you will hold constant, the ones you will block on, and the ones you will leave to randomisation.</p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Controls</h2>
+            <p>A result means something only in comparison. <strong>Controls</strong> provide the comparison:</p>
+            <ul>
+              <li>A <strong>negative control</strong> receives no treatment, or an inactive one, and shows what happens without the effect being studied.</li>
+              <li>A <strong>vehicle</strong> or <strong>sham control</strong> receives everything except the active ingredient: the solvent without the drug, the surgery without the implant, the handling without the injection. It separates the effect of the treatment from the effect of the procedure.</li>
+              <li>A <strong>positive control</strong> receives a treatment known to work. If it fails to show an effect, the assay itself is not working, and a negative result for the new treatment means nothing.</li>
+              <li>In human studies, a <strong>placebo</strong> controls for expectations: people often improve simply because they believe they are being treated.</li>
+            </ul>
+            <p>Controls must be run <em>at the same time and under the same conditions</em> as the treatments, ideally interleaved with them. “Historical” controls from last month’s experiment are confounded with everything that has changed since.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Randomisation</h2>
+            <p>Suppose twelve samples are measured in sequence, the first six with treatment A and the last six with treatment B, and the instrument drifts slowly as it warms up. The drift will look exactly like a treatment effect. The same happens if treated plants are placed nearest the window, if the healthiest animals are chosen first for the new drug, or if the treated samples are processed in the morning. The treatment is <strong>confounded</strong> with something else.</p>
+            <p>The remedy is <strong>randomisation</strong>: assign treatments to units, and order the runs, by a genuinely random process. Fisher argued that randomisation does two things: it protects against bias from factors you have not thought of, and it makes the error estimate, and hence the p-value, valid. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span> The idea had appeared earlier: in 1885 Charles Sanders Peirce and Joseph Jastrow used shuffled playing cards to randomise the order of their experiments on perceiving small differences in weight, with the subject unaware of the sequence. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> In 1948 a Medical Research Council trial of streptomycin for tuberculosis allocated patients by random numbers, setting the pattern for modern clinical trials. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+            <figure class="fig" data-fig="fig-randomisation">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Why randomise?</strong> Twelve runs measured in sequence with a slowly drifting instrument and no real treatment effect. Compare running all A first, alternating, and random order.
+              </figcaption>
+            </figure>
+            <p>With a drift of a quarter of a standard deviation per run, running all of A before all of B produced a “significant” difference in 57% of simulated experiments; random order kept the false-positive rate at the intended 5%. “Haphazard” is not random: people choosing “at random” favour certain patterns. Use a random number generator, and keep a record of the allocation.</p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Replication: How Many, and of What?</h2>
+            <p>Replication estimates the variability against which effects are judged, and it is what makes conclusions general. Two questions matter:</p>
+            <ul>
+              <li><strong>Of what?</strong> <strong>Technical replicates</strong> (repeated measurements of the same sample) tell you about the precision of the measurement. <strong>Biological</strong> or <strong>experimental replicates</strong> (independent units: different animals, cultures, batches, plots) tell you about the variation the conclusion must generalise over. Only the latter count towards the sample size for comparing treatments; technical replicates can be averaged first (Part 6).</li>
+              <li><strong>How many?</strong> Decide in advance, using a power calculation (Part 4) based on the smallest effect worth detecting and an estimate of the variability, perhaps from a pilot study. Too few replicates waste the whole experiment; far too many waste resources, and in animal research raise ethical concerns.</li>
+            </ul>
+            <p>Replication also means repeating the whole experiment: on another day, with a fresh batch, ideally in another laboratory. A result that appears once may reflect something peculiar to that occasion.</p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Blocking, Balance and Latin Squares</h2>
+            <p>Randomisation turns nuisance variation into noise; <strong>blocking</strong> removes it altogether. If runs are spread over several days, batches or instruments, make each block contain every treatment, randomise the order within the block, and include the block in the analysis (Part 6). Keep the design <strong>balanced</strong>, with equal numbers of units per treatment, which maximises precision for a given total and makes the analysis robust to unequal variances (Part 5).</p>
+            <p>When there are two nuisance factors, a <strong>Latin square</strong> blocks both at once. With four treatments, four days and four instrument positions, each treatment appears once on every day and once in every position, in only 16 runs. Fisher popularised Latin squares for field trials, where they control for soil differences along both the rows and the columns of a field. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-latin-square">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. A random Latin square.</strong> Each treatment (letter) appears exactly once in every row (day) and every column (position). Generate new random squares of different sizes.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Blinding</h2>
+            <p>People who know which samples are treated, however honest, can be influenced by what they expect: in deciding borderline scores, choosing which cells to count, handling animals, or deciding which data look like errors. <strong>Blinding</strong> (masking) prevents this. Code the samples so that the person running the measurements, scoring the outcomes, or both, does not know which treatment each received until the analysis is done.</p>
+            <p>The effect is real and measurable. A systematic review of clinical trials that used both blinded and non-blinded assessors of the same outcomes found that the non-blinded assessments exaggerated the treatment effect (the odds ratio) by about 36% on average. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> Blinding is cheap: a colleague relabels the tubes, and a key is kept until the end. In analysis, a related practice is <strong>blind analysis</strong>, used in particle physics, where the result is hidden until all analysis choices are fixed (Part 3).</p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Many Factors: Factorial and Screening Designs</h2>
+            <p>Part 6 showed why factorial designs, which combine every level of every factor, beat changing one factor at a time: they use every run to estimate every effect and reveal interactions. But a full factorial grows fast: 7 factors at 2 levels each need 2<sup>7</sup> = 128 runs.</p>
+            <p>When the aim is to find out which of many factors matter, <strong>fractional factorial</strong> designs run a carefully chosen fraction of the combinations, such as 16 of the 128, chosen so that main effects can still be estimated cleanly, at the cost of confusing (<strong>aliasing</strong>) some high-order interactions with each other, which are usually small. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span> <strong>Plackett–Burman</strong> designs screen up to 11 factors in 12 runs, or 19 in 20. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span> Screening is typically the first stage: identify the few important factors, then study them in detail.</p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Finding the Best Conditions: Response Surfaces</h2>
+            <p>Often the goal is not to test a hypothesis but to find the best conditions: the temperature and time that maximise a yield, the composition that maximises strength. If the factors interact, changing them one at a time can get stuck far from the optimum. George Box and K. B. Wilson developed <strong>response surface methodology</strong> in 1951 for the chemical industry: run a small designed experiment, fit a simple surface (a plane, then a quadratic), move in the direction it indicates, and repeat near the new best point. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span></p>
+            <figure class="fig" data-fig="fig-response-surface">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Finding the best conditions.</strong> The true yield (shading) depends on temperature and time, with an interaction that creates a diagonal ridge. Compare one-factor-at-a-time optimisation with a nine-run designed experiment and a fitted quadratic surface.
+              </figcaption>
+            </figure>
+            <p>In this example, the one-factor-at-a-time search uses 23 runs and stops at about 155 °C and 40 minutes, with a yield near 87%, while a 3 × 3 design of nine runs and a fitted quadratic surface point directly to the true optimum of 90% at 175 °C and 60 minutes. Designs such as the central composite design add star points and centre replicates to estimate curvature efficiently.</p>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Peeking, Stopping and Flexibility</h2>
+            <p>A tempting practice is to collect some data, test, and if the result is not quite significant, collect a little more and test again. Each test is another chance for a false positive. Peter Armitage and colleagues showed in 1969 that such repeated significance testing on accumulating data can push the false-positive rate far above its nominal level. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span> In simulations with no real effect, testing after every 10 measurements per group, up to 100, and stopping at the first p &lt; 0.05 gave false positives about 20% of the time instead of 5%.</p>
+            <figure class="fig" data-fig="fig-peeking">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. The danger of peeking.</strong> The p-value of an experiment with no real effect, recalculated as measurements accumulate. Set how often you look and simulate many experiments to see the false-positive rate.
+              </figcaption>
+            </figure>
+            <p>Optional stopping is one of many “researcher degrees of freedom”: choosing which outcomes to report, which outliers to remove, which covariates to include, which subgroups to analyse. A 2011 study showed how combining a few such choices could make almost any result “significant”. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span> The solution is not to forbid flexibility but to decide in advance: fix the sample size, or use a properly designed sequential method with adjusted thresholds, as clinical trials do with interim analyses.</p>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Pre-registration and Reproducibility</h2>
+            <p>In 2005 John Ioannidis argued that, given small studies, small effects, flexible analyses and the pressure to publish positive results, most published research findings in many fields are likely to be false. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span> A decade later, a collaboration of 270 researchers repeated 100 published psychology experiments: 97% of the originals had reported significant results, but only 36% of the replications did. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span> Similar concerns have been raised in cancer biology, neuroscience and other fields.</p>
+            <p>Responses focus on design and transparency:</p>
+            <ul>
+              <li><strong>Pre-registration</strong>: recording the hypotheses, design, sample size and analysis plan in a time-stamped registry before collecting data, so that confirmatory analyses can be distinguished from exploratory ones. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span> In <strong>registered reports</strong>, journals review and accept the plan before the results are known.</li>
+              <li><strong>Reporting guidelines</strong> such as ARRIVE for animal research, which list what a report must include: randomisation, blinding, sample-size calculation, the experimental unit, and every animal and outcome. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span></li>
+              <li><strong>Open data and code</strong>, so that analyses can be checked and reused.</li>
+            </ul>
+            <p>None of this forbids exploration. It simply makes clear which results were predicted and which were discovered along the way, so that discoveries can be tested in a new experiment.</p>
+          </section>
+
+          <section id="section-13">
+            <h2>13. A Checklist for Designing an Experiment</h2>
+            <ol>
+              <li><strong>Question:</strong> state the hypothesis and the primary outcome.</li>
+              <li><strong>Unit:</strong> identify the experimental unit and the population you want to generalise to.</li>
+              <li><strong>Treatments and controls:</strong> define them, including negative, vehicle and positive controls.</li>
+              <li><strong>Factors:</strong> list the factors to vary, hold constant, block on and randomise over. Consider a factorial design.</li>
+              <li><strong>Measurement:</strong> choose the instrument and method; know its uncertainty and calibration (Part 3).</li>
+              <li><strong>Sample size:</strong> do a power calculation for the smallest effect that matters (Part 4); plan biological, not just technical, replicates.</li>
+              <li><strong>Randomisation:</strong> randomise allocation and run order with a random number generator; record it.</li>
+              <li><strong>Blocking:</strong> group runs by day, batch or instrument, with every treatment in each block.</li>
+              <li><strong>Blinding:</strong> code the samples so that measurement and scoring are done blind.</li>
+              <li><strong>Analysis plan:</strong> write down the test or model, how outliers and missing data will be handled, and any corrections for multiple comparisons, before seeing the data. Pre-register if appropriate.</li>
+              <li><strong>Pilot:</strong> try the procedure on a small scale to find practical problems and estimate variability.</li>
+              <li><strong>Record and report everything:</strong> deviations from the plan, failed runs, all outcomes measured.</li>
+            </ol>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Worked Example: Planning a Coating Experiment</h2>
+            <p>A materials scientist wants to know whether a new protective coating reduces corrosion of steel compared with the standard coating, and whether the benefit depends on humidity.</p>
+            <ol>
+              <li><strong>Question and outcome.</strong> Primary outcome: mass loss (mg) after 500 hours in a climate chamber.</li>
+              <li><strong>Design.</strong> A 2 × 2 factorial: coating (new, standard) × humidity (60%, 90%), so the interaction can be tested. A positive control (uncoated steel) confirms that the chamber causes corrosion.</li>
+              <li><strong>Experimental unit.</strong> A steel coupon, coated individually. Three mass readings per coupon are technical replicates and will be averaged.</li>
+              <li><strong>Sample size.</strong> Pilot data suggest a coupon-to-coupon SD of 4 mg; a reduction of 4 mg (d = 1) is worth detecting. For 80% power at α = 0.05, about 17 coupons per group are needed (Part 4); the plan uses 18.</li>
+              <li><strong>Blocking.</strong> Coupons come from three steel sheets, which may differ. Each sheet supplies equal numbers of coupons to every combination: sheet is a block.</li>
+              <li><strong>Randomisation.</strong> Coupons are allocated to treatments within each sheet by random numbers, and their positions in the chamber are randomised, because temperature varies across the chamber.</li>
+              <li><strong>Blinding.</strong> A colleague labels the coupons with codes; the person weighing them does not know which coating each has.</li>
+              <li><strong>Analysis plan.</strong> Two-way ANOVA with sheet as a block (or a mixed model with sheet as a random effect), reporting the coating effect at each humidity with 95% confidence intervals, and checking residuals.</li>
+            </ol>
+            <p>Every choice above is made before a single coupon goes into the chamber.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">Try it in Python: sample size, randomisation and a Latin square</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">import numpy as np
+from statsmodels.stats.power import TTestIndPower
+
+n = TTestIndPower().solve_power(effect_size=1.0, alpha=0.05, power=0.8)
+print(np.ceil(n))                       # 17 coupons per group
+
+rng = np.random.default_rng(2026)       # record the seed with the plan
+treatments = np.repeat(["new-60", "new-90", "std-60", "std-90"], 6)
+for sheet in ["S1", "S2", "S3"]:        # randomise within each block
+    print(sheet, rng.permutation(treatments))
+
+k = 4                                   # a random Latin square
+base = (np.arange(k)[:, None] + np.arange(k)) % k
+square = base[rng.permutation(k)][:, rng.permutation(k)]
+print(np.array(list("ABCD"))[rng.permutation(k)][square])</code></pre>
+            </details>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Try It Yourself: Design a Better Helicopter</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: a complete designed experiment</div>
+              <ol>
+                <li>George Box popularised the paper helicopter as a way to teach experimental design. <span class="cite-group">[<a class="cite" href="#ref-17">17</a>]</span> Choose three factors at two levels: rotor length, body length, and paper clip (with or without). That is a 2 × 2 × 2 factorial of 8 designs.</li>
+                <li>Plan before flying: the response is flight time from a fixed height; each design is built twice (two experimental units each), and each helicopter is dropped three times (technical replicates, averaged).</li>
+                <li>Randomise the order of the 16 helicopters’ flights with a random number generator, and if two people drop them, make the person a block.</li>
+                <li>Analyse with a three-factor ANOVA. Which factors matter? Is there an interaction? Then move towards the best design and run a second, smaller experiment around it: response surface methodology in miniature.</li>
+              </ol>
+              <p>Finally, write a short report as if for a journal, following the checklist in Section 13. You have now used almost every idea in this series.</p>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Legend and Record</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: the lady tasting tea</div>
+              <p><strong>The legend:</strong> at an afternoon tea at Rothamsted in the 1920s, a lady claimed she could tell whether milk had been poured into the cup before or after the tea; Fisher set up a test, and she got every cup right.</p>
+              <p><strong>The record:</strong> Fisher opened <em>The Design of Experiments</em> (1935) with this example, without naming her. He proposed eight cups, four of each kind, presented in random order, with the lady told that there were four of each. If she were guessing, the chance of identifying all eight correctly would be 1 in 70, because there are 70 ways to choose which four cups had milk first. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span> The lady is usually identified as the algologist Muriel Bristol, a colleague at Rothamsted. According to an account passed on by one of Fisher’s colleagues and retold by David Salsburg, she did identify all eight cups correctly, but Fisher himself never reported the outcome. <span class="cite-group">[<a class="cite" href="#ref-18">18</a>]</span></p>
+              <p><strong>The grain of truth:</strong> whatever happened at the tea party, the example contains the whole logic of a designed experiment: a clear hypothesis, a planned number of trials, randomisation, a precise calculation of what chance alone would produce, and an analysis (Fisher’s exact test, Part 8) chosen before the data were collected.</p>
+            </div>
+          </section>
+
+          <section id="section-17">
+            <h2>17. Philosophy Corner</h2>
+            <div class="callout callout-philosophy">
+              <div class="callout-header">Philosophy Corner: why should chance decide?</div>
+              <p>It can seem strange to let a random number generator make decisions a careful scientist could make better. Gosset thought so: in a paper published after his death in 1938, he argued that carefully balanced systematic layouts of field plots were more precise than Fisher’s randomised ones. <span class="cite-group">[<a class="cite" href="#ref-19">19</a>]</span> Fisher replied that only randomisation guarantees that the estimate of error is valid, because only randomisation ensures that no hidden pattern in the field, known or unknown, can line up with the treatments.</p>
+              <p>The debate continues in new forms. Bayesian statisticians point out that, once the data are in, the particular random allocation that happened to be used should not change what we believe; yet many agree that randomisation is valuable because it protects against the experimenter’s own biases, conscious or not, and makes results credible to others. In causal reasoning, randomisation is what allows a difference between groups to be interpreted as an effect of the treatment rather than of whatever made the groups different.</p>
+              <p><strong>Questions to think about:</strong> If you could measure every factor that might affect the outcome, would randomisation still be needed? Can an experiment ever be too carefully designed, so that its results no longer apply to the messier world outside the laboratory?</p>
+            </div>
+          </section>
+
+          <section id="section-18">
+            <h2>18. Where to Go from Here</h2>
+            <p>This series began with a mean and a median and ends with the design of experiments. Along the way: describing data (Part 1), probability and distributions (Part 2), measurement uncertainty (Part 3), estimation and confidence intervals (Part 4), the analysis of variance (Parts 5 and 6), correlation and regression (Part 7), and counts and categories (Part 8). Together they cover most of the statistics used in experimental science.</p>
+            <p>The most important lessons are not formulas. Plot your data. Report uncertainty. Think about what the experimental unit is. Decide your analysis before you see the results. Prefer effect sizes and confidence intervals to bare p-values. Randomise, block and blind. And remember that a single experiment is a step, not a conclusion: science advances by replication.</p>
+            <p>For going further, two classic books are Montgomery’s <em>Design and Analysis of Experiments</em> and Box, Hunter and Hunter’s <em>Statistics for Experimenters</em>. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>, <a class="cite" href="#ref-4">4</a>]</span> Our standalone articles on <a href="null-hypothesis-p-values-and-effect-sizes.html">null hypotheses, p-values and effect sizes</a> and on <a href="classification-and-regression-metrics.html">classification and regression metrics</a> take some of these ideas into hypothesis testing and machine learning.</p>
+          </section>
+          <section id="section-19">
+            <h2>19. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Charles Sanders Peirce</td>
+                <td style="padding:0.6rem 0.8rem;">1839–1914<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Randomised, blinded experiments (1885)</td>
+                <td style="padding:0.6rem 0.8rem;">With Joseph Jastrow, used random order and blinding in psychology experiments.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Ronald A. Fisher</td>
+                <td style="padding:0.6rem 0.8rem;">1890–1962<br>England</td>
+                <td style="padding:0.6rem 0.8rem;"><em>The Design of Experiments</em> (1935)</td>
+                <td style="padding:0.6rem 0.8rem;">Established replication, randomisation and blocking as the foundations of design.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">William Sealy Gosset (“Student”)</td>
+                <td style="padding:0.6rem 0.8rem;">1876–1937<br>England / Ireland</td>
+                <td style="padding:0.6rem 0.8rem;">Balanced versus random layouts (1938)</td>
+                <td style="padding:0.6rem 0.8rem;">Defended systematic designs in a famous debate with Fisher.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Austin Bradford Hill</td>
+                <td style="padding:0.6rem 0.8rem;">1897–1991<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Streptomycin trial (1948)</td>
+                <td style="padding:0.6rem 0.8rem;">Designed the landmark randomised trial for the Medical Research Council.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">George E. P. Box</td>
+                <td style="padding:0.6rem 0.8rem;">1919–2013<br>England / USA</td>
+                <td style="padding:0.6rem 0.8rem;">Response surfaces (1951), fractional factorials (1961)</td>
+                <td style="padding:0.6rem 0.8rem;">Brought designed experiments into industry and taught them with paper helicopters.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Peter Armitage</td>
+                <td style="padding:0.6rem 0.8rem;">1924–2024<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Repeated significance tests (1969)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed the dangers of testing accumulating data repeatedly.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John P. A. Ioannidis</td>
+                <td style="padding:0.6rem 0.8rem;">born 1965<br>USA / Greece</td>
+                <td style="padding:0.6rem 0.8rem;">“Why most published research findings are false” (2005)</td>
+                <td style="padding:0.6rem 0.8rem;">Sparked the modern debate on reproducibility.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-20">
+            <h2>20. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about designing experiments.</p>
+            <figure class="fig" data-fig="fig-quiz-d9">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-21">
+            <h2>21. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Fisher, R. A.</strong> (1926). "The arrangement of field experiments." <em>Journal of the Ministry of Agriculture of Great Britain</em>, 33: 503–513.</li>
+              <li id="ref-2"><strong>Fisher, R. A.</strong> (1935). <em>The Design of Experiments</em>. Edinburgh: Oliver &amp; Boyd.</li>
+              <li id="ref-3"><strong>Montgomery, Douglas C.</strong> (2017). <em>Design and Analysis of Experiments</em>. 9th ed. Hoboken, NJ: Wiley.</li>
+              <li id="ref-4"><strong>Box, George E. P., Hunter, J. Stuart &amp; Hunter, William G.</strong> (2005). <em>Statistics for Experimenters: Design, Innovation, and Discovery</em>. 2nd ed. Hoboken, NJ: Wiley.</li>
+              <li id="ref-5"><strong>Peirce, C. S. &amp; Jastrow, J.</strong> (1885). "On small differences of sensation." <em>Memoirs of the National Academy of Sciences</em>, 3: 73–83.</li>
+              <li id="ref-6"><strong>Medical Research Council.</strong> (1948). "Streptomycin treatment of pulmonary tuberculosis: a Medical Research Council investigation." <em>BMJ</em>, 2(4582): 769–782.</li>
+              <li id="ref-7"><strong>Hróbjartsson, Asbjørn, Thomsen, Ann Sofia Skou, Emanuelsson, Frida, et al.</strong> (2012). "Observer bias in randomised clinical trials with binary outcomes: systematic review of trials with both blinded and non-blinded outcome assessors." <em>BMJ</em>, 344: e1119.</li>
+              <li id="ref-8"><strong>Box, G. E. P. &amp; Hunter, J. S.</strong> (1961). "The 2<sup>k−p</sup> fractional factorial designs, Part I." <em>Technometrics</em>, 3(3): 311–351.</li>
+              <li id="ref-9"><strong>Plackett, R. L. &amp; Burman, J. P.</strong> (1946). "The design of optimum multifactorial experiments." <em>Biometrika</em>, 33(4): 305–325.</li>
+              <li id="ref-10"><strong>Box, G. E. P. &amp; Wilson, K. B.</strong> (1951). "On the experimental attainment of optimum conditions." <em>Journal of the Royal Statistical Society: Series B</em>, 13(1): 1–45.</li>
+              <li id="ref-11"><strong>Armitage, P., McPherson, C. K. &amp; Rowe, B. C.</strong> (1969). "Repeated significance tests on accumulating data." <em>Journal of the Royal Statistical Society: Series A</em>, 132(2): 235–244.</li>
+              <li id="ref-12"><strong>Simmons, Joseph P., Nelson, Leif D. &amp; Simonsohn, Uri.</strong> (2011). "False-positive psychology: undisclosed flexibility in data collection and analysis allows presenting anything as significant." <em>Psychological Science</em>, 22(11): 1359–1366.</li>
+              <li id="ref-13"><strong>Ioannidis, John P. A.</strong> (2005). "Why most published research findings are false." <em>PLoS Medicine</em>, 2(8): e124.</li>
+              <li id="ref-14"><strong>Open Science Collaboration.</strong> (2015). "Estimating the reproducibility of psychological science." <em>Science</em>, 349(6251): aac4716.</li>
+              <li id="ref-15"><strong>Nosek, Brian A., Ebersole, Charles R., DeHaven, Alexander C. &amp; Mellor, David T.</strong> (2018). "The preregistration revolution." <em>Proceedings of the National Academy of Sciences</em>, 115(11): 2600–2606.</li>
+              <li id="ref-16"><strong>Kilkenny, Carol, Browne, William J., Cuthill, Innes C., Emerson, Michael &amp; Altman, Douglas G.</strong> (2010). "Improving bioscience research reporting: the ARRIVE guidelines for reporting animal research." <em>PLoS Biology</em>, 8(6): e1000412.</li>
+              <li id="ref-17"><strong>Box, George E. P.</strong> (1992). "Teaching engineers experimental design with a paper helicopter." <em>Quality Engineering</em>, 4(3): 453–459.</li>
+              <li id="ref-18"><strong>Salsburg, David.</strong> (2001). <em>The Lady Tasting Tea: How Statistics Revolutionized Science in the Twentieth Century</em>. New York: W. H. Freeman.</li>
+              <li id="ref-19"><strong>Student [Gosset, W. S.].</strong> (1938). "Comparison between balanced and random arrangements of field plots." <em>Biometrika</em>, 29(3–4): 363–379.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/making-sense-of-data.html">Making Sense of Data</a> (Part 9 of 9)</div>
+  <div class="series-banner-links">
+    <a href="counts-and-categories.html">← Part 8: Counts and Categories: Chi-Square, Exact Tests and Overdispersion</a>
+    <span>Final part</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/designing-experiments.js"></script>
+</body>
+</html>

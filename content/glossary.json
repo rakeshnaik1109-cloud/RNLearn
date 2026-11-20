@@ -4116,5 +4116,120 @@
       "dichotomising",
       "dichotomizing"
     ]
+  },
+  {
+    "term": "Primary outcome",
+    "definition": "The single outcome, chosen in advance, on which an experiment’s main conclusion rests.",
+    "forms": []
+  },
+  {
+    "term": "Negative control",
+    "definition": "A group that receives no treatment or an inactive one, showing what happens without the effect being studied.",
+    "forms": [
+      "negative controls"
+    ]
+  },
+  {
+    "term": "Positive control",
+    "definition": "A group given a treatment known to work, confirming that the assay can detect an effect.",
+    "forms": [
+      "positive controls"
+    ]
+  },
+  {
+    "term": "Vehicle control",
+    "definition": "A control that receives everything except the active ingredient, such as the solvent alone.",
+    "forms": [
+      "vehicle controls",
+      "sham control"
+    ]
+  },
+  {
+    "term": "Confounding",
+    "definition": "When the effect of a treatment cannot be separated from that of another factor that varies with it.",
+    "forms": [
+      "confounded"
+    ]
+  },
+  {
+    "term": "Randomisation",
+    "definition": "Assigning treatments to units, and ordering runs, by a random process, so that hidden factors cannot line up with treatments.",
+    "forms": [
+      "randomization",
+      "randomised",
+      "randomized"
+    ]
+  },
+  {
+    "term": "Technical replicate",
+    "definition": "A repeated measurement of the same sample; it shows measurement precision, not variation between units.",
+    "forms": [
+      "technical replicates"
+    ]
+  },
+  {
+    "term": "Biological replicate",
+    "definition": "An independent experimental unit, such as a separate animal, culture or batch.",
+    "forms": [
+      "biological replicates"
+    ]
+  },
+  {
+    "term": "Latin square",
+    "definition": "A design in which each treatment appears once in every row and every column, blocking two nuisance factors.",
+    "forms": [
+      "Latin squares"
+    ]
+  },
+  {
+    "term": "Blinding",
+    "definition": "Keeping those who run, measure or score an experiment unaware of which treatment each unit received.",
+    "forms": [
+      "blinded",
+      "masking"
+    ]
+  },
+  {
+    "term": "Fractional factorial design",
+    "definition": "A design that runs a chosen fraction of all factor combinations, to screen many factors in few runs.",
+    "forms": [
+      "fractional factorial designs",
+      "fractional factorial"
+    ]
+  },
+  {
+    "term": "Aliasing",
+    "definition": "In a fractional design, when two effects cannot be estimated separately because they are confused with each other.",
+    "forms": []
+  },
+  {
+    "term": "Plackett–Burman design",
+    "definition": "A two-level screening design that studies up to n − 1 factors in n runs.",
+    "forms": [
+      "Plackett-Burman design",
+      "Plackett–Burman designs"
+    ]
+  },
+  {
+    "term": "Response surface methodology",
+    "definition": "Fitting simple surfaces to designed experiments and moving step by step towards optimum conditions.",
+    "forms": []
+  },
+  {
+    "term": "Optional stopping",
+    "definition": "Deciding when to stop collecting data based on interim results, which inflates false positives unless planned for.",
+    "forms": []
+  },
+  {
+    "term": "Researcher degrees of freedom",
+    "definition": "The many choices in collecting and analysing data that, if made after seeing results, can produce false positives.",
+    "forms": []
+  },
+  {
+    "term": "Registered report",
+    "definition": "A publication format in which the study plan is peer reviewed and accepted before the results are known.",
+    "forms": [
+      "registered reports"
+    ]
   }
 ]

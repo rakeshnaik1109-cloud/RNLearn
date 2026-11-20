@@ -1,5 +1,31 @@
 [
   {
+    "slug": "designing-experiments",
+    "title": "Designing Experiments: Randomise, Replicate, Block and Blind",
+    "summary": "Questions and experimental units, controls, randomisation, replication, blocking and Latin squares, blinding, screening and response surfaces, optional stopping, pre-registration and a checklist.",
+    "subject": "Science",
+    "tags": [
+      "statistics",
+      "experimental-design",
+      "experiments",
+      "randomisation",
+      "reproducibility",
+      "data-analysis"
+    ],
+    "date": "2026-11-20",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 20,
+    "series": {
+      "id": "making-sense-of-data",
+      "part": 9
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
     "slug": "counts-and-categories",
     "title": "Counts and Categories: Chi-Square, Exact Tests and Overdispersion",
     "summary": "Categorical data, χ² goodness of fit and independence, Fisher’s exact test, McNemar’s test, risk and odds ratios, Poisson counts and overdispersion, trend tests and Cohen’s kappa.",
