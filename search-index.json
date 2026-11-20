@@ -1,70 +1,19 @@
 [
   {
-    "slug": "classification-and-regression-metrics",
-    "url": "articles/classification-and-regression-metrics.html",
-    "title": "Is 99% Accuracy Good? A Complete Guide to Model Metrics, from the Confusion Matrix to MCC, AUC and R²",
-    "summary": "Accuracy, sensitivity, specificity, precision, F1, micro and macro F1, MCC, ROC and AUC, PR curves, calibration and regression errors, explained from scratch with worked examples.",
-    "subject": "Technology",
-    "tags": [
-      "machine-learning",
-      "evaluation-metrics",
-      "classification",
-      "statistics",
-      "artificial-intelligence",
-      "regression"
-    ],
-    "date": "2026-12-01",
-    "type": "tutorial"
-  },
-  {
-    "slug": "null-hypothesis-p-values-and-effect-sizes",
-    "url": "articles/null-hypothesis-p-values-and-effect-sizes.html",
-    "title": "Is It Real, or Just Luck? Null Hypotheses, p-Values and Effect Sizes, from Coin Flips to Comparing AI Models",
-    "summary": "From a suspicious coin to comparing AI models: null hypotheses, p-values, power, rank tests, Cliff’s delta, confidence intervals, FDR and q-values, and how to test ML results properly.",
-    "subject": "Technology",
-    "tags": [
-      "statistics",
-      "hypothesis-testing",
-      "probability",
-      "effect-size",
-      "machine-learning",
-      "artificial-intelligence"
-    ],
-    "date": "2026-11-30",
-    "type": "tutorial"
-  },
-  {
-    "slug": "why-is-my-laser-spot-grainy",
-    "url": "articles/why-is-my-laser-spot-grainy.html",
-    "title": "Why Is My Laser Spot Grainy? Speckle, Stray Fringes and Other Gremlins of the Optics Lab",
-    "summary": "Why laser light looks grainy, why stripes drift across your images and why lasers get noisy: speckle, etalons, ghosts, dust rings, fibre noise and vibration, and how to beat each one.",
+    "slug": "weighing-the-earth",
+    "url": "articles/weighing-the-earth.html",
+    "title": "Weighing the Earth: Pendulums, a Scottish Mountain and Two Lead Balls",
+    "summary": "How Newton’s guess, Maskelyne’s mountain and Cavendish’s lead balls revealed the Earth’s mass and density, why G is still the most uncertain constant, and how it weighs the Sun and planets.",
     "subject": "Science",
     "tags": [
-      "optics",
+      "measurement",
+      "gravity",
       "physics",
-      "experiments",
-      "coherence",
-      "speckle",
-      "lasers"
+      "newton",
+      "geodesy",
+      "history-of-science"
     ],
-    "date": "2026-11-29",
-    "type": "tutorial"
-  },
-  {
-    "slug": "how-dna-paternity-tests-work",
-    "url": "articles/how-dna-paternity-tests-work.html",
-    "title": "Who’s the Father? How a DNA Paternity Test Works",
-    "summary": "From chromosomes and short tandem repeats to PCR, the paternity index and Bayes’ theorem: how a cheek swab becomes a report saying “excluded” or “99.99%”, plus the tricky cases and Indian law.",
-    "subject": "Science",
-    "tags": [
-      "dna",
-      "genetics",
-      "paternity-testing",
-      "forensic-science",
-      "probability",
-      "law"
-    ],
-    "date": "2026-11-28",
+    "date": "2026-11-20",
     "type": "tutorial"
   },
   {
@@ -81,24 +30,7 @@
       "deep-time",
       "history-of-science"
     ],
-    "date": "2026-11-22",
-    "type": "tutorial"
-  },
-  {
-    "slug": "weighing-the-earth",
-    "url": "articles/weighing-the-earth.html",
-    "title": "Weighing the Earth: Pendulums, a Scottish Mountain and Two Lead Balls",
-    "summary": "How Newton’s guess, Maskelyne’s mountain and Cavendish’s lead balls revealed the Earth’s mass and density, why G is still the most uncertain constant, and how it weighs the Sun and planets.",
-    "subject": "Science",
-    "tags": [
-      "measurement",
-      "gravity",
-      "physics",
-      "newton",
-      "geodesy",
-      "history-of-science"
-    ],
-    "date": "2026-11-21",
+    "date": "2026-11-20",
     "type": "tutorial"
   },
   {
@@ -491,6 +423,74 @@
       "turing"
     ],
     "date": "2026-11-05",
+    "type": "tutorial"
+  },
+  {
+    "slug": "classification-and-regression-metrics",
+    "url": "articles/classification-and-regression-metrics.html",
+    "title": "Is 99% Accuracy Good? A Complete Guide to Model Metrics, from the Confusion Matrix to MCC, AUC and R²",
+    "summary": "Accuracy, sensitivity, specificity, precision, F1, micro and macro F1, MCC, ROC and AUC, PR curves, calibration and regression errors, explained from scratch with worked examples.",
+    "subject": "Technology",
+    "tags": [
+      "machine-learning",
+      "evaluation-metrics",
+      "classification",
+      "statistics",
+      "artificial-intelligence",
+      "regression"
+    ],
+    "date": "2026-11-04",
+    "type": "tutorial"
+  },
+  {
+    "slug": "null-hypothesis-p-values-and-effect-sizes",
+    "url": "articles/null-hypothesis-p-values-and-effect-sizes.html",
+    "title": "Is It Real, or Just Luck? Null Hypotheses, p-Values and Effect Sizes, from Coin Flips to Comparing AI Models",
+    "summary": "From a suspicious coin to comparing AI models: null hypotheses, p-values, power, rank tests, Cliff’s delta, confidence intervals, FDR and q-values, and how to test ML results properly.",
+    "subject": "Technology",
+    "tags": [
+      "statistics",
+      "hypothesis-testing",
+      "probability",
+      "effect-size",
+      "machine-learning",
+      "artificial-intelligence"
+    ],
+    "date": "2026-11-03",
+    "type": "tutorial"
+  },
+  {
+    "slug": "why-is-my-laser-spot-grainy",
+    "url": "articles/why-is-my-laser-spot-grainy.html",
+    "title": "Why Is My Laser Spot Grainy? Speckle, Stray Fringes and Other Gremlins of the Optics Lab",
+    "summary": "Why laser light looks grainy, why stripes drift across your images and why lasers get noisy: speckle, etalons, ghosts, dust rings, fibre noise and vibration, and how to beat each one.",
+    "subject": "Science",
+    "tags": [
+      "optics",
+      "physics",
+      "experiments",
+      "coherence",
+      "speckle",
+      "lasers"
+    ],
+    "date": "2026-11-02",
+    "type": "tutorial"
+  },
+  {
+    "slug": "how-dna-paternity-tests-work",
+    "url": "articles/how-dna-paternity-tests-work.html",
+    "title": "Who’s the Father? How a DNA Paternity Test Works",
+    "summary": "From chromosomes and short tandem repeats to PCR, the paternity index and Bayes’ theorem: how a cheek swab becomes a report saying “excluded” or “99.99%”, plus the tricky cases and Indian law.",
+    "subject": "Science",
+    "tags": [
+      "dna",
+      "genetics",
+      "paternity-testing",
+      "forensic-science",
+      "probability",
+      "law"
+    ],
+    "date": "2026-11-01",
     "type": "tutorial"
   },
   {
