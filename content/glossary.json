@@ -4404,5 +4404,108 @@
     "term": "Double descent",
     "definition": "Test error that falls, rises near the point where the model can fit the training data exactly, then falls again as the model grows.",
     "forms": []
+  },
+  {
+    "term": "Normal equation",
+    "definition": "The equation XᵀXw = Xᵀy whose solution gives the least-squares weights of a linear regression.",
+    "forms": []
+  },
+  {
+    "term": "Stochastic gradient descent",
+    "definition": "Gradient descent using the gradient from one example or a small random batch at each step.",
+    "forms": [
+      "SGD",
+      "mini-batch gradient descent"
+    ]
+  },
+  {
+    "term": "Feature standardisation",
+    "definition": "Rescaling a feature to have mean zero and standard deviation one.",
+    "forms": [
+      "standardised features",
+      "standardized features"
+    ]
+  },
+  {
+    "term": "Basis function",
+    "definition": "A fixed function of the inputs, such as x² or sin x, used as a feature so that a linear model can fit curves.",
+    "forms": [
+      "basis functions"
+    ]
+  },
+  {
+    "term": "Regularisation",
+    "definition": "Adding a penalty on model complexity, such as the size of the weights, to reduce overfitting.",
+    "forms": [
+      "regularization"
+    ]
+  },
+  {
+    "term": "Ridge regression",
+    "definition": "Linear regression with a penalty on the sum of squared weights (L2).",
+    "forms": []
+  },
+  {
+    "term": "Lasso",
+    "definition": "Linear regression with a penalty on the sum of absolute weights (L1), which can set weights exactly to zero.",
+    "forms": []
+  },
+  {
+    "term": "Elastic net",
+    "definition": "Regression with a combination of the L1 and L2 penalties.",
+    "forms": []
+  },
+  {
+    "term": "Regularisation path",
+    "definition": "How a model’s coefficients change as the regularisation strength varies.",
+    "forms": [
+      "regularization path"
+    ]
+  },
+  {
+    "term": "Coordinate descent",
+    "definition": "An optimisation method that updates one parameter at a time while holding the others fixed.",
+    "forms": []
+  },
+  {
+    "term": "Sigmoid function",
+    "definition": "The S-shaped function 1/(1 + e⁻ᶻ), which maps any number to a value between 0 and 1.",
+    "forms": [
+      "sigmoid"
+    ]
+  },
+  {
+    "term": "Decision boundary",
+    "definition": "The surface in feature space where a classifier switches from predicting one class to another.",
+    "forms": [
+      "decision boundaries"
+    ]
+  },
+  {
+    "term": "Cross-entropy",
+    "definition": "A loss for classification: the average negative log of the probability given to the true class; also called log loss.",
+    "forms": [
+      "log loss",
+      "cross-entropy loss"
+    ]
+  },
+  {
+    "term": "Softmax",
+    "definition": "A function turning a vector of scores into probabilities that are positive and sum to one.",
+    "forms": [
+      "softmax regression"
+    ]
+  },
+  {
+    "term": "Implicit regularisation",
+    "definition": "Regularisation that arises from the training method itself, such as gradient descent favouring small weights.",
+    "forms": [
+      "implicit regularization"
+    ]
+  },
+  {
+    "term": "Benign overfitting",
+    "definition": "When a model fits noisy training data exactly yet still predicts new data well.",
+    "forms": []
   }
 ]

@@ -34,6 +34,23 @@
     "type": "tutorial"
   },
   {
+    "slug": "linear-models",
+    "url": "articles/linear-models.html",
+    "title": "Linear Models: Gradient Descent, Regularisation and Logistic Regression",
+    "summary": "Linear regression as a learning machine, gradient descent from scratch, stochastic updates, basis functions, ridge, lasso and elastic net, logistic and softmax regression, and reading coefficients.",
+    "subject": "AI & Machine Learning",
+    "tags": [
+      "machine-learning",
+      "linear-regression",
+      "logistic-regression",
+      "gradient-descent",
+      "regularisation",
+      "data-analysis"
+    ],
+    "date": "2026-11-20",
+    "type": "tutorial"
+  },
+  {
     "slug": "learning-from-data",
     "url": "articles/learning-from-data.html",
     "title": "Learning from Data: Models, Loss, Overfitting and Honest Evaluation",

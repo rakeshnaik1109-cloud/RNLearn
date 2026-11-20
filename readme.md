@@ -65,6 +65,7 @@ A twelve-part series on scientists and philosophers, told in pairs and groups ar
 ### New Series: *Inside the Machine* (subject: AI & Machine Learning)
 A ten-part series on how machine learning works, with a new structure: an at-a-glance card, a series map, layered concepts (intuition, fold-out maths and code, pitfalls), inline self-checks, a running example shared across parts, Myth vs Reality, Open Questions, key takeaways and a cheat table.
 1. **Part 1**: *Learning from Data: Models, Loss, Overfitting and Honest Evaluation* (what learning is, supervised/unsupervised/self-supervised, parameters & hyperparameters, inductive bias, loss & empirical risk, overfitting playground, bias–variance, train/validation/test, cross-validation, the data-leakage trap, learning curves, no free lunch, double descent)
+2. **Part 2**: *Linear Models: Gradient Descent, Regularisation and Logistic Regression* (linear regression & the normal equation, gradient descent explorer with learning rate & feature scaling, SGD & mini-batches, basis functions, ridge/lasso/elastic net lab with coefficient paths, why the lasso gives zeros, logistic regression playground on the series’ classification data, cross-entropy & softmax, reading coefficients, implicit regularisation & benign overfitting)
 
 ### Standalone Tutorials
 - *Who's the Father? How a DNA Paternity Test Works* (DNA basics, inheritance, blood groups & the Chaplin case, Jeffreys, STRs, PCR & capillary electrophoresis, the paternity index & Bayes, tricky cases, Indian law)

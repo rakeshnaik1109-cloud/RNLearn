@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linear Models: Gradient Descent, Regularisation and Logistic Regression — RNLearn</title>
+  <meta name="description" content="Linear regression as a learning machine, gradient descent from scratch, stochastic updates, basis functions, ridge, lasso and elastic net, logistic and softmax regression, and reading coefficients.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/linear-models.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Linear Models: Gradient Descent, Regularisation and Logistic Regression — RNLearn">
+  <meta property="og:description" content="Linear regression as a learning machine, gradient descent from scratch, stochastic updates, basis functions, ridge, lasso and elastic net, logistic and softmax regression, and reading coefficients.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/linear-models.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Linear Models: Gradient Descent, Regularisation and Logistic Regression — RNLearn">
+  <meta name="twitter:description" content="Linear regression as a learning machine, gradient descent from scratch, stochastic updates, basis functions, ridge, lasso and elastic net, logistic and softmax regression, and reading coefficients.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Linear Models: Gradient Descent, Regularisation and Logistic Regression",
+    "description": "Linear regression as a learning machine, gradient descent from scratch, stochastic updates, basis functions, ridge, lasso and elastic net, logistic and softmax regression, and reading coefficients.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-20",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/linear-models.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/ai-machine-learning.html" class="post-subject-tag" data-subject="ai-machine-learning">AI &amp; Machine Learning</a>
+        </div>
+        <h1 class="article-title">Linear Models: Gradient Descent, Regularisation and Logistic Regression</h1>
+        <p class="article-standfirst">
+          The oldest models in machine learning are still among the most useful, and the building block of every neural network. Here is how they learn by gradient descent, how regularisation tames them, and how a line becomes a classifier.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-20">20 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>20 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/inside-the-machine.html">Inside the Machine</a> (Part 2 of 10)</div>
+  <div class="series-banner-links">
+    <a href="learning-from-data.html">← Part 1: Learning from Data: Models, Loss, Overfitting and Honest Evaluation</a>
+    <span>Part 3 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. Why Start with Straight Lines?</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Linear Regression as a Learning Machine</a></li>
+              <li><a class="toc-link" href="#section-4">4. Gradient Descent from Scratch</a></li>
+              <li><a class="toc-link" href="#section-5">5. Stochastic and Mini-Batch Gradient Descent</a></li>
+              <li><a class="toc-link" href="#section-6">6. Curves from Lines: Basis Functions</a></li>
+              <li><a class="toc-link" href="#section-7">7. Regularisation: Ridge, Lasso and Elastic Net</a></li>
+              <li><a class="toc-link" href="#section-8">8. Why the Lasso Gives Zeros</a></li>
+              <li><a class="toc-link" href="#section-9">9. Classifying with a Line: Logistic Regression</a></li>
+              <li><a class="toc-link" href="#section-10">10. Cross-Entropy and Softmax</a></li>
+              <li><a class="toc-link" href="#section-11">11. Reading the Coefficients</a></li>
+              <li><a class="toc-link" href="#section-12">12. When Linear Models Shine, and When They Fail</a></li>
+              <li><a class="toc-link" href="#section-13">13. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-14">14. Worked Example: Regularising the Running Example</a></li>
+              <li><a class="toc-link" href="#section-15">15. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-16">16. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-17">17. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-18">18. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-19">19. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-20">20. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>You will learn:</strong> linear regression as a learning machine; gradient descent from scratch, and why the learning rate and feature scaling matter; stochastic and mini-batch updates; how lines can fit curves; ridge, lasso and elastic-net regularisation and why the lasso gives zeros; logistic and softmax regression for classification; and when linear models are the right choice.</p>
+            <p><strong>You need:</strong> Part 1 (loss, overfitting, cross-validation). Fold-out boxes use vectors and derivatives; you can skip them.</p>
+            <p><strong>Try:</strong> four interactive figures: a gradient-descent explorer, a regularisation lab, the geometry of L1 and L2, and a logistic-regression playground with the series’ classification data.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. Why Start with Straight Lines?</h2>
+            <p>Linear models are the oldest tools in machine learning and still among the most used. They are fast, need little data, and their parameters can be read and explained. They are the baseline every fancier model must beat, and they are the building block of neural networks: a single artificial neuron is a linear model followed by a simple function (Part 6). Understanding them well, including how they are trained, how they are kept from overfitting and how they classify, makes everything later easier. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-ml-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Tap any part to see what it covers.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-ml2-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Linear models from Legendre to benign overfitting, 1805–2020.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Linear Regression as a Learning Machine</h2>
+            <p>A linear regression model predicts a number by adding up the features, each multiplied by a <strong>weight</strong>, plus a constant <strong>bias</strong> (intercept):</p>
+            <p>$$\hat{y} = w_1x_1 + w_2x_2 + \dots + w_dx_d + b = \mathbf{w}^\top\mathbf{x} + b.$$</p>
+            <p>Each weight says how much the prediction changes when that feature increases by one unit, with the others held fixed. Learning means finding the weights that minimise the mean squared error on the training data. For this particular model and loss there is an exact answer, the method of least squares published by Legendre in 1805 and covered statistically in <em>Making Sense of Data</em> Part 7. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> Here we look at linear regression through machine-learning eyes: as a model to be trained, regularised and validated.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">The maths: the normal equation</summary>
+              <p style="margin-top:0.6rem;">Stack the n training examples as rows of a matrix X (with a column of ones for the bias) and the targets in a vector y. The mean squared error is ‖y − Xw‖²/n, and setting its gradient to zero gives the <strong>normal equation</strong>:</p>
+              <p>$$X^\top X\,\mathbf{w} = X^\top\mathbf{y} \quad\Rightarrow\quad \mathbf{w} = (X^\top X)^{-1}X^\top\mathbf{y}.$$</p>
+              <p>Solving it costs roughly d³ operations for d features, fine for hundreds of features but not for millions, and it fails when features are perfectly correlated (X<sup>⊤</sup>X cannot be inverted). Both problems motivate the next two sections.</p>
+            </details>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Gradient Descent from Scratch</h2>
+            <p>Imagine the loss as a landscape over the space of parameters: every choice of weights is a point, and its height is the loss. Training means finding the lowest point. <strong>Gradient descent</strong> does it like a hiker in fog: feel which way the ground slopes most steeply downhill, take a step that way, and repeat. The slope is the <strong>gradient</strong>, the vector of partial derivatives of the loss with respect to each parameter. Augustin-Louis Cauchy described the method in 1847. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span></p>
+            <p>$$\mathbf{w} \leftarrow \mathbf{w} - \eta\,\nabla_{\mathbf{w}}\,\text{Loss}(\mathbf{w}).$$</p>
+            <p>The <strong>learning rate</strong> η sets the step size. It is the most important hyperparameter in all of deep learning, and Figure 3 shows why.</p>
+            <figure class="fig" data-fig="fig-ml-gd">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Gradient descent on a real loss surface.</strong> Fitting a line to 30 points: the left panel shows the loss for every slope and intercept, with the path taken from (0, 0); the right panel shows the loss at each step. Change the learning rate, and switch between the raw and standardised feature.
+              </figcaption>
+            </figure>
+            <p>With the raw feature, which runs from 0 to 10, the loss surface is a long, narrow valley: about 190 times steeper across than along. Any learning rate above about 0.024 makes the steep direction overshoot and diverge, yet at that rate progress along the valley floor takes hundreds of steps. After <strong>standardising</strong> the feature (subtracting its mean and dividing by its standard deviation) the valley becomes round, and a learning rate of 0.5 reaches the minimum in a single step.</p>
+            <div class="callout callout-warn">
+              <div class="callout-header">Watch out: scale your features</div>
+              <p>Features on very different scales (metres and millimetres, income and age) make gradient descent slow or unstable, and make penalties such as ridge and lasso unfair to some features. Standardise them, fitting the scaler on the training data only (Part 1, Section 11).</p>
+            </div>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">In code: gradient descent for linear regression in NumPy</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">import numpy as np
+
+def gradient_descent(X, y, lr=0.1, steps=500):
+    X = np.column_stack([np.ones(len(X)), X])     # add a bias column
+    w = np.zeros(X.shape[1])
+    for _ in range(steps):
+        grad = 2 / len(y) * X.T @ (X @ w - y)     # gradient of the MSE
+        w -= lr * grad
+    return w
+
+rng = np.random.default_rng(5)
+x = rng.uniform(0, 10, 30); y = 2 * x + 5 + rng.normal(0, 2, 30)
+z = (x - x.mean()) / x.std()                      # standardise
+print(gradient_descent(z, y))                     # [intercept, slope on z]</code></pre>
+            </details>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Stochastic and Mini-Batch Gradient Descent</h2>
+            <p>Computing the exact gradient means passing over every training example for every step: expensive when there are millions. <strong>Stochastic gradient descent</strong> (SGD) instead estimates the gradient from one example, or a small random <strong>mini-batch</strong>, at a time. Each step is noisy but cheap, and over many steps the noise averages out. One full pass through the training data is called an <strong>epoch</strong>.</p>
+            <p>The idea goes back to Herbert Robbins and Sutton Monro’s stochastic approximation of 1951, which showed that such noisy updates converge if the step size shrinks appropriately, and to Bernard Widrow and Ted Hoff’s least-mean-squares rule of 1960, used to train an adaptive electronic neuron. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>, <a class="cite" href="#ref-6">6</a>]</span> Today almost every neural network is trained with a mini-batch variant of SGD, refined with momentum and adaptive learning rates (Part 8). The noise is not only tolerated: it may help models find solutions that generalise better.</p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Curves from Lines: Basis Functions</h2>
+            <p>“Linear” refers to the parameters, not the inputs. A model is linear if the prediction is a weighted sum, but the things being weighted can be any functions of the inputs: x², √x, sin x, log x, or products such as x<sub>1</sub>x<sub>2</sub>. These <strong>basis functions</strong> (or engineered features) let a linear model fit curves while keeping all the advantages of linear fitting.</p>
+            <p>The polynomials of Part 1 were exactly this: the features 1, x, x², …, x<sup>9</sup> with ordinary least squares. Other popular choices are <strong>splines</strong> (smooth curves joined at knots) and Fourier features (sines and cosines). <strong>Interaction terms</strong> such as x<sub>1</sub>x<sub>2</sub> let the effect of one feature depend on another, like the interactions of ANOVA (<em>Making Sense of Data</em> Part 6). The catch, as Part 1 showed, is that many flexible features invite overfitting. That is what regularisation is for.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">Check yourself: linear or not?</summary>
+              <p style="margin-top:0.6rem;">ŷ = w<sub>0</sub> + w<sub>1</sub>e<sup>x</sup>: <strong>linear</strong> (a weighted sum of fixed functions). ŷ = w<sub>0</sub>e<sup>w<sub>1</sub>x</sup>: <strong>not linear</strong>, because the parameter w<sub>1</sub> sits inside the exponential.</p>
+            </details>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Regularisation: Ridge, Lasso and Elastic Net</h2>
+            <p><strong>Regularisation</strong> fights overfitting by adding a penalty for large weights to the loss. The model must now balance fitting the data against keeping its weights small, which favours smoother, simpler functions. The strength of the penalty, λ, is a hyperparameter chosen by cross-validation.</p>
+            <ul>
+              <li><strong>Ridge regression</strong> (L2 penalty) adds λ times the sum of squared weights. Andrey Tikhonov introduced the idea in 1943 for unstable “inverse problems”, and Arthur Hoerl and Robert Kennard proposed it for regression in 1970, to cope with highly correlated predictors. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>, <a class="cite" href="#ref-8">8</a>]</span> It shrinks all weights smoothly towards zero.</li>
+              <li><strong>The lasso</strong> (L1 penalty) adds λ times the sum of absolute weights. Robert Tibshirani proposed it in 1996. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span> It shrinks weights and sets some of them <em>exactly</em> to zero, so it also selects features.</li>
+              <li><strong>Elastic net</strong> combines both, keeping the lasso’s sparsity while handling groups of correlated features more gracefully. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span></li>
+            </ul>
+            <figure class="fig" data-fig="fig-ml-reg">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. The regularisation lab.</strong> A degree-9 polynomial fitted to the 15 training points of the running example, with a ridge or lasso penalty. Right: how each of the nine coefficients changes as λ grows (the regularisation path).
+              </figcaption>
+            </figure>
+            <p>On the running example (with standardised features), the nearly unpenalised degree-9 fit has a test error of about 14. Ridge brings it down to 0.12 at λ ≈ 0.06; the lasso does better still, 0.088 at λ ≈ 0.006, using only 4 of the 9 terms. Neither quite matches the plain cubic of Part 1 (0.075), a reminder that choosing the right features can beat regularising the wrong ones.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">The maths: the penalised losses</summary>
+              <p style="margin-top:0.6rem;">$$\text{Ridge: } \frac{1}{n}\lVert \mathbf{y}-X\mathbf{w}\rVert^2 + \lambda\lVert\mathbf{w}\rVert_2^2, \qquad \text{Lasso: } \frac{1}{2n}\lVert \mathbf{y}-X\mathbf{w}\rVert^2 + \lambda\lVert\mathbf{w}\rVert_1.$$</p>
+              <p>Ridge still has an exact solution, w = (X<sup>⊤</sup>X + nλI)<sup>−1</sup>X<sup>⊤</sup>y, and the added nλI makes the matrix invertible even when features are collinear. The lasso has no closed form; it is usually solved by <strong>coordinate descent</strong>, updating one weight at a time with a “soft-thresholding” step that snaps small weights to zero, which computes whole regularisation paths quickly. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span> The bias is not penalised, and features must be standardised so that the penalty treats them equally. In Bayesian terms, ridge corresponds to a Gaussian prior on the weights and the lasso to a Laplace prior.</p>
+            </details>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Why the Lasso Gives Zeros</h2>
+            <p>Why should absolute values produce exact zeros when squares do not? A penalty is equivalent to a constraint: keep the weights inside a region while minimising the loss. For L2 the region is a circle (a sphere in more dimensions); for L1 it is a diamond, with corners sitting on the axes. The solution is where the smallest contour of the loss touches the region, and contours tend to hit the diamond at a corner, where one or more weights are zero.</p>
+            <figure class="fig" data-fig="fig-ml-l1l2">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. The geometry of L1 and L2.</strong> Orange: contours of the loss around the unpenalised solution. Blue: the allowed region for a given budget. Red: the penalised solution. Shrink the budget and compare the circle with the diamond.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Classifying with a Line: Logistic Regression</h2>
+            <p>To classify, a linear model computes a score z = w<sup>⊤</sup>x + b and decides by its sign. Rosenblatt’s perceptron of 1958 did exactly that, adjusting its weights whenever it misclassified an example. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span> But a bare sign says nothing about confidence. <strong>Logistic regression</strong> passes the score through the S-shaped <strong>sigmoid</strong> function, turning it into a probability:</p>
+            <p>$$P(y=1\mid\mathbf{x}) = \sigma(\mathbf{w}^\top\mathbf{x}+b) = \frac{1}{1+e^{-(\mathbf{w}^\top\mathbf{x}+b)}}.$$</p>
+            <p>The <strong>decision boundary</strong>, where the probability is 0.5, is where the score is zero: a straight line in two dimensions, a flat plane in more. David Cox set out the regression analysis of binary outcomes in 1958, <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span> and logistic regression remains a workhorse of medicine, social science and industry, and one of the strongest baselines for any classification task. Its statistical side, with odds ratios, is covered in <em>Making Sense of Data</em> Part 7.</p>
+            <div class="callout callout-method">
+              <div class="callout-header">The running example: classification</div>
+              <p>From this part on, the series uses three small two-dimensional classification data sets of 200 points each, split into 140 training and 60 test points: <strong>two clouds</strong> that a straight line can separate, <strong>two moons</strong> that interlock, and <strong>circles</strong>, one class inside the other. Because they are two-dimensional, every model’s decision boundary can be drawn and compared across parts.</p>
+            </div>
+            <figure class="fig" data-fig="fig-ml-logreg">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. The logistic regression playground.</strong> Choose a data set, the features and the regularisation strength. Shading shows the predicted probability; the black line is the decision boundary.
+              </figcaption>
+            </figure>
+            <p>With the raw features, logistic regression scores 90% on the test points of the two clouds and also 90% on the moons, but only 55% on the circles: no straight line can separate a ring from its centre. Adding polynomial features of degree 3 lifts the moons to 95% and the circles to 98%, while the model stays linear in its parameters.</p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Cross-Entropy and Softmax</h2>
+            <p>Logistic regression is trained by minimising the <strong>cross-entropy</strong> or <strong>log loss</strong>: the average of −log of the probability the model gave to the true class. A confident correct prediction costs almost nothing; a confident wrong one costs a great deal. Minimising it is the same as maximising the likelihood of the data, and unlike squared error it gives a well-behaved (convex) loss surface for this model.</p>
+            <p>For more than two classes, <strong>softmax regression</strong> (multinomial logistic regression) computes one linear score per class and turns the scores into probabilities that are positive and sum to one. The name “softmax” was coined by John Bridle in 1990. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span> The same softmax sits at the output of almost every neural-network classifier (Parts 6 and 7). Linear, logistic and Poisson regression are all members of the family of generalised linear models introduced by John Nelder and Robert Wedderburn in 1972. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span></p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">The maths: log loss, its gradient and softmax</summary>
+              <p style="margin-top:0.6rem;">With p<sub>i</sub> = σ(w<sup>⊤</sup>x<sub>i</sub> + b),</p>
+              <p>$$\text{Loss} = -\frac{1}{n}\sum_i \big[y_i\log p_i + (1-y_i)\log(1-p_i)\big], \qquad \nabla_{\mathbf{w}} = \frac{1}{n}\sum_i (p_i - y_i)\,\mathbf{x}_i.$$</p>
+              <p>The gradient has the same form as for linear regression, with the prediction error p<sub>i</sub> − y<sub>i</sub>. For K classes with scores z<sub>k</sub>,</p>
+              <p>$$\text{softmax}(\mathbf{z})_k = \frac{e^{z_k}}{\sum_{j=1}^{K} e^{z_j}}.$$</p>
+            </details>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">In code: regularised logistic regression with scikit-learn</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">from sklearn.datasets import make_moons
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import PolynomialFeatures, StandardScaler
+from sklearn.linear_model import LogisticRegression
+
+X, y = make_moons(n_samples=200, noise=0.2, random_state=0)
+X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.3, random_state=0)
+
+for degree in [1, 3]:
+    clf = make_pipeline(PolynomialFeatures(degree), StandardScaler(),
+                        LogisticRegression(C=10, max_iter=5000))   # C = 1/lambda
+    print(degree, cross_val_score(clf, X_tr, y_tr, cv=5).mean())</code></pre>
+            </details>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Reading the Coefficients</h2>
+            <p>A great strength of linear models is that they can be read. In linear regression a weight is the change in prediction per unit change of its feature, others held fixed; in logistic regression, e<sup>w</sup> is the odds ratio per unit. But reading them correctly takes care:</p>
+            <ul>
+              <li><strong>Units matter.</strong> A weight of 0.001 per metre is the same as 1 per kilometre. Compare standardised coefficients to judge relative importance.</li>
+              <li><strong>Correlated features</strong> share credit unpredictably: two nearly identical features can get large weights of opposite sign. Ridge stabilises them; the lasso tends to pick one arbitrarily.</li>
+              <li><strong>“Held fixed” may be impossible.</strong> You cannot raise a house’s floor area while holding its number of rooms fixed in real life.</li>
+              <li><strong>Association, not causation.</strong> A weight describes the pattern in the data, not what would happen if you intervened (<em>Making Sense of Data</em> Part 7).</li>
+            </ul>
+          </section>
+
+          <section id="section-12">
+            <h2>12. When Linear Models Shine, and When They Fail</h2>
+            <p>Linear models are the right first choice when data are limited, when there are many features relative to examples (text, genomics), when interpretability matters, or when predictions must be fast. With good features and regularisation they are surprisingly hard to beat on many tabular problems.</p>
+            <p>They struggle when the relationship is strongly nonlinear or full of interactions that nobody thought to engineer: images, sound, language, or the interlocking moons of Figure 6. One remedy is to engineer features by hand, as with polynomials. The rest of the series explores the alternatives that learn nonlinear shapes themselves: neighbours and trees (Part 3), ensembles (Part 4), kernels (Part 5) and neural networks (Parts 6–9), which in a sense learn their own basis functions.</p>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: when is fitting the noise harmless?</div>
+              <p>Part 1 warned that a model fitting its training data exactly will overfit. Yet when a linear model has many more features than examples, gradient descent started from zero converges to the solution with the smallest weights among the infinitely many that fit the data exactly: a hidden form of ridge-like regularisation, called <strong>implicit regularisation</strong>. In 2020 Peter Bartlett and colleagues showed precisely when such a model can interpolate noisy data and still predict nearly optimally, a phenomenon they called <strong>benign overfitting</strong>. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span> Linear models have become the laboratory in which researchers try to understand why huge neural networks generalise.</p>
+            </div>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Worked Example: Regularising the Running Example</h2>
+            <ol>
+              <li><strong>Features.</strong> Expand x into the nine powers u, u², …, u<sup>9</sup> (with u = 2x − 1), and standardise each using the training points only.</li>
+              <li><strong>Unpenalised fit.</strong> Test error about 14: severe overfitting, as in Part 1.</li>
+              <li><strong>Ridge path.</strong> Test error 0.38 at λ = 0.001, 0.21 at 0.01, 0.14 at 0.1 and 0.35 at 1, with a best of 0.12 near λ = 0.06. All nine coefficients stay non-zero.</li>
+              <li><strong>Lasso path.</strong> Test error 0.21 at λ = 0.001 (5 terms), 0.090 at 0.01 (5 terms), 0.20 at 0.1 (3 terms), and at λ = 1 every coefficient is zero and the model predicts a constant (0.63). Best: 0.088 near λ = 0.006 with 4 terms.</li>
+              <li><strong>In practice</strong> you would choose λ by cross-validation on the training data (Part 1), and only then report the test error once. The numbers above use the test set to show the whole path, which is fine for teaching but not for reporting.</li>
+            </ol>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">In code: ridge and lasso paths with scikit-learn</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">import numpy as np
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import Ridge, Lasso, LassoCV
+
+# x_train, y_train, x_test: the running example of Part 1
+def powers(x, d=9):
+    u = 2 * x - 1
+    return np.column_stack([u**k for k in range(1, d + 1)])
+
+scaler = StandardScaler().fit(powers(x_train))
+A, B = scaler.transform(powers(x_train)), scaler.transform(powers(x_test))
+
+ridge = Ridge(alpha=15 * 0.056).fit(A, y_train)   # sklearn alpha = n * lambda
+lasso = Lasso(alpha=0.0056, max_iter=100000).fit(A, y_train)
+print((lasso.coef_ != 0).sum())                    # 4 non-zero terms
+best = LassoCV(cv=5).fit(A, y_train).alpha_        # choose lambda by CV</code></pre>
+            </details>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: break gradient descent, then fix it</div>
+              <ol>
+                <li>In Figure 3, with the raw feature, find the largest learning rate that still converges. Then switch to the standardised feature and find it again. How many steps does each need?</li>
+                <li>In Figure 4, move λ slowly from left to right with the lasso. In what order do the coefficients drop to zero?</li>
+                <li>In Figure 5, shrink the budget with the diamond until w₂ becomes zero. Does the same happen with the circle?</li>
+                <li>In Figure 6, choose the circles. Which features let a “linear” model draw a ring? Try strong regularisation: what shape does the boundary relax towards?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “linear models can only draw straight lines”</div>
+              <p><strong>The myth:</strong> linear models are too simple for real problems, because the world is not linear.</p>
+              <p><strong>The reality:</strong> a linear model is linear in its <em>parameters</em>. With the right features (polynomials, splines, interactions, or features learned by another model) it can represent very complicated curves and boundaries, as the circles of Figure 6 show. Kernel methods (Part 5) push this idea to infinitely many features, and the last layer of most neural networks is a linear or logistic regression on features the network has learned.</p>
+              <p><strong>Why it matters:</strong> before reaching for a complex model, it is often worth asking whether a simple model with better features would do, and be easier to trust.</p>
+            </div>
+          </section>
+
+          <section id="section-17">
+            <h2>17. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>A linear model predicts with a weighted sum of features; it is linear in its weights, not necessarily in its inputs.</li>
+                <li>Gradient descent steps downhill on the loss; the learning rate must be neither too small nor too large, and standardised features make it far easier.</li>
+                <li>Stochastic and mini-batch gradient descent trade exact gradients for cheap, noisy steps, and power deep learning.</li>
+                <li>Ridge shrinks weights; the lasso shrinks and selects; elastic net does both. Choose λ by cross-validation.</li>
+                <li>Logistic regression turns a linear score into a probability with the sigmoid and is trained with cross-entropy; softmax extends it to many classes.</li>
+                <li>Linear models are fast, interpretable, strong baselines, but need engineered features for nonlinear problems.</li>
+              </ul>
+            </div>
+            <div class="table-container" style="overflow-x:auto; margin:1.2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.92rem; line-height:1.5;">
+                <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.5rem;">Model</th><th style="padding:0.5rem;">Task</th><th style="padding:0.5rem;">Loss</th><th style="padding:0.5rem;">Strengths</th><th style="padding:0.5rem;">Watch for</th></tr></thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Linear regression</td><td style="padding:0.5rem;">Regression</td><td style="padding:0.5rem;">Squared error</td><td style="padding:0.5rem;">Fast, exact solution, interpretable</td><td style="padding:0.5rem;">Nonlinearity, outliers, collinearity</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Ridge</td><td style="padding:0.5rem;">Regression</td><td style="padding:0.5rem;">Squared error + L2</td><td style="padding:0.5rem;">Stable with correlated features</td><td style="padding:0.5rem;">Keeps all features; scale features</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Lasso / elastic net</td><td style="padding:0.5rem;">Regression</td><td style="padding:0.5rem;">Squared error + L1 (+ L2)</td><td style="padding:0.5rem;">Selects features; sparse models</td><td style="padding:0.5rem;">Arbitrary choice among correlated features</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Logistic regression</td><td style="padding:0.5rem;">Binary classification</td><td style="padding:0.5rem;">Cross-entropy</td><td style="padding:0.5rem;">Probabilities, odds ratios, strong baseline</td><td style="padding:0.5rem;">Straight boundary unless features are expanded</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Softmax regression</td><td style="padding:0.5rem;">Multi-class classification</td><td style="padding:0.5rem;">Cross-entropy</td><td style="padding:0.5rem;">Calibrated class probabilities</td><td style="padding:0.5rem;">Linear boundaries between classes</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <section id="section-18">
+            <h2>18. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Adrien-Marie Legendre</td>
+                <td style="padding:0.6rem 0.8rem;">1752–1833<br>France</td>
+                <td style="padding:0.6rem 0.8rem;">Least squares (1805)</td>
+                <td style="padding:0.6rem 0.8rem;">Published the method still used to fit linear regressions.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Augustin-Louis Cauchy</td>
+                <td style="padding:0.6rem 0.8rem;">1789–1857<br>France</td>
+                <td style="padding:0.6rem 0.8rem;">Steepest descent (1847)</td>
+                <td style="padding:0.6rem 0.8rem;">Described the method of gradient descent.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Andrey Tikhonov</td>
+                <td style="padding:0.6rem 0.8rem;">1906–1993<br>USSR</td>
+                <td style="padding:0.6rem 0.8rem;">Regularisation (1943)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed how penalties stabilise ill-posed problems.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Herbert Robbins &amp; Sutton Monro</td>
+                <td style="padding:0.6rem 0.8rem;">1915–2001 / 1919–1995<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Stochastic approximation (1951)</td>
+                <td style="padding:0.6rem 0.8rem;">Proved that noisy step-by-step updates converge.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Bernard Widrow &amp; Ted Hoff</td>
+                <td style="padding:0.6rem 0.8rem;">born 1929 / born 1937<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">ADALINE and the LMS rule (1960)</td>
+                <td style="padding:0.6rem 0.8rem;">Trained adaptive neurons with an early form of SGD; Hoff later co-invented the microprocessor.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">David Cox</td>
+                <td style="padding:0.6rem 0.8rem;">1924–2022<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Logistic regression (1958)</td>
+                <td style="padding:0.6rem 0.8rem;">Developed regression for binary outcomes.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Arthur Hoerl &amp; Robert Kennard</td>
+                <td style="padding:0.6rem 0.8rem;">1921–1994 / 1923–2011<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Ridge regression (1970)</td>
+                <td style="padding:0.6rem 0.8rem;">Introduced ridge regression for correlated predictors.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Robert Tibshirani</td>
+                <td style="padding:0.6rem 0.8rem;">born 1956<br>Canada / USA</td>
+                <td style="padding:0.6rem 0.8rem;">The lasso (1996)</td>
+                <td style="padding:0.6rem 0.8rem;">Proposed the L1 penalty that shrinks and selects.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-19">
+            <h2>19. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about linear models.</p>
+            <figure class="fig" data-fig="fig-quiz-ml2">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-20">
+            <h2>20. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Hastie, Trevor, Tibshirani, Robert &amp; Friedman, Jerome.</strong> (2009). <em>The Elements of Statistical Learning</em>. 2nd ed. New York: Springer.</li>
+              <li id="ref-2"><strong>James, Gareth, Witten, Daniela, Hastie, Trevor &amp; Tibshirani, Robert.</strong> (2021). <em>An Introduction to Statistical Learning</em>. 2nd ed. New York: Springer.</li>
+              <li id="ref-3"><strong>Legendre, Adrien-Marie.</strong> (1805). <em>Nouvelles méthodes pour la détermination des orbites des comètes</em>. Paris: Courcier.</li>
+              <li id="ref-4"><strong>Cauchy, Augustin-Louis.</strong> (1847). "Méthode générale pour la résolution des systèmes d’équations simultanées." <em>Comptes Rendus de l’Académie des Sciences</em>, 25: 536–538.</li>
+              <li id="ref-5"><strong>Robbins, Herbert &amp; Monro, Sutton.</strong> (1951). "A stochastic approximation method." <em>The Annals of Mathematical Statistics</em>, 22(3): 400–407.</li>
+              <li id="ref-6"><strong>Widrow, Bernard &amp; Hoff, Marcian E.</strong> (1960). "Adaptive switching circuits." <em>IRE WESCON Convention Record</em>, 4: 96–104.</li>
+              <li id="ref-7"><strong>Tikhonov, A. N.</strong> (1943). "On the stability of inverse problems." <em>Doklady Akademii Nauk SSSR</em>, 39(5): 195–198.</li>
+              <li id="ref-8"><strong>Hoerl, Arthur E. &amp; Kennard, Robert W.</strong> (1970). "Ridge regression: biased estimation for nonorthogonal problems." <em>Technometrics</em>, 12(1): 55–67.</li>
+              <li id="ref-9"><strong>Tibshirani, Robert.</strong> (1996). "Regression shrinkage and selection via the lasso." <em>Journal of the Royal Statistical Society: Series B</em>, 58(1): 267–288.</li>
+              <li id="ref-10"><strong>Zou, Hui &amp; Hastie, Trevor.</strong> (2005). "Regularization and variable selection via the elastic net." <em>Journal of the Royal Statistical Society: Series B</em>, 67(2): 301–320.</li>
+              <li id="ref-11"><strong>Friedman, Jerome, Hastie, Trevor &amp; Tibshirani, Robert.</strong> (2010). "Regularization paths for generalized linear models via coordinate descent." <em>Journal of Statistical Software</em>, 33(1): 1–22.</li>
+              <li id="ref-12"><strong>Rosenblatt, F.</strong> (1958). "The perceptron: a probabilistic model for information storage and organization in the brain." <em>Psychological Review</em>, 65(6): 386–408.</li>
+              <li id="ref-13"><strong>Cox, D. R.</strong> (1958). "The regression analysis of binary sequences." <em>Journal of the Royal Statistical Society: Series B</em>, 20(2): 215–242.</li>
+              <li id="ref-14"><strong>Bridle, John S.</strong> (1990). "Probabilistic interpretation of feedforward classification network outputs, with relationships to statistical pattern recognition." In F. Fogelman Soulié &amp; J. Hérault (eds.), <em>Neurocomputing</em>, NATO ASI Series F68, pp. 227–236. Berlin: Springer.</li>
+              <li id="ref-15"><strong>Nelder, J. A. &amp; Wedderburn, R. W. M.</strong> (1972). "Generalized linear models." <em>Journal of the Royal Statistical Society: Series A</em>, 135(3): 370–384.</li>
+              <li id="ref-16"><strong>Bartlett, Peter L., Long, Philip M., Lugosi, Gábor &amp; Tsigler, Alexander.</strong> (2020). "Benign overfitting in linear regression." <em>Proceedings of the National Academy of Sciences</em>, 117(48): 30063–30070.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/inside-the-machine.html">Inside the Machine</a> (Part 2 of 10)</div>
+  <div class="series-banner-links">
+    <a href="learning-from-data.html">← Part 1: Learning from Data: Models, Loss, Overfitting and Honest Evaluation</a>
+    <span>Part 3 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/linear-models.js"></script>
+</body>
+</html>

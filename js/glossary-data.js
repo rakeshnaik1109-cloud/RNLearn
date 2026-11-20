@@ -4406,5 +4406,108 @@ window.RNLEARN_GLOSSARY = [
   "Double descent",
   "Test error that falls, rises near the point where the model can fit the training data exactly, then falls again as the model grows.",
   []
+ ],
+ [
+  "Normal equation",
+  "The equation XᵀXw = Xᵀy whose solution gives the least-squares weights of a linear regression.",
+  []
+ ],
+ [
+  "Stochastic gradient descent",
+  "Gradient descent using the gradient from one example or a small random batch at each step.",
+  [
+   "SGD",
+   "mini-batch gradient descent"
+  ]
+ ],
+ [
+  "Feature standardisation",
+  "Rescaling a feature to have mean zero and standard deviation one.",
+  [
+   "standardised features",
+   "standardized features"
+  ]
+ ],
+ [
+  "Basis function",
+  "A fixed function of the inputs, such as x² or sin x, used as a feature so that a linear model can fit curves.",
+  [
+   "basis functions"
+  ]
+ ],
+ [
+  "Regularisation",
+  "Adding a penalty on model complexity, such as the size of the weights, to reduce overfitting.",
+  [
+   "regularization"
+  ]
+ ],
+ [
+  "Ridge regression",
+  "Linear regression with a penalty on the sum of squared weights (L2).",
+  []
+ ],
+ [
+  "Lasso",
+  "Linear regression with a penalty on the sum of absolute weights (L1), which can set weights exactly to zero.",
+  []
+ ],
+ [
+  "Elastic net",
+  "Regression with a combination of the L1 and L2 penalties.",
+  []
+ ],
+ [
+  "Regularisation path",
+  "How a model’s coefficients change as the regularisation strength varies.",
+  [
+   "regularization path"
+  ]
+ ],
+ [
+  "Coordinate descent",
+  "An optimisation method that updates one parameter at a time while holding the others fixed.",
+  []
+ ],
+ [
+  "Sigmoid function",
+  "The S-shaped function 1/(1 + e⁻ᶻ), which maps any number to a value between 0 and 1.",
+  [
+   "sigmoid"
+  ]
+ ],
+ [
+  "Decision boundary",
+  "The surface in feature space where a classifier switches from predicting one class to another.",
+  [
+   "decision boundaries"
+  ]
+ ],
+ [
+  "Cross-entropy",
+  "A loss for classification: the average negative log of the probability given to the true class; also called log loss.",
+  [
+   "log loss",
+   "cross-entropy loss"
+  ]
+ ],
+ [
+  "Softmax",
+  "A function turning a vector of scores into probabilities that are positive and sum to one.",
+  [
+   "softmax regression"
+  ]
+ ],
+ [
+  "Implicit regularisation",
+  "Regularisation that arises from the training method itself, such as gradient descent favouring small weights.",
+  [
+   "implicit regularization"
+  ]
+ ],
+ [
+  "Benign overfitting",
+  "When a model fits noisy training data exactly yet still predicts new data well.",
+  []
  ]
 ];
