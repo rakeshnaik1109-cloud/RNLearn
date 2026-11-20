@@ -34,6 +34,23 @@
     "type": "tutorial"
   },
   {
+    "slug": "neighbours-bayes-and-trees",
+    "url": "articles/neighbours-bayes-and-trees.html",
+    "title": "Neighbours, Bayes and Trees: Three Classic Ways to Classify",
+    "summary": "k-nearest neighbours and the curse of dimensionality, naive Bayes and why its naive assumption works, decision trees with Gini impurity, entropy and pruning, and regression trees.",
+    "subject": "AI & Machine Learning",
+    "tags": [
+      "machine-learning",
+      "k-nearest-neighbours",
+      "naive-bayes",
+      "decision-trees",
+      "classification",
+      "data-analysis"
+    ],
+    "date": "2026-11-20",
+    "type": "tutorial"
+  },
+  {
     "slug": "linear-models",
     "url": "articles/linear-models.html",
     "title": "Linear Models: Gradient Descent, Regularisation and Logistic Regression",

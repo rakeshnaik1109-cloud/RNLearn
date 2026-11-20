@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neighbours, Bayes and Trees: Three Classic Ways to Classify — RNLearn</title>
+  <meta name="description" content="k-nearest neighbours and the curse of dimensionality, naive Bayes and why its naive assumption works, decision trees with Gini impurity, entropy and pruning, and regression trees.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/neighbours-bayes-and-trees.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Neighbours, Bayes and Trees: Three Classic Ways to Classify — RNLearn">
+  <meta property="og:description" content="k-nearest neighbours and the curse of dimensionality, naive Bayes and why its naive assumption works, decision trees with Gini impurity, entropy and pruning, and regression trees.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/neighbours-bayes-and-trees.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Neighbours, Bayes and Trees: Three Classic Ways to Classify — RNLearn">
+  <meta name="twitter:description" content="k-nearest neighbours and the curse of dimensionality, naive Bayes and why its naive assumption works, decision trees with Gini impurity, entropy and pruning, and regression trees.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Neighbours, Bayes and Trees: Three Classic Ways to Classify",
+    "description": "k-nearest neighbours and the curse of dimensionality, naive Bayes and why its naive assumption works, decision trees with Gini impurity, entropy and pruning, and regression trees.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-20",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/neighbours-bayes-and-trees.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/ai-machine-learning.html" class="post-subject-tag" data-subject="ai-machine-learning">AI &amp; Machine Learning</a>
+        </div>
+        <h1 class="article-title">Neighbours, Bayes and Trees: Three Classic Ways to Classify</h1>
+        <p class="article-standfirst">
+          Ask the neighbours, weigh the probabilities, or play twenty questions. Three classic algorithms, built on three different ideas, that are still everywhere, and one of them is the building block of the most successful methods for tabular data.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-20">20 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>19 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/inside-the-machine.html">Inside the Machine</a> (Part 3 of 10)</div>
+  <div class="series-banner-links">
+    <a href="linear-models.html">← Part 2: Linear Models: Gradient Descent, Regularisation and Logistic Regression</a>
+    <span>Part 4 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. Three Ways to Decide</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. k-Nearest Neighbours: Ask the Neighbours</a></li>
+              <li><a class="toc-link" href="#section-4">4. Choosing k, and k-NN for Regression</a></li>
+              <li><a class="toc-link" href="#section-5">5. The Curse of Dimensionality</a></li>
+              <li><a class="toc-link" href="#section-6">6. Naive Bayes: Classifying with Probabilities</a></li>
+              <li><a class="toc-link" href="#section-7">7. Why a Naive Assumption Works</a></li>
+              <li><a class="toc-link" href="#section-8">8. Decision Trees: Twenty Questions</a></li>
+              <li><a class="toc-link" href="#section-9">9. Growing a Tree: Impurity and Splits</a></li>
+              <li><a class="toc-link" href="#section-10">10. Regression Trees</a></li>
+              <li><a class="toc-link" href="#section-11">11. Pruning and the Instability of Trees</a></li>
+              <li><a class="toc-link" href="#section-12">12. Comparing the Three</a></li>
+              <li><a class="toc-link" href="#section-13">13. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-14">14. Worked Example: Three Models on the Two Moons</a></li>
+              <li><a class="toc-link" href="#section-15">15. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-16">16. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-17">17. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-18">18. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-19">19. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-20">20. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>You will learn:</strong> three classic algorithms built on three different ideas: k-nearest neighbours (decide by similar past cases), naive Bayes (decide by probabilities) and decision trees (decide by asking questions). How each works, how to tune it, the curse of dimensionality, why a “naive” assumption works, impurity measures, pruning, and when to use which.</p>
+            <p><strong>You need:</strong> Part 1 (bias, variance, cross-validation). Part 2 helps for comparison. Basic probability from <em>Making Sense of Data</em> Part 2 helps for naive Bayes.</p>
+            <p><strong>Try:</strong> six interactive figures on the series’ running data, including a tree you can grow one level at a time.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. Three Ways to Decide</h2>
+            <p>How might you guess whether a mushroom is poisonous? You could compare it with mushrooms you have seen before and go with the most similar ones. You could reason with probabilities: of the poisonous mushrooms I know, most have white gills; of the safe ones, few do. Or you could follow a key: does it have a ring? If so, what colour are the gills? Each strategy is the seed of a machine-learning algorithm: <strong>k-nearest neighbours</strong>, <strong>naive Bayes</strong> and <strong>decision trees</strong>.</p>
+            <p>All three are simple, decades old and still widely used. Unlike the linear models of Part 2, the first and third draw curved, flexible boundaries without hand-made features, and the decision tree is the building block of the ensembles in Part 4, which win many machine-learning competitions on tabular data. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+            <figure class="fig" data-fig="fig-ml-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Tap any part to see what it covers.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-ml3-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Neighbours, probabilities and trees, 1763–2022.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. k-Nearest Neighbours: Ask the Neighbours</h2>
+            <p>The <strong>k-nearest neighbours</strong> (k-NN) classifier is the simplest idea in machine learning. To classify a new point, find the k training points closest to it and take a majority vote of their classes. That is all. There is no training phase beyond storing the data, which is why k-NN is called a <strong>lazy learner</strong>; all the work happens at prediction time.</p>
+            <p>The method was described in 1951 by Evelyn Fix and Joseph Hodges in a report for the US Air Force School of Aviation Medicine. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span> In 1967 Thomas Cover and Peter Hart proved a remarkable guarantee: with enough data, the error of the 1-nearest-neighbour rule is at most twice the lowest error any classifier could possibly achieve. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+            <figure class="fig" data-fig="fig-ml-knn">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. k-nearest neighbours.</strong> The series’ three classification data sets (dots: training points; squares: test points). Change k and the distance measure; shading shows the share of orange votes.
+              </figcaption>
+            </figure>
+            <p>On the two moons, k = 1 gets every training point right (it is its own nearest neighbour) but only 88% of test points: its boundary wraps around noisy points. k = 15 scores 94% on training and 93% on test. Very large k over-smooths: on the circles, k = 31 drops to 58%: almost all its errors are points on the outer ring, whose 31 nearest neighbours are swamped by the densely packed inner class.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">The maths: distances</summary>
+              <p style="margin-top:0.6rem;">The usual choice is the Euclidean distance; the Manhattan distance adds absolute differences instead. Both are cases of the Minkowski distance:</p>
+              <p>$$d_2(\mathbf{a},\mathbf{b}) = \sqrt{\textstyle\sum_j (a_j-b_j)^2}, \qquad d_1(\mathbf{a},\mathbf{b}) = \textstyle\sum_j |a_j-b_j|, \qquad d_p = \Big(\textstyle\sum_j |a_j-b_j|^p\Big)^{1/p}.$$</p>
+              <p>For text, cosine similarity (the angle between word-count vectors) is common; for categories, the Hamming distance counts mismatches. Votes can be weighted by 1/distance so that closer neighbours count more.</p>
+            </details>
+            <div class="callout callout-warn">
+              <div class="callout-header">Watch out: k-NN needs scaled features</div>
+              <p>Distances add up differences across features, so a feature measured in thousands (income) swamps one measured in units (number of children). Standardise features first, inside the cross-validation folds (Part 1).</p>
+            </div>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Choosing k, and k-NN for Regression</h2>
+            <p>The number of neighbours k is a hyperparameter that controls the bias–variance trade-off of Part 1: small k means low bias and high variance; large k, the reverse. Choose it by cross-validation. On the training data of the two moons, 5-fold cross-validated accuracy is 90% for k = 1, rises to about 94% for k between 5 and 21, and falls to 78% for k = 61. An odd k avoids ties between two classes.</p>
+            <p>For regression, k-NN predicts the average target of the k nearest neighbours. On the running example, k = 1 has zero training error and a test error of 0.150; k = 5 gives the best test error, 0.088, as good as the lasso of Part 2, with no feature engineering at all; and k = 15, which averages all the training points, gives a flat line.</p>
+            <figure class="fig" data-fig="fig-ml-knnreg">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. k-NN regression on the running example.</strong> The prediction is the average of the k nearest training points, a step-shaped curve.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-5">
+            <h2>5. The Curse of Dimensionality</h2>
+            <p>k-NN relies on nearby points being similar. In many dimensions that idea falls apart. Space grows so fast as dimensions are added that data become sparse: to capture 10% of uniformly spread data in 10 dimensions, a neighbourhood must span about 80% of the range of each feature. Worse, distances concentrate: the nearest and farthest neighbours end up almost equally far away. Richard Bellman coined the phrase <strong>curse of dimensionality</strong> in 1957 for the explosive growth of space with dimension. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span></p>
+            <figure class="fig" data-fig="fig-ml-curse">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Distances in high dimensions.</strong> Distances from one random point to 400 others in a unit cube. As the number of dimensions grows, the histogram narrows: everyone becomes roughly equally far away.
+              </figcaption>
+            </figure>
+            <p>Real data are rarely spread evenly through all their dimensions; images, sounds and measurements usually lie near much lower-dimensional surfaces, which is why k-NN and other methods still work. But irrelevant or noisy features dilute distances and can wreck k-NN, so feature selection and dimension reduction matter. k-NN is also slow to predict with large data sets, since every prediction compares against every stored example; tree-based indexes and approximate nearest-neighbour search speed it up, and power today’s vector databases and retrieval systems.</p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Naive Bayes: Classifying with Probabilities</h2>
+            <p>Naive Bayes classifies by asking which class is most probable given the features, using <strong>Bayes’ theorem</strong>, published in 1763 after the death of its author, the Reverend Thomas Bayes. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> The theorem turns what we can estimate from training data, how likely the features are within each class, into what we want, how likely each class is given the features:</p>
+            <p>$$P(\text{class}\mid\mathbf{x}) = \frac{P(\mathbf{x}\mid\text{class})\,P(\text{class})}{P(\mathbf{x})}.$$</p>
+            <p>The difficulty is P(<strong>x</strong> | class): with many features, there are far too many combinations to estimate. Naive Bayes makes a bold simplification: it assumes the features are <strong>independent</strong> of each other within each class, so the joint probability is just the product of one-feature probabilities, each easy to estimate. That assumption is almost never true, hence “naive”.</p>
+            <figure class="fig" data-fig="fig-ml-nb">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. Gaussian naive Bayes.</strong> Each class is modelled as a bell curve along each feature separately; the ellipses show 1 and 2 standard deviations. Bayes’ theorem combines them into the probability shading and boundary.
+              </figcaption>
+            </figure>
+            <p>For continuous features, <strong>Gaussian naive Bayes</strong> fits a normal distribution (Part 2 of <em>Making Sense of Data</em>) to each feature in each class. On the two clouds it reaches 92% test accuracy and on the moons 88%. On the circles it scores 97%, far better than logistic regression with raw features (55%): because the inner class has a small spread and the outer a large one, the boundary between their bell curves is a closed loop.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">The maths: the naive Bayes rule</summary>
+              <p style="margin-top:0.6rem;">With features x<sub>1</sub>, …, x<sub>d</sub> assumed independent within each class c:</p>
+              <p>$$\hat{c} = \arg\max_c\; P(c)\prod_{j=1}^{d} P(x_j\mid c) = \arg\max_c\;\Big[\log P(c) + \sum_{j=1}^{d}\log P(x_j\mid c)\Big].$$</p>
+              <p>Working with logarithms avoids multiplying many tiny numbers. Variants differ in how each P(x<sub>j</sub> | c) is modelled: Gaussian for continuous features, multinomial for word counts, Bernoulli for word presence or absence.</p>
+            </details>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Why a Naive Assumption Works</h2>
+            <p>If the independence assumption is so wrong, why does naive Bayes work at all? In 1997 Pedro Domingos and Michael Pazzani showed that a classifier only needs the correct class to have the highest score, not accurate probabilities. Naive Bayes can be badly wrong about <em>how</em> likely each class is while still ranking them correctly, and they proved it is optimal under zero–one loss in a much wider range of situations than the assumption suggests. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span> Its probabilities, however, tend to be overconfident, so they should not be trusted as probabilities without calibration (see our <a href="classification-and-regression-metrics.html">metrics article</a>).</p>
+            <p>Naive Bayes shines with text. As early as 1961 Melvin Maron used word probabilities to assign documents to subject categories, <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> and in 1998 Mehran Sahami and colleagues applied naive Bayes to filtering junk e-mail. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span> Each word becomes a feature, there may be tens of thousands of them, and naive Bayes trains in a single pass, needs little data and handles new words gracefully. One practical detail is essential: a word never seen in a class during training would get probability zero and veto that class entirely. <strong>Laplace smoothing</strong>, adding one to every count, prevents this.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">Check yourself: a tiny spam filter</summary>
+              <p style="margin-top:0.6rem;">Suppose 40% of e-mails are spam. The word “prize” appears in 30% of spam and 1% of genuine e-mails. An e-mail contains “prize”. Then P(spam | prize) ∝ 0.4 × 0.30 = 0.12 and P(genuine | prize) ∝ 0.6 × 0.01 = 0.006, so P(spam | prize) = 0.12/(0.12 + 0.006) ≈ <strong>95%</strong>. With more words, naive Bayes simply multiplies more such factors.</p>
+            </details>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Decision Trees: Twenty Questions</h2>
+            <p>A <strong>decision tree</strong> predicts by asking a sequence of yes/no questions about the features: is x<sub>1</sub> ≤ 0.4? If yes, is x<sub>2</sub> > 0.2? Each answer leads down a branch until a <strong>leaf</strong> gives the prediction: the majority class of the training points that reached it, or for regression their average. The result can be drawn as a flowchart and read as a set of rules, which is why trees appeal to doctors, engineers and regulators.</p>
+            <p>The first regression trees came from social science: in 1963 James Morgan and John Sonquist’s AID program split survey data by repeated binary questions. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span> The modern methods are Leo Breiman, Jerome Friedman, Richard Olshen and Charles Stone’s <strong>CART</strong> (classification and regression trees, 1984), and Ross Quinlan’s <strong>ID3</strong> (1986) and <strong>C4.5</strong> (1993). <span class="cite-group">[<a class="cite" href="#ref-10">10</a>, <a class="cite" href="#ref-11">11</a>, <a class="cite" href="#ref-12">12</a>]</span></p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Growing a Tree: Impurity and Splits</h2>
+            <p>Trees are grown greedily from the top. At each node, the algorithm tries every feature and every threshold, and picks the split that makes the two resulting groups as <strong>pure</strong> as possible, that is, as close as possible to containing a single class. Then it repeats on each group, until the groups are pure or a stopping rule applies.</p>
+            <p>Purity is measured by an <strong>impurity</strong> function. CART uses the <strong>Gini impurity</strong>, the chance that two points drawn at random from the node belong to different classes. ID3 and C4.5 use <strong>entropy</strong> from information theory, and choose the split with the largest <strong>information gain</strong>, the drop in entropy. In practice the two give very similar trees.</p>
+            <figure class="fig" data-fig="fig-ml-tree">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 7. Growing a decision tree.</strong> Increase the maximum depth one level at a time. Purple lines mark the first splits; for shallow trees the rules are listed below the figure.
+              </figcaption>
+            </figure>
+            <p>On the two moons, a single split (depth 1) gives 81% training and 88% test accuracy. Depth 2, with four leaves, reaches 91% and 92%. A fully grown tree has 15 leaves and 100% training accuracy, with 92% on test. Test accuracy does not change smoothly with depth: depth 4 happens to drop to 80%, because one extra split carves out a region that the test points do not share, a sign of how sensitive trees are to small details of the data. Cross-validation on the training data favours depth 2 or 3 (90%).</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">The maths: Gini impurity, entropy and information gain</summary>
+              <p style="margin-top:0.6rem;">For a node where a fraction p<sub>k</sub> of points belong to class k:</p>
+              <p>$$\text{Gini} = 1-\sum_k p_k^2, \qquad \text{Entropy} = -\sum_k p_k\log_2 p_k.$$</p>
+              <p>Both are 0 for a pure node and largest for an even mix (0.5 and 1 bit for two classes). A split of a node with n points into children with n<sub>L</sub> and n<sub>R</sub> points is scored by the decrease</p>
+              <p>$$\Delta = I(\text{parent}) - \frac{n_L}{n}I(\text{left}) - \frac{n_R}{n}I(\text{right}),$$</p>
+              <p>called the information gain when I is entropy. For regression trees, I is the variance of the targets, and the split reduces the squared error most.</p>
+            </details>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">In code: the three algorithms with scikit-learn</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">from sklearn.datasets import make_moons
+from sklearn.model_selection import GridSearchCV
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.tree import DecisionTreeClassifier, export_text
+
+X, y = make_moons(n_samples=200, noise=0.2, random_state=0)
+
+knn = GridSearchCV(make_pipeline(StandardScaler(), KNeighborsClassifier()),
+                   {"kneighborsclassifier__n_neighbors": range(1, 62, 2)}, cv=5).fit(X, y)
+nb = GaussianNB().fit(X, y)
+tree = GridSearchCV(DecisionTreeClassifier(random_state=0),
+                    {"max_depth": range(1, 13)}, cv=5).fit(X, y)
+
+print(knn.best_params_, tree.best_params_)
+print(export_text(tree.best_estimator_, feature_names=["x1", "x2"]))   # the rules</code></pre>
+            </details>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Regression Trees</h2>
+            <p>For a numerical target, a <strong>regression tree</strong> chooses splits that most reduce the squared error and predicts the average target in each leaf. The prediction is a staircase: flexible enough to follow any shape with enough steps, but never smooth, and flat beyond the range of the training data, so trees cannot extrapolate a trend.</p>
+            <figure class="fig" data-fig="fig-ml-regtree">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 8. A regression tree on the running example.</strong> Each extra level of depth can double the number of steps.
+              </figcaption>
+            </figure>
+            <p>On the running example, depth 1 (one split) gives a test error of 0.143, depth 2 (four steps) 0.125, and depth 5, which gives every training point its own leaf, 0.151 with zero training error. None beats the smooth cubic of Part 1 (0.075): a staircase is a clumsy way to draw a sine wave from 15 points. Trees are at their best with many examples and features, where their ability to find interactions automatically pays off.</p>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Pruning and the Instability of Trees</h2>
+            <p>Left to grow, a tree keeps splitting until every leaf is pure, memorising the training data. The remedies are to stop early or to prune afterwards:</p>
+            <ul>
+              <li><strong>Pre-pruning</strong> limits growth: a maximum depth, a minimum number of points per leaf, or a minimum impurity decrease for a split.</li>
+              <li><strong>Post-pruning</strong> grows a large tree and then cuts back branches that do not earn their complexity. CART’s <strong>cost-complexity pruning</strong> penalises the number of leaves and chooses the penalty by cross-validation; C4.5 prunes using a pessimistic estimate of each branch’s error. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>, <a class="cite" href="#ref-12">12</a>]</span></li>
+            </ul>
+            <p>Even pruned, trees have a deeper weakness: <strong>instability</strong>. Because each split depends on the one above it, a small change in the training data can change the first split and with it the whole tree. Trees have high variance. Part 4 shows how averaging many different trees, in bagging, random forests and boosting, turns this weakness into one of the most powerful methods in machine learning.</p>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Comparing the Three</h2>
+            <div class="table-container" style="overflow-x:auto; margin:1.2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.92rem; line-height:1.5;">
+                <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.5rem;"></th><th style="padding:0.5rem;">k-nearest neighbours</th><th style="padding:0.5rem;">Naive Bayes</th><th style="padding:0.5rem;">Decision tree</th></tr></thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;font-weight:600;">Idea</td><td style="padding:0.5rem;">Similar cases have similar labels</td><td style="padding:0.5rem;">Bayes’ theorem with independent features</td><td style="padding:0.5rem;">A sequence of yes/no questions</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;font-weight:600;">Training</td><td style="padding:0.5rem;">None (store the data)</td><td style="padding:0.5rem;">One pass: count or average</td><td style="padding:0.5rem;">Greedy splitting</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;font-weight:600;">Prediction</td><td style="padding:0.5rem;">Slow: compare with all stored points</td><td style="padding:0.5rem;">Very fast</td><td style="padding:0.5rem;">Very fast</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;font-weight:600;">Boundary</td><td style="padding:0.5rem;">Any shape</td><td style="padding:0.5rem;">Smooth curves</td><td style="padding:0.5rem;">Axis-aligned steps</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;font-weight:600;">Feature scaling</td><td style="padding:0.5rem;">Essential</td><td style="padding:0.5rem;">Not needed</td><td style="padding:0.5rem;">Not needed</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;font-weight:600;">Many features</td><td style="padding:0.5rem;">Suffers (curse of dimensionality)</td><td style="padding:0.5rem;">Copes well (text)</td><td style="padding:0.5rem;">Copes, picks useful ones</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;font-weight:600;">Main hyperparameter</td><td style="padding:0.5rem;">k, distance</td><td style="padding:0.5rem;">Smoothing, distribution type</td><td style="padding:0.5rem;">Depth, leaf size, pruning</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;font-weight:600;">Moons test accuracy</td><td style="padding:0.5rem;">93% (k = 15)</td><td style="padding:0.5rem;">88%</td><td style="padding:0.5rem;">92% (depth 2)</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>For comparison, logistic regression scored 90% on the moons with raw features and 95% with polynomial features (Part 2). With only 60 test points, differences of a few percent are within the noise (<em>Making Sense of Data</em> Part 4): one test point is 1.7 percentage points.</p>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: why do trees still rule tabular data?</div>
+              <p>Deep learning has transformed images, speech and language, yet on ordinary tables of mixed features, the kind found in business, medicine and science, ensembles of decision trees usually still win. A 2022 benchmark study by Léo Grinsztajn, Edouard Oyallon and Gaël Varoquaux confirmed this on 45 data sets and suggested reasons: tabular data often contain uninformative features, irregular target functions, and features whose meaning depends on their individual axes, all of which suit trees better than neural networks. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span> Whether neural networks designed specifically for tables, or large pretrained models, will overtake tree ensembles is an active research question.</p>
+            </div>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Worked Example: Three Models on the Two Moons</h2>
+            <ol>
+              <li><strong>Data.</strong> 140 training and 60 test points of the two moons; the test points are held back.</li>
+              <li><strong>k-NN.</strong> Standardise (here the two features already have similar scales). 5-fold cross-validation over odd k gives about 94% for k from 5 to 21; choose k = 15. Test accuracy: 93%.</li>
+              <li><strong>Naive Bayes.</strong> No hyperparameters to tune. Test accuracy: 88%. Its probabilities are overconfident near the boundary.</li>
+              <li><strong>Decision tree.</strong> Cross-validation over depth favours 2 or 3; choose depth 2 (four leaves, readable as four rules). Test accuracy: 92%.</li>
+              <li><strong>Conclusion.</strong> k-NN and the shallow tree do about as well as logistic regression with engineered features (95%), and none of the differences is clearly larger than the noise of 60 test points. Choosing between them would depend on other needs: speed of prediction, interpretability, or how the data will grow.</li>
+            </ol>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: find the breaking points</div>
+              <ol>
+                <li>In Figure 3, choose the circles and raise k slowly. At what k does the inner class disappear, and why?</li>
+                <li>In Figure 5, how many dimensions does it take before the nearest neighbour is more than 80% as far away as the farthest?</li>
+                <li>In Figure 6, why are the naive Bayes ellipses always aligned with the axes? What would a model that allowed tilted ellipses gain on the moons? (That model is called quadratic discriminant analysis.)</li>
+                <li>In Figure 7, grow the tree on the circles one level at a time. How many levels does a staircase need to enclose a circle reasonably?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “decision trees explain themselves”</div>
+              <p><strong>The myth:</strong> a decision tree is always interpretable, because you can read its rules.</p>
+              <p><strong>The reality:</strong> a shallow tree is a model anyone can follow. But trees grown on real data often have hundreds of leaves, and the rules of a deep tree are no easier to understand than a page of numbers. Trees are also unstable: retrain on slightly different data and you may get very different rules, which undermines any explanation based on a single tree. Cynthia Rudin has argued that for high-stakes decisions we should insist on models that are genuinely interpretable, such as small, carefully optimised trees or scoring systems, rather than explaining complex models after the fact, and that such models often lose little accuracy. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span></p>
+              <p><strong>Why it matters:</strong> interpretability is a property of a particular model, not of a family of algorithms. Part 10 returns to how to explain predictions honestly.</p>
+            </div>
+          </section>
+
+          <section id="section-17">
+            <h2>17. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>k-NN predicts from the k most similar training examples; choose k by cross-validation and always scale the features.</li>
+                <li>In high dimensions distances lose meaning, the curse of dimensionality, so k-NN needs relevant features.</li>
+                <li>Naive Bayes applies Bayes’ theorem assuming independent features; it is fast, data-efficient and excellent for text, but its probabilities are overconfident.</li>
+                <li>Decision trees ask yes/no questions chosen to reduce impurity (Gini or entropy); they need no scaling and capture interactions.</li>
+                <li>Unpruned trees overfit and all trees are unstable; limit depth, prune, or move to ensembles (Part 4).</li>
+                <li>On small data sets, differences of a few points in test accuracy are often just noise.</li>
+              </ul>
+            </div>
+          </section>
+          <section id="section-18">
+            <h2>18. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Thomas Bayes</td>
+                <td style="padding:0.6rem 0.8rem;">c. 1701–1761<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Essay on the doctrine of chances (1763)</td>
+                <td style="padding:0.6rem 0.8rem;">Gave the theorem for reasoning from evidence to causes.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Evelyn Fix &amp; Joseph Hodges</td>
+                <td style="padding:0.6rem 0.8rem;">1904–1965 / 1922–2000<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Nearest-neighbour rule (1951)</td>
+                <td style="padding:0.6rem 0.8rem;">First described classification by nearest neighbours.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Thomas Cover &amp; Peter Hart</td>
+                <td style="padding:0.6rem 0.8rem;">1938–2012 / born 1941<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Nearest-neighbour pattern classification (1967)</td>
+                <td style="padding:0.6rem 0.8rem;">Proved the error guarantee of the nearest-neighbour rule.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Richard Bellman</td>
+                <td style="padding:0.6rem 0.8rem;">1920–1984<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Dynamic Programming</em> (1957)</td>
+                <td style="padding:0.6rem 0.8rem;">Coined the curse of dimensionality.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Leo Breiman</td>
+                <td style="padding:0.6rem 0.8rem;">1928–2005<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">CART (1984), later random forests</td>
+                <td style="padding:0.6rem 0.8rem;">Co-created classification and regression trees and championed ensembles.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Ross Quinlan</td>
+                <td style="padding:0.6rem 0.8rem;">born 1943<br>Australia</td>
+                <td style="padding:0.6rem 0.8rem;">ID3 (1986), C4.5 (1993)</td>
+                <td style="padding:0.6rem 0.8rem;">Developed information-gain trees and pruning.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Pedro Domingos</td>
+                <td style="padding:0.6rem 0.8rem;">born 1965<br>Portugal / USA</td>
+                <td style="padding:0.6rem 0.8rem;">Optimality of naive Bayes (1997)</td>
+                <td style="padding:0.6rem 0.8rem;">Explained why naive Bayes works despite its assumption.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Cynthia Rudin</td>
+                <td style="padding:0.6rem 0.8rem;">born 1976<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Interpretable models (2019)</td>
+                <td style="padding:0.6rem 0.8rem;">Argues for inherently interpretable models in high-stakes decisions.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-19">
+            <h2>19. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about neighbours, Bayes and trees.</p>
+            <figure class="fig" data-fig="fig-quiz-ml3">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-20">
+            <h2>20. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Hastie, Trevor, Tibshirani, Robert &amp; Friedman, Jerome.</strong> (2009). <em>The Elements of Statistical Learning</em>. 2nd ed. New York: Springer.</li>
+              <li id="ref-2"><strong>Fix, Evelyn &amp; Hodges, J. L.</strong> (1951). <em>Discriminatory Analysis. Nonparametric Discrimination: Consistency Properties</em>. Report No. 4, Project 21-49-004. Randolph Field, TX: USAF School of Aviation Medicine.</li>
+              <li id="ref-3"><strong>Cover, T. M. &amp; Hart, P. E.</strong> (1967). "Nearest neighbor pattern classification." <em>IEEE Transactions on Information Theory</em>, 13(1): 21–27.</li>
+              <li id="ref-4"><strong>Bellman, Richard.</strong> (1957). <em>Dynamic Programming</em>. Princeton: Princeton University Press.</li>
+              <li id="ref-5"><strong>Bayes, Thomas.</strong> (1763). "An essay towards solving a problem in the doctrine of chances." <em>Philosophical Transactions of the Royal Society of London</em>, 53: 370–418.</li>
+              <li id="ref-6"><strong>Domingos, Pedro &amp; Pazzani, Michael.</strong> (1997). "On the optimality of the simple Bayesian classifier under zero-one loss." <em>Machine Learning</em>, 29: 103–130.</li>
+              <li id="ref-7"><strong>Maron, M. E.</strong> (1961). "Automatic indexing: an experimental inquiry." <em>Journal of the ACM</em>, 8(3): 404–417.</li>
+              <li id="ref-8"><strong>Sahami, Mehran, Dumais, Susan, Heckerman, David &amp; Horvitz, Eric.</strong> (1998). "A Bayesian approach to filtering junk e-mail." In <em>Learning for Text Categorization: Papers from the 1998 AAAI Workshop</em>. Technical Report WS-98-05. Madison, WI: AAAI.</li>
+              <li id="ref-9"><strong>Morgan, James N. &amp; Sonquist, John A.</strong> (1963). "Problems in the analysis of survey data, and a proposal." <em>Journal of the American Statistical Association</em>, 58(302): 415–434.</li>
+              <li id="ref-10"><strong>Breiman, Leo, Friedman, Jerome H., Olshen, Richard A. &amp; Stone, Charles J.</strong> (1984). <em>Classification and Regression Trees</em>. Belmont, CA: Wadsworth.</li>
+              <li id="ref-11"><strong>Quinlan, J. R.</strong> (1986). "Induction of decision trees." <em>Machine Learning</em>, 1(1): 81–106.</li>
+              <li id="ref-12"><strong>Quinlan, J. Ross.</strong> (1993). <em>C4.5: Programs for Machine Learning</em>. San Mateo, CA: Morgan Kaufmann.</li>
+              <li id="ref-13"><strong>Grinsztajn, Léo, Oyallon, Edouard &amp; Varoquaux, Gaël.</strong> (2022). "Why do tree-based models still outperform deep learning on typical tabular data?" <em>Advances in Neural Information Processing Systems 35 (NeurIPS 2022), Datasets and Benchmarks Track</em>.</li>
+              <li id="ref-14"><strong>Rudin, Cynthia.</strong> (2019). "Stop explaining black box machine learning models for high stakes decisions and use interpretable models instead." <em>Nature Machine Intelligence</em>, 1: 206–215.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/inside-the-machine.html">Inside the Machine</a> (Part 3 of 10)</div>
+  <div class="series-banner-links">
+    <a href="linear-models.html">← Part 2: Linear Models: Gradient Descent, Regularisation and Logistic Regression</a>
+    <span>Part 4 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/neighbours-bayes-and-trees.js"></script>
+</body>
+</html>

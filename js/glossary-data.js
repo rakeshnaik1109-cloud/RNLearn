@@ -4509,5 +4509,82 @@ window.RNLEARN_GLOSSARY = [
   "Benign overfitting",
   "When a model fits noisy training data exactly yet still predicts new data well.",
   []
+ ],
+ [
+  "k-nearest neighbours",
+  "A method that predicts from the k most similar training examples: a majority vote for classification, an average for regression.",
+  [
+   "k-NN",
+   "k-nearest-neighbour",
+   "k-nearest neighbors"
+  ]
+ ],
+ [
+  "Lazy learner",
+  "A method that does no work at training time beyond storing the data, and computes everything when asked to predict.",
+  []
+ ],
+ [
+  "Euclidean distance",
+  "Straight-line distance: the square root of the sum of squared differences between coordinates.",
+  []
+ ],
+ [
+  "Manhattan distance",
+  "Distance measured as the sum of absolute differences between coordinates, like travelling along city blocks.",
+  []
+ ],
+ [
+  "Curse of dimensionality",
+  "The problems that arise as the number of features grows: data become sparse and distances lose meaning.",
+  []
+ ],
+ [
+  "Bayes’ theorem",
+  "The rule P(A|B) = P(B|A)P(A)/P(B) for updating probabilities in the light of evidence.",
+  [
+   "Bayes' theorem"
+  ]
+ ],
+ [
+  "Laplace smoothing",
+  "Adding a small count to every category so that unseen features do not get zero probability.",
+  []
+ ],
+ [
+  "Decision tree",
+  "A model that predicts by a sequence of yes/no questions about the features, ending in leaves that give the prediction.",
+  [
+   "decision trees"
+  ]
+ ],
+ [
+  "Gini impurity",
+  "The probability that two points drawn at random from a node belong to different classes; zero for a pure node.",
+  []
+ ],
+ [
+  "Information gain",
+  "The decrease in entropy produced by splitting a node in a decision tree.",
+  []
+ ],
+ [
+  "Regression tree",
+  "A decision tree that predicts a number, the average target of the training points in each leaf.",
+  [
+   "regression trees"
+  ]
+ ],
+ [
+  "Pruning",
+  "Removing branches of a decision tree that add complexity without improving predictions on new data.",
+  [
+   "cost-complexity pruning"
+  ]
+ ],
+ [
+  "CART",
+  "Classification and regression trees: the tree-growing and pruning method of Breiman, Friedman, Olshen and Stone (1984).",
+  []
  ]
 ];
