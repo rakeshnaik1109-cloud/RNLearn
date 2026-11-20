@@ -51,6 +51,23 @@
     "type": "tutorial"
   },
   {
+    "slug": "margins-and-kernels",
+    "url": "articles/margins-and-kernels.html",
+    "title": "Margins and Kernels: Support Vector Machines and Gaussian Processes",
+    "summary": "The maximum-margin classifier, support vectors, soft margins and hinge loss, the kernel trick, RBF and polynomial kernels, support vector regression, and Gaussian processes with uncertainty.",
+    "subject": "AI & Machine Learning",
+    "tags": [
+      "machine-learning",
+      "support-vector-machines",
+      "kernels",
+      "gaussian-processes",
+      "classification",
+      "data-analysis"
+    ],
+    "date": "2026-11-20",
+    "type": "tutorial"
+  },
+  {
     "slug": "linear-models",
     "url": "articles/linear-models.html",
     "title": "Linear Models: Gradient Descent, Regularisation and Logistic Regression",

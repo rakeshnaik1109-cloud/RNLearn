@@ -1,5 +1,31 @@
 [
   {
+    "slug": "margins-and-kernels",
+    "title": "Margins and Kernels: Support Vector Machines and Gaussian Processes",
+    "summary": "The maximum-margin classifier, support vectors, soft margins and hinge loss, the kernel trick, RBF and polynomial kernels, support vector regression, and Gaussian processes with uncertainty.",
+    "subject": "AI & Machine Learning",
+    "tags": [
+      "machine-learning",
+      "support-vector-machines",
+      "kernels",
+      "gaussian-processes",
+      "classification",
+      "data-analysis"
+    ],
+    "date": "2026-11-20",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 18,
+    "series": {
+      "id": "inside-the-machine",
+      "part": 5
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
     "slug": "ensembles",
     "title": "Ensembles: Bagging, Random Forests and Boosting",
     "summary": "Why combining models works, bagging and random forests, out-of-bag error and feature importance, AdaBoost, gradient boosting and XGBoost, stacking, and how to compare ensembles fairly.",

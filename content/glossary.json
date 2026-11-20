@@ -4675,5 +4675,86 @@
       "stacked generalisation",
       "stacked generalization"
     ]
+  },
+  {
+    "term": "Support vectors",
+    "definition": "The training points on or inside the margin of an SVM, which alone determine the boundary.",
+    "forms": [
+      "support vector"
+    ]
+  },
+  {
+    "term": "Soft margin",
+    "definition": "An SVM margin that allows some points inside it or on the wrong side, at a cost set by the parameter C.",
+    "forms": []
+  },
+  {
+    "term": "Hinge loss",
+    "definition": "The loss max(0, 1 − y·f(x)), zero for points correctly classified beyond the margin.",
+    "forms": []
+  },
+  {
+    "term": "Kernel trick",
+    "definition": "Replacing inner products by a kernel function so that a linear method works in a high-dimensional feature space without computing the features.",
+    "forms": []
+  },
+  {
+    "term": "Kernel function",
+    "definition": "A function giving the inner product of two points in some feature space, used as a measure of similarity.",
+    "forms": [
+      "kernel functions"
+    ]
+  },
+  {
+    "term": "RBF kernel",
+    "definition": "The radial basis function or Gaussian kernel exp(−γ‖a − b‖²), whose similarity decays with distance.",
+    "forms": [
+      "Gaussian kernel",
+      "radial basis function kernel"
+    ]
+  },
+  {
+    "term": "Sequential minimal optimisation",
+    "definition": "Platt’s algorithm for training SVMs by repeatedly optimising two dual variables at a time.",
+    "forms": [
+      "SMO",
+      "sequential minimal optimization"
+    ]
+  },
+  {
+    "term": "Platt scaling",
+    "definition": "Converting classifier scores into probabilities by fitting a logistic curve on held-out data.",
+    "forms": []
+  },
+  {
+    "term": "Support vector regression",
+    "definition": "Regression that ignores errors inside a tube of half-width ε and penalises larger errors linearly.",
+    "forms": [
+      "SVR"
+    ]
+  },
+  {
+    "term": "Kernel PCA",
+    "definition": "Principal component analysis carried out in a kernel feature space, finding nonlinear directions of variation.",
+    "forms": []
+  },
+  {
+    "term": "Gaussian process",
+    "definition": "A model treating an unknown function as random, with a kernel giving correlations; predictions come with uncertainty.",
+    "forms": [
+      "Gaussian processes"
+    ]
+  },
+  {
+    "term": "Bayesian optimisation",
+    "definition": "Optimising an expensive function by modelling it with a Gaussian process and choosing each new trial to balance exploration and exploitation.",
+    "forms": [
+      "Bayesian optimization"
+    ]
+  },
+  {
+    "term": "Neural tangent kernel",
+    "definition": "The kernel describing how an infinitely wide neural network behaves during gradient-descent training.",
+    "forms": []
   }
 ]

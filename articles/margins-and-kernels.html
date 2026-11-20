@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Margins and Kernels: Support Vector Machines and Gaussian Processes — RNLearn</title>
+  <meta name="description" content="The maximum-margin classifier, support vectors, soft margins and hinge loss, the kernel trick, RBF and polynomial kernels, support vector regression, and Gaussian processes with uncertainty.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/margins-and-kernels.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Margins and Kernels: Support Vector Machines and Gaussian Processes — RNLearn">
+  <meta property="og:description" content="The maximum-margin classifier, support vectors, soft margins and hinge loss, the kernel trick, RBF and polynomial kernels, support vector regression, and Gaussian processes with uncertainty.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/margins-and-kernels.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Margins and Kernels: Support Vector Machines and Gaussian Processes — RNLearn">
+  <meta name="twitter:description" content="The maximum-margin classifier, support vectors, soft margins and hinge loss, the kernel trick, RBF and polynomial kernels, support vector regression, and Gaussian processes with uncertainty.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Margins and Kernels: Support Vector Machines and Gaussian Processes",
+    "description": "The maximum-margin classifier, support vectors, soft margins and hinge loss, the kernel trick, RBF and polynomial kernels, support vector regression, and Gaussian processes with uncertainty.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-20",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/margins-and-kernels.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/ai-machine-learning.html" class="post-subject-tag" data-subject="ai-machine-learning">AI &amp; Machine Learning</a>
+        </div>
+        <h1 class="article-title">Margins and Kernels: Support Vector Machines and Gaussian Processes</h1>
+        <p class="article-standfirst">
+          Run the boundary down the middle of the widest street, then lift the data into a space where a straight line will do. Support vector machines and their kernel cousins, the stars of classical machine learning, explained and tried out.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-20">20 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>18 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/inside-the-machine.html">Inside the Machine</a> (Part 5 of 10)</div>
+  <div class="series-banner-links">
+    <a href="ensembles.html">← Part 4: Ensembles: Bagging, Random Forests and Boosting</a>
+    <span>Part 6 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. The Widest Street</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. The Maximum-Margin Classifier</a></li>
+              <li><a class="toc-link" href="#section-4">4. The Soft Margin and the Hinge Loss</a></li>
+              <li><a class="toc-link" href="#section-5">5. Solving It: the Dual Problem and SMO</a></li>
+              <li><a class="toc-link" href="#section-6">6. The Kernel Trick</a></li>
+              <li><a class="toc-link" href="#section-7">7. Kernels and How to Tune Them</a></li>
+              <li><a class="toc-link" href="#section-8">8. What an SVM Costs</a></li>
+              <li><a class="toc-link" href="#section-9">9. Support Vector Regression</a></li>
+              <li><a class="toc-link" href="#section-10">10. Kernels Beyond the SVM</a></li>
+              <li><a class="toc-link" href="#section-11">11. Gaussian Processes: Kernels with Uncertainty</a></li>
+              <li><a class="toc-link" href="#section-12">12. When to Use Kernel Methods</a></li>
+              <li><a class="toc-link" href="#section-13">13. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-14">14. Worked Example: Kernels on the Running Data</a></li>
+              <li><a class="toc-link" href="#section-15">15. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-16">16. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-17">17. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-18">18. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-19">19. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-20">20. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>You will learn:</strong> the maximum-margin idea behind support vector machines; support vectors and the soft margin; hinge loss; the kernel trick that turns a linear method into a nonlinear one; linear, polynomial and RBF kernels and how to tune them; support vector regression; and Gaussian processes, which add honest uncertainty to kernel predictions.</p>
+            <p><strong>You need:</strong> Parts 1 and 2 (loss, regularisation, linear classifiers). The fold-outs use inner products and a little optimisation.</p>
+            <p><strong>Try:</strong> five interactive figures: the widest street, lifting points with x², a kernel SVM playground, an ε-tube for regression and a Gaussian process with error bands.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. The Widest Street</h2>
+            <p>If two groups of points can be separated by a straight line, there are usually infinitely many such lines. Which is best? A line that grazes some points may misclassify the next point that lands nearby. Intuitively, the safest choice runs down the middle of the widest empty “street” between the classes. That simple idea, the <strong>maximum margin</strong>, combined with a mathematical trick for drawing curved boundaries, produced the <strong>support vector machine</strong> (SVM), which in the late 1990s and 2000s was the leading general-purpose classifier. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <p>This part completes the classical half of the series. Kernels connect it to what follows: they are another way, besides neural networks, of letting a linear method learn nonlinear patterns, and the theory linking the two is an active area of research.</p>
+            <figure class="fig" data-fig="fig-ml-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Tap any part to see what it covers.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-ml5-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Margins and kernels, 1909–2018.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. The Maximum-Margin Classifier</h2>
+            <p>A linear classifier predicts with the sign of w<sup>⊤</sup>x + b (Part 2). The <strong>margin</strong> is the distance from the boundary to the nearest training points. The maximum-margin classifier chooses w and b to make it as large as possible while classifying every training point correctly. Vladimir Vapnik and Alexander Lerner described such an “optimal hyperplane” in 1963. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+            <p>The solution has a remarkable property. It depends only on the few points that lie exactly on the edges of the street, the <strong>support vectors</strong>. Every other point could be moved, or deleted, without changing the boundary at all. A model defined by a handful of critical examples is compact, and the number of support vectors gives a rough indication of how complex the boundary is.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">The maths: maximising the margin</summary>
+              <p style="margin-top:0.6rem;">With labels y<sub>i</sub> = ±1, scale w and b so that the closest points satisfy y<sub>i</sub>(w<sup>⊤</sup>x<sub>i</sub> + b) = 1. The margin width is then 2/‖w‖, so maximising it means minimising ‖w‖:</p>
+              <p>$$\min_{\mathbf{w},b}\ \tfrac{1}{2}\lVert\mathbf{w}\rVert^2 \quad\text{subject to}\quad y_i(\mathbf{w}^\top\mathbf{x}_i+b)\ge 1 \ \text{for all } i.$$</p>
+              <p>This is a convex quadratic programme: it has a single best solution and no local minima to get stuck in, unlike the neural networks of later parts.</p>
+            </details>
+          </section>
+
+          <section id="section-4">
+            <h2>4. The Soft Margin and the Hinge Loss</h2>
+            <p>Real data are rarely perfectly separable, and a single outlier can drag a hard margin badly out of place. In 1995 Corinna Cortes and Vladimir Vapnik introduced the <strong>soft margin</strong>: points may sit inside the street, or even on the wrong side, at a cost. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span> A penalty parameter <strong>C</strong> sets the price of each violation. Small C buys a wide street that tolerates many violations; large C narrows the street to violate as little as possible, which risks overfitting.</p>
+            <figure class="fig" data-fig="fig-ml-svm-linear">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. The widest street.</strong> A linear SVM on the two clouds. Dashed lines mark the margin; circles mark the support vectors (red: on or inside the margin). Change C and watch the street.
+              </figcaption>
+            </figure>
+            <p>On the two clouds, C = 0.01 gives a street 2.7 units wide in which 104 of the 140 training points are support vectors; C = 1 narrows it to 0.76 with 24 support vectors; C = 100 to 0.44 with 15. Test accuracy barely changes (88–92%), because the boundary itself moves little.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">The maths: the soft margin is regularised hinge loss</summary>
+              <p style="margin-top:0.6rem;">The soft-margin SVM minimises</p>
+              <p>$$\tfrac{1}{2}\lVert\mathbf{w}\rVert^2 + C\sum_i \max\big(0,\ 1 - y_i(\mathbf{w}^\top\mathbf{x}_i + b)\big).$$</p>
+              <p>The second term is the <strong>hinge loss</strong>: zero for points correctly classified beyond the margin, growing linearly for violations. So an SVM is a linear classifier, like logistic regression, with a different loss (hinge rather than cross-entropy) and an L2 penalty, with C playing the role of 1/λ in Part 2. Unlike cross-entropy, the hinge loss is exactly zero for confident correct predictions, which is why those points drop out of the solution.</p>
+            </details>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Solving It: the Dual Problem and SMO</h2>
+            <p>SVMs are usually solved in a rearranged form, the <strong>dual problem</strong>, in which each training point gets a weight α<sub>i</sub> between 0 and C. Points beyond the margin get α<sub>i</sub> = 0; support vectors get α<sub>i</sub> > 0. The prediction becomes a weighted sum over support vectors:</p>
+            <p>$$f(\mathbf{x}) = \sum_{i\in\text{SV}} \alpha_i\,y_i\,\mathbf{x}_i^\top\mathbf{x} + b.$$</p>
+            <p>Notice that the training points enter only through inner products x<sub>i</sub><sup>⊤</sup>x. That is the door to the kernel trick. For training, John Platt’s <strong>sequential minimal optimisation</strong> (SMO, 1998) solves the dual by repeatedly optimising just two α’s at a time, each step with a simple closed-form solution. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> Refined versions power the LIBSVM library behind scikit-learn’s <code>SVC</code>, and the figures on this page use the same method.</p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. The Kernel Trick</h2>
+            <p>Part 2 showed that a linear model can draw curves if we add features such as x². The same works for SVMs: map each point into a richer feature space, then find a maximum-margin <em>linear</em> boundary there. Figure 4 shows the idea in one dimension. The two classes cannot be split by one threshold on the line, but after adding x² as a second coordinate, a straight line separates them.</p>
+            <figure class="fig" data-fig="fig-ml-lift">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Lifting a line into a plane.</strong> Slide to add the feature x² and watch an inseparable problem become separable by a straight line.
+              </figcaption>
+            </figure>
+            <p>The trouble is that rich feature spaces are huge. All products of 100 features up to degree 3 number over 176,000. The <strong>kernel trick</strong> sidesteps this. Because the SVM needs only inner products between points, we can replace x<sub>i</sub><sup>⊤</sup>x by a <strong>kernel function</strong> K(x<sub>i</sub>, x) that computes the inner product in the feature space directly from the original features, without ever constructing the features. Mark Aizerman, Emmanuel Braverman and Lev Rozonoer used this interpretation of kernels in 1964; <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> in 1992 Bernhard Boser, Isabelle Guyon and Vapnik combined it with maximum margins to create the modern SVM. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">The maths: a kernel in action</summary>
+              <p style="margin-top:0.6rem;">For two-dimensional points a and b, the kernel K(a, b) = (a<sup>⊤</sup>b)² expands as</p>
+              <p>$$(a_1b_1 + a_2b_2)^2 = a_1^2b_1^2 + 2a_1a_2b_1b_2 + a_2^2b_2^2 = \phi(\mathbf{a})^\top\phi(\mathbf{b}),$$</p>
+              <p>with the feature map φ(x) = (x<sub>1</sub>², √2 x<sub>1</sub>x<sub>2</sub>, x<sub>2</sub>²). Computing (a<sup>⊤</sup>b)² takes three multiplications; it gives exactly the inner product in the three-dimensional space of products. For the RBF kernel, the corresponding feature space is infinite-dimensional, yet the kernel is a single exponential.</p>
+            </details>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Kernels and How to Tune Them</h2>
+            <p>Not every function is a valid kernel. It must correspond to an inner product in some feature space, a condition characterised by James Mercer’s theorem of 1909 and the theory of reproducing kernel Hilbert spaces developed by Nachman Aronszajn in 1950. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>, <a class="cite" href="#ref-8">8</a>]</span> The common choices are:</p>
+            <ul>
+              <li><strong>Linear</strong>: K(a, b) = a<sup>⊤</sup>b. The plain SVM; best for very many features, such as text.</li>
+              <li><strong>Polynomial</strong>: K(a, b) = (γ a<sup>⊤</sup>b + 1)<sup>d</sup>. All products of features up to degree d.</li>
+              <li><strong>RBF</strong> (radial basis function, or Gaussian): K(a, b) = exp(−γ‖a − b‖²). Similarity that decays with distance; the default choice for nonlinear problems.</li>
+            </ul>
+            <figure class="fig" data-fig="fig-ml-svm-kernel">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. The kernel SVM playground.</strong> Choose a data set and a kernel, and tune C and γ. Circles mark support vectors; dashed lines, the margin.
+              </figcaption>
+            </figure>
+            <p>With C = 1, an RBF kernel with γ = 1 scores 95% on the moons and 98% on the circles, where the linear kernel manages 88% and 53%. Raising γ to 100 makes each support vector’s influence tiny: training accuracy approaches 100% but test accuracy falls to 83% on the moons, a classic case of overfitting with nearly every training point (131 of 140) a support vector. C and γ interact, so they are tuned together, usually by a grid search with cross-validation on logarithmic scales (Part 10).</p>
+            <div class="callout callout-warn">
+              <div class="callout-header">Watch out: scale features for kernel methods</div>
+              <p>RBF and polynomial kernels depend on distances and inner products, so features on different scales distort them, as with k-NN in Part 3. Standardise features, inside the cross-validation folds.</p>
+            </div>
+          </section>
+
+          <section id="section-8">
+            <h2>8. What an SVM Costs</h2>
+            <p>Kernel methods compare every pair of training points: the kernel matrix has n² entries, and training typically takes between n² and n³ operations. For a few thousand examples that is fast; for millions it is impractical without approximations. Prediction costs one kernel evaluation per support vector. SVMs also output scores rather than probabilities; Platt scaling, fitting a logistic curve to the scores on held-out data, converts them into calibrated probabilities. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span> For more than two classes, SVMs combine several binary classifiers, one for each pair of classes (scikit-learn’s default) or one for each class against the rest.</p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Support Vector Regression</h2>
+            <p>The margin idea also works for numbers. <strong>Support vector regression</strong> (SVR), introduced by Harris Drucker and colleagues in 1997, fits a function surrounded by a tube of half-width ε. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span> Errors smaller than ε cost nothing; larger errors cost in proportion to how far they stick out. Points inside the tube have no influence; only those on or outside it become support vectors.</p>
+            <figure class="fig" data-fig="fig-ml-svr">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. Support vector regression on the running example.</strong> An RBF-kernel SVR with its ε-tube. Circled points are support vectors. Change ε, C and γ.
+              </figcaption>
+            </figure>
+            <p>With ε = 0.2, C = 10 and γ = 10, the SVR uses 7 of the 15 training points as support vectors and reaches a test error of 0.062, below the cubic polynomial of Part 1 (0.075) and close to the noise floor of 0.0625. Narrowing the tube to ε = 0.1 uses 9 support vectors for a similar test error (0.061); widening it to 0.5 leaves only 4 and the fit becomes too crude (0.18).</p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Kernels Beyond the SVM</h2>
+            <p>Any method that can be written in terms of inner products can be “kernelised”. <strong>Kernel ridge regression</strong> is the ridge regression of Part 2 with a kernel. <strong>Kernel PCA</strong>, introduced by Bernhard Schölkopf, Alexander Smola and Klaus-Robert Müller in 1998, finds nonlinear directions of variation in data. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span> Kernels have been designed for strings, graphs, molecules and images, letting the same algorithms compare DNA sequences or chemical structures directly. Choosing a kernel is a way of building in knowledge about what makes two examples similar: an inductive bias, in the language of Part 1.</p>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Gaussian Processes: Kernels with Uncertainty</h2>
+            <p>A <strong>Gaussian process</strong> (GP) treats the unknown function itself as random, with the kernel describing how strongly the values at two points are correlated. Conditioning on the training data gives, for any new x, not just a prediction but a full normal distribution: a mean and an uncertainty. Gaussian processes have long been used in geostatistics, where the method is known as kriging, and Carl Rasmussen and Christopher Williams’ 2006 book made them a standard machine-learning tool. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span></p>
+            <figure class="fig" data-fig="fig-ml-gp">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 7. Gaussian process regression on the running example.</strong> The purple line is the predicted mean; the band is the 95% interval for a new observation. Change the length-scale and noise, or fit them by maximum likelihood.
+              </figcaption>
+            </figure>
+            <p>Fitted by maximising the marginal likelihood of the training data, the GP chooses a length-scale of about 0.25 and a noise level of about 0.18, close to the true 0.25. Its test error is 0.059, the best of any method in the series so far, and its 95% band contains 56 of the 60 test points (93%). Most strikingly, the band balloons in the gap between x = 0.13 and 0.37 where there are no training points: the model is honest about what it does not know. Gaussian processes are the engine of <strong>Bayesian optimisation</strong>, used to tune hyperparameters and design experiments with few trials.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">In code: SVMs, SVR and Gaussian processes in scikit-learn</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">from sklearn.svm import SVC, SVR
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import GridSearchCV
+from sklearn.gaussian_process import GaussianProcessRegressor
+from sklearn.gaussian_process.kernels import RBF, WhiteKernel
+
+svm = GridSearchCV(make_pipeline(StandardScaler(), SVC(kernel="rbf")),
+                   {"svc__C": [0.1, 1, 10, 100], "svc__gamma": [0.01, 0.1, 1, 10]},
+                   cv=5).fit(X_train, y_train)
+print(svm.best_params_, svm.score(X_test, y_test))
+
+svr = SVR(kernel="rbf", C=10, epsilon=0.2, gamma=10).fit(x_train.reshape(-1, 1), y)
+gp = GaussianProcessRegressor(RBF(0.1) + WhiteKernel(0.05)).fit(x_train.reshape(-1, 1), y)
+mean, std = gp.predict(x_new.reshape(-1, 1), return_std=True)   # predictions with uncertainty
+print(gp.kernel_)                                                # fitted length-scale and noise</code></pre>
+            </details>
+          </section>
+
+          <section id="section-12">
+            <h2>12. When to Use Kernel Methods</h2>
+            <ul>
+              <li><strong>Good fit:</strong> small to medium data sets (hundreds to tens of thousands of examples), many features relative to examples, well-defined similarity measures, and problems where a smooth boundary is expected. A linear SVM remains excellent for text classification.</li>
+              <li><strong>Gaussian processes</strong> when uncertainty matters and data are scarce: calibration curves, surrogate models of expensive simulations, Bayesian optimisation.</li>
+              <li><strong>Poor fit:</strong> very large data sets (training cost), raw images, audio or text where deep networks learn better features, and tables with mixed and categorical features, where tree ensembles (Part 4) usually win.</li>
+            </ul>
+            <p>A broad 2014 comparison of 179 classifiers on 121 data sets found random forests and SVMs with Gaussian kernels among the most accurate families overall. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span></p>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: are neural networks secretly kernel machines?</div>
+              <p>Two lines of research connect kernels to deep learning. In 2007 Ali Rahimi and Benjamin Recht showed that kernels can be approximated by a layer of random features followed by a linear model, which looks very like a neural network whose first layer is never trained. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span> In 2018 Arthur Jacot, Franck Gabriel and Clément Hongler proved that in the limit of infinitely wide layers, a neural network trained by gradient descent behaves exactly like a kernel method with a particular kernel, the <strong>neural tangent kernel</strong>. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span> Yet real networks of finite width seem to learn their features in ways no fixed kernel can, which may be the source of their power. How much of deep learning kernel theory can explain is one of the central questions of modern machine-learning theory.</p>
+            </div>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Worked Example: Kernels on the Running Data</h2>
+            <ol>
+              <li><strong>Classification.</strong> RBF SVM with C = 1, γ = 1: test accuracy 90% on the two clouds, 95% on the moons and 98% on the circles, using 36, 40 and 43 support vectors. The polynomial kernel of degree 3 does almost as well (85%, 93%, 98%); the linear kernel fails on the circles (53%).</li>
+              <li><strong>Overfitting check.</strong> With γ = 100, training accuracy rises to 99–100% and test accuracy drops (75% on the clouds, 83% on the moons), with almost every point a support vector: a warning sign worth watching for.</li>
+              <li><strong>Regression.</strong> SVR (ε = 0.2, C = 10, γ = 10): test error 0.062. Gaussian process with hyperparameters fitted by maximum likelihood on the training data: 0.059. Both beat every earlier method on the running example (best so far: the cubic, 0.075), and the GP also says how sure it is.</li>
+              <li><strong>Caveat.</strong> The SVM and SVR settings here were picked by hand for illustration; in practice choose C, γ and ε by cross-validation on the training data only (Parts 1 and 10). The GP’s hyperparameters were fitted to the training data alone, which is legitimate.</li>
+            </ol>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: margins and kernels</div>
+              <ol>
+                <li>In Figure 3, find the C at which the number of support vectors stops changing. Which points remain?</li>
+                <li>In Figure 5, with the RBF kernel on the moons, find the γ that gives the best test accuracy, then the γ that gives the most support vectors. Are they the same?</li>
+                <li>In Figure 6, set ε = 0. How many support vectors are there now, and why?</li>
+                <li>In Figure 7, set a very small length-scale. What happens to the band between the training points, and in the gap?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “deep learning made SVMs obsolete”</div>
+              <p><strong>The myth:</strong> since neural networks took over image recognition in 2012, support vector machines are a museum piece.</p>
+              <p><strong>The reality:</strong> deep learning did replace SVMs where raw, high-dimensional data and huge labelled sets are available, such as images, speech and language. But on smaller, structured problems, kernel methods remain strong and are often easier to train: the 2014 comparison of 179 classifiers ranked Gaussian-kernel SVMs among the best families. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span> Their ideas live on everywhere: the hinge loss in modern classifiers, margins in theories of generalisation, kernels in Gaussian processes and Bayesian optimisation, and the neural tangent kernel in the theory of deep learning itself. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span></p>
+              <p><strong>Why it matters:</strong> fashions in machine learning change faster than the problems. The right tool depends on the size and shape of the data, not on what is newest.</p>
+            </div>
+          </section>
+
+          <section id="section-17">
+            <h2>17. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>An SVM chooses the boundary with the widest margin; only the support vectors determine it.</li>
+                <li>The soft margin trades margin width against violations through C; it is an L2-regularised hinge loss.</li>
+                <li>The kernel trick replaces inner products by kernel functions, giving nonlinear boundaries without computing new features.</li>
+                <li>The RBF kernel’s γ controls the reach of each support vector; tune C and γ together by cross-validation, after scaling features.</li>
+                <li>SVR ignores errors inside an ε-tube; Gaussian processes give predictions with honest uncertainty.</li>
+                <li>Kernel methods excel on small and medium data; their cost grows quickly with the number of examples.</li>
+              </ul>
+            </div>
+            <div class="table-container" style="overflow-x:auto; margin:1.2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.92rem; line-height:1.5;">
+                <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.5rem;">Method (Parts 1–5)</th><th style="padding:0.5rem;">Running example test error</th><th style="padding:0.5rem;">Moons test accuracy</th></tr></thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Polynomial (degree 3) / logistic regression</td><td style="padding:0.5rem;">0.075</td><td style="padding:0.5rem;">90% (raw), 95% (degree 3)</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Lasso, degree 9</td><td style="padding:0.5rem;">0.088</td><td style="padding:0.5rem;">—</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">k-NN (k = 5 / k = 15)</td><td style="padding:0.5rem;">0.088</td><td style="padding:0.5rem;">93%</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Decision tree (depth 2)</td><td style="padding:0.5rem;">0.125</td><td style="padding:0.5rem;">92%</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Gradient boosting / random forest</td><td style="padding:0.5rem;">≈0.12</td><td style="padding:0.5rem;">92%</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">SVR / RBF SVM</td><td style="padding:0.5rem;">0.062</td><td style="padding:0.5rem;">95%</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Gaussian process</td><td style="padding:0.5rem;">0.059</td><td style="padding:0.5rem;">—</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>With one feature and 15 points, smooth kernel methods suit the running example particularly well; the ranking would differ on large, many-featured data, and differences of a few percent on 60 test points are within the noise (Part 4).</p>
+          </section>
+          <section id="section-18">
+            <h2>18. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">James Mercer</td>
+                <td style="padding:0.6rem 0.8rem;">1883–1932<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Mercer’s theorem (1909)</td>
+                <td style="padding:0.6rem 0.8rem;">Characterised functions that act as inner products, the basis of kernels.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Vladimir Vapnik</td>
+                <td style="padding:0.6rem 0.8rem;">born 1936<br>USSR / USA</td>
+                <td style="padding:0.6rem 0.8rem;">Optimal hyperplane (1963), SVMs (1992, 1995)</td>
+                <td style="padding:0.6rem 0.8rem;">Co-invented support vector machines and statistical learning theory.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Mark Aizerman, Emmanuel Braverman &amp; Lev Rozonoer</td>
+                <td style="padding:0.6rem 0.8rem;">1913–1992 / 1931–1977 / 1931–2019<br>USSR</td>
+                <td style="padding:0.6rem 0.8rem;">Potential functions (1964)</td>
+                <td style="padding:0.6rem 0.8rem;">First interpreted kernels as inner products in a feature space.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Isabelle Guyon &amp; Bernhard Boser</td>
+                <td style="padding:0.6rem 0.8rem;">born 1961 / born 1956<br>France / USA</td>
+                <td style="padding:0.6rem 0.8rem;">Kernel SVM (1992)</td>
+                <td style="padding:0.6rem 0.8rem;">With Vapnik, combined the kernel trick with maximum margins.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Corinna Cortes</td>
+                <td style="padding:0.6rem 0.8rem;">born 1961<br>Denmark / USA</td>
+                <td style="padding:0.6rem 0.8rem;">Soft-margin SVM (1995)</td>
+                <td style="padding:0.6rem 0.8rem;">With Vapnik, made SVMs practical for noisy data.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John Platt</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">SMO (1998), Platt scaling (1999)</td>
+                <td style="padding:0.6rem 0.8rem;">Made SVM training fast and their outputs probabilistic.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Bernhard Schölkopf</td>
+                <td style="padding:0.6rem 0.8rem;">born 1968<br>Germany</td>
+                <td style="padding:0.6rem 0.8rem;">Kernel PCA (1998), <em>Learning with Kernels</em></td>
+                <td style="padding:0.6rem 0.8rem;">Extended the kernel trick far beyond classification.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Carl Rasmussen &amp; Christopher Williams</td>
+                <td style="padding:0.6rem 0.8rem;"><br>Denmark / England</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Gaussian Processes for Machine Learning</em> (2006)</td>
+                <td style="padding:0.6rem 0.8rem;">Made Gaussian processes a standard machine-learning tool.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-19">
+            <h2>19. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about margins and kernels.</p>
+            <figure class="fig" data-fig="fig-quiz-ml5">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-20">
+            <h2>20. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Cortes, Corinna &amp; Vapnik, Vladimir.</strong> (1995). "Support-vector networks." <em>Machine Learning</em>, 20(3): 273–297.</li>
+              <li id="ref-2"><strong>Schölkopf, Bernhard &amp; Smola, Alexander J.</strong> (2002). <em>Learning with Kernels</em>. Cambridge, MA: MIT Press.</li>
+              <li id="ref-3"><strong>Vapnik, V. &amp; Lerner, A.</strong> (1963). "Pattern recognition using generalized portrait method." <em>Automation and Remote Control</em>, 24: 774–780.</li>
+              <li id="ref-4"><strong>Platt, John C.</strong> (1998). <em>Sequential Minimal Optimization: A Fast Algorithm for Training Support Vector Machines</em>. Technical Report MSR-TR-98-14. Redmond, WA: Microsoft Research.</li>
+              <li id="ref-5"><strong>Aizerman, M. A., Braverman, E. M. &amp; Rozonoer, L. I.</strong> (1964). "Theoretical foundations of the potential function method in pattern recognition learning." <em>Automation and Remote Control</em>, 25: 821–837.</li>
+              <li id="ref-6"><strong>Boser, Bernhard E., Guyon, Isabelle M. &amp; Vapnik, Vladimir N.</strong> (1992). "A training algorithm for optimal margin classifiers." In <em>Proceedings of the Fifth Annual Workshop on Computational Learning Theory (COLT)</em>, pp. 144–152.</li>
+              <li id="ref-7"><strong>Mercer, J.</strong> (1909). "Functions of positive and negative type, and their connection with the theory of integral equations." <em>Philosophical Transactions of the Royal Society A</em>, 209: 415–446.</li>
+              <li id="ref-8"><strong>Aronszajn, N.</strong> (1950). "Theory of reproducing kernels." <em>Transactions of the American Mathematical Society</em>, 68(3): 337–404.</li>
+              <li id="ref-9"><strong>Platt, John C.</strong> (1999). "Probabilistic outputs for support vector machines and comparisons to regularized likelihood methods." In A. Smola et al. (eds.), <em>Advances in Large Margin Classifiers</em>, pp. 61–74. Cambridge, MA: MIT Press.</li>
+              <li id="ref-10"><strong>Drucker, Harris, Burges, Christopher J. C., Kaufman, Linda, Smola, Alex &amp; Vapnik, Vladimir.</strong> (1997). "Support vector regression machines." <em>Advances in Neural Information Processing Systems 9</em>, pp. 155–161.</li>
+              <li id="ref-11"><strong>Schölkopf, Bernhard, Smola, Alexander &amp; Müller, Klaus-Robert.</strong> (1998). "Nonlinear component analysis as a kernel eigenvalue problem." <em>Neural Computation</em>, 10(5): 1299–1319.</li>
+              <li id="ref-12"><strong>Rasmussen, Carl Edward &amp; Williams, Christopher K. I.</strong> (2006). <em>Gaussian Processes for Machine Learning</em>. Cambridge, MA: MIT Press.</li>
+              <li id="ref-13"><strong>Fernández-Delgado, Manuel, Cernadas, Eva, Barro, Senén &amp; Amorim, Dinani.</strong> (2014). "Do we need hundreds of classifiers to solve real world classification problems?" <em>Journal of Machine Learning Research</em>, 15: 3133–3181.</li>
+              <li id="ref-14"><strong>Rahimi, Ali &amp; Recht, Benjamin.</strong> (2007). "Random features for large-scale kernel machines." <em>Advances in Neural Information Processing Systems 20</em>.</li>
+              <li id="ref-15"><strong>Jacot, Arthur, Gabriel, Franck &amp; Hongler, Clément.</strong> (2018). "Neural tangent kernel: convergence and generalization in neural networks." <em>Advances in Neural Information Processing Systems 31</em>.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/inside-the-machine.html">Inside the Machine</a> (Part 5 of 10)</div>
+  <div class="series-banner-links">
+    <a href="ensembles.html">← Part 4: Ensembles: Bagging, Random Forests and Boosting</a>
+    <span>Part 6 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/margins-and-kernels.js"></script>
+</body>
+</html>

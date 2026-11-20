@@ -4677,5 +4677,86 @@ window.RNLEARN_GLOSSARY = [
    "stacked generalisation",
    "stacked generalization"
   ]
+ ],
+ [
+  "Support vectors",
+  "The training points on or inside the margin of an SVM, which alone determine the boundary.",
+  [
+   "support vector"
+  ]
+ ],
+ [
+  "Soft margin",
+  "An SVM margin that allows some points inside it or on the wrong side, at a cost set by the parameter C.",
+  []
+ ],
+ [
+  "Hinge loss",
+  "The loss max(0, 1 − y·f(x)), zero for points correctly classified beyond the margin.",
+  []
+ ],
+ [
+  "Kernel trick",
+  "Replacing inner products by a kernel function so that a linear method works in a high-dimensional feature space without computing the features.",
+  []
+ ],
+ [
+  "Kernel function",
+  "A function giving the inner product of two points in some feature space, used as a measure of similarity.",
+  [
+   "kernel functions"
+  ]
+ ],
+ [
+  "RBF kernel",
+  "The radial basis function or Gaussian kernel exp(−γ‖a − b‖²), whose similarity decays with distance.",
+  [
+   "Gaussian kernel",
+   "radial basis function kernel"
+  ]
+ ],
+ [
+  "Sequential minimal optimisation",
+  "Platt’s algorithm for training SVMs by repeatedly optimising two dual variables at a time.",
+  [
+   "SMO",
+   "sequential minimal optimization"
+  ]
+ ],
+ [
+  "Platt scaling",
+  "Converting classifier scores into probabilities by fitting a logistic curve on held-out data.",
+  []
+ ],
+ [
+  "Support vector regression",
+  "Regression that ignores errors inside a tube of half-width ε and penalises larger errors linearly.",
+  [
+   "SVR"
+  ]
+ ],
+ [
+  "Kernel PCA",
+  "Principal component analysis carried out in a kernel feature space, finding nonlinear directions of variation.",
+  []
+ ],
+ [
+  "Gaussian process",
+  "A model treating an unknown function as random, with a kernel giving correlations; predictions come with uncertainty.",
+  [
+   "Gaussian processes"
+  ]
+ ],
+ [
+  "Bayesian optimisation",
+  "Optimising an expensive function by modelling it with a Gaussian process and choosing each new trial to balance exploration and exploitation.",
+  [
+   "Bayesian optimization"
+  ]
+ ],
+ [
+  "Neural tangent kernel",
+  "The kernel describing how an infinitely wide neural network behaves during gradient-descent training.",
+  []
  ]
 ];
