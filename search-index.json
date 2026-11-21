@@ -16,6 +16,22 @@
     "type": "tutorial"
   },
   {
+    "slug": "choosing-and-explaining-models",
+    "url": "articles/choosing-and-explaining-models.html",
+    "title": "Choosing and Explaining Models: Comparison, Tuning and Interpretability",
+    "summary": "No free lunch, baselines, cross-validation, grid vs random search, the winner’s curse and nested CV, permutation importance, partial dependence, ICE, LIME, SHAP and shortcut learning.",
+    "subject": "AI & Machine Learning",
+    "tags": [
+      "machine-learning",
+      "model-selection",
+      "interpretability",
+      "cross-validation",
+      "data-analysis"
+    ],
+    "date": "2026-11-21",
+    "type": "tutorial"
+  },
+  {
     "slug": "weighing-the-earth",
     "url": "articles/weighing-the-earth.html",
     "title": "Weighing the Earth: Pendulums, a Scottish Mountain and Two Lead Balls",

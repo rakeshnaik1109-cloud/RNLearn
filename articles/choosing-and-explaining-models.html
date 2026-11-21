@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Choosing and Explaining Models: Comparison, Tuning and Interpretability — RNLearn</title>
+  <meta name="description" content="No free lunch, baselines, cross-validation, grid vs random search, the winner’s curse and nested CV, permutation importance, partial dependence, ICE, LIME, SHAP and shortcut learning.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/choosing-and-explaining-models.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Choosing and Explaining Models: Comparison, Tuning and Interpretability — RNLearn">
+  <meta property="og:description" content="No free lunch, baselines, cross-validation, grid vs random search, the winner’s curse and nested CV, permutation importance, partial dependence, ICE, LIME, SHAP and shortcut learning.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/choosing-and-explaining-models.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Choosing and Explaining Models: Comparison, Tuning and Interpretability — RNLearn">
+  <meta name="twitter:description" content="No free lunch, baselines, cross-validation, grid vs random search, the winner’s curse and nested CV, permutation importance, partial dependence, ICE, LIME, SHAP and shortcut learning.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Choosing and Explaining Models: Comparison, Tuning and Interpretability",
+    "description": "No free lunch, baselines, cross-validation, grid vs random search, the winner’s curse and nested CV, permutation importance, partial dependence, ICE, LIME, SHAP and shortcut learning.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-21",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/choosing-and-explaining-models.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/ai-machine-learning.html" class="post-subject-tag" data-subject="ai-machine-learning">AI &amp; Machine Learning</a>
+        </div>
+        <h1 class="article-title">Choosing and Explaining Models: Comparison, Tuning and Interpretability</h1>
+        <p class="article-standfirst">
+          A good model is not enough: you have to pick it fairly, tune it without fooling yourself, and understand why it predicts what it does.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-21">21 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>22 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/inside-the-machine.html">Inside the Machine</a> (Part 10 of 10)</div>
+  <div class="series-banner-links">
+    <a href="network-architectures.html">← Part 9: Network Architectures: Convolutional, Recurrent and Transformer Networks, and Autoencoders</a>
+    <span>Final part</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. The Last Mile</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. No Free Lunch</a></li>
+              <li><a class="toc-link" href="#section-4">4. Start with a Baseline</a></li>
+              <li><a class="toc-link" href="#section-5">5. Comparing Models Fairly</a></li>
+              <li><a class="toc-link" href="#section-6">6. Tuning Hyperparameters</a></li>
+              <li><a class="toc-link" href="#section-7">7. The Winner’s Curse</a></li>
+              <li><a class="toc-link" href="#section-8">8. Interpretable Models or Explained Black Boxes?</a></li>
+              <li><a class="toc-link" href="#section-9">9. Permutation Importance</a></li>
+              <li><a class="toc-link" href="#section-10">10. Partial Dependence and ICE Curves</a></li>
+              <li><a class="toc-link" href="#section-11">11. Explaining One Prediction: LIME and SHAP</a></li>
+              <li><a class="toc-link" href="#section-12">12. Explaining Neural Networks</a></li>
+              <li><a class="toc-link" href="#section-13">13. Right for the Wrong Reasons</a></li>
+              <li><a class="toc-link" href="#section-14">14. Beyond Accuracy</a></li>
+              <li><a class="toc-link" href="#section-15">15. A Decision Guide</a></li>
+              <li><a class="toc-link" href="#section-16">16. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-17">17. Worked Example: From Data to an Explained Model</a></li>
+              <li><a class="toc-link" href="#section-18">18. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-19">19. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-20">20. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-21">21. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-22">22. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-23">23. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>You will learn:</strong> why no model is best everywhere; how to start from a baseline; how to compare models fairly with cross-validation; grid, random and Bayesian hyperparameter search; why choosing among many models inflates their scores, and how nested cross-validation fixes it; interpretable models versus explained black boxes; permutation importance, partial dependence and ICE curves; LIME and SHAP for single predictions; explaining neural networks; shortcut learning; and fairness, data shift and model documentation.</p>
+            <p><strong>You need:</strong> Part 1 (validation, leakage) and a passing acquaintance with the models of Parts 2–9.</p>
+            <p><strong>Try:</strong> six interactive figures, including a race of six models on three data sets, a demonstration of how useless models can look good, and an exact Shapley explanation of a random forest’s prediction.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. The Last Mile</h2>
+            <p>Parts 1–9 built a toolbox: linear models, neighbours and trees, ensembles, kernels, and neural networks of many shapes, with the losses and training methods behind them. This final part is about using that toolbox well. Which model should you try? How do you tune it without fooling yourself? And once it works, how do you find out <em>why</em> it works, so that you can trust it, debug it and explain its decisions to the people they affect?</p>
+            <p>These questions decide whether a model is useful in the real world, and they are where many projects quietly fail. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-ml-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Part 10 brings the classical and neural toolboxes together.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-ml10-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Choosing and explaining models, 1953–2019.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. No Free Lunch</h2>
+            <p>Is there a best learning algorithm? In 1996 David Wolpert proved that, averaged over all possible problems, every algorithm performs equally well: any method that wins on some problems must lose on others. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> This “no free lunch” theorem does not mean that all methods are equal in practice, because real problems are not random. It means that a method wins exactly when its built-in assumptions, its inductive bias (Part 9), match the problem. Linear models assume additive effects; trees assume that thresholds matter; convolutional networks assume local patterns. Choosing a model is choosing which assumptions to bet on.</p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Start with a Baseline</h2>
+            <p>Before anything elaborate, fit something simple: predict the average or the most common class, then fit a linear or logistic regression. A baseline tells you how hard the problem is and how much each added complication is really worth. Often it is closer to the best result than expected.</p>
+            <ul>
+              <li><strong>Tables of mixed features:</strong> gradient-boosted trees and random forests (Part 4) are hard to beat. In a comparison of 179 classifiers on 121 data sets, Manuel Fernández-Delgado and colleagues found random forests best overall; <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> Léo Grinsztajn, Edouard Oyallon and Gaël Varoquaux found tree ensembles still ahead of deep networks on typical tabular data in 2022. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span></li>
+              <li><strong>Images, sound, text:</strong> start from a pre-trained convolutional network or transformer (Part 9) and fine-tune it.</li>
+              <li><strong>Few examples:</strong> prefer simpler, more constrained models, or strong pre-trained ones.</li>
+              <li><strong>Need for explanation:</strong> consider models that are interpretable in themselves (Section 8).</li>
+            </ul>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Comparing Models Fairly</h2>
+            <p>A single train–test split gives a noisy verdict, especially with small data sets. <strong>k-fold cross-validation</strong>, formalised by Mervyn Stone in 1974, splits the data into k parts, trains on k − 1 and tests on the remaining one, k times over, so that every example is used for testing exactly once. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span> The average estimates performance; the spread across folds shows how much to trust differences.</p>
+            <figure class="fig" data-fig="fig-ml-cv">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Six models compared by 10-fold cross-validation.</strong> The series’ three classification data sets (200 points each). Choose the data set.
+              </figcaption>
+            </figure>
+            <p>On the two clouds, logistic regression, naive Bayes and k-nearest neighbours tie at 94.5%, and the flexible models do slightly worse. On the moons, k-nearest neighbours (94.5%), the neural network (93.5%) and the random forest (93.0%) lead, and the linear models fall to about 86%. On the circles, logistic regression collapses to 45%, while the neural network (97.5%), k-nearest neighbours (97.0%) and naive Bayes (96.0%) excel. No model wins everywhere, as Wolpert’s theorem predicts, and the fold-to-fold scatter of about five percentage points means that differences of one or two points are not evidence of anything.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">In code: cross-validated comparison and tuning in scikit-learn</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">from scipy.stats import loguniform
+from sklearn.datasets import make_moons
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import RandomizedSearchCV, cross_val_score
+from sklearn.svm import SVC
+
+X, y = make_moons(n_samples=200, noise=0.2, random_state=0)
+for model in [LogisticRegression(), RandomForestClassifier(random_state=0)]:
+    s = cross_val_score(model, X, y, cv=10)
+    print(type(model).__name__, s.mean().round(3), s.std().round(3))
+
+# Random search inside cross-validation, wrapped in an outer CV (nested)
+search = RandomizedSearchCV(SVC(), {"C": loguniform(1e-2, 1e3),
+                                    "gamma": loguniform(1e-3, 1e2)},
+                            n_iter=30, cv=5, random_state=0)
+print(cross_val_score(search, X, y, cv=5).mean())   # honest estimate</code></pre>
+            </details>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Tuning Hyperparameters</h2>
+            <p>Every model has <strong>hyperparameters</strong> that are set before training: the k of k-nearest neighbours, a tree’s depth, a network’s learning rate and size. The traditional approach, <strong>grid search</strong>, tries every combination of a few values per hyperparameter. In 2012 James Bergstra and Yoshua Bengio showed that <strong>random search</strong>, which samples combinations at random, usually finds good settings with far fewer trials. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> The reason is that typically only a few hyperparameters matter much, and a grid wastes most of its trials repeating the same few values of those.</p>
+            <figure class="fig" data-fig="fig-ml-search">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Grid search and random search.</strong> A validation score that depends strongly on one hyperparameter and hardly at all on the other. Choose the budget and draw new random trials.
+              </figcaption>
+            </figure>
+            <p>With 9 trials, a 3 × 3 grid tests only three values of the important hyperparameter and its best score is 0.757; random search beats it in 78% of draws. With 25 trials, the 5 × 5 grid happens to miss the peak again (0.757), and random search wins 99% of the time. Smarter methods go further. <strong>Bayesian optimisation</strong> fits a model, often a Gaussian process (Part 5), to the scores seen so far and chooses the most promising setting to try next; <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span> <strong>Hyperband</strong> starts many settings with a small budget and gives more training only to the best. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span></p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. The Winner’s Curse</h2>
+            <p>Every time a choice is made by looking at validation scores, whether of a model, a hyperparameter, a feature set or a random seed, some of the winner’s apparent advantage is luck. The more options compared, and the smaller the validation set, the larger the luck.</p>
+            <figure class="fig" data-fig="fig-ml-curse">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. The winner’s curse.</strong> Many “models” that guess at random are scored on the same validation set, and the best is chosen. Change the number of models and the size of the validation set.
+              </figcaption>
+            </figure>
+            <p>Among 100 random guessers scored on 50 validation examples, the best typically reaches between 64% and 74%; on fresh data its expected accuracy is 50%, like all the others. Try 1,000 models and the winner can reach 72%. With 1,000 validation examples, the best of 100 shrinks to about 54%. The cure is to keep the final test set out of every decision, and when data are scarce, to use <strong>nested cross-validation</strong>: an inner loop chooses the hyperparameters, an outer loop evaluates the whole tuning procedure on folds it never saw. Sudhir Varma and Richard Simon showed in 2006 that skipping the outer loop gives seriously optimistic error estimates, <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span> and Gavin Cawley and Nicola Talbot showed that overfitting during model selection can matter as much as the choice of algorithm. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span></p>
+            <div class="callout callout-warn">
+              <div class="callout-header">Watch out: hidden model selection</div>
+              <p>Selection happens in more places than hyperparameter search: trying several feature sets, re-running with different seeds, dropping “bad” outliers after seeing results, or iterating on a public benchmark’s test set. Each look spends some of the test set’s honesty. Record every choice, and report how many were tried.</p>
+            </div>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Interpretable Models or Explained Black Boxes?</h2>
+            <p>Once a model performs well, the next question is why. There are two strategies. One is to use a model that is <strong>interpretable by design</strong>: a sparse linear model, a short decision tree, a scoring rule with a few points per factor. The other is to train any model and explain it afterwards with <strong>post-hoc explanation</strong> methods. Cynthia Rudin argued in 2019 that for high-stakes decisions, such as bail, credit or medical triage, explaining a black box is a poor substitute for a model that can be understood directly, because explanations are approximations that can mislead, and because carefully built interpretable models often lose little or no accuracy on structured data. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span> For images, sound and text, where accurate models are inevitably complex, post-hoc methods are the main tool.</p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Permutation Importance</h2>
+            <p>Which features does a model rely on? Leo Breiman, introducing random forests in 2001, proposed a simple answer: shuffle one feature’s values across the test examples, breaking its link with the outcome, and measure how much the model’s error rises. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span> <strong>Permutation importance</strong> works for any model and needs no retraining; Aaron Fisher, Cynthia Rudin and Francesca Dominici later extended it to describe how much a whole class of good models could rely on a feature. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span></p>
+            <figure class="fig" data-fig="fig-ml-perm">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. Permutation importance.</strong> Six features, a known true function, and a random forest fitted to 300 training examples. Compare the forest’s importances with those of the true function.
+              </figcaption>
+            </figure>
+            <p>The data follow y = 3x<sub>1</sub> + 2 sin(2πx<sub>2</sub>) + 3x<sub>3</sub>(2x<sub>4</sub> − 1) plus noise, with x<sub>5</sub> irrelevant and x<sub>6</sub> a near-copy of x<sub>1</sub>. For the true function, shuffling x<sub>1</sub> raises the error by 1.45 and shuffling x<sub>6</sub> by nothing. The forest, which cannot tell the twins apart, splits on both and gives x<sub>1</sub> 0.52 and x<sub>6</sub> 0.21. Correlated features share importance, so each looks less important than the information they carry, and shuffling one creates unrealistic combinations of values. Importance describes how the model uses the features, not how the world works.</p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Partial Dependence and ICE Curves</h2>
+            <p>Importance says <em>how much</em> a feature matters, not <em>how</em>. Jerome Friedman’s <strong>partial dependence plot</strong> of 2001 sets a feature to each value in turn for every example, keeping the other features as they are, and averages the model’s predictions. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span> In 2015 Alex Goldstein and colleagues proposed plotting the curve for each example separately, <strong>individual conditional expectation</strong> (ICE) curves, because averages can hide what is happening. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span></p>
+            <figure class="fig" data-fig="fig-ml-pdp">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 7. Partial dependence and ICE curves.</strong> Choose a feature and a model. The red curve is the average; thin curves show individual test examples.
+              </figcaption>
+            </figure>
+            <p>For x<sub>2</sub>, the average reveals a wave that no single coefficient could describe. For x<sub>3</sub>, the average curve is almost flat, as if x<sub>3</sub> did not matter, yet its permutation importance is far from zero. The ICE curves explain the paradox: they rise for examples with large x<sub>4</sub> and fall for those with small x<sub>4</sub>, and the two cancel. An interaction like this is invisible in the average and plain in the individual curves.</p>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Explaining One Prediction: LIME and SHAP</h2>
+            <p>Often what matters is a single decision: why was <em>this</em> loan refused, or <em>this</em> scan flagged? <strong>LIME</strong>, by Marco Ribeiro, Sameer Singh and Carlos Guestrin, perturbs the example, watches how the model’s predictions change, and fits a simple linear model that mimics the black box nearby. <span class="cite-group">[<a class="cite" href="#ref-17">17</a>]</span> <strong>SHAP</strong>, by Scott Lundberg and Su-In Lee, rests on a result from game theory: Lloyd Shapley’s 1953 rule for dividing a payout fairly among the players of a cooperative game. <span class="cite-group">[<a class="cite" href="#ref-18">18</a>, <a class="cite" href="#ref-19">19</a>]</span> The “players” are the features, the “payout” is the difference between this prediction and the average prediction, and each feature’s <strong>Shapley value</strong> is its average added contribution over all the orders in which the features could join.</p>
+            <figure class="fig" data-fig="fig-ml-shap">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 8. Shapley values for one prediction.</strong> Pick a test example; the bars show how each feature moves the prediction away from the average. Compare the random forest with the true function.
+              </figcaption>
+            </figure>
+            <p>For test example 2, with a large x<sub>3</sub> (0.92) and a large x<sub>4</sub> (0.80), the true function predicts 4.04 against an average of 1.40, and its Shapley values credit x<sub>4</sub> with +1.31, x<sub>2</sub> with +0.81 and x<sub>3</sub> with +0.36. The forest predicts 3.50, with a similar but blurrier story. Shapley values are the only way of dividing the prediction that satisfies a few natural fairness rules, including that the shares add up exactly to the prediction and that a feature the model never uses gets zero. Computing them exactly requires every subset of features, 2<sup>d</sup> of them, so in practice they are approximated, and the result depends on how the “absent” features are filled in.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">The maths: the Shapley value</summary>
+              <p style="margin-top:0.6rem;">For features F (d of them), a prediction f(x) and the value v(S) of a subset S, here the average prediction when the features in S take their values from x and the others from background data,</p>
+              <p>$$\phi_j = \sum_{S \subseteq F\setminus\{j\}} \frac{|S|!\,(d-|S|-1)!}{d!}\,\big[v(S\cup\{j\}) - v(S)\big], \qquad \sum_j \phi_j = f(x) - v(\varnothing).$$</p>
+              <p>The weights are the fraction of all orderings of the features in which exactly the features in S come before j.</p>
+            </details>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Explaining Neural Networks</h2>
+            <p>For a neural network, the gradient of the output with respect to the input (Part 6) shows which input pixels or words would change the prediction most: a <strong>saliency map</strong>, as used by Karen Simonyan, Andrea Vedaldi and Andrew Zisserman in 2014. <span class="cite-group">[<a class="cite" href="#ref-20">20</a>]</span> Raw gradients are noisy and can be misleading where the network is saturated; Mukund Sundararajan, Ankur Taly and Qiqi Yan’s <strong>integrated gradients</strong> instead accumulate gradients along a path from a neutral baseline input to the real one, and, like Shapley values, add up to the change in prediction. <span class="cite-group">[<a class="cite" href="#ref-21">21</a>]</span></p>
+            <p>These maps should be tested, not admired. In 2018 Julius Adebayo and colleagues found that some popular saliency methods produced almost the same maps after the network’s weights had been randomised, so the maps reflected the image more than the model. <span class="cite-group">[<a class="cite" href="#ref-22">22</a>]</span> An explanation that does not change when the model changes explains nothing.</p>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Right for the Wrong Reasons</h2>
+            <p>Explanations earn their keep by exposing <strong>shortcuts</strong>: features that predict the label in the training data but for the wrong reason. In an experiment in the LIME paper, Ribeiro and colleagues deliberately trained a classifier to tell wolves from huskies on photographs in which the wolves stood in snow; LIME’s explanations showed it was detecting the snow, and helped people who saw them distrust it. <span class="cite-group">[<a class="cite" href="#ref-17">17</a>]</span> Real shortcuts are found the same way: Sebastian Lapuschkin and colleagues found a well-performing image classifier that recognised horses largely by a copyright tag present on many horse photographs, a modern “Clever Hans”, after the horse that seemed to do arithmetic but was reading its trainer’s cues. <span class="cite-group">[<a class="cite" href="#ref-23">23</a>]</span></p>
+            <p>Shortcuts can have serious consequences. Ziad Obermeyer and colleagues found in 2019 that a widely used American health-care algorithm predicted patients’ future health-care <em>costs</em> as a stand-in for their health needs; because less money had historically been spent on Black patients with the same needs, the algorithm systematically underestimated how ill they were. <span class="cite-group">[<a class="cite" href="#ref-24">24</a>]</span> The model did what it was trained to do; the target was the problem.</p>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Beyond Accuracy</h2>
+            <ul>
+              <li><strong>Calibration:</strong> check that predicted probabilities match observed frequencies (Part 7).</li>
+              <li><strong>Fairness:</strong> compare error rates and calibration across groups of people; aggregate accuracy can hide large gaps.</li>
+              <li><strong>Data shift:</strong> the world changes after deployment. Monitor the inputs and the performance, and retrain when they drift.</li>
+              <li><strong>Documentation:</strong> Margaret Mitchell and colleagues proposed <strong>model cards</strong>, short reports stating what a model is for, how it was evaluated, on whom, and where it should not be used. <span class="cite-group">[<a class="cite" href="#ref-25">25</a>]</span></li>
+            </ul>
+          </section>
+
+          <section id="section-15">
+            <h2>15. A Decision Guide</h2>
+            <div class="table-container" style="overflow-x:auto; margin:1.2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.92rem; line-height:1.5;">
+                <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.5rem;">Question</th><th style="padding:0.5rem;">Tool</th><th style="padding:0.5rem;">Caveat</th></tr></thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Which model family?</td><td style="padding:0.5rem;">Baseline, then models suited to the data type (Parts 2–9)</td><td style="padding:0.5rem;">No model wins everywhere</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Is model A better than B?</td><td style="padding:0.5rem;">k-fold cross-validation, the same folds for both</td><td style="padding:0.5rem;">Look at the spread, not just the mean</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Which hyperparameters?</td><td style="padding:0.5rem;">Random search, Bayesian optimisation, Hyperband</td><td style="padding:0.5rem;">Tune inside the training folds only</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">How good is the final model?</td><td style="padding:0.5rem;">Untouched test set, or nested cross-validation</td><td style="padding:0.5rem;">Every look at the test set biases it</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Which features matter?</td><td style="padding:0.5rem;">Permutation importance; mean absolute SHAP</td><td style="padding:0.5rem;">Correlated features share credit</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">How does a feature act?</td><td style="padding:0.5rem;">Partial dependence with ICE curves</td><td style="padding:0.5rem;">Averages hide interactions</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Why this prediction?</td><td style="padding:0.5rem;">SHAP, LIME; integrated gradients for networks</td><td style="padding:0.5rem;">Approximate; sanity-check them</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">High-stakes decision?</td><td style="padding:0.5rem;">Interpretable-by-design model; model card</td><td style="padding:0.5rem;">Check fairness and calibration by group</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: can we trust explanations?</div>
+              <p>Different explanation methods applied to the same model and the same prediction often disagree about which features matter most. Satyapriya Krishna and colleagues documented this “disagreement problem” in 2022, and found that practitioners resolve it largely by intuition. <span class="cite-group">[<a class="cite" href="#ref-26">26</a>]</span> Explanations can also be manipulated: Dylan Slack and colleagues built models that behave in a biased way on real data while LIME and SHAP report innocent-looking explanations. <span class="cite-group">[<a class="cite" href="#ref-27">27</a>]</span> Which explanation is right depends on what question is being asked, about the model, about the data or about the world, and research is still working out how to evaluate explanations, how to explain the reasoning of large language models, and whether such models can explain themselves faithfully.</p>
+            </div>
+          </section>
+
+          <section id="section-17">
+            <h2>17. Worked Example: From Data to an Explained Model</h2>
+            <ol>
+              <li><strong>Baseline:</strong> on the moons, logistic regression scores 85.5% by 10-fold cross-validation.</li>
+              <li><strong>Candidates:</strong> k-nearest neighbours (94.5%), the neural network (93.5%) and the random forest (93.0%) are all clearly better; their differences are within the fold-to-fold scatter of about ±4–5 points.</li>
+              <li><strong>Tuning:</strong> search k and the network size by random search inside each training fold, and evaluate the whole procedure with an outer cross-validation loop.</li>
+              <li><strong>Final check:</strong> retrain the chosen model on all the training data and score it once on a held-out test set.</li>
+              <li><strong>Explain:</strong> on the regression data of Figures 6–8, permutation importance ranks x<sub>2</sub> first; partial dependence shows its wave; ICE curves reveal that x<sub>3</sub> acts through x<sub>4</sub>; and Shapley values break individual predictions into contributions that add up exactly.</li>
+            </ol>
+          </section>
+
+          <section id="section-18">
+            <h2>18. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: choosing and explaining</div>
+              <ol>
+                <li>In Figure 3, which model is never last on any of the three data sets? Which one is first on one data set and last on another?</li>
+                <li>In Figure 4, with a budget of 16, the grid scores 0.844. Press “New random draw” ten times: how often does random search do better?</li>
+                <li>In Figure 5, with 1,000 models and 50 validation examples, how good does the best useless model look?</li>
+                <li>In Figure 6, switch between the forest and the true function. Which feature does the forest overrate compared with the truth?</li>
+                <li>In Figure 8, find a test example where x<sub>3</sub> pushes the prediction down. What is its value of x<sub>4</sub>?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-19">
+            <h2>19. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “if a feature is important to the model, it causes the outcome”</div>
+              <p><strong>The myth:</strong> feature importance and SHAP values reveal which factors drive the outcome, so they tell us what to change.</p>
+              <p><strong>The reality:</strong> they describe the model, which learned associations in its training data. Figure 6 shows a feature that has no effect at all, x<sub>6</sub>, earning importance because it is correlated with one that does. A feature can matter to a model because it is a proxy, as health-care costs stood in for health needs in the algorithm Obermeyer and colleagues studied, <span class="cite-group">[<a class="cite" href="#ref-24">24</a>]</span> or because of a shortcut such as a copyright tag. <span class="cite-group">[<a class="cite" href="#ref-23">23</a>]</span> Changing an important feature in the real world need not change the outcome.</p>
+              <p><strong>Why it matters:</strong> causal questions (“what happens if we intervene?”) need causal methods and, ideally, experiments, as our series <em>Making Sense of Data</em> discusses. Explanations are for understanding and auditing models.</p>
+            </div>
+          </section>
+
+          <section id="section-20">
+            <h2>20. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>No model is best for every problem; start with a simple baseline and models suited to your data type.</li>
+                <li>Compare models with cross-validation on the same folds, and treat small differences with suspicion.</li>
+                <li>Random search beats grid search when only a few hyperparameters matter; Bayesian optimisation and Hyperband are more efficient still.</li>
+                <li>Choosing among many options inflates the winner’s score: keep a test set untouched, or use nested cross-validation.</li>
+                <li>Prefer interpretable models for high-stakes decisions; otherwise use permutation importance, partial dependence with ICE curves, and SHAP or LIME, and sanity-check them.</li>
+                <li>Explanations describe the model, not the world: correlated features share credit, and important features may be proxies or shortcuts.</li>
+                <li>Check calibration, fairness across groups and drift after deployment, and document what the model is for.</li>
+              </ul>
+              <p style="margin-top:0.8rem;"><strong>The series in one table:</strong></p>
+              <div class="table-container" style="overflow-x:auto; margin:0.5rem 0 0;">
+                <table style="width:100%; border-collapse:collapse; font-size:0.9rem; line-height:1.5;">
+                  <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.4rem;">Part</th><th style="padding:0.4rem;">Main idea</th></tr></thead>
+                  <tbody>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">1. Learning from Data</td><td style="padding:0.4rem;">Generalisation, bias and variance, honest validation</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">2. Linear Models</td><td style="padding:0.4rem;">Linear and logistic regression, regularisation, gradient descent</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">3. Neighbours, Bayes and Trees</td><td style="padding:0.4rem;">Similarity, probability and splitting rules</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">4. Ensembles</td><td style="padding:0.4rem;">Many weak models make a strong one</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">5. Margins and Kernels</td><td style="padding:0.4rem;">Maximum margins, the kernel trick, Gaussian processes</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">6. Neurons and Activations</td><td style="padding:0.4rem;">Nonlinear units and backpropagation</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">7. Loss Functions</td><td style="padding:0.4rem;">What a model learns is what its loss rewards</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">8. Training Deep Networks</td><td style="padding:0.4rem;">Optimisers, schedules, normalisation, regularisation</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">9. Architectures</td><td style="padding:0.4rem;">Convolution, recurrence, attention, autoencoders</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">10. Choosing and Explaining</td><td style="padding:0.4rem;">Fair comparison, honest tuning, explanations with care</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section id="section-21">
+            <h2>21. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Lloyd Shapley</td>
+                <td style="padding:0.6rem 0.8rem;">1923–2016<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">The Shapley value (1953)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed how to share a payout fairly; Nobel Prize in economics 2012.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Mervyn Stone</td>
+                <td style="padding:0.6rem 0.8rem;">born 1932<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Cross-validation (1974)</td>
+                <td style="padding:0.6rem 0.8rem;">Formalised cross-validatory choice and assessment.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">David Wolpert</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">No free lunch (1996)</td>
+                <td style="padding:0.6rem 0.8rem;">Proved that no learning algorithm is best for all problems.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Leo Breiman</td>
+                <td style="padding:0.6rem 0.8rem;">1928–2005<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Random forests and permutation importance (2001)</td>
+                <td style="padding:0.6rem 0.8rem;">Measured feature importance by shuffling.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Jerome Friedman</td>
+                <td style="padding:0.6rem 0.8rem;">born 1939<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Partial dependence (2001)</td>
+                <td style="padding:0.6rem 0.8rem;">Introduced partial dependence plots with gradient boosting.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">James Bergstra &amp; Yoshua Bengio</td>
+                <td style="padding:0.6rem 0.8rem;"><br>Canada</td>
+                <td style="padding:0.6rem 0.8rem;">Random search (2012)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed random search beats grid search for hyperparameters.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Scott Lundberg &amp; Su-In Lee</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">SHAP (2017)</td>
+                <td style="padding:0.6rem 0.8rem;">Unified explanation methods with Shapley values.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Cynthia Rudin</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Interpretable machine learning (2019)</td>
+                <td style="padding:0.6rem 0.8rem;">Argued for interpretable models in high-stakes decisions.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-22">
+            <h2>22. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about choosing and explaining models.</p>
+            <figure class="fig" data-fig="fig-quiz-ml10">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-23">
+            <h2>23. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Hastie, Trevor, Tibshirani, Robert &amp; Friedman, Jerome.</strong> (2009). <em>The Elements of Statistical Learning</em>, 2nd edition, chapter 7. New York: Springer.</li>
+              <li id="ref-2"><strong>Molnar, Christoph.</strong> (2022). <em>Interpretable Machine Learning: A Guide for Making Black Box Models Explainable</em>, 2nd edition. Online book.</li>
+              <li id="ref-3"><strong>Wolpert, David H.</strong> (1996). "The lack of a priori distinctions between learning algorithms." <em>Neural Computation</em>, 8(7): 1341–1390.</li>
+              <li id="ref-4"><strong>Fernández-Delgado, Manuel, Cernadas, Eva, Barro, Senén &amp; Amorim, Dinani.</strong> (2014). "Do we need hundreds of classifiers to solve real world classification problems?" <em>Journal of Machine Learning Research</em>, 15: 3133–3181.</li>
+              <li id="ref-5"><strong>Grinsztajn, Léo, Oyallon, Edouard &amp; Varoquaux, Gaël.</strong> (2022). "Why do tree-based models still outperform deep learning on typical tabular data?" In <em>Advances in Neural Information Processing Systems 35 (NeurIPS), Datasets and Benchmarks Track</em>.</li>
+              <li id="ref-6"><strong>Stone, M.</strong> (1974). "Cross-validatory choice and assessment of statistical predictions." <em>Journal of the Royal Statistical Society, Series B</em>, 36(2): 111–147.</li>
+              <li id="ref-7"><strong>Bergstra, James &amp; Bengio, Yoshua.</strong> (2012). "Random search for hyper-parameter optimization." <em>Journal of Machine Learning Research</em>, 13: 281–305.</li>
+              <li id="ref-8"><strong>Snoek, Jasper, Larochelle, Hugo &amp; Adams, Ryan P.</strong> (2012). "Practical Bayesian optimization of machine learning algorithms." In <em>Advances in Neural Information Processing Systems 25 (NIPS)</em>, pp. 2951–2959.</li>
+              <li id="ref-9"><strong>Li, Lisha, Jamieson, Kevin, DeSalvo, Giulia, Rostamizadeh, Afshin &amp; Talwalkar, Ameet.</strong> (2018). "Hyperband: a novel bandit-based approach to hyperparameter optimization." <em>Journal of Machine Learning Research</em>, 18(185): 1–52.</li>
+              <li id="ref-10"><strong>Varma, Sudhir &amp; Simon, Richard.</strong> (2006). "Bias in error estimation when using cross-validation for model selection." <em>BMC Bioinformatics</em>, 7: 91.</li>
+              <li id="ref-11"><strong>Cawley, Gavin C. &amp; Talbot, Nicola L. C.</strong> (2010). "On over-fitting in model selection and subsequent selection bias in performance evaluation." <em>Journal of Machine Learning Research</em>, 11: 2079–2107.</li>
+              <li id="ref-12"><strong>Rudin, Cynthia.</strong> (2019). "Stop explaining black box machine learning models for high stakes decisions and use interpretable models instead." <em>Nature Machine Intelligence</em>, 1: 206–215.</li>
+              <li id="ref-13"><strong>Breiman, Leo.</strong> (2001). "Random forests." <em>Machine Learning</em>, 45(1): 5–32.</li>
+              <li id="ref-14"><strong>Fisher, Aaron, Rudin, Cynthia &amp; Dominici, Francesca.</strong> (2019). "All models are wrong, but many are useful: learning a variable’s importance by studying an entire class of prediction models simultaneously." <em>Journal of Machine Learning Research</em>, 20(177): 1–81.</li>
+              <li id="ref-15"><strong>Friedman, Jerome H.</strong> (2001). "Greedy function approximation: a gradient boosting machine." <em>Annals of Statistics</em>, 29(5): 1189–1232.</li>
+              <li id="ref-16"><strong>Goldstein, Alex, Kapelner, Adam, Bleich, Justin &amp; Pitkin, Emil.</strong> (2015). "Peeking inside the black box: visualizing statistical learning with plots of individual conditional expectation." <em>Journal of Computational and Graphical Statistics</em>, 24(1): 44–65.</li>
+              <li id="ref-17"><strong>Ribeiro, Marco Tulio, Singh, Sameer &amp; Guestrin, Carlos.</strong> (2016). "“Why should I trust you?”: explaining the predictions of any classifier." In <em>Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</em>, pp. 1135–1144.</li>
+              <li id="ref-18"><strong>Shapley, L. S.</strong> (1953). "A value for n-person games." In H. W. Kuhn &amp; A. W. Tucker (eds), <em>Contributions to the Theory of Games II</em>, Annals of Mathematics Studies 28, pp. 307–317. Princeton: Princeton University Press.</li>
+              <li id="ref-19"><strong>Lundberg, Scott M. &amp; Lee, Su-In.</strong> (2017). "A unified approach to interpreting model predictions." In <em>Advances in Neural Information Processing Systems 30 (NeurIPS)</em>, pp. 4765–4774.</li>
+              <li id="ref-20"><strong>Simonyan, Karen, Vedaldi, Andrea &amp; Zisserman, Andrew.</strong> (2014). "Deep inside convolutional networks: visualising image classification models and saliency maps." In <em>ICLR Workshop</em>. arXiv: 1312.6034.</li>
+              <li id="ref-21"><strong>Sundararajan, Mukund, Taly, Ankur &amp; Yan, Qiqi.</strong> (2017). "Axiomatic attribution for deep networks." In <em>Proceedings of the 34th International Conference on Machine Learning (ICML)</em>, PMLR 70: 3319–3328.</li>
+              <li id="ref-22"><strong>Adebayo, Julius, Gilmer, Justin, Muelly, Michael, Goodfellow, Ian, Hardt, Moritz &amp; Kim, Been.</strong> (2018). "Sanity checks for saliency maps." In <em>Advances in Neural Information Processing Systems 31 (NeurIPS)</em>.</li>
+              <li id="ref-23"><strong>Lapuschkin, Sebastian, Wäldchen, Stephan, Binder, Alexander, Montavon, Grégoire, Samek, Wojciech &amp; Müller, Klaus-Robert.</strong> (2019). "Unmasking Clever Hans predictors and assessing what machines really learn." <em>Nature Communications</em>, 10: 1096.</li>
+              <li id="ref-24"><strong>Obermeyer, Ziad, Powers, Brian, Vogeli, Christine &amp; Mullainathan, Sendhil.</strong> (2019). "Dissecting racial bias in an algorithm used to manage the health of populations." <em>Science</em>, 366(6464): 447–453.</li>
+              <li id="ref-25"><strong>Mitchell, Margaret, Wu, Simone, Zaldivar, Andrew, Barnes, Parker, Vasserman, Lucy, Hutchinson, Ben, Spitzer, Elena, Raji, Inioluwa Deborah &amp; Gebru, Timnit.</strong> (2019). "Model cards for model reporting." In <em>Proceedings of the Conference on Fairness, Accountability, and Transparency (FAT*)</em>, pp. 220–229.</li>
+              <li id="ref-26"><strong>Krishna, Satyapriya, Han, Tessa, Gu, Alex, Pombra, Javin, Jabbari, Shahin, Wu, Steven &amp; Lakkaraju, Himabindu.</strong> (2022). "The disagreement problem in explainable machine learning: a practitioner’s perspective." <em>arXiv</em>: 2202.01602.</li>
+              <li id="ref-27"><strong>Slack, Dylan, Hilgard, Sophie, Jia, Emily, Singh, Sameer &amp; Lakkaraju, Himabindu.</strong> (2020). "Fooling LIME and SHAP: adversarial attacks on post hoc explanation methods." In <em>Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society (AIES)</em>, pp. 180–186.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/inside-the-machine.html">Inside the Machine</a> (Part 10 of 10)</div>
+  <div class="series-banner-links">
+    <a href="network-architectures.html">← Part 9: Network Architectures: Convolutional, Recurrent and Transformer Networks, and Autoencoders</a>
+    <span>Final part</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/choosing-and-explaining-models.js"></script>
+</body>
+</html>

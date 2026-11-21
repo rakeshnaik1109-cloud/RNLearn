@@ -1,5 +1,30 @@
 [
   {
+    "slug": "choosing-and-explaining-models",
+    "title": "Choosing and Explaining Models: Comparison, Tuning and Interpretability",
+    "summary": "No free lunch, baselines, cross-validation, grid vs random search, the winner’s curse and nested CV, permutation importance, partial dependence, ICE, LIME, SHAP and shortcut learning.",
+    "subject": "AI & Machine Learning",
+    "tags": [
+      "machine-learning",
+      "model-selection",
+      "interpretability",
+      "cross-validation",
+      "data-analysis"
+    ],
+    "date": "2026-11-21",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 22,
+    "series": {
+      "id": "inside-the-machine",
+      "part": 10
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
     "slug": "network-architectures",
     "title": "Network Architectures: Convolutional, Recurrent and Transformer Networks, and Autoencoders",
     "summary": "Convolution and receptive fields, recurrent networks and LSTMs, attention, transformers and positional encodings, autoencoders and embeddings, generative and graph networks.",

@@ -5021,5 +5021,65 @@ window.RNLEARN_GLOSSARY = [
   [
    "word embeddings"
   ]
+ ],
+ [
+  "No free lunch theorem",
+  "The result that, averaged over all possible problems, no learning algorithm performs better than any other.",
+  []
+ ],
+ [
+  "Nested cross-validation",
+  "Cross-validation with an inner loop that tunes hyperparameters and an outer loop that evaluates the whole tuning procedure.",
+  []
+ ],
+ [
+  "Random search",
+  "Tuning hyperparameters by trying randomly sampled combinations instead of a fixed grid.",
+  []
+ ],
+ [
+  "Partial dependence plot",
+  "A plot of a model’s average prediction as one feature is varied, with the other features kept as they are.",
+  [
+   "partial dependence"
+  ]
+ ],
+ [
+  "ICE curves",
+  "Individual conditional expectation curves: one curve per example showing how its prediction changes with one feature.",
+  [
+   "individual conditional expectation"
+  ]
+ ],
+ [
+  "Shapley value",
+  "A fair share of a prediction attributed to each feature, its average added contribution over all orders of the features.",
+  [
+   "Shapley values"
+  ]
+ ],
+ [
+  "SHAP",
+  "SHapley Additive exPlanations: a family of methods that explain predictions with Shapley values.",
+  []
+ ],
+ [
+  "Saliency map",
+  "An image showing which input pixels most affect a network’s output, usually from gradients.",
+  [
+   "saliency maps"
+  ]
+ ],
+ [
+  "Shortcut learning",
+  "A model relying on a spurious feature that predicts the label in the training data, such as a watermark.",
+  []
+ ],
+ [
+  "Model card",
+  "A short document reporting what a model is for, how it was evaluated and where it should not be used.",
+  [
+   "model cards"
+  ]
  ]
 ];

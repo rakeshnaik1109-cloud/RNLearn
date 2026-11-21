@@ -5019,5 +5019,65 @@
     "forms": [
       "word embeddings"
     ]
+  },
+  {
+    "term": "No free lunch theorem",
+    "definition": "The result that, averaged over all possible problems, no learning algorithm performs better than any other.",
+    "forms": []
+  },
+  {
+    "term": "Nested cross-validation",
+    "definition": "Cross-validation with an inner loop that tunes hyperparameters and an outer loop that evaluates the whole tuning procedure.",
+    "forms": []
+  },
+  {
+    "term": "Random search",
+    "definition": "Tuning hyperparameters by trying randomly sampled combinations instead of a fixed grid.",
+    "forms": []
+  },
+  {
+    "term": "Partial dependence plot",
+    "definition": "A plot of a model’s average prediction as one feature is varied, with the other features kept as they are.",
+    "forms": [
+      "partial dependence"
+    ]
+  },
+  {
+    "term": "ICE curves",
+    "definition": "Individual conditional expectation curves: one curve per example showing how its prediction changes with one feature.",
+    "forms": [
+      "individual conditional expectation"
+    ]
+  },
+  {
+    "term": "Shapley value",
+    "definition": "A fair share of a prediction attributed to each feature, its average added contribution over all orders of the features.",
+    "forms": [
+      "Shapley values"
+    ]
+  },
+  {
+    "term": "SHAP",
+    "definition": "SHapley Additive exPlanations: a family of methods that explain predictions with Shapley values.",
+    "forms": []
+  },
+  {
+    "term": "Saliency map",
+    "definition": "An image showing which input pixels most affect a network’s output, usually from gradients.",
+    "forms": [
+      "saliency maps"
+    ]
+  },
+  {
+    "term": "Shortcut learning",
+    "definition": "A model relying on a spurious feature that predicts the label in the training data, such as a watermark.",
+    "forms": []
+  },
+  {
+    "term": "Model card",
+    "definition": "A short document reporting what a model is for, how it was evaluated and where it should not be used.",
+    "forms": [
+      "model cards"
+    ]
   }
 ]
