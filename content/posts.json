@@ -1,5 +1,30 @@
 [
   {
+    "slug": "network-architectures",
+    "title": "Network Architectures: Convolutional, Recurrent and Transformer Networks, and Autoencoders",
+    "summary": "Convolution and receptive fields, recurrent networks and LSTMs, attention, transformers and positional encodings, autoencoders and embeddings, generative and graph networks.",
+    "subject": "AI & Machine Learning",
+    "tags": [
+      "machine-learning",
+      "neural-networks",
+      "deep-learning",
+      "transformers",
+      "data-analysis"
+    ],
+    "date": "2026-11-21",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 20,
+    "series": {
+      "id": "inside-the-machine",
+      "part": 9
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
     "slug": "training-deep-networks",
     "title": "Training Deep Networks: Optimisers, Learning Rates, Normalisation and Regularisation",
     "summary": "SGD and mini-batches, learning rates, momentum, RMSProp and Adam, schedules and warm-up, the range test, normalisation, skip connections, clipping, weight decay, dropout, early stopping.",

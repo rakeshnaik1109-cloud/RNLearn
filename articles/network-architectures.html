@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Network Architectures: Convolutional, Recurrent and Transformer Networks, and Autoencoders — RNLearn</title>
+  <meta name="description" content="Convolution and receptive fields, recurrent networks and LSTMs, attention, transformers and positional encodings, autoencoders and embeddings, generative and graph networks.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/network-architectures.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Network Architectures: Convolutional, Recurrent and Transformer Networks, and Autoencoders — RNLearn">
+  <meta property="og:description" content="Convolution and receptive fields, recurrent networks and LSTMs, attention, transformers and positional encodings, autoencoders and embeddings, generative and graph networks.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/network-architectures.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Network Architectures: Convolutional, Recurrent and Transformer Networks, and Autoencoders — RNLearn">
+  <meta name="twitter:description" content="Convolution and receptive fields, recurrent networks and LSTMs, attention, transformers and positional encodings, autoencoders and embeddings, generative and graph networks.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Network Architectures: Convolutional, Recurrent and Transformer Networks, and Autoencoders",
+    "description": "Convolution and receptive fields, recurrent networks and LSTMs, attention, transformers and positional encodings, autoencoders and embeddings, generative and graph networks.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-21",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/network-architectures.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/ai-machine-learning.html" class="post-subject-tag" data-subject="ai-machine-learning">AI &amp; Machine Learning</a>
+        </div>
+        <h1 class="article-title">Network Architectures: Convolutional, Recurrent and Transformer Networks, and Autoencoders</h1>
+        <p class="article-standfirst">
+          The same neurons can be wired in very different ways. Arrange them to match the structure of images, sequences or graphs, and a network learns far more from far less.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-21">21 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>20 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/inside-the-machine.html">Inside the Machine</a> (Part 9 of 10)</div>
+  <div class="series-banner-links">
+    <a href="training-deep-networks.html">← Part 8: Training Deep Networks: Optimisers, Learning Rates, Normalisation and Regularisation</a>
+    <span>Part 10 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. Why Architecture Matters</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. The Limits of Full Connection</a></li>
+              <li><a class="toc-link" href="#section-4">4. Convolution</a></li>
+              <li><a class="toc-link" href="#section-5">5. Pooling, Depth and Receptive Fields</a></li>
+              <li><a class="toc-link" href="#section-6">6. Recurrent Networks</a></li>
+              <li><a class="toc-link" href="#section-7">7. Attention</a></li>
+              <li><a class="toc-link" href="#section-8">8. Transformers</a></li>
+              <li><a class="toc-link" href="#section-9">9. Autoencoders and Embeddings</a></li>
+              <li><a class="toc-link" href="#section-10">10. Generative and Graph Networks</a></li>
+              <li><a class="toc-link" href="#section-11">11. Choosing an Architecture</a></li>
+              <li><a class="toc-link" href="#section-12">12. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-13">13. Worked Example: Counting Weights</a></li>
+              <li><a class="toc-link" href="#section-14">14. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-15">15. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-16">16. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-17">17. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-18">18. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-19">19. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>You will learn:</strong> why the arrangement of a network matters; how convolutional networks see images through shared filters and growing receptive fields; how recurrent networks and LSTMs carry memory through sequences; how attention works and how transformers are built from it; why transformers need positional encodings; autoencoders and embeddings; a glimpse of generative and graph networks; and how to choose an architecture.</p>
+            <p><strong>You need:</strong> Part 6 (neurons, backpropagation, vanishing gradients) and Part 8 (normalisation, skip connections).</p>
+            <p><strong>Try:</strong> six interactive figures, including filters sliding over an image, a query searching for its keys, and an autoencoder learning to squeeze a curve into a single number.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. Why Architecture Matters</h2>
+            <p>The networks of Parts 6–8 were fully connected: every unit in one layer is linked to every unit in the next. In principle, such a network can approximate any function (Part 6). In practice, the most successful networks are arranged to match the structure of their data. Images have nearby pixels that belong together and objects that can appear anywhere; sentences unfold in order, and a word’s meaning depends on others far away. An <strong>architecture</strong> builds such assumptions, an <strong>inductive bias</strong>, into the network, so that it needs fewer weights and less data to learn.</p>
+            <p>This part tours the main families: convolutional networks for grids such as images, recurrent networks and transformers for sequences, and autoencoders for learning compact representations. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-ml-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Part 9 shows how neurons are arranged into the networks used in practice.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-ml9-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Architectures from the visual cortex to the vision transformer, 1962–2021.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. The Limits of Full Connection</h2>
+            <p>A colour photograph of 224 × 224 pixels has 150,528 numbers. Connecting each to just 1,000 hidden units takes over 150 million weights in the first layer alone. Worse, such a layer has no notion that neighbouring pixels are related, or that a cat in the top-left corner is the same as a cat in the bottom-right: it would have to learn every object separately at every position, from examples at every position. Sequences pose similar problems: a fully connected network needs a fixed input length, and has no built-in sense of order.</p>
+            <div class="callout callout-method">
+              <div class="callout-header">Running example</div>
+              <p>The figures use small, transparent examples: a 16 × 16 picture of a house for convolution, a six-word toy vocabulary for attention, and 200 points on a curved arc for the autoencoder. Every number in them is computed live from the formulas in the text.</p>
+            </div>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Convolution</h2>
+            <p>In 1962 David Hubel and Torsten Wiesel found that neurons in the cat’s visual cortex respond to simple features, such as an edge at a particular angle, within a small patch of the visual field, their <em>receptive field</em>. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> Kunihiko Fukushima’s neocognitron of 1980 copied this layered arrangement of local feature detectors, <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> and in 1989 Yann LeCun and colleagues trained such a network by backpropagation to read handwritten zip codes. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span></p>
+            <p>The key operation is <strong>convolution</strong>. A small grid of weights, a <strong>filter</strong> or kernel, slides over the image; at each position, it multiplies the pixels beneath it by its weights and adds them up. The result is a <strong>feature map</strong> showing where the filter’s pattern occurs. Because the same filter is used at every position (<strong>weight sharing</strong>), a pattern learned in one place is recognised everywhere, and the number of weights depends on the filter size, not the image size.</p>
+            <figure class="fig" data-fig="fig-ml-conv">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Convolution on a small image.</strong> Choose a 3 × 3 filter and move the red window to see how each value of the feature map is computed.
+              </figcaption>
+            </figure>
+            <p>A convolutional layer applies many filters at once, say 64, each producing its own feature map, and the next layer’s filters combine all 64 maps. Early layers end up detecting edges and colours; deeper layers combine them into textures, parts and whole objects. Hand-designed filters like those in Figure 3 were the basis of classical image processing; a convolutional network learns its filters from data.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Pooling, Depth and Receptive Fields</h2>
+            <p>Each 3 × 3 filter sees only a tiny patch. Stacking layers widens the view: a unit in the second layer sees 5 × 5 input pixels, in the third 7 × 7. <strong>Pooling</strong> layers, which keep only the maximum or average of each small block, and convolutions with a <strong>stride</strong> of 2, which skip every other position, halve the size of the feature maps, so the receptive field grows much faster and computation shrinks.</p>
+            <figure class="fig" data-fig="fig-ml-rf">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Receptive fields.</strong> A one-dimensional stack of convolutional layers. Choose the number of layers, the filter width and the stride, and see every input the top unit depends on.
+              </figcaption>
+            </figure>
+            <p>With width-3 filters and stride 1, three layers see 7 inputs and six layers 13. With stride 2, three layers already see 15 inputs and six layers 127. LeCun’s LeNet-5 of 1998 alternated convolution and pooling to read cheques; <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span> in 2012, AlexNet, a much deeper version trained on two graphics processors, won the ImageNet challenge with a top-5 error of 15.3%, against 26.2% for the next entry, and set off the deep-learning boom. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> Later networks grew deeper with small 3 × 3 filters, <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span> and residual networks with skip connections (Part 8) reached 152 layers. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span></p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">The maths: receptive field size</summary>
+              <p style="margin-top:0.6rem;">For layers l = 1, …, L with filter widths k<sub>l</sub> and strides s<sub>l</sub>, the receptive field r of a unit in the last layer is</p>
+              <p>$$r = 1 + \sum_{l=1}^{L} (k_l - 1)\prod_{i=1}^{l-1} s_i .$$</p>
+              <p>With k = 3 and s = 2 throughout, r = 2<sup>L+1</sup> − 1: it doubles with every layer.</p>
+            </details>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">In code: a small convolutional network in PyTorch</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">import torch
+from torch import nn
+
+cnn = nn.Sequential(                       # input: 3 × 32 × 32 colour image
+    nn.Conv2d(3, 32, kernel_size=3, padding=1), nn.BatchNorm2d(32), nn.ReLU(),
+    nn.MaxPool2d(2),                       # → 32 × 16 × 16
+    nn.Conv2d(32, 64, kernel_size=3, padding=1), nn.BatchNorm2d(64), nn.ReLU(),
+    nn.MaxPool2d(2),                       # → 64 × 8 × 8
+    nn.AdaptiveAvgPool2d(1), nn.Flatten(), # → 64 numbers
+    nn.Linear(64, 10))                     # → scores for 10 classes
+print(sum(p.numel() for p in cnn.parameters()))   # 20,234 parameters</code></pre>
+            </details>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Recurrent Networks</h2>
+            <p>For sequences, such as text, speech or sensor readings, a <strong>recurrent neural network</strong> (RNN) reads one element at a time and carries a <strong>hidden state</strong> from each step to the next: h<sub>t</sub> = tanh(W h<sub>t−1</sub> + U x<sub>t</sub> + b). The same weights are used at every step, the time-wise equivalent of weight sharing, so the network handles sequences of any length. Jeffrey Elman showed in 1990 how such networks discover structure, such as word boundaries, in streams of input. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span> They are trained by unrolling the loop over time and applying backpropagation, “backpropagation through time”.</p>
+            <p>Unrolled, a recurrent network is a very deep network, and it suffers the vanishing gradients of Part 6: the influence of early inputs shrinks exponentially with every step. Sepp Hochreiter and Jürgen Schmidhuber’s <strong>long short-term memory</strong> (LSTM) of 1997 adds a memory cell that is updated by addition and controlled by <em>gates</em>, small sigmoid units that decide what to forget, what to write and what to read. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span> Kyunghyun Cho and colleagues’ gated recurrent unit (GRU) of 2014 is a simpler variant. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span></p>
+            <figure class="fig" data-fig="fig-ml-rnn">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Memory in recurrent networks.</strong> How strongly the current state depends on the state t steps earlier, for a simple RNN driven by random inputs and for an LSTM memory cell. Change the recurrent weight and the forget gate.
+              </figcaption>
+            </figure>
+            <p>With a recurrent weight of 1, the simple RNN’s sensitivity falls to about 3 × 10<sup>−4</sup> after 20 steps and about 10<sup>−8</sup> after 50. Raising the weight does not help: the tanh saturates and its slope collapses. An LSTM cell with a forget gate of 0.99 keeps 61% of its sensitivity after 50 steps. LSTMs powered speech recognition and machine translation for much of the 2010s; in 2014 Ilya Sutskever, Oriol Vinyals and Quoc Le translated whole sentences with one LSTM that read the source and another that wrote the translation. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span></p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Attention</h2>
+            <p>Sutskever’s translator had to squeeze the meaning of a whole sentence into one fixed-length vector before writing a word. In 2015 Dzmitry Bahdanau, Kyunghyun Cho and Yoshua Bengio let the writer look back at all the source words instead, weighting each by its relevance to the word being written: <strong>attention</strong>. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span></p>
+            <p>Attention is a soft lookup. Each word offers a <strong>key</strong> (what it contains) and a <strong>value</strong> (what it passes on); the word doing the looking presents a <strong>query</strong> (what it needs). Scores are dot products of the query with every key, a softmax (Part 7) turns them into weights that sum to 1, and the output is the weighted average of the values.</p>
+            <p>$$\text{Attention}(Q, K, V) = \text{softmax}\!\Big(\frac{QK^\top}{\sqrt{d}}\Big)\,V$$</p>
+            <figure class="fig" data-fig="fig-ml-attn">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. Attention as a soft lookup.</strong> Six words with two-dimensional keys. Turn the query and change its length to see the attention weights and the output they produce.
+              </figcaption>
+            </figure>
+            <p>Dividing by √d, where d is the length of the vectors, keeps the scores from growing with d and pushing the softmax into saturation. Unlike a recurrent network, attention connects any two words directly, however far apart, and all the scores can be computed at once in parallel.</p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Transformers</h2>
+            <p>In 2017 Ashish Vaswani and colleagues at Google showed that attention alone, without any recurrence, gave better translations and trained much faster: “Attention is all you need”. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span> Their <strong>transformer</strong> stacks identical blocks, each with two parts:</p>
+            <ul>
+              <li><strong>Multi-head self-attention:</strong> every word attends to every other word in the same sequence, with several attention “heads” in parallel, each using its own learned maps from word vectors to queries, keys and values, so that different heads can track different relationships.</li>
+              <li><strong>A feed-forward network</strong> applied to each word separately, usually with a GELU or SwiGLU activation (Part 6).</li>
+            </ul>
+            <p>Each part is wrapped in a skip connection and layer normalisation (Part 8). Because attention treats its inputs as an unordered set, the word order is supplied by adding a <strong>positional encoding</strong> to each word’s vector.</p>
+            <figure class="fig" data-fig="fig-ml-pos">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 7. Sinusoidal positional encodings.</strong> The original transformer’s position codes for 50 positions and 32 dimensions. Choose a position to see how similar its code is to every other position’s.
+              </figcaption>
+            </figure>
+            <p>Transformers now dominate language processing: BERT, from Jacob Devlin and colleagues, learns by filling in masked words, <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span> and the GPT models learn by predicting the next word, reaching 175 billion parameters with GPT-3 in 2020. <span class="cite-group">[<a class="cite" href="#ref-17">17</a>]</span> In 2021 Alexey Dosovitskiy and colleagues cut images into 16 × 16 patches and fed them to a transformer like words; this <strong>vision transformer</strong> matched the best convolutional networks, but only when pre-trained on very large data sets, a sign of how much the convolutional inductive bias is worth when data are scarce. <span class="cite-group">[<a class="cite" href="#ref-18">18</a>]</span> The price of attention is that every word attends to every other, so the cost grows with the square of the sequence length.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">The maths: sinusoidal positional encodings</summary>
+              <p style="margin-top:0.6rem;">For position p and dimensions 2i and 2i + 1 of a d-dimensional code:</p>
+              <p>$$PE_{p,\,2i} = \sin\!\big(p / 10000^{2i/d}\big), \qquad PE_{p,\,2i+1} = \cos\!\big(p / 10000^{2i/d}\big).$$</p>
+              <p>Each pair of dimensions rotates at its own speed as p increases, so moving k positions is the same rotation wherever it happens, which makes relative positions easy for attention to use. Many recent models instead learn the codes, or rotate queries and keys directly.</p>
+            </details>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Autoencoders and Embeddings</h2>
+            <p>An <strong>autoencoder</strong> is trained to reproduce its input, after forcing it through a narrow middle layer, the <strong>bottleneck</strong>. To succeed, the encoder must summarise each input in a few numbers that the decoder can expand again, and those numbers become a compact <strong>embedding</strong> of the data. A linear autoencoder learns the same subspace as principal component analysis; in 2006 Geoffrey Hinton and Ruslan Salakhutdinov showed that deep nonlinear autoencoders compress images far better. <span class="cite-group">[<a class="cite" href="#ref-19">19</a>]</span></p>
+            <figure class="fig" data-fig="fig-ml-ae">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 8. A linear and a nonlinear autoencoder.</strong> Two hundred points on a curved arc are compressed to a single number and reconstructed. Compare the linear autoencoder with a nonlinear one you can train.
+              </figcaption>
+            </figure>
+            <p>The best straight line leaves a reconstruction error of 0.094; after 2,000 steps the nonlinear autoencoder’s is about 0.004, because its one number records where each point lies along the curve. Embeddings appear throughout deep learning. Word embeddings place words with similar meanings close together; Tomas Mikolov and colleagues found that such vectors even capture analogies, with king − man + woman landing near queen. <span class="cite-group">[<a class="cite" href="#ref-20">20</a>]</span> Every transformer begins by turning tokens into embeddings, and the hidden layers of a trained network are embeddings that can be reused for other tasks.</p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Generative and Graph Networks</h2>
+            <ul>
+              <li><strong>Variational autoencoders</strong>, by Diederik Kingma and Max Welling, make the bottleneck a probability distribution, so that new data can be generated by sampling codes. <span class="cite-group">[<a class="cite" href="#ref-21">21</a>]</span></li>
+              <li><strong>Generative adversarial networks</strong>, by Ian Goodfellow and colleagues, train a generator to fool a discriminator that tries to tell its output from real data. <span class="cite-group">[<a class="cite" href="#ref-22">22</a>]</span></li>
+              <li><strong>Diffusion models</strong>, developed by Jonathan Ho, Ajay Jain and Pieter Abbeel among others, learn to remove noise step by step, and generate images by starting from pure noise. <span class="cite-group">[<a class="cite" href="#ref-23">23</a>]</span> They power most of today’s image generators.</li>
+              <li><strong>Graph neural networks</strong>, such as the graph convolutional network of Thomas Kipf and Max Welling, pass messages between connected nodes, for molecules, social networks or road maps. <span class="cite-group">[<a class="cite" href="#ref-24">24</a>]</span></li>
+            </ul>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Choosing an Architecture</h2>
+            <div class="table-container" style="overflow-x:auto; margin:1.2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.92rem; line-height:1.5;">
+                <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.5rem;">Data</th><th style="padding:0.5rem;">Typical architecture</th><th style="padding:0.5rem;">Built-in assumption</th></tr></thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Tables of features</td><td style="padding:0.5rem;">Gradient-boosted trees (Part 4); small fully connected network</td><td style="padding:0.5rem;">None about order or position</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Images, spectrograms, grids</td><td style="padding:0.5rem;">Convolutional network; vision transformer with lots of data</td><td style="padding:0.5rem;">Local patterns, the same anywhere</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Text, code, long sequences</td><td style="padding:0.5rem;">Transformer</td><td style="padding:0.5rem;">Any element may relate to any other</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Streaming signals, small sequence data</td><td style="padding:0.5rem;">LSTM or GRU; 1-D convolution</td><td style="padding:0.5rem;">Order matters; recent past matters most</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Molecules, networks, meshes</td><td style="padding:0.5rem;">Graph neural network</td><td style="padding:0.5rem;">Relationships follow the graph’s links</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Unlabelled data, compression, generation</td><td style="padding:0.5rem;">Autoencoder, VAE, diffusion model</td><td style="padding:0.5rem;">Data lie near a lower-dimensional structure</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>In practice, start from a published architecture that works on similar data, and, where possible, from its pre-trained weights: fine-tuning a network trained on millions of examples usually beats training from scratch on thousands.</p>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: does architecture still matter?</div>
+              <p>The vision transformer suggests that with enough data, a general architecture can learn what a specialised one has built in. <span class="cite-group">[<a class="cite" href="#ref-18">18</a>]</span> Jared Kaplan and colleagues found that the loss of language models falls smoothly, as a power law, with the number of parameters, the amount of data and the computation used, and depends only weakly on details such as depth versus width. <span class="cite-group">[<a class="cite" href="#ref-25">25</a>]</span> Does that mean architecture matters less and less as scale grows? Or does the quadratic cost of attention, the hunger for data, and the difficulty of reasoning over long contexts mean new architectures are still needed? Researchers are actively exploring alternatives, from recurrent models with efficient training to mixtures of experts that activate only part of a network for each input, and the answer is not yet clear.</p>
+            </div>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Worked Example: Counting Weights</h2>
+            <ol>
+              <li><strong>Fully connected:</strong> a 224 × 224 colour image has 150,528 inputs. One layer of 64 hidden units needs 150,528 × 64 = 9.6 million weights.</li>
+              <li><strong>Convolutional:</strong> 64 filters of size 3 × 3 over 3 colour channels need 3 × 3 × 3 × 64 = 1,728 weights, about 5,600 times fewer, and produce 64 full-size feature maps instead of 64 numbers.</li>
+              <li><strong>Going deeper:</strong> a second layer of 64 filters reading 64 maps needs 3 × 3 × 64 × 64 = 36,864 weights, still independent of the image size.</li>
+              <li><strong>Attention:</strong> a transformer layer with vectors of length 512 has four 512 × 512 matrices (queries, keys, values, output), about 1 million weights, whatever the sequence length. But its attention scores form an n × n table: 1 million entries for a sequence of 1,000 tokens, 100 million for 10,000.</li>
+              <li><strong>Recurrent:</strong> an LSTM with 512 hidden units and 512 inputs has 4 gates, each with (512 + 512) × 512 weights plus biases: about 2.1 million, applied again at every step.</li>
+            </ol>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: architectures</div>
+              <ol>
+                <li>In Figure 3, choose the vertical-edge filter and move the window across the left wall of the house. Where is the response positive, and where negative?</li>
+                <li>In Figure 4, how many stride-1 layers of width-3 filters are needed to see as many inputs as four stride-2 layers?</li>
+                <li>In Figure 5, set the recurrent weight to 3. Why does the simple RNN forget even faster?</li>
+                <li>In Figure 6, set the query length to 0. What are the weights, and why?</li>
+                <li>In Figure 8, press “New start” and train several times. Does the nonlinear autoencoder always find the curve?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “convolutional networks see shapes, as we do”</div>
+              <p><strong>The myth:</strong> because convolutional networks were inspired by the visual cortex and classify objects as well as people do, they recognise objects by their shape, as humans do.</p>
+              <p><strong>The reality:</strong> in 2019 Robert Geirhos and colleagues showed people and networks images in which shape and texture conflicted, such as the outline of a cat filled with the texture of elephant skin. People overwhelmingly went by shape; standard ImageNet-trained networks mostly went by texture, answering “elephant”. Training on images whose textures had been randomised made the networks rely more on shape and become more robust. <span class="cite-group">[<a class="cite" href="#ref-26">26</a>]</span></p>
+              <p><strong>Why it matters:</strong> a network’s architecture makes some solutions easy to learn, but the data decide which one it actually learns. Similar accuracy does not mean similar reasoning.</p>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>Architectures build assumptions about the data into a network, so it learns from fewer weights and examples.</li>
+                <li>Convolutional networks slide shared filters over grids; stacking and downsampling layers widens their receptive field.</li>
+                <li>Recurrent networks carry a state through sequences; LSTMs and GRUs use gates to keep memory and gradients alive.</li>
+                <li>Attention computes a weighted average of values, with weights from a softmax of query–key dot products.</li>
+                <li>Transformers stack multi-head self-attention and feed-forward layers with skip connections, normalisation and positional encodings; their cost grows with the square of the sequence length.</li>
+                <li>Autoencoders learn compact embeddings through a bottleneck; generative models such as VAEs, GANs and diffusion models create new data.</li>
+                <li>Choose the architecture whose built-in assumptions match your data, and start from pre-trained weights when you can.</li>
+              </ul>
+              <div class="table-container" style="overflow-x:auto; margin:1rem 0 0;">
+                <table style="width:100%; border-collapse:collapse; font-size:0.9rem; line-height:1.5;">
+                  <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.4rem;">Building block</th><th style="padding:0.4rem;">What it does</th><th style="padding:0.4rem;">Found in</th></tr></thead>
+                  <tbody>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">Convolution</td><td style="padding:0.4rem;">Shared local filter</td><td style="padding:0.4rem;">CNNs, audio models</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">Pooling / stride</td><td style="padding:0.4rem;">Downsampling, wider view</td><td style="padding:0.4rem;">CNNs</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">Recurrence with gates</td><td style="padding:0.4rem;">Memory over time</td><td style="padding:0.4rem;">LSTMs, GRUs</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">Self-attention</td><td style="padding:0.4rem;">Every element looks at every other</td><td style="padding:0.4rem;">Transformers</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">Positional encoding</td><td style="padding:0.4rem;">Supplies order</td><td style="padding:0.4rem;">Transformers</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">Bottleneck</td><td style="padding:0.4rem;">Forces a compact code</td><td style="padding:0.4rem;">Autoencoders, VAEs</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section id="section-17">
+            <h2>17. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">David Hubel &amp; Torsten Wiesel</td>
+                <td style="padding:0.6rem 0.8rem;">1926–2013 / born 1924<br>Canada / Sweden</td>
+                <td style="padding:0.6rem 0.8rem;">Receptive fields (1962)</td>
+                <td style="padding:0.6rem 0.8rem;">Discovered edge-detecting neurons in the visual cortex; Nobel Prize 1981.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Kunihiko Fukushima</td>
+                <td style="padding:0.6rem 0.8rem;">born 1936<br>Japan</td>
+                <td style="padding:0.6rem 0.8rem;">The neocognitron (1980)</td>
+                <td style="padding:0.6rem 0.8rem;">Built the first layered network of local feature detectors.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Yann LeCun</td>
+                <td style="padding:0.6rem 0.8rem;">born 1960<br>France / USA</td>
+                <td style="padding:0.6rem 0.8rem;">Convolutional networks (1989, 1998)</td>
+                <td style="padding:0.6rem 0.8rem;">Trained convolutional networks by backpropagation to read handwriting.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Jeffrey Elman</td>
+                <td style="padding:0.6rem 0.8rem;">1948–2018<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Simple recurrent networks (1990)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed how recurrent networks find structure in sequences.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Sepp Hochreiter &amp; Jürgen Schmidhuber</td>
+                <td style="padding:0.6rem 0.8rem;">born 1967 / born 1963<br>Germany</td>
+                <td style="padding:0.6rem 0.8rem;">LSTM (1997)</td>
+                <td style="padding:0.6rem 0.8rem;">Invented the gated memory cell for long sequences.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Alex Krizhevsky, Ilya Sutskever &amp; Geoffrey Hinton</td>
+                <td style="padding:0.6rem 0.8rem;"><br>Canada</td>
+                <td style="padding:0.6rem 0.8rem;">AlexNet (2012)</td>
+                <td style="padding:0.6rem 0.8rem;">Won ImageNet by a wide margin and launched the deep-learning boom.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Dzmitry Bahdanau, Kyunghyun Cho &amp; Yoshua Bengio</td>
+                <td style="padding:0.6rem 0.8rem;"><br>Canada</td>
+                <td style="padding:0.6rem 0.8rem;">Attention (2015)</td>
+                <td style="padding:0.6rem 0.8rem;">Let translation models look back at the relevant source words.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Ashish Vaswani and colleagues</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">The transformer (2017)</td>
+                <td style="padding:0.6rem 0.8rem;">Built a network from attention alone, the basis of modern language models.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-18">
+            <h2>18. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about network architectures.</p>
+            <figure class="fig" data-fig="fig-quiz-ml9">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-19">
+            <h2>19. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Goodfellow, Ian, Bengio, Yoshua &amp; Courville, Aaron.</strong> (2016). <em>Deep Learning</em>, chapters 9, 10 and 14. Cambridge, MA: MIT Press.</li>
+              <li id="ref-2"><strong>LeCun, Yann, Bengio, Yoshua &amp; Hinton, Geoffrey.</strong> (2015). "Deep learning." <em>Nature</em>, 521: 436–444.</li>
+              <li id="ref-3"><strong>Hubel, D. H. &amp; Wiesel, T. N.</strong> (1962). "Receptive fields, binocular interaction and functional architecture in the cat’s visual cortex." <em>Journal of Physiology</em>, 160(1): 106–154.</li>
+              <li id="ref-4"><strong>Fukushima, Kunihiko.</strong> (1980). "Neocognitron: a self-organizing neural network model for a mechanism of pattern recognition unaffected by shift in position." <em>Biological Cybernetics</em>, 36(4): 193–202.</li>
+              <li id="ref-5"><strong>LeCun, Y., Boser, B., Denker, J. S., Henderson, D., Howard, R. E., Hubbard, W. &amp; Jackel, L. D.</strong> (1989). "Backpropagation applied to handwritten zip code recognition." <em>Neural Computation</em>, 1(4): 541–551.</li>
+              <li id="ref-6"><strong>LeCun, Yann, Bottou, Léon, Bengio, Yoshua &amp; Haffner, Patrick.</strong> (1998). "Gradient-based learning applied to document recognition." <em>Proceedings of the IEEE</em>, 86(11): 2278–2324.</li>
+              <li id="ref-7"><strong>Krizhevsky, Alex, Sutskever, Ilya &amp; Hinton, Geoffrey E.</strong> (2012). "ImageNet classification with deep convolutional neural networks." In <em>Advances in Neural Information Processing Systems 25 (NIPS)</em>, pp. 1097–1105.</li>
+              <li id="ref-8"><strong>Simonyan, Karen &amp; Zisserman, Andrew.</strong> (2015). "Very deep convolutional networks for large-scale image recognition." In <em>International Conference on Learning Representations (ICLR)</em>.</li>
+              <li id="ref-9"><strong>He, Kaiming, Zhang, Xiangyu, Ren, Shaoqing &amp; Sun, Jian.</strong> (2016). "Deep residual learning for image recognition." In <em>Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</em>, pp. 770–778.</li>
+              <li id="ref-10"><strong>Elman, Jeffrey L.</strong> (1990). "Finding structure in time." <em>Cognitive Science</em>, 14(2): 179–211.</li>
+              <li id="ref-11"><strong>Hochreiter, Sepp &amp; Schmidhuber, Jürgen.</strong> (1997). "Long short-term memory." <em>Neural Computation</em>, 9(8): 1735–1780.</li>
+              <li id="ref-12"><strong>Cho, Kyunghyun, van Merriënboer, Bart, Gulcehre, Caglar, Bahdanau, Dzmitry, Bougares, Fethi, Schwenk, Holger &amp; Bengio, Yoshua.</strong> (2014). "Learning phrase representations using RNN encoder–decoder for statistical machine translation." In <em>Proceedings of EMNLP 2014</em>, pp. 1724–1734.</li>
+              <li id="ref-13"><strong>Sutskever, Ilya, Vinyals, Oriol &amp; Le, Quoc V.</strong> (2014). "Sequence to sequence learning with neural networks." In <em>Advances in Neural Information Processing Systems 27 (NIPS)</em>, pp. 3104–3112.</li>
+              <li id="ref-14"><strong>Bahdanau, Dzmitry, Cho, Kyunghyun &amp; Bengio, Yoshua.</strong> (2015). "Neural machine translation by jointly learning to align and translate." In <em>International Conference on Learning Representations (ICLR)</em>.</li>
+              <li id="ref-15"><strong>Vaswani, Ashish, Shazeer, Noam, Parmar, Niki, Uszkoreit, Jakob, Jones, Llion, Gomez, Aidan N., Kaiser, Łukasz &amp; Polosukhin, Illia.</strong> (2017). "Attention is all you need." In <em>Advances in Neural Information Processing Systems 30 (NeurIPS)</em>.</li>
+              <li id="ref-16"><strong>Devlin, Jacob, Chang, Ming-Wei, Lee, Kenton &amp; Toutanova, Kristina.</strong> (2019). "BERT: pre-training of deep bidirectional transformers for language understanding." In <em>Proceedings of NAACL-HLT 2019</em>, pp. 4171–4186.</li>
+              <li id="ref-17"><strong>Brown, Tom B. and 30 co-authors.</strong> (2020). "Language models are few-shot learners." In <em>Advances in Neural Information Processing Systems 33 (NeurIPS)</em>, pp. 1877–1901.</li>
+              <li id="ref-18"><strong>Dosovitskiy, Alexey and 11 co-authors.</strong> (2021). "An image is worth 16x16 words: transformers for image recognition at scale." In <em>International Conference on Learning Representations (ICLR)</em>.</li>
+              <li id="ref-19"><strong>Hinton, G. E. &amp; Salakhutdinov, R. R.</strong> (2006). "Reducing the dimensionality of data with neural networks." <em>Science</em>, 313(5786): 504–507.</li>
+              <li id="ref-20"><strong>Mikolov, Tomas, Yih, Wen-tau &amp; Zweig, Geoffrey.</strong> (2013). "Linguistic regularities in continuous space word representations." In <em>Proceedings of NAACL-HLT 2013</em>, pp. 746–751.</li>
+              <li id="ref-21"><strong>Kingma, Diederik P. &amp; Welling, Max.</strong> (2014). "Auto-encoding variational Bayes." In <em>International Conference on Learning Representations (ICLR)</em>.</li>
+              <li id="ref-22"><strong>Goodfellow, Ian, Pouget-Abadie, Jean, Mirza, Mehdi, Xu, Bing, Warde-Farley, David, Ozair, Sherjil, Courville, Aaron &amp; Bengio, Yoshua.</strong> (2014). "Generative adversarial nets." In <em>Advances in Neural Information Processing Systems 27 (NIPS)</em>, pp. 2672–2680.</li>
+              <li id="ref-23"><strong>Ho, Jonathan, Jain, Ajay &amp; Abbeel, Pieter.</strong> (2020). "Denoising diffusion probabilistic models." In <em>Advances in Neural Information Processing Systems 33 (NeurIPS)</em>, pp. 6840–6851.</li>
+              <li id="ref-24"><strong>Kipf, Thomas N. &amp; Welling, Max.</strong> (2017). "Semi-supervised classification with graph convolutional networks." In <em>International Conference on Learning Representations (ICLR)</em>.</li>
+              <li id="ref-25"><strong>Kaplan, Jared and 9 co-authors.</strong> (2020). "Scaling laws for neural language models." <em>arXiv</em>: 2001.08361.</li>
+              <li id="ref-26"><strong>Geirhos, Robert, Rubisch, Patricia, Michaelis, Claudio, Bethge, Matthias, Wichmann, Felix A. &amp; Brendel, Wieland.</strong> (2019). "ImageNet-trained CNNs are biased towards texture; increasing shape bias improves accuracy and robustness." In <em>International Conference on Learning Representations (ICLR)</em>.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/inside-the-machine.html">Inside the Machine</a> (Part 9 of 10)</div>
+  <div class="series-banner-links">
+    <a href="training-deep-networks.html">← Part 8: Training Deep Networks: Optimisers, Learning Rates, Normalisation and Regularisation</a>
+    <span>Part 10 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/network-architectures.js"></script>
+</body>
+</html>

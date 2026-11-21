@@ -4958,5 +4958,68 @@ window.RNLEARN_GLOSSARY = [
   "Data augmentation",
   "Enlarging a training set with modified copies of examples, such as flipped or cropped images.",
   []
+ ],
+ [
+  "Feature map",
+  "The output of one convolutional filter over an image, showing where its pattern occurs.",
+  [
+   "feature maps"
+  ]
+ ],
+ [
+  "Weight sharing",
+  "Using the same weights at many positions or time steps, as convolutional and recurrent networks do.",
+  []
+ ],
+ [
+  "Receptive field",
+  "The region of the input that a unit in a network, or a neuron in the brain, responds to.",
+  [
+   "receptive fields"
+  ]
+ ],
+ [
+  "Max pooling",
+  "Downsampling a feature map by keeping only the maximum of each small block.",
+  []
+ ],
+ [
+  "Recurrent neural network",
+  "A network that processes a sequence one step at a time, carrying a hidden state from step to step.",
+  [
+   "recurrent network",
+   "recurrent networks",
+   "RNN",
+   "RNNs"
+  ]
+ ],
+ [
+  "LSTM",
+  "Long short-term memory: a recurrent unit with a gated memory cell that keeps information over long sequences.",
+  [
+   "long short-term memory",
+   "LSTMs"
+  ]
+ ],
+ [
+  "Positional encoding",
+  "A vector added to each token in a transformer to tell it the token’s position in the sequence.",
+  [
+   "positional encodings"
+  ]
+ ],
+ [
+  "Autoencoder",
+  "A network trained to reproduce its input through a narrow bottleneck, learning a compact code.",
+  [
+   "autoencoders"
+  ]
+ ],
+ [
+  "Word embedding",
+  "A learned vector representing a word, placing words with similar meanings close together.",
+  [
+   "word embeddings"
+  ]
  ]
 ];

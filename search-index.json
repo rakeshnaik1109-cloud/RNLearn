@@ -1,5 +1,21 @@
 [
   {
+    "slug": "network-architectures",
+    "url": "articles/network-architectures.html",
+    "title": "Network Architectures: Convolutional, Recurrent and Transformer Networks, and Autoencoders",
+    "summary": "Convolution and receptive fields, recurrent networks and LSTMs, attention, transformers and positional encodings, autoencoders and embeddings, generative and graph networks.",
+    "subject": "AI & Machine Learning",
+    "tags": [
+      "machine-learning",
+      "neural-networks",
+      "deep-learning",
+      "transformers",
+      "data-analysis"
+    ],
+    "date": "2026-11-21",
+    "type": "tutorial"
+  },
+  {
     "slug": "weighing-the-earth",
     "url": "articles/weighing-the-earth.html",
     "title": "Weighing the Earth: Pendulums, a Scottish Mountain and Two Lead Balls",
