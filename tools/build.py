@@ -10,6 +10,7 @@ import sys
 import os
 import json
 import re
+import html as html_lib
 import datetime
 from xml.sax.saxutils import escape as xml_escape
 
@@ -286,7 +287,7 @@ def generate_listing_page(title, eyebrow, lede, posts, canonical_rel, rel_prefix
         </div>
       </div>
       <div class="footer-bottom">
-        <div>© 2026 Rakesh Naik. All rights reserved.</div>
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
         <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
       </div>
     </div>
@@ -501,6 +502,42 @@ def build_site(root_dir, check_mode=False):
                 art_html = replace_region(art_html, "series-top", banner_content)
                 art_html = replace_region(art_html, "series-bottom", banner_content)
                 files_to_write[os.path.join("articles", f"{art_slug}.html")] = art_html
+
+    # "How to cite" block in every published article
+    for art in public_posts:
+        rel = os.path.join("articles", f"{art['slug']}.html")
+        if rel in files_to_write:
+            art_html = files_to_write[rel]
+        else:
+            fp = os.path.join(root_dir, rel)
+            if not os.path.exists(fp):
+                continue
+            with open(fp, "r", encoding="utf-8") as f:
+                art_html = f.read()
+        if "build:start cite" not in art_html:
+            continue
+        year = (art.get("date") or "2026")[:4]
+        url = f"{BASE_URL}/articles/{art['slug']}.html"
+        t = html_lib.escape(art["title"])
+        key = "naik" + year + re.sub(r"[^a-z]", "", art["slug"].split("-")[0])
+        cite = f"""<section class="article-cite" id="cite">
+            <h3>How to Cite This Article</h3>
+            <p>You are free to share and adapt this article, its figures and its interactive simulations, for any purpose, provided you give appropriate credit. Please cite it as:</p>
+            <p class="cite-text">Naik, Rakesh ({year}). “{t}.” <em>RNLearn</em>, {format_date(art.get("date", ""))}. <a href="{url}">{url}</a></p>
+            <details>
+              <summary>BibTeX</summary>
+<pre><code>@misc{{{key},
+  author = {{Naik, Rakesh}},
+  title  = {{{t}}},
+  year   = {{{year}}},
+  howpublished = {{RNLearn}},
+  url    = {{{url}}},
+  note   = {{Licensed under CC BY 4.0}}
+}}</code></pre>
+            </details>
+            <p class="cite-license">Licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">Creative Commons Attribution 4.0 International (CC BY 4.0)</a>.</p>
+          </section>"""
+        files_to_write[rel] = replace_region(art_html, "cite", cite)
 
     # Determine deterministic build timestamp from latest public post, or fixed epoch
     if public_posts:

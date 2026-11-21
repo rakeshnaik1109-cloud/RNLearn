@@ -108,4 +108,4 @@ python tools/check.py
 
 ## License
 
-© 2026 Rakesh Naik. All rights reserved. No part of this repository or website may be reproduced or reused without written permission. See [LICENSE](LICENSE).
+© 2026 Rakesh Naik. The content (articles, figures, interactive simulations, quizzes and glossary) is licensed under [Creative Commons Attribution 4.0 (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/): you may share and adapt it for any purpose, provided you give proper credit. Each article ends with a "How to Cite This Article" section with a ready-made citation and BibTeX entry. The source code is licensed under the MIT License. See [LICENSE](LICENSE).

@@ -117,6 +117,7 @@
 .article-content > h4,
 .article-content > .callout,
 .article-content > .article-references,
+.article-content > .article-cite,
 .article-content > .article-corrections {
   max-width: 920px;
 }
@@ -797,6 +798,7 @@ figure[data-fig] figcaption,
 
 /* References, Citations & Corrections Section */
 .article-references,
+.article-cite,
 .article-corrections {
   border-top: 1px solid var(--border);
   padding-top: 2rem;
@@ -814,6 +816,25 @@ figure[data-fig] figcaption,
 .article-references a {
   word-break: break-all;
 }
+
+.article-cite .cite-text {
+  padding: 0.7rem 0.9rem;
+  border-left: 3px solid var(--accent);
+  background: var(--surface-raised);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.article-cite pre {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 0.9rem;
+  font-size: 0.8rem;
+  overflow-x: auto;
+}
+.article-cite summary { cursor: pointer; font-weight: 600; }
+.article-cite .cite-license { color: var(--ink-secondary); }
 
 .citation-ref {
   font-family: var(--font-mono);
@@ -946,6 +967,7 @@ figure[data-fig] figcaption,
     margin: 1.25rem 0;
   }
   .article-references,
+  .article-cite,
   .article-corrections {
     margin-top: 2rem;
     padding-top: 1.5rem;
