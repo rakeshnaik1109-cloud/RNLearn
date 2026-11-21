@@ -648,7 +648,7 @@
     "url": "articles/null-hypothesis-p-values-and-effect-sizes.html",
     "title": "Is It Real, or Just Luck? Null Hypotheses, p-Values and Effect Sizes, from Coin Flips to Comparing AI Models",
     "summary": "From a suspicious coin to comparing AI models: null hypotheses, p-values, power, rank tests, Cliff’s delta, confidence intervals, FDR and q-values, and how to test ML results properly.",
-    "subject": "Technology",
+    "subject": "AI & Machine Learning",
     "tags": [
       "statistics",
       "hypothesis-testing",
