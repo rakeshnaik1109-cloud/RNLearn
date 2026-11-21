@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Context and Attention: How Language Models Decide Which Words Matter — RNLearn</title>
+  <meta name="description" content="Long-distance clues, recurrent memory and its bottleneck, self-attention with queries, keys and values, heads and layers, induction heads, in-context learning and the cost of long contexts.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/context-and-attention.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Context and Attention: How Language Models Decide Which Words Matter — RNLearn">
+  <meta property="og:description" content="Long-distance clues, recurrent memory and its bottleneck, self-attention with queries, keys and values, heads and layers, induction heads, in-context learning and the cost of long contexts.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/context-and-attention.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Context and Attention: How Language Models Decide Which Words Matter — RNLearn">
+  <meta name="twitter:description" content="Long-distance clues, recurrent memory and its bottleneck, self-attention with queries, keys and values, heads and layers, induction heads, in-context learning and the cost of long contexts.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Context and Attention: How Language Models Decide Which Words Matter",
+    "description": "Long-distance clues, recurrent memory and its bottleneck, self-attention with queries, keys and values, heads and layers, induction heads, in-context learning and the cost of long contexts.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-21",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/context-and-attention.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/ai-machine-learning.html" class="post-subject-tag" data-subject="ai-machine-learning">AI &amp; Machine Learning</a>
+        </div>
+        <h1 class="article-title">Context and Attention: How Language Models Decide Which Words Matter</h1>
+        <p class="article-standfirst">
+          Whether the next word is “is” or “are” can depend on a word far back. Attention lets every word look back at every earlier word and decide which ones matter.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-21">21 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>14 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/one-word-at-a-time.html">One Word at a Time</a> (Part 3 of 6)</div>
+  <div class="series-banner-links">
+    <a href="words-as-numbers.html">← Part 2: Words as Numbers: Tokens, Embeddings and the First Neural Language Models</a>
+    <a href="from-scores-to-words.html">Part 4: From Scores to Words: Temperature, Sampling and How Language Models Choose →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. The Problem of Context</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Long-Distance Clues</a></li>
+              <li><a class="toc-link" href="#section-4">4. Recurrent Networks and Their Bottleneck</a></li>
+              <li><a class="toc-link" href="#section-5">5. Attention: Looking Back at Everything</a></li>
+              <li><a class="toc-link" href="#section-6">6. Many Heads, Many Layers</a></li>
+              <li><a class="toc-link" href="#section-7">7. Induction Heads and Learning in Context</a></li>
+              <li><a class="toc-link" href="#section-8">8. Predicting Every Position at Once</a></li>
+              <li><a class="toc-link" href="#section-9">9. The Cost of Context</a></li>
+              <li><a class="toc-link" href="#section-10">10. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-11">11. Worked Example: Attention by Hand</a></li>
+              <li><a class="toc-link" href="#section-12">12. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-13">13. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-14">14. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-15">15. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-16">16. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-17">17. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>In this part:</strong> why the next word can depend on words far back; how recurrent networks tried to remember and where they got stuck; how attention lets every word look back at every earlier word; queries, keys and values computed step by step; many heads and many layers; induction heads and learning from examples in the prompt; why training can predict every position at once; and the cost of long contexts.</p>
+            <p><strong>You need:</strong> Part 2 (tokens and word vectors). Inside the Machine Part 9 covers architectures more generally.</p>
+            <p><strong>Try:</strong> four interactive figures: models with different reach choosing a verb, attention computed by hand, the patterns of different attention heads, and the memory cost of long contexts.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. The Problem of Context</h2>
+            <p>Parts 1 and 2 predicted the next word from the one or two words before it. Real language does not work like that. Whether the next word is “is” or “are” may depend on a noun many words back; whether “it” means the cat or the fish depends on the whole sentence; and answering a question depends on a document pasted in thousands of words earlier. A useful language model must decide, for every next word, which of the earlier words matter. The mechanism that does this in every modern LLM is <strong>attention</strong>. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-lm-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Part 3 shows how a model uses its context.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-lm3-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. From recurrent memory to attention and induction heads, 1990–2024.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Long-Distance Clues</h2>
+            <p>Consider “The keys to the old wooden cabinet in the hall …”. The next word should be “are”, because the subject is “keys”; but the nearest nouns, “cabinet” and “hall”, are singular. Linguists call such misleading nouns <strong>attractors</strong>. In 2016 Tal Linzen, Emmanuel Dupoux and Yoav Goldberg used exactly this test on neural networks: recurrent networks usually chose the right verb, but their errors rose sharply when attractors intervened. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+            <figure class="fig" data-fig="fig-lm-agree">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Long-distance agreement.</strong> Which words can each kind of model see when it chooses the verb? Change the subject and the number of words in between.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Recurrent Networks and Their Bottleneck</h2>
+            <p>The first neural answer to long contexts was the <strong>recurrent network</strong>: read one word at a time and carry a hidden state, a vector summarising everything so far, from each word to the next. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> Plain recurrent networks forget quickly, because the signal from early words shrinks at every step; the LSTM of Sepp Hochreiter and Jürgen Schmidhuber added a gated memory cell that holds information much longer. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> LSTMs powered speech recognition and translation for much of the 2010s.</p>
+            <p>But a recurrent network still squeezes the entire past into one fixed-size vector, and must process words one after another, which is slow to train. In 2014 Ilya Sutskever, Oriol Vinyals and Quoc Le translated sentences by encoding the source into a single vector and decoding the translation from it; the longer the sentence, the more that vector had to hold. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Attention: Looking Back at Everything</h2>
+            <p>In 2015 Dzmitry Bahdanau, Kyunghyun Cho and Yoshua Bengio removed the bottleneck: for each word it wrote, their translator looked back at all the source words and took a weighted average, weighting each by its relevance. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> In 2017 Ashish Vaswani and colleagues built an entire network from this operation, the <strong>transformer</strong>, in which every word attends to the words of its own text: <strong>self-attention</strong>. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+            <p>Each word’s vector is turned into three new vectors by three learned matrices: a <strong>query</strong> (what this word is looking for), a <strong>key</strong> (what it offers to others) and a <strong>value</strong> (the information it passes on). A word’s attention to another is the dot product of its query with the other’s key, scaled and passed through a softmax so the weights sum to 1; its output is the weighted average of the values.</p>
+            <p>$$\text{Attention}(Q, K, V) = \text{softmax}\!\Big(\frac{QK^\top}{\sqrt{d}} + M\Big)\,V$$</p>
+            <p>Here M is the <strong>causal mask</strong>: minus infinity for every future position, so that a word can attend only to itself and earlier words.</p>
+            <figure class="fig" data-fig="fig-lm-qkv">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Attention computed step by step.</strong> Five words with four hand-made features and a hand-made query matrix. Choose which word is looking, and switch the causal mask on or off.
+              </figcaption>
+            </figure>
+            <p>In this hand-built example, the verb “eats” looks for an animate noun and gives “cat” a weight of 0.87; the object “fish” looks for a verb and finds “eats”; “cat” looks for an adjective and finds “hungry”. After attention, the vector for “eats” carries information about its subject. In a trained model nobody writes the matrices: they are learned, and the features are not neat labels such as “noun” but directions in a space of thousands of dimensions.</p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Many Heads, Many Layers</h2>
+            <p>One attention operation captures one kind of relationship. A transformer runs many in parallel, called <strong>heads</strong>, each with its own query, key and value matrices, and stacks dozens of layers. Each layer adds the output of its attention heads, and then of a feed-forward network applied to each word separately, to the word’s vector. Researchers call this running vector the <strong>residual stream</strong>: a shared workspace that every layer reads from and writes to. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span> The feed-forward layers act partly as a memory; Mor Geva and colleagues found that they behave like key–value stores, with particular units responding to particular textual patterns and promoting particular next words. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span></p>
+            <figure class="fig" data-fig="fig-lm-heads">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Attention patterns of different heads.</strong> An eight-token text with a repeated phrase. Choose a head and the position doing the looking. The patterns are constructed to illustrate kinds of heads found in trained models.
+              </figcaption>
+            </figure>
+            <p>Studies of trained models find heads with recognisable jobs. Kevin Clark and colleagues found heads in BERT that attend to the previous or next word, to punctuation, or from verbs to their objects. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span> Many heads park most of their attention on the very first token when nothing else is relevant; Guangxuan Xiao and colleagues called these “attention sinks” and showed that keeping the first tokens is essential when a model processes very long streams of text. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span></p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Induction Heads and Learning in Context</h2>
+            <p>One kind of head is especially important. An <strong>induction head</strong> looks for an earlier occurrence of the current word and attends to the word that came after it, so the model can predict that the pattern repeats. In Figure 5, at the second “visits” it attends to “Lumo”, which followed “visits” the first time. Catherine Olsson and colleagues found such heads in transformers of many sizes, forming suddenly during training at the same moment the models became much better at using their context. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span></p>
+            <p>This links to one of the most surprising abilities of LLMs. GPT-3 could perform new tasks, such as translating words or correcting grammar, after seeing just a few examples in its prompt, without any change to its weights: <strong>in-context learning</strong>. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span> Copying and completing patterns found earlier in the context is one of its building blocks.</p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Predicting Every Position at Once</h2>
+            <p>The causal mask has a second benefit. Because each position can see only earlier positions, a single pass over a text of 1,000 tokens gives 1,000 next-token predictions at once: position 1 predicts token 2, position 2 predicts token 3, and so on, each computed in parallel. A recurrent network has to work through the text step by step. This parallelism, on graphics processors, is what made it practical to train on trillions of tokens. Alec Radford and colleagues’ GPT of 2018 used exactly this recipe: a transformer pre-trained to predict the next token, then adapted to particular tasks. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span></p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">In code: one causal self-attention head in PyTorch</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">import torch, math
+
+n, d = 5, 4                                   # tokens, vector size
+x = torch.randn(n, d)                         # token vectors
+Wq, Wk, Wv = (torch.randn(d, d) for _ in range(3))
+q, k, v = x @ Wq, x @ Wk, x @ Wv              # queries, keys, values
+
+scores = q @ k.T / math.sqrt(d)               # every query against every key
+mask = torch.triu(torch.ones(n, n), diagonal=1).bool()
+scores = scores.masked_fill(mask, float("-inf"))   # no looking ahead
+weights = torch.softmax(scores, dim=-1)       # each row sums to 1
+out = weights @ v                             # weighted mix of values</code></pre>
+            </details>
+          </section>
+
+          <section id="section-9">
+            <h2>9. The Cost of Context</h2>
+            <p>Attention compares every word with every earlier word, so the number of comparisons grows with the square of the text length. During generation, the keys and values of all earlier tokens are kept in memory, the <strong>KV cache</strong>, so that they need not be recomputed for every new token; that memory grows in proportion to the length.</p>
+            <figure class="fig" data-fig="fig-lm-cost">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. The cost of context.</strong> Memory for the stored keys and values, and the number of attention scores, as the context grows. Choose a model size.
+              </figcaption>
+            </figure>
+            <p>For a model with 32 layers and vectors of 4,096 numbers, stored at 2 bytes per number, each token’s keys and values take 512 KB: 2 GB for a 4,096-token context and over 60 GB for 128,000 tokens. That is why long contexts are expensive, and why much engineering goes into sharing keys and values between heads, compressing the cache and computing attention efficiently.</p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: what is each part of the network doing?</div>
+              <p>Individual heads such as induction heads are understood, but a large model has thousands of heads and millions of feed-forward units interacting across dozens of layers. Nelson Elhage and colleagues found that networks store more features than they have dimensions, by overlapping them, a phenomenon they called <strong>superposition</strong>, which makes individual units hard to interpret. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span> Working out the full set of mechanisms by which a model gets from a prompt to an answer, the goal of mechanistic interpretability, is still at an early stage.</p>
+            </div>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Worked Example: Attention by Hand</h2>
+            <p>Take the query word “eats” in Figure 4, with features (noun 0, animate 0, verb 1, adjective 0).</p>
+            <ol>
+              <li>Query: the query matrix maps the verb feature to “looking for noun 3, animate 3”: q = (3, 3, 0, 0).</li>
+              <li>Keys: the = (0, 0, 0, 0), hungry = (0, 0, 0, 1), cat = (1, 1, 0, 0), eats = (0, 0, 1, 0); “fish” is in the future and masked.</li>
+              <li>Scores q·k / √4: the 0, hungry 0, cat (3 + 3)/2 = 3, eats 0.</li>
+              <li>Softmax: e<sup>3</sup> = 20.1, so the weights are 20.1/23.1 = 0.87 for “cat” and 1/23.1 = 0.04 for each of the other three.</li>
+              <li>Output: 0.87 × cat’s value + 0.04 × each other value: the vector for “eats” now strongly says “my subject is an animate noun”, which helps predict what a cat might eat.</li>
+            </ol>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: context and attention</div>
+              <ol>
+                <li>In Figure 3, with “The key” and 8 words in between, which models get the verb right, and why do some get it right by luck?</li>
+                <li>In Figure 4, select “fish” and switch the causal mask off. What changes, and why must the mask be on during training?</li>
+                <li>In Figure 4, select “the”. Why does it spread its attention evenly?</li>
+                <li>In Figure 5, choose the induction head and move to position 6 (the second “Ziba”). What does it predict will come next?</li>
+                <li>In Figure 6, how long a context fits in 80 GB of memory for the medium model?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “a model with a huge context window reads everything equally well”</div>
+              <p><strong>The myth:</strong> if a model accepts a million tokens, it uses every part of that text as carefully as a human reading a short note.</p>
+              <p><strong>The reality:</strong> attention can reach every token, but that does not mean the model uses them equally. Nelson Liu and colleagues placed the document containing the answer at different positions among many distractors, and found that models answered best when it was at the beginning or end of the context and noticeably worse when it was in the middle. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span></p>
+              <p><strong>Why it matters:</strong> a long context is an opportunity, not a guarantee. Putting the key information near the start or end of a prompt, or retrieving only the relevant passages, often gives better answers.</p>
+            </div>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>The right next word can depend on words far back; short windows miss them and can be misled by nearer words.</li>
+                <li>Recurrent networks carry a summary of the past, but squeeze it into one vector and process words one at a time.</li>
+                <li>Attention lets every word look back at every earlier word: queries meet keys, a softmax gives weights, and values are mixed.</li>
+                <li>Many heads in many layers each track different relationships, writing into a shared residual stream.</li>
+                <li>Induction heads copy patterns seen earlier in the context, one basis of learning from examples in the prompt.</li>
+                <li>The causal mask allows training on every position at once; the cost is memory that grows with the context and comparisons that grow with its square.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Jeffrey Elman</td>
+                <td style="padding:0.6rem 0.8rem;">1948–2018<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Simple recurrent networks (1990)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed how networks with memory find structure in sequences.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Sepp Hochreiter &amp; Jürgen Schmidhuber</td>
+                <td style="padding:0.6rem 0.8rem;">born 1967 / born 1963<br>Germany</td>
+                <td style="padding:0.6rem 0.8rem;">LSTM (1997)</td>
+                <td style="padding:0.6rem 0.8rem;">Invented the gated memory cell.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Dzmitry Bahdanau, Kyunghyun Cho &amp; Yoshua Bengio</td>
+                <td style="padding:0.6rem 0.8rem;"><br>Canada</td>
+                <td style="padding:0.6rem 0.8rem;">Attention (2015)</td>
+                <td style="padding:0.6rem 0.8rem;">Let a translator look back at every source word.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Ashish Vaswani and colleagues</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">The transformer (2017)</td>
+                <td style="padding:0.6rem 0.8rem;">Built networks from attention alone.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Tal Linzen</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Agreement tests (2016)</td>
+                <td style="padding:0.6rem 0.8rem;">Tested whether networks track distant subjects.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Catherine Olsson, Nelson Elhage and colleagues</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Induction heads (2022)</td>
+                <td style="padding:0.6rem 0.8rem;">Found the heads behind copying patterns in context.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about context and attention.</p>
+            <figure class="fig" data-fig="fig-quiz-lm3">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-17">
+            <h2>17. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Vaswani, Ashish, Shazeer, Noam, Parmar, Niki, Uszkoreit, Jakob, Jones, Llion, Gomez, Aidan N., Kaiser, Łukasz &amp; Polosukhin, Illia.</strong> (2017). "Attention is all you need." In <em>Advances in Neural Information Processing Systems 30 (NeurIPS)</em>.</li>
+              <li id="ref-2"><strong>Jurafsky, Daniel &amp; Martin, James H.</strong> <em>Speech and Language Processing</em>, 3rd edition draft, chapters 8–10. Online.</li>
+              <li id="ref-3"><strong>Linzen, Tal, Dupoux, Emmanuel &amp; Goldberg, Yoav.</strong> (2016). "Assessing the ability of LSTMs to learn syntax-sensitive dependencies." <em>Transactions of the Association for Computational Linguistics</em>, 4: 521–535.</li>
+              <li id="ref-4"><strong>Elman, Jeffrey L.</strong> (1990). "Finding structure in time." <em>Cognitive Science</em>, 14(2): 179–211.</li>
+              <li id="ref-5"><strong>Hochreiter, Sepp &amp; Schmidhuber, Jürgen.</strong> (1997). "Long short-term memory." <em>Neural Computation</em>, 9(8): 1735–1780.</li>
+              <li id="ref-6"><strong>Sutskever, Ilya, Vinyals, Oriol &amp; Le, Quoc V.</strong> (2014). "Sequence to sequence learning with neural networks." In <em>Advances in Neural Information Processing Systems 27 (NIPS)</em>, pp. 3104–3112.</li>
+              <li id="ref-7"><strong>Bahdanau, Dzmitry, Cho, Kyunghyun &amp; Bengio, Yoshua.</strong> (2015). "Neural machine translation by jointly learning to align and translate." In <em>International Conference on Learning Representations (ICLR)</em>.</li>
+              <li id="ref-8"><strong>Elhage, Nelson and 20 co-authors.</strong> (2021). "A mathematical framework for transformer circuits." <em>Transformer Circuits Thread</em> (online).</li>
+              <li id="ref-9"><strong>Geva, Mor, Schuster, Roei, Berant, Jonathan &amp; Levy, Omer.</strong> (2021). "Transformer feed-forward layers are key-value memories." In <em>Proceedings of EMNLP 2021</em>, pp. 5484–5495.</li>
+              <li id="ref-10"><strong>Clark, Kevin, Khandelwal, Urvashi, Levy, Omer &amp; Manning, Christopher D.</strong> (2019). "What does BERT look at? An analysis of BERT’s attention." In <em>Proceedings of the 2019 ACL Workshop BlackboxNLP</em>, pp. 276–286.</li>
+              <li id="ref-11"><strong>Xiao, Guangxuan, Tian, Yuandong, Chen, Beidi, Han, Song &amp; Lewis, Mike.</strong> (2024). "Efficient streaming language models with attention sinks." In <em>International Conference on Learning Representations (ICLR)</em>.</li>
+              <li id="ref-12"><strong>Olsson, Catherine and 25 co-authors.</strong> (2022). "In-context learning and induction heads." <em>Transformer Circuits Thread</em> (online). arXiv: 2209.11895.</li>
+              <li id="ref-13"><strong>Brown, Tom B. and 30 co-authors.</strong> (2020). "Language models are few-shot learners." In <em>Advances in Neural Information Processing Systems 33 (NeurIPS)</em>, pp. 1877–1901.</li>
+              <li id="ref-14"><strong>Radford, Alec, Narasimhan, Karthik, Salimans, Tim &amp; Sutskever, Ilya.</strong> (2018). "Improving language understanding by generative pre-training." OpenAI technical report.</li>
+              <li id="ref-15"><strong>Elhage, Nelson and 15 co-authors.</strong> (2022). "Toy models of superposition." <em>Transformer Circuits Thread</em> (online). arXiv: 2209.10652.</li>
+              <li id="ref-16"><strong>Liu, Nelson F., Lin, Kevin, Hewitt, John, Paranjape, Ashwin, Bevilacqua, Michele, Petroni, Fabio &amp; Liang, Percy.</strong> (2024). "Lost in the middle: how language models use long contexts." <em>Transactions of the Association for Computational Linguistics</em>, 12: 157–173.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/one-word-at-a-time.html">One Word at a Time</a> (Part 3 of 6)</div>
+  <div class="series-banner-links">
+    <a href="words-as-numbers.html">← Part 2: Words as Numbers: Tokens, Embeddings and the First Neural Language Models</a>
+    <a href="from-scores-to-words.html">Part 4: From Scores to Words: Temperature, Sampling and How Language Models Choose →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/context-and-attention.js"></script>
+</body>
+</html>

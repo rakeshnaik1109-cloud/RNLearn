@@ -5081,5 +5081,209 @@ window.RNLEARN_GLOSSARY = [
   [
    "model cards"
   ]
+ ],
+ [
+  "N-gram",
+  "A sequence of n consecutive words; an n-gram model predicts the next word from the previous n − 1.",
+  [
+   "n-gram",
+   "n-grams",
+   "bigram",
+   "bigrams",
+   "trigram",
+   "trigrams"
+  ]
+ ],
+ [
+  "Chain rule of probability",
+  "Writing the probability of a sequence as the product of each element’s probability given the ones before it.",
+  []
+ ],
+ [
+  "Markov assumption",
+  "The assumption that the next item depends only on a fixed number of immediately preceding items.",
+  []
+ ],
+ [
+  "Data sparsity",
+  "The problem that most possible word sequences never occur in any training text, so their counts are zero.",
+  []
+ ],
+ [
+  "Add-k smoothing",
+  "Adding a small pseudo-count k to every count so that no word sequence gets probability zero.",
+  []
+ ],
+ [
+  "Perplexity",
+  "The exponential of a model’s average negative log-probability per word; the effective number of choices it is uncertain between.",
+  []
+ ],
+ [
+  "Token",
+  "A unit of text, often a word or a piece of a word, that a language model reads and predicts.",
+  [
+   "tokens"
+  ]
+ ],
+ [
+  "Byte-pair encoding",
+  "A tokenisation method that repeatedly merges the most frequent adjacent pair of symbols into a new token.",
+  [
+   "BPE"
+  ]
+ ],
+ [
+  "Tokeniser",
+  "The program that splits text into tokens and maps each to a number.",
+  [
+   "tokenisers",
+   "tokenizer",
+   "tokenizers"
+  ]
+ ],
+ [
+  "Distributional hypothesis",
+  "The idea that words occurring in similar contexts tend to have similar meanings.",
+  []
+ ],
+ [
+  "Pointwise mutual information",
+  "A measure of how much more often two words occur together than they would by chance.",
+  [
+   "PMI",
+   "PPMI"
+  ]
+ ],
+ [
+  "Cosine similarity",
+  "The cosine of the angle between two vectors: 1 if they point the same way, 0 if unrelated.",
+  []
+ ],
+ [
+  "Neural language model",
+  "A language model that predicts the next token with a neural network operating on learned vectors.",
+  [
+   "neural language models"
+  ]
+ ],
+ [
+  "Embedding table",
+  "The table of learned vectors, one per token, at the start of a neural language model.",
+  []
+ ],
+ [
+  "Query, key and value",
+  "In attention, the vectors that say what a token is looking for, what it offers, and what information it passes on.",
+  []
+ ],
+ [
+  "Causal mask",
+  "In a GPT-style model, the rule that each token may attend only to itself and earlier tokens.",
+  []
+ ],
+ [
+  "Attention head",
+  "One of several parallel attention operations in a transformer layer, each with its own query, key and value matrices.",
+  [
+   "attention heads"
+  ]
+ ],
+ [
+  "Residual stream",
+  "The running vector for each token that every transformer layer reads from and adds its output to.",
+  []
+ ],
+ [
+  "Induction head",
+  "An attention head that finds an earlier occurrence of the current token and attends to the token that followed it.",
+  [
+   "induction heads"
+  ]
+ ],
+ [
+  "KV cache",
+  "The stored keys and values of earlier tokens, kept so they need not be recomputed for each new token.",
+  []
+ ],
+ [
+  "Context window",
+  "The maximum number of tokens a language model can take into account at once.",
+  [
+   "context windows"
+  ]
+ ],
+ [
+  "Logits (neural networks)",
+  "The raw scores a network gives each possible output before the softmax turns them into probabilities.",
+  [
+   "logits"
+  ]
+ ],
+ [
+  "Temperature (sampling)",
+  "A number that divides the logits before the softmax: below 1 sharpens the distribution, above 1 flattens it.",
+  []
+ ],
+ [
+  "Top-k sampling",
+  "Sampling the next token only from the k most likely candidates.",
+  []
+ ],
+ [
+  "Nucleus sampling",
+  "Top-p sampling: drawing the next token from the smallest set of candidates whose probabilities add up to p.",
+  [
+   "top-p sampling"
+  ]
+ ],
+ [
+  "Greedy decoding",
+  "Always choosing the single most likely next token.",
+  []
+ ],
+ [
+  "Beam search",
+  "A decoding method that keeps the few most probable partial sequences at each step and extends them all.",
+  []
+ ],
+ [
+  "Emergent ability",
+  "A capability that appears to arise suddenly once a model passes a certain scale.",
+  [
+   "emergent abilities"
+  ]
+ ],
+ [
+  "Probing classifier",
+  "A simple classifier trained to read a property from a neural network’s internal activations.",
+  []
+ ],
+ [
+  "Instruction tuning",
+  "Further training a pre-trained language model on examples of requests and good responses.",
+  []
+ ],
+ [
+  "Good–Turing estimate",
+  "An estimate of the chance that the next observation is something never seen before, from the share of things seen exactly once.",
+  []
+ ],
+ [
+  "Reversal curse",
+  "The finding that a model trained on “A is B” often cannot answer the reverse question “who is B?”.",
+  []
+ ],
+ [
+  "Retrieval-augmented generation",
+  "Answering by first retrieving relevant documents and giving them to the language model as context.",
+  [
+   "RAG"
+  ]
+ ],
+ [
+  "Test-set contamination",
+  "When a model has seen the questions of a test during training, inflating its score.",
+  []
  ]
 ];

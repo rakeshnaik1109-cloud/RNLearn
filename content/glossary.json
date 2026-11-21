@@ -5079,5 +5079,209 @@
     "forms": [
       "model cards"
     ]
+  },
+  {
+    "term": "N-gram",
+    "definition": "A sequence of n consecutive words; an n-gram model predicts the next word from the previous n − 1.",
+    "forms": [
+      "n-gram",
+      "n-grams",
+      "bigram",
+      "bigrams",
+      "trigram",
+      "trigrams"
+    ]
+  },
+  {
+    "term": "Chain rule of probability",
+    "definition": "Writing the probability of a sequence as the product of each element’s probability given the ones before it.",
+    "forms": []
+  },
+  {
+    "term": "Markov assumption",
+    "definition": "The assumption that the next item depends only on a fixed number of immediately preceding items.",
+    "forms": []
+  },
+  {
+    "term": "Data sparsity",
+    "definition": "The problem that most possible word sequences never occur in any training text, so their counts are zero.",
+    "forms": []
+  },
+  {
+    "term": "Add-k smoothing",
+    "definition": "Adding a small pseudo-count k to every count so that no word sequence gets probability zero.",
+    "forms": []
+  },
+  {
+    "term": "Perplexity",
+    "definition": "The exponential of a model’s average negative log-probability per word; the effective number of choices it is uncertain between.",
+    "forms": []
+  },
+  {
+    "term": "Token",
+    "definition": "A unit of text, often a word or a piece of a word, that a language model reads and predicts.",
+    "forms": [
+      "tokens"
+    ]
+  },
+  {
+    "term": "Byte-pair encoding",
+    "definition": "A tokenisation method that repeatedly merges the most frequent adjacent pair of symbols into a new token.",
+    "forms": [
+      "BPE"
+    ]
+  },
+  {
+    "term": "Tokeniser",
+    "definition": "The program that splits text into tokens and maps each to a number.",
+    "forms": [
+      "tokenisers",
+      "tokenizer",
+      "tokenizers"
+    ]
+  },
+  {
+    "term": "Distributional hypothesis",
+    "definition": "The idea that words occurring in similar contexts tend to have similar meanings.",
+    "forms": []
+  },
+  {
+    "term": "Pointwise mutual information",
+    "definition": "A measure of how much more often two words occur together than they would by chance.",
+    "forms": [
+      "PMI",
+      "PPMI"
+    ]
+  },
+  {
+    "term": "Cosine similarity",
+    "definition": "The cosine of the angle between two vectors: 1 if they point the same way, 0 if unrelated.",
+    "forms": []
+  },
+  {
+    "term": "Neural language model",
+    "definition": "A language model that predicts the next token with a neural network operating on learned vectors.",
+    "forms": [
+      "neural language models"
+    ]
+  },
+  {
+    "term": "Embedding table",
+    "definition": "The table of learned vectors, one per token, at the start of a neural language model.",
+    "forms": []
+  },
+  {
+    "term": "Query, key and value",
+    "definition": "In attention, the vectors that say what a token is looking for, what it offers, and what information it passes on.",
+    "forms": []
+  },
+  {
+    "term": "Causal mask",
+    "definition": "In a GPT-style model, the rule that each token may attend only to itself and earlier tokens.",
+    "forms": []
+  },
+  {
+    "term": "Attention head",
+    "definition": "One of several parallel attention operations in a transformer layer, each with its own query, key and value matrices.",
+    "forms": [
+      "attention heads"
+    ]
+  },
+  {
+    "term": "Residual stream",
+    "definition": "The running vector for each token that every transformer layer reads from and adds its output to.",
+    "forms": []
+  },
+  {
+    "term": "Induction head",
+    "definition": "An attention head that finds an earlier occurrence of the current token and attends to the token that followed it.",
+    "forms": [
+      "induction heads"
+    ]
+  },
+  {
+    "term": "KV cache",
+    "definition": "The stored keys and values of earlier tokens, kept so they need not be recomputed for each new token.",
+    "forms": []
+  },
+  {
+    "term": "Context window",
+    "definition": "The maximum number of tokens a language model can take into account at once.",
+    "forms": [
+      "context windows"
+    ]
+  },
+  {
+    "term": "Logits (neural networks)",
+    "definition": "The raw scores a network gives each possible output before the softmax turns them into probabilities.",
+    "forms": [
+      "logits"
+    ]
+  },
+  {
+    "term": "Temperature (sampling)",
+    "definition": "A number that divides the logits before the softmax: below 1 sharpens the distribution, above 1 flattens it.",
+    "forms": []
+  },
+  {
+    "term": "Top-k sampling",
+    "definition": "Sampling the next token only from the k most likely candidates.",
+    "forms": []
+  },
+  {
+    "term": "Nucleus sampling",
+    "definition": "Top-p sampling: drawing the next token from the smallest set of candidates whose probabilities add up to p.",
+    "forms": [
+      "top-p sampling"
+    ]
+  },
+  {
+    "term": "Greedy decoding",
+    "definition": "Always choosing the single most likely next token.",
+    "forms": []
+  },
+  {
+    "term": "Beam search",
+    "definition": "A decoding method that keeps the few most probable partial sequences at each step and extends them all.",
+    "forms": []
+  },
+  {
+    "term": "Emergent ability",
+    "definition": "A capability that appears to arise suddenly once a model passes a certain scale.",
+    "forms": [
+      "emergent abilities"
+    ]
+  },
+  {
+    "term": "Probing classifier",
+    "definition": "A simple classifier trained to read a property from a neural network’s internal activations.",
+    "forms": []
+  },
+  {
+    "term": "Instruction tuning",
+    "definition": "Further training a pre-trained language model on examples of requests and good responses.",
+    "forms": []
+  },
+  {
+    "term": "Good–Turing estimate",
+    "definition": "An estimate of the chance that the next observation is something never seen before, from the share of things seen exactly once.",
+    "forms": []
+  },
+  {
+    "term": "Reversal curse",
+    "definition": "The finding that a model trained on “A is B” often cannot answer the reverse question “who is B?”.",
+    "forms": []
+  },
+  {
+    "term": "Retrieval-augmented generation",
+    "definition": "Answering by first retrieving relevant documents and giving them to the language model as context.",
+    "forms": [
+      "RAG"
+    ]
+  },
+  {
+    "term": "Test-set contamination",
+    "definition": "When a model has seen the questions of a test during training, inflating its score.",
+    "forms": []
   }
 ]

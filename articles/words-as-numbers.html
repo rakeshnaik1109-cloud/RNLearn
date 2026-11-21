@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Words as Numbers: Tokens, Embeddings and the First Neural Language Models — RNLearn</title>
+  <meta name="description" content="How language models cut text into tokens, learn word vectors from the company words keep, and use them in a neural network to predict word combinations never seen in training.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/words-as-numbers.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Words as Numbers: Tokens, Embeddings and the First Neural Language Models — RNLearn">
+  <meta property="og:description" content="How language models cut text into tokens, learn word vectors from the company words keep, and use them in a neural network to predict word combinations never seen in training.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/words-as-numbers.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Words as Numbers: Tokens, Embeddings and the First Neural Language Models — RNLearn">
+  <meta name="twitter:description" content="How language models cut text into tokens, learn word vectors from the company words keep, and use them in a neural network to predict word combinations never seen in training.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Words as Numbers: Tokens, Embeddings and the First Neural Language Models",
+    "description": "How language models cut text into tokens, learn word vectors from the company words keep, and use them in a neural network to predict word combinations never seen in training.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-21",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/words-as-numbers.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/ai-machine-learning.html" class="post-subject-tag" data-subject="ai-machine-learning">AI &amp; Machine Learning</a>
+        </div>
+        <h1 class="article-title">Words as Numbers: Tokens, Embeddings and the First Neural Language Models</h1>
+        <p class="article-standfirst">
+          To a counting model, “cat” and “dog” are unrelated symbols. Turn every word into a list of numbers learned from the company it keeps, and similar words become neighbours, letting a model predict what it has never seen.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-21">21 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>14 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/one-word-at-a-time.html">One Word at a Time</a> (Part 2 of 6)</div>
+  <div class="series-banner-links">
+    <a href="counting-words-together.html">← Part 1: Counting Words Together: How Language Models Began with Probabilities</a>
+    <a href="context-and-attention.html">Part 3: Context and Attention: How Language Models Decide Which Words Matter →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. From Symbols to Numbers</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Tokens: The Pieces a Model Reads</a></li>
+              <li><a class="toc-link" href="#section-4">4. Why Tokens Matter</a></li>
+              <li><a class="toc-link" href="#section-5">5. Know a Word by Its Company</a></li>
+              <li><a class="toc-link" href="#section-6">6. Words as Vectors</a></li>
+              <li><a class="toc-link" href="#section-7">7. A Neural Network Predicts the Next Word</a></li>
+              <li><a class="toc-link" href="#section-8">8. Embeddings in Real Models</a></li>
+              <li><a class="toc-link" href="#section-9">9. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-10">10. Worked Example: Similarity by Numbers</a></li>
+              <li><a class="toc-link" href="#section-11">11. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-12">12. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-13">13. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-14">14. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-15">15. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-16">16. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>In this part:</strong> how text is cut into tokens, and why it matters; the idea that a word is known by the company it keeps; turning words into vectors of numbers so that similar words get similar vectors; and the neural language model, which uses those vectors to predict word combinations it has never seen.</p>
+            <p><strong>You need:</strong> Part 1 (next-word probabilities and why counting runs out of data).</p>
+            <p><strong>Try:</strong> four interactive figures: a tokeniser learning its vocabulary, the “company” of pairs of words, a map of word vectors, and a neural model that learns something its training text never said.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. From Symbols to Numbers</h2>
+            <p>Part 1 ended with a counting model that could not see that “cat” and “dog” are alike. To it, every word was an unrelated symbol, and nothing learned about one transferred to another. Modern language models solve this in two steps. First, text is cut into <strong>tokens</strong>, the units the model actually reads and writes. Second, each token is turned into a list of numbers, a <strong>vector</strong>, learned so that tokens used in similar ways get similar vectors. Arithmetic on these vectors is what lets a model generalise. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-lm-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Part 2 turns words into numbers.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-lm2-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. From the distributional hypothesis to subword tokenisers, 1954–2018.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Tokens: The Pieces a Model Reads</h2>
+            <p>Should a model read whole words or single letters? Whole words make the vocabulary enormous, and any new word, name or typo is unknown. Letters make every text very long, and each letter carries little meaning. The compromise is <strong>subword tokens</strong>. The most common method, <strong>byte-pair encoding</strong> (BPE), began as a data-compression trick described by Philip Gage in 1994; <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> Rico Sennrich, Barry Haddow and Alexandra Birch adapted it in 2016 to split rare words for machine translation. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> It starts from single characters and repeatedly merges the most frequent adjacent pair into a new token.</p>
+            <figure class="fig" data-fig="fig-lm-bpe">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Byte-pair encoding.</strong> Learned from the words of the toy world. Increase the number of merges and watch common words become single tokens while unseen words are still built from pieces.
+              </figcaption>
+            </figure>
+            <p>With no merges, the toy words average 4.8 tokens each, one per character plus an end-of-word marker. After 30 merges they average 2.3, and after 120 merges every word of the toy world is a single token. The unseen word “teachers” is still handled: it becomes “tea”, “che”, “r”, “s▁”, pieces learned from other words. Real tokenisers learn vocabularies of tens of thousands to a few hundred thousand tokens; GPT-2’s had 50,257. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> Most common English words are a single token, and longer or rarer words are split into two or more.</p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Why Tokens Matter</h2>
+            <p>Tokenisation looks like a technical detail, but it shapes what a model can do and what it costs:</p>
+            <ul>
+              <li><strong>Cost and length.</strong> Models are priced, and their context windows measured, in tokens. A tokeniser trained mostly on English splits other languages into more pieces. Aleksandar Petrov and colleagues found that the same text can need more than ten times as many tokens in some languages as in English, making those users pay more and fit less text into the model. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></li>
+              <li><strong>Hidden letters.</strong> The model sees token numbers, not letters. Questions about spelling, such as counting the letters in a word, require knowledge the tokens hide. Part 6 returns to this.</li>
+              <li><strong>Numbers.</strong> A number such as 1,234,567 may be split into arbitrary chunks, which makes arithmetic harder than it looks.</li>
+            </ul>
+            <p>Modern tokenisers such as SentencePiece, by Taku Kudo and John Richardson, work directly on raw text, including spaces, in any language. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> From here on, “word” and “token” are used loosely as synonyms; strictly, a language model predicts the next <em>token</em>.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Know a Word by Its Company</h2>
+            <p>How can a machine learn that “milk” and “water” are similar without being told? In 1954 the linguist Zellig Harris argued that words that occur in similar environments tend to have similar meanings, the <strong>distributional hypothesis</strong>; <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span> in 1957 John Rupert Firth put it memorably: “You shall know a word by the company it keeps.” <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span> Counting the company each word keeps gives it a profile, and comparing profiles measures similarity.</p>
+            <figure class="fig" data-fig="fig-lm-context">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Known by their company.</strong> For two words, how often each neighbouring word appears one or two positions before or after them in the toy world. Choose a pair.
+              </figcaption>
+            </figure>
+            <p>“Milk” and “water” appear in identical company, after “drinks the” and before a full stop, and their profiles have a similarity of 1.00. “Cat” and “dog” score 0.88: they share most company but differ in what they eat. “Cat” and “tea” score 0.02. To sharpen the comparison, raw counts are converted to <strong>pointwise mutual information</strong>, which asks how much more often two words occur together than chance would predict, so that ubiquitous words such as “the” count for little.</p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Words as Vectors</h2>
+            <p>A profile over every possible neighbour is long and mostly zeros. Compressing it to a few dozen or hundred numbers keeps the main patterns and discards noise. Latent semantic analysis, by Scott Deerwester and colleagues in 1990, compressed word–document counts this way; <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span> in 2013 Tomas Mikolov and colleagues’ word2vec learned such vectors directly, by training a small network to predict neighbouring words, on billions of words in hours, <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span> and GloVe, by Jeffrey Pennington, Richard Socher and Christopher Manning, fitted them to global co-occurrence counts. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span> Omer Levy and Yoav Goldberg later showed that word2vec is implicitly compressing the same kind of mutual-information table. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span> The resulting vectors are called <strong>word embeddings</strong>.</p>
+            <figure class="fig" data-fig="fig-lm-embed">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. A map of word vectors.</strong> Each word of the toy world as 8 numbers, computed from its company and flattened onto two dimensions for display. Tap a word to see its nearest neighbours.
+              </figcaption>
+            </figure>
+            <p>The nearest neighbours of “horse” are “bird” and “cat” (similarity 0.99) and “dog” (0.98); those of “fish” are “bread”, “cheese” and “apple”; those of “teacher” are the other people. Animals, people, foods, drinks and places form separate groups, although the text never labels them. The geometry of embedding spaces can be surprisingly rich: Mikolov and colleagues found that the vector from “man” to “woman” roughly matches the one from “king” to “queen”, so that king − man + woman lands near queen. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span></p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">The maths: PMI and cosine similarity</summary>
+              <p style="margin-top:0.6rem;">For a word w and a context c,</p>
+              <p>$$\text{PMI}(w, c) = \log \frac{P(w, c)}{P(w)\,P(c)}, \qquad \cos(\mathbf{u}, \mathbf{v}) = \frac{\mathbf{u}\cdot\mathbf{v}}{\lVert\mathbf{u}\rVert\,\lVert\mathbf{v}\rVert}.$$</p>
+              <p>PMI is positive when w and c occur together more often than if they were independent. Negative values are set to zero (positive PMI). The embeddings in Figure 5 are the top 8 directions of the PPMI table, found by a truncated singular value decomposition; cosine similarity compares directions, ignoring length.</p>
+            </details>
+          </section>
+
+          <section id="section-7">
+            <h2>7. A Neural Network Predicts the Next Word</h2>
+            <p>In 2003 Yoshua Bengio and colleagues put the two ideas together: a <strong>neural language model</strong> that looks up a learned vector for each previous word and feeds those vectors through a neural network to produce a probability for every possible next word. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span> The vectors and the network are trained together, by gradient descent on the cross-entropy loss (Inside the Machine Parts 7 and 8). Because similar words get similar vectors, evidence about one word automatically informs predictions for its neighbours.</p>
+            <figure class="fig" data-fig="fig-lm-neural">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. A neural model generalises.</strong> A neural bigram model trained on the toy world. In the training text horses never drink. Compare the counted and the neural probabilities after “horse”, and change the size of the word vectors.
+              </figcaption>
+            </figure>
+            <p>The count model gives “the horse drinks” a smoothed probability of about 0.0001. A neural model with 2-number word vectors gives it 0.079, after 400 training steps: “horse” shares the region of vector space where cats, dogs and birds live, and inherits their habit of drinking. With 8-number vectors, the model has room to give the horse its own corner and memorises the exception (0.0001 again). Whether that is right depends on the world: perhaps horses really never drink in this world, or perhaps the text simply never mentioned it. A model trained on text cannot tell the difference, a fact that matters greatly in Part 6.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">In code: an embedding layer and a next-word predictor in PyTorch</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">import torch
+from torch import nn
+
+V, d = 39, 2                                  # vocabulary size, vector size
+model = nn.Sequential(nn.Embedding(V, d),     # one learned vector per token
+                      nn.Linear(d, V))        # scores for every next token
+opt = torch.optim.Adam(model.parameters(), lr=0.05)
+
+prev = torch.tensor([3, 3, 7])                # previous-token ids (a batch)
+nxt  = torch.tensor([5, 9, 5])                # the tokens that followed
+for step in range(400):
+    loss = nn.functional.cross_entropy(model(prev), nxt)
+    opt.zero_grad(); loss.backward(); opt.step()
+probs = torch.softmax(model(torch.tensor([3])), dim=-1)   # P(next | token 3)</code></pre>
+            </details>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Embeddings in Real Models</h2>
+            <p>Every modern LLM begins with an <strong>embedding table</strong>: one learned vector per token. These vectors are long. GPT-3, for example, used vectors of 12,288 numbers for a vocabulary of about 50,000 tokens, so its embedding table alone held over 600 million numbers. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span> In a large model, the embedding is only the starting point. A word such as “bank” gets the same initial vector whether it means a river bank or a savings bank; the layers that follow, described in Part 3, mix in information from the surrounding words, producing <strong>contextual</strong> vectors that differ from one sentence to the next.</p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: is usage enough for meaning?</div>
+              <p>Embeddings capture how words are used, not what they refer to. Emily Bender and Alexander Koller argued in 2020 that a system trained only on text, on form, cannot in principle learn meaning, which connects words to the world and to speakers’ intentions. <span class="cite-group">[<a class="cite" href="#ref-17">17</a>]</span> Others point out that text contains a great deal of information about the world, and that later parts of this series show models acquiring internal representations of things such as space and time. How much meaning can be extracted from the patterns of words alone is one of the deepest open questions about language models.</p>
+            </div>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Worked Example: Similarity by Numbers</h2>
+            <p>Suppose three words have 3-number vectors: cat = (0.9, 0.8, 0.1), dog = (0.8, 0.9, 0.2) and tea = (0.1, 0.2, 0.9).</p>
+            <ol>
+              <li>cat · dog = 0.72 + 0.72 + 0.02 = 1.46; |cat| = √(0.81 + 0.64 + 0.01) = 1.208; |dog| = √(0.64 + 0.81 + 0.04) = 1.221.</li>
+              <li>cos(cat, dog) = 1.46 / (1.208 × 1.221) = 0.99: nearly the same direction.</li>
+              <li>cat · tea = 0.09 + 0.16 + 0.09 = 0.34; |tea| = √(0.01 + 0.04 + 0.81) = 0.927; cos(cat, tea) = 0.34 / (1.208 × 0.927) = 0.30.</li>
+              <li>A model that has learned that cats drink milk will, through the similar vector, expect the same of dogs, but not of tea.</li>
+            </ol>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: words as numbers</div>
+              <ol>
+                <li>In Figure 3, which merge comes first, and why does “e” followed by the end-of-word marker occur so often in the toy world?</li>
+                <li>In Figure 3, with 120 merges, why is “horseshoe” still split into small pieces, although “horse” is a single token?</li>
+                <li>In Figure 4, compare “eats” and “drinks”. Why is their similarity only 0.20, although both are verbs about consuming?</li>
+                <li>In Figure 5, tap “hungry”. Which words are its neighbours, and what do they have in common grammatically?</li>
+                <li>In Figure 6, train with 4 numbers per word. Does the model generalise to “the horse drinks”, memorise the exception, or something in between?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “word vectors are neutral mathematics”</div>
+              <p><strong>The myth:</strong> embeddings are computed objectively from data, so they carry no opinions.</p>
+              <p><strong>The reality:</strong> embeddings faithfully absorb the associations in their training text, including social stereotypes. Tolga Bolukbasi and colleagues found that word2vec vectors trained on news articles completed the analogy “man is to computer programmer as woman is to …” with “homemaker”. <span class="cite-group">[<a class="cite" href="#ref-18">18</a>]</span> Aylin Caliskan, Joanna Bryson and Arvind Narayanan showed that standard embeddings reproduce a wide range of human biases measured by psychologists, for example associating European-American names more strongly than African-American names with pleasant words. <span class="cite-group">[<a class="cite" href="#ref-19">19</a>]</span></p>
+              <p><strong>Why it matters:</strong> “the company a word keeps” includes the prejudices of the people who wrote the text. Large language models inherit such patterns too, which is one reason they are tested and adjusted after training (Part 5).</p>
+            </div>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>Language models read and write tokens: words or pieces of words learned by methods such as byte-pair encoding.</li>
+                <li>Subword tokens handle any new word, but they cost different amounts in different languages and hide individual letters.</li>
+                <li>Words used in similar contexts tend to have similar meanings: the distributional hypothesis.</li>
+                <li>Embeddings represent each token as a vector; similar tokens get similar vectors, measured by cosine similarity.</li>
+                <li>A neural language model predicts the next token from these vectors, so knowledge about one word transfers to similar words.</li>
+                <li>Too little room forces generalisation, too much allows memorisation; and embeddings absorb the biases of their text.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="section-14">
+            <h2>14. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Zellig Harris</td>
+                <td style="padding:0.6rem 0.8rem;">1909–1992<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Distributional structure (1954)</td>
+                <td style="padding:0.6rem 0.8rem;">Proposed that similar contexts signal similar meanings.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John Rupert Firth</td>
+                <td style="padding:0.6rem 0.8rem;">1890–1960<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">“The company it keeps” (1957)</td>
+                <td style="padding:0.6rem 0.8rem;">Gave the distributional idea its famous slogan.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Yoshua Bengio</td>
+                <td style="padding:0.6rem 0.8rem;">born 1964<br>France / Canada</td>
+                <td style="padding:0.6rem 0.8rem;">Neural language model (2003)</td>
+                <td style="padding:0.6rem 0.8rem;">Learned word vectors while predicting the next word.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Tomas Mikolov</td>
+                <td style="padding:0.6rem 0.8rem;">born 1982<br>Czech Republic</td>
+                <td style="padding:0.6rem 0.8rem;">word2vec (2013)</td>
+                <td style="padding:0.6rem 0.8rem;">Made word vectors fast to train on billions of words.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Rico Sennrich</td>
+                <td style="padding:0.6rem 0.8rem;"><br>Switzerland</td>
+                <td style="padding:0.6rem 0.8rem;">Subword units (2016)</td>
+                <td style="padding:0.6rem 0.8rem;">Brought byte-pair encoding to neural translation.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Aylin Caliskan, Joanna Bryson &amp; Arvind Narayanan</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA / UK</td>
+                <td style="padding:0.6rem 0.8rem;">Bias in embeddings (2017)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed that word vectors absorb human biases.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about tokens and embeddings.</p>
+            <figure class="fig" data-fig="fig-quiz-lm2">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-16">
+            <h2>16. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Jurafsky, Daniel &amp; Martin, James H.</strong> <em>Speech and Language Processing</em>, 3rd edition draft, chapters 2 and 6. Online.</li>
+              <li id="ref-2"><strong>Goldberg, Yoav.</strong> (2017). <em>Neural Network Methods for Natural Language Processing</em>. San Rafael, CA: Morgan &amp; Claypool.</li>
+              <li id="ref-3"><strong>Gage, Philip.</strong> (1994). "A new algorithm for data compression." <em>The C Users Journal</em>, 12(2): 23–38.</li>
+              <li id="ref-4"><strong>Sennrich, Rico, Haddow, Barry &amp; Birch, Alexandra.</strong> (2016). "Neural machine translation of rare words with subword units." In <em>Proceedings of the 54th Annual Meeting of the ACL</em>, pp. 1715–1725.</li>
+              <li id="ref-5"><strong>Radford, Alec, Wu, Jeffrey, Child, Rewon, Luan, David, Amodei, Dario &amp; Sutskever, Ilya.</strong> (2019). "Language models are unsupervised multitask learners." OpenAI technical report.</li>
+              <li id="ref-6"><strong>Petrov, Aleksandar, La Malfa, Emanuele, Torr, Philip H. S. &amp; Bibi, Adel.</strong> (2023). "Language model tokenizers introduce unfairness between languages." In <em>Advances in Neural Information Processing Systems 36 (NeurIPS)</em>.</li>
+              <li id="ref-7"><strong>Kudo, Taku &amp; Richardson, John.</strong> (2018). "SentencePiece: a simple and language independent subword tokenizer and detokenizer for neural text processing." In <em>Proceedings of EMNLP 2018: System Demonstrations</em>, pp. 66–71.</li>
+              <li id="ref-8"><strong>Harris, Zellig S.</strong> (1954). "Distributional structure." <em>Word</em>, 10(2–3): 146–162.</li>
+              <li id="ref-9"><strong>Firth, J. R.</strong> (1957). "A synopsis of linguistic theory, 1930–1955." In <em>Studies in Linguistic Analysis</em>, pp. 1–32. Oxford: Blackwell.</li>
+              <li id="ref-10"><strong>Deerwester, Scott, Dumais, Susan T., Furnas, George W., Landauer, Thomas K. &amp; Harshman, Richard.</strong> (1990). "Indexing by latent semantic analysis." <em>Journal of the American Society for Information Science</em>, 41(6): 391–407.</li>
+              <li id="ref-11"><strong>Mikolov, Tomas, Sutskever, Ilya, Chen, Kai, Corrado, Greg &amp; Dean, Jeffrey.</strong> (2013). "Distributed representations of words and phrases and their compositionality." In <em>Advances in Neural Information Processing Systems 26 (NIPS)</em>, pp. 3111–3119.</li>
+              <li id="ref-12"><strong>Pennington, Jeffrey, Socher, Richard &amp; Manning, Christopher D.</strong> (2014). "GloVe: global vectors for word representation." In <em>Proceedings of EMNLP 2014</em>, pp. 1532–1543.</li>
+              <li id="ref-13"><strong>Levy, Omer &amp; Goldberg, Yoav.</strong> (2014). "Neural word embedding as implicit matrix factorization." In <em>Advances in Neural Information Processing Systems 27 (NIPS)</em>, pp. 2177–2185.</li>
+              <li id="ref-14"><strong>Mikolov, Tomas, Yih, Wen-tau &amp; Zweig, Geoffrey.</strong> (2013). "Linguistic regularities in continuous space word representations." In <em>Proceedings of NAACL-HLT 2013</em>, pp. 746–751.</li>
+              <li id="ref-15"><strong>Bengio, Yoshua, Ducharme, Réjean, Vincent, Pascal &amp; Jauvin, Christian.</strong> (2003). "A neural probabilistic language model." <em>Journal of Machine Learning Research</em>, 3: 1137–1155.</li>
+              <li id="ref-16"><strong>Brown, Tom B. and 30 co-authors.</strong> (2020). "Language models are few-shot learners." In <em>Advances in Neural Information Processing Systems 33 (NeurIPS)</em>, pp. 1877–1901.</li>
+              <li id="ref-17"><strong>Bender, Emily M. &amp; Koller, Alexander.</strong> (2020). "Climbing towards NLU: on meaning, form, and understanding in the age of data." In <em>Proceedings of the 58th Annual Meeting of the ACL</em>, pp. 5185–5198.</li>
+              <li id="ref-18"><strong>Bolukbasi, Tolga, Chang, Kai-Wei, Zou, James, Saligrama, Venkatesh &amp; Kalai, Adam.</strong> (2016). "Man is to computer programmer as woman is to homemaker? Debiasing word embeddings." In <em>Advances in Neural Information Processing Systems 29 (NIPS)</em>, pp. 4349–4357.</li>
+              <li id="ref-19"><strong>Caliskan, Aylin, Bryson, Joanna J. &amp; Narayanan, Arvind.</strong> (2017). "Semantics derived automatically from language corpora contain human-like biases." <em>Science</em>, 356(6334): 183–186.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/one-word-at-a-time.html">One Word at a Time</a> (Part 2 of 6)</div>
+  <div class="series-banner-links">
+    <a href="counting-words-together.html">← Part 1: Counting Words Together: How Language Models Began with Probabilities</a>
+    <a href="context-and-attention.html">Part 3: Context and Attention: How Language Models Decide Which Words Matter →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/words-as-numbers.js"></script>
+</body>
+</html>

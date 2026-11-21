@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Counting Words Together: How Language Models Began with Probabilities — RNLearn</title>
+  <meta name="description" content="How an LLM builds answers one word at a time: next-word probabilities from counts, n-gram models, generating text, data sparsity, smoothing, perplexity, and the limits of counting.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/counting-words-together.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Counting Words Together: How Language Models Began with Probabilities — RNLearn">
+  <meta property="og:description" content="How an LLM builds answers one word at a time: next-word probabilities from counts, n-gram models, generating text, data sparsity, smoothing, perplexity, and the limits of counting.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/counting-words-together.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Counting Words Together: How Language Models Began with Probabilities — RNLearn">
+  <meta name="twitter:description" content="How an LLM builds answers one word at a time: next-word probabilities from counts, n-gram models, generating text, data sparsity, smoothing, perplexity, and the limits of counting.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Counting Words Together: How Language Models Began with Probabilities",
+    "description": "How an LLM builds answers one word at a time: next-word probabilities from counts, n-gram models, generating text, data sparsity, smoothing, perplexity, and the limits of counting.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-21",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/counting-words-together.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/ai-machine-learning.html" class="post-subject-tag" data-subject="ai-machine-learning">AI &amp; Machine Learning</a>
+        </div>
+        <h1 class="article-title">Counting Words Together: How Language Models Began with Probabilities</h1>
+        <p class="article-standfirst">
+          Every answer a large language model gives is built one word at a time, each chosen from a list of probabilities. The story starts with the simplest way to get those probabilities: counting which words follow which.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-21">21 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>14 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/one-word-at-a-time.html">One Word at a Time</a> (Part 1 of 6)</div>
+  <div class="series-banner-links">
+    <span>First part</span>
+    <a href="words-as-numbers.html">Part 2: Words as Numbers: Tokens, Embeddings and the First Neural Language Models →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. A Puzzle About Words</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Language as a Game of Prediction</a></li>
+              <li><a class="toc-link" href="#section-4">4. Counting Word Pairs</a></li>
+              <li><a class="toc-link" href="#section-5">5. Longer Memories: n-Gram Models</a></li>
+              <li><a class="toc-link" href="#section-6">6. Running Out of Data</a></li>
+              <li><a class="toc-link" href="#section-7">7. Smoothing and Perplexity</a></li>
+              <li><a class="toc-link" href="#section-8">8. What Counting Cannot Do</a></li>
+              <li><a class="toc-link" href="#section-9">9. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-10">10. Worked Example: The Probability of a Sentence</a></li>
+              <li><a class="toc-link" href="#section-11">11. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-12">12. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-13">13. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-14">14. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-15">15. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-16">16. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>The puzzle:</strong> a large language model writes an answer one word at a time, each time choosing a likely next word. How can a machine that only predicts words produce answers that are fluent, relevant and often correct? This six-part series takes the machine apart.</p>
+            <p><strong>In this part:</strong> language as a game of prediction; next-word probabilities from counting word pairs; n-gram models and the Markov assumption; generating text; why counting runs out of data; smoothing and perplexity; and what counting can never do.</p>
+            <p><strong>Try:</strong> four interactive figures built on a small toy world of 800 sentences, including a text generator whose output you can watch turn from word salad into fluent sentences, and then into copies.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. A Puzzle About Words</h2>
+            <p>Ask a chatbot “What is the capital of Australia?” and it answers “Canberra”. Underneath, the model did not look the answer up. It was given the words of the question and computed, for every word (or piece of a word) it knows, a probability that it comes next. It picked one, added it to the text, and repeated the process until it decided to stop. Every answer, poem and program a large language model (LLM) produces is built this way: <strong>one word at a time</strong>.</p>
+            <p>That raises two questions this series answers. First, how does a model turn the patterns of words that occur together into probabilities? Second, why does choosing likely words so often produce <em>true</em> and useful answers, and why does it sometimes produce confident nonsense? We begin with the simplest possible language model: counting. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-lm-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Tap a part to see what it covers.
+              </figcaption>
+            </figure>
+            <div class="callout callout-method">
+              <div class="callout-header">Running example</div>
+              <p>Throughout the series we use a toy world small enough to see completely: 1,000 short sentences generated from a simple grammar, about cats, dogs, birds and horses, girls, boys, teachers and farmers, what they eat and drink and where they sleep and play. It has just 39 distinct words. Cats prefer fish and milk, horses live in fields and never drink in the training text. The first 800 sentences are for training, the last 200 for testing. Real models learn from trillions of words, but the principles are the same.</p>
+            </div>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-lm1-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Counting words, 1913–2007.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Language as a Game of Prediction</h2>
+            <p>Language is highly predictable. Read “the cat drinks the …” and you expect “milk” or “water”, not “garden”. In 1913 the Russian mathematician Andrey Markov counted how vowels and consonants follow each other in 20,000 letters of Pushkin’s <em>Eugene Onegin</em>, the first statistical study of a chain of dependent events, now called a <strong>Markov chain</strong>. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> In 1951 Claude Shannon turned prediction into a game: people guessed a text one letter at a time, and from their success he estimated that English carries only about one bit of information per letter, far less than the nearly five bits needed to pick among 27 symbols blindly. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span></p>
+            <p>A <strong>language model</strong> plays this game with numbers. For any text so far, it gives a probability to every possible next word. Multiplying those probabilities gives the probability of a whole sentence, by the <strong>chain rule</strong> of probability:</p>
+            <p>$$P(w_1, w_2, \dots, w_n) = P(w_1)\,P(w_2 \mid w_1)\,P(w_3 \mid w_1, w_2)\cdots P(w_n \mid w_1, \dots, w_{n-1}).$$</p>
+            <p>This is not an approximation: any probability for sentences can be written this way. The whole difficulty lies in estimating each factor, the probability of the next word given everything before it.</p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Counting Word Pairs</h2>
+            <p>The simplest estimate looks only at the previous word. Count how often each pair of words, each <strong>bigram</strong>, occurs in a large text, and divide:</p>
+            <p>$$P(\text{next} \mid \text{previous}) \approx \frac{\text{count}(\text{previous},\ \text{next})}{\text{count}(\text{previous})}.$$</p>
+            <p>In the toy world, “cat” occurs 110 times in the training text, followed by “eats” 31 times, so P(eats | cat) = 31/110 = 0.28. Looking back two words (a <strong>trigram</strong>) or three (a <strong>4-gram</strong>) gives sharper predictions, because more of the context is used.</p>
+            <figure class="fig" data-fig="fig-lm-next">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Next-word probabilities from counts.</strong> Choose the words so far and how far back the model looks. Bars show the probability of each possible next word, with its count in brackets.
+              </figcaption>
+            </figure>
+            <p>After “the”, almost any noun or adjective may follow, and the most likely word, “bread”, has a probability of only 0.09. After “eats the”, only foods remain. After “cat drinks the”, a 4-gram model knows that cats drink only milk and water. Notice that the model has no idea what a cat or milk <em>is</em>. It knows only which words have followed which.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Longer Memories: n-Gram Models</h2>
+            <p>A model that uses the previous n − 1 words is an <strong>n-gram model</strong>. It makes the <strong>Markov assumption</strong>: the next word depends only on that short window, and everything earlier is forgotten. With this assumption, a model can also <em>write</em>: start a sentence, draw the next word at random in proportion to its probability, append it, and repeat. Shannon did exactly this by hand in 1948, producing text that grew more English-like as he used longer contexts. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-lm-gen">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Generating text from counts.</strong> Choose the context length n and generate sentences. ⧉ marks a sentence that appears word for word in the training text; ✦ marks a new one.
+              </figcaption>
+            </figure>
+            <p>With no context (n = 1), words appear at their overall frequencies in random order. With n = 2, every adjacent pair is plausible but the sentence as a whole may not be: “the teacher eats the garden”. With n = 3 the sentences are mostly sensible, and 31% are copies of training sentences. With n = 4, 65% are copies, and with n = 6, 85%. A long-context count model becomes fluent by <em>memorising</em>: its contexts are so specific that only the continuation it has seen remains. That is the first hint of a tension that runs through this series, between reproducing the training data and generalising from it.</p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Running Out of Data</h2>
+            <p>Why not simply use long contexts and lots of text? Because the number of possible word sequences explodes. With a vocabulary of V words there are V<sup>n</sup> possible n-grams: for V = 50,000, there are 2.5 billion possible bigrams and 1.25 × 10<sup>14</sup> trigrams. Most perfectly good sentences contain word combinations that never appeared in any training text, and a count model gives them probability zero. This is <strong>data sparsity</strong>.</p>
+            <figure class="fig" data-fig="fig-lm-sparse">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Running out of data.</strong> The share of n-grams in the test sentences that never occur in the training sentences. Change the amount of training text.
+              </figcaption>
+            </figure>
+            <p>Even in this tiny, repetitive world, a model trained on 100 sentences has never seen 10.5% of the trigrams in the test sentences, and 33.8% of the 6-grams. More data helps, but only slowly: language keeps producing new combinations. In 2007 Thorsten Brants and colleagues at Google trained n-gram models on up to two trillion words for machine translation, calling them “large language models”, and found that translation kept improving as the data grew. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> Counting can be pushed far, but it never escapes sparsity.</p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Smoothing and Perplexity</h2>
+            <p>The classic fix is <strong>smoothing</strong>: take a little probability from seen events and give it to unseen ones. The simplest version, add-k smoothing, pretends every possible pair was seen k extra times. Better methods <strong>back off</strong> to shorter contexts when a long one is unseen, as Slava Katz proposed in 1987, <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span> or blend contexts of all lengths; Reinhard Kneser and Hermann Ney’s 1995 method, which asks how many different contexts a word has appeared in, became the best of these. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>, <a class="cite" href="#ref-8">8</a>]</span> Such models powered speech recognition at IBM from the 1970s, in Frederick Jelinek’s group, and machine translation for decades. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span></p>
+            <p>To compare models we need a score. <strong>Perplexity</strong> is the exponential of the average negative log-probability that a model gives to each word of a test text. It can be read as the number of equally likely words the model is choosing between at each step: lower is better.</p>
+            <figure class="fig" data-fig="fig-lm-smooth">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. Smoothing and perplexity.</strong> A bigram model with add-k smoothing, scored on the 200 test sentences. Change the amount of training text and the pseudo-count k.
+              </figcaption>
+            </figure>
+            <p>Ignoring the previous word altogether (a unigram model) gives a perplexity of 17.8 on the toy test sentences. A bigram model trained on 800 sentences reaches 3.6. Trained on only 50 sentences, it needs smoothing: with k = 0.0001 its perplexity is 8.0, with k = 0.01 it improves to 5.6, and with k = 10 it worsens to 23, because every word has become almost equally likely. Choosing the smoothing is choosing how much to trust the counts.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">The maths: perplexity</summary>
+              <p style="margin-top:0.6rem;">For a test text of N words,</p>
+              <p>$$\text{PP} = \exp\!\Big(-\frac{1}{N}\sum_{i=1}^{N} \ln P(w_i \mid w_1, \dots, w_{i-1})\Big).$$</p>
+              <p>This is the exponential of the cross-entropy loss of Inside the Machine Part 7. A model that spreads probability evenly over V words has perplexity V; a model that always gives the true next word probability 1 has perplexity 1.</p>
+            </details>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">In code: a bigram model in a few lines of Python</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">import math, random
+from collections import Counter, defaultdict
+
+train = ["the cat drinks the milk .", "the dog eats the bread .",
+         "the cat eats the fish .", "the horse sleeps in the field ."]
+pairs = defaultdict(Counter)
+for s in train:
+    w = ["&lt;s&gt;"] + s.split()
+    for a, b in zip(w, w[1:]):
+        pairs[a][b] += 1
+
+def prob(a, b, k=0.01, V=20):           # add-k smoothing
+    return (pairs[a][b] + k) / (sum(pairs[a].values()) + k * V)
+
+def generate():
+    w, out = "&lt;s&gt;", []
+    while w != ".":
+        w = random.choices(list(pairs[w]), weights=pairs[w].values())[0]
+        out.append(w)
+    return " ".join(out)
+
+print(prob("cat", "drinks"), generate())</code></pre>
+            </details>
+          </section>
+
+          <section id="section-8">
+            <h2>8. What Counting Cannot Do</h2>
+            <p>Counting models hit three walls:</p>
+            <ul>
+              <li><strong>No notion of similarity.</strong> To a count model, “cat” and “dog” are as different as “cat” and “tea”. Seeing “the dog drinks the water” a thousand times tells it nothing about “the horse drinks the water”, which in our toy world never appears in training.</li>
+              <li><strong>Short memory.</strong> In “the keys that the old man left on the table <em>are</em> …”, choosing “are” rather than “is” depends on “keys”, eight words back, far beyond any practical n.</li>
+              <li><strong>Sparsity.</strong> Most long contexts have never been seen, so the model falls back to short ones and loses the meaning.</li>
+            </ul>
+            <p>The breakthrough, described in Part 2, was to stop treating words as unrelated symbols. In 2003 Yoshua Bengio and colleagues gave each word a learned vector of numbers and let a neural network predict the next word from those vectors, so that what is learned about cats can transfer to horses. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span> Part 3 then shows how attention lets a model look back over thousands of words at once.</p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: how predictable is language?</div>
+              <p>Shannon estimated that English carries between about 0.6 and 1.3 bits of information per letter, depending on how much context his human guessers used. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> The true value is still unknown, because it would require a perfect predictor. Every improvement in language models lowers the upper bound, and the gap between today’s models and that unknown limit is one way to ask how much of language, and of the knowledge expressed in it, they have yet to capture.</p>
+            </div>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Worked Example: The Probability of a Sentence</h2>
+            <p>Using the bigram counts of the toy world, without smoothing, score “the hungry cat eats the fish .”:</p>
+            <ol>
+              <li>Every sentence starts with “the”: P(the | start) = 800/800 = 1.</li>
+              <li>P(hungry | the) = 51/1,773 = 0.029.</li>
+              <li>P(cat | hungry) = 6/51 = 0.118.</li>
+              <li>P(eats | cat) = 31/110 = 0.282, and P(the | eats) = 347/347 = 1.</li>
+              <li>P(fish | the) = 14/1,773 = 0.008, and P(. | fish) = 12/14 = 0.857.</li>
+              <li>Multiplying: P(sentence) ≈ 6.5 × 10<sup>−6</sup>. Even a perfectly ordinary sentence has a tiny probability, because probability is shared among an enormous number of possible sentences. That is why language models work with logarithms of probabilities.</li>
+            </ol>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: counting words</div>
+              <ol>
+                <li>In Figure 3, compare “… horse” with “… cat”. Which word never follows “horse”, and why?</li>
+                <li>In Figure 4, generate with n = 2 several times. Find a sentence in which every word pair is plausible but the whole is nonsense.</li>
+                <li>In Figure 5, how many training sentences are needed before fewer than 5% of test trigrams are unseen?</li>
+                <li>In Figure 6, with 200 training sentences, find the best pseudo-count k. Is it larger or smaller than with 50 sentences, and why?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “language models just paste together sentences they have seen”</div>
+              <p><strong>The myth:</strong> an LLM is a giant lookup table that retrieves and stitches together text from its training data.</p>
+              <p><strong>The reality:</strong> that describes a long-context n-gram model, which, as Figure 4 shows, becomes fluent mainly by copying. Modern models are different. R. Thomas McCoy and colleagues found that text generated by neural language models is largely novel: most of its longer word sequences do not appear in the training data, and the models often use words in new grammatical combinations, though they do occasionally copy long passages. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span> Nicholas Carlini and colleagues showed that models can memorise and regurgitate some rare training text word for word, such as contact details that appear only a few times, which matters for privacy. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span></p>
+              <p><strong>Why it matters:</strong> LLMs both generalise and memorise. Which one they are doing in a given answer is not visible from the outside, a theme Part 6 returns to.</p>
+            </div>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>A language model assigns a probability to every possible next word; by the chain rule, these give the probability of any text.</li>
+                <li>n-gram models estimate those probabilities by counting how often words follow the previous n − 1 words.</li>
+                <li>Generating text means repeatedly drawing a next word from those probabilities.</li>
+                <li>Longer contexts give more fluent text but need exponentially more data, and generation drifts into copying.</li>
+                <li>Smoothing and back-off share probability with unseen sequences; perplexity measures how well a model predicts new text.</li>
+                <li>Counting has no notion of similarity and a short memory: the problems that word vectors (Part 2) and attention (Part 3) solve.</li>
+              </ul>
+              <div class="table-container" style="overflow-x:auto; margin:1rem 0 0;">
+                <table style="width:100%; border-collapse:collapse; font-size:0.9rem; line-height:1.5;">
+                  <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.4rem;">Model</th><th style="padding:0.4rem;">Context used</th><th style="padding:0.4rem;">Toy test perplexity</th></tr></thead>
+                  <tbody>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">Uniform guess</td><td style="padding:0.4rem;">None</td><td style="padding:0.4rem;">39</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">Unigram</td><td style="padding:0.4rem;">Word frequencies only</td><td style="padding:0.4rem;">17.8</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">Bigram (800 sentences)</td><td style="padding:0.4rem;">Previous word</td><td style="padding:0.4rem;">3.6</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section id="section-14">
+            <h2>14. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Andrey Markov</td>
+                <td style="padding:0.6rem 0.8rem;">1856–1922<br>Russia</td>
+                <td style="padding:0.6rem 0.8rem;">Chains of letters (1913)</td>
+                <td style="padding:0.6rem 0.8rem;">Studied how letters depend on the ones before; founded Markov chains.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Claude Shannon</td>
+                <td style="padding:0.6rem 0.8rem;">1916–2001<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Information theory (1948), the guessing game (1951)</td>
+                <td style="padding:0.6rem 0.8rem;">Generated text from statistics and measured how predictable English is.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Frederick Jelinek</td>
+                <td style="padding:0.6rem 0.8rem;">1932–2010<br>Czechoslovakia / USA</td>
+                <td style="padding:0.6rem 0.8rem;">Statistical speech recognition (1976)</td>
+                <td style="padding:0.6rem 0.8rem;">Made n-gram language models central to speech recognition at IBM.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Slava Katz</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Back-off (1987)</td>
+                <td style="padding:0.6rem 0.8rem;">Fell back to shorter contexts for unseen word sequences.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Reinhard Kneser &amp; Hermann Ney</td>
+                <td style="padding:0.6rem 0.8rem;"><br>Germany</td>
+                <td style="padding:0.6rem 0.8rem;">Kneser–Ney smoothing (1995)</td>
+                <td style="padding:0.6rem 0.8rem;">Devised the strongest classic smoothing method.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Thorsten Brants and colleagues</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Large n-gram models (2007)</td>
+                <td style="padding:0.6rem 0.8rem;">Trained n-gram models on up to two trillion words for translation.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about counting-based language models.</p>
+            <figure class="fig" data-fig="fig-quiz-lm1">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-16">
+            <h2>16. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Jurafsky, Daniel &amp; Martin, James H.</strong> <em>Speech and Language Processing</em>, 3rd edition draft, chapter 3: “N-gram language models”. Online.</li>
+              <li id="ref-2"><strong>Shannon, Claude E.</strong> (1948). "A mathematical theory of communication." <em>Bell System Technical Journal</em>, 27: 379–423 and 623–656.</li>
+              <li id="ref-3"><strong>Markov, A. A.</strong> (1913). "An example of statistical investigation of the text <em>Eugene Onegin</em> concerning the connection of samples in chains." <em>Bulletin of the Imperial Academy of Sciences of St Petersburg</em>, 7(3): 153–162. English translation in <em>Science in Context</em>, 19(4): 591–600 (2006).</li>
+              <li id="ref-4"><strong>Shannon, C. E.</strong> (1951). "Prediction and entropy of printed English." <em>Bell System Technical Journal</em>, 30(1): 50–64.</li>
+              <li id="ref-5"><strong>Brants, Thorsten, Popat, Ashok C., Xu, Peng, Och, Franz J. &amp; Dean, Jeffrey.</strong> (2007). "Large language models in machine translation." In <em>Proceedings of EMNLP-CoNLL 2007</em>, pp. 858–867.</li>
+              <li id="ref-6"><strong>Katz, Slava M.</strong> (1987). "Estimation of probabilities from sparse data for the language model component of a speech recognizer." <em>IEEE Transactions on Acoustics, Speech, and Signal Processing</em>, 35(3): 400–401.</li>
+              <li id="ref-7"><strong>Kneser, Reinhard &amp; Ney, Hermann.</strong> (1995). "Improved backing-off for m-gram language modeling." In <em>Proceedings of ICASSP 1995</em>, pp. 181–184.</li>
+              <li id="ref-8"><strong>Chen, Stanley F. &amp; Goodman, Joshua.</strong> (1999). "An empirical study of smoothing techniques for language modeling." <em>Computer Speech &amp; Language</em>, 13(4): 359–394.</li>
+              <li id="ref-9"><strong>Jelinek, Frederick.</strong> (1976). "Continuous speech recognition by statistical methods." <em>Proceedings of the IEEE</em>, 64(4): 532–556.</li>
+              <li id="ref-10"><strong>Bengio, Yoshua, Ducharme, Réjean, Vincent, Pascal &amp; Jauvin, Christian.</strong> (2003). "A neural probabilistic language model." <em>Journal of Machine Learning Research</em>, 3: 1137–1155.</li>
+              <li id="ref-11"><strong>McCoy, R. Thomas, Smolensky, Paul, Linzen, Tal, Gao, Jianfeng &amp; Celikyilmaz, Asli.</strong> (2023). "How much do language models copy from their training data? Evaluating linguistic novelty in text generation using RAVEN." <em>Transactions of the Association for Computational Linguistics</em>, 11: 652–670.</li>
+              <li id="ref-12"><strong>Carlini, Nicholas and 11 co-authors.</strong> (2021). "Extracting training data from large language models." In <em>Proceedings of the 30th USENIX Security Symposium</em>, pp. 2633–2650.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/one-word-at-a-time.html">One Word at a Time</a> (Part 1 of 6)</div>
+  <div class="series-banner-links">
+    <span>First part</span>
+    <a href="words-as-numbers.html">Part 2: Words as Numbers: Tokens, Embeddings and the First Neural Language Models →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/counting-words-together.js"></script>
+</body>
+</html>

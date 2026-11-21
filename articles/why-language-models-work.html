@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why It Works: How Next-Word Prediction Leads to Knowledge and Reasoning — RNLearn</title>
+  <meta name="description" content="Why predicting the next word teaches a model facts and reasoning: prediction as compression, scaling laws, emergent abilities, world models inside LLMs, RLHF and chain of thought.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/why-language-models-work.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Why It Works: How Next-Word Prediction Leads to Knowledge and Reasoning — RNLearn">
+  <meta property="og:description" content="Why predicting the next word teaches a model facts and reasoning: prediction as compression, scaling laws, emergent abilities, world models inside LLMs, RLHF and chain of thought.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/why-language-models-work.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Why It Works: How Next-Word Prediction Leads to Knowledge and Reasoning — RNLearn">
+  <meta name="twitter:description" content="Why predicting the next word teaches a model facts and reasoning: prediction as compression, scaling laws, emergent abilities, world models inside LLMs, RLHF and chain of thought.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Why It Works: How Next-Word Prediction Leads to Knowledge and Reasoning",
+    "description": "Why predicting the next word teaches a model facts and reasoning: prediction as compression, scaling laws, emergent abilities, world models inside LLMs, RLHF and chain of thought.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-21",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/why-language-models-work.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/ai-machine-learning.html" class="post-subject-tag" data-subject="ai-machine-learning">AI &amp; Machine Learning</a>
+        </div>
+        <h1 class="article-title">Why It Works: How Next-Word Prediction Leads to Knowledge and Reasoning</h1>
+        <p class="article-standfirst">
+          Nothing in a language model’s training mentions facts, logic or truth. Yet predicting human text well turns out to require all three, and a big enough model learns a surprising amount of them.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-21">21 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>14 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/one-word-at-a-time.html">One Word at a Time</a> (Part 5 of 6)</div>
+  <div class="series-banner-links">
+    <a href="from-scores-to-words.html">← Part 4: From Scores to Words: Temperature, Sampling and How Language Models Choose</a>
+    <a href="why-language-models-fail.html">Part 6: Why It Fails: Hallucination, Calibration and Measuring the Accuracy of Language Models →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. The Real Puzzle</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. To Predict Well, You Must Know Things</a></li>
+              <li><a class="toc-link" href="#section-4">4. Prediction Is Compression</a></li>
+              <li><a class="toc-link" href="#section-5">5. Scale: More Data, Bigger Models</a></li>
+              <li><a class="toc-link" href="#section-6">6. Emergent Abilities or Smooth Progress?</a></li>
+              <li><a class="toc-link" href="#section-7">7. What Models Learn Inside</a></li>
+              <li><a class="toc-link" href="#section-8">8. From Text Predictor to Assistant</a></li>
+              <li><a class="toc-link" href="#section-9">9. Thinking in Tokens</a></li>
+              <li><a class="toc-link" href="#section-10">10. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-11">11. Worked Example: Reading a Scaling Law</a></li>
+              <li><a class="toc-link" href="#section-12">12. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-13">13. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-14">14. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-15">15. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-16">16. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-17">17. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>In this part:</strong> the heart of the puzzle. Why does a model trained only to predict the next word end up knowing facts and following reasoning? We look at what good prediction requires; prediction as compression; scaling laws; whether abilities “emerge” suddenly; what researchers find inside models; how instruction tuning and learning from human preferences turn a text predictor into an assistant; and why writing out steps helps.</p>
+            <p><strong>You need:</strong> Parts 1–4.</p>
+            <p><strong>Try:</strong> five interactive figures: next words that need knowledge, the cost of text in bits, a scaling law, the illusion of sudden abilities, and preferences turned into rewards.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. The Real Puzzle</h2>
+            <p>Parts 1–4 explained the machinery: tokens become vectors, attention mixes in context, and a next token is drawn from a probability distribution. None of it mentions facts, logic or truth. Yet ask a large model a question about chemistry or history and it usually answers correctly. Where does that come from? The short answer is that predicting human text extremely well is a very demanding task, and the cheapest way for a big enough network to do it is to learn much of what the text is about. This part examines that answer, and its limits. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+            <figure class="fig" data-fig="fig-lm-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Part 5 asks why the machinery works.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-lm5-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. From the predictability of English to world models inside LLMs, 1951–2024.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. To Predict Well, You Must Know Things</h2>
+            <p>Some next words follow from grammar alone. Many do not. The next word after “The chemical symbol for gold is” requires a fact; after “17 + 25 =”, arithmetic; after a short story about a ball being moved while someone is out of the room, an idea of what that person believes. Word counts cannot supply any of these, but each is useful for predicting text, and text written by people is full of them.</p>
+            <figure class="fig" data-fig="fig-lm-know">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. What must you know to predict the next word?</strong> Seven sentence beginnings. Reveal each next word and what it takes to predict it.
+              </figcaption>
+            </figure>
+            <p>Training lowers the prediction error over trillions of tokens. Every regularity that helps, from subject–verb agreement to the boiling point of water, is worth learning if the network has room for it. An early glimpse came in 2017, when Alec Radford, Rafal Jozefowicz and Ilya Sutskever trained a network only to predict the next character of product reviews and found that one of its units tracked whether the review was positive or negative: sentiment was useful for prediction, so the network had learned to represent it. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Prediction Is Compression</h2>
+            <p>There is a precise way to say “predicts better”. If a model gives the actual next word probability p, that word costs −log<sub>2</sub> p bits to encode with the model’s help, a result going back to Shannon. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> A word the model expected costs almost nothing; a surprising word costs many bits. A better predictor is literally a better compressor, and Grégoire Delétang and colleagues showed that large language models compress text, and even images and audio, better than standard compression programs. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span></p>
+            <figure class="fig" data-fig="fig-lm-compress">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Prediction is compression.</strong> The surprise of each word in bits under four models of the toy world. Choose a model and a sentence.
+              </figcaption>
+            </figure>
+            <p>On the 200 test sentences of the toy world, a blind guess costs 5.3 bits per word, word frequencies 4.2, a bigram model 1.9 and a trigram 1.4. In “the hungry cat drinks the milk”, the trigram model pays 4.1 bits for “hungry”, a genuinely unpredictable choice, but only 1.9 bits for “milk” once it knows a cat is drinking. Driving the cost of real text down requires knowing what real text knows.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Scale: More Data, Bigger Models</h2>
+            <p>How much better does prediction get with size? In 2020 Jared Kaplan and colleagues trained hundreds of transformer language models and found that their test loss fell as a <strong>power law</strong> in the number of parameters, in the amount of data and in the computation used, over many orders of magnitude, with little dependence on details such as depth versus width. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span></p>
+            <figure class="fig" data-fig="fig-lm-scaling">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. A scaling law.</strong> Kaplan and colleagues’ fitted relation between model size and test loss, for models trained with enough data. Move along the line.
+              </figcaption>
+            </figure>
+            <p>On log scales the law is a straight line: every tenfold increase in parameters multiplies the loss by 0.84. Such regularity made it possible to predict a large model’s performance from small experiments before spending millions on training it. In 2022 Jordan Hoffmann and colleagues refined the recipe: for a fixed computing budget, models had been too large and trained on too little text. Their 70-billion-parameter Chinchilla, trained on 1.4 trillion tokens, about 20 tokens per parameter, outperformed models four times its size. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">The maths: the power laws</summary>
+              <p style="margin-top:0.6rem;">Kaplan and colleagues fitted, for test loss L in nats per token,</p>
+              <p>$$L(N) \approx \Big(\frac{N_c}{N}\Big)^{\alpha_N}, \quad \alpha_N \approx 0.076,\ N_c \approx 8.8\times10^{13}; \qquad L(D) \approx \Big(\frac{D_c}{D}\Big)^{\alpha_D}, \quad \alpha_D \approx 0.095,$$</p>
+              <p>where N is the number of non-embedding parameters and D the number of training tokens. Training compute is roughly C ≈ 6ND floating-point operations. A small exponent means slow but steady gains: halving the loss would take about 10<sup>4</sup> times more parameters.</p>
+            </details>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Emergent Abilities or Smooth Progress?</h2>
+            <p>Loss falls smoothly, but some abilities seemed to appear suddenly: small models scored near zero on multi-digit arithmetic or certain puzzles, and above some size, scores shot up. Jason Wei and colleagues catalogued many such <strong>emergent abilities</strong>. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> Rylan Schaeffer, Brando Miranda and Sanmi Koyejo then showed that many of these jumps depend on how the ability is scored. When an answer counts only if it is exactly right, small steady gains in each token’s accuracy add up to a sharp jump in the score; with a measure that gives partial credit, the same models improve smoothly. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span></p>
+            <figure class="fig" data-fig="fig-lm-emerge">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. A sudden ability, or a sudden metric?</strong> An illustrative per-token accuracy that improves smoothly with scale, and the exact-match accuracy of an answer whose tokens must all be right. Change the answer length.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-7">
+            <h2>7. What Models Learn Inside</h2>
+            <p>If prediction forces models to learn about the world, we should find traces of that world inside them. Researchers look with <strong>probes</strong>: simple classifiers trained to read a property from a model’s internal vectors. Kenneth Li and colleagues trained a transformer only on sequences of legal moves in the board game Othello, never showing it a board; probes could nonetheless read the state of every square from its activations, and changing those activations changed the moves it predicted. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span> Wes Gurnee and Max Tegmark found that large language models represent the geographical position of places and the dates of historical events along roughly straight directions in their activation space. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span> These are not proofs of understanding, but they show that models build structured internal pictures of what text describes, because those pictures help them predict.</p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. From Text Predictor to Assistant</h2>
+            <p>A model pre-trained on the internet predicts how a document would continue, not what would help you. Asked a question, it might continue with more questions, as a quiz page would. Two more stages turn it into an assistant. <strong>Instruction tuning</strong> continues training on examples of requests and good responses. <strong>Reinforcement learning from human feedback</strong> (RLHF), developed by Paul Christiano and colleagues for training agents, <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span> asks people to compare pairs of answers, trains a reward model to predict their choices, and then adjusts the language model to produce answers the reward model scores highly. Long Ouyang and colleagues applied this to GPT-3: people preferred the answers of a tuned model with 1.3 billion parameters to those of the original with 175 billion. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span></p>
+            <figure class="fig" data-fig="fig-lm-pref">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 7. Learning from preferences.</strong> The Bradley–Terry model links a quality gap between two answers to how often people prefer the better one. Change the gap and the number of comparisons.
+              </figcaption>
+            </figure>
+            <p>Later methods replace some human judgements with written principles: in Anthropic’s Constitutional AI, a model critiques and revises its own answers according to a list of principles, and AI feedback trains the reward model. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span> None of this adds much new knowledge; it mostly changes which of the model’s possible behaviours it shows. The knowledge comes from pre-training.</p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Thinking in Tokens</h2>
+            <p>Each token is produced by a fixed amount of computation: one pass through the network. A hard problem may need more steps than one pass can do. Writing out intermediate steps gives the model both more computation and a place to keep partial results. Jason Wei and colleagues found that showing a model worked examples with step-by-step reasoning, <strong>chain-of-thought</strong> prompting, greatly improved its accuracy on arithmetic word problems; <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span> Takeshi Kojima and colleagues found that simply adding “Let’s think step by step” helped too. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span> Today’s reasoning models are trained to produce long chains of thought before answering, an idea taken up again in Part 6.</p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: is it understanding?</div>
+              <p>Emily Bender, Timnit Gebru, Angelina McMillan-Major and Margaret Mitchell (credited under a pseudonym) described large language models as “stochastic parrots” that stitch together linguistic forms according to probabilities, without reference to meaning, and warned of the risks of mistaking fluency for understanding. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span> Findings such as internal board states and maps of the world suggest that models build some structured representations of what text is about. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>, <a class="cite" href="#ref-10">10</a>]</span> Where the truth lies between these views, and whether “understanding” is even the right question to ask of a system so unlike a human mind, is one of the most debated issues in AI.</p>
+            </div>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Worked Example: Reading a Scaling Law</h2>
+            <ol>
+              <li>Kaplan’s law gives a loss of (8.8 × 10<sup>13</sup> / 10<sup>9</sup>)<sup>0.076</sup> = 88,000<sup>0.076</sup> ≈ 2.38 nats per token for a model with a billion non-embedding parameters.</li>
+              <li>Ten times larger (10<sup>10</sup>): the loss is multiplied by 10<sup>−0.076</sup> = 0.839, giving 1.99.</li>
+              <li>In perplexity, e<sup>2.38</sup> ≈ 10.8 falls to e<sup>1.99</sup> ≈ 7.3: the model is choosing among about 7 equally likely tokens instead of 11.</li>
+              <li>Chinchilla’s rule of about 20 tokens per parameter suggests training a 10-billion-parameter model on roughly 200 billion tokens, using about 6 × 10<sup>10</sup> × 2 × 10<sup>11</sup> = 1.2 × 10<sup>22</sup> operations.</li>
+            </ol>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: why it works</div>
+              <ol>
+                <li>In Figure 3, which next words could a count model from Part 1 never get right, however much text it saw?</li>
+                <li>In Figure 4, which word in “the girl gives the cake to the horse” is most surprising to the trigram model, and why?</li>
+                <li>In Figure 5, how many times larger must a model be to lower the loss from 2.0 to 1.5?</li>
+                <li>In Figure 6, set the answer length to 1 and then to 12. How does the apparent suddenness change?</li>
+                <li>In Figure 7, with a true gap of 0.5, how many comparisons are needed before the estimate is usually within 0.25 of the truth?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “it is just autocomplete, so it cannot know anything”</div>
+              <p><strong>The myth:</strong> because an LLM only predicts the next word, it is like the autocomplete on a phone and cannot contain knowledge or reasoning.</p>
+              <p><strong>The reality:</strong> the training objective is simple, but what is needed to achieve it is not. Phone autocomplete is a small n-gram-like model; a large model reduces its prediction error on trillions of tokens by learning facts, grammar and patterns of reasoning, and probes find structured representations of games, places and times inside it. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>, <a class="cite" href="#ref-10">10</a>]</span> At the same time, the objective explains real weaknesses: the model learns what is <em>said</em>, which is not always what is <em>true</em>, the subject of Part 6.</p>
+              <p><strong>Why it matters:</strong> “just predicting the next word” describes the interface, not the capability. Both dismissing LLMs and over-trusting them rest on misreading what next-word prediction demands.</p>
+            </div>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>Predicting human text well requires grammar, facts, arithmetic, logic and models of the world and of people, so training pushes models to learn them.</li>
+                <li>Better prediction is better compression: the cost of text in bits measures how much of its structure a model has captured.</li>
+                <li>Loss falls as a smooth power law with parameters, data and compute; compute-optimal training uses about 20 tokens per parameter.</li>
+                <li>Abilities that seem to emerge suddenly often reflect all-or-nothing scoring of smoothly improving skills.</li>
+                <li>Probes find internal representations of board states, locations and dates: models build structured pictures because they help prediction.</li>
+                <li>Instruction tuning and learning from human preferences turn a text predictor into an assistant; writing out steps gives a model more computation per answer.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Claude Shannon</td>
+                <td style="padding:0.6rem 0.8rem;">1916–2001<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Prediction and entropy (1951)</td>
+                <td style="padding:0.6rem 0.8rem;">Linked prediction of text to the information it contains.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Jared Kaplan and colleagues</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Scaling laws (2020)</td>
+                <td style="padding:0.6rem 0.8rem;">Found power laws linking size, data and compute to loss.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Jordan Hoffmann and colleagues</td>
+                <td style="padding:0.6rem 0.8rem;"><br>UK</td>
+                <td style="padding:0.6rem 0.8rem;">Chinchilla (2022)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed how to balance model size and training data.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Paul Christiano</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Learning from human preferences (2017)</td>
+                <td style="padding:0.6rem 0.8rem;">Developed training from human comparisons.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Long Ouyang and colleagues</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">InstructGPT (2022)</td>
+                <td style="padding:0.6rem 0.8rem;">Turned GPT-3 into an instruction-following assistant with RLHF.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Jason Wei</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Chain of thought, emergent abilities (2022)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed that step-by-step reasoning prompts help, and catalogued sudden abilities.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Emily Bender and Timnit Gebru</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">“Stochastic parrots” (2021)</td>
+                <td style="padding:0.6rem 0.8rem;">Warned against mistaking fluent text for understanding.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about why language models work.</p>
+            <figure class="fig" data-fig="fig-quiz-lm5">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-17">
+            <h2>17. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Bommasani, Rishi and 113 co-authors.</strong> (2021). "On the opportunities and risks of foundation models." <em>arXiv</em>: 2108.07258.</li>
+              <li id="ref-2"><strong>Radford, Alec, Jozefowicz, Rafal &amp; Sutskever, Ilya.</strong> (2017). "Learning to generate reviews and discovering sentiment." <em>arXiv</em>: 1704.01444.</li>
+              <li id="ref-3"><strong>Shannon, C. E.</strong> (1951). "Prediction and entropy of printed English." <em>Bell System Technical Journal</em>, 30(1): 50–64.</li>
+              <li id="ref-4"><strong>Delétang, Grégoire and 12 co-authors.</strong> (2024). "Language modeling is compression." In <em>International Conference on Learning Representations (ICLR)</em>.</li>
+              <li id="ref-5"><strong>Kaplan, Jared and 9 co-authors.</strong> (2020). "Scaling laws for neural language models." <em>arXiv</em>: 2001.08361.</li>
+              <li id="ref-6"><strong>Hoffmann, Jordan and 21 co-authors.</strong> (2022). "Training compute-optimal large language models." In <em>Advances in Neural Information Processing Systems 35 (NeurIPS)</em>.</li>
+              <li id="ref-7"><strong>Wei, Jason and 15 co-authors.</strong> (2022). "Emergent abilities of large language models." <em>Transactions on Machine Learning Research</em>.</li>
+              <li id="ref-8"><strong>Schaeffer, Rylan, Miranda, Brando &amp; Koyejo, Sanmi.</strong> (2023). "Are emergent abilities of large language models a mirage?" In <em>Advances in Neural Information Processing Systems 36 (NeurIPS)</em>.</li>
+              <li id="ref-9"><strong>Li, Kenneth, Hopkins, Aspen K., Bau, David, Viégas, Fernanda, Pfister, Hanspeter &amp; Wattenberg, Martin.</strong> (2023). "Emergent world representations: exploring a sequence model trained on a synthetic task." In <em>International Conference on Learning Representations (ICLR)</em>.</li>
+              <li id="ref-10"><strong>Gurnee, Wes &amp; Tegmark, Max.</strong> (2024). "Language models represent space and time." In <em>International Conference on Learning Representations (ICLR)</em>.</li>
+              <li id="ref-11"><strong>Christiano, Paul F., Leike, Jan, Brown, Tom B., Martic, Miljan, Legg, Shane &amp; Amodei, Dario.</strong> (2017). "Deep reinforcement learning from human preferences." In <em>Advances in Neural Information Processing Systems 30 (NeurIPS)</em>.</li>
+              <li id="ref-12"><strong>Ouyang, Long and 19 co-authors.</strong> (2022). "Training language models to follow instructions with human feedback." In <em>Advances in Neural Information Processing Systems 35 (NeurIPS)</em>.</li>
+              <li id="ref-13"><strong>Bai, Yuntao and 50 co-authors.</strong> (2022). "Constitutional AI: harmlessness from AI feedback." <em>arXiv</em>: 2212.08073.</li>
+              <li id="ref-14"><strong>Wei, Jason, Wang, Xuezhi, Schuurmans, Dale, Bosma, Maarten, Ichter, Brian, Xia, Fei, Chi, Ed, Le, Quoc &amp; Zhou, Denny.</strong> (2022). "Chain-of-thought prompting elicits reasoning in large language models." In <em>Advances in Neural Information Processing Systems 35 (NeurIPS)</em>.</li>
+              <li id="ref-15"><strong>Kojima, Takeshi, Gu, Shixiang Shane, Reid, Machel, Matsuo, Yutaka &amp; Iwasawa, Yusuke.</strong> (2022). "Large language models are zero-shot reasoners." In <em>Advances in Neural Information Processing Systems 35 (NeurIPS)</em>.</li>
+              <li id="ref-16"><strong>Bender, Emily M., Gebru, Timnit, McMillan-Major, Angelina &amp; Shmitchell, Shmargaret.</strong> (2021). "On the dangers of stochastic parrots: can language models be too big?" In <em>Proceedings of the 2021 ACM Conference on Fairness, Accountability, and Transparency (FAccT)</em>, pp. 610–623.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/one-word-at-a-time.html">One Word at a Time</a> (Part 5 of 6)</div>
+  <div class="series-banner-links">
+    <a href="from-scores-to-words.html">← Part 4: From Scores to Words: Temperature, Sampling and How Language Models Choose</a>
+    <a href="why-language-models-fail.html">Part 6: Why It Fails: Hallucination, Calibration and Measuring the Accuracy of Language Models →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/why-language-models-work.js"></script>
+</body>
+</html>

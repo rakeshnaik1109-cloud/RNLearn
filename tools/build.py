@@ -67,6 +67,12 @@ SERIES = {
         "label": "ML Part",
         "lede": "A ten-part series on how machine learning works, from learning from data and classical algorithms to activation and loss functions, optimisers, deep architectures and choosing a model, with interactive playgrounds in every part.",
     },
+    "one-word-at-a-time": {
+        "title": "One Word at a Time",
+        "parts": 6,
+        "label": "LLM Part",
+        "lede": "A six-part series on how large language models work: from counting words that occur together to tokens, embeddings and attention, choosing each next word, and why the answers are so often right, and sometimes confidently wrong.",
+    },
     "minds-that-changed-how-we-know": {
         "title": "Minds That Changed How We Know",
         "parts": 12,
@@ -426,6 +432,8 @@ def build_site(root_dir, check_mode=False):
             lede = "How Machines Learned to Think: an eight-part history of artificial intelligence, from the first dreams of thinking machines to today’s AI and where it may lead."
             if any((x.get("series") or {}).get("id") == "inside-the-machine" for x in posts):
                 lede += " Inside the Machine: a ten-part series on how machine learning works, with interactive playgrounds."
+            if any((x.get("series") or {}).get("id") == "one-word-at-a-time" for x in posts):
+                lede += " One Word at a Time: a six-part series on how large language models work and why they are accurate."
         posts.sort(key=reading_order)
         html = generate_listing_page(title, eyebrow, lede, posts, f"subjects/{s_slug}.html")
         files_to_write[os.path.join("subjects", f"{s_slug}.html")] = html

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why It Fails: Hallucination, Calibration and Measuring the Accuracy of Language Models — RNLearn</title>
+  <meta name="description" content="Why language models are sometimes confidently wrong: hallucination, rare facts and the Good–Turing bound, calibration, tokenisation blind spots, retrieval and tools, and honest benchmarks.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/why-language-models-fail.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Why It Fails: Hallucination, Calibration and Measuring the Accuracy of Language Models — RNLearn">
+  <meta property="og:description" content="Why language models are sometimes confidently wrong: hallucination, rare facts and the Good–Turing bound, calibration, tokenisation blind spots, retrieval and tools, and honest benchmarks.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/why-language-models-fail.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Why It Fails: Hallucination, Calibration and Measuring the Accuracy of Language Models — RNLearn">
+  <meta name="twitter:description" content="Why language models are sometimes confidently wrong: hallucination, rare facts and the Good–Turing bound, calibration, tokenisation blind spots, retrieval and tools, and honest benchmarks.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Why It Fails: Hallucination, Calibration and Measuring the Accuracy of Language Models",
+    "description": "Why language models are sometimes confidently wrong: hallucination, rare facts and the Good–Turing bound, calibration, tokenisation blind spots, retrieval and tools, and honest benchmarks.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-21",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/why-language-models-fail.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/ai-machine-learning.html" class="post-subject-tag" data-subject="ai-machine-learning">AI &amp; Machine Learning</a>
+        </div>
+        <h1 class="article-title">Why It Fails: Hallucination, Calibration and Measuring the Accuracy of Language Models</h1>
+        <p class="article-standfirst">
+          The machinery that makes language models so often right also makes them sometimes wrong in a peculiar way: fluent, specific and confident. Knowing where those errors come from tells you when an answer can be trusted.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-21">21 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>14 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/one-word-at-a-time.html">One Word at a Time</a> (Part 6 of 6)</div>
+  <div class="series-banner-links">
+    <a href="why-language-models-work.html">← Part 5: Why It Works: How Next-Word Prediction Leads to Knowledge and Reasoning</a>
+    <span>Final part</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. Confidently Wrong</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Why Models Hallucinate</a></li>
+              <li><a class="toc-link" href="#section-4">4. Rare Facts and the Limits of Memory</a></li>
+              <li><a class="toc-link" href="#section-5">5. Knowing What You Know: Calibration</a></li>
+              <li><a class="toc-link" href="#section-6">6. Blind Spots: Letters, Numbers and Reversals</a></li>
+              <li><a class="toc-link" href="#section-7">7. Fixing Errors: Retrieval, Tools and Reasoning</a></li>
+              <li><a class="toc-link" href="#section-8">8. Measuring Accuracy Honestly</a></li>
+              <li><a class="toc-link" href="#section-9">9. So How Accurate Are They?</a></li>
+              <li><a class="toc-link" href="#section-10">10. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-11">11. Worked Example: The Unseen and the Uncertain</a></li>
+              <li><a class="toc-link" href="#section-12">12. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-13">13. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-14">14. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-15">15. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-16">16. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-17">17. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>In this part:</strong> the other half of the puzzle. Why do language models sometimes state falsehoods fluently and confidently? We look at why “most probable” is not “true”; why rare facts are the weak spot, with a mathematical bound; calibration, or whether a model knows what it knows; blind spots with letters, numbers and reversed facts; how retrieval, tools and reasoning reduce errors; and how to measure accuracy honestly.</p>
+            <p><strong>You need:</strong> Parts 1–5. Our article on <a href="null-hypothesis-p-values-and-effect-sizes.html">null hypotheses and p-values</a> helps with Section 8.</p>
+            <p><strong>Try:</strong> four interactive figures: how often facts appear in training, a calibration chart, how tokens hide letters, and how sure a benchmark score really is.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. Confidently Wrong</h2>
+            <p>Part 5 explained why language models are so often right: predicting human text well requires learning much of what the text knows. This final part explains why they are sometimes wrong in a peculiar way, producing fluent, specific, confident statements that are simply false. Such errors are called <strong>hallucinations</strong>. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span> They are not random glitches. They follow from the same machinery that makes the models work, and understanding where they come from is the best guide to when an answer can be trusted.</p>
+            <figure class="fig" data-fig="fig-lm-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Part 6 asks when and why the answers go wrong.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-lm6-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Understanding and reducing errors, 1953–2025.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Why Models Hallucinate</h2>
+            <p>A language model is trained to continue text the way text usually continues. When it knows a fact well, the most probable continuation is the fact. When it does not, the most probable continuation is still fluent and plausible: a confident sentence with a name, a date or a reference of the right form. Nothing in next-word prediction distinguishes “what is true” from “what sounds like the kind of thing that would be said here”. Asked for a citation, the model knows what citations look like; if it does not recall a real one that fits, it may produce an invented one with realistic authors, journal and year.</p>
+            <p>This has had real consequences. In 2023 a US federal judge sanctioned two lawyers who had filed a brief citing court decisions that did not exist; the cases, complete with quotations, had been generated by a chatbot. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span> Part 4’s lesson applies: decoding chooses among the model’s probable continuations, and if none of them is true, no setting will make the answer true.</p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Rare Facts and the Limits of Memory</h2>
+            <p>Which facts are at risk? Fame is extremely uneven: a few people, places and events are mentioned millions of times, and most are mentioned rarely or once. A model sees the famous facts again and again, in different wordings, and learns them reliably. A fact mentioned once is hard to learn; a fact never mentioned cannot be learned at all, yet the model will still produce a plausible answer if asked.</p>
+            <figure class="fig" data-fig="fig-lm-singleton">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Rare facts.</strong> 100,000 facts whose popularity follows a Zipf law, mentioned at random in a training text. Change how skewed fame is and how much text there is.
+              </figcaption>
+            </figure>
+            <p>With 100,000 mentions and a typical skew, 83% of the facts never appear and 12% appear exactly once. Alan Turing and I. J. Good worked out, during the Second World War, that the share of observations that are of items seen exactly once estimates how likely the next observation is to be something never seen before. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> In 2024 Adam Tauman Kalai and Santosh Vempala proved a striking consequence: for arbitrary facts such as birthdays, which follow no pattern, a language model that is well calibrated must hallucinate at a rate at least roughly equal to this “once-seen” share. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> The only ways out are to see the fact more often, to look it up, or to abstain from answering.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Knowing What You Know: Calibration</h2>
+            <p>A model would be far more useful if it signalled when it is guessing. A model is <strong>calibrated</strong> if, among all the answers it gives with 70% confidence, about 70% are right (Inside the Machine Part 7). Saurav Kadavath and colleagues found that large language models were well calibrated on multiple-choice questions, and could be trained to estimate the probability that their own answers were correct. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> OpenAI reported that its pre-trained GPT-4 model was well calibrated on such questions, but that the tuning for helpfulness described in Part 5 reduced its calibration. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+            <figure class="fig" data-fig="fig-lm-calib">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Calibration.</strong> Simulated answers grouped by the confidence the model attaches to them. Compare a calibrated, an overconfident and an underconfident model.
+              </figcaption>
+            </figure>
+            <p>Calibration in multiple-choice probabilities does not mean that the confident tone of a long written answer is meaningful: the wording is generated like any other text. Practical checks include asking the same question several times and seeing whether the answers agree (Part 4), asking for sources and verifying them, and preferring systems that are allowed, and encouraged, to say “I don’t know”.</p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Blind Spots: Letters, Numbers and Reversals</h2>
+            <p>Some errors come from how models see text. Because they receive tokens rather than letters (Part 2), questions about spelling require knowledge the input hides. Numbers are cut into chunks that need not align with place value, which makes long arithmetic error-prone without help.</p>
+            <figure class="fig" data-fig="fig-lm-letters">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Tokens hide letters.</strong> What a person sees and what a model receives, using illustrative token splits. Choose a word, and ask the model to answer directly or to spell the word out first.
+              </figcaption>
+            </figure>
+            <p>Other blind spots come from how knowledge is stored. Lukas Berglund and colleagues trained models on made-up facts of the form “A is B” and found that they could not answer the reverse question, “Who is B?”: a model that has learned “X is the composer of Y” does not automatically know who composed Y. They called this the <strong>reversal curse</strong>. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> Knowledge in a language model is a set of learned associations in one direction, not a database that can be queried any way round.</p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Fixing Errors: Retrieval, Tools and Reasoning</h2>
+            <ul>
+              <li><strong>Retrieval.</strong> Retrieval-augmented generation, introduced by Patrick Lewis and colleagues, first searches a collection of documents and gives the most relevant passages to the model, which then answers from them. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span> It addresses rare, recent and private facts, and makes sources checkable, though the model can still misread or ignore what it retrieves.</li>
+              <li><strong>Tools.</strong> Timo Schick and colleagues taught a model to decide by itself when to call a calculator, a search engine or a calendar, and to use the results in its answer. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span> Arithmetic done by a calculator does not suffer from tokenisation.</li>
+              <li><strong>Reasoning.</strong> Writing out steps (Part 5) improves accuracy on problems that need several steps. Reasoning models are now trained with reinforcement learning on problems whose answers can be checked automatically, such as maths and code, so that they learn to produce long, self-correcting chains of thought; DeepSeek described one such training method in detail. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span> But a written chain of thought is not necessarily an honest account of how the answer was reached: Miles Turpin and colleagues showed that models’ explanations can leave out the factor that actually swayed them, such as a hint planted in the prompt. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span></li>
+            </ul>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Measuring Accuracy Honestly</h2>
+            <p>Claims about how accurate a model is usually rest on <strong>benchmarks</strong>: fixed sets of questions with known answers. Three cautions apply. First, a benchmark is a sample, so its score has sampling error; small differences between models may be noise. Second, a model may have seen the benchmark’s questions during training, <strong>contamination</strong>, which inflates its score; Yonatan Oren and colleagues developed statistical tests that can detect it. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span> Third, a benchmark measures what it measures. Stephanie Lin, Jacob Hilton and Owain Evans built TruthfulQA from questions that people often answer wrongly because of popular misconceptions, and found that larger models were often <em>less</em> truthful, because they were better at imitating common human errors. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span></p>
+            <figure class="fig" data-fig="fig-lm-bench">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. How sure is a benchmark score?</strong> Two models’ accuracies with 95% confidence intervals, and a paired test of their difference. Change the number of questions and the accuracies.
+              </figcaption>
+            </figure>
+            <p>With 200 questions, accuracies of 82% and 78% have overlapping 95% intervals (76.1–86.7% and 71.8–83.2%), and the paired test gives p = 0.38: no evidence of a real difference. With 2,000 questions, the same accuracies give p = 0.002. Our article on <a href="null-hypothesis-p-values-and-effect-sizes.html">null hypotheses, p-values and effect sizes</a> explains these tests and how to compare AI models properly.</p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. So How Accurate Are They?</h2>
+            <p>Putting the series together gives a practical answer to the puzzle we started with:</p>
+            <ul>
+              <li><strong>Usually right</strong> on well-established knowledge that appears often and consistently in text, on language tasks such as summarising and rephrasing, and on common patterns of reasoning, because predicting text well required learning these (Part 5).</li>
+              <li><strong>Often wrong</strong> on rare facts, recent events after the training data was collected, precise details such as citations, quotations, numbers and dates, and questions where a popular misconception is more common in text than the truth (Sections 3–4, 8).</li>
+              <li><strong>Unreliable</strong> on tasks that clash with how text is represented, such as spelling and long arithmetic, unless tools or step-by-step working are used (Section 6).</li>
+              <li><strong>More trustworthy</strong> when answers are grounded in retrieved sources, checked by tools, agreed on across several samples, and when the system may decline to answer (Sections 5, 7).</li>
+            </ul>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: can hallucination be eliminated?</div>
+              <p>Kalai and Vempala’s result shows that for arbitrary facts seen only once, a calibrated model must sometimes invent answers, unless it abstains. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> So eliminating hallucination entirely means trading it for something else: more refusals, more retrieval, or less calibration. How to make models abstain exactly when they do not know, how to make their stated reasoning faithful to their actual computation, <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span> and how to evaluate systems on questions they could not have seen in training, are among the most active research problems in AI.</p>
+            </div>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Worked Example: The Unseen and the Uncertain</h2>
+            <ol>
+              <li><strong>The once-seen share.</strong> Suppose a training text contains 1,000,000 mentions of facts about people, and 27,000 people are mentioned exactly once. Good–Turing estimates that the chance a new question concerns someone never mentioned is about 27,000 / 1,000,000 = 2.7%, the value in Figure 3 for that setting. For such questions, a model that always answers will often be wrong.</li>
+              <li><strong>A benchmark interval.</strong> A model answers 164 of 200 questions correctly: 82%. The 95% Wilson interval is 76.1% to 86.7%: a rival scoring 78% is not clearly worse.</li>
+              <li><strong>The paired test.</strong> If model A alone gets 36 questions right and model B alone 28, the paired test asks whether a 36:28 split is surprising under equal ability: p = 0.38, so it is not.</li>
+            </ol>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: when answers fail</div>
+              <ol>
+                <li>In Figure 3, increase the training text to 10 million mentions. What happens to the share of once-seen facts, and what does that suggest about bigger training sets?</li>
+                <li>In Figure 3, make fame less skewed (exponent 0.8). Are rare facts more or less of a problem?</li>
+                <li>In Figure 4, which model would be most dangerous to rely on, and why?</li>
+                <li>In Figure 5, switch to “Spell it out first” for each word. Why does this help?</li>
+                <li>In Figure 6, with accuracies of 82% and 78%, how many questions are needed for the difference to become clearly significant?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “bigger models are always more truthful”</div>
+              <p><strong>The myth:</strong> as language models grow and score higher on benchmarks, their answers become more truthful across the board.</p>
+              <p><strong>The reality:</strong> bigger models know more and are usually more accurate, but they are also better at imitating human text, including its errors. On TruthfulQA, built from questions that many people answer wrongly, the largest models of the time were often less truthful than smaller ones, because they reproduced popular misconceptions more fluently. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span> Tuning, retrieval and reasoning reduce such errors, but do not remove the underlying pull towards what is commonly said.</p>
+              <p><strong>Why it matters:</strong> fluency and size are not proof of truth. The questions on which a model is most persuasive and most wrong are exactly those where human text is wrong too.</p>
+            </div>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>Hallucinations follow from next-word prediction: a plausible continuation can be probable without being true.</li>
+                <li>Rare facts are the weak spot; for arbitrary facts seen once, a calibrated model must sometimes invent answers.</li>
+                <li>Models can be fairly well calibrated in their probabilities, but a confident tone in writing is not evidence.</li>
+                <li>Tokens hide letters and digits, and learned associations run one way, causing characteristic blind spots.</li>
+                <li>Retrieval, tools, reasoning and multiple samples reduce errors; written reasoning is not always a faithful explanation.</li>
+                <li>Benchmark scores are samples with uncertainty, may be inflated by contamination, and measure only what they test.</li>
+              </ul>
+              <p style="margin-top:0.8rem;"><strong>The series in one table:</strong></p>
+              <div class="table-container" style="overflow-x:auto; margin:0.5rem 0 0;">
+                <table style="width:100%; border-collapse:collapse; font-size:0.9rem; line-height:1.5;">
+                  <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.4rem;">Part</th><th style="padding:0.4rem;">The answer to the puzzle it gives</th></tr></thead>
+                  <tbody>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">1. Counting Words Together</td><td style="padding:0.4rem;">A language model gives probabilities to next words; counting works, then runs out of data.</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">2. Words as Numbers</td><td style="padding:0.4rem;">Tokens and vectors let similar words share what is learned.</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">3. Context and Attention</td><td style="padding:0.4rem;">Attention lets every word use every earlier word that matters.</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">4. From Scores to Words</td><td style="padding:0.4rem;">Decoding picks one token at a time from the probabilities.</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">5. Why It Works</td><td style="padding:0.4rem;">Predicting text well requires knowing what the text knows, and scale delivers it.</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">6. Why It Fails</td><td style="padding:0.4rem;">Probable is not true: rare facts, hidden letters and common misconceptions trip it up.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Alan Turing &amp; I. J. Good</td>
+                <td style="padding:0.6rem 0.8rem;">1912–1954 / 1916–2009<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Good–Turing estimation (1953)</td>
+                <td style="padding:0.6rem 0.8rem;">Estimated the chance of meeting something never seen before.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Adam Tauman Kalai &amp; Santosh Vempala</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Calibrated models must hallucinate (2024)</td>
+                <td style="padding:0.6rem 0.8rem;">Proved a lower bound on hallucination for rare facts.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Saurav Kadavath and colleagues</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Calibration of LLMs (2022)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed that large models can estimate whether their answers are right.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Patrick Lewis and colleagues</td>
+                <td style="padding:0.6rem 0.8rem;"><br>UK</td>
+                <td style="padding:0.6rem 0.8rem;">Retrieval-augmented generation (2020)</td>
+                <td style="padding:0.6rem 0.8rem;">Let models answer from retrieved documents.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Stephanie Lin, Jacob Hilton &amp; Owain Evans</td>
+                <td style="padding:0.6rem 0.8rem;"><br>UK / USA</td>
+                <td style="padding:0.6rem 0.8rem;">TruthfulQA (2022)</td>
+                <td style="padding:0.6rem 0.8rem;">Measured how often models repeat human misconceptions.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Lukas Berglund and colleagues</td>
+                <td style="padding:0.6rem 0.8rem;"><br>UK</td>
+                <td style="padding:0.6rem 0.8rem;">The reversal curse (2024)</td>
+                <td style="padding:0.6rem 0.8rem;">Found that learned facts often work in one direction only.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about why language models fail.</p>
+            <figure class="fig" data-fig="fig-quiz-lm6">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-17">
+            <h2>17. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Ji, Ziwei and 9 co-authors.</strong> (2023). "Survey of hallucination in natural language generation." <em>ACM Computing Surveys</em>, 55(12): 248.</li>
+              <li id="ref-2"><strong>Mata v. Avianca, Inc.</strong> (2023). Opinion and Order on Sanctions, No. 22-cv-1461 (PKC), United States District Court for the Southern District of New York, 22 June 2023.</li>
+              <li id="ref-3"><strong>Good, I. J.</strong> (1953). "The population frequencies of species and the estimation of population parameters." <em>Biometrika</em>, 40(3–4): 237–264.</li>
+              <li id="ref-4"><strong>Kalai, Adam Tauman &amp; Vempala, Santosh S.</strong> (2024). "Calibrated language models must hallucinate." In <em>Proceedings of the 56th Annual ACM Symposium on Theory of Computing (STOC)</em>.</li>
+              <li id="ref-5"><strong>Kadavath, Saurav and 35 co-authors.</strong> (2022). "Language models (mostly) know what they know." <em>arXiv</em>: 2207.05221.</li>
+              <li id="ref-6"><strong>OpenAI.</strong> (2023). "GPT-4 technical report." <em>arXiv</em>: 2303.08774.</li>
+              <li id="ref-7"><strong>Berglund, Lukas, Tong, Meg, Kaufmann, Max, Balesni, Mikita, Stickland, Asa Cooper, Korbak, Tomasz &amp; Evans, Owain.</strong> (2024). "The reversal curse: LLMs trained on “A is B” fail to learn “B is A”." In <em>International Conference on Learning Representations (ICLR)</em>.</li>
+              <li id="ref-8"><strong>Lewis, Patrick and 11 co-authors.</strong> (2020). "Retrieval-augmented generation for knowledge-intensive NLP tasks." In <em>Advances in Neural Information Processing Systems 33 (NeurIPS)</em>, pp. 9459–9474.</li>
+              <li id="ref-9"><strong>Schick, Timo, Dwivedi-Yu, Jane, Dessì, Roberto, Raileanu, Roberta, Lomeli, Maria, Hambro, Eric, Zettlemoyer, Luke, Cancedda, Nicola &amp; Scialom, Thomas.</strong> (2023). "Toolformer: language models can teach themselves to use tools." In <em>Advances in Neural Information Processing Systems 36 (NeurIPS)</em>.</li>
+              <li id="ref-10"><strong>DeepSeek-AI.</strong> (2025). "DeepSeek-R1: incentivizing reasoning capability in LLMs via reinforcement learning." <em>arXiv</em>: 2501.12948.</li>
+              <li id="ref-11"><strong>Turpin, Miles, Michael, Julian, Perez, Ethan &amp; Bowman, Samuel R.</strong> (2023). "Language models don’t always say what they think: unfaithful explanations in chain-of-thought prompting." In <em>Advances in Neural Information Processing Systems 36 (NeurIPS)</em>.</li>
+              <li id="ref-12"><strong>Oren, Yonatan, Meister, Nicole, Chatterji, Niladri, Ladhak, Faisal &amp; Hashimoto, Tatsunori B.</strong> (2024). "Proving test set contamination in black box language models." In <em>International Conference on Learning Representations (ICLR)</em>.</li>
+              <li id="ref-13"><strong>Lin, Stephanie, Hilton, Jacob &amp; Evans, Owain.</strong> (2022). "TruthfulQA: measuring how models mimic human falsehoods." In <em>Proceedings of the 60th Annual Meeting of the ACL</em>, pp. 3214–3252.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/one-word-at-a-time.html">One Word at a Time</a> (Part 6 of 6)</div>
+  <div class="series-banner-links">
+    <a href="why-language-models-work.html">← Part 5: Why It Works: How Next-Word Prediction Leads to Knowledge and Reasoning</a>
+    <span>Final part</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/why-language-models-fail.js"></script>
+</body>
+</html>

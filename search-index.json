@@ -1,5 +1,53 @@
 [
   {
+    "slug": "words-as-numbers",
+    "url": "articles/words-as-numbers.html",
+    "title": "Words as Numbers: Tokens, Embeddings and the First Neural Language Models",
+    "summary": "How language models cut text into tokens, learn word vectors from the company words keep, and use them in a neural network to predict word combinations never seen in training.",
+    "subject": "AI & Machine Learning",
+    "tags": [
+      "large-language-models",
+      "language-models",
+      "machine-learning",
+      "word-embeddings",
+      "natural-language-processing"
+    ],
+    "date": "2026-11-21",
+    "type": "tutorial"
+  },
+  {
+    "slug": "why-language-models-work",
+    "url": "articles/why-language-models-work.html",
+    "title": "Why It Works: How Next-Word Prediction Leads to Knowledge and Reasoning",
+    "summary": "Why predicting the next word teaches a model facts and reasoning: prediction as compression, scaling laws, emergent abilities, world models inside LLMs, RLHF and chain of thought.",
+    "subject": "AI & Machine Learning",
+    "tags": [
+      "large-language-models",
+      "language-models",
+      "scaling-laws",
+      "machine-learning",
+      "natural-language-processing"
+    ],
+    "date": "2026-11-21",
+    "type": "tutorial"
+  },
+  {
+    "slug": "why-language-models-fail",
+    "url": "articles/why-language-models-fail.html",
+    "title": "Why It Fails: Hallucination, Calibration and Measuring the Accuracy of Language Models",
+    "summary": "Why language models are sometimes confidently wrong: hallucination, rare facts and the Good–Turing bound, calibration, tokenisation blind spots, retrieval and tools, and honest benchmarks.",
+    "subject": "AI & Machine Learning",
+    "tags": [
+      "large-language-models",
+      "language-models",
+      "hallucination",
+      "machine-learning",
+      "natural-language-processing"
+    ],
+    "date": "2026-11-21",
+    "type": "tutorial"
+  },
+  {
     "slug": "network-architectures",
     "url": "articles/network-architectures.html",
     "title": "Network Architectures: Convolutional, Recurrent and Transformer Networks, and Autoencoders",
@@ -11,6 +59,54 @@
       "deep-learning",
       "transformers",
       "data-analysis"
+    ],
+    "date": "2026-11-21",
+    "type": "tutorial"
+  },
+  {
+    "slug": "from-scores-to-words",
+    "url": "articles/from-scores-to-words.html",
+    "title": "From Scores to Words: Temperature, Sampling and How Language Models Choose",
+    "summary": "How a language model turns scores into a next word: softmax, temperature, top-k and top-p, greedy decoding and repetition, beam search, and why sampling several answers can improve accuracy.",
+    "subject": "AI & Machine Learning",
+    "tags": [
+      "large-language-models",
+      "language-models",
+      "sampling",
+      "probability",
+      "natural-language-processing"
+    ],
+    "date": "2026-11-21",
+    "type": "tutorial"
+  },
+  {
+    "slug": "counting-words-together",
+    "url": "articles/counting-words-together.html",
+    "title": "Counting Words Together: How Language Models Began with Probabilities",
+    "summary": "How an LLM builds answers one word at a time: next-word probabilities from counts, n-gram models, generating text, data sparsity, smoothing, perplexity, and the limits of counting.",
+    "subject": "AI & Machine Learning",
+    "tags": [
+      "large-language-models",
+      "language-models",
+      "machine-learning",
+      "probability",
+      "natural-language-processing"
+    ],
+    "date": "2026-11-21",
+    "type": "tutorial"
+  },
+  {
+    "slug": "context-and-attention",
+    "url": "articles/context-and-attention.html",
+    "title": "Context and Attention: How Language Models Decide Which Words Matter",
+    "summary": "Long-distance clues, recurrent memory and its bottleneck, self-attention with queries, keys and values, heads and layers, induction heads, in-context learning and the cost of long contexts.",
+    "subject": "AI & Machine Learning",
+    "tags": [
+      "large-language-models",
+      "language-models",
+      "transformers",
+      "attention",
+      "natural-language-processing"
     ],
     "date": "2026-11-21",
     "type": "tutorial"

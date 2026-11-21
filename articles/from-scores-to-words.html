@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>From Scores to Words: Temperature, Sampling and How Language Models Choose — RNLearn</title>
+  <meta name="description" content="How a language model turns scores into a next word: softmax, temperature, top-k and top-p, greedy decoding and repetition, beam search, and why sampling several answers can improve accuracy.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/from-scores-to-words.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="From Scores to Words: Temperature, Sampling and How Language Models Choose — RNLearn">
+  <meta property="og:description" content="How a language model turns scores into a next word: softmax, temperature, top-k and top-p, greedy decoding and repetition, beam search, and why sampling several answers can improve accuracy.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/from-scores-to-words.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="From Scores to Words: Temperature, Sampling and How Language Models Choose — RNLearn">
+  <meta name="twitter:description" content="How a language model turns scores into a next word: softmax, temperature, top-k and top-p, greedy decoding and repetition, beam search, and why sampling several answers can improve accuracy.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "From Scores to Words: Temperature, Sampling and How Language Models Choose",
+    "description": "How a language model turns scores into a next word: softmax, temperature, top-k and top-p, greedy decoding and repetition, beam search, and why sampling several answers can improve accuracy.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-21",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/from-scores-to-words.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/ai-machine-learning.html" class="post-subject-tag" data-subject="ai-machine-learning">AI &amp; Machine Learning</a>
+        </div>
+        <h1 class="article-title">From Scores to Words: Temperature, Sampling and How Language Models Choose</h1>
+        <p class="article-standfirst">
+          A language model does not output an answer; it outputs a probability for every possible next token. How one token is picked from that list changes whether the result is dull or creative, repetitive or rambling, and even how often it is right.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-21">21 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>12 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/one-word-at-a-time.html">One Word at a Time</a> (Part 4 of 6)</div>
+  <div class="series-banner-links">
+    <a href="context-and-attention.html">← Part 3: Context and Attention: How Language Models Decide Which Words Matter</a>
+    <a href="why-language-models-work.html">Part 5: Why It Works: How Next-Word Prediction Leads to Knowledge and Reasoning →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. The Last Step</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. From Scores to Probabilities</a></li>
+              <li><a class="toc-link" href="#section-4">4. Temperature</a></li>
+              <li><a class="toc-link" href="#section-5">5. Top-k and Top-p</a></li>
+              <li><a class="toc-link" href="#section-6">6. Greedy, Sampling and Repetition</a></li>
+              <li><a class="toc-link" href="#section-7">7. Beam Search</a></li>
+              <li><a class="toc-link" href="#section-8">8. Many Samples, One Answer</a></li>
+              <li><a class="toc-link" href="#section-9">9. Stopping and Shaping the Output</a></li>
+              <li><a class="toc-link" href="#section-10">10. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-11">11. Worked Example: Temperature by Hand</a></li>
+              <li><a class="toc-link" href="#section-12">12. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-13">13. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-14">14. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-15">15. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-16">16. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-17">17. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>In this part:</strong> how the model’s final scores become probabilities; how temperature, top-k and top-p shape the choice of the next token; why always picking the most likely token can make text repetitive, and why sampling can make it ramble; beam search; why asking several times and voting can make answers more accurate; and how generation stops.</p>
+            <p><strong>You need:</strong> Parts 1–3. The softmax is explained again here.</p>
+            <p><strong>Try:</strong> four interactive figures: temperature and top-p on a real-looking question, sampling sentences from the toy world, greedy decoding versus beam search, and majority voting over many samples.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. The Last Step</h2>
+            <p>After its tokens have passed through dozens of attention layers (Part 3), a language model produces, for the next position, one number for every token in its vocabulary, perhaps 100,000 or more of them. These raw scores are called <strong>logits</strong>. Turning them into an actual next token is a separate step, called <strong>decoding</strong>, and it involves choices that the model itself does not make: how adventurous to be, how much of the improbable tail to allow, and whether to look ahead. The same trained model can be dull or creative, repetitive or erratic, more or less accurate, depending on these choices. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-lm-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Part 4 turns scores into words.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-lm4-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Choosing the next word, 1948–2023.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. From Scores to Probabilities</h2>
+            <p>The <strong>softmax</strong> turns logits into probabilities: exponentiate each score, so that every value is positive and differences become ratios, then divide by the total so the values sum to 1 (Inside the Machine Part 7). A token whose logit is 1 higher than another’s becomes e ≈ 2.7 times as likely. The model was trained so that these probabilities match how often each token actually followed similar contexts in its training text.</p>
+            <p>$$P(\text{token}_i) = \frac{e^{z_i / T}}{\sum_j e^{z_j / T}}$$</p>
+            <p>The number T is the <strong>temperature</strong>. At T = 1 the probabilities are exactly those the model learned. The name comes from physics, by way of Boltzmann machines, where David Ackley, Geoffrey Hinton and Terrence Sejnowski used a temperature to control how random a network’s choices were. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Temperature</h2>
+            <p>Dividing every logit by T before the softmax stretches or squashes their differences. Below 1, differences grow and the top token dominates; above 1, they shrink and the distribution flattens. At the extreme T → 0, the model always takes the single most likely token.</p>
+            <figure class="fig" data-fig="fig-lm-temp">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Temperature, top-k and top-p.</strong> Illustrative logits for the token after “The capital of Australia is”. Change the temperature, k and p and watch the final probabilities.
+              </figcaption>
+            </figure>
+            <p>With these illustrative scores, the right answer “Canberra” gets probability 0.75 at T = 1 and the common mistake “Sydney” 0.15. At T = 0.3, Canberra rises to 0.995; at T = 2, it falls to 0.42 while Sydney rises to 0.19. Notice that “Sydney” is likely not because the model is confused about geography, but because the phrase “capital … Sydney” is common in text written by people who make the same mistake. Low temperatures are used for factual questions and code; higher ones for brainstorming and fiction.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Top-k and Top-p</h2>
+            <p>Even at T = 1, thousands of individually unlikely tokens together hold a noticeable share of the probability, and drawing one of them can derail a sentence. Two common fixes cut off this long tail. <strong>Top-k sampling</strong>, used by Angela Fan, Mike Lewis and Yann Dauphin for story writing, keeps only the k most likely tokens and renormalises. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> <strong>Top-p</strong>, or <strong>nucleus sampling</strong>, introduced by Ari Holtzman and colleagues, keeps the smallest set of tokens whose probabilities add up to p, so the number kept adapts: a few when the model is confident, many when it is not. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span> In Figure 3, top-p = 0.9 keeps three tokens, and Canberra’s probability rises to 0.80.</p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Greedy, Sampling and Repetition</h2>
+            <p>Always choosing the most likely token, <strong>greedy decoding</strong>, sounds safest. For short factual answers it often is. For longer texts it has a strange failure: it tends to repeat itself. Holtzman and colleagues showed that with GPT-2, greedy and beam-search outputs often fell into loops, repeating a phrase again and again, because each repetition makes the next one even more probable; human text, in contrast, is far less predictable, word by word, than what a model generates when it always picks the top choice. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span> <strong>Sampling</strong>, drawing each token at random from the probabilities, avoids loops but risks rambling.</p>
+            <figure class="fig" data-fig="fig-lm-sample">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Sampling sentences from the toy world.</strong> A trigram model of the toy world from Part 1. Change the temperature and sample again.
+              </figcaption>
+            </figure>
+            <p>At temperature 0, all samples are identical: “the boy eats the bread .”, the single most likely path. At temperature 0.5, 142 of 200 samples are different sentences; at 1, 171. As the temperature rises to 2, the average log-probability per word falls from −1.0 to −3.5 and 15% of samples run on for more than 14 words without a full stop. Every decoding choice trades predictability against variety.</p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Beam Search</h2>
+            <p>Greedy decoding is short-sighted: the most likely first word may lead to continuations whose probability is split many ways. <strong>Beam search</strong>, used since Bruce Lowerre’s Harpy speech recogniser in the 1970s, <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> keeps the few most probable partial sequences at each step and extends all of them, so it can recover from a locally attractive but globally poor choice.</p>
+            <figure class="fig" data-fig="fig-lm-beam">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Greedy decoding versus beam search.</strong> A small tree of next-word probabilities after “The weather today is”. Change the beam width.
+              </figcaption>
+            </figure>
+            <p>Beam search was the standard for neural machine translation, where a single faithful output is wanted. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span> For open-ended text it brings back the repetition problem, and chat models usually sample instead. Strangely, searching harder for the single most probable output can make things worse: Felix Stahlberg and Bill Byrne found that for many sentences, the most probable translation according to a translation model was the <em>empty</em> translation. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span></p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Many Samples, One Answer</h2>
+            <p>Randomness can be turned to advantage. For questions with a definite answer, such as a maths problem, a model can be sampled several times, each time reasoning its way to an answer, and the most common final answer chosen. Xuezhi Wang and colleagues called this <strong>self-consistency</strong>, and found that it raised accuracy substantially on arithmetic and reasoning benchmarks compared with a single greedy answer. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span></p>
+            <figure class="fig" data-fig="fig-lm-vote">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. Majority voting over samples.</strong> Each sample is right with a chosen probability, and otherwise gives one of several wrong answers. Change both and see how often the most common answer is right.
+              </figcaption>
+            </figure>
+            <p>If one sample is right half the time and its errors scatter over three wrong answers, a vote over 9 samples is right about 80% of the time, and over 40 samples 99%. If samples are right only 30% of the time, a 40-sample vote is right about half the time. But if there is a single tempting wrong answer that the model gives 60% of the time, voting reliably picks that wrong answer. Voting amplifies whatever the model is most inclined to say. Other tricks speed decoding up rather than improve it: in <strong>speculative decoding</strong>, a small fast model drafts several tokens and the large model checks them all at once, producing exactly the large model’s distribution in less time. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span></p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Stopping and Shaping the Output</h2>
+            <p>Generation stops when the model produces a special <strong>end-of-sequence</strong> token, which it learned to emit where texts end, or when a length limit is reached. Systems can also constrain decoding, for example allowing only tokens that keep the output valid JSON or a valid answer letter, by setting every other token’s probability to zero before sampling. None of these steps changes the model’s knowledge; they only change which of its possible continuations you see.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">In code: temperature and top-p sampling in a few lines</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">import numpy as np
+
+def sample_next(logits, temperature=1.0, top_p=1.0, rng=np.random.default_rng()):
+    if temperature == 0:
+        return int(np.argmax(logits))                 # greedy
+    z = np.asarray(logits) / temperature
+    p = np.exp(z - z.max()); p /= p.sum()             # softmax
+    order = np.argsort(-p)
+    keep = order[: np.searchsorted(np.cumsum(p[order]), top_p) + 1]
+    q = np.zeros_like(p); q[keep] = p[keep]; q /= q.sum()   # nucleus
+    return int(rng.choice(len(p), p=q))
+
+print(sample_next([9.0, 7.4, 6.0, 5.5], temperature=0.7, top_p=0.9))</code></pre>
+            </details>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: if the most probable text is not the best text, what is the model for?</div>
+              <p>A language model is trained to give each token its probability in human text. Yet the single most probable text is often bad: repetitive in conversation, sometimes empty in translation. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>, <a class="cite" href="#ref-7">7</a>]</span> Clara Meister, Ryan Cotterell and Tim Vieira argued that beam search works well precisely because it does <em>not</em> find the most probable output, and that its success reflects a preference, shared by human writers, for spreading information evenly. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span> What exactly makes a text good, and how to decode for it rather than for probability, remains an open research question.</p>
+            </div>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Worked Example: Temperature by Hand</h2>
+            <p>Three tokens have logits 2, 1 and 0.</p>
+            <ol>
+              <li>At T = 1: e<sup>2</sup> = 7.39, e<sup>1</sup> = 2.72, e<sup>0</sup> = 1; total 11.11; probabilities 0.67, 0.24, 0.09.</li>
+              <li>At T = 0.5, divide the logits by 0.5: 4, 2, 0. e<sup>4</sup> = 54.6, e<sup>2</sup> = 7.39, 1; total 63.0; probabilities 0.87, 0.12, 0.02.</li>
+              <li>At T = 2: 1, 0.5, 0. e<sup>1</sup> = 2.72, e<sup>0.5</sup> = 1.65, 1; total 5.37; probabilities 0.51, 0.31, 0.19.</li>
+              <li>Top-p with p = 0.8 at T = 1 keeps the first two tokens (0.67 + 0.24 = 0.91 ≥ 0.8) and renormalises them to 0.74 and 0.26.</li>
+            </ol>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: choosing words</div>
+              <ol>
+                <li>In Figure 3, at temperature 1.5, what top-k removes “Sydney” entirely? What happens to Canberra’s probability?</li>
+                <li>In Figure 3, set top-p to 0.5. How many candidates remain, and why does top-p adapt to the model’s confidence?</li>
+                <li>In Figure 4, find the lowest temperature at which samples start to differ from each other.</li>
+                <li>In Figure 5, why does a beam of width 2 already find the best continuation?</li>
+                <li>In Figure 6, with 1 wrong answer, find the chance of being right at which voting stops helping.</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “temperature 0 gives the model’s true, correct answer”</div>
+              <p><strong>The myth:</strong> randomness only adds errors, so the most likely answer at temperature 0 is the model’s best and most correct one.</p>
+              <p><strong>The reality:</strong> temperature 0 makes an answer repeatable, not right. The single most likely continuation can be a common misconception, a repetitive loop or, in translation, nothing at all. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>, <a class="cite" href="#ref-7">7</a>]</span> And sampling can make a model more accurate: Wang and colleagues found that voting over many sampled reasoning paths beat greedy decoding on a range of reasoning tasks. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span></p>
+              <p><strong>Why it matters:</strong> the reliability of an answer comes from the model’s knowledge, not from the decoding setting. Asking several times and checking agreement is a cheap way to gauge how confident it really is (Part 6).</p>
+            </div>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>The model outputs a score (logit) for every token; the softmax turns scores into probabilities.</li>
+                <li>Temperature sharpens (below 1) or flattens (above 1) the distribution; top-k and top-p cut off the unlikely tail.</li>
+                <li>Greedy decoding is repeatable but can loop; sampling is varied but can ramble.</li>
+                <li>Beam search looks ahead to find more probable sequences, but the most probable text is not always the best text.</li>
+                <li>Sampling several answers and voting improves accuracy when the right answer is more likely than any single wrong one.</li>
+                <li>Decoding changes which of the model’s possible continuations you see, not what the model knows.</li>
+              </ul>
+              <div class="table-container" style="overflow-x:auto; margin:1rem 0 0;">
+                <table style="width:100%; border-collapse:collapse; font-size:0.9rem; line-height:1.5;">
+                  <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.4rem;">Setting</th><th style="padding:0.4rem;">Typical use</th></tr></thead>
+                  <tbody>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">Temperature 0 (greedy)</td><td style="padding:0.4rem;">Short factual answers, classification, code completion</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">Temperature 0.7–1, top-p 0.9–0.95</td><td style="padding:0.4rem;">Conversation, explanations, general writing</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">Temperature above 1</td><td style="padding:0.4rem;">Brainstorming, unusual ideas (check the output)</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">Beam search</td><td style="padding:0.4rem;">Translation, speech recognition</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">Many samples + vote</td><td style="padding:0.4rem;">Maths and reasoning questions with a definite answer</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Bruce Lowerre</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Beam search in Harpy (1976)</td>
+                <td style="padding:0.6rem 0.8rem;">Kept only the most promising hypotheses in speech recognition.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">David Ackley, Geoffrey Hinton &amp; Terrence Sejnowski</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA / Canada</td>
+                <td style="padding:0.6rem 0.8rem;">Boltzmann machines (1985)</td>
+                <td style="padding:0.6rem 0.8rem;">Used temperature to control randomness in neural networks.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Angela Fan, Mike Lewis &amp; Yann Dauphin</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Top-k sampling (2018)</td>
+                <td style="padding:0.6rem 0.8rem;">Sampled stories from the most likely words only.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Ari Holtzman and colleagues</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Nucleus sampling (2020)</td>
+                <td style="padding:0.6rem 0.8rem;">Explained repetition and proposed top-p sampling.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Xuezhi Wang and colleagues</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Self-consistency (2023)</td>
+                <td style="padding:0.6rem 0.8rem;">Improved reasoning by voting over sampled answers.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Yaniv Leviathan, Matan Kalman &amp; Yossi Matias</td>
+                <td style="padding:0.6rem 0.8rem;"><br>Israel</td>
+                <td style="padding:0.6rem 0.8rem;">Speculative decoding (2023)</td>
+                <td style="padding:0.6rem 0.8rem;">Sped up generation without changing its output distribution.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about decoding.</p>
+            <figure class="fig" data-fig="fig-quiz-lm4">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-17">
+            <h2>17. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Jurafsky, Daniel &amp; Martin, James H.</strong> <em>Speech and Language Processing</em>, 3rd edition draft, chapter 10. Online.</li>
+              <li id="ref-2"><strong>Holtzman, Ari, Buys, Jan, Du, Li, Forbes, Maxwell &amp; Choi, Yejin.</strong> (2020). "The curious case of neural text degeneration." In <em>International Conference on Learning Representations (ICLR)</em>.</li>
+              <li id="ref-3"><strong>Ackley, David H., Hinton, Geoffrey E. &amp; Sejnowski, Terrence J.</strong> (1985). "A learning algorithm for Boltzmann machines." <em>Cognitive Science</em>, 9(1): 147–169.</li>
+              <li id="ref-4"><strong>Fan, Angela, Lewis, Mike &amp; Dauphin, Yann.</strong> (2018). "Hierarchical neural story generation." In <em>Proceedings of the 56th Annual Meeting of the ACL</em>, pp. 889–898.</li>
+              <li id="ref-5"><strong>Lowerre, Bruce T.</strong> (1976). <em>The HARPY Speech Recognition System</em>. PhD thesis, Carnegie Mellon University.</li>
+              <li id="ref-6"><strong>Sutskever, Ilya, Vinyals, Oriol &amp; Le, Quoc V.</strong> (2014). "Sequence to sequence learning with neural networks." In <em>Advances in Neural Information Processing Systems 27 (NIPS)</em>, pp. 3104–3112.</li>
+              <li id="ref-7"><strong>Stahlberg, Felix &amp; Byrne, Bill.</strong> (2019). "On NMT search errors and model errors: cat got your tongue?" In <em>Proceedings of EMNLP-IJCNLP 2019</em>, pp. 3356–3362.</li>
+              <li id="ref-8"><strong>Wang, Xuezhi, Wei, Jason, Schuurmans, Dale, Le, Quoc, Chi, Ed, Narang, Sharan, Chowdhery, Aakanksha &amp; Zhou, Denny.</strong> (2023). "Self-consistency improves chain of thought reasoning in language models." In <em>International Conference on Learning Representations (ICLR)</em>.</li>
+              <li id="ref-9"><strong>Leviathan, Yaniv, Kalman, Matan &amp; Matias, Yossi.</strong> (2023). "Fast inference from transformers via speculative decoding." In <em>Proceedings of the 40th International Conference on Machine Learning (ICML)</em>, PMLR 202: 19274–19286.</li>
+              <li id="ref-10"><strong>Meister, Clara, Cotterell, Ryan &amp; Vieira, Tim.</strong> (2020). "If beam search is the answer, what was the question?" In <em>Proceedings of EMNLP 2020</em>, pp. 2173–2185.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/one-word-at-a-time.html">One Word at a Time</a> (Part 4 of 6)</div>
+  <div class="series-banner-links">
+    <a href="context-and-attention.html">← Part 3: Context and Attention: How Language Models Decide Which Words Matter</a>
+    <a href="why-language-models-work.html">Part 5: Why It Works: How Next-Word Prediction Leads to Knowledge and Reasoning →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/from-scores-to-words.js"></script>
+</body>
+</html>
