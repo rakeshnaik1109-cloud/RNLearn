@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aryabhata and Brahmagupta: Zero, Debts and a Spinning Earth — RNLearn</title>
+  <meta name="description" content="Place value and the Bakhshālī puzzle, Aryabhata’s π, sine table and rotating Earth, Brahmagupta’s rules for zero and negative numbers, Pell’s equation, and how the numerals travelled.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/aryabhata-and-brahmagupta.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Aryabhata and Brahmagupta: Zero, Debts and a Spinning Earth — RNLearn">
+  <meta property="og:description" content="Place value and the Bakhshālī puzzle, Aryabhata’s π, sine table and rotating Earth, Brahmagupta’s rules for zero and negative numbers, Pell’s equation, and how the numerals travelled.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/aryabhata-and-brahmagupta.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Aryabhata and Brahmagupta: Zero, Debts and a Spinning Earth — RNLearn">
+  <meta name="twitter:description" content="Place value and the Bakhshālī puzzle, Aryabhata’s π, sine table and rotating Earth, Brahmagupta’s rules for zero and negative numbers, Pell’s equation, and how the numerals travelled.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Aryabhata and Brahmagupta: Zero, Debts and a Spinning Earth",
+    "description": "Place value and the Bakhshālī puzzle, Aryabhata’s π, sine table and rotating Earth, Brahmagupta’s rules for zero and negative numbers, Pell’s equation, and how the numerals travelled.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-23",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/aryabhata-and-brahmagupta.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/philosophy-ideas.html" class="post-subject-tag" data-subject="philosophy-ideas">Philosophy &amp; Ideas</a>
+        </div>
+        <h1 class="article-title">Aryabhata and Brahmagupta: Zero, Debts and a Spinning Earth</h1>
+        <p class="article-standfirst">
+          One claimed the ground beneath our feet is spinning; the other wrote down how to add, subtract and multiply nothing and debts. Two Indian astronomers changed how the whole world counts.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-23">23 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>16 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/minds-that-changed-how-we-know.html">Minds That Changed How We Know</a> (Part 3 of 12)</div>
+  <div class="series-banner-links">
+    <a href="euclid-and-archimedes.html">← Part 2: Euclid and Archimedes: Can Reasoning from Axioms Describe Nature?</a>
+    <a href="ibn-al-haytham-and-ibn-sina.html">Part 4: Ibn al-Haytham and Ibn Sina: Experiment Against Authority →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. Numbers Beyond What We Can See</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Before Aryabhata: Counting by Place</a></li>
+              <li><a class="toc-link" href="#section-4">4. Aryabhata and the Āryabhaṭīya</a></li>
+              <li><a class="toc-link" href="#section-5">5. A Spinning Earth</a></li>
+              <li><a class="toc-link" href="#section-6">6. The Sine Is Born</a></li>
+              <li><a class="toc-link" href="#section-7">7. Brahmagupta of Bhillamāla</a></li>
+              <li><a class="toc-link" href="#section-8">8. Zero as a Number, and Rules for Debts</a></li>
+              <li><a class="toc-link" href="#section-9">9. Brahmagupta’s Composition and “Pell’s Equation”</a></li>
+              <li><a class="toc-link" href="#section-10">10. How the Numerals Travelled</a></li>
+              <li><a class="toc-link" href="#section-11">11. After Brahmagupta: Bhāskara and the Kerala School</a></li>
+              <li><a class="toc-link" href="#section-12">12. Argument and Authority in Indian Astronomy</a></li>
+              <li><a class="toc-link" href="#section-13">13. The Legacy</a></li>
+              <li><a class="toc-link" href="#section-14">14. Try It Yourself: Calculating Like Brahmagupta</a></li>
+              <li><a class="toc-link" href="#section-15">15. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-16">16. Philosophy Corner</a></li>
+              <li><a class="toc-link" href="#section-17">17. People in This Part</a></li>
+              <li><a class="toc-link" href="#section-18">18. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-19">19. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. Numbers Beyond What We Can See</h2>
+            <p>Euclid’s geometry dealt with lengths, areas and whole numbers you could picture (Part 2). Greek mathematicians had no zero and would not have called a debt a number. In India, between the fifth and seventh centuries CE, two astronomer-mathematicians took steps that changed how the whole world calculates. Aryabhata, writing in 499 CE, used a decimal place-value system, gave an excellent value of π, built a table of sines, and declared that the Earth spins. Brahmagupta, in 628 CE, wrote down rules for calculating with zero and with negative numbers, and found ways to solve equations that European mathematicians would not crack for another thousand years. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <p>Their story raises the question of this part. Zero and negative numbers cannot be seen or counted out in pebbles. Are they real, or only useful tools? And when a calculation says the ground beneath us is spinning, while every sense says it is still, should we believe the calculation?</p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-m3-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. From place-value words to Fibonacci’s Liber Abaci, 458–c. 1400 CE.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Before Aryabhata: Counting by Place</h2>
+            <p>Many ancient peoples counted in tens, but writing numbers in a <strong>place-value</strong> system, where the same symbol means 3, 30 or 300 depending on its position, is a rarer idea. The Babylonians used it in base 60, with a placeholder sign but no true zero. In India, the Brāhmī numerals of the third century BCE had separate signs for 1–9, 10, 20 and so on, without place value. By the fifth century CE, place value with nine digits and a zero had appeared: a Jain cosmological text, the <em>Lokavibhāga</em>, dated to 458 CE, writes large numbers in place-value order using words, including a word for zero (<em>śūnya</em>, “empty”). <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-3">3</a>]</span></p>
+            <p>The <strong>Bakhshālī manuscript</strong>, a birch-bark arithmetic text found in 1881 near Peshawar, uses a dot as a zero. Radiocarbon dating published by the Bodleian Library in 2017 gave widely different ages for different leaves, the oldest falling in the third or fourth century CE, but specialists have argued that the text itself is later and that the bark samples may not date the writing. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>, <a class="cite" href="#ref-5">5</a>]</span> What is clear is that by the sixth century, Indian mathematicians had the complete decimal place-value system we use today.</p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Aryabhata and the Āryabhaṭīya</h2>
+            <p>Aryabhata tells us that he was 23 years old when 3,600 years of the current cosmic age (the Kali Yuga) had passed, which places the composition of his book in 499 CE and his birth in 476. Later writers associate him with Kusumapura, near Pāṭaliputra (modern Patna), then a great centre of learning. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>, <a class="cite" href="#ref-7">7</a>]</span></p>
+            <p>The <strong>Āryabhaṭīya</strong> is astonishingly compact: 121 verses in four sections, on numerical notation, mathematics, time-reckoning and the sphere of the heavens. Like most Sanskrit science, it is written in verse to be memorised, with commentaries supplying explanations; Aryabhata even invented a code that packed large numbers into syllables. In a few verses he covers square and cube roots, the areas of triangles and circles, arithmetic series, the solution of linear equations in whole numbers (the <em>kuṭṭaka</em> or “pulveriser” method), and much more. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>, <a class="cite" href="#ref-1">1</a>]</span> He gave π as the circumference of a circle 20,000 across: “add 4 to 100, multiply by 8 and add 62,000”, that is 62,832 ÷ 20,000 = 3.1416, and he called it <em>āsanna</em>, “approximate”, suggesting he knew it could not be exact. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span></p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. A Spinning Earth</h2>
+            <p>The most daring verse of the Āryabhaṭīya concerns the daily motion of the stars. “Just as a man in a boat moving forward sees stationary objects moving backward, so the stationary stars are seen by people at Laṅkā [a reference point on the equator] as moving exactly towards the west.” <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span> Aryabhata was saying that the stars stand still and the Earth turns once a day. He gave the number of the Earth’s rotations in a great cycle of 4,320,000 years as 1,582,237,500, which corresponds to a sidereal day (one turn relative to the stars) of about 23 hours 56 minutes 4.1 seconds, extremely close to the modern value. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+            <p>The idea was not new in principle: Heraclides of Pontus had suggested it in Greece. But nothing in everyday experience supports it, and it raised obvious objections: why do birds not fall behind, why does a stone thrown upward land at our feet? Most later Indian astronomers, including Brahmagupta, rejected it, and some commentators even reinterpreted Aryabhata’s verses to make them say the opposite. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>, <a class="cite" href="#ref-1">1</a>]</span> They were not foolish. As the figure shows, a spinning Earth and a spinning sky predict exactly the same view from the ground. The question could only be settled by new evidence, which came more than a thousand years later (Parts 5 and 6).</p>
+            <figure class="fig" data-fig="fig-rotation">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Does the Earth turn, or the sky?</strong> Switch between the two models; the observer’s view of the rising and setting stars is identical.
+              </figcaption>
+            </figure>
+            <p>Aryabhata also explained eclipses naturally: a lunar eclipse is the Moon entering the Earth’s shadow, and a solar eclipse is the Moon blocking the Sun, rather than the work of the demon Rāhu. He knew that the Moon and planets shine by reflected sunlight. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. The Sine Is Born</h2>
+            <p>Greek astronomers such as Hipparchus and Ptolemy computed with tables of <em>chords</em>: the straight line joining two points on a circle. Indian astronomers found it more convenient to use the <em>half-chord</em>, <strong>jyā</strong>, which is exactly what we call the sine (times the radius). Aryabhata gave a table of 24 values in steps of 3° 45′, stated as the differences between successive values in a single verse. He used a radius of 3,438, the number of minutes of arc in a radian, so that the sine of a small angle equals the angle itself in minutes. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>, <a class="cite" href="#ref-1">1</a>]</span></p>
+            <p>The word itself made a strange journey. Arabic astronomers transliterated <em>jyā</em> as <em>jiba</em>, written without vowels as <em>jb</em>; later readers took it as the ordinary word <em>jaib</em>, “fold” or “pocket”, and twelfth-century translators into Latin rendered that as <em>sinus</em>. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-jya">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Aryabhata’s sine table.</strong> Step through his 24 tabulated half-chords and compare each with the modern value.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Brahmagupta of Bhillamāla</h2>
+            <p>Brahmagupta was born in 598 CE and worked at Bhillamāla (modern Bhinmal, in Rajasthan). At the age of 30, in 628 CE, he completed the <strong>Brāhmasphuṭasiddhānta</strong> (“the correctly established doctrine of Brahma”), a long treatise on astronomy with chapters on mathematics; decades later, in 665, he wrote a practical astronomical handbook, the <em>Khaṇḍakhādyaka</em>. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>, <a class="cite" href="#ref-1">1</a>]</span> He was a sharp critic: he attacked Aryabhata’s rotating Earth and other proposals with arguments and sometimes with scorn. Yet his mathematical chapters contain some of the most original work of the age.</p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Zero as a Number, and Rules for Debts</h2>
+            <p>Using a symbol for an empty place is one thing; treating zero as a number you can add, subtract and multiply is another. Brahmagupta did the second. In chapter 18 he gives rules for calculating with <strong>zero</strong> (<em>śūnya</em>), with positive numbers, which he calls <strong>fortunes</strong> (<em>dhana</em>), and with negative numbers, which he calls <strong>debts</strong> (<em>ṛṇa</em>): <span class="cite-group">[<a class="cite" href="#ref-9">9</a>, <a class="cite" href="#ref-1">1</a>]</span></p>
+            <ul>
+              <li>A debt minus zero is a debt; a fortune minus zero is a fortune; zero minus zero is zero.</li>
+              <li>The sum of a fortune and a debt is their difference; if they are equal, the sum is zero.</li>
+              <li>The product of a debt and a fortune is a debt; the product of two debts is a fortune.</li>
+              <li>The product of zero and anything is zero.</li>
+            </ul>
+            <p>These are, almost word for word, the rules taught in schools today. Brahmagupta also said that zero divided by zero is zero, and that a number divided by zero is a fraction with zero as its denominator, without saying what it equals. Modern mathematics leaves both undefined. Bhāskara II, five centuries later, suggested that a number divided by zero is infinite, which is also problematic, but shows mathematicians wrestling with the strange new number. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+            <figure class="fig" data-fig="fig-zero">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Brahmagupta’s rules for fortunes, debts and zero.</strong> Choose two numbers and an operation; see the result and the rule as Brahmagupta stated it.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Brahmagupta’s Composition and “Pell’s Equation”</h2>
+            <p>Brahmagupta’s most remarkable discovery concerns equations of the form <strong>x² − N y² = 1</strong>, where N is a whole number that is not a perfect square and x and y must be whole numbers. They are hard: for N = 92 the smallest solution is x = 1,151, y = 120. Brahmagupta found an identity, the <strong>bhāvanā</strong> (composition): if (x₁, y₁) gives x₁² − Ny₁² = k₁ and (x₂, y₂) gives k₂, then (x₁x₂ + Ny₁y₂, x₁y₂ + x₂y₁) gives k₁k₂. With it, one solution generates infinitely many, and a “near miss” with k = ±1, ±2 or ±4 can be turned into an exact solution. He remarked that anyone who could solve the case N = 92 within a year was truly a mathematician. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>, <a class="cite" href="#ref-10">10</a>]</span></p>
+            <p>In the twelfth century Bhāskara II completed the method into the <strong>chakravāla</strong> (cyclic) algorithm, which solves every such equation, and solved the notoriously difficult case N = 61, whose smallest solution has x = 1,766,319,049. In 1657 Pierre de Fermat posed exactly this case to European mathematicians as a challenge. The equation is still called “Pell’s equation”, after John Pell, because of a mistake by Euler, who had little to do with it. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span></p>
+            <figure class="fig" data-fig="fig-pell">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Solutions of x² − Ny² = 1.</strong> Choose N to find the smallest solution, follow Brahmagupta’s route for N = 92, and compose solutions to generate ever larger ones.
+              </figcaption>
+            </figure>
+            <p>Brahmagupta also gave a formula for the area of a quadrilateral inscribed in a circle in terms of its four sides, generalising Heron’s formula for triangles.</p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. How the Numerals Travelled</h2>
+            <p>Indian astronomy reached Baghdad around 773, when, according to later Arabic sources, an Indian scholar brought a Sanskrit astronomical text, probably related to Brahmagupta’s, to the court of the caliph al-Manṣūr; it was translated into Arabic as the <em>Sindhind</em>. About fifty years later, Muḥammad ibn Mūsā al-Khwārizmī wrote a book on calculating with the Indian numerals. Its twelfth-century Latin translation began “Dixit Algorismi” (“al-Khwārizmī said”), and his name became our word <strong>algorithm</strong>. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <p>The numerals took on new shapes in the Arab world and in Europe. In 1202 Leonardo of Pisa, known as Fibonacci, who had learned them as a boy in North Africa, opened his <em>Liber Abaci</em> with “the nine Indian figures … and with this sign 0, which the Arabs call <em>zephirum</em>, any number whatsoever can be written”. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span> Merchants were at first suspicious (Florence banned their use in official accounts in 1299, because they were easy to alter), but by the sixteenth century they had replaced Roman numerals and the abacus for calculation across Europe. The words “zero” and “cipher” both descend from the Arabic <em>ṣifr</em>, a translation of Sanskrit <em>śūnya</em>.</p>
+          </section>
+
+          <section id="section-11">
+            <h2>11. After Brahmagupta: Bhāskara and the Kerala School</h2>
+            <p>The tradition continued. Bhāskara II (1114–c. 1185) wrote the <em>Līlāvatī</em>, a textbook of arithmetic in verse that was studied for centuries, and the <em>Bījagaṇita</em> on algebra. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span> Between the fourteenth and sixteenth centuries, a school of astronomers in Kerala, beginning with Mādhava of Saṅgamagrāma (c. 1340–1425), found infinite series for π, the sine and the cosine, such as π/4 = 1 − 1/3 + 1/5 − 1/7 + …, along with methods to speed up their convergence, about three centuries before Gregory, Newton and Leibniz found similar series in Europe. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>, <a class="cite" href="#ref-1">1</a>]</span> Whether any of this knowledge reached Europe remains unproven; most historians think the European discoveries were independent.</p>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Argument and Authority in Indian Astronomy</h2>
+            <p>Indian astronomy was a living tradition of competing schools, not a fixed doctrine. Astronomers revised their parameters when predictions of eclipses and planetary positions drifted from observation, and they argued fiercely in print. Brahmagupta’s attacks on Aryabhata show both sides of this: careful criticism of results, and the rejection of an idea (a rotating Earth) that was, in fact, correct but could not yet be supported by observation. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>, <a class="cite" href="#ref-1">1</a>]</span> As in the Greek world, astronomy was also bound up with calendars, ritual and astrology, which gave astronomers employment and shaped the questions they asked.</p>
+          </section>
+
+          <section id="section-13">
+            <h2>13. The Legacy</h2>
+            <p>Every time we write a number, we use the system perfected in India: ten digits, place value and zero. It made arithmetic so easy that calculation could pass from specialists with counting boards to every shopkeeper, and later made possible logarithm tables, accounting, and the binary arithmetic of computers (whose place-value system uses just two digits). Negative numbers, at first called “absurd” or “false” by many European mathematicians into the seventeenth century, became indispensable. The Indian solution of Pell’s equation and the Kerala series show that sophisticated mathematics flourished far from Greece and Europe. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Try It Yourself: Calculating Like Brahmagupta</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: numbers, zero and debts</div>
+              <ol>
+                <li><strong>Place value:</strong> multiply MCMXLVII by XXIV using only Roman numerals. Then do 1947 × 24 the usual way. Which method tells you why place value won?</li>
+                <li><strong>Fortunes and debts:</strong> explain to a friend, using money, why a debt of 3 taken away from a fortune of 5 leaves a fortune of 8.</li>
+                <li><strong>Pell:</strong> check that 3² − 2 × 2² = 1. Use Brahmagupta’s composition with itself to find a bigger solution for N = 2 (you should get 17 and 12).</li>
+                <li><strong>Rotation:</strong> lie on the ground on a clear night and watch a bright star near the horizon for ten minutes. Can you <em>feel</em> which is moving, you or the star?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Legend and Record</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: “Aryabhata invented zero”</div>
+              <p><strong>The legend:</strong> Aryabhata invented zero.</p>
+              <p><strong>The record:</strong> no single person invented zero. The Babylonians used a placeholder sign in their base-60 numbers centuries before, and the Maya independently developed a zero. Aryabhata worked with decimal place value, but the Āryabhaṭīya does not contain a zero symbol or rules for calculating with zero. The oldest dated zeros in South and Southeast Asia are in inscriptions: a dot in a Khmer inscription from Cambodia dated 683 CE, and a round zero at the Chaturbhuj temple in Gwalior dated 876 CE. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>, <a class="cite" href="#ref-1">1</a>]</span> It was Brahmagupta, in 628, who first treated zero as a number with its own arithmetic rules.</p>
+              <p><strong>The grain of truth:</strong> the complete system we use, nine digits plus a zero that is both a placeholder and a number, was developed in India by the sixth and seventh centuries, and Aryabhata’s work is one of its earliest great uses.</p>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Philosophy Corner</h2>
+            <div class="callout callout-philosophy">
+              <div class="callout-header">Philosophy Corner: are zero and negative numbers real?</div>
+              <p>You can hold three apples, but not minus three, or zero. For centuries many mathematicians felt that such “numbers” were fictions: useful for calculation, but not real. Brahmagupta’s answer was practical: debts are real enough to anyone who owes money, and the rules work. Later the same pattern repeated with irrational numbers, imaginary numbers and infinitesimals: each began as a suspicious device and became indispensable. Philosophers still debate whether numbers exist independently of us (<em>Platonism</em>, Part 1) or are human inventions that happen to fit the world.</p>
+              <p>Aryabhata’s spinning Earth raises a second puzzle. Two theories that predict exactly the same observations are called <em>empirically equivalent</em>. When that happens, evidence cannot decide between them; scientists fall back on simplicity, coherence with other knowledge, or simply tradition. Later philosophers called this the <em>underdetermination</em> of theory by evidence.</p>
+              <p><strong>Questions to think about:</strong> Is −3 as real as 3? If two theories make identical predictions forever, is there any sense in which one is true and the other false?</p>
+            </div>
+          </section>
+          <section id="section-17">
+            <h2>17. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Aryabhata</td>
+                <td style="padding:0.6rem 0.8rem;">476–c. 550 CE<br>Kusumapura (near Patna)</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Āryabhaṭīya</em> (499)</td>
+                <td style="padding:0.6rem 0.8rem;">Gave π ≈ 3.1416, the first sine table and a rotating Earth.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Brahmagupta</td>
+                <td style="padding:0.6rem 0.8rem;">598–after 665 CE<br>Bhillamāla (Bhinmal)</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Brāhmasphuṭasiddhānta</em> (628), <em>Khaṇḍakhādyaka</em> (665)</td>
+                <td style="padding:0.6rem 0.8rem;">Gave rules for zero and negative numbers and the composition method for Pell’s equation.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Bhāskara II</td>
+                <td style="padding:0.6rem 0.8rem;">1114–c. 1185<br>Karnataka / Ujjain</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Līlāvatī</em>, <em>Bījagaṇita</em></td>
+                <td style="padding:0.6rem 0.8rem;">Completed the chakravāla method and wrote famous textbooks of arithmetic and algebra.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Mādhava of Saṅgamagrāma</td>
+                <td style="padding:0.6rem 0.8rem;">c. 1340–1425<br>Kerala</td>
+                <td style="padding:0.6rem 0.8rem;">Works known through later Kerala texts</td>
+                <td style="padding:0.6rem 0.8rem;">Found infinite series for π, sine and cosine.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Muḥammad ibn Mūsā al-Khwārizmī</td>
+                <td style="padding:0.6rem 0.8rem;">c. 780–c. 850<br>Baghdad</td>
+                <td style="padding:0.6rem 0.8rem;">Books on algebra and on Indian numerals</td>
+                <td style="padding:0.6rem 0.8rem;">Transmitted Indian arithmetic to the Islamic world; gave us “algorithm”.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Leonardo of Pisa (Fibonacci)</td>
+                <td style="padding:0.6rem 0.8rem;">c. 1170–after 1240<br>Pisa</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Liber Abaci</em> (1202)</td>
+                <td style="padding:0.6rem 0.8rem;">Introduced the Hindu–Arabic numerals to European commerce.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-18">
+            <h2>18. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about Aryabhata, Brahmagupta and the Indian numerals.</p>
+            <figure class="fig" data-fig="fig-quiz-m3">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-19">
+            <h2>19. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Plofker, Kim.</strong> (2009). <em>Mathematics in India</em>. Princeton: Princeton University Press.</li>
+              <li id="ref-2"><strong>Joseph, George Gheverghese.</strong> (2011). <em>The Crest of the Peacock: Non-European Roots of Mathematics</em>. 3rd ed. Princeton: Princeton University Press.</li>
+              <li id="ref-3"><strong>Datta, Bibhutibhusan &amp; Singh, Avadhesh Narayan.</strong> (1935–1938). <em>History of Hindu Mathematics</em>. 2 vols. Lahore: Motilal Banarsidass.</li>
+              <li id="ref-4"><strong>Plofker, Kim, Keller, Agathe, Hayashi, Takao, Montelle, Clemency &amp; Wujastyk, Dominik.</strong> (2017). "The Bakhshālī Manuscript: a response to the Bodleian Library’s radiocarbon dating." <em>History of Science in South Asia</em>, 5(1): 134–150.</li>
+              <li id="ref-5"><strong>Hayashi, Takao.</strong> (1995). <em>The Bakhshālī Manuscript: An Ancient Indian Mathematical Treatise</em>. Groningen: Egbert Forsten.</li>
+              <li id="ref-6"><strong>Clark, Walter Eugene.</strong> (1930). <em>The Āryabhaṭīya of Āryabhaṭa: An Ancient Indian Work on Mathematics and Astronomy</em>. Chicago: University of Chicago Press.</li>
+              <li id="ref-7"><strong>Shukla, Kripa Shankar &amp; Sarma, K. V.</strong> (1976). <em>Āryabhaṭīya of Āryabhaṭa</em>. New Delhi: Indian National Science Academy.</li>
+              <li id="ref-8"><strong>Pingree, David.</strong> (1981). <em>Jyotiḥśāstra: Astral and Mathematical Literature</em>. Wiesbaden: Otto Harrassowitz.</li>
+              <li id="ref-9"><strong>Colebrooke, Henry Thomas.</strong> (1817). <em>Algebra, with Arithmetic and Mensuration, from the Sanscrit of Brahmegupta and Bháscara</em>. London: John Murray.</li>
+              <li id="ref-10"><strong>Weil, André.</strong> (1984). <em>Number Theory: An Approach Through History from Hammurapi to Legendre</em>. Boston: Birkhäuser.</li>
+              <li id="ref-11"><strong>Sigler, Laurence E.</strong> (2002). <em>Fibonacci’s Liber Abaci: A Translation into Modern English of Leonardo Pisano’s Book of Calculation</em>. New York: Springer.</li>
+              <li id="ref-12"><strong>Rajagopal, C. T. &amp; Rangachari, M. S.</strong> (1978). "On an untapped source of medieval Keralese mathematics." <em>Archive for History of Exact Sciences</em>, 18(2): 89–102.</li>
+              <li id="ref-13"><strong>Coedès, George.</strong> (1931). "À propos de l’origine des chiffres arabes." <em>Bulletin of the School of Oriental Studies</em>, 6(2): 323–328.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/minds-that-changed-how-we-know.html">Minds That Changed How We Know</a> (Part 3 of 12)</div>
+  <div class="series-banner-links">
+    <a href="euclid-and-archimedes.html">← Part 2: Euclid and Archimedes: Can Reasoning from Axioms Describe Nature?</a>
+    <a href="ibn-al-haytham-and-ibn-sina.html">Part 4: Ibn al-Haytham and Ibn Sina: Experiment Against Authority →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/aryabhata-and-brahmagupta.js"></script>
+</body>
+</html>

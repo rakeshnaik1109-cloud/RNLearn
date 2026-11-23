@@ -6015,5 +6015,136 @@
     "forms": [
       "FPGAs"
     ]
+  },
+  {
+    "term": "Euclidean algorithm",
+    "definition": "Finding the greatest common divisor of two numbers by repeatedly replacing the larger by its remainder on division by the smaller.",
+    "forms": []
+  },
+  {
+    "term": "Archimedes’ principle",
+    "definition": "A body immersed in a fluid is pushed up by a force equal to the weight of the fluid it displaces.",
+    "forms": [
+      "Archimedes' principle"
+    ]
+  },
+  {
+    "term": "Law of the lever",
+    "definition": "Weights balance on a lever when their distances from the fulcrum are inversely proportional to the weights.",
+    "forms": []
+  },
+  {
+    "term": "Palimpsest",
+    "definition": "A manuscript whose original text was scraped off so the parchment could be reused, often leaving the older writing faintly recoverable.",
+    "forms": []
+  },
+  {
+    "term": "Hydrostatics",
+    "definition": "The science of fluids at rest and the forces they exert, founded by Archimedes.",
+    "forms": []
+  },
+  {
+    "term": "Bhāvanā",
+    "definition": "Brahmagupta’s composition rule: combining two solutions of x² − Ny² = k to produce a new one, the key to solving Pell’s equation.",
+    "forms": [
+      "bhāvanā"
+    ]
+  },
+  {
+    "term": "Chakravāla method",
+    "definition": "Bhāskara II’s cyclic algorithm (12th century) that solves every equation x² − Ny² = 1.",
+    "forms": [
+      "chakravāla"
+    ]
+  },
+  {
+    "term": "Jyā",
+    "definition": "The Sanskrit half-chord of an arc, the ancestor of the sine function.",
+    "forms": []
+  },
+  {
+    "term": "Negative number",
+    "definition": "A number less than zero; Brahmagupta called negative numbers “debts” and positive numbers “fortunes”.",
+    "forms": [
+      "negative numbers"
+    ]
+  },
+  {
+    "term": "Empirical equivalence",
+    "definition": "The situation in which two different theories predict exactly the same observations, so evidence cannot choose between them.",
+    "forms": [
+      "empirically equivalent"
+    ]
+  },
+  {
+    "term": "Sidereal day",
+    "definition": "The time the Earth takes to rotate once relative to the distant stars, about 23 hours 56 minutes 4 seconds.",
+    "forms": []
+  },
+  {
+    "term": "Alhazen’s problem",
+    "definition": "Finding the point on a curved mirror at which light from one given point is reflected to another; posed and solved geometrically by Ibn al-Haytham.",
+    "forms": [
+      "Alhazen's problem"
+    ]
+  },
+  {
+    "term": "Floating man",
+    "definition": "Ibn Sina’s thought experiment of a person suspended without any sensation, meant to show that self-awareness does not depend on the body or the senses.",
+    "forms": []
+  },
+  {
+    "term": "Moon illusion",
+    "definition": "The Moon’s appearing larger near the horizon than high in the sky, though its image in the eye is the same size; explained by Ibn al-Haytham through perceived distance.",
+    "forms": []
+  },
+  {
+    "term": "Control group",
+    "definition": "In an experiment or trial, a comparison group that does not receive the treatment, used to separate its effect from other causes.",
+    "forms": [
+      "control groups"
+    ]
+  },
+  {
+    "term": "Snell’s law",
+    "definition": "The law of refraction, sin i = n sin r; first described by Ibn Sahl in 984 and later by Snell and Descartes.",
+    "forms": [
+      "Snell's law",
+      "sine law"
+    ]
+  },
+  {
+    "term": "Idols of the mind",
+    "definition": "Bacon’s four kinds of habitual error that distort knowledge: idols of the tribe, the cave, the marketplace and the theatre.",
+    "forms": [
+      "idols of the tribe",
+      "idols of the cave",
+      "idols of the marketplace",
+      "idols of the theatre"
+    ]
+  },
+  {
+    "term": "Principle of relativity",
+    "definition": "The principle that the laws of motion are the same for all observers moving uniformly relative to one another, so uniform motion cannot be detected from inside; first argued by Galileo.",
+    "forms": [
+      "Galilean relativity"
+    ]
+  },
+  {
+    "term": "Eliminative induction",
+    "definition": "Finding a cause by rejecting every candidate that is absent where the effect occurs or present where it does not, as in Bacon’s tables.",
+    "forms": []
+  },
+  {
+    "term": "Novum Organum",
+    "definition": "Francis Bacon’s 1620 book proposing a new method of inductive, experimental science to replace Aristotle’s logic.",
+    "forms": [
+      "New Organon"
+    ]
+  },
+  {
+    "term": "Phases of Venus",
+    "definition": "The changing illuminated shape of Venus seen in a telescope; Galileo’s observation of a full cycle in 1610 refuted Ptolemy’s arrangement of the planets.",
+    "forms": []
   }
 ]

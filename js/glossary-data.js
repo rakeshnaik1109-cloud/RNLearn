@@ -6017,5 +6017,136 @@ window.RNLEARN_GLOSSARY = [
   [
    "FPGAs"
   ]
+ ],
+ [
+  "Euclidean algorithm",
+  "Finding the greatest common divisor of two numbers by repeatedly replacing the larger by its remainder on division by the smaller.",
+  []
+ ],
+ [
+  "Archimedes’ principle",
+  "A body immersed in a fluid is pushed up by a force equal to the weight of the fluid it displaces.",
+  [
+   "Archimedes' principle"
+  ]
+ ],
+ [
+  "Law of the lever",
+  "Weights balance on a lever when their distances from the fulcrum are inversely proportional to the weights.",
+  []
+ ],
+ [
+  "Palimpsest",
+  "A manuscript whose original text was scraped off so the parchment could be reused, often leaving the older writing faintly recoverable.",
+  []
+ ],
+ [
+  "Hydrostatics",
+  "The science of fluids at rest and the forces they exert, founded by Archimedes.",
+  []
+ ],
+ [
+  "Bhāvanā",
+  "Brahmagupta’s composition rule: combining two solutions of x² − Ny² = k to produce a new one, the key to solving Pell’s equation.",
+  [
+   "bhāvanā"
+  ]
+ ],
+ [
+  "Chakravāla method",
+  "Bhāskara II’s cyclic algorithm (12th century) that solves every equation x² − Ny² = 1.",
+  [
+   "chakravāla"
+  ]
+ ],
+ [
+  "Jyā",
+  "The Sanskrit half-chord of an arc, the ancestor of the sine function.",
+  []
+ ],
+ [
+  "Negative number",
+  "A number less than zero; Brahmagupta called negative numbers “debts” and positive numbers “fortunes”.",
+  [
+   "negative numbers"
+  ]
+ ],
+ [
+  "Empirical equivalence",
+  "The situation in which two different theories predict exactly the same observations, so evidence cannot choose between them.",
+  [
+   "empirically equivalent"
+  ]
+ ],
+ [
+  "Sidereal day",
+  "The time the Earth takes to rotate once relative to the distant stars, about 23 hours 56 minutes 4 seconds.",
+  []
+ ],
+ [
+  "Alhazen’s problem",
+  "Finding the point on a curved mirror at which light from one given point is reflected to another; posed and solved geometrically by Ibn al-Haytham.",
+  [
+   "Alhazen's problem"
+  ]
+ ],
+ [
+  "Floating man",
+  "Ibn Sina’s thought experiment of a person suspended without any sensation, meant to show that self-awareness does not depend on the body or the senses.",
+  []
+ ],
+ [
+  "Moon illusion",
+  "The Moon’s appearing larger near the horizon than high in the sky, though its image in the eye is the same size; explained by Ibn al-Haytham through perceived distance.",
+  []
+ ],
+ [
+  "Control group",
+  "In an experiment or trial, a comparison group that does not receive the treatment, used to separate its effect from other causes.",
+  [
+   "control groups"
+  ]
+ ],
+ [
+  "Snell’s law",
+  "The law of refraction, sin i = n sin r; first described by Ibn Sahl in 984 and later by Snell and Descartes.",
+  [
+   "Snell's law",
+   "sine law"
+  ]
+ ],
+ [
+  "Idols of the mind",
+  "Bacon’s four kinds of habitual error that distort knowledge: idols of the tribe, the cave, the marketplace and the theatre.",
+  [
+   "idols of the tribe",
+   "idols of the cave",
+   "idols of the marketplace",
+   "idols of the theatre"
+  ]
+ ],
+ [
+  "Principle of relativity",
+  "The principle that the laws of motion are the same for all observers moving uniformly relative to one another, so uniform motion cannot be detected from inside; first argued by Galileo.",
+  [
+   "Galilean relativity"
+  ]
+ ],
+ [
+  "Eliminative induction",
+  "Finding a cause by rejecting every candidate that is absent where the effect occurs or present where it does not, as in Bacon’s tables.",
+  []
+ ],
+ [
+  "Novum Organum",
+  "Francis Bacon’s 1620 book proposing a new method of inductive, experimental science to replace Aristotle’s logic.",
+  [
+   "New Organon"
+  ]
+ ],
+ [
+  "Phases of Venus",
+  "The changing illuminated shape of Venus seen in a telescope; Galileo’s observation of a full cycle in 1610 refuted Ptolemy’s arrangement of the planets.",
+  []
  ]
 ];

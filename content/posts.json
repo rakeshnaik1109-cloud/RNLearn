@@ -1,5 +1,109 @@
 [
   {
+    "slug": "galileo-and-bacon",
+    "title": "Galileo and Francis Bacon: Should We Observe or Reason?",
+    "summary": "Copernicus’ problem, Galileo’s inclined plane, relativity and telescope, the phases of Venus and the trial; Bacon’s idols, tables and induction, and two visions of the new science.",
+    "subject": "Philosophy & Ideas",
+    "tags": [
+      "philosophy",
+      "history-of-science",
+      "scientific-revolution",
+      "astronomy",
+      "physics",
+      "epistemology"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 16,
+    "series": {
+      "id": "minds-that-changed-how-we-know",
+      "part": 5
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "ibn-al-haytham-and-ibn-sina",
+    "title": "Ibn al-Haytham and Ibn Sina: Experiment Against Authority",
+    "summary": "The translation movement, how we see, the camera obscura, refraction and Ibn Sahl, Doubts Concerning Ptolemy, the Canon of Medicine, rules for testing drugs, and the floating man.",
+    "subject": "Philosophy & Ideas",
+    "tags": [
+      "philosophy",
+      "history-of-science",
+      "islamic-golden-age",
+      "optics",
+      "medicine",
+      "epistemology"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 15,
+    "series": {
+      "id": "minds-that-changed-how-we-know",
+      "part": 4
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "aryabhata-and-brahmagupta",
+    "title": "Aryabhata and Brahmagupta: Zero, Debts and a Spinning Earth",
+    "summary": "Place value and the Bakhshālī puzzle, Aryabhata’s π, sine table and rotating Earth, Brahmagupta’s rules for zero and negative numbers, Pell’s equation, and how the numerals travelled.",
+    "subject": "Philosophy & Ideas",
+    "tags": [
+      "philosophy",
+      "history-of-science",
+      "india",
+      "mathematics",
+      "astronomy",
+      "epistemology"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 16,
+    "series": {
+      "id": "minds-that-changed-how-we-know",
+      "part": 3
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "euclid-and-archimedes",
+    "title": "Euclid and Archimedes: Can Reasoning from Axioms Describe Nature?",
+    "summary": "Euclid’s Elements, postulates and proofs, the parallel postulate, primes and the oldest algorithm; Archimedes’ lever, buoyancy and the golden crown, π, and the lost Method.",
+    "subject": "Philosophy & Ideas",
+    "tags": [
+      "philosophy",
+      "history-of-science",
+      "ancient-greece",
+      "mathematics",
+      "physics",
+      "epistemology"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 17,
+    "series": {
+      "id": "minds-that-changed-how-we-know",
+      "part": 2
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
     "slug": "beyond-silicon",
     "title": "Beyond Silicon: Chiplets, Photonics, Neuromorphic and Quantum Computing",
     "summary": "Where computing goes as scaling slows: chiplets and 3D stacking, domain-specific accelerators, silicon photonics, spiking neuromorphic chips, quantum computing, and a look back at the series.",

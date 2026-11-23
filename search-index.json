@@ -112,6 +112,40 @@
     "type": "tutorial"
   },
   {
+    "slug": "ibn-al-haytham-and-ibn-sina",
+    "url": "articles/ibn-al-haytham-and-ibn-sina.html",
+    "title": "Ibn al-Haytham and Ibn Sina: Experiment Against Authority",
+    "summary": "The translation movement, how we see, the camera obscura, refraction and Ibn Sahl, Doubts Concerning Ptolemy, the Canon of Medicine, rules for testing drugs, and the floating man.",
+    "subject": "Philosophy & Ideas",
+    "tags": [
+      "philosophy",
+      "history-of-science",
+      "islamic-golden-age",
+      "optics",
+      "medicine",
+      "epistemology"
+    ],
+    "date": "2026-11-23",
+    "type": "tutorial"
+  },
+  {
+    "slug": "galileo-and-bacon",
+    "url": "articles/galileo-and-bacon.html",
+    "title": "Galileo and Francis Bacon: Should We Observe or Reason?",
+    "summary": "Copernicus’ problem, Galileo’s inclined plane, relativity and telescope, the phases of Venus and the trial; Bacon’s idols, tables and induction, and two visions of the new science.",
+    "subject": "Philosophy & Ideas",
+    "tags": [
+      "philosophy",
+      "history-of-science",
+      "scientific-revolution",
+      "astronomy",
+      "physics",
+      "epistemology"
+    ],
+    "date": "2026-11-23",
+    "type": "tutorial"
+  },
+  {
     "slug": "gpus-and-parallel-computing",
     "url": "articles/gpus-and-parallel-computing.html",
     "title": "GPUs and Parallel Computing: Warps, Rooflines and Tensor Cores",
@@ -123,6 +157,23 @@
       "computer-architecture",
       "parallel-computing",
       "ai"
+    ],
+    "date": "2026-11-23",
+    "type": "tutorial"
+  },
+  {
+    "slug": "euclid-and-archimedes",
+    "url": "articles/euclid-and-archimedes.html",
+    "title": "Euclid and Archimedes: Can Reasoning from Axioms Describe Nature?",
+    "summary": "Euclid’s Elements, postulates and proofs, the parallel postulate, primes and the oldest algorithm; Archimedes’ lever, buoyancy and the golden crown, π, and the lost Method.",
+    "subject": "Philosophy & Ideas",
+    "tags": [
+      "philosophy",
+      "history-of-science",
+      "ancient-greece",
+      "mathematics",
+      "physics",
+      "epistemology"
     ],
     "date": "2026-11-23",
     "type": "tutorial"
@@ -219,6 +270,23 @@
       "semiconductors",
       "quantum-physics",
       "materials"
+    ],
+    "date": "2026-11-23",
+    "type": "tutorial"
+  },
+  {
+    "slug": "aryabhata-and-brahmagupta",
+    "url": "articles/aryabhata-and-brahmagupta.html",
+    "title": "Aryabhata and Brahmagupta: Zero, Debts and a Spinning Earth",
+    "summary": "Place value and the Bakhshālī puzzle, Aryabhata’s π, sine table and rotating Earth, Brahmagupta’s rules for zero and negative numbers, Pell’s equation, and how the numerals travelled.",
+    "subject": "Philosophy & Ideas",
+    "tags": [
+      "philosophy",
+      "history-of-science",
+      "india",
+      "mathematics",
+      "astronomy",
+      "epistemology"
     ],
     "date": "2026-11-23",
     "type": "tutorial"
