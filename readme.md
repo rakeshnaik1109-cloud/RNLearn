@@ -37,7 +37,7 @@ An 8-part history of artificial intelligence, from the first dreams of thinking 
 8. **Part 8**: *Where Is It Leading Us? Work, Safety, Rules and the Future of AI* (Five views of the future, jobs, education, alignment, risks, regulation & lessons)
 
 ### New Series: *How We Measured the Universe*
-A 12-part series on how people measured the Earth, the Moon, the Sun, light, gravity, time, the stars, galaxies and atoms, with experiments to try yourself (in progress):
+A 12-part series on how people measured the Earth, the Moon, the Sun, light, gravity, time, the stars, galaxies and atoms, with experiments to try yourself:
 1. **Part 1**: *How Big Is the Earth? From Eratosthenes' Shadows to Satellites* (Eratosthenes, al-Biruni, Fernel, Snell, Picard & GPS)
 2. **Part 2**: *The Shape of the Earth: Squashed Planets, the Metre and Mount Everest* (Newton vs Cassini, Lapland & Peru, the metre, the Great Trigonometrical Survey & Everest)
 3. **Part 3**: *How Far Is the Moon? Shadows, Parallax and Mirrors on the Moon* (Aristarchus, Hipparchus, Ptolemy, Aryabhata, Lalande & Lacaille, radar & lunar laser ranging)
@@ -45,6 +45,11 @@ A 12-part series on how people measured the Earth, the Moon, the Sun, light, gra
 5. **Part 5**: *How Fast Is Light? Jupiter’s Moons, Spinning Wheels and a Defined Constant* (Galileo’s lanterns, Rømer & Huygens, Bradley’s aberration, Fizeau, Foucault, Maxwell, Michelson, Essen, lasers & the 1983 definition)
 6. **Part 6**: *Weighing the Earth: Pendulums, a Scottish Mountain and Two Lead Balls* (Galileo, Newton’s guess, Schiehallion & Hutton’s contour lines, Cavendish, Poynting & Boys, the G problem, isostasy & GRACE, weighing the planets)
 7. **Part 7**: *How Old Is the Earth? Salt, Cooling Rocks and Radioactive Clocks* (Ussher, Hutton, Buffon, Halley & Joly’s salt clock, Kelvin & Perry, radioactivity, Boltwood & Holmes, Patterson’s meteorite, the oldest zircons)
+8. **Part 8**: *How Far Are the Stars? The Two-Thousand-Year Hunt for Parallax* (Aristotle’s missing shift, Tycho’s dilemma, Hooke, Bradley’s aberration, Herschel’s binaries, Bessel, Henderson & Struve in 1838, parsecs & light-years, Proxima, Hipparcos & Gaia)
+9. **Part 9**: *The Milky Way and Other Galaxies: Leavitt’s Law, Shapley’s Clusters and Hubble’s Cepheid* (Kant’s island universes, Herschel & Kapteyn, the inverse-square law, Leavitt’s Cepheids, Shapley’s globular clusters, the Great Debate, Hubble’s VAR! plate, Trumpler’s dust & Baade’s correction)
+10. **Part 10**: *The Expanding Universe and Its Age: Redshifts, the Big Bang and the Hubble Tension* (Slipher, Einstein’s static universe, Friedmann & Lemaître, Hubble’s law, the age problem, the CMB, the distance ladder, accelerating expansion, Planck & the Hubble tension)
+11. **Part 11**: *Counting the Cosmos: How Many Stars and Galaxies, and the Matter We Cannot See* (sampling & Kapteyn’s Selected Areas, weighing the Milky Way, Gaia’s census, the Hubble Deep Fields, two trillion or fewer, Zwicky, Vera Rubin, the Bullet Cluster & dark matter)
+12. **Part 12**: *Measuring the Very Small: Oil Films, Jiggling Grains and the Charge of an Electron* (Franklin’s pond, Rayleigh & Pockels, Loschmidt, Einstein & Perrin’s Brownian motion, Millikan’s oil drops, seeing atoms, the 2019 kilogram)
 
 ### New Series: *Making Sense of Data*
 A nine-part series on the statistics used in real experiments:
@@ -113,6 +118,7 @@ A fourteen-part journey from logic gates to GPUs and beyond, covering both the d
 14. **Part 14**: *Beyond Silicon* (chiplets, accelerators, silicon photonics, neuromorphic chips, quantum computing, a look back)
 
 ### Standalone Tutorials
+- *The Riemann Hypothesis, and the Claimed Proof Found with Claude* (primes & Gauss’s estimate, Euler’s product, Riemann’s 1859 paper, zeros & the explicit formula, partial results, formal proofs in Lean, Claude’s two-thirds result of August 2026, and the status of the November 2026 claimed proof)
 - *Who's the Father? How a DNA Paternity Test Works* (DNA basics, inheritance, blood groups & the Chaplin case, Jeffreys, STRs, PCR & capillary electrophoresis, the paternity index & Bayes, tricky cases, Indian law)
 - *Why Is My Laser Spot Grainy? Speckle, Stray Fringes and Other Gremlins of the Optics Lab* (coherence, speckle statistics & reduction, accidental etalons, ghosts & back-reflections, dust rings & spatial filters, fibre noise, vibration, detector artifacts, speckle as a tool, troubleshooting guide)
 - *Is It Real, or Just Luck? Null Hypotheses, p-Values and Effect Sizes, from Coin Flips to Comparing AI Models* (null & alternative hypotheses, p-values & misreadings, errors & power, t/chi-square/rank/permutation tests, bootstrap, Cohen’s d & Cliff’s delta, confidence intervals, Bonferroni/Holm/FDR & q-values, the replication crisis, comparing ML models, A/B tests, benchmarks & LLM evals)

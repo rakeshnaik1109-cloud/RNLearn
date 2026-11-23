@@ -6388,5 +6388,162 @@ window.RNLEARN_GLOSSARY = [
   "Imitation game",
   "Turing’s 1950 test in which an interrogator tries to tell a machine from a human by text conversation; now called the Turing test.",
   []
+ ],
+ [
+  "Parsec",
+  "The distance at which a star would show a parallax of one second of arc: about 3.26 light-years, 206,265 astronomical units or 30.9 trillion km.",
+  [
+   "parsecs"
+  ]
+ ],
+ [
+  "Light-year",
+  "The distance light travels in a year: about 9.46 trillion km, or about 63,000 times the Earth–Sun distance.",
+  [
+   "light-years"
+  ]
+ ],
+ [
+  "Proper motion",
+  "The slow apparent movement of a star across the sky over years, caused by its motion relative to the Sun; large proper motion suggests a nearby star.",
+  []
+ ],
+ [
+  "Heliometer",
+  "A telescope whose objective lens is cut in two; sliding the halves makes two images, so that small angles between stars can be measured precisely.",
+  []
+ ],
+ [
+  "Astrometry",
+  "The precise measurement of the positions, distances and motions of stars and other celestial objects.",
+  []
+ ],
+ [
+  "Standard candle",
+  "An astronomical object whose true luminosity is known, so that comparing it with its apparent brightness gives its distance.",
+  [
+   "standard candles"
+  ]
+ ],
+ [
+  "Cepheid variable",
+  "A pulsating giant star whose brightness varies with a regular period; longer-period Cepheids are more luminous, which makes them standard candles.",
+  [
+   "Cepheid variables",
+   "Cepheids",
+   "Cepheid"
+  ]
+ ],
+ [
+  "Globular cluster",
+  "A dense, roughly spherical ball of hundreds of thousands of old stars orbiting the centre of a galaxy.",
+  [
+   "globular clusters"
+  ]
+ ],
+ [
+  "Absolute magnitude",
+  "How bright a star would appear if it were placed at a standard distance of 10 parsecs; a measure of its true luminosity on the magnitude scale.",
+  []
+ ],
+ [
+  "Redshift",
+  "The stretching of light to longer, redder wavelengths, measured as z = Δλ/λ; for galaxies it shows that they are receding as the universe expands.",
+  [
+   "redshifts"
+  ]
+ ],
+ [
+  "Hubble constant",
+  "The present expansion rate of the universe, H₀: the recession speed of a galaxy per unit distance, about 67–73 km/s per megaparsec.",
+  []
+ ],
+ [
+  "Cosmic microwave background",
+  "Faint microwave radiation filling the universe at 2.7 K, released about 380,000 years after the big bang when atoms first formed.",
+  []
+ ],
+ [
+  "Cosmological constant",
+  "A term Einstein added to general relativity in 1917 that acts as a uniform repulsion; today it is the simplest explanation for dark energy.",
+  []
+ ],
+ [
+  "Dark energy",
+  "The unknown cause of the accelerating expansion of the universe, making up about 68% of its energy content.",
+  []
+ ],
+ [
+  "Type Ia supernova",
+  "The explosion of a white dwarf star in a binary system, with a nearly standard peak brightness that makes it a standard candle across billions of light-years.",
+  [
+   "Type Ia supernovae"
+  ]
+ ],
+ [
+  "Dark matter",
+  "Matter that does not emit or absorb light and is detected only by its gravity; it appears to be about five times as abundant as ordinary matter.",
+  []
+ ],
+ [
+  "Rotation curve",
+  "A graph of the orbital speed of stars and gas against distance from a galaxy’s centre; flat rotation curves are key evidence for dark matter.",
+  [
+   "rotation curves"
+  ]
+ ],
+ [
+  "Observable universe",
+  "The region from which light has had time to reach us since the big bang: about 46 billion light-years in radius today, because of the expansion.",
+  []
+ ],
+ [
+  "Gravitational lensing",
+  "The bending of light from distant objects by the gravity of mass in front of them, used to map mass, including dark matter.",
+  []
+ ],
+ [
+  "Monolayer",
+  "A film exactly one molecule thick, such as oil spread on water; its thickness gives the length of a molecule.",
+  []
+ ],
+ [
+  "Elementary charge",
+  "The charge of a single proton, equal and opposite to that of an electron: exactly 1.602176634 × 10⁻¹⁹ coulombs since 2019.",
+  []
+ ],
+ [
+  "Scanning tunnelling microscope",
+  "A microscope that images surfaces atom by atom by measuring a tiny electric current between a sharp tip and the surface.",
+  []
+ ],
+ [
+  "Riemann hypothesis",
+  "The conjecture, stated by Riemann in 1859, that every nontrivial zero of the zeta function has real part ½; it implies that the primes are distributed as regularly as possible.",
+  []
+ ],
+ [
+  "Riemann zeta function",
+  "The function ζ(s) = 1 + 1/2^s + 1/3^s + …, extended to complex s; its zeros control the distribution of prime numbers.",
+  [
+   "zeta function"
+  ]
+ ],
+ [
+  "Critical line",
+  "The vertical line of complex numbers with real part ½, on which the Riemann hypothesis says all nontrivial zeros of the zeta function lie.",
+  []
+ ],
+ [
+  "Prime number theorem",
+  "The theorem, proved in 1896, that the number of primes up to x is approximately x / ln x, or more accurately Li(x).",
+  []
+ ],
+ [
+  "Proof assistant",
+  "Software, such as Lean, in which mathematics is written formally so that a small trusted kernel can check every step of a proof.",
+  [
+   "proof assistants"
+  ]
  ]
 ];

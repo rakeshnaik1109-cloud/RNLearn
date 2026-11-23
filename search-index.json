@@ -16,6 +16,23 @@
     "type": "tutorial"
   },
   {
+    "slug": "the-riemann-hypothesis-and-the-claimed-ai-proof",
+    "url": "articles/the-riemann-hypothesis-and-the-claimed-ai-proof.html",
+    "title": "The Riemann Hypothesis, and the Claimed Proof Found with Claude",
+    "summary": "What the Riemann hypothesis says and why primes care, 165 years of partial progress, and what has and has not been checked in the November 2026 claim of a proof found with Claude.",
+    "subject": "AI & Machine Learning",
+    "tags": [
+      "mathematics",
+      "prime-numbers",
+      "riemann-hypothesis",
+      "formal-proof",
+      "artificial-intelligence",
+      "claude"
+    ],
+    "date": "2026-11-23",
+    "type": "tutorial"
+  },
+  {
     "slug": "the-processor",
     "url": "articles/the-processor.html",
     "title": "The Processor: Stored Programs, Pipelines, Caches and Prediction",
@@ -32,6 +49,23 @@
     "type": "tutorial"
   },
   {
+    "slug": "the-milky-way-and-other-galaxies",
+    "url": "articles/the-milky-way-and-other-galaxies.html",
+    "title": "The Milky Way and Other Galaxies: Leavitt’s Law, Shapley’s Clusters and Hubble’s Cepheid",
+    "summary": "How Henrietta Leavitt’s variable stars became a cosmic yardstick, how Shapley moved the Sun from the centre, the 1920 Great Debate, and Hubble’s proof that galaxies exist.",
+    "subject": "Science",
+    "tags": [
+      "measurement",
+      "astronomy",
+      "galaxies",
+      "cepheid-variables",
+      "milky-way",
+      "history-of-science"
+    ],
+    "date": "2026-11-23",
+    "type": "tutorial"
+  },
+  {
     "slug": "the-mosfet",
     "url": "articles/the-mosfet.html",
     "title": "The MOSFET: How a Voltage Opens a Channel",
@@ -43,6 +77,23 @@
       "semiconductors",
       "physics",
       "computing"
+    ],
+    "date": "2026-11-23",
+    "type": "tutorial"
+  },
+  {
+    "slug": "the-expanding-universe-and-its-age",
+    "url": "articles/the-expanding-universe-and-its-age.html",
+    "title": "The Expanding Universe and Its Age: Redshifts, the Big Bang and the Hubble Tension",
+    "summary": "Slipher’s redshifts, Lemaître and Hubble’s law, a universe younger than its rocks, the cosmic background, accelerating expansion, 13.8 billion years and the Hubble tension.",
+    "subject": "Science",
+    "tags": [
+      "measurement",
+      "cosmology",
+      "astronomy",
+      "big-bang",
+      "hubble-constant",
+      "history-of-science"
     ],
     "date": "2026-11-23",
     "type": "tutorial"
@@ -147,6 +198,23 @@
     "type": "tutorial"
   },
   {
+    "slug": "measuring-the-very-small",
+    "url": "articles/measuring-the-very-small.html",
+    "title": "Measuring the Very Small: Oil Films, Jiggling Grains and the Charge of an Electron",
+    "summary": "Franklin’s teaspoon of oil, Rayleigh and Pockels, Einstein and Perrin’s Brownian motion, Millikan’s oil drops, seeing atoms, and the 2019 redefinition of the kilogram.",
+    "subject": "Science",
+    "tags": [
+      "measurement",
+      "atoms",
+      "physics",
+      "brownian-motion",
+      "si-units",
+      "history-of-science"
+    ],
+    "date": "2026-11-23",
+    "type": "tutorial"
+  },
+  {
     "slug": "marie-curie-and-ernst-mach",
     "url": "articles/marie-curie-and-ernst-mach.html",
     "title": "Marie Curie and Ernst Mach: Are Atoms Real?",
@@ -192,6 +260,23 @@
       "optics",
       "medicine",
       "epistemology"
+    ],
+    "date": "2026-11-23",
+    "type": "tutorial"
+  },
+  {
+    "slug": "how-far-are-the-stars",
+    "url": "articles/how-far-are-the-stars.html",
+    "title": "How Far Are the Stars? The Two-Thousand-Year Hunt for Parallax",
+    "summary": "Why Aristotle and Tycho saw no shift, how Bradley found aberration instead, Bessel’s 61 Cygni in 1838, light-years and parsecs, and Gaia’s billion-star map.",
+    "subject": "Science",
+    "tags": [
+      "measurement",
+      "astronomy",
+      "parallax",
+      "stars",
+      "gaia",
+      "history-of-science"
     ],
     "date": "2026-11-23",
     "type": "tutorial"
@@ -309,6 +394,23 @@
       "evolution",
       "epistemology",
       "victorian-science"
+    ],
+    "date": "2026-11-23",
+    "type": "tutorial"
+  },
+  {
+    "slug": "counting-the-cosmos",
+    "url": "articles/counting-the-cosmos.html",
+    "title": "Counting the Cosmos: How Many Stars and Galaxies, and the Matter We Cannot See",
+    "summary": "How astronomers count stars and galaxies by sampling and weighing: Kapteyn’s Selected Areas, the Hubble Deep Field, two trillion or fewer, Zwicky, Vera Rubin and dark matter.",
+    "subject": "Science",
+    "tags": [
+      "measurement",
+      "astronomy",
+      "galaxies",
+      "dark-matter",
+      "estimation",
+      "history-of-science"
     ],
     "date": "2026-11-23",
     "type": "tutorial"

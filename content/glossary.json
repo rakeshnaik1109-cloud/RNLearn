@@ -6386,5 +6386,162 @@
     "term": "Imitation game",
     "definition": "Turing’s 1950 test in which an interrogator tries to tell a machine from a human by text conversation; now called the Turing test.",
     "forms": []
+  },
+  {
+    "term": "Parsec",
+    "definition": "The distance at which a star would show a parallax of one second of arc: about 3.26 light-years, 206,265 astronomical units or 30.9 trillion km.",
+    "forms": [
+      "parsecs"
+    ]
+  },
+  {
+    "term": "Light-year",
+    "definition": "The distance light travels in a year: about 9.46 trillion km, or about 63,000 times the Earth–Sun distance.",
+    "forms": [
+      "light-years"
+    ]
+  },
+  {
+    "term": "Proper motion",
+    "definition": "The slow apparent movement of a star across the sky over years, caused by its motion relative to the Sun; large proper motion suggests a nearby star.",
+    "forms": []
+  },
+  {
+    "term": "Heliometer",
+    "definition": "A telescope whose objective lens is cut in two; sliding the halves makes two images, so that small angles between stars can be measured precisely.",
+    "forms": []
+  },
+  {
+    "term": "Astrometry",
+    "definition": "The precise measurement of the positions, distances and motions of stars and other celestial objects.",
+    "forms": []
+  },
+  {
+    "term": "Standard candle",
+    "definition": "An astronomical object whose true luminosity is known, so that comparing it with its apparent brightness gives its distance.",
+    "forms": [
+      "standard candles"
+    ]
+  },
+  {
+    "term": "Cepheid variable",
+    "definition": "A pulsating giant star whose brightness varies with a regular period; longer-period Cepheids are more luminous, which makes them standard candles.",
+    "forms": [
+      "Cepheid variables",
+      "Cepheids",
+      "Cepheid"
+    ]
+  },
+  {
+    "term": "Globular cluster",
+    "definition": "A dense, roughly spherical ball of hundreds of thousands of old stars orbiting the centre of a galaxy.",
+    "forms": [
+      "globular clusters"
+    ]
+  },
+  {
+    "term": "Absolute magnitude",
+    "definition": "How bright a star would appear if it were placed at a standard distance of 10 parsecs; a measure of its true luminosity on the magnitude scale.",
+    "forms": []
+  },
+  {
+    "term": "Redshift",
+    "definition": "The stretching of light to longer, redder wavelengths, measured as z = Δλ/λ; for galaxies it shows that they are receding as the universe expands.",
+    "forms": [
+      "redshifts"
+    ]
+  },
+  {
+    "term": "Hubble constant",
+    "definition": "The present expansion rate of the universe, H₀: the recession speed of a galaxy per unit distance, about 67–73 km/s per megaparsec.",
+    "forms": []
+  },
+  {
+    "term": "Cosmic microwave background",
+    "definition": "Faint microwave radiation filling the universe at 2.7 K, released about 380,000 years after the big bang when atoms first formed.",
+    "forms": []
+  },
+  {
+    "term": "Cosmological constant",
+    "definition": "A term Einstein added to general relativity in 1917 that acts as a uniform repulsion; today it is the simplest explanation for dark energy.",
+    "forms": []
+  },
+  {
+    "term": "Dark energy",
+    "definition": "The unknown cause of the accelerating expansion of the universe, making up about 68% of its energy content.",
+    "forms": []
+  },
+  {
+    "term": "Type Ia supernova",
+    "definition": "The explosion of a white dwarf star in a binary system, with a nearly standard peak brightness that makes it a standard candle across billions of light-years.",
+    "forms": [
+      "Type Ia supernovae"
+    ]
+  },
+  {
+    "term": "Dark matter",
+    "definition": "Matter that does not emit or absorb light and is detected only by its gravity; it appears to be about five times as abundant as ordinary matter.",
+    "forms": []
+  },
+  {
+    "term": "Rotation curve",
+    "definition": "A graph of the orbital speed of stars and gas against distance from a galaxy’s centre; flat rotation curves are key evidence for dark matter.",
+    "forms": [
+      "rotation curves"
+    ]
+  },
+  {
+    "term": "Observable universe",
+    "definition": "The region from which light has had time to reach us since the big bang: about 46 billion light-years in radius today, because of the expansion.",
+    "forms": []
+  },
+  {
+    "term": "Gravitational lensing",
+    "definition": "The bending of light from distant objects by the gravity of mass in front of them, used to map mass, including dark matter.",
+    "forms": []
+  },
+  {
+    "term": "Monolayer",
+    "definition": "A film exactly one molecule thick, such as oil spread on water; its thickness gives the length of a molecule.",
+    "forms": []
+  },
+  {
+    "term": "Elementary charge",
+    "definition": "The charge of a single proton, equal and opposite to that of an electron: exactly 1.602176634 × 10⁻¹⁹ coulombs since 2019.",
+    "forms": []
+  },
+  {
+    "term": "Scanning tunnelling microscope",
+    "definition": "A microscope that images surfaces atom by atom by measuring a tiny electric current between a sharp tip and the surface.",
+    "forms": []
+  },
+  {
+    "term": "Riemann hypothesis",
+    "definition": "The conjecture, stated by Riemann in 1859, that every nontrivial zero of the zeta function has real part ½; it implies that the primes are distributed as regularly as possible.",
+    "forms": []
+  },
+  {
+    "term": "Riemann zeta function",
+    "definition": "The function ζ(s) = 1 + 1/2^s + 1/3^s + …, extended to complex s; its zeros control the distribution of prime numbers.",
+    "forms": [
+      "zeta function"
+    ]
+  },
+  {
+    "term": "Critical line",
+    "definition": "The vertical line of complex numbers with real part ½, on which the Riemann hypothesis says all nontrivial zeros of the zeta function lie.",
+    "forms": []
+  },
+  {
+    "term": "Prime number theorem",
+    "definition": "The theorem, proved in 1896, that the number of primes up to x is approximately x / ln x, or more accurately Li(x).",
+    "forms": []
+  },
+  {
+    "term": "Proof assistant",
+    "definition": "Software, such as Lean, in which mathematics is written formally so that a small trusted kernel can check every step of a proof.",
+    "forms": [
+      "proof assistants"
+    ]
   }
 ]

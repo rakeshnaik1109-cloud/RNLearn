@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Riemann Hypothesis, and the Claimed Proof Found with Claude — RNLearn</title>
+  <meta name="description" content="What the Riemann hypothesis says and why primes care, 165 years of partial progress, and what has and has not been checked in the November 2026 claim of a proof found with Claude.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/the-riemann-hypothesis-and-the-claimed-ai-proof.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Riemann Hypothesis, and the Claimed Proof Found with Claude — RNLearn">
+  <meta property="og:description" content="What the Riemann hypothesis says and why primes care, 165 years of partial progress, and what has and has not been checked in the November 2026 claim of a proof found with Claude.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/the-riemann-hypothesis-and-the-claimed-ai-proof.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Riemann Hypothesis, and the Claimed Proof Found with Claude — RNLearn">
+  <meta name="twitter:description" content="What the Riemann hypothesis says and why primes care, 165 years of partial progress, and what has and has not been checked in the November 2026 claim of a proof found with Claude.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "The Riemann Hypothesis, and the Claimed Proof Found with Claude",
+    "description": "What the Riemann hypothesis says and why primes care, 165 years of partial progress, and what has and has not been checked in the November 2026 claim of a proof found with Claude.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-23",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/the-riemann-hypothesis-and-the-claimed-ai-proof.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/ai-machine-learning.html" class="post-subject-tag" data-subject="ai-machine-learning">AI &amp; Machine Learning</a>
+        </div>
+        <h1 class="article-title">The Riemann Hypothesis, and the Claimed Proof Found with Claude</h1>
+        <p class="article-standfirst">
+          For 165 years the most famous problem in mathematics has resisted every attack. In November 2026 an Anthropic mathematician claimed a proof, found with Claude and written for a computer to check. Here is what the hypothesis means, and where the claim stands.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-23">23 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>20 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. A Million-Dollar Question</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. How Are the Primes Spread Out?</a></li>
+              <li><a class="toc-link" href="#section-4">4. Euler’s Golden Key</a></li>
+              <li><a class="toc-link" href="#section-5">5. Riemann’s Eight Pages</a></li>
+              <li><a class="toc-link" href="#section-6">6. What the Hypothesis Says</a></li>
+              <li><a class="toc-link" href="#section-7">7. The Music of the Primes</a></li>
+              <li><a class="toc-link" href="#section-8">8. Why Mathematicians Care</a></li>
+              <li><a class="toc-link" href="#section-9">9. A Century and a Half of Partial Progress</a></li>
+              <li><a class="toc-link" href="#section-10">10. Proofs That a Computer Can Check</a></li>
+              <li><a class="toc-link" href="#section-11">11. August 2026: Claude and the Zeros on the Line</a></li>
+              <li><a class="toc-link" href="#section-12">12. November 2026: The Claimed Proof</a></li>
+              <li><a class="toc-link" href="#section-13">13. What Has Been Checked, and What Has Not</a></li>
+              <li><a class="toc-link" href="#section-14">14. What Happens Next</a></li>
+              <li><a class="toc-link" href="#section-15">15. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-16">16. Philosophy Corner</a></li>
+              <li><a class="toc-link" href="#section-17">17. People in This Story</a></li>
+              <li><a class="toc-link" href="#section-18">18. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-19">19. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. A Million-Dollar Question</h2>
+            <p>The Riemann hypothesis is often called the most important unsolved problem in mathematics. Stated in 1859, it is a claim about where a particular function equals zero, and it turns out to be a claim about how the prime numbers are spread out. It has resisted the best mathematicians for more than 165 years, and since 2000 it has carried a prize of one million dollars from the Clay Mathematics Institute. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+            <p>On 20 November 2026, Levent Alpöge, one of Anthropic’s mathematicians, announced that he had found a proof, working with Anthropic’s AI system Claude. The proof was released not as a paper for mathematicians to read but as a formal proof of about 17 million lines, written for a computer program to check. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span> This article explains what the hypothesis says and why it matters, and then describes, as carefully as possible, what has been claimed, what has been checked so far, and what has not. At the time of writing, three days after the announcement, the claim has <strong>not</strong> been accepted by the mathematical community, and it may take a long time before it is.</p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-rh-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. From Euler to a claimed proof, 1737–2026.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. How Are the Primes Spread Out?</h2>
+            <p>A prime is a whole number greater than 1 that can be divided only by 1 and itself: 2, 3, 5, 7, 11, 13 and so on. Euclid proved that there are infinitely many of them, but they seem to appear with no pattern. There are four primes below 10, 25 below 100, 168 below 1,000 and 78,498 below a million.</p>
+            <p>As a teenager in the 1790s, Carl Friedrich Gauss studied tables of primes and noticed that, although individual primes are unpredictable, their overall density is regular: near a number <em>x</em>, roughly one number in every ln <em>x</em> is prime, where ln is the natural logarithm. Adding up these chances gives an estimate for the number of primes up to <em>x</em>, written π(<em>x</em>), called the logarithmic integral, Li(<em>x</em>). <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+            <figure class="fig" data-fig="fig-prime-count">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Counting primes.</strong> Slide to count primes up to a million, and compare the true count with Gauss’s two estimates. Li(<em>x</em>) is astonishingly accurate, but never exact.
+              </figcaption>
+            </figure>
+            <p>The question is how good this estimate is. How far can the true count stray from Li(<em>x</em>)? The Riemann hypothesis is, in essence, the claim that the error is always about as small as it could possibly be.</p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Euler’s Golden Key</h2>
+            <p>The bridge between primes and smooth functions was found by Leonhard Euler. He studied the sum of the reciprocals of powers of all whole numbers,</p>
+            <p>$$\zeta(s) = 1 + \frac{1}{2^s} + \frac{1}{3^s} + \frac{1}{4^s} + \cdots,$$</p>
+            <p>and in 1734 he amazed Europe by showing that for <em>s</em> = 2 the sum is π²/6. In 1737 he found something even more important: the same sum can be written as a product over the primes alone, <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span></p>
+            <p>$$\zeta(s) = \frac{1}{1 - 2^{-s}} \cdot \frac{1}{1 - 3^{-s}} \cdot \frac{1}{1 - 5^{-s}} \cdot \frac{1}{1 - 7^{-s}} \cdots$$</p>
+            <p>The product works because every whole number can be split into primes in exactly one way. It means that the function ζ, which is smooth and can be studied with calculus, secretly contains all the information about the primes. It is now called the Riemann zeta function, after the mathematician who discovered how to unlock that information.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Riemann’s Eight Pages</h2>
+            <p>In 1859 Bernhard Riemann, recently elected to the Berlin Academy, sent it a short paper with the title “On the number of primes less than a given magnitude”. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> It is only about eight pages long, and it is the only paper he ever wrote on number theory. In it, he let the variable <em>s</em> be a complex number, <em>s</em> = σ + <em>it</em>, with a real part σ and an imaginary part <em>t</em>. The sum defining ζ(<em>s</em>) only makes sense when σ is greater than 1, but Riemann showed how to extend the function to the whole complex plane (except <em>s</em> = 1), and found a symmetry that relates its values at <em>s</em> and 1 − <em>s</em>.</p>
+            <p>He then showed that the primes are controlled by the places where ζ(<em>s</em>) equals zero. Some zeros are easy to find, at −2, −4, −6 and so on; these are called the trivial zeros. All the others, the <strong>nontrivial zeros</strong>, lie in the <em>critical strip</em> where σ is between 0 and 1. Riemann remarked that it is “very probable” (“sehr wahrscheinlich”) that they all have real part exactly ½, adding that he had put aside the search for a proof after some fleeting attempts, as it was not needed for his immediate purpose. That remark is the Riemann hypothesis.</p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. What the Hypothesis Says</h2>
+            <p>Stated precisely:</p>
+            <div class="callout callout-tip">
+              <div class="callout-header">The Riemann hypothesis</div>
+              <p>Every nontrivial zero of the Riemann zeta function has real part ½. That is, if ζ(<em>s</em>) = 0 and <em>s</em> is not one of −2, −4, −6, …, then <em>s</em> = ½ + <em>it</em> for some real number <em>t</em>.</p>
+            </div>
+            <p>The vertical line σ = ½ is called the <strong>critical line</strong>. The zeros come in mirror-image pairs above and below the real axis, and the first few lie at heights <em>t</em> = 14.1347…, 21.0220…, 25.0109…. You can find them yourself below.</p>
+            <figure class="fig" data-fig="fig-zeta-zeros">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Hunting zeros.</strong> The curve shows the size of ζ(σ + <em>it</em>) as you move up a vertical line. On the critical line σ = ½ it touches zero again and again. Move the line left or right and the zeros disappear.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-7">
+            <h2>7. The Music of the Primes</h2>
+            <p>Why should the zeros of a function tell us anything about primes? Riemann found an exact formula, later refined by Hans von Mangoldt, that expresses the count of primes as a smooth main term minus a sum of waves, one wave for each nontrivial zero. The height of a zero sets the frequency of its wave; its real part sets how fast the wave grows. With enough zeros, the smooth curve reshapes itself into the jagged staircase of the primes, with a step at every prime.</p>
+            <figure class="fig" data-fig="fig-explicit-formula">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. The zeros rebuild the primes.</strong> Add zeros one at a time to Riemann’s explicit formula and watch a smooth curve turn into a staircase that steps up at every prime and prime power.
+              </figcaption>
+            </figure>
+            <p>If all the zeros have real part ½, then all the waves grow at the same, slowest possible rate, about √<em>x</em>, and the primes never stray far from Gauss’s estimate. In 1901 Helge von Koch showed that the Riemann hypothesis is equivalent to saying that the error in Li(<em>x</em>) is never much bigger than √<em>x</em> ln <em>x</em>. A single zero off the line would create a wave that grows faster and makes the primes much less regular.</p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Why Mathematicians Care</h2>
+            <p>Over the past century, thousands of theorems have been proved on the assumption that the Riemann hypothesis, or its generalisations, is true. They concern the gaps between primes, the speed of algorithms that test whether a number is prime, and many questions in algebra and analysis. A proof would turn all of these conditional results into theorems at a stroke, and the methods used would probably be at least as important as the result itself. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+            <p>A common myth is that a proof would break internet encryption. Systems such as RSA rely on the difficulty of factoring very large numbers into primes. The Riemann hypothesis concerns how primes are distributed on average and gives no fast way to factor a number. Mathematicians and cryptographers already work on the assumption that the hypothesis is true.</p>
+            <p>There are also generalised versions. The <strong>generalised Riemann hypothesis</strong> makes the same claim for a large family of related functions, including the Dirichlet L-functions, which control how primes are distributed among remainders, for example among numbers ending in 1, 3, 7 or 9.</p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. A Century and a Half of Partial Progress</h2>
+            <p>In 1896 Jacques Hadamard and Charles-Jean de la Vallée Poussin independently proved Gauss’s guess, the <strong>prime number theorem</strong>, by showing that no zeros lie on the edge of the critical strip, where σ = 1. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>, <a class="cite" href="#ref-7">7</a>]</span> In 1900 David Hilbert put the Riemann hypothesis eighth on his famous list of problems for the twentieth century. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span></p>
+            <p>In 1914 G. H. Hardy proved that infinitely many zeros lie on the critical line. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span> Later results showed that a positive proportion of all zeros do: Atle Selberg in 1942, Norman Levinson with more than a third in 1974, <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span> Brian Conrey with more than two fifths in 1989, <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span> and Kyle Pratt, Nicolas Robles, Alexandru Zaharescu and Dirk Zeindler with more than five twelfths (41.7%) in 2020. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span></p>
+            <figure class="fig" data-fig="fig-zero-records">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. How much of the line has been proven?</strong> The proven lower bound on the share of zeros on the critical line, over time. Choose a result to read about it. The Riemann hypothesis is the claim that the true figure is 100%, with no exceptions.
+              </figcaption>
+            </figure>
+            <p>Computers have checked the hypothesis directly for enormous numbers of zeros. In 2021 David Platt and Tim Trudgian confirmed that all zeros up to height 3 × 10<sup>12</sup>, about 12 trillion of them, lie on the critical line. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span> Such checks cannot prove the hypothesis, which concerns infinitely many zeros, and in number theory patterns sometimes fail only at enormous sizes. There have also been many claimed proofs that did not survive scrutiny, including one presented by the distinguished mathematician Michael Atiyah in 2018.</p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Proofs That a Computer Can Check</h2>
+            <p>To understand the 2026 claim, we need one more idea. A <strong>proof assistant</strong> is a program in which mathematics is written in a precise formal language. A small core program, the <em>kernel</em>, checks that every step follows from the axioms and from earlier results by the rules of logic. If the kernel accepts a proof, there are no gaps, unless the kernel itself has a bug.</p>
+            <p>Formal proofs have already settled controversies. Georges Gonthier and colleagues formally verified the four colour theorem, first proved with heavy computer assistance in 1976, completing the work in 2005. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span> Thomas Hales’s 1998 proof of the Kepler conjecture on packing spheres was so complex that referees could not fully check it; a team completed a formal proof in 2014, published in 2017. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span> One widely used proof assistant is <strong>Lean</strong>, and its community library, <strong>Mathlib</strong>, contains a vast amount of formalised mathematics, including a formal statement of the Riemann hypothesis:</p>
+            <pre><code>def RiemannHypothesis : Prop :=
+  ∀ (s : ℂ) (_ : riemannZeta s = 0) (_ : ¬∃ n : ℕ, s = -2 * (n + 1)) (_ : s ≠ 1), s.re = 1 / 2</code></pre>
+            <p>In words: for every complex number <em>s</em>, if ζ(<em>s</em>) = 0, <em>s</em> is not a trivial zero, and <em>s</em> ≠ 1, then the real part of <em>s</em> is ½. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span> (The condition <em>s</em> ≠ 1 is a technicality: Mathlib assigns ζ an arbitrary value at its pole.) A formal proof of a theorem with exactly this statement, accepted by Lean’s kernel, would be a machine-checked proof of the Riemann hypothesis.</p>
+          </section>
+
+          <section id="section-11">
+            <h2>11. August 2026: Claude and the Zeros on the Line</h2>
+            <p>The story of the claim begins with a smaller result. On 10 August 2026, Anthropic reported that a staff member, Jarred Sumner, who is not a mathematician, had asked an unreleased research version of Claude to “take a real stab” at the Riemann hypothesis. <span class="cite-group">[<a class="cite" href="#ref-17">17</a>]</span> Claude did not prove it. But over two sessions, coordinating about 60 instances of itself that proposed ideas, checked them numerically against known zeros and reviewed each other’s work, it found a way to raise the proven share of zeros on the critical line from about 41.7% to two thirds.</p>
+            <p>Two of Anthropic’s mathematicians, Levent Alpöge and Ralph Furman, examined and verified the argument, and the paper appeared on the arXiv under their names, with a statement on its first page that “the mathematical argument in this paper was discovered and written by Claude” and that the listed authors “verified the proof and take responsibility for its content”. <span class="cite-group">[<a class="cite" href="#ref-18">18</a>]</span> Anthropic thanked the experts Brian Conrey and Dan Goldston for examining it, and a Lean formalisation accompanied it. Anthropic’s post was explicit about the limits: “We don’t expect that the techniques Claude used will lead to proving the Riemann hypothesis.” <span class="cite-group">[<a class="cite" href="#ref-17">17</a>]</span></p>
+          </section>
+
+          <section id="section-12">
+            <h2>12. November 2026: The Claimed Proof</h2>
+            <p>Three months later, on 20 November 2026, Alpöge posted a four-page note titled “Remark” on his personal website, together with a compressed archive of Lean code. In it he wrote that, working with Claude, he had found a proof of the Riemann hypothesis, and of the generalised Riemann hypothesis for Dirichlet L-functions, fully formalised in Lean. <span class="cite-group">[<a class="cite" href="#ref-19">19</a>]</span> There was no conventional human-readable proof.</p>
+            <p>The archive is enormous. Volunteers who mirrored and analysed it counted 175,187 Lean files and about 17.4 million lines of code, with more than 800,000 theorems and lemmas and no comments. <span class="cite-group">[<a class="cite" href="#ref-20">20</a>]</span> Its main file proves five theorems: Mathlib’s own <code>RiemannHypothesis</code>, an equivalent restatement, and three statements of the generalised hypothesis for Dirichlet L-functions. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+            <p>Note who made the claim. It was announced by an individual mathematician who works at Anthropic, describing work done with Anthropic’s AI. At the time of writing, Anthropic’s own news and research pages carried no announcement or endorsement of the November claim. Describing it as “Anthropic solving the Riemann hypothesis” goes beyond what has been established.</p>
+          </section>
+
+          <section id="section-13">
+            <h2>13. What Has Been Checked, and What Has Not</h2>
+            <p>Within hours, members of the Lean community began checking the archive. They set up a public repository under the <code>leanprover-community</code> organisation on GitHub to maintain and verify the formalisation. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span> The checks reported so far include:</p>
+            <ul>
+              <li><strong>Statement matching.</strong> A tool called Comparator checks that the proved theorems are exactly the intended statements, written independently in a file that imports only Mathlib, so that the proof cannot quietly redefine what “zeta” or “zero” means. A second check compares the statements with versions written before the announcement in Google DeepMind’s <em>formal-conjectures</em> project. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>, <a class="cite" href="#ref-20">20</a>]</span></li>
+              <li><strong>Axioms.</strong> The proof is reported to use only Lean’s three standard axioms, with no extra assumptions, and a text scan found no <code>sorry</code> (Lean’s placeholder for a missing proof) or similar escape hatches. <span class="cite-group">[<a class="cite" href="#ref-20">20</a>]</span></li>
+              <li><strong>Independent kernels.</strong> According to a community dashboard that collects the reports, the complete proof was accepted both by Lean’s own kernel and by nanoda, an independently written checker, and several outside parties reported reproducing the checks with their own builds. <span class="cite-group">[<a class="cite" href="#ref-21">21</a>]</span></li>
+              <li><strong>Mathlib’s response.</strong> The documentation of Mathlib’s <code>RiemannHypothesis</code> definition now points readers to the community repository “for a construction of a term of type <code>RiemannHypothesis</code>”: in Lean’s language, a proof. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span></li>
+            </ul>
+            <p>What has <strong>not</strong> happened is just as important. No mathematician has yet explained the argument in a form that people can read and understand, and it has not been through peer review. The community’s own notes list what a successful check still trusts: the checking programs, Mathlib’s definitions, its official build cache, the export tools and the sandboxes in which the code was run. <span class="cite-group">[<a class="cite" href="#ref-20">20</a>]</span> The project was written for a version of Lean that predates some kernel bug fixes, which is why the checkers used a newer version and independent kernels. <span class="cite-group">[<a class="cite" href="#ref-20">20</a>]</span> And a kernel can confirm that a proof is valid without anyone knowing <em>why</em> the theorem is true. Early reactions from mathematicians quoted in the press ranged from cautious optimism to sharp criticism of the way the result was presented.</p>
+          </section>
+
+          <section id="section-14">
+            <h2>14. What Happens Next</h2>
+            <p>If the formal proof holds up, it will be one of the most remarkable events in the history of mathematics, and the first time a problem of this stature has been settled with AI playing a central part. But a proof that is correct and a proof that is accepted are not the same thing. Mathematicians will want to know the ideas: which known results it builds on, where the new insight lies, and whether it can be explained in a few dozen pages rather than millions of lines. Volunteers have already started mapping the formal proof, shrinking it and writing guides to its structure.</p>
+            <p>The Clay Mathematics Institute’s rules for its Millennium Prizes require that a solution be published in a qualifying outlet, that at least two years pass after publication, and that it gain general acceptance in the mathematical community. <span class="cite-group">[<a class="cite" href="#ref-22">22</a>]</span> So whatever happens, no prize decision can be expected soon.</p>
+            <p>This article will not take sides on whether the proof is correct. The honest summary, on 23 November 2026, is: a proof of the Riemann hypothesis has been <em>claimed</em> by an Anthropic mathematician working with Claude; its formal statement appears to be the right one; independent computer checks reported so far have accepted it; and human understanding and traditional review have barely begun.</p>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Legend and Record</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: separating headlines from sources</div>
+              <p><strong>The legend:</strong> “Anthropic solved the Riemann hypothesis.”</p>
+              <p><strong>The record:</strong> the claim was made by Levent Alpöge on his own website, describing work with Claude. Anthropic’s published statement on the subject, from August 2026, concerns the earlier two-thirds result and says the company did not expect those techniques to prove the hypothesis. <span class="cite-group">[<a class="cite" href="#ref-17">17</a>, <a class="cite" href="#ref-19">19</a>]</span> As of 23 November 2026 the full claim is unrefereed.</p>
+              <p><strong>A second legend:</strong> “Riemann claimed to have a proof.” <strong>The record:</strong> he did not. He called the statement very probable and said he had set aside the search for a proof. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span></p>
+              <p><strong>A third legend:</strong> “Billions of zeros have been checked, so it must be true.” <strong>The record:</strong> numerical checks are strong evidence but not proof. In number theory, some patterns hold for every number anyone can compute and still fail eventually; for example, Li(<em>x</em>) is larger than π(<em>x</em>) for every <em>x</em> ever computed, yet J. E. Littlewood proved in 1914 that this reverses infinitely often.</p>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Philosophy Corner</h2>
+            <div class="callout callout-philosophy">
+              <div class="callout-header">Philosophy Corner: is a proof nobody can read a proof?</div>
+              <p>When Kenneth Appel and Wolfgang Haken proved the four colour theorem in 1976 with hours of computer calculations, some mathematicians objected that a proof should be something a person can survey and understand. The philosopher Thomas Tymoczko argued in 1979 that accepting it meant changing the very idea of proof, adding a kind of experimental evidence to mathematics. <span class="cite-group">[<a class="cite" href="#ref-23">23</a>]</span> Today computer-assisted proofs are widely accepted, and formal verification is often considered <em>more</em> reliable than human refereeing.</p>
+              <p>A 17-million-line formal proof of the Riemann hypothesis pushes the question further. If the kernel accepts it, we may be more certain that the theorem is true than of almost any human proof. Yet a proof is also supposed to give understanding: to show <em>why</em>. Would a correct but incomprehensible proof end the story, or only begin a new one, in which people try to learn from what a machine has found? And how much should we trust a result whose correctness rests on software, a library of definitions and the people who check them?</p>
+            </div>
+          </section>
+
+          <section id="section-17">
+            <h2>17. People in This Story</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Leonhard Euler</td>
+                <td style="padding:0.6rem 0.8rem;">1707–1783<br>Basel, St Petersburg and Berlin</td>
+                <td style="padding:0.6rem 0.8rem;">The Euler product (1737)</td>
+                <td style="padding:0.6rem 0.8rem;">Linked the primes to the zeta function.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Carl Friedrich Gauss</td>
+                <td style="padding:0.6rem 0.8rem;">1777–1855<br>Göttingen</td>
+                <td style="padding:0.6rem 0.8rem;">Density of primes (1790s)</td>
+                <td style="padding:0.6rem 0.8rem;">Guessed that primes near x occur with density 1/ln x.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Bernhard Riemann</td>
+                <td style="padding:0.6rem 0.8rem;">1826–1866<br>Göttingen</td>
+                <td style="padding:0.6rem 0.8rem;">“On the number of primes less than a given magnitude” (1859)</td>
+                <td style="padding:0.6rem 0.8rem;">Connected primes to the zeros of ζ and stated the hypothesis.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">G. H. Hardy</td>
+                <td style="padding:0.6rem 0.8rem;">1877–1947<br>Cambridge and Oxford</td>
+                <td style="padding:0.6rem 0.8rem;">Infinitely many zeros on the critical line (1914)</td>
+                <td style="padding:0.6rem 0.8rem;">Began the long series of partial results.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Brian Conrey</td>
+                <td style="padding:0.6rem 0.8rem;">born 1955<br>American Institute of Mathematics</td>
+                <td style="padding:0.6rem 0.8rem;">More than two fifths of the zeros on the line (1989)</td>
+                <td style="padding:0.6rem 0.8rem;">Set a record that stood for decades and examined Claude’s 2026 result.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Levent Alpöge</td>
+                <td style="padding:0.6rem 0.8rem;">Anthropic</td>
+                <td style="padding:0.6rem 0.8rem;">Verified Claude’s two-thirds result (2026); announced a claimed proof (November 2026)</td>
+                <td style="padding:0.6rem 0.8rem;">Made the claim now being checked.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-18">
+            <h2>18. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about the Riemann hypothesis and the 2026 claim.</p>
+            <figure class="fig" data-fig="fig-quiz-rh">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-19">
+            <h2>19. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources. Sources about the November 2026 claim were read on 23 November 2026 and describe a fast-moving situation.</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Bombieri, Enrico.</strong> (2006). "The Riemann hypothesis." In J. Carlson, A. Jaffe &amp; A. Wiles (eds.), <em>The Millennium Prize Problems</em>, pp. 107–124. Cambridge, MA: Clay Mathematics Institute; Providence, RI: American Mathematical Society.</li>
+              <li id="ref-2"><strong>Lean community.</strong> (2026). <em>riemann-hypothesis</em>: community repository for the Lean formalisation of the claimed proof (README and theorem statements). GitHub: leanprover-community/riemann-hypothesis. Read 23 November 2026.</li>
+              <li id="ref-3"><strong>Derbyshire, John.</strong> (2003). <em>Prime Obsession: Bernhard Riemann and the Greatest Unsolved Problem in Mathematics</em>. Washington, DC: Joseph Henry Press.</li>
+              <li id="ref-4"><strong>Euler, Leonhard.</strong> (1744). "Variae observationes circa series infinitas." <em>Commentarii Academiae Scientiarum Petropolitanae</em>, 9: 160–188. (Presented 1737.)</li>
+              <li id="ref-5"><strong>Riemann, Bernhard.</strong> (1859). "Ueber die Anzahl der Primzahlen unter einer gegebenen Grösse." <em>Monatsberichte der Königlich Preußischen Akademie der Wissenschaften zu Berlin</em>, November 1859: 671–680.</li>
+              <li id="ref-6"><strong>Hadamard, Jacques.</strong> (1896). "Sur la distribution des zéros de la fonction ζ(s) et ses conséquences arithmétiques." <em>Bulletin de la Société Mathématique de France</em>, 24: 199–220.</li>
+              <li id="ref-7"><strong>de la Vallée Poussin, Charles-Jean.</strong> (1896). "Recherches analytiques sur la théorie des nombres premiers." <em>Annales de la Société Scientifique de Bruxelles</em>, 20: 183–256.</li>
+              <li id="ref-8"><strong>Hilbert, David.</strong> (1902). "Mathematical problems." <em>Bulletin of the American Mathematical Society</em>, 8(10): 437–479.</li>
+              <li id="ref-9"><strong>Hardy, G. H.</strong> (1914). "Sur les zéros de la fonction ζ(s) de Riemann." <em>Comptes Rendus de l’Académie des Sciences</em>, 158: 1012–1014.</li>
+              <li id="ref-10"><strong>Levinson, Norman.</strong> (1974). "More than one third of zeros of Riemann’s zeta-function are on σ = 1/2." <em>Advances in Mathematics</em>, 13(4): 383–436.</li>
+              <li id="ref-11"><strong>Conrey, J. B.</strong> (1989). "More than two fifths of the zeros of the Riemann zeta function are on the critical line." <em>Journal für die reine und angewandte Mathematik</em>, 399: 1–26.</li>
+              <li id="ref-12"><strong>Pratt, Kyle, Robles, Nicolas, Zaharescu, Alexandru &amp; Zeindler, Dirk.</strong> (2020). "More than five-twelfths of the zeros of ζ are on the critical line." <em>Research in the Mathematical Sciences</em>, 7: 2.</li>
+              <li id="ref-13"><strong>Platt, Dave &amp; Trudgian, Tim.</strong> (2021). "The Riemann hypothesis is true up to 3·10¹²." <em>Bulletin of the London Mathematical Society</em>, 53(3): 792–797.</li>
+              <li id="ref-14"><strong>Gonthier, Georges.</strong> (2008). "Formal proof—the four-color theorem." <em>Notices of the American Mathematical Society</em>, 55(11): 1382–1393.</li>
+              <li id="ref-15"><strong>Hales, Thomas, et al.</strong> (2017). "A formal proof of the Kepler conjecture." <em>Forum of Mathematics, Pi</em>, 5: e2.</li>
+              <li id="ref-16"><strong>The Mathlib Community.</strong> <em>Mathlib</em>, file Mathlib/NumberTheory/LSeries/RiemannZeta.lean (definition <code>RiemannHypothesis</code> and its documentation). GitHub: leanprover-community/mathlib4. Read 23 November 2026.</li>
+              <li id="ref-17"><strong>Anthropic.</strong> (2026). "Learning more about Claude’s mathematical capabilities." Anthropic research post, 10 August 2026 (updated 13 August 2026). anthropic.com/research/riemann-zeta.</li>
+              <li id="ref-18"><strong>Alpöge, Levent &amp; Furman, Ralph.</strong> (2026). "More than two thirds of the zeros of the Riemann zeta function are simple and on the critical line." arXiv:2608.13637 [math.NT].</li>
+              <li id="ref-19"><strong>Alpöge, Levent.</strong> (2026). "Remark." Four-page note with an accompanying Lean archive, posted 20 November 2026 at alpo.ge/remark.pdf (as preserved and described by the mirrors and community repositories cited here).</li>
+              <li id="ref-20"><strong>Lean community.</strong> (2026). "Verification notes." File verification/NOTES.md in GitHub repository leanprover-community/riemann-hypothesis. Read 23 November 2026.</li>
+              <li id="ref-21"><strong>riemann-rev.</strong> (2026). "The announced proof of the Riemann hypothesis: a map, a guide and a verification dashboard." GitHub repository nasqret/riemann-rev, status record of 20 November 2026, 23:51 UTC. An independent community project.</li>
+              <li id="ref-22"><strong>Clay Mathematics Institute.</strong> (2018). <em>Rules for the Millennium Prize Problems</em> (revised 2018). Cambridge, MA: Clay Mathematics Institute.</li>
+              <li id="ref-23"><strong>Tymoczko, Thomas.</strong> (1979). "The four-color problem and its philosophical significance." <em>Journal of Philosophy</em>, 76(2): 57–83.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/the-riemann-hypothesis-and-the-claimed-ai-proof.js"></script>
+</body>
+</html>
