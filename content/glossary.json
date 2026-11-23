@@ -6146,5 +6146,245 @@
     "term": "Phases of Venus",
     "definition": "The changing illuminated shape of Venus seen in a telescope; Galileo’s observation of a full cycle in 1610 refuted Ptolemy’s arrangement of the planets.",
     "forms": []
+  },
+  {
+    "term": "Inverse-square law",
+    "definition": "A law in which a quantity, such as gravitational force, falls off as one over the square of the distance.",
+    "forms": [
+      "inverse square law"
+    ]
+  },
+  {
+    "term": "Absolute space",
+    "definition": "Newton’s view that space is a fixed, infinite container existing independently of the bodies in it.",
+    "forms": []
+  },
+  {
+    "term": "Relationalism",
+    "definition": "Leibniz’s view that space and time are nothing more than relations between bodies and events.",
+    "forms": [
+      "relational space"
+    ]
+  },
+  {
+    "term": "Action at a distance",
+    "definition": "A force, like Newton’s gravity, that acts across empty space without any intervening mechanism.",
+    "forms": []
+  },
+  {
+    "term": "Laws of motion",
+    "definition": "Newton’s three laws: inertia, force equals mass times acceleration, and action equals reaction.",
+    "forms": [
+      "Newton’s laws of motion"
+    ]
+  },
+  {
+    "term": "Fundamental theorem of calculus",
+    "definition": "The discovery that differentiation and integration are inverse operations.",
+    "forms": []
+  },
+  {
+    "term": "Constant conjunction",
+    "definition": "Hume’s term for the regular association of one kind of event with another, which is all experience shows us of causation.",
+    "forms": []
+  },
+  {
+    "term": "Hume’s fork",
+    "definition": "Hume’s division of knowledge into relations of ideas (certain but uninformative) and matters of fact (informative but known only by experience).",
+    "forms": [
+      "Hume's fork"
+    ]
+  },
+  {
+    "term": "Synthetic a priori",
+    "definition": "Kant’s term for judgements that extend our knowledge yet are known independently of experience, such as (he argued) geometry and the causal principle.",
+    "forms": []
+  },
+  {
+    "term": "Nebular hypothesis",
+    "definition": "The theory, proposed by Kant (1755) and Laplace (1796), that the Solar System formed from a collapsing, rotating cloud of gas and dust.",
+    "forms": []
+  },
+  {
+    "term": "Rule of succession",
+    "definition": "Laplace’s rule that after n successes and no failures the probability of another success is (n + 1)/(n + 2).",
+    "forms": []
+  },
+  {
+    "term": "Grue",
+    "definition": "Goodman’s invented predicate (green if observed before a certain time, blue otherwise) used to pose the new riddle of induction.",
+    "forms": []
+  },
+  {
+    "term": "Genetic drift",
+    "definition": "Random change in the frequency of gene variants from one generation to the next, strongest in small populations.",
+    "forms": []
+  },
+  {
+    "term": "Wallace Line",
+    "definition": "The faunal boundary through the Indonesian islands, between Bali and Lombok and Borneo and Sulawesi, separating Asian from Australian animals.",
+    "forms": []
+  },
+  {
+    "term": "Modern synthesis",
+    "definition": "The unification, in the 1920s–40s, of Darwin’s natural selection with Mendelian genetics.",
+    "forms": []
+  },
+  {
+    "term": "Heritability",
+    "definition": "The fraction of the variation in a trait within a population that is due to inherited differences.",
+    "forms": []
+  },
+  {
+    "term": "Breeder’s equation",
+    "definition": "R = h²S: the response of a trait to selection equals its heritability times the strength of selection.",
+    "forms": [
+      "Breeder's equation"
+    ]
+  },
+  {
+    "term": "Consilience of inductions",
+    "definition": "Whewell’s term for a theory’s explaining many different kinds of facts it was not designed for, which strongly supports it.",
+    "forms": [
+      "consilience"
+    ]
+  },
+  {
+    "term": "Artificial selection",
+    "definition": "Deliberate breeding by humans of plants or animals with desired traits; Darwin’s model for natural selection.",
+    "forms": []
+  },
+  {
+    "term": "Radioactivity",
+    "definition": "The spontaneous emission of radiation by unstable atomic nuclei as they transform into other nuclei; the term was coined by Marie Curie.",
+    "forms": [
+      "radioactive"
+    ]
+  },
+  {
+    "term": "Brownian motion",
+    "definition": "The random jiggling of small particles suspended in a fluid, caused by collisions with its molecules.",
+    "forms": []
+  },
+  {
+    "term": "Avogadro’s number",
+    "definition": "The number of particles in one mole of a substance, about 6.022 × 10²³.",
+    "forms": [
+      "Avogadro's number",
+      "Avogadro constant"
+    ]
+  },
+  {
+    "term": "Mach number",
+    "definition": "The ratio of an object’s speed to the local speed of sound.",
+    "forms": []
+  },
+  {
+    "term": "Mach’s principle",
+    "definition": "The idea, named by Einstein after Mach, that inertia arises from the influence of all the matter in the universe.",
+    "forms": [
+      "Mach's principle"
+    ]
+  },
+  {
+    "term": "Inference to the best explanation",
+    "definition": "Accepting a hypothesis because it explains the available evidence better than its rivals.",
+    "forms": []
+  },
+  {
+    "term": "Relativity of simultaneity",
+    "definition": "The result of special relativity that events simultaneous for one observer need not be simultaneous for another moving relative to the first.",
+    "forms": []
+  },
+  {
+    "term": "Conventionalism",
+    "definition": "Poincaré’s view that some basic principles of science, such as the choice of geometry, are conventions chosen for convenience rather than facts forced by experiment.",
+    "forms": []
+  },
+  {
+    "term": "Lorentz transformation",
+    "definition": "The equations relating space and time coordinates of observers moving uniformly relative to each other in special relativity.",
+    "forms": [
+      "Lorentz transformations"
+    ]
+  },
+  {
+    "term": "Michelson–Morley experiment",
+    "definition": "The 1887 interferometer experiment that found no sign of the Earth’s motion through the supposed luminiferous ether.",
+    "forms": []
+  },
+  {
+    "term": "Gravitational wave",
+    "definition": "A ripple in the curvature of spacetime travelling at the speed of light, predicted by general relativity and detected in 2015.",
+    "forms": [
+      "gravitational waves"
+    ]
+  },
+  {
+    "term": "Integer partition",
+    "definition": "A way of writing a positive whole number as a sum of positive whole numbers, ignoring order; p(n) counts them.",
+    "forms": [
+      "partitions of",
+      "partition numbers"
+    ]
+  },
+  {
+    "term": "Raman scattering",
+    "definition": "Inelastic scattering of light in which photons gain or lose energy to molecular vibrations, shifting their colour; discovered by Raman and Krishnan in 1928.",
+    "forms": [
+      "Raman effect",
+      "Raman spectroscopy"
+    ]
+  },
+  {
+    "term": "Stokes line",
+    "definition": "A Raman line at lower photon energy than the incident light; an anti-Stokes line lies at higher energy.",
+    "forms": [
+      "Stokes lines",
+      "anti-Stokes"
+    ]
+  },
+  {
+    "term": "Boson",
+    "definition": "A particle, such as a photon, that obeys Bose–Einstein statistics and can share a quantum state with others of its kind.",
+    "forms": [
+      "bosons"
+    ]
+  },
+  {
+    "term": "Fermion",
+    "definition": "A particle, such as an electron, that obeys the Pauli exclusion principle, so no two can share a quantum state.",
+    "forms": [
+      "fermions"
+    ]
+  },
+  {
+    "term": "Bose–Einstein condensate",
+    "definition": "A state of matter in which many bosons, cooled near absolute zero, occupy the same quantum state; first made in 1995.",
+    "forms": []
+  },
+  {
+    "term": "Planck’s law",
+    "definition": "The formula for the spectrum of light emitted by a body at a given temperature, derived by Planck (1900) and by Bose from photon counting (1924).",
+    "forms": [
+      "Planck's law"
+    ]
+  },
+  {
+    "term": "Chinese Room",
+    "definition": "Searle’s 1980 thought experiment: someone following rules to answer questions in Chinese, without understanding it, suggests that symbol manipulation alone is not understanding.",
+    "forms": [
+      "Chinese Room argument"
+    ]
+  },
+  {
+    "term": "Corroboration",
+    "definition": "Popper’s term for the credit a theory earns by surviving serious attempts to falsify it, as opposed to being confirmed or proved.",
+    "forms": []
+  },
+  {
+    "term": "Imitation game",
+    "definition": "Turing’s 1950 test in which an interrogator tries to tell a machine from a human by text conversation; now called the Turing test.",
+    "forms": []
   }
 ]

@@ -6148,5 +6148,245 @@ window.RNLEARN_GLOSSARY = [
   "Phases of Venus",
   "The changing illuminated shape of Venus seen in a telescope; Galileo’s observation of a full cycle in 1610 refuted Ptolemy’s arrangement of the planets.",
   []
+ ],
+ [
+  "Inverse-square law",
+  "A law in which a quantity, such as gravitational force, falls off as one over the square of the distance.",
+  [
+   "inverse square law"
+  ]
+ ],
+ [
+  "Absolute space",
+  "Newton’s view that space is a fixed, infinite container existing independently of the bodies in it.",
+  []
+ ],
+ [
+  "Relationalism",
+  "Leibniz’s view that space and time are nothing more than relations between bodies and events.",
+  [
+   "relational space"
+  ]
+ ],
+ [
+  "Action at a distance",
+  "A force, like Newton’s gravity, that acts across empty space without any intervening mechanism.",
+  []
+ ],
+ [
+  "Laws of motion",
+  "Newton’s three laws: inertia, force equals mass times acceleration, and action equals reaction.",
+  [
+   "Newton’s laws of motion"
+  ]
+ ],
+ [
+  "Fundamental theorem of calculus",
+  "The discovery that differentiation and integration are inverse operations.",
+  []
+ ],
+ [
+  "Constant conjunction",
+  "Hume’s term for the regular association of one kind of event with another, which is all experience shows us of causation.",
+  []
+ ],
+ [
+  "Hume’s fork",
+  "Hume’s division of knowledge into relations of ideas (certain but uninformative) and matters of fact (informative but known only by experience).",
+  [
+   "Hume's fork"
+  ]
+ ],
+ [
+  "Synthetic a priori",
+  "Kant’s term for judgements that extend our knowledge yet are known independently of experience, such as (he argued) geometry and the causal principle.",
+  []
+ ],
+ [
+  "Nebular hypothesis",
+  "The theory, proposed by Kant (1755) and Laplace (1796), that the Solar System formed from a collapsing, rotating cloud of gas and dust.",
+  []
+ ],
+ [
+  "Rule of succession",
+  "Laplace’s rule that after n successes and no failures the probability of another success is (n + 1)/(n + 2).",
+  []
+ ],
+ [
+  "Grue",
+  "Goodman’s invented predicate (green if observed before a certain time, blue otherwise) used to pose the new riddle of induction.",
+  []
+ ],
+ [
+  "Genetic drift",
+  "Random change in the frequency of gene variants from one generation to the next, strongest in small populations.",
+  []
+ ],
+ [
+  "Wallace Line",
+  "The faunal boundary through the Indonesian islands, between Bali and Lombok and Borneo and Sulawesi, separating Asian from Australian animals.",
+  []
+ ],
+ [
+  "Modern synthesis",
+  "The unification, in the 1920s–40s, of Darwin’s natural selection with Mendelian genetics.",
+  []
+ ],
+ [
+  "Heritability",
+  "The fraction of the variation in a trait within a population that is due to inherited differences.",
+  []
+ ],
+ [
+  "Breeder’s equation",
+  "R = h²S: the response of a trait to selection equals its heritability times the strength of selection.",
+  [
+   "Breeder's equation"
+  ]
+ ],
+ [
+  "Consilience of inductions",
+  "Whewell’s term for a theory’s explaining many different kinds of facts it was not designed for, which strongly supports it.",
+  [
+   "consilience"
+  ]
+ ],
+ [
+  "Artificial selection",
+  "Deliberate breeding by humans of plants or animals with desired traits; Darwin’s model for natural selection.",
+  []
+ ],
+ [
+  "Radioactivity",
+  "The spontaneous emission of radiation by unstable atomic nuclei as they transform into other nuclei; the term was coined by Marie Curie.",
+  [
+   "radioactive"
+  ]
+ ],
+ [
+  "Brownian motion",
+  "The random jiggling of small particles suspended in a fluid, caused by collisions with its molecules.",
+  []
+ ],
+ [
+  "Avogadro’s number",
+  "The number of particles in one mole of a substance, about 6.022 × 10²³.",
+  [
+   "Avogadro's number",
+   "Avogadro constant"
+  ]
+ ],
+ [
+  "Mach number",
+  "The ratio of an object’s speed to the local speed of sound.",
+  []
+ ],
+ [
+  "Mach’s principle",
+  "The idea, named by Einstein after Mach, that inertia arises from the influence of all the matter in the universe.",
+  [
+   "Mach's principle"
+  ]
+ ],
+ [
+  "Inference to the best explanation",
+  "Accepting a hypothesis because it explains the available evidence better than its rivals.",
+  []
+ ],
+ [
+  "Relativity of simultaneity",
+  "The result of special relativity that events simultaneous for one observer need not be simultaneous for another moving relative to the first.",
+  []
+ ],
+ [
+  "Conventionalism",
+  "Poincaré’s view that some basic principles of science, such as the choice of geometry, are conventions chosen for convenience rather than facts forced by experiment.",
+  []
+ ],
+ [
+  "Lorentz transformation",
+  "The equations relating space and time coordinates of observers moving uniformly relative to each other in special relativity.",
+  [
+   "Lorentz transformations"
+  ]
+ ],
+ [
+  "Michelson–Morley experiment",
+  "The 1887 interferometer experiment that found no sign of the Earth’s motion through the supposed luminiferous ether.",
+  []
+ ],
+ [
+  "Gravitational wave",
+  "A ripple in the curvature of spacetime travelling at the speed of light, predicted by general relativity and detected in 2015.",
+  [
+   "gravitational waves"
+  ]
+ ],
+ [
+  "Integer partition",
+  "A way of writing a positive whole number as a sum of positive whole numbers, ignoring order; p(n) counts them.",
+  [
+   "partitions of",
+   "partition numbers"
+  ]
+ ],
+ [
+  "Raman scattering",
+  "Inelastic scattering of light in which photons gain or lose energy to molecular vibrations, shifting their colour; discovered by Raman and Krishnan in 1928.",
+  [
+   "Raman effect",
+   "Raman spectroscopy"
+  ]
+ ],
+ [
+  "Stokes line",
+  "A Raman line at lower photon energy than the incident light; an anti-Stokes line lies at higher energy.",
+  [
+   "Stokes lines",
+   "anti-Stokes"
+  ]
+ ],
+ [
+  "Boson",
+  "A particle, such as a photon, that obeys Bose–Einstein statistics and can share a quantum state with others of its kind.",
+  [
+   "bosons"
+  ]
+ ],
+ [
+  "Fermion",
+  "A particle, such as an electron, that obeys the Pauli exclusion principle, so no two can share a quantum state.",
+  [
+   "fermions"
+  ]
+ ],
+ [
+  "Bose–Einstein condensate",
+  "A state of matter in which many bosons, cooled near absolute zero, occupy the same quantum state; first made in 1995.",
+  []
+ ],
+ [
+  "Planck’s law",
+  "The formula for the spectrum of light emitted by a body at a given temperature, derived by Planck (1900) and by Bose from photon counting (1924).",
+  [
+   "Planck's law"
+  ]
+ ],
+ [
+  "Chinese Room",
+  "Searle’s 1980 thought experiment: someone following rules to answer questions in Chinese, without understanding it, suggests that symbol manipulation alone is not understanding.",
+  [
+   "Chinese Room argument"
+  ]
+ ],
+ [
+  "Corroboration",
+  "Popper’s term for the credit a theory earns by surviving serious attempts to falsify it, as opposed to being confirmed or proved.",
+  []
+ ],
+ [
+  "Imitation game",
+  "Turing’s 1950 test in which an interrogator tries to tell a machine from a human by text conversation; now called the Turing test.",
+  []
  ]
 ];

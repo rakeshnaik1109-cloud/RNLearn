@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popper, Kuhn and Turing: What Makes Science Science, and Can Machines Think? — RNLearn</title>
+  <meta name="description" content="Popper’s falsifiability and the Wason task, Kuhn’s paradigms and revolutions, Turing machines, the halting problem and the imitation game; and a look back at how we came to know.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/popper-kuhn-and-turing.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Popper, Kuhn and Turing: What Makes Science Science, and Can Machines Think? — RNLearn">
+  <meta property="og:description" content="Popper’s falsifiability and the Wason task, Kuhn’s paradigms and revolutions, Turing machines, the halting problem and the imitation game; and a look back at how we came to know.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/popper-kuhn-and-turing.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Popper, Kuhn and Turing: What Makes Science Science, and Can Machines Think? — RNLearn">
+  <meta name="twitter:description" content="Popper’s falsifiability and the Wason task, Kuhn’s paradigms and revolutions, Turing machines, the halting problem and the imitation game; and a look back at how we came to know.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Popper, Kuhn and Turing: What Makes Science Science, and Can Machines Think?",
+    "description": "Popper’s falsifiability and the Wason task, Kuhn’s paradigms and revolutions, Turing machines, the halting problem and the imitation game; and a look back at how we came to know.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-23",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/popper-kuhn-and-turing.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/philosophy-ideas.html" class="post-subject-tag" data-subject="philosophy-ideas">Philosophy &amp; Ideas</a>
+        </div>
+        <h1 class="article-title">Popper, Kuhn and Turing: What Makes Science Science, and Can Machines Think?</h1>
+        <p class="article-standfirst">
+          A Viennese philosopher said science lives by trying to prove itself wrong; an American historian said it lives by paradigms until revolutions overturn them; an English mathematician asked what thinking is, and whether machines could do it.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-23">23 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>14 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/minds-that-changed-how-we-know.html">Minds That Changed How We Know</a> (Part 12 of 12)</div>
+  <div class="series-banner-links">
+    <a href="ramanujan-raman-and-bose.html">← Part 11: Ramanujan, C. V. Raman and S. N. Bose: Intuition, Scattered Light and Counting Particles</a>
+    <span>Final part</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. What Makes Science Science?</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Karl Popper: A Lesson from 1919</a></li>
+              <li><a class="toc-link" href="#section-4">4. Falsifiability and the Logic of Discovery</a></li>
+              <li><a class="toc-link" href="#section-5">5. Popper’s Later Life</a></li>
+              <li><a class="toc-link" href="#section-6">6. Thomas Kuhn: The Structure of Scientific Revolutions</a></li>
+              <li><a class="toc-link" href="#section-7">7. Alan Turing: What Is Computation?</a></li>
+              <li><a class="toc-link" href="#section-8">8. The Limits of Algorithms</a></li>
+              <li><a class="toc-link" href="#section-9">9. Can Machines Think?</a></li>
+              <li><a class="toc-link" href="#section-10">10. Kuhn’s Revolutions and Incommensurability</a></li>
+              <li><a class="toc-link" href="#section-11">11. After Popper and Kuhn</a></li>
+              <li><a class="toc-link" href="#section-12">12. The 1965 Debate, and What We Have Learned</a></li>
+              <li><a class="toc-link" href="#section-13">13. The Series in One Picture</a></li>
+              <li><a class="toc-link" href="#section-14">14. Try It Yourself: Testing Ideas</a></li>
+              <li><a class="toc-link" href="#section-15">15. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-16">16. Philosophy Corner</a></li>
+              <li><a class="toc-link" href="#section-17">17. People in This Part</a></li>
+              <li><a class="toc-link" href="#section-18">18. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-19">19. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. What Makes Science Science?</h2>
+            <p>This series has followed thinkers who changed how we know: Socrates’ questions, Euclid’s proofs, Ibn al-Haytham’s experiments, Bacon’s tables, Newton’s laws, Hume’s doubts, Darwin’s long argument and Einstein’s rethinking of time. In the twentieth century, philosophers turned to science itself and asked what, if anything, makes it special. Karl Popper answered that science is the practice of making bold conjectures and trying hard to refute them. Thomas Kuhn, a physicist turned historian, replied that real science looks very different: long periods of puzzle-solving within a shared framework, broken by revolutions. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <p>Meanwhile Alan Turing asked what thinking itself is. By defining precisely what it means to compute, he founded computer science, showed that some questions can never be answered by any algorithm, and asked whether machines could think. His question is now among the most pressing of our age.</p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-m12-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. From Vienna to the Turing test, 1902–2013.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Karl Popper: A Lesson from 1919</h2>
+            <p>Karl Popper was born in Vienna in 1902, into a cultured family of Jewish origin. As a teenager in the turbulent Vienna after the First World War, he was briefly attracted to Marxism and worked with the psychologist Alfred Adler. In 1919, he later wrote, he noticed a striking contrast. Marxists, Freudians and Adlerians could explain every possible observation as confirming their theories; nothing could ever count against them. Einstein’s general relativity, by contrast, had just made a risky prediction about the bending of starlight that the 1919 eclipse could have refuted (Part 10). <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> Popper concluded that a theory that explains everything explains nothing, and that the mark of science is the possibility of being wrong.</p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Falsifiability and the Logic of Discovery</h2>
+            <p>In <em>Logik der Forschung</em> (1934; English edition <em>The Logic of Scientific Discovery</em>, 1959), Popper proposed a solution to Hume’s problem of induction (Part 7): abandon induction altogether. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span> No number of observed white swans can prove that all swans are white, but a single black swan proves it false. This asymmetry means that science should not seek confirmation but should propose bold conjectures and attempt to <strong>falsify</strong> them. A theory is scientific if it forbids certain observations, so that it could be refuted; it gains credit, or “corroboration”, by surviving serious attempts to refute it, but it is never proved. Popper called this the criterion of <strong>demarcation</strong> between science and non-science.</p>
+            <p>The idea had a profound influence on scientists, who liked its picture of science as heroic criticism. It also has well-known difficulties. A failed prediction never refutes a theory alone, because predictions always depend on auxiliary assumptions, as Duhem had pointed out (Part 10): when Uranus strayed from its Newtonian orbit, astronomers did not abandon Newton but postulated an unseen planet, and found Neptune (Part 6). Popper accepted that falsification is a methodological decision, not a mechanical rule, and he warned against rescuing theories with ad hoc adjustments. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+            <figure class="fig" data-fig="fig-wason">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. The Wason selection task.</strong> Which cards must you turn over to test a rule? Most people look for confirmation rather than refutation.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Popper’s Later Life</h2>
+            <p>As Nazism rose, Popper left Austria in 1937 for a lectureship in New Zealand, where during the war he wrote <em>The Open Society and Its Enemies</em> (1945), a defence of liberal democracy against the totalitarian ambitions he traced to Plato, Hegel and Marx. From 1946 he taught at the London School of Economics, was knighted in 1965, and died in 1994. His idea that knowledge grows through conjectures and refutations extended, in his view, from science to politics: open societies, like good science, can learn from their mistakes because criticism is allowed. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Thomas Kuhn: The Structure of Scientific Revolutions</h2>
+            <p>Thomas Kuhn was born in Cincinnati in 1922 and trained as a physicist at Harvard. In 1947, preparing a course on the history of science, he struggled to understand how Aristotle, obviously brilliant, could have written physics that seemed so absurd. Suddenly he realised that Aristotle’s words made sense within a completely different framework of concepts (as Part 1 suggested with motion in honey). <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span> That experience led to <em>The Structure of Scientific Revolutions</em> (1962), one of the most cited books of the twentieth century.</p>
+            <p>Kuhn argued that mature sciences are governed by <strong>paradigms</strong>: shared achievements, such as Newton’s <em>Principia</em> or Lavoisier’s chemistry, that define the legitimate problems, methods and standards of solution for a community. Most science is <strong>normal science</strong>, solving puzzles within the paradigm, not testing it. When results disagree with the paradigm, scientists usually treat these <strong>anomalies</strong> as puzzles to be solved later, or adjust auxiliary assumptions. Only when anomalies accumulate into a <strong>crisis</strong> do scientists seriously consider alternatives, and a <strong>scientific revolution</strong> may replace the paradigm: Copernicus replacing Ptolemy (Part 5), Lavoisier replacing phlogiston, Einstein replacing Newton (Part 10). <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-epicycles">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Epicycles can fit anything.</strong> Add circles on circles until they match a planet’s path, a square or even a heart; a framework that can absorb any data risks predicting nothing.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Alan Turing: What Is Computation?</h2>
+            <p>Alan Turing was born in London in 1912 and studied mathematics at King’s College, Cambridge. In 1936, aged 23, he answered a question posed by David Hilbert: is there a mechanical procedure that can decide whether any mathematical statement is provable? To answer it, Turing first had to say what a “mechanical procedure” is. He imagined a person following rules with pencil and paper, and boiled the process down to an abstract machine: an endless tape divided into squares, a head that reads and writes one symbol at a time, and a finite table of rules. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> Any calculation that can be done by following explicit rules, he argued, can be done by such a <strong>Turing machine</strong>. He also described a <strong>universal machine</strong> that can imitate any other, given its rule table as data on the tape: the theoretical blueprint of the stored-program computer. Alonzo Church reached an equivalent conclusion by a different route at about the same time.</p>
+            <figure class="fig" data-fig="fig-turing">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. A Turing machine.</strong> Step through a machine that adds one to a binary number, or the famous three-state “busy beaver”.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-8">
+            <h2>8. The Limits of Algorithms</h2>
+            <p>Turing then proved that the answer to Hilbert’s question is no. Using a version of Georg Cantor’s diagonal argument, he showed that no Turing machine can decide, for every machine and input, whether that machine will eventually halt. If such a decider existed, one could build a contrary machine that consults the decider about itself and does the opposite, a contradiction. The <strong>halting problem</strong> is undecidable, and so is the general question of provability. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> Together with Kurt Gödel’s incompleteness theorems of 1931, this showed that there are definite limits to what formal reasoning, and computers, can ever achieve.</p>
+            <p>During the Second World War, Turing worked at Bletchley Park, where he designed the electromechanical “Bombe” used to break messages enciphered on the German Enigma machine, work that historians judge significantly shortened the war. Afterwards he designed one of the first stored-program computers, the ACE, and worked on early computers at Manchester. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span></p>
+            <figure class="fig" data-fig="fig-diagonal">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. The diagonal argument.</strong> However a list of sequences is made, flipping its diagonal produces a sequence that is not in the list, the trick behind the undecidability of the halting problem.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Can Machines Think?</h2>
+            <p>In 1950 Turing published “Computing Machinery and Intelligence” in the philosophy journal <em>Mind</em>. Rather than define “thinking”, he proposed an <strong>imitation game</strong>: an interrogator converses by text with a hidden human and a hidden machine, and tries to tell which is which. If the machine is regularly mistaken for the human, we have as much reason to call it intelligent as we have for other people. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span> He predicted that by about the year 2000 computers would play the game well enough that an average interrogator would have no more than a 70% chance of identifying them after five minutes, and he answered objections one by one, including the theological objection, the argument from consciousness and Lady Lovelace’s objection that machines can only do what we tell them. He even suggested that machines might learn like children. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+            <p>In 1980 the philosopher John Searle replied with his “Chinese Room”: a person who follows a rulebook to answer questions in Chinese, without understanding a word, could pass a Turing test in Chinese, so symbol manipulation alone cannot amount to understanding. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> The debate is no longer hypothetical; today’s language models converse fluently, and whether they understand anything is fiercely argued.</p>
+            <p>Turing’s life ended tragically. In 1952 he was convicted of “gross indecency” for a relationship with a man and forced to undergo hormone treatment. He died of cyanide poisoning in 1954, aged 41; an inquest ruled it suicide, though some have questioned the verdict. In 2009 the British prime minister apologised for his treatment, and in 2013 he received a royal pardon. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span></p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Kuhn’s Revolutions and Incommensurability</h2>
+            <p>Kuhn’s most controversial claim was that paradigms are <strong>incommensurable</strong>: there is no fully neutral standard by which to compare them, because they differ not only in theories but in concepts, problems and standards. “Mass” means something different in Newton’s physics and in Einstein’s. Choosing between paradigms, he wrote, is partly like a gestalt switch or a conversion, and scientists on either side may “practise their trades in different worlds”. Critics accused him of making science irrational, a matter of “mob psychology”. Kuhn protested that he had been misread: scientists choose by shared values such as accuracy, consistency, scope, simplicity and fruitfulness, but these values do not determine a unique choice, and reasonable people can weigh them differently. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>, <a class="cite" href="#ref-8">8</a>]</span></p>
+          </section>
+
+          <section id="section-11">
+            <h2>11. After Popper and Kuhn</h2>
+            <p>Imre Lakatos tried to combine the two: science consists of <em>research programmes</em> with a protected “hard core” and a protective belt of auxiliary hypotheses; a programme is progressive if its adjustments predict new facts, degenerating if they merely patch failures. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span> Paul Feyerabend argued that no single method has governed scientific progress, provocatively summarising his view as “anything goes”. W. V. O. Quine argued that our beliefs face experience as a whole web, any part of which can be revised. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span> Bayesian philosophers returned to probabilistic confirmation (Part 7). Most philosophers today see elements of truth in Popper (criticism and testability matter), in Kuhn (communities, training and frameworks matter) and in their successors.</p>
+          </section>
+
+          <section id="section-12">
+            <h2>12. The 1965 Debate, and What We Have Learned</h2>
+            <p>In July 1965 Kuhn and Popper faced each other at an international colloquium at Bedford College, London. Popper admitted that normal science exists but called it a danger to science; Kuhn insisted that it is what makes deep research possible. The papers, with contributions by Lakatos, Feyerabend and others, were published as <em>Criticism and the Growth of Knowledge</em> (1970). <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span></p>
+            <p>Looking back across this series, both pictures fit parts of the story. Galileo, Darwin and Einstein made risky claims that could have failed (Popper). Ptolemaic astronomy, Aristotle’s physics and Newtonian mechanics each functioned as a paradigm that shaped what questions were asked, and each was replaced only after long resistance (Kuhn). And at every turn, the tools of reasoning, from Euclid’s axioms to Turing’s machines, shaped what could be known.</p>
+          </section>
+
+          <section id="section-13">
+            <h2>13. The Series in One Picture</h2>
+            <p>Over twelve parts, two great sources of knowledge have kept meeting: reason and experience. Plato and Euclid trusted reason; Aristotle, Ibn al-Haytham and Bacon insisted on experience. Galileo and Newton married mathematics to experiment. Hume showed that experience alone cannot justify general laws; Kant argued that the mind supplies their framework; Poincaré that some of it is convention. Darwin and Perrin showed how converging evidence can establish what no one can directly see. Popper and Kuhn asked how the whole enterprise advances, and Turing asked whether the reasoning itself can be mechanised. The thread that runs through it all is criticism: the willingness to test ideas, including one’s own, against the world and against each other.</p>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Try It Yourself: Testing Ideas</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: Popper, Kuhn and Turing</div>
+              <ol>
+                <li><strong>Falsifiability:</strong> write down a claim you believe. What observation would prove it wrong? If you cannot think of one, is it a scientific claim?</li>
+                <li><strong>The 2-4-6 game:</strong> a friend thinks of a rule that the sequence 2, 4, 6 obeys. Propose sequences to test it. Do you try sequences that could prove your guess wrong?</li>
+                <li><strong>Paradigms:</strong> pick an old textbook (or an old map) and find a statement that was once “obvious” and is now rejected. What made people accept it?</li>
+                <li><strong>Turing test:</strong> chat with an AI system and a friend by text without knowing which is which. What questions would you ask to tell them apart?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Legend and Record</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: Wittgenstein’s poker</div>
+              <p><strong>The legend:</strong> on 25 October 1946, at the Cambridge Moral Sciences Club, Ludwig Wittgenstein brandished a fireplace poker at Karl Popper during a furious argument, and when challenged to give an example of a moral rule, Popper replied, “Not to threaten visiting lecturers with pokers”, whereupon Wittgenstein stormed out.</p>
+              <p><strong>The record:</strong> about thirty people were present, and their accounts conflict. Popper told the story in his autobiography thirty years later; others, including Wittgenstein’s friends, denied that he threatened anyone or that the famous retort was made before he left. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span> The meeting lasted only a few minutes in its heated phase, and the poker was certainly in Wittgenstein’s hand at some point.</p>
+              <p><strong>The grain of truth:</strong> the two philosophers did clash fiercely that evening over whether there are genuine philosophical problems (Popper) or only linguistic puzzles (Wittgenstein). The episode is a reminder that even accounts by eyewitnesses, written down later, are reconstructions, which is exactly why science prefers records made at the time.</p>
+            </div>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Philosophy Corner</h2>
+            <div class="callout callout-philosophy">
+              <div class="callout-header">Philosophy Corner: what should we trust?</div>
+              <p>If no theory is ever proved, and frameworks shape what we see, why trust science at all? A reasonable answer from this series is that science is not a body of certainties but a set of practices, such as testing predictions, measuring carefully, seeking independent lines of evidence, publishing for criticism and revising in the light of failure, that make errors more likely to be found and corrected than in any other way of knowing we have devised.</p>
+              <p>Turing’s question adds a new twist. As machines increasingly generate hypotheses, analyse data and write text, we must ask whether they can take part in this practice of criticism, and how we would know if they understood what they produce.</p>
+              <p><strong>Questions to think about:</strong> Is falsifiability necessary for a theory to be scientific? Could a machine ever do science, in the full sense, rather than just calculate?</p>
+            </div>
+          </section>
+          <section id="section-17">
+            <h2>17. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Karl Popper</td>
+                <td style="padding:0.6rem 0.8rem;">1902–1994<br>Vienna, Christchurch, London</td>
+                <td style="padding:0.6rem 0.8rem;"><em>The Logic of Scientific Discovery</em> (1934/1959), <em>The Open Society and Its Enemies</em> (1945)</td>
+                <td style="padding:0.6rem 0.8rem;">Proposed falsifiability as the mark of science.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Thomas Kuhn</td>
+                <td style="padding:0.6rem 0.8rem;">1922–1996<br>Cincinnati, Harvard, Berkeley, MIT</td>
+                <td style="padding:0.6rem 0.8rem;"><em>The Structure of Scientific Revolutions</em> (1962)</td>
+                <td style="padding:0.6rem 0.8rem;">Described science as paradigms, normal science and revolutions.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Alan Turing</td>
+                <td style="padding:0.6rem 0.8rem;">1912–1954<br>London, Cambridge, Bletchley, Manchester</td>
+                <td style="padding:0.6rem 0.8rem;">“On Computable Numbers” (1936), “Computing Machinery and Intelligence” (1950)</td>
+                <td style="padding:0.6rem 0.8rem;">Defined computation, proved the limits of algorithms and asked whether machines can think.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Imre Lakatos</td>
+                <td style="padding:0.6rem 0.8rem;">1922–1974<br>Hungary and London</td>
+                <td style="padding:0.6rem 0.8rem;"><em>The Methodology of Scientific Research Programmes</em> (1978)</td>
+                <td style="padding:0.6rem 0.8rem;">Combined Popper and Kuhn in the idea of research programmes.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Paul Feyerabend</td>
+                <td style="padding:0.6rem 0.8rem;">1924–1994<br>Vienna and Berkeley</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Against Method</em> (1975)</td>
+                <td style="padding:0.6rem 0.8rem;">Argued that no single method governs science.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John Searle</td>
+                <td style="padding:0.6rem 0.8rem;">born 1932<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">“Minds, brains, and programs” (1980)</td>
+                <td style="padding:0.6rem 0.8rem;">Proposed the Chinese Room argument against strong AI.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-18">
+            <h2>18. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about Popper, Kuhn and Turing.</p>
+            <figure class="fig" data-fig="fig-quiz-m12">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-19">
+            <h2>19. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Popper, Karl R.</strong> (1959). <em>The Logic of Scientific Discovery</em>. London: Hutchinson. (Originally <em>Logik der Forschung</em>, Vienna: Springer, 1934.)</li>
+              <li id="ref-2"><strong>Kuhn, Thomas S.</strong> (1962). <em>The Structure of Scientific Revolutions</em>. Chicago: University of Chicago Press.</li>
+              <li id="ref-3"><strong>Popper, Karl R.</strong> (1963). <em>Conjectures and Refutations: The Growth of Scientific Knowledge</em>. London: Routledge &amp; Kegan Paul.</li>
+              <li id="ref-4"><strong>Turing, A. M.</strong> (1936). "On computable numbers, with an application to the Entscheidungsproblem." <em>Proceedings of the London Mathematical Society</em>, 2nd series, 42: 230–265.</li>
+              <li id="ref-5"><strong>Hodges, Andrew.</strong> (1983). <em>Alan Turing: The Enigma</em>. London: Burnett Books.</li>
+              <li id="ref-6"><strong>Turing, A. M.</strong> (1950). "Computing machinery and intelligence." <em>Mind</em>, 59(236): 433–460.</li>
+              <li id="ref-7"><strong>Searle, John R.</strong> (1980). "Minds, brains, and programs." <em>Behavioral and Brain Sciences</em>, 3(3): 417–424.</li>
+              <li id="ref-8"><strong>Lakatos, Imre &amp; Musgrave, Alan (eds.).</strong> (1970). <em>Criticism and the Growth of Knowledge</em>. Cambridge: Cambridge University Press.</li>
+              <li id="ref-9"><strong>Lakatos, Imre.</strong> (1978). <em>The Methodology of Scientific Research Programmes</em>. Ed. J. Worrall and G. Currie. Cambridge: Cambridge University Press.</li>
+              <li id="ref-10"><strong>Quine, W. V. O.</strong> (1951). "Two dogmas of empiricism." <em>The Philosophical Review</em>, 60(1): 20–43.</li>
+              <li id="ref-11"><strong>Edmonds, David &amp; Eidinow, John.</strong> (2001). <em>Wittgenstein’s Poker: The Story of a Ten-Minute Argument Between Two Great Philosophers</em>. London: Faber and Faber.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/minds-that-changed-how-we-know.html">Minds That Changed How We Know</a> (Part 12 of 12)</div>
+  <div class="series-banner-links">
+    <a href="ramanujan-raman-and-bose.html">← Part 11: Ramanujan, C. V. Raman and S. N. Bose: Intuition, Scattered Light and Counting Particles</a>
+    <span>Final part</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/popper-kuhn-and-turing.js"></script>
+</body>
+</html>

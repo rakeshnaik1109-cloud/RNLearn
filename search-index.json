@@ -64,6 +64,57 @@
     "type": "tutorial"
   },
   {
+    "slug": "ramanujan-raman-and-bose",
+    "url": "articles/ramanujan-raman-and-bose.html",
+    "title": "Ramanujan, C. V. Raman and S. N. Bose: Intuition, Scattered Light and Counting Particles",
+    "summary": "Ramanujan’s notebooks, Hardy and partitions; Raman’s blue sea and the Raman effect; Bose counting photons, Planck’s law, bosons and the Bose–Einstein condensate; science in a colonial world.",
+    "subject": "Philosophy & Ideas",
+    "tags": [
+      "philosophy",
+      "history-of-science",
+      "india",
+      "mathematics",
+      "quantum-physics",
+      "spectroscopy"
+    ],
+    "date": "2026-11-23",
+    "type": "tutorial"
+  },
+  {
+    "slug": "popper-kuhn-and-turing",
+    "url": "articles/popper-kuhn-and-turing.html",
+    "title": "Popper, Kuhn and Turing: What Makes Science Science, and Can Machines Think?",
+    "summary": "Popper’s falsifiability and the Wason task, Kuhn’s paradigms and revolutions, Turing machines, the halting problem and the imitation game; and a look back at how we came to know.",
+    "subject": "Philosophy & Ideas",
+    "tags": [
+      "philosophy",
+      "history-of-science",
+      "philosophy-of-science",
+      "computing",
+      "artificial-intelligence",
+      "epistemology"
+    ],
+    "date": "2026-11-23",
+    "type": "tutorial"
+  },
+  {
+    "slug": "newton-and-leibniz",
+    "url": "articles/newton-and-leibniz.html",
+    "title": "Newton and Leibniz: Calculus, Gravity and the Nature of Space",
+    "summary": "Two inventors of the calculus: fluxions and differentials, the Principia’s laws and universal gravitation, the Moon test, Newton’s prism, the priority quarrel, and absolute versus relational space.",
+    "subject": "Philosophy & Ideas",
+    "tags": [
+      "philosophy",
+      "history-of-science",
+      "scientific-revolution",
+      "mathematics",
+      "physics",
+      "epistemology"
+    ],
+    "date": "2026-11-23",
+    "type": "tutorial"
+  },
+  {
     "slug": "modern-transistors",
     "url": "articles/modern-transistors.html",
     "title": "Modern Transistors: High-k Gates, FinFETs and Gate-All-Around",
@@ -91,6 +142,23 @@
       "computing",
       "memory",
       "sequential-logic"
+    ],
+    "date": "2026-11-23",
+    "type": "tutorial"
+  },
+  {
+    "slug": "marie-curie-and-ernst-mach",
+    "url": "articles/marie-curie-and-ernst-mach.html",
+    "title": "Marie Curie and Ernst Mach: Are Atoms Real?",
+    "summary": "Mach’s critique of absolute space and atoms, shock waves and the Mach number; Curie’s radioactivity, polonium and radium; Einstein and Perrin counting molecules; and realism versus scepticism.",
+    "subject": "Philosophy & Ideas",
+    "tags": [
+      "philosophy",
+      "history-of-science",
+      "physics",
+      "chemistry",
+      "atoms",
+      "epistemology"
     ],
     "date": "2026-11-23",
     "type": "tutorial"
@@ -190,6 +258,57 @@
       "circuits",
       "computing",
       "energy"
+    ],
+    "date": "2026-11-23",
+    "type": "tutorial"
+  },
+  {
+    "slug": "einstein-and-poincare",
+    "url": "articles/einstein-and-poincare.html",
+    "title": "Einstein and Poincaré: Space, Time and the Role of Convention",
+    "summary": "The ether crisis, Poincaré’s clocks and conventions, Einstein’s special relativity, light clocks and simultaneity, GPS, the disc world, curved spacetime and the 1919 eclipse.",
+    "subject": "Philosophy & Ideas",
+    "tags": [
+      "philosophy",
+      "history-of-science",
+      "physics",
+      "relativity",
+      "epistemology",
+      "mathematics"
+    ],
+    "date": "2026-11-23",
+    "type": "tutorial"
+  },
+  {
+    "slug": "hume-and-kant",
+    "url": "articles/hume-and-kant.html",
+    "title": "David Hume and Immanuel Kant: Can We Ever Know That Causes Cause?",
+    "summary": "Hume’s impressions and fork, causation as constant conjunction, the problem of induction and Bayes; Kant’s nebular hypothesis, the synthetic a priori, and geometry meeting curved space.",
+    "subject": "Philosophy & Ideas",
+    "tags": [
+      "philosophy",
+      "history-of-science",
+      "enlightenment",
+      "epistemology",
+      "causation",
+      "probability"
+    ],
+    "date": "2026-11-23",
+    "type": "tutorial"
+  },
+  {
+    "slug": "darwin-and-wallace",
+    "url": "articles/darwin-and-wallace.html",
+    "title": "Darwin and Wallace: Evolution by Natural Selection, and How a Theory Is Built",
+    "summary": "The Beagle and the Malay Archipelago, Malthus and natural selection, the 1858 papers and the Origin, peppered moths, Darwin’s finches evolving in a generation, drift and the modern synthesis.",
+    "subject": "Philosophy & Ideas",
+    "tags": [
+      "philosophy",
+      "history-of-science",
+      "biology",
+      "evolution",
+      "epistemology",
+      "victorian-science"
     ],
     "date": "2026-11-23",
     "type": "tutorial"
