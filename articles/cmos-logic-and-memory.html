@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CMOS: Logic Gates, Power and Memory from Complementary Transistors — RNLearn</title>
+  <meta name="description" content="The CMOS inverter and its transfer curve, noise margins, NAND and NOR networks, gate delay and power with the minimum-energy point, and SRAM, DRAM and flash memory cells.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/cmos-logic-and-memory.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="CMOS: Logic Gates, Power and Memory from Complementary Transistors — RNLearn">
+  <meta property="og:description" content="The CMOS inverter and its transfer curve, noise margins, NAND and NOR networks, gate delay and power with the minimum-energy point, and SRAM, DRAM and flash memory cells.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/cmos-logic-and-memory.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CMOS: Logic Gates, Power and Memory from Complementary Transistors — RNLearn">
+  <meta name="twitter:description" content="The CMOS inverter and its transfer curve, noise margins, NAND and NOR networks, gate delay and power with the minimum-energy point, and SRAM, DRAM and flash memory cells.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "CMOS: Logic Gates, Power and Memory from Complementary Transistors",
+    "description": "The CMOS inverter and its transfer curve, noise margins, NAND and NOR networks, gate delay and power with the minimum-energy point, and SRAM, DRAM and flash memory cells.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-23",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/cmos-logic-and-memory.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/electronics-computing.html" class="post-subject-tag" data-subject="electronics-computing">Electronics &amp; Computing</a>
+        </div>
+        <h1 class="article-title">CMOS: Logic Gates, Power and Memory from Complementary Transistors</h1>
+        <p class="article-standfirst">
+          Pair a transistor that turns on with one that turns off, and a logic gate stops wasting power at rest. That one idea from 1963 made billion-transistor chips possible.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-23">23 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>14 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 9 of 14)</div>
+  <div class="series-banner-links">
+    <a href="the-mosfet.html">← Part 8: The MOSFET: How a Voltage Opens a Channel</a>
+    <a href="making-chips.html">Part 10: Making Chips: Lithography, Moore’s Law and the End of Dennard Scaling →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. The Perfect Partnership</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. The CMOS Inverter</a></li>
+              <li><a class="toc-link" href="#section-4">4. Noise Margins and Regeneration</a></li>
+              <li><a class="toc-link" href="#section-5">5. NAND, NOR and Complex Gates</a></li>
+              <li><a class="toc-link" href="#section-6">6. Delay and Power</a></li>
+              <li><a class="toc-link" href="#section-7">7. Memory Cells: SRAM, DRAM and Flash</a></li>
+              <li><a class="toc-link" href="#section-8">8. Designing with Billions of Transistors</a></li>
+              <li><a class="toc-link" href="#section-9">9. Worked Problems</a></li>
+              <li><a class="toc-link" href="#section-10">10. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-11">11. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-12">12. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-13">13. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-14">14. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-15">15. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-16">16. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>In this part:</strong> CMOS, the circuit style inside essentially every digital chip. The complementary inverter and its transfer curve; noise margins and why logic signals restore themselves; NAND, NOR and the duality of pull-up and pull-down networks; gate delay and power, including the minimum-energy supply voltage; SRAM, DRAM and flash memory cells; and how billions of transistors are designed.</p>
+            <p><strong>You need:</strong> Part 8 (MOSFETs), Part 4 (RC delay and CV² energy) and Part 1 (logic gates).</p>
+            <p><strong>Try:</strong> three interactive figures and five worked problems.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. The Perfect Partnership</h2>
+            <p>Parts 7 and 8 ended with the same problem: logic gates that draw current whenever their output is low. In 1963 Frank Wanlass and Chih-Tang Sah at Fairchild showed the solution. Pair an n-channel MOSFET, which conducts when its gate is high, with a p-channel MOSFET, which conducts when its gate is low. Connect them in series between the supply and ground, drive both gates with the same input, and in either logic state one transistor is off. Their demonstration gate drew only nanowatts when idle. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span> <strong>Complementary MOS</strong> (CMOS) was at first slower and more complicated to make, but as chips grew denser its near-zero standby power became decisive. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Part 9 combines transistors into CMOS logic and memory.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-el9-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. From nanowatt logic to CMOS everywhere, 1963–1985.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. The CMOS Inverter</h2>
+            <p>The CMOS inverter has just two transistors. The pMOS connects the output to V<sub>DD</sub> (the <em>pull-up</em>); the nMOS connects it to ground (the <em>pull-down</em>). With the input at 0, the pMOS is on and the nMOS off, so the output is 1. With the input at 1, the reverse. In both steady states the output is connected firmly to a supply rail by a conducting transistor, so it sits at a full 0 or V<sub>DD</sub>, and no current flows through the pair. Current flows only while the input is passing through the middle, when both transistors are partly on.</p>
+            <p>The <strong>voltage transfer characteristic</strong> plots output against input. It is flat near the rails and plunges steeply around the <strong>switching threshold</strong> V<sub>M</sub>, where V<sub>out</sub> = V<sub>in</sub>. Because holes have lower mobility, the pMOS is usually made two to three times wider than the nMOS to balance the two and place V<sub>M</sub> near V<sub>DD</sub>/2. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-vtc">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. The CMOS inverter’s transfer curve.</strong> Change the supply voltage, the relative strengths of the two transistors and the threshold voltage; watch the switching point, noise margins and switching current.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Noise Margins and Regeneration</h2>
+            <p>Real signals are never exactly 0 or V<sub>DD</sub>: wires pick up noise from their neighbours, and supply voltages droop. The transfer curve defines how much is tolerable. The input levels at which the slope is −1, V<sub>IL</sub> and V<sub>IH</sub>, mark the edges of the steep region. The <strong>noise margins</strong> are NM<sub>L</sub> = V<sub>IL</sub> − V<sub>OL</sub> and NM<sub>H</sub> = V<sub>OH</sub> − V<sub>IH</sub>: how far a low or high signal can be disturbed and still be read correctly by the next gate.</p>
+            <p>The crucial property is <strong>gain</strong>. Around V<sub>M</sub>, a small change in input produces a much larger change in output, so a slightly degraded input is pushed back to a clean rail. A signal passing through a chain of gates is therefore restored at every stage, rather than accumulating errors as an analogue signal would. This regeneration is what makes digital computation with billions of imperfect devices possible, and it requires transistors with gain: a reason why passive switches alone cannot build large computers.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. NAND, NOR and Complex Gates</h2>
+            <p>Every static CMOS gate follows the same recipe: an nMOS <strong>pull-down network</strong> that connects the output to ground when the function should be 0, and a pMOS <strong>pull-up network</strong> that connects it to V<sub>DD</sub> when the function should be 1. The two are duals: transistors in series in one appear in parallel in the other.</p>
+            <ul>
+              <li><strong>NAND:</strong> nMOS in series (both inputs must be 1 to pull down), pMOS in parallel. Four transistors.</li>
+              <li><strong>NOR:</strong> nMOS in parallel, pMOS in series. Four transistors.</li>
+              <li>Combined functions such as NOT(A·B + C) can be built as a single compound gate.</li>
+            </ul>
+            <p>CMOS gates naturally invert, so AND and OR need an extra inverter. Since series transistors add resistance, and pMOS transistors are already weaker, designers prefer NAND-based logic to NOR-based logic and avoid long series stacks. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-cmosgate">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Inside CMOS gates.</strong> Choose an inverter, NAND or NOR, toggle the inputs, and follow which transistors conduct.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Delay and Power</h2>
+            <p>When a gate switches, its output must charge or discharge the capacitance of the wires and gate inputs it drives through the resistance of its on transistors. Its delay is roughly t<sub>p</sub> ≈ 0.69 R<sub>on</sub>C<sub>load</sub> (Part 4). Since R<sub>on</sub> falls as the gate voltage rises above threshold, the delay grows rapidly as V<sub>DD</sub> approaches V<sub>T</sub>; Takayasu Sakurai and Richard Newton’s alpha-power law, t<sub>p</sub> ∝ V<sub>DD</sub>/(V<sub>DD</sub> − V<sub>T</sub>)<sup>α</sup> with α between 1 and 2, captures this for short-channel transistors. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span></p>
+            <p>The power has two parts. <strong>Dynamic power</strong>, αCV<sub>DD</sub>²f, is spent charging capacitances. <strong>Static power</strong>, I<sub>leak</sub>V<sub>DD</sub>, comes from subthreshold and other leakage through the transistors that are off (Part 8). Lowering V<sub>DD</sub> cuts dynamic energy quadratically but slows everything down, giving leakage longer to act. The energy per operation therefore has a minimum, typically near or just below the threshold voltage, which ultra-low-power chips exploit. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-mep">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Speed against energy.</strong> Lower the supply voltage and watch switching energy fall, delay rise and leakage energy take over.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Memory Cells: SRAM, DRAM and Flash</h2>
+            <p>The same transistors build memories, which occupy a large share of most chips:</p>
+            <ul>
+              <li><strong>SRAM</strong> stores a bit in two cross-coupled CMOS inverters (a latch, Part 3), with two access transistors connecting it to a pair of bit lines when its word line is raised: six transistors in all. It is fast and needs no refresh, and forms the caches of processors (Part 12). Hitachi showed in 1978 that CMOS SRAM could match the speed of nMOS memory at a fraction of the power. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></li>
+              <li><strong>DRAM</strong> stores a bit as charge on a capacitor reached through one transistor (Robert Dennard’s 1966 cell). <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> It is much denser but must be refreshed, and reading it is delicate: the tiny cell shares its charge with a long bit line, producing a signal of only about a hundred millivolts that a sense amplifier must detect.</li>
+              <li><strong>Flash</strong> stores a bit as charge trapped on a <em>floating gate</em> buried in the oxide, which shifts the transistor’s threshold voltage and keeps data for years without power. Dawon Kahng and Simon Sze proposed the floating gate in 1967; Fujio Masuoka’s team at Toshiba presented flash memory, erasable in whole blocks at once, in 1984. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>, <a class="cite" href="#ref-9">9</a>]</span> Modern flash stores several bits per cell in different charge levels and stacks cells in hundreds of layers.</li>
+            </ul>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Designing with Billions of Transistors</h2>
+            <p>Nobody draws billions of transistors by hand. In 1980 Carver Mead and Lynn Conway published a textbook that separated chip design from manufacturing through simple, scalable layout rules, letting university students design working chips. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span> Their approach grew into today’s flow: designers describe behaviour in a hardware description language; synthesis software maps it onto a library of pre-designed <strong>standard cells</strong> (gates, flip-flops); placement and routing tools arrange the cells and wire them up; and timing analysis checks every path against the clock (Part 3).</p>
+            <p>CMOS has its own hazards. The pMOS and nMOS transistors, with their wells and substrate, form parasitic bipolar transistors that can latch into a short circuit from supply to ground (<em>latch-up</em>) if triggered, which is prevented by layout rules and guard rings. Variability between nominally identical transistors, and the electromigration of metal atoms in wires carrying high current densities, also have to be designed around. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Worked Problems</h2>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 1 (easy): counting transistors</div>
+              <p>How many transistors are needed for a 2-input AND gate in static CMOS, and for a 3-input NAND? Which transistors are in series in the 3-input NAND?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>AND = NAND (4) + inverter (2) = <strong>6 transistors</strong>. A 3-input NAND needs <strong>6 transistors</strong>: three nMOS in series in the pull-down network (all inputs must be 1 to pull the output low) and three pMOS in parallel in the pull-up network.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 2 (easy): noise margins</div>
+              <p>An inverter at V<sub>DD</sub> = 0.8 V has V<sub>OL</sub> = 0.02 V, V<sub>OH</sub> = 0.78 V, V<sub>IL</sub> = 0.34 V and V<sub>IH</sub> = 0.46 V. Find the noise margins.</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>NM<sub>L</sub> = V<sub>IL</sub> − V<sub>OL</sub> = 0.34 − 0.02 = <strong>0.32 V</strong>; NM<sub>H</sub> = V<sub>OH</sub> − V<sub>IH</sub> = 0.78 − 0.46 = <strong>0.32 V</strong>. Symmetric margins of 40% of the supply: a well-balanced inverter.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 3 (medium): gate delay and a ring oscillator</div>
+              <p>An inverter with an effective on-resistance of 5 kΩ drives 2 fF. Estimate its propagation delay. What is the oscillation frequency of a ring of 31 such inverters (an odd number connected in a loop)?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>t<sub>p</sub> ≈ 0.69 × 5 kΩ × 2 fF = <strong>6.9 ps</strong>. A transition must travel round the ring twice (once falling, once rising) for one full period: T = 2 × 31 × 6.9 ps ≈ 428 ps, so f ≈ <strong>2.3 GHz</strong>. Chip makers build ring oscillators on every wafer to measure gate delay directly.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 4 (medium): dynamic and static power</div>
+              <p>A chip has 2 × 10<sup>9</sup> switching nodes of 0.5 fF each, activity factor α = 0.05, f = 3 GHz and V<sub>DD</sub> = 0.75 V. Its leakage current is 5 A. Find the dynamic and static power.</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>Total capacitance C = 2 × 10<sup>9</sup> × 0.5 fF = 1 µF. Dynamic: αCV²f = 0.05 × 10<sup>−6</sup> × 0.5625 × 3 × 10<sup>9</sup> ≈ <strong>84 W</strong>. Static: 5 A × 0.75 V = <strong>3.75 W</strong>. Dynamic power dominates while the chip is busy, but leakage is paid even when it is idle, which is why idle parts of chips are switched off entirely (“power gating”).</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 5 (harder): reading a DRAM cell</div>
+              <p>A DRAM cell of 20 fF holds either 1.0 V (a “1”) or 0 V (a “0”). Its bit line, of capacitance 80 fF, is precharged to 0.5 V. When the access transistor opens, charge is shared. What voltage does the bit line reach in each case, and why is a sense amplifier needed?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>Charge is conserved: V = (C<sub>cell</sub>V<sub>cell</sub> + C<sub>BL</sub>V<sub>BL</sub>)/(C<sub>cell</sub> + C<sub>BL</sub>). For a 1: (20 × 1.0 + 80 × 0.5)/100 = <strong>0.60 V</strong>; for a 0: (0 + 40)/100 = <strong>0.40 V</strong>. The signal is only ±100 mV around 0.5 V, and reading destroys the stored charge. A sense amplifier, a cross-coupled latch, amplifies the small difference to full levels and writes the value back into the cell. Larger cell-to-bit-line capacitance ratios give bigger signals, which is why DRAM makers fight to keep cell capacitance up as cells shrink.</p></details>
+            </div>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: the memory wall and new memories</div>
+              <p>SRAM cells have stopped shrinking as fast as logic at the newest manufacturing nodes, and DRAM cell capacitors are becoming extremely tall and thin, so memory density is improving more slowly than it used to. Meanwhile, moving data between memory and processor costs far more energy than computing on it. Researchers are developing new non-volatile memories, such as magnetic (MRAM), phase-change and resistive (RRAM) memories, and placing computation inside or beside memory arrays. Which of these will find large markets beyond niches such as embedded MRAM is still uncertain.</p>
+            </div>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: CMOS</div>
+              <ol>
+                <li>In Figure 3, set the pMOS strength ratio to 0.25 and then 4. Which way does V<sub>M</sub> move, and which noise margin suffers?</li>
+                <li>In Figure 3, lower V<sub>DD</sub> until the peak gain approaches 1. Roughly how low can CMOS go?</li>
+                <li>In Figure 4, find the input combination for which NOR outputs 1. How many transistors conduct in the pull-up network then?</li>
+                <li>In Figure 5, increase the number of gates in the critical path. What happens to the minimum-energy voltage, and why?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “CMOS uses no power when idle”</div>
+              <p><strong>The myth:</strong> CMOS gates only use energy when they switch, so an idle chip draws nothing.</p>
+              <p><strong>The reality:</strong> that was nearly true for the CMOS of the 1970s and 1980s, with high threshold voltages and thick oxides. Modern transistors leak through subthreshold conduction, gate-oxide tunnelling and junctions, and in some chips leakage has reached a large fraction of total power. Phones and laptops therefore cut the power to idle blocks completely and lower voltages dynamically.</p>
+              <p><strong>Why it matters:</strong> managing leakage is now as important to battery life as reducing switching energy.</p>
+            </div>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>A CMOS inverter pairs a pMOS pull-up with an nMOS pull-down; in either state one is off, so idle gates draw almost no current.</li>
+                <li>The transfer curve’s steep, high-gain middle gives noise margins and restores degraded signals at every stage.</li>
+                <li>Static CMOS gates use dual pull-up and pull-down networks: NAND has series nMOS and parallel pMOS; NOR the reverse.</li>
+                <li>Delay ≈ 0.69 R<sub>on</sub>C; power = αCV²f + I<sub>leak</sub>V; energy per operation has a minimum near threshold.</li>
+                <li>SRAM (6 transistors), DRAM (1 transistor + 1 capacitor) and flash (floating gate) are all built from MOS transistors.</li>
+              </ul>
+            </div>
+          </section>
+          <section id="section-14">
+            <h2>14. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Frank Wanlass &amp; Chih-Tang Sah</td>
+                <td style="padding:0.6rem 0.8rem;">1933–2010 / born 1932<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">CMOS (1963)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed complementary logic drawing nanowatts at rest.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Simon Sze</td>
+                <td style="padding:0.6rem 0.8rem;">born 1936<br>China / USA / Taiwan</td>
+                <td style="padding:0.6rem 0.8rem;">Floating-gate memory (1967)</td>
+                <td style="padding:0.6rem 0.8rem;">Co-proposed the floating gate behind flash memory; author of the standard device physics textbook.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Fujio Masuoka</td>
+                <td style="padding:0.6rem 0.8rem;">born 1943<br>Japan</td>
+                <td style="padding:0.6rem 0.8rem;">Flash memory (1984)</td>
+                <td style="padding:0.6rem 0.8rem;">Led the invention of flash memory at Toshiba.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Carver Mead &amp; Lynn Conway</td>
+                <td style="padding:0.6rem 0.8rem;">born 1934 / 1938–2024<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">VLSI design (1980)</td>
+                <td style="padding:0.6rem 0.8rem;">Made chip design teachable with simple, scalable rules.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Takayasu Sakurai</td>
+                <td style="padding:0.6rem 0.8rem;">born 1954<br>Japan</td>
+                <td style="padding:0.6rem 0.8rem;">Alpha-power law (1990)</td>
+                <td style="padding:0.6rem 0.8rem;">Created a widely used model of short-channel gate delay.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about CMOS logic and memory.</p>
+            <figure class="fig" data-fig="fig-quiz-el9">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-16">
+            <h2>16. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Wanlass, F. M. &amp; Sah, C. T.</strong> (1963). "Nanowatt logic using field-effect metal-oxide semiconductor triodes." In <em>IEEE International Solid-State Circuits Conference Digest of Technical Papers</em>, pp. 32–33.</li>
+              <li id="ref-2"><strong>Weste, Neil H. E. &amp; Harris, David Money.</strong> (2010). <em>CMOS VLSI Design: A Circuits and Systems Perspective</em>, 4th edition. Boston: Addison-Wesley.</li>
+              <li id="ref-3"><strong>Rabaey, Jan M., Chandrakasan, Anantha &amp; Nikolić, Borivoje.</strong> (2003). <em>Digital Integrated Circuits: A Design Perspective</em>, 2nd edition, chapters 5–6. Upper Saddle River, NJ: Prentice Hall.</li>
+              <li id="ref-4"><strong>Sakurai, Takayasu &amp; Newton, A. Richard.</strong> (1990). "Alpha-power law MOSFET model and its applications to CMOS inverter delay and other formulas." <em>IEEE Journal of Solid-State Circuits</em>, 25(2): 584–594.</li>
+              <li id="ref-5"><strong>Calhoun, Benton H., Wang, Alice &amp; Chandrakasan, Anantha.</strong> (2005). "Modeling and sizing for minimum energy operation in subthreshold circuits." <em>IEEE Journal of Solid-State Circuits</em>, 40(9): 1778–1786.</li>
+              <li id="ref-6"><strong>Masuhara, T., Minato, O., Sasaki, T., Sakai, Y., Kubo, M. &amp; Yasui, T.</strong> (1978). "A high-speed, low-power Hi-CMOS 4K static RAM." In <em>IEEE International Solid-State Circuits Conference Digest of Technical Papers</em>, pp. 110–111.</li>
+              <li id="ref-7"><strong>Dennard, Robert H.</strong> (1968). "Field-effect transistor memory." US Patent 3,387,286.</li>
+              <li id="ref-8"><strong>Kahng, D. &amp; Sze, S. M.</strong> (1967). "A floating gate and its application to memory devices." <em>Bell System Technical Journal</em>, 46(6): 1288–1295.</li>
+              <li id="ref-9"><strong>Masuoka, F., Asano, M., Iwahashi, H., Komuro, T. &amp; Tanaka, S.</strong> (1984). "A new flash E<sup>2</sup>PROM cell using triple polysilicon technology." In <em>International Electron Devices Meeting Technical Digest</em>, pp. 464–467.</li>
+              <li id="ref-10"><strong>Mead, Carver &amp; Conway, Lynn.</strong> (1980). <em>Introduction to VLSI Systems</em>. Reading, MA: Addison-Wesley.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 9 of 14)</div>
+  <div class="series-banner-links">
+    <a href="the-mosfet.html">← Part 8: The MOSFET: How a Voltage Opens a Channel</a>
+    <a href="making-chips.html">Part 10: Making Chips: Lithography, Moore’s Law and the End of Dennard Scaling →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/cmos-logic-and-memory.js"></script>
+</body>
+</html>

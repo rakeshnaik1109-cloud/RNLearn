@@ -5283,5 +5283,737 @@
     "term": "Test-set contamination",
     "definition": "When a model has seen the questions of a test during training, inflating its score.",
     "forms": []
+  },
+  {
+    "term": "Hexadecimal",
+    "definition": "Base-16 notation using digits 0–9 and A–F; each hex digit stands for 4 bits.",
+    "forms": []
+  },
+  {
+    "term": "Truth table",
+    "definition": "A table listing a logic function’s output for every combination of its inputs.",
+    "forms": [
+      "truth tables"
+    ]
+  },
+  {
+    "term": "De Morgan’s laws",
+    "definition": "NOT(A AND B) = NOT A OR NOT B, and NOT(A OR B) = NOT A AND NOT B.",
+    "forms": []
+  },
+  {
+    "term": "NAND gate",
+    "definition": "A gate whose output is 0 only when all inputs are 1; any logic circuit can be built from NAND gates alone.",
+    "forms": [
+      "NAND gates",
+      "NAND"
+    ]
+  },
+  {
+    "term": "Sum of products",
+    "definition": "A way of writing any logic function as an OR of AND terms, one for each input combination giving 1.",
+    "forms": []
+  },
+  {
+    "term": "Propagation delay",
+    "definition": "The time a gate takes to change its output after its inputs change.",
+    "forms": []
+  },
+  {
+    "term": "Combinational circuit",
+    "definition": "A logic circuit whose outputs depend only on its current inputs, with no memory.",
+    "forms": [
+      "combinational circuits",
+      "combinational logic"
+    ]
+  },
+  {
+    "term": "Karnaugh map",
+    "definition": "A grid layout of a truth table in Gray-code order, used to simplify logic by grouping neighbouring 1s.",
+    "forms": [
+      "Karnaugh maps",
+      "K-map"
+    ]
+  },
+  {
+    "term": "Gray code",
+    "definition": "An ordering of binary numbers in which consecutive values differ in exactly one bit.",
+    "forms": []
+  },
+  {
+    "term": "Multiplexer",
+    "definition": "A circuit that selects one of several inputs to pass to its output, according to select lines.",
+    "forms": [
+      "multiplexers",
+      "mux"
+    ]
+  },
+  {
+    "term": "Full adder",
+    "definition": "A circuit that adds two bits and a carry-in, producing a sum bit and a carry-out.",
+    "forms": [
+      "full adders",
+      "half adder"
+    ]
+  },
+  {
+    "term": "Two’s complement",
+    "definition": "The standard way to represent signed integers in binary: the leftmost bit has negative weight; negate by inverting all bits and adding 1.",
+    "forms": []
+  },
+  {
+    "term": "Carry lookahead",
+    "definition": "Adder logic that computes carries in advance from generate and propagate signals, avoiding a slow ripple of carries.",
+    "forms": [
+      "carry-lookahead"
+    ]
+  },
+  {
+    "term": "Arithmetic logic unit",
+    "definition": "The part of a processor that performs arithmetic and logic operations on binary numbers.",
+    "forms": [
+      "ALU"
+    ]
+  },
+  {
+    "term": "Sequential circuit",
+    "definition": "A logic circuit whose outputs depend on its past inputs as well as its present ones, because it contains memory.",
+    "forms": [
+      "sequential circuits",
+      "sequential logic"
+    ]
+  },
+  {
+    "term": "SR latch",
+    "definition": "The simplest memory circuit: two cross-coupled gates with Set and Reset inputs that store one bit.",
+    "forms": [
+      "D latch",
+      "SR latches"
+    ]
+  },
+  {
+    "term": "Flip-flop",
+    "definition": "A one-bit memory circuit that captures its input at a clock edge and holds it until the next edge.",
+    "forms": [
+      "flip-flops"
+    ]
+  },
+  {
+    "term": "Shift register",
+    "definition": "A chain of flip-flops that moves its stored bits one position along on every clock tick.",
+    "forms": [
+      "shift registers"
+    ]
+  },
+  {
+    "term": "Static RAM",
+    "definition": "Memory that stores each bit in a small latch (usually six transistors); fast, and needs no refresh while powered.",
+    "forms": [
+      "SRAM"
+    ]
+  },
+  {
+    "term": "Dynamic RAM",
+    "definition": "Memory that stores each bit as charge on a tiny capacitor with one transistor; dense, but must be refreshed every few milliseconds.",
+    "forms": [
+      "DRAM"
+    ]
+  },
+  {
+    "term": "Finite-state machine",
+    "definition": "A sequential circuit (or model) with a finite set of states, moving between them according to its inputs.",
+    "forms": [
+      "finite-state machines",
+      "state machine",
+      "state machines"
+    ]
+  },
+  {
+    "term": "Metastability",
+    "definition": "A flip-flop hanging between 0 and 1 for an unpredictable time when its input changes too close to the clock edge.",
+    "forms": [
+      "metastable"
+    ]
+  },
+  {
+    "term": "Synchroniser",
+    "definition": "Two or more flip-flops in series that give an asynchronous signal time to settle before it is used, making metastability failures extremely rare.",
+    "forms": [
+      "synchronisers",
+      "synchronizer"
+    ]
+  },
+  {
+    "term": "Ohm’s law",
+    "definition": "The voltage across a conductor equals the current through it times its resistance: V = IR.",
+    "forms": [
+      "Ohm's law"
+    ]
+  },
+  {
+    "term": "Kirchhoff’s laws",
+    "definition": "Two circuit rules: current into a junction equals current out, and voltages around any closed loop sum to zero.",
+    "forms": [
+      "Kirchhoff's laws"
+    ]
+  },
+  {
+    "term": "Voltage divider",
+    "definition": "Two resistors in series across a supply; the voltage at their junction is a fixed fraction R₂/(R₁ + R₂) of the supply.",
+    "forms": [
+      "voltage dividers"
+    ]
+  },
+  {
+    "term": "Drift velocity",
+    "definition": "The small average speed of charge carriers along a conductor when a current flows, superimposed on their fast random motion.",
+    "forms": []
+  },
+  {
+    "term": "Resistivity",
+    "definition": "A material’s intrinsic resistance to current, ρ; a wire’s resistance is R = ρL/A.",
+    "forms": []
+  },
+  {
+    "term": "Carrier mobility",
+    "definition": "How fast charge carriers drift per unit electric field, μ = v/E; conductivity is σ = nqμ.",
+    "forms": []
+  },
+  {
+    "term": "RC time constant",
+    "definition": "The product τ = RC, which sets how quickly a capacitor charges or discharges through a resistor (63% in one τ).",
+    "forms": []
+  },
+  {
+    "term": "Dynamic power",
+    "definition": "The power a digital circuit uses to charge and discharge its capacitances when switching, P ≈ αCV²f.",
+    "forms": []
+  },
+  {
+    "term": "Semiconductor",
+    "definition": "A material such as silicon with a small band gap, whose conductivity lies between metals and insulators and can be controlled by doping, heat, light or electric fields.",
+    "forms": [
+      "semiconductors"
+    ]
+  },
+  {
+    "term": "Band gap",
+    "definition": "A range of electron energies with no allowed states in a crystal, between the valence band and the conduction band.",
+    "forms": [
+      "band gaps"
+    ]
+  },
+  {
+    "term": "Valence band",
+    "definition": "The highest energy band that is (nearly) full of electrons in a semiconductor or insulator.",
+    "forms": []
+  },
+  {
+    "term": "Conduction band",
+    "definition": "The band of energies above the band gap, nearly empty in a semiconductor; electrons in it move freely and carry current.",
+    "forms": []
+  },
+  {
+    "term": "Pauli exclusion principle",
+    "definition": "The rule that no two electrons can occupy the same quantum state.",
+    "forms": [
+      "exclusion principle"
+    ]
+  },
+  {
+    "term": "Intrinsic carrier concentration",
+    "definition": "The density of electrons (equal to that of holes) in a pure semiconductor, created by heat lifting electrons across the gap; about 10¹⁰ per cm³ in silicon at room temperature.",
+    "forms": []
+  },
+  {
+    "term": "Doping",
+    "definition": "Adding small, controlled amounts of impurity atoms to a semiconductor to set its number of free electrons or holes.",
+    "forms": []
+  },
+  {
+    "term": "n-type semiconductor",
+    "definition": "A semiconductor doped with donors (such as phosphorus in silicon) so that electrons are the majority carriers; p-type uses acceptors (such as boron) so that holes are.",
+    "forms": [
+      "n-type",
+      "p-type"
+    ]
+  },
+  {
+    "term": "Fermi level",
+    "definition": "The energy at which an electron state has a 50% chance of being occupied; in equilibrium it is the same throughout a connected system.",
+    "forms": []
+  },
+  {
+    "term": "Fermi–Dirac distribution",
+    "definition": "The probability f(E) = 1/(1 + e^((E − E_F)/kT)) that a state at energy E is occupied by an electron.",
+    "forms": [
+      "Fermi–Dirac statistics"
+    ]
+  },
+  {
+    "term": "Diode",
+    "definition": "A two-terminal device that lets current flow easily in one direction and very little in the other.",
+    "forms": [
+      "diodes"
+    ]
+  },
+  {
+    "term": "p–n junction",
+    "definition": "The boundary between p-type and n-type regions of a semiconductor crystal, the basis of diodes, LEDs, solar cells and bipolar transistors.",
+    "forms": [
+      "p–n junctions",
+      "p-n junction"
+    ]
+  },
+  {
+    "term": "Depletion region",
+    "definition": "The zone around a p–n junction emptied of mobile carriers, leaving fixed charged dopant ions and a strong electric field.",
+    "forms": []
+  },
+  {
+    "term": "Built-in voltage",
+    "definition": "The potential step across a p–n junction in equilibrium, V_bi = (kT/q) ln(N_A N_D / n_i²), about 0.7–0.9 V in silicon.",
+    "forms": []
+  },
+  {
+    "term": "Diode equation",
+    "definition": "Shockley’s law for a junction’s current: I = I_s(e^(qV/nkT) − 1).",
+    "forms": []
+  },
+  {
+    "term": "Zener diode",
+    "definition": "A diode designed to break down at a precise reverse voltage, used as a voltage reference.",
+    "forms": [
+      "Zener diodes",
+      "Zener breakdown"
+    ]
+  },
+  {
+    "term": "Light-emitting diode",
+    "definition": "A p–n junction in a direct-gap semiconductor that emits light when electrons and holes recombine; its colour is set by the band gap.",
+    "forms": [
+      "light-emitting diodes",
+      "LED",
+      "LEDs"
+    ]
+  },
+  {
+    "term": "Solar cell",
+    "definition": "A p–n junction that converts light into electrical power by separating light-generated electron–hole pairs.",
+    "forms": [
+      "solar cells"
+    ]
+  },
+  {
+    "term": "Rectifier",
+    "definition": "A circuit of diodes that converts alternating current into direct current.",
+    "forms": [
+      "rectifiers"
+    ]
+  },
+  {
+    "term": "Transistor",
+    "definition": "A semiconductor device in which a small voltage or current at one terminal controls a larger current between two others; used to amplify and switch.",
+    "forms": [
+      "transistors"
+    ]
+  },
+  {
+    "term": "Bipolar junction transistor",
+    "definition": "A transistor made of three layers (npn or pnp) in which a small base current controls a larger collector current; both electrons and holes take part.",
+    "forms": [
+      "bipolar junction transistors",
+      "BJT",
+      "BJTs"
+    ]
+  },
+  {
+    "term": "Current gain",
+    "definition": "In a bipolar transistor, the ratio β = I_C/I_B of collector current to base current, typically 50–300.",
+    "forms": []
+  },
+  {
+    "term": "Transconductance",
+    "definition": "How much a transistor’s output current changes per volt of input, g_m = ∂I/∂V; for a bipolar transistor g_m = I_C/V_T.",
+    "forms": []
+  },
+  {
+    "term": "Early effect",
+    "definition": "The slight rise of a bipolar transistor’s collector current with collector voltage, as the widening depletion region thins the base.",
+    "forms": []
+  },
+  {
+    "term": "Load line",
+    "definition": "A line on a device’s current–voltage graph showing all the operating points allowed by the external circuit; the device operates where it crosses the device curve.",
+    "forms": []
+  },
+  {
+    "term": "Transistor-transistor logic",
+    "definition": "A family of bipolar logic chips (such as the 7400 series) that were the standard digital building blocks from the 1960s to the 1980s.",
+    "forms": [
+      "TTL"
+    ]
+  },
+  {
+    "term": "Heterojunction bipolar transistor",
+    "definition": "A bipolar transistor whose emitter uses a wider-band-gap semiconductor than its base, giving very high speed; used in phones and radars.",
+    "forms": [
+      "heterojunction bipolar transistors",
+      "HBT",
+      "HBTs"
+    ]
+  },
+  {
+    "term": "MOSFET",
+    "definition": "Metal–oxide–semiconductor field-effect transistor: a gate voltage, acting through a thin insulator, creates or removes a conducting channel between source and drain.",
+    "forms": [
+      "MOSFETs"
+    ]
+  },
+  {
+    "term": "Field-effect transistor",
+    "definition": "A transistor in which an electric field from a gate electrode controls the conductivity of a channel.",
+    "forms": [
+      "field-effect transistors",
+      "FET",
+      "FETs"
+    ]
+  },
+  {
+    "term": "Threshold voltage",
+    "definition": "The gate voltage at which a MOSFET’s channel forms (strong inversion), typically 0.2–0.5 V in modern logic.",
+    "forms": []
+  },
+  {
+    "term": "Inversion layer",
+    "definition": "A thin sheet of minority carriers (electrons in p-type silicon) induced at the surface under a MOSFET gate; it forms the channel.",
+    "forms": []
+  },
+  {
+    "term": "Subthreshold swing",
+    "definition": "The gate voltage needed to change a transistor’s off-state current tenfold; at least about 60 mV per decade at room temperature.",
+    "forms": []
+  },
+  {
+    "term": "Gate oxide",
+    "definition": "The thin insulating layer between a MOSFET’s gate and its channel, originally silicon dioxide.",
+    "forms": []
+  },
+  {
+    "term": "CMOS",
+    "definition": "Complementary metal–oxide–semiconductor logic, which pairs n-channel and p-channel MOSFETs so that almost no current flows when a gate is idle.",
+    "forms": [
+      "complementary MOS"
+    ]
+  },
+  {
+    "term": "Noise margin",
+    "definition": "How far a logic signal can be disturbed and still be read correctly by the next gate, e.g. NM_L = V_IL − V_OL.",
+    "forms": [
+      "noise margins"
+    ]
+  },
+  {
+    "term": "Pull-down network",
+    "definition": "In a CMOS gate, the nMOS transistors that connect the output to ground when the output should be 0; its dual, the pMOS pull-up network, connects it to the supply.",
+    "forms": [
+      "pull-up network"
+    ]
+  },
+  {
+    "term": "Voltage transfer characteristic",
+    "definition": "A graph of a logic gate’s output voltage against its input voltage.",
+    "forms": []
+  },
+  {
+    "term": "Standard cell",
+    "definition": "A pre-designed, pre-characterised logic gate or flip-flop layout from a library, used by software to assemble large chips.",
+    "forms": [
+      "standard cells"
+    ]
+  },
+  {
+    "term": "Flash memory",
+    "definition": "Non-volatile memory that stores bits as charge trapped on a floating gate, erased in blocks; used in SSDs and phones.",
+    "forms": []
+  },
+  {
+    "term": "Floating gate",
+    "definition": "An electrically isolated conductor inside a transistor’s gate oxide whose trapped charge shifts the threshold voltage, storing data without power.",
+    "forms": []
+  },
+  {
+    "term": "Latch-up",
+    "definition": "A failure in CMOS chips where parasitic bipolar transistors form a short circuit from supply to ground.",
+    "forms": []
+  },
+  {
+    "term": "Sense amplifier",
+    "definition": "A circuit that detects the small voltage difference produced when a memory cell is read and amplifies it to a full logic level.",
+    "forms": [
+      "sense amplifiers"
+    ]
+  },
+  {
+    "term": "Integrated circuit",
+    "definition": "A complete electronic circuit, with its transistors and wiring, made on a single piece of semiconductor: a chip.",
+    "forms": [
+      "integrated circuits"
+    ]
+  },
+  {
+    "term": "Photolithography",
+    "definition": "Patterning a chip by projecting light through a mask onto light-sensitive resist, then developing it into a stencil for etching or doping.",
+    "forms": [
+      "lithography"
+    ]
+  },
+  {
+    "term": "Planar process",
+    "definition": "Making transistors by diffusing dopants through windows in a protective oxide on a flat silicon surface, with wiring laid on top (Hoerni, 1959).",
+    "forms": []
+  },
+  {
+    "term": "Moore’s law",
+    "definition": "Gordon Moore’s observation that the number of transistors per chip doubles at a regular rate, about every two years since 1975.",
+    "forms": [
+      "Moore's law"
+    ]
+  },
+  {
+    "term": "Dennard scaling",
+    "definition": "Shrinking a MOSFET’s dimensions and voltage together so it becomes faster and lower-power at constant power density; it broke down around 2005.",
+    "forms": []
+  },
+  {
+    "term": "Dark silicon",
+    "definition": "The part of a chip that cannot be powered at full speed at the same time because of power and heat limits.",
+    "forms": []
+  },
+  {
+    "term": "Extreme ultraviolet lithography",
+    "definition": "Lithography using 13.5 nm light produced from tin plasma and focused with mirrors in vacuum.",
+    "forms": [
+      "EUV"
+    ]
+  },
+  {
+    "term": "Czochralski method",
+    "definition": "Growing a single crystal by slowly pulling a seed crystal up from a melt; used for nearly all silicon wafers.",
+    "forms": []
+  },
+  {
+    "term": "Short-channel effects",
+    "definition": "The loss of gate control in very short transistors, including threshold roll-off, drain-induced barrier lowering and a worse subthreshold swing.",
+    "forms": [
+      "short-channel effect"
+    ]
+  },
+  {
+    "term": "Drain-induced barrier lowering",
+    "definition": "In a short transistor, the drain voltage lowers the source barrier, reducing the threshold voltage and raising leakage.",
+    "forms": [
+      "DIBL"
+    ]
+  },
+  {
+    "term": "Velocity saturation",
+    "definition": "The levelling-off of carrier drift speed (about 10⁷ cm/s in silicon) in strong electric fields.",
+    "forms": []
+  },
+  {
+    "term": "High-k dielectric",
+    "definition": "A gate insulator with a higher dielectric constant than SiO₂ (such as hafnium oxide), giving the same capacitance in a thicker, less leaky layer.",
+    "forms": [
+      "high-k dielectrics",
+      "high-k"
+    ]
+  },
+  {
+    "term": "Equivalent oxide thickness",
+    "definition": "The thickness of SiO₂ that would give the same capacitance as a given gate insulator: EOT = t × 3.9/κ.",
+    "forms": [
+      "EOT"
+    ]
+  },
+  {
+    "term": "FinFET",
+    "definition": "A transistor whose channel is a thin vertical fin with the gate wrapped over three sides; used from 22 nm (2011–12) onwards.",
+    "forms": [
+      "FinFETs"
+    ]
+  },
+  {
+    "term": "Gate-all-around transistor",
+    "definition": "A transistor whose gate completely surrounds one or more thin channels (nanosheets or nanowires), giving the best electrostatic control.",
+    "forms": [
+      "gate-all-around",
+      "GAA"
+    ]
+  },
+  {
+    "term": "Strained silicon",
+    "definition": "Silicon whose crystal lattice is deliberately stretched or compressed to raise carrier mobility.",
+    "forms": []
+  },
+  {
+    "term": "Stored-program computer",
+    "definition": "A computer that keeps its instructions in the same memory as its data, as binary numbers (the von Neumann architecture).",
+    "forms": [
+      "stored-program"
+    ]
+  },
+  {
+    "term": "Instruction set architecture",
+    "definition": "The set of instructions a processor understands and how they are encoded; the interface between software and hardware.",
+    "forms": []
+  },
+  {
+    "term": "Program counter",
+    "definition": "The processor register holding the address of the next instruction to fetch.",
+    "forms": []
+  },
+  {
+    "term": "Pipelining",
+    "definition": "Overlapping the stages of successive instructions (fetch, decode, execute…) so that a new instruction can start every cycle.",
+    "forms": [
+      "pipelined"
+    ]
+  },
+  {
+    "term": "Branch prediction",
+    "definition": "Guessing the outcome of a conditional jump before it is known so that the pipeline can keep fetching instructions.",
+    "forms": []
+  },
+  {
+    "term": "Out-of-order execution",
+    "definition": "Executing instructions as soon as their inputs are ready rather than strictly in program order, while preserving the program’s results.",
+    "forms": []
+  },
+  {
+    "term": "RISC",
+    "definition": "Reduced instruction set computer: a processor design with simple, uniform instructions that are easy to pipeline, such as ARM and RISC-V.",
+    "forms": []
+  },
+  {
+    "term": "Memory wall",
+    "definition": "The growing gap between processor speed and the time needed to fetch data from main memory.",
+    "forms": []
+  },
+  {
+    "term": "Speculative execution",
+    "definition": "Executing instructions along a predicted path before knowing whether they are needed, discarding the results if the guess was wrong.",
+    "forms": []
+  },
+  {
+    "term": "Amdahl’s law",
+    "definition": "The speedup of a fixed task on N processors is at most 1/((1 − p) + p/N), where p is the parallel fraction; it can never exceed 1/(1 − p).",
+    "forms": [
+      "Amdahl's law"
+    ]
+  },
+  {
+    "term": "Gustafson’s law",
+    "definition": "When problem size grows with the machine, the scaled speedup on N processors is about (1 − p) + pN.",
+    "forms": [
+      "Gustafson's law"
+    ]
+  },
+  {
+    "term": "SIMD",
+    "definition": "Single instruction, multiple data: one instruction applied to many data elements at once.",
+    "forms": []
+  },
+  {
+    "term": "Warp",
+    "definition": "On Nvidia GPUs, a group of 32 threads that execute the same instruction together.",
+    "forms": [
+      "warps"
+    ]
+  },
+  {
+    "term": "SIMT",
+    "definition": "Single instruction, multiple threads: the GPU execution style in which groups of threads run the same instruction on different data.",
+    "forms": []
+  },
+  {
+    "term": "Arithmetic intensity",
+    "definition": "The number of arithmetic operations a computation performs per byte of data moved to or from memory.",
+    "forms": []
+  },
+  {
+    "term": "Roofline model",
+    "definition": "A performance model: attainable speed = min(peak compute, memory bandwidth × arithmetic intensity).",
+    "forms": [
+      "roofline"
+    ]
+  },
+  {
+    "term": "Tensor core",
+    "definition": "A GPU unit that performs a small matrix multiply–accumulate in one operation, usually at reduced precision, to accelerate neural networks.",
+    "forms": [
+      "tensor cores"
+    ]
+  },
+  {
+    "term": "Tensor Processing Unit",
+    "definition": "Google’s family of AI accelerator chips built around large arrays of multipliers.",
+    "forms": [
+      "TPU",
+      "TPUs"
+    ]
+  },
+  {
+    "term": "Chiplet",
+    "definition": "One of several smaller dies combined in a single package to form a larger processor.",
+    "forms": [
+      "chiplets"
+    ]
+  },
+  {
+    "term": "Silicon photonics",
+    "definition": "Making optical components such as waveguides, modulators and detectors on silicon with chip-manufacturing methods.",
+    "forms": []
+  },
+  {
+    "term": "Neuromorphic computing",
+    "definition": "Computing hardware inspired by the brain, in which many simple neurons communicate with sparse spikes and memory sits beside computation.",
+    "forms": [
+      "neuromorphic"
+    ]
+  },
+  {
+    "term": "Memristor",
+    "definition": "A two-terminal device whose resistance depends on the history of the current that has passed through it.",
+    "forms": [
+      "memristors"
+    ]
+  },
+  {
+    "term": "Qubit",
+    "definition": "A quantum bit: a two-level quantum system that can be in a superposition of 0 and 1 and entangled with other qubits.",
+    "forms": [
+      "qubits"
+    ]
+  },
+  {
+    "term": "Quantum error correction",
+    "definition": "Encoding one reliable logical qubit in many noisy physical qubits so that errors can be detected and corrected.",
+    "forms": []
+  },
+  {
+    "term": "Domain-specific architecture",
+    "definition": "A processor designed for one class of tasks (such as neural networks or video) to gain efficiency at the expense of generality.",
+    "forms": [
+      "domain-specific architectures",
+      "domain-specific accelerators"
+    ]
+  },
+  {
+    "term": "FPGA",
+    "definition": "Field-programmable gate array: a chip of configurable logic blocks and wiring that can be reprogrammed to implement different circuits.",
+    "forms": [
+      "FPGAs"
+    ]
   }
 ]

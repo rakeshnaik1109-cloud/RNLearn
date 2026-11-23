@@ -25,6 +25,7 @@ CANONICAL_SUBJECTS = [
     "Research",
     "Technology",
     "AI & Machine Learning",
+    "Electronics & Computing",
     "Finance & Economics",
     "History",
     "Geography",
@@ -66,6 +67,12 @@ SERIES = {
         "parts": 10,
         "label": "ML Part",
         "lede": "A ten-part series on how machine learning works, from learning from data and classical algorithms to activation and loss functions, optimisers, deep architectures and choosing a model, with interactive playgrounds in every part.",
+    },
+    "from-switch-to-supercomputer": {
+        "title": "From Switch to Supercomputer",
+        "parts": 14,
+        "label": "Electronics Part",
+        "lede": "A fourteen-part series on electronics, from bits and logic gates through band theory, diodes and transistors to CMOS, chip fabrication, processors and GPUs, with interactive figures and worked problems in every part.",
     },
     "one-word-at-a-time": {
         "title": "One Word at a Time",
@@ -434,6 +441,9 @@ def build_site(root_dir, check_mode=False):
                 lede += " Inside the Machine: a ten-part series on how machine learning works, with interactive playgrounds."
             if any((x.get("series") or {}).get("id") == "one-word-at-a-time" for x in posts):
                 lede += " One Word at a Time: a six-part series on how large language models work and why they are accurate."
+        elif subj == "Electronics & Computing" and any((x.get("series") or {}).get("id") == "from-switch-to-supercomputer" for x in posts):
+            eyebrow = "Subject Archive • Series"
+            lede = "From Switch to Supercomputer: a fourteen-part series on electronics, from logic gates and Boolean algebra through semiconductor physics, diodes and transistors to CMOS chips, processors and GPUs, with interactive figures and worked problems."
         posts.sort(key=reading_order)
         html = generate_listing_page(title, eyebrow, lede, posts, f"subjects/{s_slug}.html")
         files_to_write[os.path.join("subjects", f"{s_slug}.html")] = html

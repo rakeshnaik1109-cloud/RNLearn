@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Band Theory: Why Silicon Is a Semiconductor — RNLearn</title>
+  <meta name="description" content="Electrons as waves in crystals, energy bands and gaps, metals versus insulators, electrons and holes, doping with phosphorus and boron, and the Fermi level, with worked problems.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/band-theory-and-semiconductors.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Band Theory: Why Silicon Is a Semiconductor — RNLearn">
+  <meta property="og:description" content="Electrons as waves in crystals, energy bands and gaps, metals versus insulators, electrons and holes, doping with phosphorus and boron, and the Fermi level, with worked problems.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/band-theory-and-semiconductors.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Band Theory: Why Silicon Is a Semiconductor — RNLearn">
+  <meta name="twitter:description" content="Electrons as waves in crystals, energy bands and gaps, metals versus insulators, electrons and holes, doping with phosphorus and boron, and the Fermi level, with worked problems.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Band Theory: Why Silicon Is a Semiconductor",
+    "description": "Electrons as waves in crystals, energy bands and gaps, metals versus insulators, electrons and holes, doping with phosphorus and boron, and the Fermi level, with worked problems.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-23",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/band-theory-and-semiconductors.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/electronics-computing.html" class="post-subject-tag" data-subject="electronics-computing">Electronics &amp; Computing</a>
+        </div>
+        <h1 class="article-title">Band Theory: Why Silicon Is a Semiconductor</h1>
+        <p class="article-standfirst">
+          Copper conducts 10²⁰ times better than glass, and silicon sits in between, controllable by a trace of impurity. Quantum mechanics explains why, and that explanation is the foundation of every transistor.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-23">23 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>14 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 5 of 14)</div>
+  <div class="series-banner-links">
+    <a href="electricity-and-circuits.html">← Part 4: Electricity and Circuits: Ohm, Kirchhoff, RC Delay and the Energy of a Bit</a>
+    <a href="pn-junction-and-diode.html">Part 6: The p–n Junction: Diodes, LEDs and Solar Cells →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. Conductors, Insulators and the Puzzle in Between</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Electrons as Waves in a Crystal</a></li>
+              <li><a class="toc-link" href="#section-4">4. From Levels to Bands</a></li>
+              <li><a class="toc-link" href="#section-5">5. Metals, Insulators and Semiconductors</a></li>
+              <li><a class="toc-link" href="#section-6">6. Electrons and Holes</a></li>
+              <li><a class="toc-link" href="#section-7">7. Doping: Controlling Conductivity</a></li>
+              <li><a class="toc-link" href="#section-8">8. The Fermi Level</a></li>
+              <li><a class="toc-link" href="#section-9">9. Worked Problems</a></li>
+              <li><a class="toc-link" href="#section-10">10. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-11">11. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-12">12. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-13">13. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-14">14. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-15">15. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-16">16. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>In this part:</strong> why silicon is a semiconductor. Electrons in a crystal behave as waves; their allowed energies form bands separated by gaps; whether bands are full or empty decides between metal, insulator and semiconductor. We meet holes, the intrinsic carrier concentration, doping with phosphorus and boron, and the Fermi level that ties it all together.</p>
+            <p><strong>You need:</strong> Part 4 (current, conductivity σ = nqμ). Some familiarity with energy in electronvolts helps.</p>
+            <p><strong>Try:</strong> four interactive figures, including a chain of atoms whose levels merge into bands, and five worked problems.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. Conductors, Insulators and the Puzzle in Between</h2>
+            <p>Copper conducts about 10<sup>20</sup> times better than glass. Between them lies a strange family of materials, the <strong>semiconductors</strong>, whose conductivity rises with temperature (the opposite of metals), changes when light falls on them, and can be altered a million-fold by traces of impurity. In 1874 Ferdinand Braun found that a metal point pressed on a lead sulphide crystal conducted better in one direction than the other, <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span> and crystal detectors built on this effect served as early radio receivers, but nobody could explain them. The explanation came only with quantum mechanics, and it is the foundation of every transistor. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>, <a class="cite" href="#ref-3">3</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Part 5 explains the materials: band theory.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-el5-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. From a puzzling rectifier to ultra-pure silicon, 1874–1952.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Electrons as Waves in a Crystal</h2>
+            <p>Drude’s electron gas (Part 4) explained Ohm’s law but failed badly elsewhere: it could not say why some solids are insulators, and it predicted the wrong heat capacity. Two quantum ideas fixed it. First, in 1925 Wolfgang Pauli proposed the <strong>exclusion principle</strong>: no two electrons can occupy the same quantum state. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> Electrons therefore fill the available states one by one from the bottom, like water filling a jug, a filling described by Fermi–Dirac statistics. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>, <a class="cite" href="#ref-6">6</a>]</span></p>
+            <p>Second, an electron is a wave. In 1928 Felix Bloch showed that an electron wave can travel through a perfectly periodic crystal without scattering at all; resistance comes only from imperfections and vibrations of the lattice. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> But not every energy is allowed: waves whose wavelength matches the spacing of the atoms are reflected back and forth by the lattice, like light in a multilayer mirror, and cannot travel. These forbidden energies are the <strong>band gaps</strong>.</p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. From Levels to Bands</h2>
+            <p>Another way to see bands: start with isolated atoms, each with sharp energy levels. Bring two atoms together and each level splits into two, a lower bonding and a higher antibonding state. Bring N atoms together and each level splits into N. With about 5 × 10<sup>22</sup> atoms per cubic centimetre, the levels are so close that they form continuous <strong>bands</strong>, separated by gaps where no states exist. The closer the atoms, the more their wavefunctions overlap and the wider the bands; if bands become wide enough, they overlap and the gap closes.</p>
+            <figure class="fig" data-fig="fig-el-bands">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Levels become bands.</strong> Add atoms to the chain and move them closer together; watch the levels multiply, merge into bands and finally overlap.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Metals, Insulators and Semiconductors</h2>
+            <p>In 1931 Alan Wilson used band theory to explain the three kinds of solid. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span> The key insight is that a completely full band carries no current: for every electron moving one way there is another moving the opposite way, and there are no empty states to shift into. So:</p>
+            <ul>
+              <li><strong>Metals</strong> have a partly filled band (or overlapping bands). Electrons at the top of the filling have empty states just above them and respond to the slightest field.</li>
+              <li><strong>Insulators</strong> have a full <strong>valence band</strong> and an empty <strong>conduction band</strong> separated by a large gap: about 5.5 eV for diamond and about 9 eV for silicon dioxide.</li>
+              <li><strong>Semiconductors</strong> have the same arrangement with a small gap: 1.12 eV for silicon, 0.66 eV for germanium and 1.42 eV for gallium arsenide at room temperature. Thermal energy (kT ≈ 0.026 eV at 300 K) is small compared with these gaps but, because of the vast number of electrons, it lifts a few across. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></li>
+            </ul>
+            <p>The gap also sets how a semiconductor interacts with light: a photon can lift an electron across the gap only if its energy hc/λ exceeds E<sub>g</sub>. Silicon absorbs visible light, which is why solar cells and camera sensors are made of it, but is transparent beyond about 1.1 µm in the infrared.</p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Electrons and Holes</h2>
+            <p>When an electron is lifted into the conduction band it leaves behind an empty state in the valence band. A neighbouring electron can move into that vacancy, leaving a vacancy behind it, and so on: the vacancy moves through the crystal like a bubble through water. It behaves exactly like a particle with positive charge +e and is called a <strong>hole</strong>. A semiconductor therefore has two kinds of carrier, electrons in the conduction band and holes in the valence band, and both carry current.</p>
+            <p>In a pure (<em>intrinsic</em>) crystal, electrons and holes are created in pairs, so their densities are equal: n = p = n<sub>i</sub>. The intrinsic concentration depends steeply on the gap and the temperature, n<sub>i</sub> ∝ T<sup>3/2</sup> e<sup>−E<sub>g</sub>/2kT</sup>. For silicon at 300 K, n<sub>i</sub> ≈ 1 × 10<sup>10</sup> cm<sup>−3</sup>: about one free electron per 5 × 10<sup>12</sup> atoms. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span> Pure silicon is therefore a poor conductor, and the conductivity rises rapidly with temperature, the signature of a semiconductor.</p>
+            <figure class="fig" data-fig="fig-el-ni">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Heat creates carriers.</strong> Change the temperature and compare silicon, germanium and gallium arsenide.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Doping: Controlling Conductivity</h2>
+            <p>Silicon sits in group IV of the periodic table: each atom shares its four outer electrons in four covalent bonds with its neighbours. Replace one silicon atom by phosphorus (group V, five outer electrons) and four electrons form bonds while the fifth is held only weakly, by about 0.045 eV. At room temperature it is set free into the conduction band: phosphorus is a <strong>donor</strong>, and silicon dominated by donors is <strong>n-type</strong>. Replace a silicon atom by boron (group III, three electrons) and one bond is left incomplete; it readily captures an electron from the valence band, creating a hole. Boron is an <strong>acceptor</strong>, making <strong>p-type</strong> silicon. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span></p>
+            <p>In thermal equilibrium the product of electron and hole densities is fixed, <strong>np = n<sub>i</sub>²</strong> (the law of mass action). So doping silicon with 10<sup>16</sup> phosphorus atoms per cm³, one per five million silicon atoms, gives n ≈ 10<sup>16</sup> and p ≈ 10<sup>4</sup> cm<sup>−3</sup>: electrons are the <em>majority carriers</em> and holes the <em>minority carriers</em>.</p>
+            <p>Doping only works if the crystal is otherwise extremely pure. In 1940 Russell Ohl at Bell Labs found a silicon rod that produced a voltage when light fell on it; impurities segregated during freezing had made one end p-type and the other n-type, creating the first p–n junction (Part 6). <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span> William Pfann’s zone refining, described in 1952, swept impurities out of germanium to below one part in a billion and made reliable devices possible. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>, <a class="cite" href="#ref-13">13</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-doping">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Doping silicon.</strong> Choose an impurity and its concentration; see the extra electron or hole, the carrier densities, the Fermi level and the resistivity.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-8">
+            <h2>8. The Fermi Level</h2>
+            <p>The probability that a state at energy E holds an electron is given by the <strong>Fermi–Dirac distribution</strong>, f(E) = 1/(1 + e<sup>(E − E<sub>F</sub>)/kT</sup>), where E<sub>F</sub> is the <strong>Fermi level</strong>: the energy at which a state has a 50% chance of being filled. In a pure semiconductor E<sub>F</sub> lies near the middle of the gap. Donors push it up towards the conduction band, by E<sub>F</sub> − E<sub>i</sub> = kT ln(n/n<sub>i</sub>); acceptors push it down.</p>
+            <p>The Fermi level is the single most useful idea for understanding devices. In equilibrium it is flat throughout any connected system, like the water level in connected tanks. When p-type and n-type silicon touch, or when a gate voltage is applied to a transistor, the bands bend so that E<sub>F</sub> stays flat, and that bending is what creates the barriers and channels of the next three parts. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-fermi">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. The Fermi–Dirac distribution.</strong> Raise the temperature to blur the edge, and move the Fermi level to change how many states in each band are occupied.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Worked Problems</h2>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 1 (easy): which light does silicon absorb?</div>
+              <p>Silicon’s band gap is 1.12 eV. What is the longest wavelength of light it can absorb by lifting electrons across the gap? (Use hc ≈ 1240 eV nm.)</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>λ<sub>max</sub> = hc/E<sub>g</sub> = 1240/1.12 ≈ <strong>1,110 nm</strong>, in the near infrared. All visible light (400–700 nm) is absorbed, which is why silicon looks dark and makes good solar cells; telecom light at 1,550 nm passes straight through, which is useful for silicon photonics (Part 14).</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 2 (easy): carriers in doped silicon</div>
+              <p>Silicon is doped with 10<sup>16</sup> phosphorus atoms per cm³. With n<sub>i</sub> = 10<sup>10</sup> cm<sup>−3</sup>, find the electron and hole concentrations at room temperature.</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>Every donor is ionised and N<sub>D</sub> ≫ n<sub>i</sub>, so <strong>n ≈ 10<sup>16</sup> cm<sup>−3</sup></strong>. By mass action, p = n<sub>i</sub>²/n = 10<sup>20</sup>/10<sup>16</sup> = <strong>10<sup>4</sup> cm<sup>−3</sup></strong>. One impurity atom per five million silicon atoms changed the electron density a million-fold and the hole density a million-fold the other way.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 3 (medium): resistivity</div>
+              <p>Using μ<sub>n</sub> = 1,400 and μ<sub>p</sub> = 450 cm²/(V s), compare the resistivity of pure silicon with that of the doped sample in Problem 2.</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>ρ = 1/[q(nμ<sub>n</sub> + pμ<sub>p</sub>)]. Pure: ρ = 1/[1.6 × 10<sup>−19</sup> × 10<sup>10</sup> × 1,850] ≈ <strong>3.4 × 10<sup>5</sup> Ω cm</strong>. Doped: ρ ≈ 1/[1.6 × 10<sup>−19</sup> × 10<sup>16</sup> × 1,400] ≈ <strong>0.45 Ω cm</strong>, about 750,000 times lower. (Copper is about 1.7 × 10<sup>−6</sup> Ω cm.)</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 4 (medium): where is the Fermi level?</div>
+              <p>For the sample in Problem 2, how far above mid-gap is the Fermi level at 300 K (kT = 0.0259 eV)? In pure silicon, with E<sub>F</sub> at mid-gap, what is the occupation probability of a state at the conduction-band edge, 0.56 eV higher?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>E<sub>F</sub> − E<sub>i</sub> = kT ln(n/n<sub>i</sub>) = 0.0259 × ln(10<sup>6</sup>) = 0.0259 × 13.8 ≈ <strong>0.36 eV</strong>, about two-thirds of the way from mid-gap to the conduction band. For pure silicon, f ≈ e<sup>−0.56/0.0259</sup> = e<sup>−21.6</sup> ≈ <strong>4 × 10<sup>−10</sup></strong>: tiny, but multiplied by about 3 × 10<sup>19</sup> states per cm³ near the band edge it gives the 10<sup>10</sup> electrons per cm³ found above.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 5 (harder): a hot chip</div>
+              <p>Estimate by what factor silicon’s intrinsic carrier concentration rises between 300 K and 400 K (127 °C), using n<sub>i</sub> ∝ T<sup>3/2</sup> e<sup>−E<sub>g</sub>/2kT</sup> with E<sub>g</sub> = 1.12 eV held constant. Why does this matter for a device doped at 10<sup>14</sup> cm<sup>−3</sup>?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>Ratio = (400/300)<sup>3/2</sup> × exp[(E<sub>g</sub>/2k)(1/300 − 1/400)] = 1.54 × exp[(1.12/(2 × 8.617 × 10<sup>−5</sup>)) × 8.33 × 10<sup>−4</sup>] = 1.54 × e<sup>5.42</sup> ≈ 1.54 × 225 ≈ <strong>350</strong>. (The gap shrinks slightly with temperature, making it larger still, about 400–500.) So n<sub>i</sub> rises from 10<sup>10</sup> to about 4 × 10<sup>12</sup> cm<sup>−3</sup>, still below 10<sup>14</sup>, but minority-carrier densities (n<sub>i</sub>²/N) rise 100,000-fold, and leakage currents in junctions, which depend on them, grow enormously. That is one reason chips have a maximum operating temperature.</p></details>
+            </div>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: beyond simple bands</div>
+              <p>Band theory treats each electron as moving independently in an average field from the others. It works superbly for silicon, but it fails for some materials where electrons interact strongly: certain oxides predicted to be metals are in fact insulators (<em>Mott insulators</em>), and high-temperature superconductors emerge from such materials. Predicting band gaps accurately from first principles is still hard: the standard computational method, density functional theory, systematically underestimates gaps, and more accurate methods are expensive. Designing new semiconductors for faster or more efficient devices by computer therefore remains an active research field.</p>
+            </div>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: bands and carriers</div>
+              <ol>
+                <li>In Figure 3, set the number of atoms to 2, then 40. How many levels does each band contain? At what spacing does the gap close?</li>
+                <li>In Figure 4, find the temperature at which germanium’s n<sub>i</sub> reaches the red “light doping” line. What about silicon?</li>
+                <li>In Figure 5, switch between phosphorus and boron at 10<sup>16</sup> cm<sup>−3</sup>. Why is the p-type resistivity higher at the same doping?</li>
+                <li>In Figure 6, set the temperature to 0 K and then 1,500 K. How wide (in eV) is the blurred region at each?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “holes are just an accounting trick”</div>
+              <p><strong>The myth:</strong> only electrons really move; “holes” are a bookkeeping fiction.</p>
+              <p><strong>The reality:</strong> holes behave as genuine positive particles in experiments. In the Hall effect, a magnetic field deflects carriers sideways; in p-type material the sideways voltage has the opposite sign to that in metals and n-type material, exactly as for positive charges. Holes have their own effective mass and mobility, and devices such as p-channel transistors rely on them.</p>
+              <p><strong>Why it matters:</strong> describing a nearly full band by its few empty states is not only convenient; it is the physically correct way to predict how the band responds.</p>
+            </div>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>Electrons in crystals are waves; their allowed energies form bands separated by forbidden gaps.</li>
+                <li>Full bands carry no current: metals have partly full bands; insulators and semiconductors have a full valence band and an empty conduction band separated by a gap (silicon: 1.12 eV).</li>
+                <li>Heat lifts a few electrons across the gap, creating electron–hole pairs; n<sub>i</sub> ∝ T<sup>3/2</sup> e<sup>−E<sub>g</sub>/2kT</sup>, about 10<sup>10</sup> cm<sup>−3</sup> for silicon at 300 K.</li>
+                <li>Donors (phosphorus) make n-type silicon; acceptors (boron) make p-type; np = n<sub>i</sub>².</li>
+                <li>The Fermi level marks 50% occupation; doping moves it, and in equilibrium it is flat everywhere.</li>
+              </ul>
+            </div>
+          </section>
+          <section id="section-14">
+            <h2>14. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Wolfgang Pauli</td>
+                <td style="padding:0.6rem 0.8rem;">1900–1958<br>Austria / Switzerland</td>
+                <td style="padding:0.6rem 0.8rem;">Exclusion principle (1925)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed that no two electrons can share a quantum state.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Enrico Fermi &amp; Paul Dirac</td>
+                <td style="padding:0.6rem 0.8rem;">1901–1954 / 1902–1984<br>Italy / UK</td>
+                <td style="padding:0.6rem 0.8rem;">Fermi–Dirac statistics (1926)</td>
+                <td style="padding:0.6rem 0.8rem;">Worked out how electrons fill energy levels.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Felix Bloch</td>
+                <td style="padding:0.6rem 0.8rem;">1905–1983<br>Switzerland / USA</td>
+                <td style="padding:0.6rem 0.8rem;">Electron waves in crystals (1928)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed that electrons travel through perfect crystals as waves.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Alan Herries Wilson</td>
+                <td style="padding:0.6rem 0.8rem;">1906–1995<br>UK</td>
+                <td style="padding:0.6rem 0.8rem;">Band theory of semiconductors (1931)</td>
+                <td style="padding:0.6rem 0.8rem;">Explained metals, insulators and semiconductors with bands.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Russell Ohl</td>
+                <td style="padding:0.6rem 0.8rem;">1898–1987<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">The p–n junction (1940)</td>
+                <td style="padding:0.6rem 0.8rem;">Discovered p-type and n-type regions in silicon.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about band theory and semiconductors.</p>
+            <figure class="fig" data-fig="fig-quiz-el5">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-16">
+            <h2>16. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Braun, Ferdinand.</strong> (1874). "Ueber die Stromleitung durch Schwefelmetalle." <em>Annalen der Physik und Chemie</em>, 153(4): 556–563.</li>
+              <li id="ref-2"><strong>Kittel, Charles.</strong> (2005). <em>Introduction to Solid State Physics</em>, 8th edition, chapters 6–8. Hoboken, NJ: Wiley.</li>
+              <li id="ref-3"><strong>Sze, S. M. &amp; Ng, Kwok K.</strong> (2007). <em>Physics of Semiconductor Devices</em>, 3rd edition, chapter 1. Hoboken, NJ: Wiley.</li>
+              <li id="ref-4"><strong>Pauli, Wolfgang.</strong> (1925). "Über den Zusammenhang des Abschlusses der Elektronengruppen im Atom mit der Komplexstruktur der Spektren." <em>Zeitschrift für Physik</em>, 31: 765–783.</li>
+              <li id="ref-5"><strong>Fermi, Enrico.</strong> (1926). "Sulla quantizzazione del gas perfetto monoatomico." <em>Rendiconti Lincei</em>, 3: 145–149.</li>
+              <li id="ref-6"><strong>Dirac, P. A. M.</strong> (1926). "On the theory of quantum mechanics." <em>Proceedings of the Royal Society of London A</em>, 112(762): 661–677.</li>
+              <li id="ref-7"><strong>Bloch, Felix.</strong> (1929). "Über die Quantenmechanik der Elektronen in Kristallgittern." <em>Zeitschrift für Physik</em>, 52: 555–600.</li>
+              <li id="ref-8"><strong>Wilson, A. H.</strong> (1931). "The theory of electronic semi-conductors." <em>Proceedings of the Royal Society of London A</em>, 133(822): 458–491.</li>
+              <li id="ref-9"><strong>Sproul, A. B. &amp; Green, M. A.</strong> (1991). "Improved value for the silicon intrinsic carrier concentration from 275 to 375 K." <em>Journal of Applied Physics</em>, 70(2): 846–854.</li>
+              <li id="ref-10"><strong>Streetman, Ben G. &amp; Banerjee, Sanjay Kumar.</strong> (2015). <em>Solid State Electronic Devices</em>, 7th edition, chapter 3. Boston: Pearson.</li>
+              <li id="ref-11"><strong>Scaff, J. H. &amp; Ohl, R. S.</strong> (1947). "Development of silicon crystal rectifiers for microwave radar receivers." <em>Bell System Technical Journal</em>, 26(1): 1–30.</li>
+              <li id="ref-12"><strong>Pfann, W. G.</strong> (1952). "Principles of zone-melting." <em>Transactions of the American Institute of Mining and Metallurgical Engineers</em>, 194: 747–753.</li>
+              <li id="ref-13"><strong>Riordan, Michael &amp; Hoddeson, Lillian.</strong> (1997). <em>Crystal Fire: The Birth of the Information Age</em>. New York: W. W. Norton.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 5 of 14)</div>
+  <div class="series-banner-links">
+    <a href="electricity-and-circuits.html">← Part 4: Electricity and Circuits: Ohm, Kirchhoff, RC Delay and the Energy of a Bit</a>
+    <a href="pn-junction-and-diode.html">Part 6: The p–n Junction: Diodes, LEDs and Solar Cells →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/band-theory-and-semiconductors.js"></script>
+</body>
+</html>

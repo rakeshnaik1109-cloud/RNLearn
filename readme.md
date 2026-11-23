@@ -84,6 +84,23 @@ A six-part series on how large language models produce answers one token at a ti
 5. **Part 5**: *Why It Works: How Next-Word Prediction Leads to Knowledge and Reasoning* (what prediction requires, prediction as compression, scaling laws and Chinchilla, emergent abilities vs metrics, world models inside LLMs, RLHF and Bradley–Terry preferences, chain of thought)
 6. **Part 6**: *Why It Fails: Hallucination, Calibration and Measuring the Accuracy of Language Models* (why models hallucinate, rare facts and the Good–Turing bound, calibration, tokens hiding letters, the reversal curse, retrieval/tools/reasoning, benchmark uncertainty and contamination)
 
+### New Series: *From Switch to Supercomputer* (subject: Electronics & Computing)
+A fourteen-part journey from logic gates to GPUs and beyond, covering both the digital design and the device physics, with worked problems (collapsible solutions) at first-year undergraduate level in every part.
+1. **Part 1**: *Bits, Logic and Boolean Algebra* (binary, logic gates, Boolean algebra, De Morgan, NAND universality)
+2. **Part 2**: *Combinational Circuits* (Karnaugh maps, multiplexers and decoders, adders, two’s complement, carry lookahead)
+3. **Part 3**: *Memory and Time* (latches, flip-flops, clocks, counters, SRAM/DRAM, state machines, timing and metastability)
+4. **Part 4**: *Electricity and Circuits* (drift velocity, Ohm and Kirchhoff, dividers, RC delay, switching energy αCV²f)
+5. **Part 5**: *Band Theory* (bands and gaps, electrons and holes, intrinsic carriers, doping, the Fermi level)
+6. **Part 6**: *The p–n Junction* (depletion region, built-in voltage, diode equation, breakdown, rectifiers, LEDs, solar cells)
+7. **Part 7**: *The Bipolar Transistor* (point-contact and junction transistors, output curves, amplifiers, bipolar logic, HBTs)
+8. **Part 8**: *The MOSFET* (MOS capacitor, threshold voltage, square law, subthreshold swing and leakage)
+9. **Part 9**: *CMOS* (inverter transfer curve, noise margins, NAND/NOR, delay and power, minimum-energy point, SRAM/DRAM/flash)
+10. **Part 10**: *Making Chips* (crystal growth, planar process, lithography resolution and EUV, yield, Moore’s law, Dennard scaling)
+11. **Part 11**: *Modern Transistors* (short-channel effects, strain, high-k metal gates, FinFETs, gate-all-around, what “3 nm” means)
+12. **Part 12**: *The Processor* (stored programs with a working toy CPU, RISC, pipelining and hazards, caches, branch prediction, out-of-order execution)
+13. **Part 13**: *GPUs and Parallel Computing* (Amdahl and Gustafson, SIMD/SIMT, warps and latency hiding, the roofline model, tensor cores)
+14. **Part 14**: *Beyond Silicon* (chiplets, accelerators, silicon photonics, neuromorphic chips, quantum computing, a look back)
+
 ### Standalone Tutorials
 - *Who's the Father? How a DNA Paternity Test Works* (DNA basics, inheritance, blood groups & the Chaplin case, Jeffreys, STRs, PCR & capillary electrophoresis, the paternity index & Bayes, tricky cases, Indian law)
 - *Why Is My Laser Spot Grainy? Speckle, Stray Fringes and Other Gremlins of the Optics Lab* (coherence, speckle statistics & reduction, accidental etalons, ghosts & back-reflections, dust rings & spatial filters, fibre noise, vibration, detector artifacts, speckle as a tool, troubleshooting guide)

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory and Time: Latches, Flip-Flops, Counters and State Machines — RNLearn</title>
+  <meta name="description" content="How feedback gives circuits memory: latches, flip-flops and clocks, registers and counters, SRAM and DRAM, finite-state machines, timing rules and metastability.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/memory-and-time.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Memory and Time: Latches, Flip-Flops, Counters and State Machines — RNLearn">
+  <meta property="og:description" content="How feedback gives circuits memory: latches, flip-flops and clocks, registers and counters, SRAM and DRAM, finite-state machines, timing rules and metastability.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/memory-and-time.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Memory and Time: Latches, Flip-Flops, Counters and State Machines — RNLearn">
+  <meta name="twitter:description" content="How feedback gives circuits memory: latches, flip-flops and clocks, registers and counters, SRAM and DRAM, finite-state machines, timing rules and metastability.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Memory and Time: Latches, Flip-Flops, Counters and State Machines",
+    "description": "How feedback gives circuits memory: latches, flip-flops and clocks, registers and counters, SRAM and DRAM, finite-state machines, timing rules and metastability.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-23",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/memory-and-time.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/electronics-computing.html" class="post-subject-tag" data-subject="electronics-computing">Electronics &amp; Computing</a>
+        </div>
+        <h1 class="article-title">Memory and Time: Latches, Flip-Flops, Counters and State Machines</h1>
+        <p class="article-standfirst">
+          A circuit that only reacts to its present inputs cannot count, store or follow a sequence. One wire looped back on itself changes everything, and a ticking clock keeps billions of such loops in step.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-23">23 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>14 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 3 of 14)</div>
+  <div class="series-banner-links">
+    <a href="combinational-circuits.html">← Part 2: Combinational Circuits: Karnaugh Maps, Multiplexers and Binary Adders</a>
+    <a href="electricity-and-circuits.html">Part 4: Electricity and Circuits: Ohm, Kirchhoff, RC Delay and the Energy of a Bit →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. Circuits That Remember</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Latches: Feedback Makes Memory</a></li>
+              <li><a class="toc-link" href="#section-4">4. Flip-Flops and the Clock</a></li>
+              <li><a class="toc-link" href="#section-5">5. Registers and Counters</a></li>
+              <li><a class="toc-link" href="#section-6">6. Memory Arrays: From Cores to Chips</a></li>
+              <li><a class="toc-link" href="#section-7">7. Finite-State Machines</a></li>
+              <li><a class="toc-link" href="#section-8">8. Timing: Setup, Hold and Metastability</a></li>
+              <li><a class="toc-link" href="#section-9">9. Worked Problems</a></li>
+              <li><a class="toc-link" href="#section-10">10. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-11">11. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-12">12. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-13">13. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-14">14. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-15">15. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-16">16. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>In this part:</strong> sequential circuits, which remember. Feedback turns two gates into a latch; a clock edge turns latches into flip-flops; flip-flops build registers, counters and state machines; and arrays of tiny cells become SRAM and DRAM. We finish with timing: how fast a clocked circuit can run, and the strange problem of metastability.</p>
+            <p><strong>You need:</strong> Parts 1 and 2 (gates and combinational circuits).</p>
+            <p><strong>Try:</strong> five interactive figures, including a working latch, a counter and a traffic-light controller, and five worked problems.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. Circuits That Remember</h2>
+            <p>The circuits of Part 2 forget everything the moment their inputs change. A calculator that could not remember the first number while you typed the second would be useless. Circuits whose outputs depend on their past as well as their present inputs are called <strong>sequential</strong>. The single idea that gives them memory is <strong>feedback</strong>: an output wired back to an input. Add a clock to keep everything in step and you have the framework of every digital system, from a wristwatch to a supercomputer. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Part 3 adds memory and time to logic.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-el3-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. From vacuum-tube triggers to memory chips, 1918–1973.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Latches: Feedback Makes Memory</h2>
+            <p>In 1918 the British physicists William Eccles and Frank Jordan connected two vacuum tubes so that each held the other in its state: one on, one off, until a pulse flipped them. Their “trigger relay”, published in 1919, was the first electronic flip-flop. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> The same idea works with gates. Take two NOR gates and feed each output into one input of the other. This <strong>SR latch</strong> has two inputs:</p>
+            <ul>
+              <li><strong>S (set) = 1</strong> forces Q = 1.</li>
+              <li><strong>R (reset) = 1</strong> forces Q = 0.</li>
+              <li><strong>S = R = 0</strong>: the loop holds whichever value it had. This is memory.</li>
+              <li><strong>S = R = 1</strong> is forbidden: both outputs go to 0, and if both inputs are released together the latch falls into an unpredictable state.</li>
+            </ul>
+            <p>The <strong>D latch</strong> removes the forbidden case. It has a data input D and an enable input E, and gates them so that S = E·D and R = E·D̅. While E = 1 the latch is <em>transparent</em> and Q follows D; when E returns to 0, Q holds the last value.</p>
+            <figure class="fig" data-fig="fig-el-latch">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. A latch made of two NOR gates.</strong> Toggle Set and Reset (or D and Enable) and watch the feedback loop hold the stored bit.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Flip-Flops and the Clock</h2>
+            <p>Transparency is a problem when circuits feed each other: while the enable is high, a change can race through one latch, through the logic and into the next latch, many times over. The fix is the <strong>edge-triggered D flip-flop</strong>, usually built from two latches in series (a <em>master</em> and a <em>slave</em>) enabled on opposite halves of the clock. The result copies D to Q only at the instant the clock rises, and holds it for the whole cycle.</p>
+            <p>A <strong>clock</strong> is a square wave that ticks billions of times per second in a modern processor. In a <strong>synchronous</strong> design every flip-flop samples on the same edge, so the whole system moves forward one step per tick. Between ticks, combinational logic has one clock period to compute the next values. This discipline, simple as it is, is what makes chips with billions of transistors possible to design and test.</p>
+            <figure class="fig" data-fig="fig-el-dff">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Latch versus flip-flop.</strong> Tap the D trace to change it and compare how a transparent latch and an edge-triggered flip-flop respond.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Registers and Counters</h2>
+            <p>Put n flip-flops side by side with a shared clock and you have an n-bit <strong>register</strong>, which stores a number. A processor’s registers hold the values it is working on right now. Connect each flip-flop’s output to the next one’s input and you have a <strong>shift register</strong>, which moves bits along one place per clock: the basis of serial links such as USB.</p>
+            <p>Feed a register’s output through an adder that adds 1 and back into its input, and you have a <strong>counter</strong>. Its lowest bit toggles every cycle, the next every two cycles, and so on: each bit divides the clock frequency by 2. Counters time events, generate addresses and, in the form of a processor’s <em>program counter</em>, step through the instructions of every program.</p>
+            <figure class="fig" data-fig="fig-el-counter">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. A 4-bit counter.</strong> Pulse the clock or let it run; each output is a square wave at half the frequency of the one above.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Memory Arrays: From Cores to Chips</h2>
+            <p>Registers built from flip-flops are fast but large. Early computers needed something denser. In 1951 Jay Forrester at MIT described storing each bit in the magnetisation of a tiny ferrite ring, threaded on a grid of wires; magnetic-core memory dominated computing for twenty years. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span></p>
+            <p>Semiconductor memory replaced it. <strong>Static RAM (SRAM)</strong> stores each bit in a pair of cross-coupled inverters, essentially a latch, using six transistors: fast, and it keeps data as long as power is on. In 1966 Robert Dennard at IBM conceived <strong>dynamic RAM (DRAM)</strong>, which stores a bit as charge on a single capacitor reached through one transistor; he patented it in 1968. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> Intel’s 1103 chip of 1970 was the first DRAM to sell widely and started the end of core memory. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+            <p>DRAM’s single-transistor cell makes it dense and cheap, but the charge leaks away within milliseconds, so every row must be read and rewritten, or <em>refreshed</em>, regularly; a typical standard requires every cell to be refreshed within 64 milliseconds. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> That is why computers use a little fast SRAM (for caches) and a lot of dense DRAM (for main memory), a hierarchy we return to in Part 12. How the cells are built from transistors appears in Part 9.</p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Finite-State Machines</h2>
+            <p>A <strong>finite-state machine</strong> (FSM) is the general recipe for a sequential circuit: a register holds the current <em>state</em>, and combinational logic computes the next state from the current state and the inputs. With k flip-flops it can have up to 2<sup>k</sup> states. In 1955 George Mealy described machines whose outputs depend on both state and inputs; in 1956 Edward Moore analysed machines whose outputs depend only on the state. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>, <a class="cite" href="#ref-9">9</a>]</span> Both styles are used everywhere, from vending machines and lift controllers to the control unit that drives a processor and the protocol logic of a network card.</p>
+            <p>Designing an FSM follows a fixed path: draw the state diagram, choose binary codes for the states, write the next-state and output truth tables, simplify them (Part 2), and build them with flip-flops and gates.</p>
+            <figure class="fig" data-fig="fig-el-fsm">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. A traffic-light controller as a state machine.</strong> Signal a car on the side road and tick the clock to step through the states.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Timing: Setup, Hold and Metastability</h2>
+            <p>A flip-flop needs its input to be steady for a short <strong>setup time</strong> before the clock edge and a <strong>hold time</strong> after it. Its output appears a <strong>clock-to-Q delay</strong> after the edge. So in a synchronous circuit, a signal leaving one flip-flop must pass through the logic and arrive at the next flip-flop before the next edge, giving the central timing rule:</p>
+            <p style="text-align:center;"><strong>T<sub>clock</sub> ≥ t<sub>clk→Q</sub> + t<sub>logic,max</sub> + t<sub>setup</sub></strong></p>
+            <p>The slowest such path, the <em>critical path</em>, sets the maximum clock frequency. A second rule protects hold time: the fastest path must not be so quick that new data overwrites the old before the receiving flip-flop has captured it.</p>
+            <p>When an input arrives from outside the clock domain, such as a button press or data from another chip, nothing guarantees these rules. If D changes right at the clock edge, the flip-flop can balance between 0 and 1 for an unpredictable time, like a ball on a hilltop: this is <strong>metastability</strong>. Thomas Chaney and Charles Molnar demonstrated it experimentally in 1973, overturning a widespread belief that a well-designed flip-flop always decides promptly. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span> The chance of still being undecided falls exponentially with waiting time, so designers pass asynchronous signals through two or more flip-flops in a row, a <strong>synchroniser</strong>. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-mtbf">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 7. How long until a synchroniser fails?</strong> The mean time between failures grows exponentially with the time allowed to settle; adjust the flip-flop’s time constant and the clock speed.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Worked Problems</h2>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 1 (easy): trace an SR latch</div>
+              <p>A NOR SR latch starts with Q = 0. The inputs (S, R) take the values (1, 0), (0, 0), (0, 1), (0, 0), (1, 0) in turn. What is Q after each step?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>(1, 0) sets: Q = 1. (0, 0) holds: Q = 1. (0, 1) resets: Q = 0. (0, 0) holds: Q = 0. (1, 0) sets: Q = 1. So Q goes <strong>1, 1, 0, 0, 1</strong>. The “hold” steps are where memory shows: the same inputs (0, 0) give different outputs depending on history.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 2 (easy): a watch from a crystal</div>
+              <p>A quartz watch crystal oscillates at 32,768 Hz. How many divide-by-2 flip-flop stages are needed to produce one pulse per second? How many flip-flops does a counter that counts 0–59 seconds need?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>32,768 = 2<sup>15</sup>, so <strong>15 stages</strong> give exactly 1 Hz; that is why watch crystals use this odd-looking frequency. For 60 states, we need 2<sup>k</sup> ≥ 60, so <strong>k = 6</strong> flip-flops (2<sup>6</sup> = 64), with logic that resets the count to 0 after 59.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 3 (medium): maximum clock frequency</div>
+              <p>Flip-flops have clock-to-Q delay 50 ps, setup time 30 ps and hold time 20 ps. The slowest logic path between two flip-flops takes 400 ps and the fastest takes 10 ps. What is the maximum clock frequency? Is the hold time met?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>T ≥ 50 + 400 + 30 = 480 ps, so f<sub>max</sub> = 1/480 ps ≈ <strong>2.08 GHz</strong>. For hold, the earliest new data arrives t<sub>clk→Q</sub> + t<sub>logic,min</sub> = 50 + 10 = 60 ps after the edge, which is later than the 20 ps hold time, so <strong>hold is met</strong> (with no clock skew). Note that hold violations cannot be fixed by slowing the clock, which is why they are feared.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 4 (medium): design a “101” detector</div>
+              <p>Design a Moore machine that reads one bit per clock and outputs 1 whenever the last three bits were 1, 0, 1 (overlaps allowed). How many states and flip-flops are needed?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>States record how much of the pattern has been seen: S0 (nothing useful), S1 (seen “1”), S2 (seen “10”), S3 (seen “101”, output 1). Transitions (input 0 / input 1): S0 → S0 / S1; S1 → S2 / S1; S2 → S0 / S3; S3 → S2 / S1. The last line handles overlap: after “101”, a 0 means “10” has been seen again. <strong>Four states, two flip-flops.</strong> The input 1 0 1 0 1 gives outputs 0 0 1 0 1.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 5 (harder): synchroniser reliability</div>
+              <p>The mean time between failures of a synchroniser is MTBF = e<sup>t/τ</sup> / (T<sub>w</sub> f<sub>clk</sub> f<sub>data</sub>). Take τ = 20 ps, T<sub>w</sub> = 20 ps, f<sub>clk</sub> = 1 GHz and f<sub>data</sub> = 100 MHz. Compare the MTBF if the flip-flop has t = 0.5 ns or t = 1 ns to settle.</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>The denominator is 20 × 10<sup>−12</sup> × 10<sup>9</sup> × 10<sup>8</sup> = 2 × 10<sup>6</sup> s<sup>−1</sup>. For t = 0.5 ns, t/τ = 25 and e<sup>25</sup> ≈ 7.2 × 10<sup>10</sup>, so MTBF ≈ 3.6 × 10<sup>4</sup> s, about <strong>10 hours</strong>: unacceptable. For t = 1 ns, t/τ = 50 and e<sup>50</sup> ≈ 5.2 × 10<sup>21</sup>, so MTBF ≈ 2.6 × 10<sup>15</sup> s, about <strong>80 million years</strong>. Doubling the waiting time squared the safety factor.</p></details>
+            </div>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: must every chip march to one clock?</div>
+              <p>Distributing one clock across a large chip is hard: the wires that carry it consume a large share of the power, and the edge arrives at slightly different times in different places (skew). Modern chips therefore split into many clock domains joined by synchronisers, and some designs drop the global clock altogether in favour of <em>asynchronous</em> circuits that signal when each step is done. Asynchronous logic promises lower power and robustness to variation but is harder to design and verify, and how far it should replace clocked design remains debated. Arbiters, which must decide which of two near-simultaneous requests came first, can never be made free of metastability, only made extremely unlikely to fail. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span></p>
+            </div>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: memory and time</div>
+              <ol>
+                <li>In Figure 3, set Q = 1, then release Set. Which input combination makes the latch forget? Now try S = R = 1.</li>
+                <li>In Figure 4, add a short 1-pulse in D while the clock is high but between edges. Which output sees it?</li>
+                <li>In Figure 5, switch to the decade counter. Which output no longer looks like a clean divide-by-2 square wave?</li>
+                <li>In Figure 7, at 4 GHz, what time constant τ is needed for a two-flip-flop synchroniser to last more than a year?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “a higher clock speed always means a faster computer”</div>
+              <p><strong>The myth:</strong> a 4 GHz processor is always faster than a 3 GHz one.</p>
+              <p><strong>The reality:</strong> the clock sets only how often the flip-flops update. How much useful work is done per tick depends on the design: how many instructions are started per cycle, how often the processor waits for memory, and how many cores share the work. A design can raise its clock by splitting work into more, shorter steps, yet do less per tick. Clock frequencies have barely risen since the mid-2000s, while performance has kept growing through other means (Parts 11–13).</p>
+              <p><strong>Why it matters:</strong> performance is frequency × work per cycle × number of cores, and the last two now matter most.</p>
+            </div>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>Feedback gives circuits memory: two cross-coupled gates form a latch.</li>
+                <li>Edge-triggered flip-flops sample their input only at clock edges, so synchronous systems move one step per tick.</li>
+                <li>Registers store numbers, shift registers move bits, and counters divide frequencies by powers of 2.</li>
+                <li>SRAM stores bits in latches (fast); DRAM stores them as leaking charge on capacitors (dense, needs refresh).</li>
+                <li>A finite-state machine is a state register plus next-state logic; k flip-flops give up to 2<sup>k</sup> states.</li>
+                <li>T<sub>clock</sub> ≥ t<sub>clk→Q</sub> + t<sub>logic</sub> + t<sub>setup</sub>; asynchronous inputs need synchronisers because of metastability.</li>
+              </ul>
+            </div>
+          </section>
+          <section id="section-14">
+            <h2>14. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">William Eccles &amp; Frank Jordan</td>
+                <td style="padding:0.6rem 0.8rem;">1875–1966 / 1881–1941<br>UK</td>
+                <td style="padding:0.6rem 0.8rem;">Trigger relay (1918–19)</td>
+                <td style="padding:0.6rem 0.8rem;">Built the first electronic flip-flop from two vacuum tubes.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Jay Forrester</td>
+                <td style="padding:0.6rem 0.8rem;">1918–2016<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Magnetic-core memory (1951)</td>
+                <td style="padding:0.6rem 0.8rem;">Stored bits in ferrite rings, the main computer memory for two decades.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">George Mealy &amp; Edward Moore</td>
+                <td style="padding:0.6rem 0.8rem;">1927–2010 / 1925–2003<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">State machines (1955, 1956)</td>
+                <td style="padding:0.6rem 0.8rem;">Formalised the two standard kinds of finite-state machine.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Robert Dennard</td>
+                <td style="padding:0.6rem 0.8rem;">1932–2024<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">One-transistor DRAM (1966)</td>
+                <td style="padding:0.6rem 0.8rem;">Invented the memory cell inside almost every computer’s main memory.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Thomas Chaney &amp; Charles Molnar</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Metastability (1973)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed experimentally that flip-flops can hang undecided.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about sequential circuits.</p>
+            <figure class="fig" data-fig="fig-quiz-el3">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-16">
+            <h2>16. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Harris, David Money &amp; Harris, Sarah L.</strong> (2013). <em>Digital Design and Computer Architecture</em>, 2nd edition, chapter 3. Waltham, MA: Morgan Kaufmann.</li>
+              <li id="ref-2"><strong>Mano, M. Morris &amp; Ciletti, Michael D.</strong> (2018). <em>Digital Design</em>, 6th edition. Pearson.</li>
+              <li id="ref-3"><strong>Eccles, W. H. &amp; Jordan, F. W.</strong> (1919). "A trigger relay utilising three-electrode thermionic vacuum tubes." <em>The Electrician</em>, 83: 298.</li>
+              <li id="ref-4"><strong>Forrester, Jay W.</strong> (1951). "Digital information storage in three dimensions using magnetic cores." <em>Journal of Applied Physics</em>, 22(1): 44–48.</li>
+              <li id="ref-5"><strong>Dennard, Robert H.</strong> (1968). "Field-effect transistor memory." US Patent 3,387,286.</li>
+              <li id="ref-6"><strong>Ceruzzi, Paul E.</strong> (2003). <em>A History of Modern Computing</em>, 2nd edition. Cambridge, MA: MIT Press.</li>
+              <li id="ref-7"><strong>Jacob, Bruce, Ng, Spencer W. &amp; Wang, David T.</strong> (2008). <em>Memory Systems: Cache, DRAM, Disk</em>. Burlington, MA: Morgan Kaufmann.</li>
+              <li id="ref-8"><strong>Mealy, George H.</strong> (1955). "A method for synthesizing sequential circuits." <em>Bell System Technical Journal</em>, 34(5): 1045–1079.</li>
+              <li id="ref-9"><strong>Moore, Edward F.</strong> (1956). "Gedanken-experiments on sequential machines." In C. E. Shannon &amp; J. McCarthy (eds.), <em>Automata Studies</em>, pp. 129–153. Princeton, NJ: Princeton University Press.</li>
+              <li id="ref-10"><strong>Chaney, Thomas J. &amp; Molnar, Charles E.</strong> (1973). "Anomalous behavior of synchronizer and arbiter circuits." <em>IEEE Transactions on Computers</em>, C-22(4): 421–422.</li>
+              <li id="ref-11"><strong>Ginosar, Ran.</strong> (2011). "Metastability and synchronizers: a tutorial." <em>IEEE Design &amp; Test of Computers</em>, 28(5): 23–35.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 3 of 14)</div>
+  <div class="series-banner-links">
+    <a href="combinational-circuits.html">← Part 2: Combinational Circuits: Karnaugh Maps, Multiplexers and Binary Adders</a>
+    <a href="electricity-and-circuits.html">Part 4: Electricity and Circuits: Ohm, Kirchhoff, RC Delay and the Energy of a Bit →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/memory-and-time.js"></script>
+</body>
+</html>

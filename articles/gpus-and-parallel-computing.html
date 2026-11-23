@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPUs and Parallel Computing: Warps, Rooflines and Tensor Cores — RNLearn</title>
+  <meta name="description" content="Why parallelism took over: Amdahl’s and Gustafson’s laws, SIMD and multicore, how graphics chips became GPUs, warps and latency hiding, the roofline model, and tensor cores.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/gpus-and-parallel-computing.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="GPUs and Parallel Computing: Warps, Rooflines and Tensor Cores — RNLearn">
+  <meta property="og:description" content="Why parallelism took over: Amdahl’s and Gustafson’s laws, SIMD and multicore, how graphics chips became GPUs, warps and latency hiding, the roofline model, and tensor cores.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/gpus-and-parallel-computing.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="GPUs and Parallel Computing: Warps, Rooflines and Tensor Cores — RNLearn">
+  <meta name="twitter:description" content="Why parallelism took over: Amdahl’s and Gustafson’s laws, SIMD and multicore, how graphics chips became GPUs, warps and latency hiding, the roofline model, and tensor cores.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "GPUs and Parallel Computing: Warps, Rooflines and Tensor Cores",
+    "description": "Why parallelism took over: Amdahl’s and Gustafson’s laws, SIMD and multicore, how graphics chips became GPUs, warps and latency hiding, the roofline model, and tensor cores.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-23",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/gpus-and-parallel-computing.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/electronics-computing.html" class="post-subject-tag" data-subject="electronics-computing">Electronics &amp; Computing</a>
+        </div>
+        <h1 class="article-title">GPUs and Parallel Computing: Warps, Rooflines and Tensor Cores</h1>
+        <p class="article-standfirst">
+          When clock speeds stopped rising, computers had to do many things at once. A chip designed to draw video-game pixels turned out to be the ideal engine for science and artificial intelligence.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-23">23 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>13 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 13 of 14)</div>
+  <div class="series-banner-links">
+    <a href="the-processor.html">← Part 12: The Processor: Stored Programs, Pipelines, Caches and Prediction</a>
+    <a href="beyond-silicon.html">Part 14: Beyond Silicon: Chiplets, Photonics, Neuromorphic and Quantum Computing →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. Many Hands Make Light Work</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. The Limits of Parallelism: Amdahl and Gustafson</a></li>
+              <li><a class="toc-link" href="#section-4">4. Kinds of Parallelism</a></li>
+              <li><a class="toc-link" href="#section-5">5. From Graphics to General-Purpose GPUs</a></li>
+              <li><a class="toc-link" href="#section-6">6. How a GPU Works: SIMT, Warps and Latency Hiding</a></li>
+              <li><a class="toc-link" href="#section-7">7. Memory Bandwidth and the Roofline</a></li>
+              <li><a class="toc-link" href="#section-8">8. Tensor Cores and AI Accelerators</a></li>
+              <li><a class="toc-link" href="#section-9">9. Worked Problems</a></li>
+              <li><a class="toc-link" href="#section-10">10. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-11">11. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-12">12. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-13">13. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-14">14. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-15">15. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-16">16. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>In this part:</strong> parallel computing and the graphics processor. Amdahl’s and Gustafson’s laws; Flynn’s taxonomy of SIMD and MIMD machines; vector supercomputers and multicore CPUs; how a graphics chip became a general-purpose parallel processor; warps, SIMT execution and latency hiding; memory bandwidth and the roofline model; and tensor cores and AI accelerators, built around the energy cost of moving data.</p>
+            <p><strong>You need:</strong> Part 12 (processors, pipelines and caches) and Part 10 (why clock speeds stopped rising).</p>
+            <p><strong>Try:</strong> three interactive figures and five worked problems.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. Many Hands Make Light Work</h2>
+            <p>When clock speeds stopped rising in the mid-2000s, the only way to keep computers getting faster was to do more things at once. In 2005 Herb Sutter warned programmers that “the free lunch is over”: software would no longer speed up by itself on each new processor unless it was written to run in parallel. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span> Some problems, such as drawing millions of pixels or multiplying large matrices, are naturally parallel. For them a different kind of processor, with thousands of simple arithmetic units instead of a few complex cores, wins by a wide margin. That processor is the <strong>GPU</strong>, now the engine of scientific computing and artificial intelligence. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Part 13 explains parallel computing and GPUs.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-el13-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. From vector supercomputers to tensor cores, 1966–2017.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. The Limits of Parallelism: Amdahl and Gustafson</h2>
+            <p>In 1967 Gene Amdahl, chief architect of IBM’s System/360, argued that the part of a job that cannot be parallelised limits the benefit of adding processors. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> If a fraction p of a program’s run time can be spread over N processors and the rest is serial, the speedup is</p>
+            <p style="text-align:center;"><strong>S = 1 / ((1 − p) + p/N) ≤ 1/(1 − p)</strong></p>
+            <p>With 95% parallel work, no number of processors gives more than 20×. In 1988 John Gustafson pointed out that this assumes a fixed problem. In practice, scientists use bigger machines to solve bigger problems, whose parallel part grows while the serial part stays roughly the same; measured this way, the <em>scaled</em> speedup is (1 − p) + pN, close to linear. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> Both views matter: Amdahl’s explains why serial bottlenecks must be hunted down, Gustafson’s why supercomputers with millions of cores are useful.</p>
+            <figure class="fig" data-fig="fig-el-amdahl">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Amdahl’s law and Gustafson’s law.</strong> Change the parallel fraction and the number of processors; compare the fixed-size and scaled speedups.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Kinds of Parallelism</h2>
+            <p>In 1966 Michael Flynn classified computers by how many instruction streams and data streams they handle. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> A classic processor is <strong>SISD</strong> (single instruction, single data). <strong>SIMD</strong> machines apply one instruction to many data elements at once; <strong>MIMD</strong> machines run many independent instruction streams, as multicore processors and clusters do.</p>
+            <ul>
+              <li><strong>Vector processors</strong> such as the Cray-1 of 1976 applied each instruction to whole arrays streamed through deeply pipelined arithmetic units. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span> Their descendants are the SIMD extensions (such as SSE, AVX and Arm’s NEON and SVE) inside every modern CPU.</li>
+              <li><strong>Multicore processors</strong>, which reached desktops in 2005, put several complete cores on one chip, sharing caches and memory.</li>
+              <li><strong>GPUs</strong> combine both ideas on a massive scale: dozens to hundreds of cores, each running many threads on wide SIMD units.</li>
+            </ul>
+          </section>
+
+          <section id="section-5">
+            <h2>5. From Graphics to General-Purpose GPUs</h2>
+            <p>Drawing a 3D scene means transforming millions of triangle corners and computing the colour of millions of pixels, each independently of the others: a perfect parallel workload. Graphics chips of the 1990s did this with fixed-function hardware; in 1999 Nvidia marketed its GeForce 256 as a “graphics processing unit”. From about 2001, the per-pixel and per-vertex stages became programmable “shaders”, and researchers began disguising scientific calculations as graphics to exploit them. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span></p>
+            <p>The turning point came in 2006–2007. Nvidia’s G80 architecture replaced separate vertex and pixel units with an array of unified, general-purpose processors, and its CUDA platform let programmers write ordinary C-like code for them. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>, <a class="cite" href="#ref-9">9</a>]</span> In 2012 a neural network called AlexNet, trained on two consumer GPUs, won the ImageNet image-recognition competition by a large margin, and deep learning took off on GPU hardware. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span></p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. How a GPU Works: SIMT, Warps and Latency Hiding</h2>
+            <p>A GPU program launches a <strong>kernel</strong>, the same function run by many thousands of threads, each working on a different piece of data. The hardware groups threads into <strong>warps</strong> (32 threads on Nvidia GPUs) that execute the same instruction together on a wide SIMD unit, a style Nvidia calls SIMT: single instruction, multiple threads. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span> Each streaming multiprocessor holds dozens of warps at once.</p>
+            <p>Two consequences follow. First, if threads in a warp take different branches of an if-statement, the warp runs both paths one after the other with some threads switched off: <strong>branch divergence</strong> wastes throughput. Second, a GPU does not rely on big caches and branch prediction to keep its units busy. It hides memory latency by keeping many warps ready and switching to another warp, at no cost, whenever one is waiting for data. A CPU core is a sports car designed to finish one task quickly; a GPU is a fleet of buses designed to move as many passengers as possible.</p>
+            <figure class="fig" data-fig="fig-el-warp">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Hiding memory latency with many warps.</strong> Add warps or lengthen the memory latency and watch how busy the core stays.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Memory Bandwidth and the Roofline</h2>
+            <p>Thousands of arithmetic units are useless if data cannot reach them. A kernel’s <strong>arithmetic intensity</strong> is the number of operations it performs per byte read from or written to memory. In 2009 Samuel Williams, Andrew Waterman and David Patterson proposed the <strong>roofline model</strong>: attainable performance = min(peak compute, memory bandwidth × arithmetic intensity). <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span> Kernels with low intensity, such as adding two arrays or multiplying a sparse matrix by a vector, are limited by bandwidth; those with high intensity, such as multiplying large dense matrices, can approach peak compute. To feed their arithmetic, high-end GPUs use stacks of DRAM chips mounted beside the processor (high-bandwidth memory), delivering several terabytes per second.</p>
+            <figure class="fig" data-fig="fig-el-roofline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. The roofline model.</strong> Change the peak compute rate and memory bandwidth; see which kernels are limited by memory and which by arithmetic.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Tensor Cores and AI Accelerators</h2>
+            <p>Neural networks spend most of their time multiplying matrices. In 2017 Nvidia’s Volta GPUs added <strong>tensor cores</strong>, units that perform a small matrix multiply–accumulate (such as 4 × 4 matrices of 16-bit numbers) in one operation, many times faster than ordinary arithmetic units. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span> The same year Google described its Tensor Processing Unit, a chip built around a 256 × 256 array of 8-bit multipliers through which data flows in a systolic pattern; Google reported it was much faster and more energy-efficient than contemporary CPUs and GPUs for neural-network inference. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span> Later generations of both use ever lower precision, such as 8-bit and even 4-bit floating-point formats, because neural networks tolerate it and narrower numbers need less energy and bandwidth.</p>
+            <p>The deepest reason for specialised hardware is energy. Mark Horowitz’s widely quoted figures for a 45 nm process show a 32-bit floating-point addition costing about 0.9 pJ, while reading 32 bits from DRAM costs about 640 pJ, hundreds of times more. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span> Computation is cheap; moving data is expensive. Accelerators therefore keep data close to the arithmetic, reuse each value as many times as possible, and use the narrowest numbers that give acceptable results.</p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Worked Problems</h2>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 1 (easy): Amdahl’s law</div>
+              <p>A program is 95% parallelisable. What speedup does it get on 64 processors, and what is the maximum possible?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>S = 1/(0.05 + 0.95/64) = 1/(0.05 + 0.0148) ≈ <strong>15.4×</strong>. The limit is 1/0.05 = <strong>20×</strong>. Already at 64 processors the serial 5% takes more than three-quarters of the run time.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 2 (easy): peak throughput of a GPU</div>
+              <p>A GPU has 100 streaming multiprocessors, each with 128 single-precision arithmetic lanes, running at 1.8 GHz. Each lane can do one fused multiply–add (counted as 2 floating-point operations) per cycle. What is its peak rate?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>100 × 128 × 2 × 1.8 × 10<sup>9</sup> ≈ <strong>4.6 × 10<sup>13</sup> FLOP/s = 46 TFLOP/s</strong>. A CPU core with two 512-bit FMA units at 4 GHz manages 2 × 16 × 2 × 4 × 10<sup>9</sup> = 256 GFLOP/s, so the GPU equals about 180 such cores.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 3 (medium): roofline analysis</div>
+              <p>On a GPU with 50 TFLOP/s peak and 2 TB/s bandwidth, estimate the attainable performance of (a) adding two arrays of 32-bit floats, c[i] = a[i] + b[i], and (b) multiplying two 4096 × 4096 matrices of 32-bit floats, assuming each matrix crosses the memory bus once.</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>(a) One addition per 12 bytes (two reads, one write): intensity ≈ 0.083 FLOP/B, so performance ≈ 2 × 10<sup>12</sup> × 0.083 ≈ <strong>0.17 TFLOP/s</strong>, 0.3% of peak. (b) 2n³ = 1.4 × 10<sup>11</sup> FLOPs for 3n² × 4 bytes = 2.0 × 10<sup>8</sup> bytes: intensity ≈ n/6 ≈ 680 FLOP/B, above the ridge point of 25 FLOP/B, so it is <strong>compute-bound</strong> and can approach 50 TFLOP/s (in practice, with careful use of on-chip memory).</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 4 (medium): why GPUs need so many threads</div>
+              <p>Little’s law says that the data in flight equals bandwidth × latency. With 2 TB/s of bandwidth and a memory latency of 500 ns, how many bytes must be in flight, and how many outstanding 128-byte requests is that?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>2 × 10<sup>12</sup> B/s × 5 × 10<sup>−7</sup> s = <strong>10<sup>6</sup> bytes</strong>, about 1 MB in flight at all times. That is 10<sup>6</sup>/128 ≈ <strong>7,800 requests</strong> outstanding. Only tens of thousands of threads, each waiting on its own loads, can generate that many, which is exactly what GPUs are designed to hold.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 5 (harder): Amdahl or Gustafson?</div>
+              <p>A simulation spends 5% of its time on one processor in serial set-up and 95% in parallel work. On a 64-processor machine, scientists enlarge the grid so that the run still takes the same time. Compute Gustafson’s scaled speedup and compare it with Amdahl’s. Which describes the scientists’ experience?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>Taking the 5% serial fraction as measured on the parallel run, the scaled speedup is S = 0.05 + 0.95 × 64 = <strong>60.9×</strong>: the 64-processor run does as much work as 61 processor-runs would on one machine. Amdahl’s fixed-size speedup is 15.4× (Problem 1). The scientists experience the Gustafson figure, because they used the machine to solve a 61-times larger problem in the same time, not the same problem faster. Someone who needs the original problem solved sooner experiences Amdahl.</p></details>
+            </div>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: specialisation versus flexibility</div>
+              <p>The largest AI systems are trained on tens of thousands of accelerators, and their speed is often limited not by arithmetic but by memory bandwidth and by the networks connecting the chips. How far specialisation should go is unsettled: highly specialised chips are efficient for today’s algorithms but risk being stranded if algorithms change, while general-purpose GPUs adapt but spend energy on flexibility. Lower numerical precision, sparsity, in-memory computing and optical interconnects are all being explored, and the right balance between programmability and efficiency remains an open design question.</p>
+            </div>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: parallel computing</div>
+              <ol>
+                <li>In Figure 3, what parallel fraction is needed for a 1,000× speedup on 4,096 processors?</li>
+                <li>In Figure 4, with a 300-cycle latency and 5 instructions between loads, how many warps keep the core over 90% busy?</li>
+                <li>In Figure 5, double the peak compute without changing bandwidth. Which kernels speed up?</li>
+                <li>In Figure 5, what bandwidth would make the FFT compute-bound at 60 TFLOP/s?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “a GPU is just a faster CPU”</div>
+              <p><strong>The myth:</strong> GPUs are simply more powerful processors, so everything runs faster on them.</p>
+              <p><strong>The reality:</strong> a GPU core is slower and simpler than a CPU core, with weak branch prediction and small caches per thread. It wins only when a task can be split into thousands of similar, independent pieces with regular memory access. Serial code, branchy logic and pointer-chasing run better on a CPU. Real systems pair both, with the CPU orchestrating and the GPU doing the bulk arithmetic.</p>
+              <p><strong>Why it matters:</strong> choosing the right processor, and restructuring algorithms to suit it, matters more than raw peak numbers.</p>
+            </div>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>Amdahl: speedup ≤ 1/(1 − p) for a fixed problem; Gustafson: scaled speedup ≈ (1 − p) + pN when problems grow.</li>
+                <li>SIMD applies one instruction to many data; MIMD runs many instruction streams; GPUs combine both at massive scale.</li>
+                <li>GPUs run warps of threads in SIMT fashion and hide memory latency by switching between many warps.</li>
+                <li>The roofline model: performance = min(peak compute, bandwidth × arithmetic intensity).</li>
+                <li>Tensor cores and TPUs accelerate matrix multiplication at low precision; moving data costs far more energy than computing on it.</li>
+              </ul>
+            </div>
+          </section>
+          <section id="section-14">
+            <h2>14. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Gene Amdahl</td>
+                <td style="padding:0.6rem 0.8rem;">1922–2015<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Amdahl’s law (1967)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed how serial work limits parallel speedup; architect of IBM’s System/360.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Michael Flynn</td>
+                <td style="padding:0.6rem 0.8rem;">born 1934<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Flynn’s taxonomy (1966)</td>
+                <td style="padding:0.6rem 0.8rem;">Classified parallel computers by instruction and data streams.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John Gustafson</td>
+                <td style="padding:0.6rem 0.8rem;">born 1955<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Scaled speedup (1988)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed why massively parallel machines are worthwhile for growing problems.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John Nickolls</td>
+                <td style="padding:0.6rem 0.8rem;">1950–2011<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">CUDA (2007)</td>
+                <td style="padding:0.6rem 0.8rem;">Led the architecture of Nvidia’s general-purpose GPU computing platform.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Norman Jouppi</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Tensor Processing Unit (2017)</td>
+                <td style="padding:0.6rem 0.8rem;">Led the design of Google’s first TPU.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about parallel computing and GPUs.</p>
+            <figure class="fig" data-fig="fig-quiz-el13">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-16">
+            <h2>16. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Sutter, Herb.</strong> (2005). "The free lunch is over: a fundamental turn toward concurrency in software." <em>Dr. Dobb’s Journal</em>, 30(3).</li>
+              <li id="ref-2"><strong>Hennessy, John L. &amp; Patterson, David A.</strong> (2017). <em>Computer Architecture: A Quantitative Approach</em>, 6th edition, chapters 4–7. Cambridge, MA: Morgan Kaufmann.</li>
+              <li id="ref-3"><strong>Amdahl, Gene M.</strong> (1967). "Validity of the single processor approach to achieving large scale computing capabilities." In <em>AFIPS Spring Joint Computer Conference Proceedings</em>, 30: 483–485.</li>
+              <li id="ref-4"><strong>Gustafson, John L.</strong> (1988). "Reevaluating Amdahl’s law." <em>Communications of the ACM</em>, 31(5): 532–533.</li>
+              <li id="ref-5"><strong>Flynn, Michael J.</strong> (1966). "Very high-speed computing systems." <em>Proceedings of the IEEE</em>, 54(12): 1901–1909.</li>
+              <li id="ref-6"><strong>Russell, Richard M.</strong> (1978). "The CRAY-1 computer system." <em>Communications of the ACM</em>, 21(1): 63–72.</li>
+              <li id="ref-7"><strong>Owens, John D., Houston, Mike, Luebke, David, Green, Simon, Stone, John E. &amp; Phillips, James C.</strong> (2008). "GPU computing." <em>Proceedings of the IEEE</em>, 96(5): 879–899.</li>
+              <li id="ref-8"><strong>Lindholm, Erik, Nickolls, John, Oberman, Stuart &amp; Montrym, John.</strong> (2008). "NVIDIA Tesla: a unified graphics and computing architecture." <em>IEEE Micro</em>, 28(2): 39–55.</li>
+              <li id="ref-9"><strong>Nickolls, John, Buck, Ian, Garland, Michael &amp; Skadron, Kevin.</strong> (2008). "Scalable parallel programming with CUDA." <em>ACM Queue</em>, 6(2): 40–53.</li>
+              <li id="ref-10"><strong>Krizhevsky, Alex, Sutskever, Ilya &amp; Hinton, Geoffrey E.</strong> (2012). "ImageNet classification with deep convolutional neural networks." In <em>Advances in Neural Information Processing Systems 25</em>, pp. 1097–1105.</li>
+              <li id="ref-11"><strong>Williams, Samuel, Waterman, Andrew &amp; Patterson, David.</strong> (2009). "Roofline: an insightful visual performance model for multicore architectures." <em>Communications of the ACM</em>, 52(4): 65–76.</li>
+              <li id="ref-12"><strong>NVIDIA.</strong> (2017). <em>NVIDIA Tesla V100 GPU Architecture</em> (white paper). Santa Clara, CA: NVIDIA Corporation.</li>
+              <li id="ref-13"><strong>Jouppi, Norman P., et al.</strong> (2017). "In-datacenter performance analysis of a tensor processing unit." In <em>Proceedings of the 44th International Symposium on Computer Architecture (ISCA)</em>, pp. 1–12.</li>
+              <li id="ref-14"><strong>Horowitz, Mark.</strong> (2014). "Computing’s energy problem (and what we can do about it)." In <em>IEEE International Solid-State Circuits Conference Digest of Technical Papers</em>, pp. 10–14.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 13 of 14)</div>
+  <div class="series-banner-links">
+    <a href="the-processor.html">← Part 12: The Processor: Stored Programs, Pipelines, Caches and Prediction</a>
+    <a href="beyond-silicon.html">Part 14: Beyond Silicon: Chiplets, Photonics, Neuromorphic and Quantum Computing →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/gpus-and-parallel-computing.js"></script>
+</body>
+</html>

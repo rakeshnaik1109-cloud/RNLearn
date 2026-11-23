@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Making Chips: Lithography, Moore’s Law and the End of Dennard Scaling — RNLearn</title>
+  <meta name="description" content="From sand to chip: crystal growth, the integrated circuit and planar process, lithography’s resolution limit and EUV, yield, Moore’s law, and why Dennard scaling ended.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/making-chips.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Making Chips: Lithography, Moore’s Law and the End of Dennard Scaling — RNLearn">
+  <meta property="og:description" content="From sand to chip: crystal growth, the integrated circuit and planar process, lithography’s resolution limit and EUV, yield, Moore’s law, and why Dennard scaling ended.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/making-chips.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Making Chips: Lithography, Moore’s Law and the End of Dennard Scaling — RNLearn">
+  <meta name="twitter:description" content="From sand to chip: crystal growth, the integrated circuit and planar process, lithography’s resolution limit and EUV, yield, Moore’s law, and why Dennard scaling ended.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Making Chips: Lithography, Moore’s Law and the End of Dennard Scaling",
+    "description": "From sand to chip: crystal growth, the integrated circuit and planar process, lithography’s resolution limit and EUV, yield, Moore’s law, and why Dennard scaling ended.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-23",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/making-chips.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/electronics-computing.html" class="post-subject-tag" data-subject="electronics-computing">Electronics &amp; Computing</a>
+        </div>
+        <h1 class="article-title">Making Chips: Lithography, Moore’s Law and the End of Dennard Scaling</h1>
+        <p class="article-standfirst">
+          A chip is printed with light, layer by layer, in features smaller than the wavelength used to draw them. For fifty years each new generation was cheaper, faster and cooler, until the physics of voltage stopped cooperating.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-23">23 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>14 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 10 of 14)</div>
+  <div class="series-banner-links">
+    <a href="cmos-logic-and-memory.html">← Part 9: CMOS: Logic Gates, Power and Memory from Complementary Transistors</a>
+    <a href="modern-transistors.html">Part 11: Modern Transistors: High-k Gates, FinFETs and Gate-All-Around →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. From Sand to Chip</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Purifying Silicon and Growing Crystals</a></li>
+              <li><a class="toc-link" href="#section-4">4. The Integrated Circuit and the Planar Process</a></li>
+              <li><a class="toc-link" href="#section-5">5. Photolithography and the Resolution Limit</a></li>
+              <li><a class="toc-link" href="#section-6">6. Doping, Deposition, Etching, Wiring and Yield</a></li>
+              <li><a class="toc-link" href="#section-7">7. Moore’s Law</a></li>
+              <li><a class="toc-link" href="#section-8">8. Dennard Scaling and Its End</a></li>
+              <li><a class="toc-link" href="#section-9">9. Worked Problems</a></li>
+              <li><a class="toc-link" href="#section-10">10. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-11">11. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-12">12. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-13">13. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-14">14. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-15">15. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-16">16. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>In this part:</strong> how chips are made, and why they kept getting better. Ultra-pure silicon crystals; the integrated circuit and the planar process; photolithography and its resolution limit, from mercury lamps to extreme ultraviolet; doping, deposition, etching and copper wiring; defects and yield; Moore’s law; and Dennard scaling, the recipe that made transistors faster and cooler for thirty years, and why it ended.</p>
+            <p><strong>You need:</strong> Parts 8 and 9 (MOSFETs and CMOS) and some basic optics (diffraction) is helpful.</p>
+            <p><strong>Try:</strong> three interactive figures, including a lithography simulator and a wafer of chips, and five worked problems.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. From Sand to Chip</h2>
+            <p>A modern processor contains tens of billions of transistors, each with features a few tens of atoms across, all of which must work. Making it takes about three months, over a thousand process steps, machines costing hundreds of millions of dollars, and factories cleaner than operating theatres. Yet the price per transistor has fallen by a factor of roughly a billion since the 1960s. This part follows a chip from raw material to finished die and explains the scaling rules that drove that astonishing improvement. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Part 10 shows how chips are made and scaled.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-el10-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. From pulling crystals to extreme ultraviolet light, 1916–2019.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Purifying Silicon and Growing Crystals</h2>
+            <p>Silicon is the second most abundant element in Earth’s crust, mostly as silica (SiO₂) in sand and quartz. Reduced with carbon in an arc furnace, it becomes metallurgical-grade silicon, about 98–99% pure. For electronics it is converted into a volatile chlorosilane gas, distilled, and deposited back as polycrystalline silicon of extraordinary purity: impurities at the level of parts per billion or below.</p>
+            <p>Devices need a <em>single</em> crystal, with every atom in its place. In 1916 Jan Czochralski discovered that a crystal can be pulled slowly from a melt, and in 1950 Gordon Teal and John Little at Bell Labs applied his method to grow large single crystals of germanium, greatly improving transistors. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>, <a class="cite" href="#ref-3">3</a>]</span> Today’s silicon ingots are 300 mm in diameter and up to two metres long; they are sliced into wafers less than a millimetre thick and polished flat to within nanometres.</p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. The Integrated Circuit and the Planar Process</h2>
+            <p>Early transistors were made one at a time and wired together by hand: the “tyranny of numbers” limited how complex electronics could become. In 1958 Jack Kilby at Texas Instruments built a circuit whose transistor, resistors and capacitor were all formed in one piece of germanium, connected by fine gold wires: the first <strong>integrated circuit</strong>. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> At Fairchild Semiconductor in 1959, Jean Hoerni invented the <strong>planar process</strong>, which forms transistors by diffusing dopants through windows in a protective oxide, leaving a flat, sealed surface. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> Robert Noyce realised that metal wiring could then be laid on top of the oxide to connect the devices, and patented the monolithic integrated circuit. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span> Kilby shared the 2000 Nobel Prize in Physics; Noyce had died in 1990.</p>
+            <p>The planar process is the template for everything since: build devices in the silicon surface, then stack layers of insulators and metal wiring above them. A modern chip has more than a dozen wiring layers.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Photolithography and the Resolution Limit</h2>
+            <p>Each layer of a chip is patterned by <strong>photolithography</strong>. The wafer is coated with a light-sensitive polymer (photoresist); light shines through a <em>mask</em> carrying the layer’s pattern, and a projection lens images it, typically reduced four times, onto the resist. Developing the resist leaves a stencil through which the wafer is etched or doped. A chip needs dozens of such masks, each aligned to the previous layers within a few nanometres.</p>
+            <p>The smallest pattern a lens can print is set by diffraction. A grating of lines diffracts light into orders at angles sin θ = mλ/p; to form any image, the lens must capture at least two orders, and the result is the resolution formula</p>
+            <p style="text-align:center;"><strong>half-pitch = k₁ λ / NA</strong></p>
+            <p>where NA = n sin θ<sub>max</sub> is the lens’s numerical aperture and k₁ is a process factor, which cannot go below 0.25 for a single exposure. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> To keep shrinking, the industry moved from mercury-lamp light at 436 and 365 nm to excimer lasers at 248 and 193 nm. In the mid-2000s it added a film of water between lens and wafer, raising NA to 1.35 (<em>immersion lithography</em>). <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span> Then it split dense patterns across several exposures, and finally, after decades of development, adopted <strong>extreme ultraviolet</strong> (EUV) light at 13.5 nm, produced by hitting droplets of molten tin with a powerful laser and focused with mirrors in vacuum, because no lens is transparent at that wavelength. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-litho">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Printing lines with light.</strong> Choose a light source and numerical aperture, shrink the pitch, and watch the image lose contrast as diffraction orders miss the lens.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Doping, Deposition, Etching, Wiring and Yield</h2>
+            <p>Between lithography steps, a chip passes through many other processes. <strong>Ion implantation</strong> fires dopant ions into the silicon at a controlled dose and depth, followed by rapid annealing to repair the damage. Thin films are grown or deposited: thermal oxide, layers from chemical vapour deposition, and films built up one atomic layer at a time (atomic layer deposition). <strong>Plasma etching</strong> removes material anisotropically, straight down, through the resist stencil. <strong>Chemical–mechanical polishing</strong> planarises each layer. Wiring has been made of copper since the late 1990s, laid into trenches etched in insulators (the damascene process), because copper conducts better than aluminium. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+            <p>Every step adds a risk: a dust particle or a flaw in the wrong place kills a chip. The fraction of working chips, the <strong>yield</strong>, falls roughly as e<sup>−AD</sup> with chip area A and defect density D, a relation used since the early days of integrated circuits. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span> Yield sets cost, so fabs obsess over contamination, and designers add redundant memory rows and spare cores.</p>
+            <figure class="fig" data-fig="fig-el-yield">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Defects and yield on a 300 mm wafer.</strong> Change the defect density and the chip size and count the working chips.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Moore’s Law</h2>
+            <p>In 1965, when the most complex chips held about 64 components, Gordon Moore of Fairchild plotted the number of components per chip that gave the lowest cost per component and saw it doubling every year. He predicted the trend would continue for at least ten years, to 65,000 components by 1975. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span> In 1975 he revised the rate to a doubling about every two years. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span> “Moore’s law” is not a law of nature but an economic observation that became a self-fulfilling plan: the industry organised its research and investment around keeping it true.</p>
+            <figure class="fig" data-fig="fig-el-moore">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Fifty years of Moore’s law.</strong> Transistor counts of selected processors on a logarithmic scale; adjust the doubling time of your trend line to match.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Dennard Scaling and Its End</h2>
+            <p>More transistors would be useless if each one were slower or hotter. In 1974 Robert Dennard and his IBM colleagues showed that it need not be so. Shrink every dimension of a MOSFET by a factor κ and reduce the voltage and doping in proportion, and the transistor becomes κ times faster, its capacitance κ times smaller and its power κ² times lower, exactly balancing the κ² more transistors per unit area. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span></p>
+            <div class="table-wrapper">
+              <table>
+                <thead><tr><th>Quantity</th><th>Dennard scaling (factor κ)</th><th>After about 2005 (voltage stuck)</th></tr></thead>
+                <tbody>
+                  <tr><td>Dimensions, oxide thickness</td><td>1/κ</td><td>1/κ</td></tr>
+                  <tr><td>Supply voltage</td><td>1/κ</td><td>≈ 1</td></tr>
+                  <tr><td>Capacitance per transistor</td><td>1/κ</td><td>1/κ</td></tr>
+                  <tr><td>Gate delay</td><td>1/κ</td><td>improves slowly</td></tr>
+                  <tr><td>Power per transistor (CV²f)</td><td>1/κ²</td><td>≈ 1/κ at the same frequency</td></tr>
+                  <tr><td>Power density</td><td>constant</td><td>rises</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>For thirty years this recipe delivered free performance: each generation, clock speeds rose and power stayed manageable. It broke down in the mid-2000s. Scaling the voltage requires scaling the threshold voltage, but the 60 mV-per-decade subthreshold limit (Part 8) means every reduction in threshold multiplies leakage. Oxides only a few atoms thick began to leak by tunnelling. Supply voltages stalled near 1 V, clock speeds stopped rising at 3–5 GHz, and the industry turned to multiple cores. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span> With power now the limit, a growing fraction of each chip cannot be switched on at full speed at once, a problem dubbed <strong>dark silicon</strong>, which drives the move to specialised accelerators (Parts 13 and 14). <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span></p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Worked Problems</h2>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 1 (easy): resolution of a lithography tool</div>
+              <p>Compare the smallest half-pitch printable in one exposure by a 193 nm immersion scanner (NA = 1.35, k₁ = 0.28) and an EUV scanner (λ = 13.5 nm, NA = 0.33, k₁ = 0.4).</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>Immersion: 0.28 × 193 / 1.35 ≈ <strong>40 nm</strong>. EUV: 0.4 × 13.5 / 0.33 ≈ <strong>16 nm</strong>. EUV prints in one exposure what immersion tools need two to four exposures to achieve, saving steps and alignment errors despite its cost.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 2 (easy): chips per wafer</div>
+              <p>Estimate how many 100 mm² chips fit on a 300 mm wafer, using dies per wafer ≈ πr²/A − πd/√(2A), where the second term accounts for partial dies at the edge.</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>πr²/A = π × 150² / 100 ≈ 707. Edge loss: π × 300 / √200 ≈ 67. So about <strong>640 chips</strong> per wafer.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 3 (medium): big chips are expensive</div>
+              <p>With a killer-defect density of 0.1 per cm², compare the yield and number of good chips for 100 mm² chips and 600 mm² chips on a 300 mm wafer.</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>Small: Y = e<sup>−1 × 0.1</sup> ≈ 90%, so about 640 × 0.90 ≈ <strong>580 good chips</strong>. Large: dies ≈ 118 − 27 ≈ 91; Y = e<sup>−6 × 0.1</sup> ≈ 55%, so about <strong>50 good chips</strong>. The large chip has 6 times the area but costs about 11–12 times as much wafer per good chip. Splitting it into six small chiplets would recover most of that loss, at the cost of connecting them.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 4 (medium): checking Moore’s law</div>
+              <p>Starting from the Intel 4004’s 2,300 transistors in 1971, how many transistors does a doubling every two years predict for 2021? Compare with real flagship chips of 2020–2022 (16–80 billion).</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>Fifty years is 25 doublings: 2,300 × 2<sup>25</sup> = 2,300 × 3.4 × 10<sup>7</sup> ≈ <strong>7.7 × 10<sup>10</sup></strong>, about 77 billion: remarkably close to the largest chips of that time. A one-year doubling would have predicted 2,300 × 2<sup>50</sup> ≈ 2.6 × 10<sup>18</sup>, wildly too many.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 5 (harder): the end of Dennard scaling</div>
+              <p>Over four generations, each shrinking dimensions by κ = 1.4 (doubling density), compare the power density of a chip under ideal Dennard scaling with one in which the supply voltage stays fixed but frequency still rises by κ each generation.</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>Per transistor, P = CV²f. Dennard: C → C/κ, V → V/κ, f → κf, so P → P/κ²; density × κ², so power density is <strong>unchanged</strong>. Fixed voltage: P → (C/κ)V²(κf) = P, unchanged per transistor, while density doubles, so power density <strong>doubles each generation</strong>: 2⁴ = <strong>16 times</strong> after four generations. A 100 W chip would become 1.6 kW in the same area. That is why clock frequencies stopped rising and why parts of chips must be left idle.</p></details>
+            </div>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: how long can scaling continue?</div>
+              <p>Marketing names such as “3 nm” no longer correspond to any physical dimension (Part 11), and the cost per transistor, which used to fall steadily, has fallen much more slowly at the newest nodes. High-NA EUV scanners (NA = 0.55) promise finer patterns but are extremely expensive and print a smaller field. The industry’s roadmaps now rely on new transistor shapes, stacking transistors on top of each other, delivering power from the back of the wafer, and packaging many chiplets together. Whether these will keep the economic heart of Moore’s law, cheaper transistors every generation, beating is a debated question.</p>
+            </div>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: making chips</div>
+              <ol>
+                <li>In Figure 3, with 193 nm immersion at NA 1.35, find the smallest pitch that still prints. Compare with the formula.</li>
+                <li>In Figure 3, switch to EUV and find the smallest printable pitch. How many times finer is it?</li>
+                <li>In Figure 4, set 0.5 defects/cm² and compare a 50 mm² chip with a 500 mm² chip. Press “New wafer” a few times: how much does the result vary?</li>
+                <li>In Figure 5, which doubling time fits the 1970s chips best, and which fits the 2010s?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “Moore’s law says computers double in speed every 18 months”</div>
+              <p><strong>The myth:</strong> Moore predicted that computer speed doubles every 18 months.</p>
+              <p><strong>The reality:</strong> Moore wrote about the number of components per chip, doubling first every year and later every two years. The popular 18-month figure for performance came from others combining more transistors with faster clocks during the Dennard era. Since the mid-2000s, single-thread speed has grown far more slowly, while transistor counts have kept rising.</p>
+              <p><strong>Why it matters:</strong> more transistors no longer automatically mean faster programs; how they are used (cores, caches, accelerators) now decides performance.</p>
+            </div>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>Chips start as ultra-pure single-crystal silicon wafers grown by the Czochralski method.</li>
+                <li>Kilby’s integrated circuit (1958), Hoerni’s planar process and Noyce’s monolithic IC (1959) made it possible to build whole circuits at once.</li>
+                <li>Photolithography’s resolution is half-pitch = k₁λ/NA; the industry moved to 193 nm immersion, multiple patterning and 13.5 nm EUV.</li>
+                <li>Yield falls roughly as e<sup>−AD</sup>, making large chips expensive.</li>
+                <li>Moore’s law: transistor counts doubled about every two years for five decades.</li>
+                <li>Dennard scaling kept power density constant until voltages stalled around 2005; since then power limits performance.</li>
+              </ul>
+            </div>
+          </section>
+          <section id="section-14">
+            <h2>14. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Jan Czochralski</td>
+                <td style="padding:0.6rem 0.8rem;">1885–1953<br>Poland</td>
+                <td style="padding:0.6rem 0.8rem;">Crystal pulling (1916)</td>
+                <td style="padding:0.6rem 0.8rem;">Discovered the method that grows almost every silicon wafer.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Jack Kilby</td>
+                <td style="padding:0.6rem 0.8rem;">1923–2005<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Integrated circuit (1958)</td>
+                <td style="padding:0.6rem 0.8rem;">Built the first integrated circuit; Nobel Prize 2000.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Jean Hoerni &amp; Robert Noyce</td>
+                <td style="padding:0.6rem 0.8rem;">1924–1997 / 1927–1990<br>Switzerland / USA</td>
+                <td style="padding:0.6rem 0.8rem;">Planar process and monolithic IC (1959)</td>
+                <td style="padding:0.6rem 0.8rem;">Made integrated circuits manufacturable.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Gordon Moore</td>
+                <td style="padding:0.6rem 0.8rem;">1929–2023<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Moore’s law (1965)</td>
+                <td style="padding:0.6rem 0.8rem;">Predicted the exponential growth of components per chip; co-founded Intel.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Robert Dennard</td>
+                <td style="padding:0.6rem 0.8rem;">1932–2024<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Scaling rules (1974)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed how to shrink MOSFETs at constant power density; also invented DRAM.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about how chips are made and scaled.</p>
+            <figure class="fig" data-fig="fig-quiz-el10">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-16">
+            <h2>16. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Plummer, James D., Deal, Michael D. &amp; Griffin, Peter B.</strong> (2000). <em>Silicon VLSI Technology: Fundamentals, Practice and Modeling</em>. Upper Saddle River, NJ: Prentice Hall.</li>
+              <li id="ref-2"><strong>Czochralski, J.</strong> (1918). "Ein neues Verfahren zur Messung der Kristallisationsgeschwindigkeit der Metalle." <em>Zeitschrift für Physikalische Chemie</em>, 92: 219–221.</li>
+              <li id="ref-3"><strong>Teal, G. K. &amp; Little, J. B.</strong> (1950). "Growth of germanium single crystals." <em>Physical Review</em>, 78: 647.</li>
+              <li id="ref-4"><strong>Kilby, Jack S.</strong> (1976). "Invention of the integrated circuit." <em>IEEE Transactions on Electron Devices</em>, 23(7): 648–654.</li>
+              <li id="ref-5"><strong>Hoerni, Jean A.</strong> (1962). "Method of manufacturing semiconductor devices." US Patent 3,025,589 (filed 1959).</li>
+              <li id="ref-6"><strong>Noyce, Robert N.</strong> (1961). "Semiconductor device-and-lead structure." US Patent 2,981,877 (filed 1959).</li>
+              <li id="ref-7"><strong>Mack, Chris.</strong> (2007). <em>Fundamental Principles of Optical Lithography: The Science of Microfabrication</em>. Chichester: Wiley.</li>
+              <li id="ref-8"><strong>Lin, Burn J.</strong> (2004). "Immersion lithography and its impact on semiconductor manufacturing." <em>Journal of Microlithography, Microfabrication, and Microsystems</em>, 3(3): 377–395.</li>
+              <li id="ref-9"><strong>Fomenkov, Igor, et al.</strong> (2017). "Light sources for high-volume manufacturing EUV lithography: technology, performance, and power scaling." <em>Advanced Optical Technologies</em>, 6(3–4): 173–186.</li>
+              <li id="ref-10"><strong>Murphy, B. T.</strong> (1964). "Cost-size optima of monolithic integrated circuits." <em>Proceedings of the IEEE</em>, 52(12): 1537–1545.</li>
+              <li id="ref-11"><strong>Moore, Gordon E.</strong> (1965). "Cramming more components onto integrated circuits." <em>Electronics</em>, 38(8): 114–117.</li>
+              <li id="ref-12"><strong>Moore, Gordon E.</strong> (1975). "Progress in digital integrated electronics." In <em>International Electron Devices Meeting Technical Digest</em>, pp. 11–13.</li>
+              <li id="ref-13"><strong>Dennard, R. H., Gaensslen, F. H., Yu, H.-N., Rideout, V. L., Bassous, E. &amp; LeBlanc, A. R.</strong> (1974). "Design of ion-implanted MOSFET’s with very small physical dimensions." <em>IEEE Journal of Solid-State Circuits</em>, 9(5): 256–268.</li>
+              <li id="ref-14"><strong>Bohr, Mark.</strong> (2007). "A 30 year retrospective on Dennard’s MOSFET scaling paper." <em>IEEE Solid-State Circuits Society Newsletter</em>, 12(1): 11–13.</li>
+              <li id="ref-15"><strong>Esmaeilzadeh, Hadi, Blem, Emily, St. Amant, Renée, Sankaralingam, Karthikeyan &amp; Burger, Doug.</strong> (2011). "Dark silicon and the end of multicore scaling." In <em>Proceedings of the 38th International Symposium on Computer Architecture (ISCA)</em>, pp. 365–376.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 10 of 14)</div>
+  <div class="series-banner-links">
+    <a href="cmos-logic-and-memory.html">← Part 9: CMOS: Logic Gates, Power and Memory from Complementary Transistors</a>
+    <a href="modern-transistors.html">Part 11: Modern Transistors: High-k Gates, FinFETs and Gate-All-Around →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/making-chips.js"></script>
+</body>
+</html>

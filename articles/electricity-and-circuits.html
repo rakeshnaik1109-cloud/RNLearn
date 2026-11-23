@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Electricity and Circuits: Ohm, Kirchhoff, RC Delay and the Energy of a Bit — RNLearn</title>
+  <meta name="description" content="The circuit physics beneath digital logic: current and voltage, slow-drifting electrons, Ohm’s and Kirchhoff’s laws, dividers, RC delay and switching energy P ≈ αCV²f.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/electricity-and-circuits.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Electricity and Circuits: Ohm, Kirchhoff, RC Delay and the Energy of a Bit — RNLearn">
+  <meta property="og:description" content="The circuit physics beneath digital logic: current and voltage, slow-drifting electrons, Ohm’s and Kirchhoff’s laws, dividers, RC delay and switching energy P ≈ αCV²f.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/electricity-and-circuits.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Electricity and Circuits: Ohm, Kirchhoff, RC Delay and the Energy of a Bit — RNLearn">
+  <meta name="twitter:description" content="The circuit physics beneath digital logic: current and voltage, slow-drifting electrons, Ohm’s and Kirchhoff’s laws, dividers, RC delay and switching energy P ≈ αCV²f.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Electricity and Circuits: Ohm, Kirchhoff, RC Delay and the Energy of a Bit",
+    "description": "The circuit physics beneath digital logic: current and voltage, slow-drifting electrons, Ohm’s and Kirchhoff’s laws, dividers, RC delay and switching energy P ≈ αCV²f.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-23",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/electricity-and-circuits.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/electronics-computing.html" class="post-subject-tag" data-subject="electronics-computing">Electronics &amp; Computing</a>
+        </div>
+        <h1 class="article-title">Electricity and Circuits: Ohm, Kirchhoff, RC Delay and the Energy of a Bit</h1>
+        <p class="article-standfirst">
+          Every 1 and 0 in a computer is a voltage on a wire, and every change costs time and energy. A handful of nineteenth-century laws explain why chips run at about a volt and why they get hot.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-23">23 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>14 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 4 of 14)</div>
+  <div class="series-banner-links">
+    <a href="memory-and-time.html">← Part 3: Memory and Time: Latches, Flip-Flops, Counters and State Machines</a>
+    <a href="band-theory-and-semiconductors.html">Part 5: Band Theory: Why Silicon Is a Semiconductor →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. From Logic to Electrons</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Charge, Current and Voltage</a></li>
+              <li><a class="toc-link" href="#section-4">4. Resistance and Ohm’s Law</a></li>
+              <li><a class="toc-link" href="#section-5">5. Kirchhoff’s Laws and the Voltage Divider</a></li>
+              <li><a class="toc-link" href="#section-6">6. Capacitors and the RC Time Constant</a></li>
+              <li><a class="toc-link" href="#section-7">7. The Energy Cost of Switching</a></li>
+              <li><a class="toc-link" href="#section-8">8. What We Need from a Switch</a></li>
+              <li><a class="toc-link" href="#section-9">9. Worked Problems</a></li>
+              <li><a class="toc-link" href="#section-10">10. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-11">11. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-12">12. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-13">13. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-14">14. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-15">15. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-16">16. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>In this part:</strong> the physics underneath the 1s and 0s. Charge, current and voltage; why electrons in a wire crawl while signals race; resistance and Ohm’s law; Kirchhoff’s laws and the voltage divider; capacitors and the RC time constant that limits switching speed; and the energy every switching event costs, P ≈ αCV²f.</p>
+            <p><strong>You need:</strong> school physics is helpful but not required. Parts 1–3 explain the logic these circuits implement.</p>
+            <p><strong>Try:</strong> four interactive figures and five worked problems.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. From Logic to Electrons</h2>
+            <p>Parts 1–3 treated 0 and 1 as abstract symbols. Inside a chip they are voltages, typically near 0 V and near the supply voltage of about 1 V, and every gate is a set of switches that connects a wire to one or the other. Whether a chip is fast, how hot it gets and how long a phone battery lasts are all decided by ordinary circuit physics: resistance, capacitance and energy. This part is a compact refresher of the ideas needed for the rest of the series; the next parts dig into the materials that make the switches. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Part 4 begins the physics half: electricity and circuits.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-el4-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. From the Leyden jar to the electron gas, 1745–1900.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Charge, Current and Voltage</h2>
+            <p>In 1800 Alessandro Volta stacked discs of zinc and copper separated by brine-soaked card and obtained, for the first time, a steady flow of electricity. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> What flows was identified in 1897, when J. J. Thomson showed that cathode rays consist of particles about two thousand times lighter than a hydrogen atom: electrons, each carrying charge −e = −1.602 × 10<sup>−19</sup> coulombs. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span></p>
+            <ul>
+              <li><strong>Current</strong> I is the rate at which charge flows past a point: 1 ampere = 1 coulomb per second, about 6 × 10<sup>18</sup> electrons per second.</li>
+              <li><strong>Voltage</strong> V is the energy per unit charge between two points: 1 volt = 1 joule per coulomb. A battery or power supply is an energy pump that raises charge to a higher voltage.</li>
+              <li><strong>Power</strong> is energy per second: P = VI. A 1 V chip drawing 100 A uses 100 W.</li>
+            </ul>
+            <p>A surprise: the electrons themselves move very slowly. In 1900 Paul Drude pictured a metal as a gas of free electrons bouncing off the ions of the crystal; an applied voltage adds only a small average <strong>drift</strong> to their furious random motion. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> The current I = nqAv<sub>d</sub>, where n is the number of free electrons per cubic metre, so in copper (n ≈ 8.5 × 10<sup>28</sup> m<sup>−3</sup>) an ampere in a 1 mm wire drifts at about a tenth of a millimetre per second. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-drift">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Electrons crawl, signals race.</strong> Change the current and the wire’s diameter and see how slowly the electrons actually drift.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Resistance and Ohm’s Law</h2>
+            <p>In 1827 Georg Simon Ohm published that the current through a conductor is proportional to the voltage across it: <strong>V = IR</strong>, where R is the resistance in ohms (Ω). <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> Resistance comes from collisions: the more often electrons scatter, the more energy they hand to the crystal as heat, at a rate P = I²R = V²/R.</p>
+            <p>For a wire, R = ρL/A: longer wires resist more, fatter wires less, and the material sets the <strong>resistivity</strong> ρ (copper: 1.7 × 10<sup>−8</sup> Ω m). Its inverse, the conductivity, is σ = nqμ, where μ is the <strong>mobility</strong>, the drift speed per unit electric field. This formula is the key to Part 5: metals conduct because n is enormous; insulators do not because n is essentially zero; and semiconductors are interesting because n can be changed, by heat, light or a small amount of impurity, over many orders of magnitude.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Kirchhoff’s Laws and the Voltage Divider</h2>
+            <p>In 1845 Gustav Kirchhoff, then a 21-year-old student, stated the two rules that solve any network of resistors: <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span></p>
+            <ul>
+              <li><strong>Current law:</strong> at any junction, the total current flowing in equals the total flowing out (charge is conserved).</li>
+              <li><strong>Voltage law:</strong> around any closed loop, the voltage rises and drops sum to zero (energy is conserved).</li>
+            </ul>
+            <p>From them follow the series rule (R = R₁ + R₂), the parallel rule (1/R = 1/R₁ + 1/R₂) and the <strong>voltage divider</strong>: two resistors in series across a supply give an output V<sub>out</sub> = V × R₂/(R₁ + R₂). The divider explains much of digital electronics. A logic gate’s output is a divider between a switch to the supply and a switch to ground: when one is on (low resistance) and the other off (very high resistance), the output sits firmly at 1 or 0.</p>
+            <figure class="fig" data-fig="fig-el-divider">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Ohm’s and Kirchhoff’s laws in a voltage divider.</strong> Change the voltage and resistances, add a load, and follow the voltage around the loop.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Capacitors and the RC Time Constant</h2>
+            <p>A <strong>capacitor</strong> is two conductors separated by an insulator; the first, the Leyden jar, was made in 1745. It stores charge Q = CV, where the capacitance C is measured in farads. For parallel plates, C = εA/d: large area, thin insulator and high permittivity ε give large capacitance, a formula that returns in Part 8, because the gate of a transistor is a capacitor. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+            <p>A capacitor cannot change its voltage instantly; charge must flow in through whatever resistance is in the way. Charging through R from a step voltage gives V(t) = V<sub>DD</sub>(1 − e<sup>−t/RC</sup>), with <strong>time constant τ = RC</strong>: 63% of the way after τ, 95% after 3τ, and the 50% switching point after 0.69τ.</p>
+            <p>On a chip, every gate input and every wire is a small capacitor (femtofarads, 10<sup>−15</sup> F), and every transistor that drives it has a resistance of kilohms when on. Their product, picoseconds, sets the delay of every gate. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-rc">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. RC delay limits clock speed.</strong> Increase R or C, or shorten the clock period, until the output cannot keep up.
+              </figcaption>
+            </figure>
+            <div class="callout callout-warn">
+              <div class="callout-header">Watch out: wires are getting worse</div>
+              <p>Shrinking transistors makes them faster, but shrinking wires makes them slower: halving a wire’s width and height quadruples its resistance per unit length, while its capacitance per unit length stays roughly the same. In 1995 Mark Bohr of Intel warned that interconnect, not transistors, would become the real limit on chip speed, which drove the switch from aluminium to copper wiring and to insulators with lower permittivity. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span></p>
+            </div>
+          </section>
+
+          <section id="section-7">
+            <h2>7. The Energy Cost of Switching</h2>
+            <p>Charging a capacitor C to voltage V draws charge Q = CV from the supply at voltage V, so the supply delivers energy QV = CV². Only half, ½CV², ends up stored in the capacitor; the other half is turned into heat in the resistance on the way, and remarkably this is true whatever the resistance. When the node is discharged to 0, the stored half is turned into heat as well.</p>
+            <p>So each 0 → 1 → 0 cycle of a node costs CV². A chip with total switched capacitance C, clock frequency f and a fraction α of nodes switching each cycle dissipates the <strong>dynamic power</strong></p>
+            <p style="text-align:center;"><strong>P ≈ α C V² f</strong></p>
+            <p>This single formula explains why chips run at about 1 V rather than the 5 V of the 1980s, why clock speeds stopped rising in the mid-2000s (Part 10), and why phones slow down their processors to save battery. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-energy">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. Where the energy of a switching event goes.</strong> Change R: the current curve changes, but the energy lost stays ½CV².
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-8">
+            <h2>8. What We Need from a Switch</h2>
+            <p>Putting the pieces together, an ideal switch for logic would have zero resistance when on (to charge capacitances quickly), infinite resistance when off (so that no current flows when it is idle), and would be controlled by a voltage without itself drawing current, so that one gate’s output can drive many others. It should also be tiny, cheap and able to switch billions of times per second for years.</p>
+            <p>Relays and vacuum tubes approximated this, but were large, slow or power-hungry. The device that comes closest, the field-effect transistor, turns a semiconductor from insulator to conductor with an electric field. To see how, we need to know why some materials conduct and others do not, which is the subject of Part 5.</p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Worked Problems</h2>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 1 (easy): an LED resistor</div>
+              <p>A light-emitting diode needs 10 mA and drops 2.0 V when lit. What series resistor is needed to run it from a 5 V supply, and how much power does the resistor dissipate?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>By Kirchhoff’s voltage law, the resistor takes the remaining 5 − 2 = 3 V. By Ohm’s law, R = 3 V / 0.010 A = <strong>300 Ω</strong>. Its power is P = VI = 3 × 0.010 = <strong>30 mW</strong>, well within a standard 250 mW resistor. (The LED itself uses 2 × 0.010 = 20 mW.)</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 2 (easy): a loaded divider</div>
+              <p>Two 10 kΩ resistors divide a 5 V supply. What is the output voltage? What does it become when a 10 kΩ load is connected across the lower resistor?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>Unloaded: V<sub>out</sub> = 5 × 10/(10 + 10) = <strong>2.5 V</strong>. With the load, the lower half is 10 kΩ ∥ 10 kΩ = 5 kΩ, so V<sub>out</sub> = 5 × 5/(10 + 5) = <strong>1.67 V</strong>. Loading changed the output by a third. To keep this small, the load should be much larger than the divider resistors, which is one reason transistor gates, which draw almost no current, are so useful.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 3 (medium): drift velocity</div>
+              <p>A copper wire with cross-section 1 mm² carries 1 A. Copper has 8.5 × 10<sup>28</sup> free electrons per m³. Find the drift velocity, and the time an electron takes to travel 1 m.</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>v<sub>d</sub> = I/(nqA) = 1 / (8.5 × 10<sup>28</sup> × 1.602 × 10<sup>−19</sup> × 10<sup>−6</sup>) ≈ <strong>7.3 × 10<sup>−5</sup> m/s</strong>, about 0.07 mm/s. Travelling 1 m takes 1/7.3 × 10<sup>−5</sup> ≈ 1.4 × 10<sup>4</sup> s, about <strong>4 hours</strong>. The signal, by contrast, arrives in nanoseconds.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 4 (medium): gate delay as RC</div>
+              <p>A transistor with on-resistance 2 kΩ drives a wire and gate inputs totalling 5 fF. Estimate the time for the output to rise from 0 to 50% of the supply. What happens if the load capacitance doubles?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>τ = RC = 2 × 10<sup>3</sup> × 5 × 10<sup>−15</sup> = 10<sup>−11</sup> s = 10 ps. Setting 1 − e<sup>−t/τ</sup> = 0.5 gives t = τ ln 2 ≈ <strong>6.9 ps</strong>. Doubling C doubles τ and the delay, to about <strong>14 ps</strong>. This is why a gate that drives many others (high “fan-out”) is slow, and why designers insert buffers on long wires.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 5 (harder): the energy lost in charging</div>
+              <p>(a) Show that charging a capacitor C from 0 to V through a resistor R dissipates ½CV² in the resistor, independent of R. (b) A processor switches an effective capacitance of 100 nF with activity α = 0.1 at 3 GHz and 1.0 V. Estimate its dynamic power, and the saving at 0.8 V.</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>(a) The current is i(t) = (V/R)e<sup>−t/RC</sup>. The heat is ∫ i²R dt = (V²/R) ∫<sub>0</sub><sup>∞</sup> e<sup>−2t/RC</sup> dt = (V²/R)(RC/2) = <strong>½CV²</strong>. R cancels: a smaller resistance gives a larger current for a shorter time. The supply delivered QV = CV², so the other ½CV² is stored.</p>
+              <p>(b) P = αCV²f = 0.1 × 10<sup>−7</sup> × 1² × 3 × 10<sup>9</sup> = <strong>30 W</strong>. At 0.8 V, P = 30 × 0.64 = <strong>19.2 W</strong>, a 36% saving from a 20% voltage reduction. (Transistors switch more slowly at lower voltage, so in practice the frequency must often be reduced too, saving even more.)</p></details>
+            </div>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: is there a minimum energy per operation?</div>
+              <p>Today’s logic gates use thousands of times more energy per switching event than Landauer’s limit of kT ln 2 for erasing a bit (Part 1). Part of the gap is the CV² cost of charging wires, and part is the need for a supply voltage well above the thermal voltage kT/q ≈ 26 mV so that transistors switch cleanly (Part 8). Researchers are exploring <em>adiabatic</em> circuits, which charge capacitances slowly through ramped supplies to recover most of the energy, and <em>reversible</em> logic, which avoids erasing information. Whether such approaches can become practical at large scale, given the cost in speed and circuit size, is still unsettled.</p>
+            </div>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: circuits</div>
+              <ol>
+                <li>In Figure 3, how does the drift velocity change when you double the wire’s diameter at the same current? Why?</li>
+                <li>In Figure 4, make R₁ = R₂ and add the load. Then make both resistors smaller. Why does the load matter less?</li>
+                <li>In Figure 5, with R = 2 kΩ and C = 10 fF, what is the shortest clock period for which the output still crosses 50%?</li>
+                <li>In Figure 6, double the voltage. By what factor does each energy bar grow?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “electricity is electrons rushing through wires at the speed of light”</div>
+              <p><strong>The myth:</strong> when you flip a switch, electrons race from the switch to the lamp at nearly the speed of light.</p>
+              <p><strong>The reality:</strong> the electrons drift at fractions of a millimetre per second, and in alternating current they merely jiggle back and forth. What travels fast is the electromagnetic field, guided by the wires, which sets all the electrons along the circuit moving almost at once. The energy is carried by that field.</p>
+              <p><strong>Why it matters:</strong> signal speed on a chip depends on how quickly wire capacitances can be charged, not on how fast electrons move.</p>
+            </div>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>Current is charge per second, voltage is energy per charge, and power is P = VI.</li>
+                <li>Ohm’s law V = IR; for a wire R = ρL/A, and conductivity σ = nqμ depends on the number of free carriers.</li>
+                <li>Kirchhoff’s laws (current in = current out; voltages round a loop sum to zero) solve any resistor network.</li>
+                <li>Capacitors charge with time constant τ = RC; on chips, RC is picoseconds and sets gate delay.</li>
+                <li>Each switching cycle costs CV², so dynamic power is P ≈ αCV²f, and lowering V saves the most.</li>
+                <li>An ideal logic switch is voltage-controlled, with near-zero on-resistance and near-infinite off-resistance.</li>
+              </ul>
+            </div>
+          </section>
+          <section id="section-14">
+            <h2>14. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Alessandro Volta</td>
+                <td style="padding:0.6rem 0.8rem;">1745–1827<br>Italy</td>
+                <td style="padding:0.6rem 0.8rem;">The voltaic pile (1800)</td>
+                <td style="padding:0.6rem 0.8rem;">Made the first source of steady electric current.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Georg Simon Ohm</td>
+                <td style="padding:0.6rem 0.8rem;">1789–1854<br>Germany</td>
+                <td style="padding:0.6rem 0.8rem;">Ohm’s law (1827)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed that current is proportional to voltage.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Gustav Kirchhoff</td>
+                <td style="padding:0.6rem 0.8rem;">1824–1887<br>Germany</td>
+                <td style="padding:0.6rem 0.8rem;">Circuit laws (1845)</td>
+                <td style="padding:0.6rem 0.8rem;">Stated the current and voltage laws that solve any network.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">J. J. Thomson</td>
+                <td style="padding:0.6rem 0.8rem;">1856–1940<br>UK</td>
+                <td style="padding:0.6rem 0.8rem;">The electron (1897)</td>
+                <td style="padding:0.6rem 0.8rem;">Identified the particle that carries electric current.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Paul Drude</td>
+                <td style="padding:0.6rem 0.8rem;">1863–1906<br>Germany</td>
+                <td style="padding:0.6rem 0.8rem;">Electron gas model (1900)</td>
+                <td style="padding:0.6rem 0.8rem;">Gave the first microscopic explanation of resistance.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about electricity and circuits.</p>
+            <figure class="fig" data-fig="fig-quiz-el4">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-16">
+            <h2>16. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Horowitz, Paul &amp; Hill, Winfield.</strong> (2015). <em>The Art of Electronics</em>, 3rd edition, chapter 1. Cambridge: Cambridge University Press.</li>
+              <li id="ref-2"><strong>Sedra, Adel S. &amp; Smith, Kenneth C.</strong> (2020). <em>Microelectronic Circuits</em>, 8th edition. New York: Oxford University Press.</li>
+              <li id="ref-3"><strong>Volta, Alessandro.</strong> (1800). "On the electricity excited by the mere contact of conducting substances of different kinds." <em>Philosophical Transactions of the Royal Society of London</em>, 90: 403–431.</li>
+              <li id="ref-4"><strong>Thomson, J. J.</strong> (1897). "Cathode rays." <em>Philosophical Magazine</em>, Series 5, 44(269): 293–316.</li>
+              <li id="ref-5"><strong>Drude, Paul.</strong> (1900). "Zur Elektronentheorie der Metalle." <em>Annalen der Physik</em>, 306(3): 566–613.</li>
+              <li id="ref-6"><strong>Purcell, Edward M. &amp; Morin, David J.</strong> (2013). <em>Electricity and Magnetism</em>, 3rd edition, chapters 3–4. Cambridge: Cambridge University Press.</li>
+              <li id="ref-7"><strong>Ohm, Georg Simon.</strong> (1827). <em>Die galvanische Kette, mathematisch bearbeitet</em>. Berlin: T. H. Riemann.</li>
+              <li id="ref-8"><strong>Kirchhoff, Gustav.</strong> (1845). "Ueber den Durchgang eines elektrischen Stromes durch eine Ebene, insbesondere durch eine kreisförmige." <em>Annalen der Physik und Chemie</em>, 64: 497–514.</li>
+              <li id="ref-9"><strong>Rabaey, Jan M., Chandrakasan, Anantha &amp; Nikolić, Borivoje.</strong> (2003). <em>Digital Integrated Circuits: A Design Perspective</em>, 2nd edition. Upper Saddle River, NJ: Prentice Hall.</li>
+              <li id="ref-10"><strong>Bohr, Mark T.</strong> (1995). "Interconnect scaling: the real limiter to high performance ULSI." In <em>Proceedings of the International Electron Devices Meeting (IEDM)</em>, pp. 241–244.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 4 of 14)</div>
+  <div class="series-banner-links">
+    <a href="memory-and-time.html">← Part 3: Memory and Time: Latches, Flip-Flops, Counters and State Machines</a>
+    <a href="band-theory-and-semiconductors.html">Part 5: Band Theory: Why Silicon Is a Semiconductor →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/electricity-and-circuits.js"></script>
+</body>
+</html>

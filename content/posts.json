@@ -1,5 +1,355 @@
 [
   {
+    "slug": "beyond-silicon",
+    "title": "Beyond Silicon: Chiplets, Photonics, Neuromorphic and Quantum Computing",
+    "summary": "Where computing goes as scaling slows: chiplets and 3D stacking, domain-specific accelerators, silicon photonics, spiking neuromorphic chips, quantum computing, and a look back at the series.",
+    "subject": "Electronics & Computing",
+    "tags": [
+      "electronics",
+      "computing",
+      "quantum-computing",
+      "photonics",
+      "computer-architecture"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 14,
+    "series": {
+      "id": "from-switch-to-supercomputer",
+      "part": 14
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "gpus-and-parallel-computing",
+    "title": "GPUs and Parallel Computing: Warps, Rooflines and Tensor Cores",
+    "summary": "Why parallelism took over: Amdahl’s and Gustafson’s laws, SIMD and multicore, how graphics chips became GPUs, warps and latency hiding, the roofline model, and tensor cores.",
+    "subject": "Electronics & Computing",
+    "tags": [
+      "electronics",
+      "computing",
+      "computer-architecture",
+      "parallel-computing",
+      "ai"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 13,
+    "series": {
+      "id": "from-switch-to-supercomputer",
+      "part": 13
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "the-processor",
+    "title": "The Processor: Stored Programs, Pipelines, Caches and Prediction",
+    "summary": "How components become a computer: the stored program and fetch–decode–execute cycle, RISC, pipelining and hazards, caches and locality, branch prediction and out-of-order execution.",
+    "subject": "Electronics & Computing",
+    "tags": [
+      "electronics",
+      "computing",
+      "computer-architecture",
+      "digital-logic",
+      "history-of-technology"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 13,
+    "series": {
+      "id": "from-switch-to-supercomputer",
+      "part": 12
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "modern-transistors",
+    "title": "Modern Transistors: High-k Gates, FinFETs and Gate-All-Around",
+    "summary": "How transistors kept shrinking: short-channel effects, velocity saturation, strained silicon, high-k metal gates, FinFETs, nanosheets, what “3 nm” means, and what comes next.",
+    "subject": "Electronics & Computing",
+    "tags": [
+      "electronics",
+      "transistors",
+      "semiconductors",
+      "nanotechnology",
+      "manufacturing"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 14,
+    "series": {
+      "id": "from-switch-to-supercomputer",
+      "part": 11
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "making-chips",
+    "title": "Making Chips: Lithography, Moore’s Law and the End of Dennard Scaling",
+    "summary": "From sand to chip: crystal growth, the integrated circuit and planar process, lithography’s resolution limit and EUV, yield, Moore’s law, and why Dennard scaling ended.",
+    "subject": "Electronics & Computing",
+    "tags": [
+      "electronics",
+      "semiconductors",
+      "manufacturing",
+      "history-of-technology",
+      "optics"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 14,
+    "series": {
+      "id": "from-switch-to-supercomputer",
+      "part": 10
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "cmos-logic-and-memory",
+    "title": "CMOS: Logic Gates, Power and Memory from Complementary Transistors",
+    "summary": "The CMOS inverter and its transfer curve, noise margins, NAND and NOR networks, gate delay and power with the minimum-energy point, and SRAM, DRAM and flash memory cells.",
+    "subject": "Electronics & Computing",
+    "tags": [
+      "electronics",
+      "transistors",
+      "digital-logic",
+      "computing",
+      "memory"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 14,
+    "series": {
+      "id": "from-switch-to-supercomputer",
+      "part": 9
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "the-mosfet",
+    "title": "The MOSFET: How a Voltage Opens a Channel",
+    "summary": "The field-effect transistor from Lilienfeld’s 1925 patent to Atalla and Kahng’s MOSFET: the MOS capacitor, threshold voltage, the square law, and the 60 mV/decade leakage limit.",
+    "subject": "Electronics & Computing",
+    "tags": [
+      "electronics",
+      "transistors",
+      "semiconductors",
+      "physics",
+      "computing"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 14,
+    "series": {
+      "id": "from-switch-to-supercomputer",
+      "part": 8
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "bipolar-transistor",
+    "title": "The Bipolar Transistor: Amplifiers, Switches and the End of the Vacuum Tube",
+    "summary": "The 1947 point-contact transistor and Shockley’s junction transistor: how npn devices work, output curves and load lines, amplifier gain, bipolar logic, and HBTs today.",
+    "subject": "Electronics & Computing",
+    "tags": [
+      "electronics",
+      "transistors",
+      "semiconductors",
+      "history-of-technology",
+      "circuits"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 13,
+    "series": {
+      "id": "from-switch-to-supercomputer",
+      "part": 7
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "pn-junction-and-diode",
+    "title": "The p–n Junction: Diodes, LEDs and Solar Cells",
+    "summary": "Where p-type meets n-type silicon: depletion regions, built-in voltage, the Shockley diode equation, breakdown, rectifiers, LEDs, photodiodes and solar cells, with worked problems.",
+    "subject": "Electronics & Computing",
+    "tags": [
+      "electronics",
+      "physics",
+      "semiconductors",
+      "diodes",
+      "solar-energy"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 13,
+    "series": {
+      "id": "from-switch-to-supercomputer",
+      "part": 6
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "band-theory-and-semiconductors",
+    "title": "Band Theory: Why Silicon Is a Semiconductor",
+    "summary": "Electrons as waves in crystals, energy bands and gaps, metals versus insulators, electrons and holes, doping with phosphorus and boron, and the Fermi level, with worked problems.",
+    "subject": "Electronics & Computing",
+    "tags": [
+      "electronics",
+      "physics",
+      "semiconductors",
+      "quantum-physics",
+      "materials"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 14,
+    "series": {
+      "id": "from-switch-to-supercomputer",
+      "part": 5
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "electricity-and-circuits",
+    "title": "Electricity and Circuits: Ohm, Kirchhoff, RC Delay and the Energy of a Bit",
+    "summary": "The circuit physics beneath digital logic: current and voltage, slow-drifting electrons, Ohm’s and Kirchhoff’s laws, dividers, RC delay and switching energy P ≈ αCV²f.",
+    "subject": "Electronics & Computing",
+    "tags": [
+      "electronics",
+      "physics",
+      "circuits",
+      "computing",
+      "energy"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 14,
+    "series": {
+      "id": "from-switch-to-supercomputer",
+      "part": 4
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "memory-and-time",
+    "title": "Memory and Time: Latches, Flip-Flops, Counters and State Machines",
+    "summary": "How feedback gives circuits memory: latches, flip-flops and clocks, registers and counters, SRAM and DRAM, finite-state machines, timing rules and metastability.",
+    "subject": "Electronics & Computing",
+    "tags": [
+      "electronics",
+      "digital-logic",
+      "computing",
+      "memory",
+      "sequential-logic"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 14,
+    "series": {
+      "id": "from-switch-to-supercomputer",
+      "part": 3
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "combinational-circuits",
+    "title": "Combinational Circuits: Karnaugh Maps, Multiplexers and Binary Adders",
+    "summary": "Simplifying logic with Karnaugh maps, multiplexers and decoders, half and full adders, two’s complement and overflow, and fast carry-lookahead addition, with worked problems.",
+    "subject": "Electronics & Computing",
+    "tags": [
+      "electronics",
+      "digital-logic",
+      "computer-arithmetic",
+      "computing",
+      "logic-gates"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 13,
+    "series": {
+      "id": "from-switch-to-supercomputer",
+      "part": 2
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "bits-logic-and-boolean-algebra",
+    "title": "Bits, Logic and Boolean Algebra: How Computers Think in Ones and Zeros",
+    "summary": "Why computers use binary, counting in binary and hexadecimal, logic gates and truth tables, Boolean algebra, De Morgan’s laws, why NAND can build everything, and worked problems.",
+    "subject": "Electronics & Computing",
+    "tags": [
+      "electronics",
+      "digital-logic",
+      "boolean-algebra",
+      "computing",
+      "logic-gates"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 13,
+    "series": {
+      "id": "from-switch-to-supercomputer",
+      "part": 1
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
     "slug": "why-language-models-fail",
     "title": "Why It Fails: Hallucination, Calibration and Measuring the Accuracy of Language Models",
     "summary": "Why language models are sometimes confidently wrong: hallucination, rare facts and the Good–Turing bound, calibration, tokenisation blind spots, retrieval and tools, and honest benchmarks.",

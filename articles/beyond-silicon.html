@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beyond Silicon: Chiplets, Photonics, Neuromorphic and Quantum Computing — RNLearn</title>
+  <meta name="description" content="Where computing goes as scaling slows: chiplets and 3D stacking, domain-specific accelerators, silicon photonics, spiking neuromorphic chips, quantum computing, and a look back at the series.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/beyond-silicon.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Beyond Silicon: Chiplets, Photonics, Neuromorphic and Quantum Computing — RNLearn">
+  <meta property="og:description" content="Where computing goes as scaling slows: chiplets and 3D stacking, domain-specific accelerators, silicon photonics, spiking neuromorphic chips, quantum computing, and a look back at the series.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/beyond-silicon.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Beyond Silicon: Chiplets, Photonics, Neuromorphic and Quantum Computing — RNLearn">
+  <meta name="twitter:description" content="Where computing goes as scaling slows: chiplets and 3D stacking, domain-specific accelerators, silicon photonics, spiking neuromorphic chips, quantum computing, and a look back at the series.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Beyond Silicon: Chiplets, Photonics, Neuromorphic and Quantum Computing",
+    "description": "Where computing goes as scaling slows: chiplets and 3D stacking, domain-specific accelerators, silicon photonics, spiking neuromorphic chips, quantum computing, and a look back at the series.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-23",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/beyond-silicon.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/electronics-computing.html" class="post-subject-tag" data-subject="electronics-computing">Electronics &amp; Computing</a>
+        </div>
+        <h1 class="article-title">Beyond Silicon: Chiplets, Photonics, Neuromorphic and Quantum Computing</h1>
+        <p class="article-standfirst">
+          Shrinking transistors can no longer carry progress alone. The next gains will come from stacking chips, computing with light and spikes, harnessing quantum mechanics, and smarter use of every level of the machine.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-23">23 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>14 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 14 of 14)</div>
+  <div class="series-banner-links">
+    <a href="gpus-and-parallel-computing.html">← Part 13: GPUs and Parallel Computing: Warps, Rooflines and Tensor Cores</a>
+    <span>Final part</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. The Road Ahead</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Chiplets and 3D Integration</a></li>
+              <li><a class="toc-link" href="#section-4">4. Domain-Specific Accelerators</a></li>
+              <li><a class="toc-link" href="#section-5">5. Light Instead of Electrons: Silicon Photonics</a></li>
+              <li><a class="toc-link" href="#section-6">6. Brain-Inspired Computing</a></li>
+              <li><a class="toc-link" href="#section-7">7. Quantum Computing</a></li>
+              <li><a class="toc-link" href="#section-8">8. Looking Back: From Switch to Supercomputer</a></li>
+              <li><a class="toc-link" href="#section-9">9. Worked Problems</a></li>
+              <li><a class="toc-link" href="#section-10">10. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-11">11. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-12">12. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-13">13. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-14">14. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-15">15. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-16">16. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>In this part:</strong> the final part of the series, on where computing goes as transistor scaling slows. Chiplets and 3D integration; domain-specific accelerators; silicon photonics, which moves data with light; neuromorphic chips that compute with spikes like neurons; quantum computers and error correction; and a look back at the whole journey from a switch to a supercomputer.</p>
+            <p><strong>You need:</strong> the earlier parts, especially 10 (yield and scaling), 12 (processors) and 13 (accelerators and data movement).</p>
+            <p><strong>Try:</strong> three interactive figures and five worked problems.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. The Road Ahead</h2>
+            <p>For fifty years the recipe for better computers was simple: shrink the transistor. Dennard scaling ended around 2005 (Part 10), the cost per transistor now falls slowly, and the most important limit is energy, especially the energy of moving data (Part 13). Computing has not stopped improving, but the gains now come from many directions at once: better software and algorithms, specialised hardware, new ways of packaging chips, and entirely new physical principles. Charles Leiserson and colleagues summed this up in 2020 by arguing that “there’s plenty of room at the top” of the computing stack, even as room at the bottom runs out. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Part 14 looks beyond conventional silicon scaling.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-el14-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. New ideas for computing, 1982–2024.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Chiplets and 3D Integration</h2>
+            <p>Instead of one huge die, a processor can be built from several smaller <strong>chiplets</strong> in one package. Small dies yield far better (Part 10), each can be tested before assembly, and each can be made in the process that suits it: compute cores on the newest node, input/output and memory interfaces on older, cheaper ones. AMD’s server processors from 2017 onwards made the approach mainstream. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> Industry groups have since agreed common die-to-die interface standards so that chiplets from different makers could be combined.</p>
+            <p>Packaging is going vertical too. High-bandwidth memory stacks DRAM dies connected by thousands of through-silicon vias, placed beside the processor on a silicon interposer (Part 13). Hybrid bonding joins dies face to face with connections a few micrometres apart, allowing, for example, extra cache stacked directly on top of processor cores. The challenges are heat, since stacked dies are harder to cool, testing, and the cost of the packages themselves.</p>
+            <figure class="fig" data-fig="fig-el-chiplet">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Why chiplets pay off.</strong> Change the design size, defect density, interface overhead and number of chiplets; compare the silicon cost per working product.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Domain-Specific Accelerators</h2>
+            <p>A general-purpose core spends most of its energy not on arithmetic but on fetching and decoding instructions, predicting branches, renaming registers and moving data through caches. Hardware tailored to one class of problems can strip most of that away. In their 2018 Turing lecture, published in 2019, John Hennessy and David Patterson argued that this makes the coming decade “a new golden age for computer architecture”, with domain-specific architectures, programmed through domain-specific languages, delivering large gains in performance per watt. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> Examples are everywhere: GPUs and tensor accelerators for AI (Part 13), video codecs and image processors in phones, cryptographic engines, network processors, and FPGAs, reconfigurable chips whose lookup tables (Part 2) can be rewired after manufacture.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Light Instead of Electrons: Silicon Photonics</h2>
+            <p>Electrical wires are capacitors that must be charged for every bit, so their energy grows with length (Part 4). Light in a waveguide or optical fibre travels with little loss, and many wavelengths can share one fibre, so long links have been optical for decades. <strong>Silicon photonics</strong> builds waveguides, modulators and detectors with the same factories that make chips. A milestone came in 2004, when Intel researchers demonstrated a silicon modulator switching faster than 1 GHz. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> David Miller has analysed how optics could eventually compete even for short links inside computers if its energy per bit falls to the femtojoule level. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span> Today, optical transceivers connect the racks of every data centre, and “co-packaged optics” places them right beside switch and processor chips.</p>
+            <p>Light can also compute. A mesh of interferometers performs matrix multiplication as light passes through it; in 2017 Yichen Shen and colleagues demonstrated a simple neural network running on such a programmable nanophotonic processor. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> Whether optical computing can beat electronics in practice, given the cost of converting between electrical and optical signals, is still being explored.</p>
+            <figure class="fig" data-fig="fig-el-link">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Wires against light.</strong> Change the energy per millimetre of a wire and the fixed energy of an optical link; find the distance at which light wins.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Brain-Inspired Computing</h2>
+            <p>A human brain performs remarkable feats of perception on about 20 watts. Its neurons are slow, but there are tens of billions of them, they compute where their memory is stored, and they communicate with sparse electrical spikes. In 1990 Carver Mead proposed building <strong>neuromorphic</strong> electronic systems that copy these principles. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span> Digital neuromorphic chips followed: IBM’s TrueNorth (2014) packed a million spiking neurons and 256 million synapses into a chip using tens of milliwatts, and Intel’s Loihi (2018) added on-chip learning. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>, <a class="cite" href="#ref-10">10</a>]</span></p>
+            <p>Another approach computes inside memory. Leon Chua predicted in 1971 a fourth basic circuit element, the <strong>memristor</strong>, whose resistance depends on the history of current through it; <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span> in 2008 HP Labs reported a titanium dioxide device behaving this way. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span> In a crossbar of such devices, applying voltages to the rows produces currents in the columns equal to a matrix–vector product, by Ohm’s and Kirchhoff’s laws (Part 4), computed in place with no data movement. Device variability, limited precision and wear remain obstacles.</p>
+            <figure class="fig" data-fig="fig-el-lif">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. A spiking neuron.</strong> Change the input and the time constant of a leaky integrate-and-fire neuron, add noise, and watch the spike rate.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Quantum Computing</h2>
+            <p>In 1982 Richard Feynman argued that simulating quantum systems efficiently would need a computer that is itself quantum mechanical. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span> A quantum computer stores information in <strong>qubits</strong>, which can be in superpositions of 0 and 1 and can be entangled with each other, so n qubits are described by 2<sup>n</sup> complex amplitudes. A quantum algorithm arranges for the amplitudes of wrong answers to cancel by interference and those of right answers to add up. In 1994 Peter Shor showed that a quantum computer could factor large numbers efficiently, which would break the public-key encryption used across the internet and has driven the adoption of new, “post-quantum” cryptography. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span></p>
+            <p>Building one is extraordinarily hard: qubits lose their quantum state through tiny interactions with their surroundings. In 2019 Google reported that its 53-qubit superconducting processor performed a random-sampling task far faster than it estimated the best classical supercomputer could, though improved classical methods later narrowed the gap. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span> The decisive step is <strong>quantum error correction</strong>, which spreads one reliable “logical” qubit across many physical ones. In results published in 2025, Google showed logical qubits whose error rates fell as the code was enlarged, the threshold behaviour needed for large-scale machines. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span> Useful, fault-tolerant quantum computers will probably need hundreds of thousands to millions of physical qubits, and they will accelerate specific problems such as simulating molecules and materials, not everyday computing. <span class="cite-group">[<a class="cite" href="#ref-17">17</a>]</span></p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Looking Back: From Switch to Supercomputer</h2>
+            <p>This series climbed a ladder of abstraction, each rung built on the one below:</p>
+            <ul>
+              <li><strong>Quantum mechanics</strong> explains why electrons in crystals form bands, and why silicon is a semiconductor whose conductivity can be controlled (Part 5).</li>
+              <li><strong>Junctions and fields</strong> turn that control into devices: diodes, bipolar transistors and MOSFETs (Parts 6–8).</li>
+              <li><strong>Circuits</strong> pair transistors into CMOS gates that restore signals and waste almost no power at rest (Parts 4 and 9).</li>
+              <li><strong>Manufacturing</strong> prints billions of them at once, and scaling made them cheaper and faster for fifty years (Parts 10 and 11).</li>
+              <li><strong>Logic</strong> combines gates into adders, multiplexers, flip-flops and state machines (Parts 1–3).</li>
+              <li><strong>Architecture</strong> organises those into processors with pipelines, caches and prediction, and into massively parallel GPUs (Parts 12 and 13).</li>
+            </ul>
+            <p>At every level, a clean abstraction hides messy physics: a “1” is really a voltage, a switch is really an exponential, and an instruction sequence is really hundreds of operations in flight. Understanding several rungs at once is what lets engineers keep improving computers when one rung reaches its limits.</p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Worked Problems</h2>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 1 (easy): monolithic versus chiplets</div>
+              <p>A 600 mm² design is made either as one die or as four 150 mm² chiplets (ignore interface overhead). With 0.1 defects per cm², compare the yields and the silicon cost per working product.</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>Monolithic: Y = e<sup>−6 × 0.1</sup> ≈ <strong>55%</strong>, so each working product costs 600/0.55 ≈ 1,090 mm² of silicon. Chiplets: Y = e<sup>−1.5 × 0.1</sup> ≈ <strong>86%</strong> each, and since chiplets are tested first, a product costs 4 × 150/0.86 ≈ 700 mm²: about <strong>36% less silicon</strong>. Interface area and assembly losses eat into this, as Figure 3 shows.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 2 (easy): link power</div>
+              <p>A processor sends 10 Tb/s of data off-package. Compare the power at 5 pJ/bit (electrical) and 1 pJ/bit (co-packaged optics).</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>P = bit rate × energy per bit: 10<sup>13</sup> × 5 × 10<sup>−12</sup> = <strong>50 W</strong> electrically, versus <strong>10 W</strong> optically. At the bandwidths of AI systems, interconnect energy becomes a significant share of the power budget.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 3 (medium): firing rate of a model neuron</div>
+              <p>A leaky integrate-and-fire neuron has τ = 20 ms, a threshold 15 mV above rest, and a constant drive R·I = 20 mV. Find the time to reach threshold from rest and the firing rate (ignore the refractory period). What happens at R·I = 14 mV?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>V(t) = RI(1 − e<sup>−t/τ</sup>) reaches θ when t = τ ln(RI/(RI − θ)) = 20 × ln(20/5) ≈ <strong>27.7 ms</strong>, so the rate is about <strong>36 spikes per second</strong>. At 14 mV the voltage approaches 14 mV but never reaches 15 mV: the neuron <strong>never fires</strong>. This threshold behaviour makes spiking neurons natural detectors of strong inputs.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 4 (medium): simulating qubits classically</div>
+              <p>Storing the full state of n qubits takes 2<sup>n</sup> complex numbers of 16 bytes each. How much memory is needed for 30, 50 and 60 qubits?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>30 qubits: 2<sup>30</sup> × 16 B ≈ <strong>17 GB</strong>, fine for a workstation. 50 qubits: 2<sup>50</sup> × 16 B ≈ <strong>18 PB</strong>, beyond any single machine’s memory. 60 qubits: ≈ <strong>18 EB</strong>. Each extra qubit doubles the requirement, which is why simulating even modest quantum computers exactly is so hard (though clever methods can handle special cases).</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 5 (harder): how far from the limit?</div>
+              <p>A logic node in a modern chip has a capacitance of about 0.1 fF and switches at 0.7 V. Compare the energy ½CV² dissipated in one transition with Landauer’s limit kT ln 2 at 300 K (Part 1). What does this suggest about the future of computing energy?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>½CV² = 0.5 × 10<sup>−16</sup> × 0.49 ≈ <strong>2.5 × 10<sup>−17</sup> J</strong>. kT ln 2 = 1.38 × 10<sup>−23</sup> × 300 × 0.693 ≈ <strong>2.9 × 10<sup>−21</sup> J</strong>. The switching energy is about <strong>8,500 times</strong> the limit, and a whole operation, including wires and memory access, costs far more. Physics leaves enormous room for more efficient computing; the obstacles are thermal noise (which demands voltages well above kT/q), the 60 mV/decade switching limit, and above all the energy of moving data. Better devices, shorter wires, computing in memory and smarter algorithms all attack that gap.</p></details>
+            </div>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: what will computers be made of in 2050?</div>
+              <p>Nobody knows which technologies will dominate. Silicon CMOS has outlasted many predicted successors, and its ecosystem of factories, tools and designers is a formidable advantage. Will stacking and chiplets keep density growing? Will photonics move from linking chips to computing inside them? Will neuromorphic or in-memory computing find a mass market beyond niches? Will error-corrected quantum computers become practical, and for which problems? And will software and algorithms, where Leiserson and colleagues see large untapped gains, matter more than hardware? These are some of the most consequential open questions in engineering. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+            </div>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: beyond silicon</div>
+              <ol>
+                <li>In Figure 3, for a 300 mm² design at 0.1 defects/cm², is splitting into chiplets still worthwhile with 15% interface overhead?</li>
+                <li>In Figure 4, what optical energy per bit would make light win across a 20 mm chip?</li>
+                <li>In Figure 5, set the drive to 14 mV and turn on noise. Why does the neuron now fire occasionally?</li>
+                <li>From the whole series: list the levels of abstraction a single “add” instruction passes through, from software to electrons.</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “quantum computers will replace ordinary computers”</div>
+              <p><strong>The myth:</strong> quantum computers are simply much faster computers that will one day run everything.</p>
+              <p><strong>The reality:</strong> quantum computers offer big speedups only for particular problems with special structure, such as factoring, simulating quantum systems and some optimisation and search tasks, and even then only once they are large and error-corrected. For word processing, web browsing or most of machine learning, classical computers will remain better and cheaper. Future systems will likely use quantum processors as accelerators attached to classical machines, much as GPUs are today.</p>
+              <p><strong>Why it matters:</strong> every new computing technology so far has joined the toolbox rather than replacing it.</p>
+            </div>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>Chiplets and 3D stacking improve yield, mix processes and bring memory closer, at a cost in interfaces, heat and packaging.</li>
+                <li>Domain-specific accelerators trade generality for large gains in performance per watt.</li>
+                <li>Light beats wires beyond a crossover distance; silicon photonics is bringing optics ever closer to chips.</li>
+                <li>Neuromorphic and in-memory computing copy the brain’s event-driven, compute-where-stored style.</li>
+                <li>Quantum computers exploit superposition and interference for specific problems and depend on error correction.</li>
+                <li>From quantum physics to architecture, computers are a ladder of abstractions; progress now comes from every rung.</li>
+              </ul>
+            </div>
+          </section>
+          <section id="section-14">
+            <h2>14. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Richard Feynman</td>
+                <td style="padding:0.6rem 0.8rem;">1918–1988<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Quantum simulation (1982)</td>
+                <td style="padding:0.6rem 0.8rem;">Proposed computers that exploit quantum mechanics.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Peter Shor</td>
+                <td style="padding:0.6rem 0.8rem;">born 1959<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Shor’s algorithm (1994)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed that quantum computers could factor large numbers efficiently.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Carver Mead</td>
+                <td style="padding:0.6rem 0.8rem;">born 1934<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Neuromorphic engineering (1990)</td>
+                <td style="padding:0.6rem 0.8rem;">Pioneered brain-inspired electronics and VLSI design.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Leon Chua</td>
+                <td style="padding:0.6rem 0.8rem;">born 1936<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">The memristor (1971)</td>
+                <td style="padding:0.6rem 0.8rem;">Predicted a fourth fundamental circuit element.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">David A. B. Miller</td>
+                <td style="padding:0.6rem 0.8rem;">born 1954<br>UK / USA</td>
+                <td style="padding:0.6rem 0.8rem;">Optics for computing</td>
+                <td style="padding:0.6rem 0.8rem;">Analysed the energy limits of optical and electrical interconnects.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about the future of computing.</p>
+            <figure class="fig" data-fig="fig-quiz-el14">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-16">
+            <h2>16. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Leiserson, Charles E., Thompson, Neil C., Emer, Joel S., Kuszmaul, Bradley C., Lampson, Butler W., Sanchez, Daniel &amp; Schardl, Tao B.</strong> (2020). "There’s plenty of room at the Top: what will drive computer performance after Moore’s law?" <em>Science</em>, 368(6495): eaam9744.</li>
+              <li id="ref-2"><strong>Shalf, John.</strong> (2020). "The future of computing beyond Moore’s law." <em>Philosophical Transactions of the Royal Society A</em>, 378(2166): 20190061.</li>
+              <li id="ref-3"><strong>Naffziger, Samuel, Beck, Noah, Burd, Thomas, Lepak, Kevin, Loh, Gabriel H., Subramony, Mahesh &amp; White, Sean.</strong> (2021). "Pioneering chiplet technology and design for the AMD EPYC and Ryzen processor families." In <em>Proceedings of the 48th International Symposium on Computer Architecture (ISCA)</em>, pp. 57–70.</li>
+              <li id="ref-4"><strong>Hennessy, John L. &amp; Patterson, David A.</strong> (2019). "A new golden age for computer architecture." <em>Communications of the ACM</em>, 62(2): 48–60.</li>
+              <li id="ref-5"><strong>Liu, Ansheng, Jones, Richard, Liao, Ling, Samara-Rubio, Dean, Rubin, Doron, Cohen, Oded, Nicolaescu, Remus &amp; Paniccia, Mario.</strong> (2004). "A high-speed silicon optical modulator based on a metal–oxide–semiconductor capacitor." <em>Nature</em>, 427: 615–618.</li>
+              <li id="ref-6"><strong>Miller, David A. B.</strong> (2017). "Attojoule optoelectronics for low-energy information processing and communications." <em>Journal of Lightwave Technology</em>, 35(3): 346–396.</li>
+              <li id="ref-7"><strong>Shen, Yichen, Harris, Nicholas C., Skirlo, Scott, et al.</strong> (2017). "Deep learning with coherent nanophotonic circuits." <em>Nature Photonics</em>, 11: 441–446.</li>
+              <li id="ref-8"><strong>Mead, Carver.</strong> (1990). "Neuromorphic electronic systems." <em>Proceedings of the IEEE</em>, 78(10): 1629–1636.</li>
+              <li id="ref-9"><strong>Merolla, Paul A., et al.</strong> (2014). "A million spiking-neuron integrated circuit with a scalable communication network and interface." <em>Science</em>, 345(6197): 668–673.</li>
+              <li id="ref-10"><strong>Davies, Mike, et al.</strong> (2018). "Loihi: a neuromorphic manycore processor with on-chip learning." <em>IEEE Micro</em>, 38(1): 82–99.</li>
+              <li id="ref-11"><strong>Chua, Leon O.</strong> (1971). "Memristor: the missing circuit element." <em>IEEE Transactions on Circuit Theory</em>, 18(5): 507–519.</li>
+              <li id="ref-12"><strong>Strukov, Dmitri B., Snider, Gregory S., Stewart, Duncan R. &amp; Williams, R. Stanley.</strong> (2008). "The missing memristor found." <em>Nature</em>, 453: 80–83.</li>
+              <li id="ref-13"><strong>Feynman, Richard P.</strong> (1982). "Simulating physics with computers." <em>International Journal of Theoretical Physics</em>, 21(6–7): 467–488.</li>
+              <li id="ref-14"><strong>Shor, Peter W.</strong> (1997). "Polynomial-time algorithms for prime factorization and discrete logarithms on a quantum computer." <em>SIAM Journal on Computing</em>, 26(5): 1484–1509.</li>
+              <li id="ref-15"><strong>Arute, Frank, et al.</strong> (2019). "Quantum supremacy using a programmable superconducting processor." <em>Nature</em>, 574: 505–510.</li>
+              <li id="ref-16"><strong>Google Quantum AI and Collaborators.</strong> (2025). "Quantum error correction below the surface code threshold." <em>Nature</em>, 638: 920–926.</li>
+              <li id="ref-17"><strong>Nielsen, Michael A. &amp; Chuang, Isaac L.</strong> (2010). <em>Quantum Computation and Quantum Information</em>, 10th anniversary edition. Cambridge: Cambridge University Press.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 14 of 14)</div>
+  <div class="series-banner-links">
+    <a href="gpus-and-parallel-computing.html">← Part 13: GPUs and Parallel Computing: Warps, Rooflines and Tensor Cores</a>
+    <span>Final part</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/beyond-silicon.js"></script>
+</body>
+</html>

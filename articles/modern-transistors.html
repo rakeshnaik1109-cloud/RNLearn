@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Transistors: High-k Gates, FinFETs and Gate-All-Around — RNLearn</title>
+  <meta name="description" content="How transistors kept shrinking: short-channel effects, velocity saturation, strained silicon, high-k metal gates, FinFETs, nanosheets, what “3 nm” means, and what comes next.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/modern-transistors.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Modern Transistors: High-k Gates, FinFETs and Gate-All-Around — RNLearn">
+  <meta property="og:description" content="How transistors kept shrinking: short-channel effects, velocity saturation, strained silicon, high-k metal gates, FinFETs, nanosheets, what “3 nm” means, and what comes next.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/modern-transistors.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Modern Transistors: High-k Gates, FinFETs and Gate-All-Around — RNLearn">
+  <meta name="twitter:description" content="How transistors kept shrinking: short-channel effects, velocity saturation, strained silicon, high-k metal gates, FinFETs, nanosheets, what “3 nm” means, and what comes next.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Modern Transistors: High-k Gates, FinFETs and Gate-All-Around",
+    "description": "How transistors kept shrinking: short-channel effects, velocity saturation, strained silicon, high-k metal gates, FinFETs, nanosheets, what “3 nm” means, and what comes next.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-23",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/modern-transistors.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/electronics-computing.html" class="post-subject-tag" data-subject="electronics-computing">Electronics &amp; Computing</a>
+        </div>
+        <h1 class="article-title">Modern Transistors: High-k Gates, FinFETs and Gate-All-Around</h1>
+        <p class="article-standfirst">
+          When gates became shorter than a virus and insulators thinner than five atoms, the classic transistor stopped working. Engineers rebuilt it from new materials and then turned it on its side.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-23">23 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>14 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 11 of 14)</div>
+  <div class="series-banner-links">
+    <a href="making-chips.html">← Part 10: Making Chips: Lithography, Moore’s Law and the End of Dennard Scaling</a>
+    <a href="the-processor.html">Part 12: The Processor: Stored Programs, Pipelines, Caches and Prediction →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. When Transistors Got Too Small</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Short-Channel Effects</a></li>
+              <li><a class="toc-link" href="#section-4">4. Strain, High-k Dielectrics and Metal Gates</a></li>
+              <li><a class="toc-link" href="#section-5">5. FinFETs: Wrapping the Gate</a></li>
+              <li><a class="toc-link" href="#section-6">6. Gate-All-Around Nanosheets</a></li>
+              <li><a class="toc-link" href="#section-7">7. What “3 nm” Really Means</a></li>
+              <li><a class="toc-link" href="#section-8">8. Beyond Nanosheets</a></li>
+              <li><a class="toc-link" href="#section-9">9. Worked Problems</a></li>
+              <li><a class="toc-link" href="#section-10">10. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-11">11. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-12">12. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-13">13. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-14">14. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-15">15. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-16">16. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>In this part:</strong> how transistors kept shrinking after the simple recipe ran out. Short-channel effects and velocity saturation; strained silicon; high-k dielectrics and metal gates against tunnelling leakage; FinFETs, which stand the channel on its edge; gate-all-around nanosheets; what “3 nm” really means; and what may come next: stacked transistors, backside power and two-dimensional materials.</p>
+            <p><strong>You need:</strong> Part 8 (MOSFETs, subthreshold swing) and Part 10 (scaling).</p>
+            <p><strong>Try:</strong> three interactive figures and five worked problems.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. When Transistors Got Too Small</h2>
+            <p>By the early 2000s the gate length of a leading-edge transistor was below 50 nm and its gate oxide was about five atoms thick. The long-channel MOSFET of Part 8 assumes that the gate alone controls the channel and that the insulator is a perfect barrier. Both assumptions failed. The drain began to influence the channel, carriers hit a speed limit, and electrons tunnelled straight through the oxide. Rather than stopping, the industry reinvented the transistor several times: new materials, then new shapes. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Part 11 shows how modern transistors beat short-channel physics.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-el11-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. From planar transistors to gate-all-around, 1989–2022.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Short-Channel Effects</h2>
+            <p>In a long transistor, the gate sets the height of the barrier between source and channel, and the drain merely collects what crosses. In a short one, the electric field lines from the drain reach under the gate and pull the barrier down too. The consequences:</p>
+            <ul>
+              <li><strong>Threshold roll-off:</strong> V<sub>T</sub> falls as the gate gets shorter, so tiny variations in length cause large variations in leakage.</li>
+              <li><strong>Drain-induced barrier lowering (DIBL):</strong> V<sub>T</sub> falls further when the drain voltage is high, so off-current rises.</li>
+              <li><strong>Degraded subthreshold swing:</strong> the gate controls the barrier less efficiently, so S rises above the ideal 60 mV per decade.</li>
+              <li><strong>Velocity saturation:</strong> in fields above about 10<sup>4</sup> V/cm, electrons scatter so often that their drift speed saturates near 10<sup>7</sup> cm/s. The on-current then grows roughly linearly with V<sub>GS</sub> − V<sub>T</sub>, not as its square.</li>
+            </ul>
+            <p>A useful way to think about this is the <strong>natural length</strong> λ, the distance over which the drain’s influence decays into the channel. Analysis of the electrostatics gives λ ≈ √((ε<sub>Si</sub>/ε<sub>ox</sub>)t<sub>ox</sub>t<sub>Si</sub>) for a single gate, smaller for two or more gates, and shows that short-channel effects grow as e<sup>−L/2λ</sup>. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span> A transistor behaves well if its gate is several λ long. To shrink L, one must shrink λ: thinner insulators, thinner channels, more gates.</p>
+            <figure class="fig" data-fig="fig-el-sce">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Losing control.</strong> Shorten the gate and compare how quickly planar, FinFET and gate-all-around transistors lose their switching sharpness.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Strain, High-k Dielectrics and Metal Gates</h2>
+            <p>The first rescues were new materials. From its 90 nm generation in 2003, Intel deliberately strained the silicon lattice: stretching it for nMOS and compressing it, with embedded silicon–germanium, for pMOS. Strain changes the band structure and raises mobility, giving more current at the same voltage. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+            <p>The oxide was a harder problem. Electrons tunnel through an insulator with a probability that falls exponentially with thickness: for SiO₂, roughly tenfold for every 0.2 nm. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> At about 1.2 nm, gate leakage was becoming a serious share of chip power. The answer was to use an insulator with a higher dielectric constant κ (“<strong>high-k</strong>”), such as hafnium oxide (κ ≈ 20–25, against 3.9 for SiO₂). Because capacitance depends on κ/t, a high-k layer five times thicker gives the same gate capacitance, and the extra thickness cuts tunnelling dramatically. The quantity that matters is the <strong>equivalent oxide thickness</strong>, EOT = t<sub>high-k</sub> × 3.9/κ. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> High-k materials did not work well with polysilicon gates, so they were paired with metal gates; Intel brought “high-k metal gate” transistors into production in 2007 at 45 nm. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-tunnel">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Tunnelling through the gate insulator.</strong> Choose the equivalent oxide thickness and the dielectric constant; compare the leakage of SiO₂ and a high-k layer with the same capacitance.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-5">
+            <h2>5. FinFETs: Wrapping the Gate</h2>
+            <p>Materials bought time; geometry gave the decisive gain. If the channel is a thin vertical slab of silicon, a <em>fin</em>, a gate draped over it controls it from both sides and the top, and the thin fin has no deep substrate in which the drain’s field can sneak around. In 1989 Digh Hisamoto and colleagues at Hitachi built such a vertical double-gate transistor, called DELTA. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> Working with Chenming Hu’s group at the University of California, Berkeley, Hisamoto and colleagues then demonstrated the self-aligned <strong>FinFET</strong>, which could be made with existing processes. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span></p>
+            <p>Intel put FinFETs (which it called tri-gate transistors) into production at 22 nm, announced in 2011 and shipped in 2012; other manufacturers followed at 16 and 14 nm. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span> The current flows along both side walls, so a tall fin gives a wide effective channel in a small footprint. Fins come in whole numbers, so designers size transistors by choosing how many fins to use. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-3d">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Planar, FinFET and nanosheet transistors in cross-section.</strong> Change the fin height or sheet width and the number of fins or sheets; compare gate control and effective width per footprint.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Gate-All-Around Nanosheets</h2>
+            <p>The logical end point is a gate that surrounds the channel completely. Turn the fin on its side, make it a thin sheet a few nanometres thick, stack several such sheets, and fill the space between them with gate: a <strong>gate-all-around</strong> (GAA) transistor. In 2017 researchers from IBM, GlobalFoundries and Samsung showed that stacked nanosheets could succeed FinFETs. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span> Nanosheets offer the best electrostatic control, smaller λ, and a width that can be set continuously by the lithography rather than in whole fins. Samsung began mass production of a 3 nm-class process with GAA transistors in 2022, and other leading manufacturers have followed with their 2 nm-class processes.</p>
+            <p>Making nanosheets is formidable: alternating layers of silicon and silicon–germanium are grown, patterned, and then the silicon–germanium is selectively etched away and replaced with gate dielectric and metal, all in gaps a few nanometres wide.</p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. What “3 nm” Really Means</h2>
+            <p>Process generations used to be named after a real dimension, roughly the gate length or half the pitch of the densest wires. That link broke in the late 1990s, when gate lengths shrank faster than the names, and broke the other way with FinFETs, when names kept shrinking faster than any dimension. In a so-called 3 nm process, the distance between neighbouring gates is around 45–50 nm and the tightest metal wires are spaced around 20–25 nm apart; nothing on the chip is 3 nm long except perhaps the thickness of a nanosheet or gate dielectric. The International Roadmap for Devices and Systems instead tracks gate pitch, metal pitch and the number of transistor tracks per standard cell. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span> The useful measure for users is transistor density and the power and performance it buys, and that has continued to improve, more slowly than before.</p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Beyond Nanosheets</h2>
+            <p>Several ideas aim to keep density rising:</p>
+            <ul>
+              <li><strong>Complementary FET (CFET):</strong> stack an nMOS nanosheet transistor directly on top of a pMOS one, roughly halving the area of a logic cell. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span></li>
+              <li><strong>Backside power delivery:</strong> move the thick power wires to the back of the wafer, below the transistors, freeing the front-side wiring for signals and reducing voltage drops. Intel and TSMC have announced processes using it in the mid-2020s.</li>
+              <li><strong>Two-dimensional semiconductors:</strong> materials such as molybdenum disulphide are only three atoms thick, so a channel made of one layer has an extremely small λ. Single-layer MoS₂ transistors were demonstrated in 2011, but making them reliably at wafer scale with good contacts is still a research problem. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span></li>
+            </ul>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Worked Problems</h2>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 1 (easy): equivalent oxide thickness</div>
+              <p>A gate stack uses 3.0 nm of HfO₂ with κ = 20. What is its EOT? What thickness of SiO₂ would give the same capacitance?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>EOT = 3.0 × 3.9/20 ≈ <strong>0.59 nm</strong>, which is the same thing as the thickness of SiO₂ with equal capacitance. That would be about two atomic layers of SiO₂, which would leak enormously; the 3 nm HfO₂ film does not. (Real stacks also include a thin SiO₂ interface layer, adding a few tenths of a nanometre.)</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 2 (easy): width per footprint</div>
+              <p>A FinFET has fins 50 nm tall and 7 nm wide at a 30 nm pitch. What effective width do three fins provide, and how does it compare with a planar transistor occupying the same 90 nm of chip width?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>Each fin contributes 2 × 50 + 7 = 107 nm, so three give <strong>321 nm</strong>, about <strong>3.6 times</strong> the 90 nm of a planar device in the same footprint. Taller fins give even more, but are harder to etch and fill.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 3 (medium): velocity saturation</div>
+              <p>For a short-channel transistor in full velocity saturation, I<sub>D</sub> ≈ W C<sub>ox</sub>(V<sub>GS</sub> − V<sub>T</sub>)v<sub>sat</sub>. With C<sub>ox</sub> = 1.7 µF/cm², an overdrive of 0.5 V and v<sub>sat</sub> = 10<sup>7</sup> cm/s, find the current per µm of width. Compare with the long-channel square law for L = 20 nm and μ = 200 cm²/(V s).</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>Velocity-saturated: 10<sup>−4</sup> cm × 1.7 × 10<sup>−6</sup> × 0.5 × 10<sup>7</sup> ≈ <strong>0.85 mA/µm</strong>, close to real high-performance devices. Square law: ½ × 200 × 1.7 × 10<sup>−6</sup> × (1 µm/20 nm = 50) × 0.25 ≈ <strong>2.1 mA/µm</strong>. The long-channel model overestimates by a factor of 2.5: shrinking L no longer increases current as fast as it used to.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 4 (medium): the cost of DIBL</div>
+              <p>A transistor has a DIBL of 100 mV/V and a subthreshold swing of 80 mV/decade. By how much does its off-current rise when the drain voltage goes from 0.05 V to 0.85 V?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>V<sub>T</sub> falls by 100 mV/V × 0.8 V = 80 mV. At 80 mV per decade, the off-current rises by 10<sup>80/80</sup> = <strong>10 times</strong>. A GAA device with 30 mV/V DIBL and 65 mV/decade would see only 10<sup>24/65</sup> ≈ 2.3 times.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 5 (harder): tunnelling exponents</div>
+              <p>The tunnelling probability through a barrier of height φ and thickness t is roughly e<sup>−2κt</sup> with κ = √(2m*φ)/ħ. For SiO₂ (φ = 3.1 eV, m* = 0.4m₀), estimate κ and the factor by which leakage rises when the oxide thins from 1.5 nm to 1.2 nm.</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>κ = √(2 × 0.4 × 9.11 × 10<sup>−31</sup> × 3.1 × 1.6 × 10<sup>−19</sup>)/1.055 × 10<sup>−34</sup> ≈ 6.0 × 10<sup>−25</sup>/1.055 × 10<sup>−34</sup> ≈ <strong>5.7 nm<sup>−1</sup></strong>. Thinning by 0.3 nm multiplies the probability by e<sup>2 × 5.7 × 0.3</sup> = e<sup>3.4</sup> ≈ <strong>30</strong>. The exponential is why gate leakage went from negligible to a crisis within a couple of generations, and why replacing SiO₂ became urgent.</p></details>
+            </div>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: the last few nanometres</div>
+              <p>At gate lengths near 10 nm, a transistor’s channel holds only tens of dopant atoms and electrons, and random variations in their number and position, in line-edge roughness and in metal grain structure make nominally identical transistors differ. Direct tunnelling from source to drain sets an ultimate limit for silicon channels somewhere around 5 nm. Whether stacked CFETs can be manufactured economically, whether 2D materials can replace silicon channels, and how much further density can grow before cost, variability and heat dominate are all open. Many researchers expect future gains to come increasingly from three-dimensional stacking and packaging rather than from shrinking individual transistors.</p>
+            </div>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: modern transistors</div>
+              <ol>
+                <li>In Figure 3, find the shortest gate length at which each structure keeps S below 90 mV/decade. What are the ratios to their natural lengths?</li>
+                <li>In Figure 4, at an EOT of 1.2 nm, how much does high-k reduce leakage? What happens if κ is only 10?</li>
+                <li>In Figure 5, compare the effective width of three 50 nm fins with three stacked 50 nm nanosheets.</li>
+                <li>In Figure 5, why can a nanosheet’s width be chosen freely while a FinFET’s comes in steps?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “3 nm chips have 3 nm transistors”</div>
+              <p><strong>The myth:</strong> a 3 nm process makes transistors 3 nm across.</p>
+              <p><strong>The reality:</strong> the number is a generation label. Gates are spaced around 45–50 nm apart and the channel length is over 10 nm. Different companies’ “nodes” with the same name can differ substantially in density. The names persist because they signal roughly a new generation of density and efficiency.</p>
+              <p><strong>Why it matters:</strong> comparing chips by node name alone is misleading; transistor density, power and performance are the meaningful measures.</p>
+            </div>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>Short channels suffer threshold roll-off, DIBL, worse subthreshold swing and velocity saturation.</li>
+                <li>These effects scale as e<sup>−L/2λ</sup>; thinner channels and more gates shrink the natural length λ.</li>
+                <li>Strain raised mobility (2003); high-k dielectrics with metal gates cut tunnelling leakage at the same capacitance (2007).</li>
+                <li>FinFETs (production 2011–12) wrap the gate on three sides; GAA nanosheets (production 2022) surround the channel.</li>
+                <li>Node names such as “3 nm” are labels, not dimensions; CFETs, backside power and 2D materials are candidates for what comes next.</li>
+              </ul>
+            </div>
+          </section>
+          <section id="section-14">
+            <h2>14. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Digh Hisamoto</td>
+                <td style="padding:0.6rem 0.8rem;"><br>Japan</td>
+                <td style="padding:0.6rem 0.8rem;">DELTA and FinFET (1989, 1999)</td>
+                <td style="padding:0.6rem 0.8rem;">Pioneered vertical multi-gate transistors at Hitachi and Berkeley.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Chenming Hu</td>
+                <td style="padding:0.6rem 0.8rem;">born 1947<br>Taiwan / USA</td>
+                <td style="padding:0.6rem 0.8rem;">FinFET (1999)</td>
+                <td style="padding:0.6rem 0.8rem;">Led the Berkeley FinFET work and the BSIM transistor models used in circuit simulation.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Tsu-Jae King Liu</td>
+                <td style="padding:0.6rem 0.8rem;">born 1963<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">FinFET (1999)</td>
+                <td style="padding:0.6rem 0.8rem;">Co-developed the FinFET at Berkeley.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Mark Bohr</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">High-k metal gate and tri-gate</td>
+                <td style="padding:0.6rem 0.8rem;">Led Intel’s process technology through strain, high-k and FinFETs.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about modern transistors.</p>
+            <figure class="fig" data-fig="fig-quiz-el11">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-16">
+            <h2>16. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Taur, Yuan &amp; Ning, Tak H.</strong> (2009). <em>Fundamentals of Modern VLSI Devices</em>, 2nd edition, chapter 3. Cambridge: Cambridge University Press.</li>
+              <li id="ref-2"><strong>Yan, Ran-Hong, Ourmazd, Abbas &amp; Lee, Kwing F.</strong> (1992). "Scaling the Si MOSFET: from bulk to SOI to bulk." <em>IEEE Transactions on Electron Devices</em>, 39(7): 1704–1710.</li>
+              <li id="ref-3"><strong>Thompson, Scott E., et al.</strong> (2004). "A 90-nm logic technology featuring strained-silicon." <em>IEEE Transactions on Electron Devices</em>, 51(11): 1790–1797.</li>
+              <li id="ref-4"><strong>Lo, S.-H., Buchanan, D. A., Taur, Y. &amp; Wang, W.</strong> (1997). "Quantum-mechanical modeling of electron tunneling current from the inversion layer of ultra-thin-oxide nMOSFET’s." <em>IEEE Electron Device Letters</em>, 18(5): 209–211.</li>
+              <li id="ref-5"><strong>Wilk, G. D., Wallace, R. M. &amp; Anthony, J. M.</strong> (2001). "High-κ gate dielectrics: current status and materials properties considerations." <em>Journal of Applied Physics</em>, 89(10): 5243–5275.</li>
+              <li id="ref-6"><strong>Mistry, K., et al.</strong> (2007). "A 45nm logic technology with high-k+metal gate transistors, strained silicon, 9 Cu interconnect layers, 193nm dry patterning, and 100% Pb-free packaging." In <em>International Electron Devices Meeting Technical Digest</em>, pp. 247–250.</li>
+              <li id="ref-7"><strong>Hisamoto, D., Kaga, T., Kawamoto, Y. &amp; Takeda, E.</strong> (1989). "A fully depleted lean-channel transistor (DELTA): a novel vertical ultrathin SOI MOSFET." In <em>International Electron Devices Meeting Technical Digest</em>, pp. 833–836.</li>
+              <li id="ref-8"><strong>Hisamoto, Digh, et al.</strong> (2000). "FinFET: a self-aligned double-gate MOSFET scalable to 20 nm." <em>IEEE Transactions on Electron Devices</em>, 47(12): 2320–2325.</li>
+              <li id="ref-9"><strong>Auth, C., et al.</strong> (2012). "A 22nm high performance and low-power CMOS technology featuring fully-depleted tri-gate transistors, self-aligned contacts and high density MIM capacitors." In <em>Symposium on VLSI Technology</em>, pp. 131–132.</li>
+              <li id="ref-10"><strong>Colinge, Jean-Pierre (ed.).</strong> (2008). <em>FinFETs and Other Multi-Gate Transistors</em>. New York: Springer.</li>
+              <li id="ref-11"><strong>Loubet, N., et al.</strong> (2017). "Stacked nanosheet gate-all-around transistor to enable scaling beyond FinFET." In <em>Symposium on VLSI Technology</em>, pp. T230–T231.</li>
+              <li id="ref-12"><strong>IEEE.</strong> (2022). <em>International Roadmap for Devices and Systems, 2022 Edition: More Moore</em>. Piscataway, NJ: IEEE.</li>
+              <li id="ref-13"><strong>Ryckaert, J., et al.</strong> (2018). "The Complementary FET (CFET) for CMOS scaling beyond N3." In <em>Symposium on VLSI Technology</em>, pp. 141–142.</li>
+              <li id="ref-14"><strong>Radisavljevic, B., Radenovic, A., Brivio, J., Giacometti, V. &amp; Kis, A.</strong> (2011). "Single-layer MoS<sub>2</sub> transistors." <em>Nature Nanotechnology</em>, 6(3): 147–150.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 11 of 14)</div>
+  <div class="series-banner-links">
+    <a href="making-chips.html">← Part 10: Making Chips: Lithography, Moore’s Law and the End of Dennard Scaling</a>
+    <a href="the-processor.html">Part 12: The Processor: Stored Programs, Pipelines, Caches and Prediction →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/modern-transistors.js"></script>
+</body>
+</html>

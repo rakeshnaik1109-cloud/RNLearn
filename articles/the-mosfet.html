@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The MOSFET: How a Voltage Opens a Channel — RNLearn</title>
+  <meta name="description" content="The field-effect transistor from Lilienfeld’s 1925 patent to Atalla and Kahng’s MOSFET: the MOS capacitor, threshold voltage, the square law, and the 60 mV/decade leakage limit.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/the-mosfet.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The MOSFET: How a Voltage Opens a Channel — RNLearn">
+  <meta property="og:description" content="The field-effect transistor from Lilienfeld’s 1925 patent to Atalla and Kahng’s MOSFET: the MOS capacitor, threshold voltage, the square law, and the 60 mV/decade leakage limit.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/the-mosfet.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The MOSFET: How a Voltage Opens a Channel — RNLearn">
+  <meta name="twitter:description" content="The field-effect transistor from Lilienfeld’s 1925 patent to Atalla and Kahng’s MOSFET: the MOS capacitor, threshold voltage, the square law, and the 60 mV/decade leakage limit.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "The MOSFET: How a Voltage Opens a Channel",
+    "description": "The field-effect transistor from Lilienfeld’s 1925 patent to Atalla and Kahng’s MOSFET: the MOS capacitor, threshold voltage, the square law, and the 60 mV/decade leakage limit.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-23",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/the-mosfet.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/electronics-computing.html" class="post-subject-tag" data-subject="electronics-computing">Electronics &amp; Computing</a>
+        </div>
+        <h1 class="article-title">The MOSFET: How a Voltage Opens a Channel</h1>
+        <p class="article-standfirst">
+          A voltage on a gate, separated from silicon by a layer of glass a few atoms thick, conjures a sheet of electrons out of nowhere. That trick, repeated tens of billions of times per chip, runs the modern world.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-23">23 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>14 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 8 of 14)</div>
+  <div class="series-banner-links">
+    <a href="bipolar-transistor.html">← Part 7: The Bipolar Transistor: Amplifiers, Switches and the End of the Vacuum Tube</a>
+    <a href="cmos-logic-and-memory.html">Part 9: CMOS: Logic Gates, Power and Memory from Complementary Transistors →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. The Transistor That Took Over</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. The Field-Effect Idea</a></li>
+              <li><a class="toc-link" href="#section-4">4. The MOS Capacitor: Accumulation, Depletion and Inversion</a></li>
+              <li><a class="toc-link" href="#section-5">5. The Threshold Voltage</a></li>
+              <li><a class="toc-link" href="#section-6">6. Current–Voltage Characteristics</a></li>
+              <li><a class="toc-link" href="#section-7">7. Subthreshold Conduction: Never Fully Off</a></li>
+              <li><a class="toc-link" href="#section-8">8. nMOS, pMOS and the Complementary Idea</a></li>
+              <li><a class="toc-link" href="#section-9">9. Worked Problems</a></li>
+              <li><a class="toc-link" href="#section-10">10. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-11">11. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-12">12. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-13">13. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-14">14. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-15">15. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-16">16. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>In this part:</strong> the metal–oxide–semiconductor field-effect transistor (MOSFET), the most manufactured object in history. The field-effect idea of the 1920s and why it took until 1959 to work; the MOS capacitor and its accumulation, depletion and inversion; the threshold voltage; the linear and saturation regions and the square law; and subthreshold conduction, the 60 mV-per-decade limit that keeps transistors from ever switching fully off.</p>
+            <p><strong>You need:</strong> Parts 5 and 6 (bands, the Fermi level, junctions). Part 7 helps as a comparison.</p>
+            <p><strong>Try:</strong> three interactive figures and five worked problems.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. The Transistor That Took Over</h2>
+            <p>The bipolar transistor of Part 7 is controlled by a current. The <strong>MOSFET</strong> is controlled by a voltage: a metal (or doped silicon) gate, separated from the silicon by a thin insulating layer, attracts or repels charge in the silicon beneath it and so opens or closes a channel between two terminals, the source and the drain. No steady current flows into the gate, so one MOSFET can drive many others, and a MOSFET can be made very small and very simple. Today well over 10<sup>21</sup> have been made, more than any other manufactured object, and a single flagship chip contains tens of billions. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Part 8 introduces the MOSFET, the switch inside every modern chip.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-el8-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. From an unbuildable patent to the microprocessor, 1925–1971.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. The Field-Effect Idea</h2>
+            <p>The idea is older than the bipolar transistor. In 1925 Julius Edgar Lilienfeld, a physicist who had moved from Leipzig to the United States, filed patents for a device in which a voltage on a control electrode changes the conductivity of a thin semiconducting film. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> Oskar Heil patented a similar insulated-gate device in Britain in 1935. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> Neither could be made to work reliably with the materials of the day, and Bell Labs’ own attempts in the 1940s also failed: electrons trapped in <em>surface states</em> at the semiconductor’s surface screened the gate’s field, an obstacle that set Bardeen and Brattain on the path to the point-contact transistor instead (Part 7).</p>
+            <p>The solution was silicon’s own oxide. In 1957 Carl Frosch and Lincoln Derick at Bell Labs found that a layer of silicon dioxide grown on silicon by heating it in oxygen protected the surface and could mask it during doping. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> Mohamed Atalla showed that such a thermally grown oxide dramatically reduced surface states, and in 1959 he and Dawon Kahng built the first working <strong>metal–oxide–semiconductor field-effect transistor</strong>, which they presented in 1960. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span> Early MOSFETs were slower than bipolar transistors, but they were simpler to make, and by the 1970s they were the basis of memory chips and microprocessors.</p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. The MOS Capacitor: Accumulation, Depletion and Inversion</h2>
+            <p>The heart of a MOSFET is a capacitor: gate, oxide and silicon. Take p-type silicon and vary the gate voltage:</p>
+            <ul>
+              <li><strong>Accumulation</strong> (gate negative): holes, the majority carriers, are pulled to the surface.</li>
+              <li><strong>Depletion</strong> (gate slightly positive): holes are pushed away, leaving a layer of fixed, negatively charged acceptor ions, just as in a p–n junction.</li>
+              <li><strong>Inversion</strong> (gate positive enough): the bands bend so strongly that the surface region becomes n-type. A thin sheet of electrons, the <strong>inversion layer</strong>, only a few nanometres thick, forms at the surface. This sheet is the transistor’s channel.</li>
+            </ul>
+            <p>In band terms, the gate voltage bends the bands at the surface by the <strong>surface potential</strong> ψ<sub>s</sub>. Strong inversion is conventionally reached when ψ<sub>s</sub> = 2φ<sub>F</sub>, where φ<sub>F</sub> = (kT/q) ln(N<sub>A</sub>/n<sub>i</sub>) is the distance from the Fermi level to mid-gap in the bulk; then the surface has as many electrons as the bulk has holes. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>, <a class="cite" href="#ref-7">7</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-moscap">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Inside a MOS capacitor.</strong> Sweep the gate voltage from accumulation through depletion to inversion; change the doping and the oxide thickness and watch the threshold move.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-5">
+            <h2>5. The Threshold Voltage</h2>
+            <p>The gate voltage at which strong inversion begins is the <strong>threshold voltage</strong>. It has three parts: a flat-band voltage V<sub>FB</sub> that accounts for the difference in work function between gate and silicon (and any charge in the oxide); the 2φ<sub>F</sub> of band bending; and the voltage across the oxide needed to hold the depletion charge:</p>
+            <p style="text-align:center;"><strong>V<sub>T</sub> = V<sub>FB</sub> + 2φ<sub>F</sub> + √(2ε<sub>Si</sub>qN<sub>A</sub>·2φ<sub>F</sub>) / C<sub>ox</sub></strong></p>
+            <p>where C<sub>ox</sub> = ε<sub>ox</sub>/t<sub>ox</sub> is the oxide capacitance per unit area. Engineers set V<sub>T</sub>, typically 0.2–0.5 V in modern logic, by adjusting the doping just under the gate and by choosing the gate material. Above threshold, each extra volt on the gate adds a sheet of channel charge Q<sub>n</sub> ≈ −C<sub>ox</sub>(V<sub>GS</sub> − V<sub>T</sub>): a thinner oxide gives more charge, and more current, for the same voltage.</p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Current–Voltage Characteristics</h2>
+            <p>Add an n<sup>+</sup> source and drain on either side of the gate and the inversion layer connects them. With channel length L, width W and electron mobility μ<sub>n</sub>, the classic long-channel model, set out by Chih-Tang Sah in 1964, gives two regions: <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span></p>
+            <ul>
+              <li><strong>Linear (triode)</strong> region, V<sub>DS</sub> &lt; V<sub>GS</sub> − V<sub>T</sub>: I<sub>D</sub> = μ<sub>n</sub>C<sub>ox</sub>(W/L)[(V<sub>GS</sub> − V<sub>T</sub>)V<sub>DS</sub> − V<sub>DS</sub>²/2]. For small V<sub>DS</sub> the channel is a resistor whose value the gate controls.</li>
+              <li><strong>Saturation</strong>, V<sub>DS</sub> ≥ V<sub>GS</sub> − V<sub>T</sub>: the channel pinches off at the drain end, and I<sub>D</sub> = ½μ<sub>n</sub>C<sub>ox</sub>(W/L)(V<sub>GS</sub> − V<sub>T</sub>)², the <strong>square law</strong>.</li>
+            </ul>
+            <p>The current is proportional to W/L, which is why designers specify transistors by their width and length, and why shorter channels give more current. In real short-channel devices the electrons reach a maximum velocity in high fields, and the current grows more nearly in proportion to V<sub>GS</sub> − V<sub>T</sub> than to its square (Part 11). <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-mosiv">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. MOSFET output curves and the channel.</strong> Raise the gate voltage to form a channel, then raise the drain voltage until the channel pinches off near the drain.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Subthreshold Conduction: Never Fully Off</h2>
+            <p>An ideal switch would carry no current below threshold. A MOSFET does not: electrons in the source have a thermal spread of energies, and a few always have enough to cross the barrier into the channel. Below threshold the barrier height changes in step with the gate voltage, so the current is exponential, like a diode’s:</p>
+            <p style="text-align:center;"><strong>I<sub>D</sub> ∝ 10<sup>(V<sub>GS</sub> − V<sub>T</sub>)/S</sup>, with S = (kT/q) ln 10 × (1 + C<sub>dep</sub>/C<sub>ox</sub>) ≥ 60 mV/decade</strong></p>
+            <p>The <strong>subthreshold swing</strong> S is the gate voltage needed to change the current tenfold. Boltzmann statistics set an absolute floor of about 60 mV per decade at room temperature, however well the transistor is built; real planar transistors managed 80–100 mV. The consequence is a fundamental trade-off: to switch a current of a milliamp on and leave picoamps off, a factor of 10<sup>9</sup>, the gate must swing at least 9 × 60 = 540 mV. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span> This is why supply voltages, which fell from 5 V to about 1 V, have barely fallen since the mid-2000s, as Part 10 explains.</p>
+            <figure class="fig" data-fig="fig-el-subth">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Subthreshold leakage.</strong> Lower the threshold voltage or worsen the swing and watch the off-current, and a whole chip’s idle leakage, climb.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-8">
+            <h2>8. nMOS, pMOS and the Complementary Idea</h2>
+            <p>Swap all the doping types and you get a <strong>p-channel MOSFET</strong> (pMOS): an n-type body, p<sup>+</sup> source and drain, and a channel of holes that forms when the gate is pulled <em>below</em> the source voltage. Holes in silicon have two to three times lower mobility than electrons, so a pMOS transistor must be wider to carry the same current.</p>
+            <p>Early MOS chips used only one type: the Intel 4004 microprocessor of 1971 used pMOS, and later chips of the 1970s used nMOS with resistors or always-on transistors as loads. Like bipolar logic, these designs drew current whenever a gate’s output was low. In 1963 Frank Wanlass and Chih-Tang Sah at Fairchild showed a better way: pair an nMOS and a pMOS so that, in either logic state, one of them is off and almost no current flows. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span> This <strong>complementary MOS</strong> (CMOS) logic, the subject of Part 9, became the basis of essentially all digital chips from the 1980s on.</p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Worked Problems</h2>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 1 (easy): oxide capacitance and channel charge</div>
+              <p>A gate oxide of SiO₂ (ε<sub>ox</sub> = 3.45 × 10<sup>−13</sup> F/cm) is 2 nm thick. Find C<sub>ox</sub> and the number of channel electrons per cm² when V<sub>GS</sub> − V<sub>T</sub> = 0.5 V.</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>C<sub>ox</sub> = 3.45 × 10<sup>−13</sup> / 2 × 10<sup>−7</sup> = <strong>1.7 × 10<sup>−6</sup> F/cm²</strong> (17 fF/µm²). Q<sub>n</sub> = C<sub>ox</sub> × 0.5 = 8.6 × 10<sup>−7</sup> C/cm², which is 8.6 × 10<sup>−7</sup> / 1.6 × 10<sup>−19</sup> ≈ <strong>5.4 × 10<sup>12</sup> electrons/cm²</strong>. A 20 nm × 20 nm patch of channel holds only about 20 electrons.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 2 (easy): saturation current</div>
+              <p>An nMOS transistor has μ<sub>n</sub>C<sub>ox</sub> = 300 µA/V², W/L = 10 and V<sub>T</sub> = 0.4 V. Find the saturation current at V<sub>GS</sub> = 0.9 V, and the minimum V<sub>DS</sub> for saturation.</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>I<sub>D</sub> = ½ × 300 µA/V² × 10 × (0.5 V)² = <strong>375 µA</strong>. Saturation requires V<sub>DS</sub> ≥ V<sub>GS</sub> − V<sub>T</sub> = <strong>0.5 V</strong>. Doubling the overdrive to 1 V would quadruple the current in this long-channel model.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 3 (medium): threshold voltage</div>
+              <p>Estimate V<sub>T</sub> for N<sub>A</sub> = 10<sup>17</sup> cm<sup>−3</sup>, t<sub>ox</sub> = 10 nm, and V<sub>FB</sub> = −0.98 V (an n<sup>+</sup> polysilicon gate). Use ε<sub>Si</sub> = 1.04 × 10<sup>−12</sup> F/cm.</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>φ<sub>F</sub> = 0.0259 × ln(10<sup>7</sup>) = 0.417 V, so 2φ<sub>F</sub> = 0.834 V. Depletion charge: √(2 × 1.04 × 10<sup>−12</sup> × 1.6 × 10<sup>−19</sup> × 10<sup>17</sup> × 0.834) ≈ 1.67 × 10<sup>−7</sup> C/cm². C<sub>ox</sub> = 3.45 × 10<sup>−7</sup> F/cm², so that term is 0.48 V. V<sub>T</sub> = −0.98 + 0.83 + 0.48 ≈ <strong>0.33 V</strong>.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 4 (medium): leakage power</div>
+              <p>Transistors have a current of 1 µA per µm of width at V<sub>GS</sub> = V<sub>T</sub> = 0.3 V and a swing of 80 mV/decade. Estimate the off-current per µm at V<sub>GS</sub> = 0, and the leakage power of 10<sup>10</sup> transistors, each 0.1 µm wide, at 0.8 V. What if V<sub>T</sub> is lowered to 0.2 V?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>Going 0.3 V below threshold divides the current by 10<sup>300/80</sup> = 10<sup>3.75</sup> ≈ 5,600: I<sub>off</sub> ≈ <strong>0.18 nA/µm</strong>. Total: 10<sup>10</sup> × 0.1 µm × 0.18 nA/µm = 0.18 A, so P = 0.18 × 0.8 ≈ <strong>0.14 W</strong>. With V<sub>T</sub> = 0.2 V, leakage rises by 10<sup>100/80</sup> ≈ 18 to about <strong>2.5 W</strong>, spent doing nothing.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 5 (harder): the 60 mV limit</div>
+              <p>Below threshold, the drain current is proportional to e<sup>qψ<sub>s</sub>/kT</sup>, and the surface potential follows the gate through a capacitive divider, Δψ<sub>s</sub> = ΔV<sub>GS</sub> × C<sub>ox</sub>/(C<sub>ox</sub> + C<sub>dep</sub>). Derive S, find its minimum at 300 K, and evaluate it at 77 K (liquid nitrogen).</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>A tenfold change in current needs Δψ<sub>s</sub> = (kT/q) ln 10. The gate must change by that divided by C<sub>ox</sub>/(C<sub>ox</sub> + C<sub>dep</sub>), so <strong>S = (kT/q) ln 10 × (1 + C<sub>dep</sub>/C<sub>ox</sub>)</strong>. The bracket is at least 1, so S ≥ 0.02585 × 2.303 = <strong>59.5 mV/decade</strong> at 300 K. At 77 K, S ≥ 59.5 × 77/300 ≈ <strong>15 mV/decade</strong>, which is one reason cryogenic CMOS is studied for quantum-computer control electronics (Part 14). Beating 60 mV at room temperature needs a different injection mechanism, such as tunnelling.</p></details>
+            </div>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: can a transistor beat 60 mV per decade?</div>
+              <p>Because the 60 mV limit comes from thermally injecting carriers over a barrier, several ideas try to avoid it. <em>Tunnel FETs</em> let electrons tunnel through a narrow band-to-band barrier, which can in principle switch more sharply; in practice their on-currents have been too low. <em>Negative-capacitance FETs</em> add a ferroelectric layer intended to amplify the gate voltage at the channel; whether the effect is robust and fast enough for logic has been vigorously debated. Mechanical relays switch perfectly but slowly. No steep-slope device has yet matched silicon MOSFETs for speed, current and manufacturability, and whether one ever will is a central open question for low-power computing.</p>
+            </div>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: MOSFETs</div>
+              <ol>
+                <li>In Figure 3, find the gate voltages that separate accumulation, depletion and inversion. How does the threshold change if you halve the oxide thickness?</li>
+                <li>In Figure 4, set V<sub>GS</sub> = 0.9 V and sweep V<sub>DS</sub>. At what V<sub>DS</sub> does the channel pinch off?</li>
+                <li>In Figure 5, with S = 60 mV/decade, what is the lowest V<sub>T</sub> that keeps the chip’s leakage under 1 W?</li>
+                <li>In Figure 5, lower V<sub>DD</sub> to 0.5 V. What happens to the on/off ratio, and why is that a problem?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “a transistor is a perfect on–off switch”</div>
+              <p><strong>The myth:</strong> digital chips are made of switches that are either fully on or fully off.</p>
+              <p><strong>The reality:</strong> a MOSFET’s current changes smoothly and exponentially below threshold, so “off” means a current a million or so times smaller than “on”, not zero. Multiplied by billions of transistors, those small currents add up to watts of leakage. The digital abstraction of 0s and 1s rests on analogue devices pushed to extremes.</p>
+              <p><strong>Why it matters:</strong> the gap between real and ideal switches is what limits how far supply voltages, and therefore power, can be reduced.</p>
+            </div>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>The field-effect idea dates from 1925, but working MOSFETs needed a clean thermal oxide on silicon (Atalla and Kahng, 1959).</li>
+                <li>A MOS capacitor passes through accumulation, depletion and inversion as the gate voltage rises; the inversion layer is the channel.</li>
+                <li>V<sub>T</sub> = V<sub>FB</sub> + 2φ<sub>F</sub> + √(2ε<sub>Si</sub>qN<sub>A</sub>2φ<sub>F</sub>)/C<sub>ox</sub>; thinner oxides give stronger gate control.</li>
+                <li>Long-channel MOSFETs have a linear region and a saturation region with I<sub>D</sub> = ½μC<sub>ox</sub>(W/L)(V<sub>GS</sub> − V<sub>T</sub>)².</li>
+                <li>Below threshold the current falls only tenfold per S ≥ 60 mV, so off-transistors leak.</li>
+                <li>Pairing nMOS and pMOS (CMOS) eliminates static current in logic.</li>
+              </ul>
+            </div>
+          </section>
+          <section id="section-14">
+            <h2>14. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Julius Edgar Lilienfeld</td>
+                <td style="padding:0.6rem 0.8rem;">1882–1963<br>Austria-Hungary / USA</td>
+                <td style="padding:0.6rem 0.8rem;">Field-effect patents (1925)</td>
+                <td style="padding:0.6rem 0.8rem;">Conceived the field-effect transistor decades before it could be built.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Mohamed M. Atalla</td>
+                <td style="padding:0.6rem 0.8rem;">1924–2009<br>Egypt / USA</td>
+                <td style="padding:0.6rem 0.8rem;">Surface passivation and the MOSFET (1959)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed that thermal oxide tames the silicon surface.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Dawon Kahng</td>
+                <td style="padding:0.6rem 0.8rem;">1931–1992<br>Korea / USA</td>
+                <td style="padding:0.6rem 0.8rem;">The MOSFET (1959)</td>
+                <td style="padding:0.6rem 0.8rem;">Built the first MOSFET with Atalla.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Chih-Tang Sah</td>
+                <td style="padding:0.6rem 0.8rem;">born 1932<br>China / USA</td>
+                <td style="padding:0.6rem 0.8rem;">CMOS and MOSFET theory (1963–64)</td>
+                <td style="padding:0.6rem 0.8rem;">Co-invented CMOS logic and derived the classic MOSFET model.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Frank Wanlass</td>
+                <td style="padding:0.6rem 0.8rem;">1933–2010<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">CMOS (1963)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed that complementary transistors give near-zero standby power.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about MOSFETs.</p>
+            <figure class="fig" data-fig="fig-quiz-el8">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-16">
+            <h2>16. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Taur, Yuan &amp; Ning, Tak H.</strong> (2009). <em>Fundamentals of Modern VLSI Devices</em>, 2nd edition, chapters 2–3. Cambridge: Cambridge University Press.</li>
+              <li id="ref-2"><strong>Sze, S. M. &amp; Ng, Kwok K.</strong> (2007). <em>Physics of Semiconductor Devices</em>, 3rd edition, chapters 4 and 6. Hoboken, NJ: Wiley.</li>
+              <li id="ref-3"><strong>Lilienfeld, Julius Edgar.</strong> (1930). "Method and apparatus for controlling electric currents." US Patent 1,745,175 (filed 1926, based on a Canadian application of 1925).</li>
+              <li id="ref-4"><strong>Heil, Oskar.</strong> (1935). "Improvements in or relating to electrical amplifiers and other control arrangements and devices." British Patent 439,457.</li>
+              <li id="ref-5"><strong>Frosch, C. J. &amp; Derick, L.</strong> (1957). "Surface protection and selective masking during diffusion in silicon." <em>Journal of the Electrochemical Society</em>, 104(9): 547–552.</li>
+              <li id="ref-6"><strong>Kahng, D. &amp; Atalla, M. M.</strong> (1960). "Silicon–silicon dioxide field induced surface devices." Presented at the IRE–AIEE Solid-State Device Research Conference, Pittsburgh.</li>
+              <li id="ref-7"><strong>Streetman, Ben G. &amp; Banerjee, Sanjay Kumar.</strong> (2015). <em>Solid State Electronic Devices</em>, 7th edition, chapter 6. Boston: Pearson.</li>
+              <li id="ref-8"><strong>Sah, C. T.</strong> (1964). "Characteristics of the metal-oxide-semiconductor transistors." <em>IEEE Transactions on Electron Devices</em>, ED-11(7): 324–345.</li>
+              <li id="ref-9"><strong>Wanlass, F. M. &amp; Sah, C. T.</strong> (1963). "Nanowatt logic using field-effect metal-oxide semiconductor triodes." In <em>IEEE International Solid-State Circuits Conference Digest of Technical Papers</em>, pp. 32–33.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 8 of 14)</div>
+  <div class="series-banner-links">
+    <a href="bipolar-transistor.html">← Part 7: The Bipolar Transistor: Amplifiers, Switches and the End of the Vacuum Tube</a>
+    <a href="cmos-logic-and-memory.html">Part 9: CMOS: Logic Gates, Power and Memory from Complementary Transistors →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/the-mosfet.js"></script>
+</body>
+</html>

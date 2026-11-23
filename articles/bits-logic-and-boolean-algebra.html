@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bits, Logic and Boolean Algebra: How Computers Think in Ones and Zeros — RNLearn</title>
+  <meta name="description" content="Why computers use binary, counting in binary and hexadecimal, logic gates and truth tables, Boolean algebra, De Morgan’s laws, why NAND can build everything, and worked problems.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/bits-logic-and-boolean-algebra.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Bits, Logic and Boolean Algebra: How Computers Think in Ones and Zeros — RNLearn">
+  <meta property="og:description" content="Why computers use binary, counting in binary and hexadecimal, logic gates and truth tables, Boolean algebra, De Morgan’s laws, why NAND can build everything, and worked problems.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/bits-logic-and-boolean-algebra.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bits, Logic and Boolean Algebra: How Computers Think in Ones and Zeros — RNLearn">
+  <meta name="twitter:description" content="Why computers use binary, counting in binary and hexadecimal, logic gates and truth tables, Boolean algebra, De Morgan’s laws, why NAND can build everything, and worked problems.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Bits, Logic and Boolean Algebra: How Computers Think in Ones and Zeros",
+    "description": "Why computers use binary, counting in binary and hexadecimal, logic gates and truth tables, Boolean algebra, De Morgan’s laws, why NAND can build everything, and worked problems.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-23",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/bits-logic-and-boolean-algebra.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/electronics-computing.html" class="post-subject-tag" data-subject="electronics-computing">Electronics &amp; Computing</a>
+        </div>
+        <h1 class="article-title">Bits, Logic and Boolean Algebra: How Computers Think in Ones and Zeros</h1>
+        <p class="article-standfirst">
+          Every computer is built from switches that are either on or off. The logic that combines them was worked out on paper long before the first computer, and it is where our journey from switch to supercomputer begins.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-23">23 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>13 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 1 of 14)</div>
+  <div class="series-banner-links">
+    <span>First part</span>
+    <a href="combinational-circuits.html">Part 2: Combinational Circuits: Karnaugh Maps, Multiplexers and Binary Adders →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. From Switches to Supercomputers</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Why Binary?</a></li>
+              <li><a class="toc-link" href="#section-4">4. Logic Gates</a></li>
+              <li><a class="toc-link" href="#section-5">5. Boolean Algebra</a></li>
+              <li><a class="toc-link" href="#section-6">6. One Gate to Rule Them All: NAND</a></li>
+              <li><a class="toc-link" href="#section-7">7. From Truth Table to Circuit</a></li>
+              <li><a class="toc-link" href="#section-8">8. Real Gates: Voltages, Not Numbers</a></li>
+              <li><a class="toc-link" href="#section-9">9. Worked Problems</a></li>
+              <li><a class="toc-link" href="#section-10">10. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-11">11. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-12">12. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-13">13. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-14">14. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-15">15. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-16">16. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>The series:</strong> fourteen parts that build a modern computer from the ground up: from logic gates, through the physics of semiconductors and transistors, to chips, processors and GPUs.</p>
+            <p><strong>In this part:</strong> why computers use binary; counting in binary and hexadecimal; logic gates and truth tables; Boolean algebra and De Morgan’s laws; why one gate, NAND, can build everything; turning a truth table into a circuit; and what a “1” and a “0” are as voltages.</p>
+            <p><strong>Try:</strong> four interactive figures and five worked problems with full solutions.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. From Switches to Supercomputers</h2>
+            <p>A smartphone contains more than ten billion tiny switches. Each one is either on or off, and each flips billions of times a second. Everything the phone does, from showing a photo to running a chatbot, is built from that single idea: a switch that can control other switches. This series follows the idea all the way. We start with the logic of switches, go down into the physics of what a switch made of silicon actually is, and build back up through chips and processors to the graphics processors (GPUs) that train today’s artificial intelligence. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Tap a part to see what it covers.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-el1-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. From binary arithmetic to logic on a chip, 1703–1971.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Why Binary?</h2>
+            <p>Computers could in principle work in decimal, and some early machines did. But electronic signals are never perfectly clean: voltages wander, wires pick up interference, components age. If a wire must distinguish ten levels between 0 and 1 volt, the levels are only 0.1 V apart and a little noise causes errors. If it only has to tell “low” from “high”, a large amount of noise can be tolerated. Two states are the most reliable choice, and two states are exactly what a switch provides. One two-state digit is a <strong>bit</strong>, a word introduced in Claude Shannon’s 1948 paper on information theory, where he credited it to John Tukey. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+            <p>Binary numbers use the same place-value idea as decimal, but each place is worth twice the one to its right instead of ten times. Gottfried Wilhelm Leibniz described binary arithmetic in 1703, long before computers. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> Eight bits make a <strong>byte</strong>, which can hold 2<sup>8</sup> = 256 different values. Long binary numbers are hard to read, so programmers write them in <strong>hexadecimal</strong> (base 16), where each hex digit (0–9, A–F) stands for exactly four bits.</p>
+            <figure class="fig" data-fig="fig-el-binary">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Counting in binary.</strong> Tap bits to flip them and see the value in decimal and hexadecimal. Try “Add 1” repeatedly and watch the carries ripple.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Logic Gates</h2>
+            <p>A <strong>logic gate</strong> takes one or more bits in and produces a bit out according to a fixed rule, written as a <strong>truth table</strong> listing the output for every combination of inputs. The basic gates are AND (1 only if all inputs are 1), OR (1 if any input is 1) and NOT (the opposite of its input), plus their combinations NAND (“not AND”), NOR (“not OR”) and XOR (“exclusive OR”, 1 when the inputs differ).</p>
+            <p>The link between logic and electricity is old. In 1886 the American philosopher Charles Sanders Peirce noted in a letter that logical operations could be carried out by electrical switching circuits. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> In 1938 Claude Shannon, then a master’s student at MIT, showed systematically that the algebra of logic describes circuits of relays and switches, and can be used to design and simplify them: switches in series behave like AND, switches in parallel like OR. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span> That paper is often called the most important master’s thesis of the twentieth century.</p>
+            <figure class="fig" data-fig="fig-el-gates">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Logic gates.</strong> Choose a gate and set its inputs. The standard symbol, the output and the truth table update together.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Boolean Algebra</h2>
+            <p>In 1854 George Boole showed that logical reasoning can be written as algebra, with variables that take only two values. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> In the notation engineers use, A·B (or AB) means A AND B, A + B means A OR B, and A̅ (A with a bar) means NOT A. Many rules look like ordinary algebra (A·(B + C) = A·B + A·C), and some do not: A + A = A, A·A̅ = 0, and A + A̅ = 1.</p>
+            <p>The most useful rules are <strong>De Morgan’s laws</strong>, named after Augustus De Morgan, who stated them in his 1847 <em>Formal Logic</em>: <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span></p>
+            <p>$$\overline{A\cdot B} = \overline{A} + \overline{B}, \qquad \overline{A + B} = \overline{A}\cdot\overline{B}.$$</p>
+            <p>In words: “not (A and B)” is the same as “not A or not B”. They let you push a NOT through a bracket by swapping AND and OR, and they are the key to building every gate from NANDs.</p>
+            <figure class="fig" data-fig="fig-el-boolean">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Testing Boolean identities.</strong> Choose an identity and compare both sides for all four input combinations. One of them is a common mistake.
+              </figcaption>
+            </figure>
+            <div class="callout callout-warn">
+              <div class="callout-header">Watch out: + is not addition</div>
+              <p>In Boolean algebra, 1 + 1 = 1, because “true OR true” is true. Binary arithmetic, where 1 + 1 = 10 (two), is a different operation, built in Part 2 from XOR and AND gates. Keep the two meanings of “+” apart.</p>
+            </div>
+          </section>
+
+          <section id="section-6">
+            <h2>6. One Gate to Rule Them All: NAND</h2>
+            <p>In 1913 the logician Henry Sheffer showed that all of Boolean algebra can be built from a single operation, now called NAND (the “Sheffer stroke”). <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span> NAND is <strong>universal</strong>: connecting both inputs of a NAND gives NOT; a NAND followed by a NOT gives AND; and by De Morgan’s law, OR is a NAND of the two inverted inputs. NOR is universal too. This matters in practice, because a chip factory can build everything from one well-optimised cell, and, as Part 9 shows, NAND is especially cheap to make from transistors.</p>
+            <figure class="fig" data-fig="fig-el-nand">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. Everything from NAND.</strong> Build NOT, AND and OR using only NAND gates, and check the output for every input.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-7">
+            <h2>7. From Truth Table to Circuit</h2>
+            <p>Any truth table can be turned into a circuit by a recipe called <strong>sum of products</strong>: for every row whose output is 1, write an AND of the inputs (inverting those that are 0 in that row), then OR all these terms together. For example, the <strong>majority function</strong> of three inputs, which outputs 1 when at least two inputs are 1, has 1s in rows 011, 101, 110 and 111:</p>
+            <p>$$M = \overline{A}BC + A\overline{B}C + AB\overline{C} + ABC = AB + BC + AC.$$</p>
+            <p>The simplified form on the right uses 3 two-input ANDs and one three-input OR instead of four three-input ANDs and inverters. Simplifying circuits saves area, power and time, and Part 2 introduces a systematic way to do it, the Karnaugh map.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">In code: generating any truth table in Python</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">from itertools import product
+
+def majority(a, b, c):
+    return (a and b) or (b and c) or (a and c)
+
+for a, b, c in product([0, 1], repeat=3):
+    print(a, b, c, int(majority(a, b, c)))
+
+# Check De Morgan's law for every input
+assert all((not (a and b)) == ((not a) or (not b))
+           for a, b in product([False, True], repeat=2))</code></pre>
+            </details>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Real Gates: Voltages, Not Numbers</h2>
+            <p>Inside a chip there are no 1s and 0s, only voltages. A circuit family defines a voltage range read as “low” (0) and a range read as “high” (1), with a forbidden band between them. Each gate restores weak signals to clean levels, so noise does not accumulate as signals pass through thousands of gates; that restoring action, explained in Part 9, is the deep reason digital electronics is so reliable. Gates are also not instantaneous: each takes a short <strong>propagation delay</strong> to respond, today a few picoseconds to tens of picoseconds per gate, which ultimately limits how fast a processor can run (Part 12).</p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Worked Problems</h2>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 1 (easy): convert 156 to binary and hexadecimal</div>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>Repeatedly divide by 2 and read the remainders upwards: 156 → 78 r0 → 39 r0 → 19 r1 → 9 r1 → 4 r1 → 2 r0 → 1 r0 → 0 r1. Reading the remainders from last to first gives <strong>10011100</strong>. Check: 128 + 16 + 8 + 4 = 156. Grouping into fours, 1001 1100 = <strong>9C</strong> in hexadecimal.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 2 (easy): simplify A·B + A·B̅</div>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>Factor out A: A·(B + B̅) = A·1 = <strong>A</strong>. The output does not depend on B at all, so the circuit of two ANDs, an OR and an inverter can be replaced by a plain wire.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 3 (medium): negate (A + B)·C̅</div>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>Apply De Morgan to the AND first: NOT[(A + B)·C̅] = NOT(A + B) + NOT(C̅) = (A̅·B̅) + C. So the answer is <strong>A̅B̅ + C</strong>. Check one case: A = 0, B = 0, C = 0 gives the original (0)·1 = 0, so its negation should be 1; the answer gives 1·1 + 0 = 1 ✓.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 4 (medium): design a three-way light switch</div>
+              <p>A corridor light is controlled by three switches A, B, C. Flipping any one switch must change the light’s state. Find a logic expression.</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>Flipping one input must flip the output, so the output depends on whether an odd number of switches are up: Y = <strong>A ⊕ B ⊕ C</strong> (XOR of all three). The truth table has 1s for 001, 010, 100 and 111. This “parity” function is also used to detect single-bit errors in transmitted data.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 5 (harder): how many NAND gates for XOR?</div>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>Let N = NAND(A, B). Then XOR = NAND(NAND(A, N), NAND(B, N)): <strong>4 NAND gates</strong>. Check A = 1, B = 0: N = 1, NAND(1, 1) = 0, NAND(0, 1) = 1, NAND(0, 1) = 1 ✓. Using the textbook expression A·B̅ + A̅·B directly would need 2 NOTs, 2 ANDs and an OR, or 5 NANDs after conversion, so clever factoring saves a gate.</p></details>
+            </div>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: what is the minimum energy of a logic operation?</div>
+              <p>In 1961 Rolf Landauer argued that erasing one bit of information must release at least k<sub>B</sub>T ln 2 of heat, about 3 × 10<sup>−21</sup> J at room temperature, because erasure reduces the number of possible states. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span> In 2012 Antoine Bérut and colleagues measured this limit with a single microscopic bead in a laser trap. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span> Today’s logic gates use somewhere between ten thousand and a million times more energy per operation than this limit, depending on how it is counted. Gates that never erase information, called reversible logic, could in principle go below it; whether practical reversible computers can be built is still open.</p>
+            </div>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: logic</div>
+              <ol>
+                <li>In Figure 3, start from 00000001 and press “Shift left” seven times. What happens to the value each time, and what happens on the eighth press?</li>
+                <li>In Figure 4, which two gates give the same output for inputs 0,0 and 1,1 but differ for 0,1?</li>
+                <li>In Figure 5, find the rows where the “tempting but false” identity fails. What mistake does it make with De Morgan’s law?</li>
+                <li>Using Figure 6 as a guide, sketch how to build NOR from NAND gates. How many do you need?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “binary was invented for computers”</div>
+              <p><strong>The myth:</strong> the binary system was invented by computer engineers in the twentieth century.</p>
+              <p><strong>The reality:</strong> Leibniz published binary arithmetic in 1703, and he noted its resemblance to the hexagrams of the ancient Chinese <em>I Ching</em>. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> Boole’s algebra of logic dates from 1854. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> What was new in the twentieth century was the realisation, by Shannon and others, that this old mathematics was exactly what was needed to design machines built from switches. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+              <p><strong>Why it matters:</strong> many technologies rest on mathematics developed long before anyone knew it would be useful.</p>
+            </div>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>Computers use binary because two well-separated voltage levels are robust against noise.</li>
+                <li>Binary is place value with powers of 2; a byte (8 bits) holds 256 values; hexadecimal writes 4 bits per digit.</li>
+                <li>Logic gates compute outputs from inputs according to truth tables: AND, OR, NOT, NAND, NOR, XOR.</li>
+                <li>Boolean algebra simplifies logic; De Morgan’s laws swap AND and OR under a NOT.</li>
+                <li>NAND (and NOR) alone can build any logic circuit.</li>
+                <li>Any truth table becomes a circuit by sum of products; simplification saves gates, power and time.</li>
+              </ul>
+              <div class="table-container" style="overflow-x:auto; margin:1rem 0 0;">
+                <table style="width:100%; border-collapse:collapse; font-size:0.9rem; line-height:1.5;">
+                  <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.4rem;">A B</th><th style="padding:0.4rem;">AND</th><th style="padding:0.4rem;">OR</th><th style="padding:0.4rem;">NAND</th><th style="padding:0.4rem;">NOR</th><th style="padding:0.4rem;">XOR</th></tr></thead>
+                  <tbody>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">0 0</td><td style="padding:0.4rem;">0</td><td style="padding:0.4rem;">0</td><td style="padding:0.4rem;">1</td><td style="padding:0.4rem;">1</td><td style="padding:0.4rem;">0</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">0 1</td><td style="padding:0.4rem;">0</td><td style="padding:0.4rem;">1</td><td style="padding:0.4rem;">1</td><td style="padding:0.4rem;">0</td><td style="padding:0.4rem;">1</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">1 0</td><td style="padding:0.4rem;">0</td><td style="padding:0.4rem;">1</td><td style="padding:0.4rem;">1</td><td style="padding:0.4rem;">0</td><td style="padding:0.4rem;">1</td></tr>
+                    <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.4rem;">1 1</td><td style="padding:0.4rem;">1</td><td style="padding:0.4rem;">1</td><td style="padding:0.4rem;">0</td><td style="padding:0.4rem;">0</td><td style="padding:0.4rem;">0</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section id="section-14">
+            <h2>14. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Gottfried Wilhelm Leibniz</td>
+                <td style="padding:0.6rem 0.8rem;">1646–1716<br>Germany</td>
+                <td style="padding:0.6rem 0.8rem;">Binary arithmetic (1703)</td>
+                <td style="padding:0.6rem 0.8rem;">Described arithmetic with only 0 and 1.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Augustus De Morgan</td>
+                <td style="padding:0.6rem 0.8rem;">1806–1871<br>India / England</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Formal Logic</em> (1847)</td>
+                <td style="padding:0.6rem 0.8rem;">His laws relate negated ANDs and ORs.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">George Boole</td>
+                <td style="padding:0.6rem 0.8rem;">1815–1864<br>England / Ireland</td>
+                <td style="padding:0.6rem 0.8rem;"><em>The Laws of Thought</em> (1854)</td>
+                <td style="padding:0.6rem 0.8rem;">Turned logic into algebra.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Charles Sanders Peirce</td>
+                <td style="padding:0.6rem 0.8rem;">1839–1914<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Letter on electrical logic (1886)</td>
+                <td style="padding:0.6rem 0.8rem;">Suggested logic could be done with switching circuits.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Henry Sheffer</td>
+                <td style="padding:0.6rem 0.8rem;">1882–1964<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">The Sheffer stroke (1913)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed one operation (NAND) suffices.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Claude Shannon</td>
+                <td style="padding:0.6rem 0.8rem;">1916–2001<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Switching circuits (1938), information theory (1948)</td>
+                <td style="padding:0.6rem 0.8rem;">Connected Boolean algebra to circuits; popularised the bit.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about binary and logic.</p>
+            <figure class="fig" data-fig="fig-quiz-el1">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-16">
+            <h2>16. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Harris, David Money &amp; Harris, Sarah L.</strong> (2013). <em>Digital Design and Computer Architecture</em>, 2nd edition. Waltham, MA: Morgan Kaufmann.</li>
+              <li id="ref-2"><strong>Mano, M. Morris &amp; Ciletti, Michael D.</strong> (2018). <em>Digital Design: With an Introduction to the Verilog HDL, VHDL, and SystemVerilog</em>, 6th edition. Pearson.</li>
+              <li id="ref-3"><strong>Shannon, Claude E.</strong> (1948). "A mathematical theory of communication." <em>Bell System Technical Journal</em>, 27: 379–423 and 623–656.</li>
+              <li id="ref-4"><strong>Leibniz, Gottfried Wilhelm.</strong> (1703). "Explication de l’arithmétique binaire." <em>Mémoires de l’Académie Royale des Sciences</em>, pp. 85–89.</li>
+              <li id="ref-5"><strong>Peirce, Charles S.</strong> (1886). Letter to Allan Marquand, 30 December 1886. In <em>Writings of Charles S. Peirce: A Chronological Edition</em>, vol. 5, pp. 421–423. Bloomington: Indiana University Press (1993).</li>
+              <li id="ref-6"><strong>Shannon, Claude E.</strong> (1938). "A symbolic analysis of relay and switching circuits." <em>Transactions of the American Institute of Electrical Engineers</em>, 57(12): 713–723.</li>
+              <li id="ref-7"><strong>Boole, George.</strong> (1854). <em>An Investigation of the Laws of Thought, on Which Are Founded the Mathematical Theories of Logic and Probabilities</em>. London: Walton and Maberly.</li>
+              <li id="ref-8"><strong>De Morgan, Augustus.</strong> (1847). <em>Formal Logic: or, The Calculus of Inference, Necessary and Probable</em>. London: Taylor and Walton.</li>
+              <li id="ref-9"><strong>Sheffer, Henry M.</strong> (1913). "A set of five independent postulates for Boolean algebras, with application to logical constants." <em>Transactions of the American Mathematical Society</em>, 14(4): 481–488.</li>
+              <li id="ref-10"><strong>Landauer, Rolf.</strong> (1961). "Irreversibility and heat generation in the computing process." <em>IBM Journal of Research and Development</em>, 5(3): 183–191.</li>
+              <li id="ref-11"><strong>Bérut, Antoine, Arakelyan, Artak, Petrosyan, Artyom, Ciliberto, Sergio, Dillenschneider, Raoul &amp; Lutz, Eric.</strong> (2012). "Experimental verification of Landauer’s principle linking information and thermodynamics." <em>Nature</em>, 483: 187–189.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 1 of 14)</div>
+  <div class="series-banner-links">
+    <span>First part</span>
+    <a href="combinational-circuits.html">Part 2: Combinational Circuits: Karnaugh Maps, Multiplexers and Binary Adders →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/bits-logic-and-boolean-algebra.js"></script>
+</body>
+</html>

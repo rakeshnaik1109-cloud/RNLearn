@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Processor: Stored Programs, Pipelines, Caches and Prediction — RNLearn</title>
+  <meta name="description" content="How components become a computer: the stored program and fetch–decode–execute cycle, RISC, pipelining and hazards, caches and locality, branch prediction and out-of-order execution.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/the-processor.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Processor: Stored Programs, Pipelines, Caches and Prediction — RNLearn">
+  <meta property="og:description" content="How components become a computer: the stored program and fetch–decode–execute cycle, RISC, pipelining and hazards, caches and locality, branch prediction and out-of-order execution.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/the-processor.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Processor: Stored Programs, Pipelines, Caches and Prediction — RNLearn">
+  <meta name="twitter:description" content="How components become a computer: the stored program and fetch–decode–execute cycle, RISC, pipelining and hazards, caches and locality, branch prediction and out-of-order execution.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "The Processor: Stored Programs, Pipelines, Caches and Prediction",
+    "description": "How components become a computer: the stored program and fetch–decode–execute cycle, RISC, pipelining and hazards, caches and locality, branch prediction and out-of-order execution.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-23",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/the-processor.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/electronics-computing.html" class="post-subject-tag" data-subject="electronics-computing">Electronics &amp; Computing</a>
+        </div>
+        <h1 class="article-title">The Processor: Stored Programs, Pipelines, Caches and Prediction</h1>
+        <p class="article-standfirst">
+          A processor does only simple things, such as adding two numbers or jumping to another instruction, but it does billions of them a second, guessing ahead and hiding slow memory behind clever tricks.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-23">23 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>13 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 12 of 14)</div>
+  <div class="series-banner-links">
+    <a href="modern-transistors.html">← Part 11: Modern Transistors: High-k Gates, FinFETs and Gate-All-Around</a>
+    <a href="gpus-and-parallel-computing.html">Part 13: GPUs and Parallel Computing: Warps, Rooflines and Tensor Cores →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. Putting It All Together</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. The Stored-Program Computer</a></li>
+              <li><a class="toc-link" href="#section-4">4. Instructions and the Datapath</a></li>
+              <li><a class="toc-link" href="#section-5">5. Pipelining</a></li>
+              <li><a class="toc-link" href="#section-6">6. The Memory Hierarchy and Caches</a></li>
+              <li><a class="toc-link" href="#section-7">7. Branch Prediction and Out-of-Order Execution</a></li>
+              <li><a class="toc-link" href="#section-8">8. Performance: the Iron Law</a></li>
+              <li><a class="toc-link" href="#section-9">9. Worked Problems</a></li>
+              <li><a class="toc-link" href="#section-10">10. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-11">11. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-12">12. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-13">13. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-14">14. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-15">15. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-16">16. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>In this part:</strong> how gates, flip-flops and memory become a programmable computer. The stored-program idea; instructions, registers and the fetch–decode–execute cycle (with a working toy computer); RISC and CISC; pipelining and its hazards; caches and the memory hierarchy; branch prediction and out-of-order execution; and the “iron law” of processor performance.</p>
+            <p><strong>You need:</strong> Parts 1–3 (logic, adders, flip-flops and state machines) and Part 9 (SRAM and DRAM).</p>
+            <p><strong>Try:</strong> three interactive figures, including a computer you can single-step, and five worked problems.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. Putting It All Together</h2>
+            <p>Everything so far has been a component: gates that compute, flip-flops that remember, adders that do arithmetic, memories that store. A processor combines them into a machine that does whatever a program tells it, one simple instruction at a time. The same handful of ideas, refined for seventy years, run in every phone, laptop and data centre. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Part 12 builds a processor from the components of earlier parts.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-el12-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. From the EDVAC report to speculative execution, 1945–2018.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. The Stored-Program Computer</h2>
+            <p>Early electronic computers such as ENIAC were programmed by plugging cables and setting switches. In 1945 John von Neumann, drawing on discussions with J. Presper Eckert, John Mauchly and others on the EDVAC project, described a better design: keep the program in the same memory as the data, as numbers. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> A <em>control unit</em> fetches instructions one by one; an <em>arithmetic unit</em> executes them; <em>memory</em> holds both instructions and data; and input and output connect to the world. Changing the program means only writing different numbers into memory, and programs can even create or modify other programs, which is what compilers do. Maurice Wilkes’s EDSAC at Cambridge, running from 1949, was one of the first such machines in regular use.</p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Instructions and the Datapath</h2>
+            <p>A processor’s <strong>instruction set architecture</strong> (ISA) is the list of operations it understands, each encoded as a binary word: load a value from memory, add two registers, store a result, jump to another instruction if a condition holds. The hardware that carries them out, the <strong>datapath</strong>, contains:</p>
+            <ul>
+              <li>a <strong>program counter</strong> (PC), a register holding the address of the next instruction (a counter, Part 3);</li>
+              <li>a <strong>register file</strong>, a small, fast set of storage locations (flip-flops or SRAM);</li>
+              <li>an <strong>arithmetic logic unit</strong> (Part 2), selected by multiplexers;</li>
+              <li>and a <strong>control unit</strong>, a finite-state machine or decoder that turns each operation code into control signals (Part 3).</li>
+            </ul>
+            <p>Each instruction passes through <strong>fetch</strong> (read memory at PC), <strong>decode</strong> (work out what to do), and <strong>execute</strong> (do it and update PC). The Intel 4004 of 1971 put this whole arrangement on one chip. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> Through the 1970s instruction sets grew complex, with many addressing modes and multi-step instructions. In 1980 David Patterson and David Ditzel argued for <strong>RISC</strong>, reduced instruction set computers with simple, uniform instructions that are easy to pipeline; this philosophy underlies the ARM and RISC-V processors in phones and many other devices today. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-cpu">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. A complete 8-bit stored-program computer.</strong> Step through a program one instruction at a time and watch the program counter, accumulator and memory change.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Pipelining</h2>
+            <p>A laundry with a washer, dryer and folding table finishes loads faster if a new load starts washing as soon as the previous one moves to the dryer. A <strong>pipelined</strong> processor does the same: it splits each instruction into stages, classically fetch, decode, execute, memory access and write-back, and works on a different instruction in each stage at once. A five-stage pipeline can approach five times the throughput, with a shorter clock period because each stage does less (Part 3’s timing rule).</p>
+            <p>The complications are <strong>hazards</strong>. A <em>data hazard</em> occurs when an instruction needs a result that an earlier instruction has not yet written; <em>forwarding</em> (bypassing) routes results directly between stages, leaving only a few unavoidable stalls. A <em>control hazard</em> occurs at a branch, whose direction is not known until it executes; the pipeline must guess, and pay a penalty when wrong. IBM’s Stretch and Seymour Cray’s CDC 6600 of the early 1960s pioneered overlapping execution of this kind. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-pipe">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. A five-stage pipeline.</strong> Turn forwarding on and off and make the branch prediction right or wrong; count the stalls.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-6">
+            <h2>6. The Memory Hierarchy and Caches</h2>
+            <p>A modern processor core can complete an instruction in a fraction of a nanosecond, but fetching data from DRAM takes tens of nanoseconds or more: hundreds of cycles. Processor speeds improved far faster than DRAM latency for decades, a gap William Wulf and Sally McKee called the <strong>memory wall</strong>. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> The remedy, proposed by Maurice Wilkes in 1965 as “slave memories”, is the <strong>cache</strong>: a small, fast memory that keeps copies of recently used data. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span></p>
+            <p>Caches work because programs show <strong>locality</strong>: they reuse the same data soon (temporal locality) and use nearby addresses (spatial locality). Data moves in lines of typically 64 bytes. Modern processors have a hierarchy: small first-level caches of tens of kilobytes per core that answer in a few cycles, larger second-level caches, and a shared last-level cache of many megabytes, backed by DRAM and then storage. The <strong>average memory access time</strong> is hit time + miss rate × miss penalty, so even a small miss rate matters when the penalty is hundreds of cycles.</p>
+            <figure class="fig" data-fig="fig-el-cache">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. A cache at work.</strong> Choose an access pattern, a cache size and an organisation; see which accesses hit and the resulting average access time.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Branch Prediction and Out-of-Order Execution</h2>
+            <p>Deep pipelines that fetch several instructions per cycle may have a hundred or more instructions in flight, so stalling at every branch would be ruinous. Processors therefore <strong>predict</strong> branches. In 1981 James Smith showed that simple saturating counters, which remember whether a branch was recently taken, predict well. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span> Modern predictors combine the history of many branches and are right well over 95% of the time on typical code.</p>
+            <p>The second big idea is <strong>out-of-order execution</strong>. Robert Tomasulo’s 1967 algorithm for IBM’s System/360 Model 91 let instructions wait in reservation stations and execute as soon as their operands were ready, renaming registers to remove false dependencies. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span> Today’s high-performance cores fetch, decode and retire several instructions per cycle, execute them out of order and speculatively past predicted branches, and then commit the results in program order so that the program behaves as if run one instruction at a time.</p>
+            <p>Speculation has a cost beyond complexity. In 2018 researchers disclosed the Spectre and Meltdown attacks, which trick a processor into speculatively accessing secret data; although the results are discarded, traces left in the caches can be measured. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span> Processors and operating systems have since added defences, at some cost in performance.</p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Performance: the Iron Law</h2>
+            <p>The time to run a program is</p>
+            <p style="text-align:center;"><strong>time = instructions × cycles per instruction × time per cycle</strong></p>
+            <p>The instruction count depends on the program, compiler and ISA; cycles per instruction (CPI) on the microarchitecture (pipelining, caches, prediction, superscalar issue); and the cycle time on circuits and technology (Parts 9–11). Until the mid-2000s all three improved together. Since Dennard scaling ended (Part 10), clock rates have stalled and extracting more instructions per cycle from a single thread has become ever more expensive. The industry turned instead to many cores and to specialised processors that do one kind of work very efficiently. The most important of these, the GPU, is the subject of Part 13. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Worked Problems</h2>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 1 (easy): the iron law</div>
+              <p>A program executes 2 × 10<sup>9</sup> instructions with an average CPI of 0.8 on a 4 GHz processor. How long does it take? What if a compiler reduces the instruction count by 10% but raises CPI to 0.85?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>Time = 2 × 10<sup>9</sup> × 0.8 × 0.25 ns = <strong>0.40 s</strong>. New: 1.8 × 10<sup>9</sup> × 0.85 × 0.25 ns ≈ <strong>0.38 s</strong>, a 4% improvement. Optimising one factor while worsening another needs the full product to judge. (A CPI below 1 means the processor completes more than one instruction per cycle on average.)</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 2 (easy): average memory access time</div>
+              <p>A first-level cache hits in 1 cycle with a 5% miss rate. Misses go to a second-level cache (12 cycles, 20% local miss rate) and then to DRAM (200 cycles). Find the average memory access time.</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>Second-level average = 12 + 0.20 × 200 = 52 cycles. Overall AMAT = 1 + 0.05 × 52 = <strong>3.6 cycles</strong>. Without the second-level cache it would be 1 + 0.05 × 200 = 11 cycles, three times worse.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 3 (medium): pipeline speedup</div>
+              <p>An unpipelined processor takes 1,000 ps per instruction. It is split into 5 equal stages, with 20 ps of pipeline-register overhead per stage. Find the new cycle time and ideal speedup. If 20% of instructions are branches, 10% of which are mispredicted with a 2-cycle penalty, what is the CPI and actual speedup?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>Cycle = 200 + 20 = 220 ps; ideal speedup = 1,000/220 ≈ <strong>4.5×</strong>. CPI = 1 + 0.20 × 0.10 × 2 = <strong>1.04</strong>, so the time per instruction is 229 ps and the speedup ≈ <strong>4.4×</strong>. With a poor predictor (40% wrong) CPI would be 1.16 and the speedup 3.9×.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 4 (medium): decoding an address</div>
+              <p>A 32 KiB direct-mapped cache has 64-byte lines, and addresses are 32 bits. How many lines does it have, and how many address bits form the offset, index and tag?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>Lines = 32,768/64 = <strong>512</strong>. Offset: log₂64 = <strong>6 bits</strong> (byte within the line). Index: log₂512 = <strong>9 bits</strong> (which line). Tag: 32 − 6 − 9 = <strong>17 bits</strong>, stored with each line to check which memory block it currently holds. A 4-way set-associative cache of the same size would have 128 sets: 7 index bits and 19 tag bits.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 5 (harder): predicting a loop branch</div>
+              <p>A loop runs 10 times, and is itself executed repeatedly. Its closing branch is taken 9 times and then not taken once. Compare the steady-state accuracy of a 1-bit predictor (predict what happened last time) and a 2-bit saturating counter (change prediction only after two wrong guesses in a row).</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>1-bit: it mispredicts the final “not taken” (it last saw “taken”), and then mispredicts the first branch of the next run (it last saw “not taken”): <strong>2 misses in 10, 80% accuracy</strong>. 2-bit: in the strongly-taken state, the single “not taken” moves it only to weakly-taken, so the next run’s first branch is still predicted taken: <strong>1 miss in 10, 90% accuracy</strong>. This hysteresis is why Smith’s 2-bit counters became standard.</p></details>
+            </div>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: how much faster can one thread get?</div>
+              <p>Single-thread performance still improves each generation through wider cores, larger caches and better predictors, but the gains cost large amounts of area and power for a few percent of speed. Whether there are big untapped sources of instruction-level parallelism in ordinary programs, how to defend against speculative-execution attacks without losing performance, and whether open instruction sets such as RISC-V will reshape the industry are actively debated. Hennessy and Patterson have argued that the next big gains will come from domain-specific architectures and languages rather than general-purpose cores. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+            </div>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: processors</div>
+              <ol>
+                <li>In Figure 3, run the multiplication. How many instructions does it execute? How would the count change for 6 × 70?</li>
+                <li>In Figure 3, the program and data share one memory. What would happen if a STA instruction wrote to address 7?</li>
+                <li>In Figure 4, which instruction pair causes a stall even with forwarding, and why?</li>
+                <li>In Figure 5, compare the matrix walked by rows and by columns. What does 4-way associativity change?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “processors run instructions one after another”</div>
+              <p><strong>The myth:</strong> a CPU reads an instruction, does it, then reads the next.</p>
+              <p><strong>The reality:</strong> that is the illusion the hardware preserves. Internally, a modern core has hundreds of instructions in flight, executes them out of order and speculatively along predicted paths, and throws away work when a guess was wrong, then presents results as if everything ran in order. The gap between the simple model and the real machine is the source of both its speed and of attacks such as Spectre.</p>
+              <p><strong>Why it matters:</strong> programmers can rely on the simple model for correctness, but performance and security depend on the hidden machinery.</p>
+            </div>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>A stored-program computer keeps instructions and data in the same memory; a program counter steps through the instructions.</li>
+                <li>The datapath combines a register file, an ALU, multiplexers and a control state machine; each instruction is fetched, decoded and executed.</li>
+                <li>Pipelining overlaps instructions; forwarding and branch prediction reduce the stalls caused by hazards.</li>
+                <li>Caches exploit locality to hide slow DRAM; AMAT = hit time + miss rate × miss penalty.</li>
+                <li>Out-of-order, speculative execution finds parallelism in ordinary programs, at a cost in complexity and security.</li>
+                <li>Time = instructions × CPI × cycle time; since clock rates stalled, gains come from parallelism and specialisation.</li>
+              </ul>
+            </div>
+          </section>
+          <section id="section-14">
+            <h2>14. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John von Neumann</td>
+                <td style="padding:0.6rem 0.8rem;">1903–1957<br>Hungary / USA</td>
+                <td style="padding:0.6rem 0.8rem;">Stored-program architecture (1945)</td>
+                <td style="padding:0.6rem 0.8rem;">Described the organisation used by almost all computers since.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Maurice Wilkes</td>
+                <td style="padding:0.6rem 0.8rem;">1913–2010<br>UK</td>
+                <td style="padding:0.6rem 0.8rem;">EDSAC (1949) and caches (1965)</td>
+                <td style="padding:0.6rem 0.8rem;">Built an early stored-program computer and proposed the cache.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Seymour Cray</td>
+                <td style="padding:0.6rem 0.8rem;">1925–1996<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">CDC 6600 (1964)</td>
+                <td style="padding:0.6rem 0.8rem;">Designed the fastest computers of the 1960s and 1970s.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Robert Tomasulo</td>
+                <td style="padding:0.6rem 0.8rem;">1934–2008<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Out-of-order execution (1967)</td>
+                <td style="padding:0.6rem 0.8rem;">Invented the algorithm at the heart of modern high-performance cores.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John Hennessy &amp; David Patterson</td>
+                <td style="padding:0.6rem 0.8rem;">born 1952 / born 1947<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">RISC (1980s)</td>
+                <td style="padding:0.6rem 0.8rem;">Championed simple instruction sets; Turing Award 2017.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about processors.</p>
+            <figure class="fig" data-fig="fig-quiz-el12">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-16">
+            <h2>16. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Hennessy, John L. &amp; Patterson, David A.</strong> (2017). <em>Computer Architecture: A Quantitative Approach</em>, 6th edition. Cambridge, MA: Morgan Kaufmann.</li>
+              <li id="ref-2"><strong>Harris, David Money &amp; Harris, Sarah L.</strong> (2013). <em>Digital Design and Computer Architecture</em>, 2nd edition, chapters 6–8. Waltham, MA: Morgan Kaufmann.</li>
+              <li id="ref-3"><strong>von Neumann, John.</strong> (1945). <em>First Draft of a Report on the EDVAC</em>. Philadelphia: Moore School of Electrical Engineering, University of Pennsylvania.</li>
+              <li id="ref-4"><strong>Faggin, Federico, Hoff, Marcian E., Mazor, Stanley &amp; Shima, Masatoshi.</strong> (1996). "The history of the 4004." <em>IEEE Micro</em>, 16(6): 10–20.</li>
+              <li id="ref-5"><strong>Patterson, David A. &amp; Ditzel, David R.</strong> (1980). "The case for the reduced instruction set computer." <em>ACM SIGARCH Computer Architecture News</em>, 8(6): 25–33.</li>
+              <li id="ref-6"><strong>Thornton, James E.</strong> (1970). <em>Design of a Computer: The Control Data 6600</em>. Glenview, IL: Scott, Foresman.</li>
+              <li id="ref-7"><strong>Wulf, Wm. A. &amp; McKee, Sally A.</strong> (1995). "Hitting the memory wall: implications of the obvious." <em>ACM SIGARCH Computer Architecture News</em>, 23(1): 20–24.</li>
+              <li id="ref-8"><strong>Wilkes, M. V.</strong> (1965). "Slave memories and dynamic storage allocation." <em>IEEE Transactions on Electronic Computers</em>, EC-14(2): 270–271.</li>
+              <li id="ref-9"><strong>Smith, James E.</strong> (1981). "A study of branch prediction strategies." In <em>Proceedings of the 8th Annual Symposium on Computer Architecture</em>, pp. 135–148.</li>
+              <li id="ref-10"><strong>Tomasulo, R. M.</strong> (1967). "An efficient algorithm for exploiting multiple arithmetic units." <em>IBM Journal of Research and Development</em>, 11(1): 25–33.</li>
+              <li id="ref-11"><strong>Kocher, Paul, et al.</strong> (2019). "Spectre attacks: exploiting speculative execution." In <em>2019 IEEE Symposium on Security and Privacy</em>, pp. 1–19.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 12 of 14)</div>
+  <div class="series-banner-links">
+    <a href="modern-transistors.html">← Part 11: Modern Transistors: High-k Gates, FinFETs and Gate-All-Around</a>
+    <a href="gpus-and-parallel-computing.html">Part 13: GPUs and Parallel Computing: Warps, Rooflines and Tensor Cores →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/the-processor.js"></script>
+</body>
+</html>

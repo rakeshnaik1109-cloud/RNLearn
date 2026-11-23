@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The p–n Junction: Diodes, LEDs and Solar Cells — RNLearn</title>
+  <meta name="description" content="Where p-type meets n-type silicon: depletion regions, built-in voltage, the Shockley diode equation, breakdown, rectifiers, LEDs, photodiodes and solar cells, with worked problems.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/pn-junction-and-diode.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The p–n Junction: Diodes, LEDs and Solar Cells — RNLearn">
+  <meta property="og:description" content="Where p-type meets n-type silicon: depletion regions, built-in voltage, the Shockley diode equation, breakdown, rectifiers, LEDs, photodiodes and solar cells, with worked problems.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/pn-junction-and-diode.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The p–n Junction: Diodes, LEDs and Solar Cells — RNLearn">
+  <meta name="twitter:description" content="Where p-type meets n-type silicon: depletion regions, built-in voltage, the Shockley diode equation, breakdown, rectifiers, LEDs, photodiodes and solar cells, with worked problems.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "The p–n Junction: Diodes, LEDs and Solar Cells",
+    "description": "Where p-type meets n-type silicon: depletion regions, built-in voltage, the Shockley diode equation, breakdown, rectifiers, LEDs, photodiodes and solar cells, with worked problems.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-23",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/pn-junction-and-diode.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/electronics-computing.html" class="post-subject-tag" data-subject="electronics-computing">Electronics &amp; Computing</a>
+        </div>
+        <h1 class="article-title">The p–n Junction: Diodes, LEDs and Solar Cells</h1>
+        <p class="article-standfirst">
+          Press p-type silicon against n-type and something remarkable happens: a one-way valve for current appears, which can also turn electricity into light and light into electricity.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-23">23 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>13 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 6 of 14)</div>
+  <div class="series-banner-links">
+    <a href="band-theory-and-semiconductors.html">← Part 5: Band Theory: Why Silicon Is a Semiconductor</a>
+    <a href="bipolar-transistor.html">Part 7: The Bipolar Transistor: Amplifiers, Switches and the End of the Vacuum Tube →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. A One-Way Street for Current</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Making a Junction</a></li>
+              <li><a class="toc-link" href="#section-4">4. The Built-in Voltage and the Depletion Width</a></li>
+              <li><a class="toc-link" href="#section-5">5. Forward and Reverse Bias: the Diode Equation</a></li>
+              <li><a class="toc-link" href="#section-6">6. Breakdown: Zener, Avalanche and Tunnelling</a></li>
+              <li><a class="toc-link" href="#section-7">7. Rectifiers and Other Uses</a></li>
+              <li><a class="toc-link" href="#section-8">8. Light In, Light Out: LEDs, Photodiodes and Solar Cells</a></li>
+              <li><a class="toc-link" href="#section-9">9. Worked Problems</a></li>
+              <li><a class="toc-link" href="#section-10">10. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-11">11. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-12">12. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-13">13. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-14">14. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-15">15. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-16">16. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>In this part:</strong> the p–n junction, where p-type and n-type silicon meet. Diffusion builds a depletion region and a built-in voltage; applied voltage raises or lowers the barrier, giving the diode’s exponential one-way current (the Shockley equation); strong reverse fields cause breakdown. Then the uses: rectifiers, voltage references, LEDs, photodiodes and solar cells.</p>
+            <p><strong>You need:</strong> Part 5 (bands, doping, the Fermi level) and Part 4 (circuits).</p>
+            <p><strong>Try:</strong> four interactive figures and five worked problems.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. A One-Way Street for Current</h2>
+            <p>A <strong>diode</strong> lets current flow easily in one direction and hardly at all in the other. The first electronic diodes were vacuum tubes: in 1904 John Ambrose Fleming patented a valve in which a heated filament emitted electrons towards a plate, so current could flow only one way, to detect radio signals. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span> The semiconductor version is far smaller and needs no heater: a single crystal that is p-type on one side and n-type on the other. The <strong>p–n junction</strong> is the simplest semiconductor device, and understanding it is the key to the transistors of Parts 7 and 8, to LEDs and to solar cells. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>, <a class="cite" href="#ref-3">3</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Part 6 joins p-type and n-type silicon.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-el6-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. From vacuum valves to blue LEDs, 1904–1993.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Making a Junction</h2>
+            <p>Imagine joining a piece of p-type silicon, full of holes, to a piece of n-type silicon, full of electrons. Carriers diffuse down their concentration gradients: electrons spill into the p side and holes into the n side, where they meet and recombine. They leave behind the dopant atoms they came from, which are fixed in the lattice: positively charged donor ions on the n side and negatively charged acceptor ions on the p side. This thin zone, emptied of mobile carriers, is the <strong>depletion region</strong>.</p>
+            <p>The exposed ions create an electric field pointing from n to p, which pushes back against further diffusion. Equilibrium is reached when the field’s pull exactly balances diffusion’s push. In the band picture of Part 5, the bands bend across the junction until the Fermi level is flat, leaving an energy step that electrons on the n side must climb to reach the p side. William Shockley worked out the theory in 1949. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-junction">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Inside a p–n junction.</strong> Change the doping on each side and the applied voltage; watch the bands bend, the depletion region grow or shrink, and the field change.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-4">
+            <h2>4. The Built-in Voltage and the Depletion Width</h2>
+            <p>The height of the step is the <strong>built-in voltage</strong></p>
+            <p style="text-align:center;"><strong>V<sub>bi</sub> = (kT/q) ln(N<sub>A</sub>N<sub>D</sub>/n<sub>i</sub>²)</strong></p>
+            <p>about 0.7–0.9 V for typical silicon junctions. Solving Gauss’s law for the slabs of fixed charge gives the depletion width W = √[2ε(V<sub>bi</sub> − V)/q × (1/N<sub>A</sub> + 1/N<sub>D</sub>)], typically a fraction of a micrometre. Because the two sides must hold equal and opposite charge (N<sub>A</sub>x<sub>p</sub> = N<sub>D</sub>x<sub>n</sub>), the region extends mostly into the more lightly doped side.</p>
+            <p>The depletion region is an insulating layer between two conductors, so a junction is also a capacitor, C = εA/W. Reverse voltage widens W and lowers C. Diodes designed to exploit this, called varactors, tune radio and phone circuits by voltage alone.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Forward and Reverse Bias: the Diode Equation</h2>
+            <p>Applying a voltage V with the p side positive (<strong>forward bias</strong>) lowers the barrier to V<sub>bi</sub> − V. The number of carriers energetic enough to cross depends on the Boltzmann factor, so the current grows exponentially. Reversing the voltage (<strong>reverse bias</strong>) raises the barrier, and only the trickle of minority carriers that happen to wander into the field is swept across. Shockley’s <strong>diode equation</strong> combines both: <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span></p>
+            <p style="text-align:center;"><strong>I = I<sub>s</sub>(e<sup>qV/nkT</sup> − 1)</strong></p>
+            <p>The saturation current I<sub>s</sub> is tiny (around 10<sup>−14</sup> A for a small silicon diode) and the ideality factor n lies between 1 and 2. Since kT/q ≈ 25.9 mV, each tenfold increase in current needs only about 60 mV more. A silicon diode therefore looks like a switch that “turns on” at roughly 0.6–0.7 V, although in truth it never fully switches off or on.</p>
+            <figure class="fig" data-fig="fig-el-diodeiv">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. The diode’s current–voltage curve.</strong> Switch to the logarithmic scale to see the straight-line exponential, and heat the diode to see the turn-on voltage fall.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Breakdown: Zener, Avalanche and Tunnelling</h2>
+            <p>Under enough reverse voltage a junction suddenly conducts heavily. This <strong>breakdown</strong> is not damage if the current is limited, and it happens in two ways. In heavily doped junctions the depletion region is so thin and the field so strong that electrons tunnel directly from the valence band on one side to the conduction band on the other, a process Clarence Zener described in 1934. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> In lightly doped junctions, carriers accelerated by the field gain enough energy to knock new electron–hole pairs free, which are accelerated in turn: an <strong>avalanche</strong>. Zener diodes, designed to break down at a precise voltage, are used as voltage references.</p>
+            <p>In 1958 Leo Esaki, working at the company that became Sony, made junctions so heavily doped that electrons tunnelled through even under small forward bias, giving a region where current falls as voltage rises. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span> The tunnel diode won him a share of the 1973 Nobel Prize in Physics, and tunnelling returns in Part 11 as a source of leakage in tiny transistors.</p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Rectifiers and Other Uses</h2>
+            <p>The most common job for diodes is <strong>rectification</strong>: turning alternating current into direct current. One diode keeps one half of each cycle; a bridge of four keeps both. A capacitor then smooths the bumps, charging at each peak and supplying the load in between. Diodes also protect circuits from reversed batteries and voltage spikes, mix and detect radio signals, and measure temperature through the roughly −2 mV/K change of their forward voltage.</p>
+            <figure class="fig" data-fig="fig-el-rectifier">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. From AC to DC.</strong> Compare half-wave and bridge rectifiers, and add a smoothing capacitor to reduce the ripple.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Light In, Light Out: LEDs, Photodiodes and Solar Cells</h2>
+            <p>When an electron falls from the conduction band into a hole, it can release its energy as a photon of energy close to the band gap. In silicon this is rare, because of the shape of its bands (an <em>indirect</em> gap), but in <em>direct-gap</em> materials such as gallium arsenide it is efficient. A forward-biased junction in such a material is a <strong>light-emitting diode</strong>. In 1962 Nick Holonyak made the first practical visible LED, glowing red, from gallium arsenide phosphide. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> Bright blue LEDs, which make white light possible, arrived only in the 1990s, when Shuji Nakamura and others mastered gallium nitride; Isamu Akasaki, Hiroshi Amano and Nakamura shared the 2014 Nobel Prize in Physics for them. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span></p>
+            <p>The process also runs backwards. A photon absorbed in or near the depletion region creates an electron–hole pair, and the built-in field separates them, producing a current. Run with reverse bias, the junction is a fast <strong>photodiode</strong>, the sensor in fibre-optic receivers. Run with no external supply, it is a <strong>solar cell</strong>, delivering power. Daryl Chapin, Calvin Fuller and Gerald Pearson demonstrated a practical silicon solar cell at Bell Labs in 1954, at about 6% efficiency. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span> In 1961 Shockley and Hans-Joachim Queisser showed that a single junction under sunlight cannot exceed about 30%, because photons below the gap are lost and the energy of photons above it is partly wasted as heat. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span> The best laboratory silicon cells now exceed 26%. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-solar">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. A solar cell’s current, voltage and power.</strong> Dim the light and change the material quality; find the voltage that extracts the most power.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Worked Problems</h2>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 1 (easy): built-in voltage</div>
+              <p>A silicon junction has N<sub>A</sub> = 10<sup>18</sup> cm<sup>−3</sup> and N<sub>D</sub> = 10<sup>16</sup> cm<sup>−3</sup>. Find V<sub>bi</sub> at 300 K (kT/q = 0.0259 V, n<sub>i</sub> = 10<sup>10</sup> cm<sup>−3</sup>).</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>V<sub>bi</sub> = 0.0259 × ln(10<sup>34</sup>/10<sup>20</sup>) = 0.0259 × ln(10<sup>14</sup>) = 0.0259 × 32.2 ≈ <strong>0.83 V</strong>.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 2 (easy): diode voltage</div>
+              <p>An ideal diode (n = 1) has I<sub>s</sub> = 10<sup>−14</sup> A. What forward voltage gives 1 mA? And 10 mA?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>V = (kT/q) ln(I/I<sub>s</sub> + 1) ≈ 0.0259 × ln(10<sup>11</sup>) = 0.0259 × 25.3 ≈ <strong>0.66 V</strong>. For 10 mA, add 0.0259 × ln 10 ≈ 0.060 V: <strong>0.72 V</strong>. A tenfold change in current changes the voltage by under 10%, which is why “0.7 V” is a good rule of thumb.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 3 (medium): depletion width and capacitance</div>
+              <p>For the junction in Problem 1 (ε = 1.04 × 10<sup>−12</sup> F/cm), estimate the depletion width at zero bias and at 5 V reverse bias, and the change in capacitance.</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>Since N<sub>A</sub> ≫ N<sub>D</sub>, the junction is one-sided: W ≈ √[2ε(V<sub>bi</sub> − V)/(qN<sub>D</sub>)]. At 0 V: √[2 × 1.04 × 10<sup>−12</sup> × 0.83 / (1.6 × 10<sup>−19</sup> × 10<sup>16</sup>)] ≈ 3.3 × 10<sup>−5</sup> cm = <strong>0.33 µm</strong>, almost entirely on the n side. At −5 V, W grows by √(5.83/0.83) ≈ 2.65 to <strong>0.87 µm</strong>. Capacitance per area C = ε/W falls from about 31 to <strong>12 nF/cm²</strong>: a voltage-tunable capacitor.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 4 (medium): LED colours</div>
+              <p>Estimate the emission wavelength of LEDs with band gaps of 1.9 eV (GaAsP), 2.7 eV (InGaN) and 3.4 eV (GaN). Roughly what forward voltage does each need?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>λ ≈ 1240/E<sub>g</sub> nm: 1.9 eV → <strong>650 nm (red)</strong>; 2.7 eV → <strong>460 nm (blue)</strong>; 3.4 eV → <strong>365 nm (ultraviolet)</strong>. Each emitted photon needs an electron raised by about E<sub>g</sub>, so the forward voltage is at least about E<sub>g</sub>/q: roughly 2 V for red and 3 V for blue LEDs, as on a datasheet.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 5 (harder): solar cell performance</div>
+              <p>A silicon cell under full sun (100 mW/cm²) produces J<sub>L</sub> = 40 mA/cm² and has J<sub>0</sub> = 10<sup>−12</sup> A/cm². Find the open-circuit voltage and estimate the maximum power and efficiency.</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>At open circuit J = 0, so V<sub>oc</sub> = (kT/q) ln(J<sub>L</sub>/J<sub>0</sub> + 1) = 0.0259 × ln(4 × 10<sup>10</sup>) ≈ <strong>0.63 V</strong>. Maximising P = V × J(V) numerically (or by the approximation V<sub>m</sub> ≈ V<sub>oc</sub> − (kT/q) ln(1 + qV<sub>m</sub>/kT)) gives V<sub>m</sub> ≈ 0.55 V and J<sub>m</sub> ≈ 38 mA/cm², so P<sub>max</sub> ≈ <strong>21 mW/cm²</strong>: an efficiency of about <strong>21%</strong> and a fill factor P<sub>max</sub>/(J<sub>L</sub>V<sub>oc</sub>) ≈ 0.83. Real cells lose a little more to series resistance and reflection.</p></details>
+            </div>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: beating the single-junction limit</div>
+              <p>The Shockley–Queisser limit applies to one junction absorbing sunlight. Stacking junctions with different band gaps (tandem cells) captures more of the spectrum: perovskite-on-silicon tandems have passed the single-junction limit in the laboratory. Whether perovskites can be made stable for 25 years outdoors, and manufactured cheaply at scale, is unresolved. For LEDs, the open problem is the “efficiency droop”: gallium nitride LEDs become less efficient at high current, and the relative roles of Auger recombination and other mechanisms were debated for years. Green LEDs also remain less efficient than blue or red, the so-called “green gap”.</p>
+            </div>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: junctions</div>
+              <ol>
+                <li>In Figure 3, set N<sub>A</sub> = 10<sup>18</sup> and N<sub>D</sub> = 10<sup>15</sup>. Where is the depletion region? Now apply 0.5 V forward bias.</li>
+                <li>In Figure 4, on the logarithmic scale, change the ideality factor from 1 to 2. How does the slope change?</li>
+                <li>In Figure 5, with the bridge rectifier and a 1 kΩ load, what capacitor keeps the ripple below 1 V?</li>
+                <li>In Figure 6, at half sun, by how much does the open-circuit voltage fall? Why so little?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “a diode switches on at 0.7 V”</div>
+              <p><strong>The myth:</strong> below 0.7 V a silicon diode is off; above it, it conducts.</p>
+              <p><strong>The reality:</strong> the current is exponential at every voltage. At 0.5 V a small diode passes microamps; at 0.7 V, milliamps; at 0.8 V, tens of milliamps. “0.7 V” is simply where the current reaches the milliamp levels typical of circuits. The same exponential appears in transistors and is the reason they cannot be switched fully off at low voltage (Part 8).</p>
+              <p><strong>Why it matters:</strong> treating devices as ideal switches is useful, but the exponential physics sets the limits of low-power electronics.</p>
+            </div>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>At a p–n junction, diffusion leaves a depletion region of fixed ions whose field balances further diffusion.</li>
+                <li>V<sub>bi</sub> = (kT/q) ln(N<sub>A</sub>N<sub>D</sub>/n<sub>i</sub>²); the depletion region extends mostly into the lighter-doped side and widens with reverse bias.</li>
+                <li>The diode equation I = I<sub>s</sub>(e<sup>qV/nkT</sup> − 1): about 60 mV per decade of current at room temperature.</li>
+                <li>Strong reverse fields cause Zener (tunnelling) or avalanche breakdown, used for voltage references.</li>
+                <li>Diodes rectify AC; direct-gap junctions emit light (LEDs); illuminated junctions generate current (photodiodes, solar cells).</li>
+              </ul>
+            </div>
+          </section>
+          <section id="section-14">
+            <h2>14. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John Ambrose Fleming</td>
+                <td style="padding:0.6rem 0.8rem;">1849–1945<br>UK</td>
+                <td style="padding:0.6rem 0.8rem;">Vacuum diode (1904)</td>
+                <td style="padding:0.6rem 0.8rem;">Invented the first electronic one-way valve.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">William Shockley</td>
+                <td style="padding:0.6rem 0.8rem;">1910–1989<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Junction theory (1949)</td>
+                <td style="padding:0.6rem 0.8rem;">Derived the diode equation and the theory of junction transistors.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Clarence Zener</td>
+                <td style="padding:0.6rem 0.8rem;">1905–1993<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Tunnelling breakdown (1934)</td>
+                <td style="padding:0.6rem 0.8rem;">Explained how strong fields make insulators conduct.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Nick Holonyak Jr.</td>
+                <td style="padding:0.6rem 0.8rem;">1928–2022<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Visible LED (1962)</td>
+                <td style="padding:0.6rem 0.8rem;">Made the first practical visible light-emitting diode.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Shuji Nakamura</td>
+                <td style="padding:0.6rem 0.8rem;">born 1954<br>Japan / USA</td>
+                <td style="padding:0.6rem 0.8rem;">Bright blue LED (1993)</td>
+                <td style="padding:0.6rem 0.8rem;">Shared the 2014 Nobel Prize for efficient blue LEDs.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about p–n junctions and diodes.</p>
+            <figure class="fig" data-fig="fig-quiz-el6">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-16">
+            <h2>16. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Fleming, J. A.</strong> (1905). "Instrument for converting alternating electric currents into continuous currents." US Patent 803,684.</li>
+              <li id="ref-2"><strong>Sze, S. M. &amp; Ng, Kwok K.</strong> (2007). <em>Physics of Semiconductor Devices</em>, 3rd edition, chapters 2 and 13. Hoboken, NJ: Wiley.</li>
+              <li id="ref-3"><strong>Streetman, Ben G. &amp; Banerjee, Sanjay Kumar.</strong> (2015). <em>Solid State Electronic Devices</em>, 7th edition, chapters 5 and 8. Boston: Pearson.</li>
+              <li id="ref-4"><strong>Shockley, William.</strong> (1949). "The theory of p-n junctions in semiconductors and p-n junction transistors." <em>Bell System Technical Journal</em>, 28(3): 435–489.</li>
+              <li id="ref-5"><strong>Zener, Clarence.</strong> (1934). "A theory of the electrical breakdown of solid dielectrics." <em>Proceedings of the Royal Society of London A</em>, 145(855): 523–529.</li>
+              <li id="ref-6"><strong>Esaki, Leo.</strong> (1958). "New phenomenon in narrow germanium p-n junctions." <em>Physical Review</em>, 109(2): 603–604.</li>
+              <li id="ref-7"><strong>Holonyak, Nick, Jr. &amp; Bevacqua, S. F.</strong> (1962). "Coherent (visible) light emission from Ga(As<sub>1−x</sub>P<sub>x</sub>) junctions." <em>Applied Physics Letters</em>, 1(4): 82–83.</li>
+              <li id="ref-8"><strong>Nakamura, Shuji, Mukai, Takashi &amp; Senoh, Masayuki.</strong> (1994). "Candela-class high-brightness InGaN/AlGaN double-heterostructure blue-light-emitting diodes." <em>Applied Physics Letters</em>, 64(13): 1687–1689.</li>
+              <li id="ref-9"><strong>Chapin, D. M., Fuller, C. S. &amp; Pearson, G. L.</strong> (1954). "A new silicon p-n junction photocell for converting solar radiation into electrical power." <em>Journal of Applied Physics</em>, 25(5): 676–677.</li>
+              <li id="ref-10"><strong>Shockley, William &amp; Queisser, Hans J.</strong> (1961). "Detailed balance limit of efficiency of p-n junction solar cells." <em>Journal of Applied Physics</em>, 32(3): 510–519.</li>
+              <li id="ref-11"><strong>Yoshikawa, Kunta, et al.</strong> (2017). "Silicon heterojunction solar cell with interdigitated back contacts for a photoconversion efficiency over 26%." <em>Nature Energy</em>, 2: 17032.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 6 of 14)</div>
+  <div class="series-banner-links">
+    <a href="band-theory-and-semiconductors.html">← Part 5: Band Theory: Why Silicon Is a Semiconductor</a>
+    <a href="bipolar-transistor.html">Part 7: The Bipolar Transistor: Amplifiers, Switches and the End of the Vacuum Tube →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/pn-junction-and-diode.js"></script>
+</body>
+</html>

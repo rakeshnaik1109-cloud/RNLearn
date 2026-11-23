@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Combinational Circuits: Karnaugh Maps, Multiplexers and Binary Adders — RNLearn</title>
+  <meta name="description" content="Simplifying logic with Karnaugh maps, multiplexers and decoders, half and full adders, two’s complement and overflow, and fast carry-lookahead addition, with worked problems.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/combinational-circuits.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Combinational Circuits: Karnaugh Maps, Multiplexers and Binary Adders — RNLearn">
+  <meta property="og:description" content="Simplifying logic with Karnaugh maps, multiplexers and decoders, half and full adders, two’s complement and overflow, and fast carry-lookahead addition, with worked problems.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/combinational-circuits.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Combinational Circuits: Karnaugh Maps, Multiplexers and Binary Adders — RNLearn">
+  <meta name="twitter:description" content="Simplifying logic with Karnaugh maps, multiplexers and decoders, half and full adders, two’s complement and overflow, and fast carry-lookahead addition, with worked problems.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Combinational Circuits: Karnaugh Maps, Multiplexers and Binary Adders",
+    "description": "Simplifying logic with Karnaugh maps, multiplexers and decoders, half and full adders, two’s complement and overflow, and fast carry-lookahead addition, with worked problems.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-23",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/combinational-circuits.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/electronics-computing.html" class="post-subject-tag" data-subject="electronics-computing">Electronics &amp; Computing</a>
+        </div>
+        <h1 class="article-title">Combinational Circuits: Karnaugh Maps, Multiplexers and Binary Adders</h1>
+        <p class="article-standfirst">
+          Gates become useful machines when they are combined: circuits that simplify themselves, route data and do arithmetic. The tricks behind them, such as two’s complement, are why one adder can do all of a computer’s sums.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-23">23 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>13 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 2 of 14)</div>
+  <div class="series-banner-links">
+    <a href="bits-logic-and-boolean-algebra.html">← Part 1: Bits, Logic and Boolean Algebra: How Computers Think in Ones and Zeros</a>
+    <a href="memory-and-time.html">Part 3: Memory and Time: Latches, Flip-Flops, Counters and State Machines →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. Building with Gates</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Simplifying Logic with Karnaugh Maps</a></li>
+              <li><a class="toc-link" href="#section-4">4. Choosing and Routing: Multiplexers and Decoders</a></li>
+              <li><a class="toc-link" href="#section-5">5. Adding Binary Numbers</a></li>
+              <li><a class="toc-link" href="#section-6">6. Negative Numbers: Two’s Complement</a></li>
+              <li><a class="toc-link" href="#section-7">7. Making Addition Fast: Carry Lookahead</a></li>
+              <li><a class="toc-link" href="#section-8">8. Comparators and the Arithmetic Logic Unit</a></li>
+              <li><a class="toc-link" href="#section-9">9. Worked Problems</a></li>
+              <li><a class="toc-link" href="#section-10">10. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-11">11. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-12">12. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-13">13. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-14">14. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-15">15. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-16">16. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>In this part:</strong> combinational circuits, whose outputs depend only on their present inputs. We simplify logic with Karnaugh maps; route data with multiplexers and decoders; add binary numbers with half and full adders; represent negative numbers in two’s complement and detect overflow; and make addition fast with carry lookahead.</p>
+            <p><strong>You need:</strong> Part 1 (binary, gates, Boolean algebra).</p>
+            <p><strong>Try:</strong> four interactive figures, including a Karnaugh map that simplifies whatever you enter, and five worked problems.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. Building with Gates</h2>
+            <p>Part 1 showed that any truth table can be built from gates. Real designs need more than that: they need circuits that are small, fast and do useful jobs such as choosing between signals and doing arithmetic. Circuits whose outputs depend only on their current inputs, with no memory, are called <strong>combinational</strong>. They are the arithmetic and routing heart of every processor; memory and timing come in Part 3. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>, <a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Part 2 builds useful circuits from gates.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-el2-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. From a kitchen-table adder to logarithmic-time arithmetic, 1937–1973.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Simplifying Logic with Karnaugh Maps</h2>
+            <p>Algebraic simplification works but is error-prone. In 1953 Maurice Karnaugh, at Bell Labs, refined a chart method published by Edward Veitch the year before into a picture of the truth table in which simplifications can be seen. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>, <a class="cite" href="#ref-4">4</a>]</span> The <strong>Karnaugh map</strong> arranges the outputs in a grid whose rows and columns follow <strong>Gray code</strong> order (00, 01, 11, 10), so any two neighbouring cells, including those that wrap around the edges, differ in exactly one variable. A pair of neighbouring 1s therefore does not depend on that variable, and the variable drops out.</p>
+            <p>The rule: cover all the 1s with as few loops as possible, each loop as large as possible, with sizes that are powers of two (1, 2, 4, 8). A loop of 2ᵏ cells gives a term with k fewer variables. Inputs that can never occur, such as the codes 10–15 in a decimal digit, are <strong>don’t-cares</strong>, which may be counted as 1 or 0, whichever helps.</p>
+            <figure class="fig" data-fig="fig-el-kmap">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. A Karnaugh map that simplifies itself.</strong> Tap cells to set 0, 1 or don’t-care; the coloured loops and the simplest expression update instantly.
+              </figcaption>
+            </figure>
+            <p>The starting example has eight 1s. Written out, it needs eight terms of four variables; the map reveals it is just B̅D̅ + BD: two terms of two variables. For larger problems, Willard Van Orman Quine and Edward McCluskey developed a tabular method that a computer can follow, which this figure uses behind the scenes. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>, <a class="cite" href="#ref-6">6</a>]</span> Modern chip-design software simplifies circuits with millions of gates using heuristic programs descended from these ideas, such as Espresso. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span></p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Choosing and Routing: Multiplexers and Decoders</h2>
+            <p>A <strong>multiplexer</strong> (mux) is a data selector: n select lines choose which of 2ⁿ inputs is passed to the output, like a rotary switch. A <strong>decoder</strong> does the reverse job: it turns an n-bit number into a signal on exactly one of 2ⁿ output lines. Inside a processor, multiplexers choose which register feeds the arithmetic unit and which result is written back; decoders select a row of memory from an address and turn instruction codes into control signals.</p>
+            <figure class="fig" data-fig="fig-el-mux">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Multiplexer and decoder.</strong> Set the select lines and the data inputs and follow the signal.
+              </figcaption>
+            </figure>
+            <p>A useful trick: a multiplexer can compute any function of its select inputs if you wire the truth-table outputs to its data inputs. That is exactly how the lookup tables inside programmable chips (FPGAs) implement arbitrary logic.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Adding Binary Numbers</h2>
+            <p>In 1937 George Stibitz, a Bell Labs mathematician, built a circuit on his kitchen table from relays, batteries and torch bulbs that added two binary digits; it became known as the Model K and led to Bell Labs’ relay calculators. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span> Binary addition follows the same column method as decimal: 1 + 1 = 10, so write 0 and carry 1.</p>
+            <ul>
+              <li>A <strong>half adder</strong> adds two bits: sum S = A ⊕ B (XOR), carry C = A·B (AND).</li>
+              <li>A <strong>full adder</strong> also takes a carry in from the previous column: S = A ⊕ B ⊕ C<sub>in</sub>, and C<sub>out</sub> = A·B + C<sub>in</sub>·(A ⊕ B).</li>
+              <li>Chaining n full adders, each passing its carry to the next, gives an n-bit <strong>ripple-carry adder</strong>.</li>
+            </ul>
+            <figure class="fig" data-fig="fig-el-adder">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. A 4-bit adder and subtractor.</strong> Tap the bits of A and B; switch to subtraction to see two’s complement at work, and look out for overflow.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Negative Numbers: Two’s Complement</h2>
+            <p>How should a computer store −5? The near-universal answer is <strong>two’s complement</strong>: in an n-bit number, the leftmost bit has weight −2<sup>n−1</sup> instead of +2<sup>n−1</sup>. In 4 bits, the patterns 0000–0111 mean 0 to 7 and 1000–1111 mean −8 to −1. To negate a number, invert every bit and add 1.</p>
+            <p>The beauty of the scheme is that the ordinary adder works unchanged for negative numbers, and subtraction needs no new circuit: A − B = A + (B̅ + 1), so the adder simply receives the inverted B with a carry-in of 1. IBM’s influential System/360 computers of 1964 used two’s complement for binary integers, and almost all processors since have done the same. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span></p>
+            <p>With a fixed number of bits, results can fall outside the range. For signed numbers this is <strong>overflow</strong>, detected when the carry into the leftmost bit differs from the carry out of it: in 4 bits, 7 + 1 gives 1000, which reads as −8.</p>
+            <div class="callout callout-warn">
+              <div class="callout-header">Watch out: overflow is silent</div>
+              <p>Hardware sets an overflow flag, but many programming languages ignore it, so a signed integer can wrap from its largest value to its most negative without warning. Overflow bugs have crashed rockets and corrupted games; the first launch of the Ariane 5 rocket in 1996 failed after a 64-bit floating-point value was converted to a 16-bit integer that could not hold it. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span></p>
+            </div>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Making Addition Fast: Carry Lookahead</h2>
+            <p>A ripple-carry adder is slow because each bit must wait for the carry from the bit before: the delay grows in proportion to the width. In 1958 Arnold Weinberger and John Smith showed how to compute carries in advance. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span> For each bit, define <strong>generate</strong> G = A·B (this column creates a carry by itself) and <strong>propagate</strong> P = A ⊕ B (this column passes on a carry it receives). Then C<sub>i+1</sub> = G<sub>i</sub> + P<sub>i</sub>·C<sub>i</sub>, which can be expanded and combined over groups of bits in a tree. Peter Kogge and Harold Stone’s 1973 parallel-prefix method computes all carries in a time that grows only with the logarithm of the width. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-carry">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. Ripple carry versus lookahead.</strong> Worst-case delay, in gate delays, for adders of different widths. Change the width and the gate delay.
+              </figcaption>
+            </figure>
+            <p>For a 64-bit adder, the idealised count is 128 gate delays for ripple carry against 14 for a parallel-prefix adder, about nine times faster, paid for with more gates and wires. Processors use such fast adders because addition sits on the critical path of almost everything they do.</p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Comparators and the Arithmetic Logic Unit</h2>
+            <p>Other combinational building blocks follow the same pattern. A <strong>comparator</strong> decides whether A = B (all bits equal: an AND of XNORs) or A &gt; B. An <strong>arithmetic logic unit</strong> (ALU) combines an adder, logic operations (AND, OR, XOR) and a multiplexer that chooses which result to output according to an operation code. Together with registers (Part 3), the ALU is the core of the processor built in Part 12.</p>
+            <details style="margin:1rem 0;"><summary style="cursor:pointer;font-weight:600;">In code: a full adder and ripple-carry adder in Python</summary>
+<pre style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.8rem 1rem;font-size:0.84rem;line-height:1.55;margin-top:0.6rem;"><code style="background:none;border:0;padding:0;display:block;">def full_adder(a, b, cin):
+    s = a ^ b ^ cin
+    cout = (a &amp; b) | (cin &amp; (a ^ b))
+    return s, cout
+
+def add(A, B, n=8, subtract=False):
+    """Add or subtract two n-bit numbers bit by bit (two's complement)."""
+    carry = 1 if subtract else 0
+    result = 0
+    for i in range(n):                     # least significant bit first
+        a = (A &gt;&gt; i) &amp; 1
+        b = ((B &gt;&gt; i) &amp; 1) ^ (1 if subtract else 0)
+        s, carry = full_adder(a, b, carry)
+        result |= s &lt;&lt; i
+    return result
+
+print(add(6, 7, 4), add(5, 3, 4, subtract=True))   # 13, 2</code></pre>
+            </details>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Worked Problems</h2>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 1 (easy): add 0110 and 0111</div>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>Column by column from the right: 0 + 1 = 1; 1 + 1 = 10 (write 0, carry 1); 1 + 1 + 1 = 11 (write 1, carry 1); 0 + 0 + 1 = 1. Result <strong>1101</strong>. As unsigned numbers, 6 + 7 = 13 ✓. As 4-bit signed numbers, 1101 means −3: the true answer 13 is outside −8…7, so this is a signed overflow (carry into the leftmost bit is 1, carry out is 0).</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 2 (easy): write −5 in 8-bit two’s complement</div>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>+5 = 00000101. Invert: 11111010. Add 1: <strong>11111011</strong>. Check: −128 + 64 + 32 + 16 + 8 + 2 + 1 = −5 ✓.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 3 (medium): simplify F(A, B, C) = Σm(0, 1, 2, 5, 6, 7)</div>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>On a 3-variable map, the 1s are at 000, 001, 010, 101, 110, 111. Three pairs cover them all: 000–001 gives A̅B̅; 010–110 gives BC̅; 101–111 gives AC. So <strong>F = A̅B̅ + BC̅ + AC</strong>, three two-literal terms instead of six three-literal terms. (A second, equally small answer exists: A̅C̅ + B̅C + AB.)</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 4 (medium): design a 2-bit comparator for A &gt; B</div>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>A = A₁A₀ is larger if its top bit is larger, or if the top bits are equal and its lower bit is larger: <strong>GT = A₁·B̅₁ + (A₁ ⊙ B₁)·A₀·B̅₀</strong>, where ⊙ is XNOR (equality). Check A = 10, B = 01: A₁B̅₁ = 1·1 = 1, so GT = 1 ✓. The same pattern extends to any width.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 5 (harder): adder timing</div>
+              <p>A full adder’s carry path takes 2 gate delays of 20 ps. What clock frequency could a 32-bit ripple-carry adder support if addition must finish within one clock cycle, and what about a parallel-prefix adder with 12 gate delays?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>Ripple: 32 × 2 × 20 ps = 1,280 ps, so at most 1/1.28 ns ≈ <strong>0.78 GHz</strong> (ignoring everything else in the cycle). Parallel prefix: 12 × 20 ps = 240 ps, allowing up to ≈ <strong>4.2 GHz</strong>. This is why fast adders are essential for multi-gigahertz processors.</p></details>
+            </div>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: how small can a circuit be?</div>
+              <p>Finding the absolutely smallest circuit for a given function is extremely hard. Even exact two-level (sum-of-products) minimisation becomes intractable for large functions, which is why industrial tools rely on heuristics such as Espresso. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> For general multi-level circuits, no efficient method is known to find the minimum, and proving that a function needs large circuits is tied to the deepest open problems of computer science, including P versus NP. Practical design therefore balances size, speed and power with clever approximations rather than guaranteed optima.</p>
+            </div>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: combinational circuits</div>
+              <ol>
+                <li>In Figure 3, put 1s in the four corner cells only. What single term results, and why do the corners count as neighbours?</li>
+                <li>In Figure 4, set the data inputs so that the multiplexer computes S1 XOR S0.</li>
+                <li>In Figure 5, find two positive 4-bit numbers whose signed sum overflows, and two negative numbers whose sum overflows.</li>
+                <li>In Figure 6, at what width does the lookahead adder become more than five times faster than ripple carry?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “computers have separate circuits for adding and subtracting”</div>
+              <p><strong>The myth:</strong> a processor needs one circuit to add, another to subtract, and separate rules for positive and negative numbers.</p>
+              <p><strong>The reality:</strong> thanks to two’s complement, one adder handles positive and negative numbers and both operations: subtraction is addition of the inverted number with a carry-in of 1. Even multiplication is built mostly from adders. Choosing the right number representation saves enormous amounts of hardware.</p>
+              <p><strong>Why it matters:</strong> good representations, not just faster gates, are a recurring source of efficiency in computing.</p>
+            </div>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>Combinational circuits have no memory: outputs depend only on current inputs.</li>
+                <li>Karnaugh maps use Gray-code order so that grouping neighbouring 1s eliminates variables; don’t-cares help further.</li>
+                <li>Multiplexers select one of many inputs; decoders activate one of many outputs.</li>
+                <li>Full adders (S = A ⊕ B ⊕ C<sub>in</sub>, C<sub>out</sub> = AB + C<sub>in</sub>(A ⊕ B)) chain into multi-bit adders.</li>
+                <li>Two’s complement lets one adder handle negative numbers and subtraction; watch for overflow.</li>
+                <li>Carry lookahead cuts adder delay from proportional to n to proportional to log n.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="section-14">
+            <h2>14. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">George Stibitz</td>
+                <td style="padding:0.6rem 0.8rem;">1904–1995<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Relay adder, the Model K (1937)</td>
+                <td style="padding:0.6rem 0.8rem;">Built a binary adder from relays on his kitchen table.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Maurice Karnaugh</td>
+                <td style="padding:0.6rem 0.8rem;">1924–2022<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Karnaugh maps (1953)</td>
+                <td style="padding:0.6rem 0.8rem;">Created the visual method for simplifying logic.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Willard Van Orman Quine &amp; Edward McCluskey</td>
+                <td style="padding:0.6rem 0.8rem;">1908–2000 / 1929–2016<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Quine–McCluskey method (1952, 1956)</td>
+                <td style="padding:0.6rem 0.8rem;">Developed a systematic algorithm for logic minimisation.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Arnold Weinberger &amp; John Smith</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Carry lookahead (1958)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed how to compute carries in advance.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Peter Kogge &amp; Harold Stone</td>
+                <td style="padding:0.6rem 0.8rem;"><br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Parallel-prefix adders (1973)</td>
+                <td style="padding:0.6rem 0.8rem;">Found a logarithmic-time way to compute all carries.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about combinational circuits.</p>
+            <figure class="fig" data-fig="fig-quiz-el2">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-16">
+            <h2>16. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Harris, David Money &amp; Harris, Sarah L.</strong> (2013). <em>Digital Design and Computer Architecture</em>, 2nd edition, chapters 2 and 5. Waltham, MA: Morgan Kaufmann.</li>
+              <li id="ref-2"><strong>Mano, M. Morris &amp; Ciletti, Michael D.</strong> (2018). <em>Digital Design</em>, 6th edition. Pearson.</li>
+              <li id="ref-3"><strong>Karnaugh, Maurice.</strong> (1953). "The map method for synthesis of combinational logic circuits." <em>Transactions of the American Institute of Electrical Engineers, Part I</em>, 72(5): 593–599.</li>
+              <li id="ref-4"><strong>Veitch, Edward W.</strong> (1952). "A chart method for simplifying truth functions." In <em>Proceedings of the 1952 ACM National Meeting</em>, pp. 127–133.</li>
+              <li id="ref-5"><strong>Quine, W. V.</strong> (1952). "The problem of simplifying truth functions." <em>American Mathematical Monthly</em>, 59(8): 521–531.</li>
+              <li id="ref-6"><strong>McCluskey, E. J.</strong> (1956). "Minimization of Boolean functions." <em>Bell System Technical Journal</em>, 35(6): 1417–1444.</li>
+              <li id="ref-7"><strong>Brayton, Robert K., Hachtel, Gary D., McMullen, Curtis T. &amp; Sangiovanni-Vincentelli, Alberto L.</strong> (1984). <em>Logic Minimization Algorithms for VLSI Synthesis</em>. Boston: Kluwer Academic.</li>
+              <li id="ref-8"><strong>Ceruzzi, Paul E.</strong> (2003). <em>A History of Modern Computing</em>, 2nd edition. Cambridge, MA: MIT Press.</li>
+              <li id="ref-9"><strong>Amdahl, G. M., Blaauw, G. A. &amp; Brooks, F. P.</strong> (1964). "Architecture of the IBM System/360." <em>IBM Journal of Research and Development</em>, 8(2): 87–101.</li>
+              <li id="ref-10"><strong>Lions, J. L. (chair).</strong> (1996). <em>ARIANE 5 Flight 501 Failure: Report by the Inquiry Board</em>. Paris: European Space Agency.</li>
+              <li id="ref-11"><strong>Weinberger, A. &amp; Smith, J. L.</strong> (1958). "A logic for high-speed addition." <em>National Bureau of Standards Circular</em> 591, pp. 3–12.</li>
+              <li id="ref-12"><strong>Kogge, Peter M. &amp; Stone, Harold S.</strong> (1973). "A parallel algorithm for the efficient solution of a general class of recurrence equations." <em>IEEE Transactions on Computers</em>, C-22(8): 786–793.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 2 of 14)</div>
+  <div class="series-banner-links">
+    <a href="bits-logic-and-boolean-algebra.html">← Part 1: Bits, Logic and Boolean Algebra: How Computers Think in Ones and Zeros</a>
+    <a href="memory-and-time.html">Part 3: Memory and Time: Latches, Flip-Flops, Counters and State Machines →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/combinational-circuits.js"></script>
+</body>
+</html>

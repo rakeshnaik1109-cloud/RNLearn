@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Bipolar Transistor: Amplifiers, Switches and the End of the Vacuum Tube — RNLearn</title>
+  <meta name="description" content="The 1947 point-contact transistor and Shockley’s junction transistor: how npn devices work, output curves and load lines, amplifier gain, bipolar logic, and HBTs today.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/bipolar-transistor.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Bipolar Transistor: Amplifiers, Switches and the End of the Vacuum Tube — RNLearn">
+  <meta property="og:description" content="The 1947 point-contact transistor and Shockley’s junction transistor: how npn devices work, output curves and load lines, amplifier gain, bipolar logic, and HBTs today.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/bipolar-transistor.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Bipolar Transistor: Amplifiers, Switches and the End of the Vacuum Tube — RNLearn">
+  <meta name="twitter:description" content="The 1947 point-contact transistor and Shockley’s junction transistor: how npn devices work, output curves and load lines, amplifier gain, bipolar logic, and HBTs today.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "The Bipolar Transistor: Amplifiers, Switches and the End of the Vacuum Tube",
+    "description": "The 1947 point-contact transistor and Shockley’s junction transistor: how npn devices work, output curves and load lines, amplifier gain, bipolar logic, and HBTs today.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-23",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/bipolar-transistor.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/electronics-computing.html" class="post-subject-tag" data-subject="electronics-computing">Electronics &amp; Computing</a>
+        </div>
+        <h1 class="article-title">The Bipolar Transistor: Amplifiers, Switches and the End of the Vacuum Tube</h1>
+        <p class="article-standfirst">
+          In December 1947 two physicists pressed gold foil onto germanium and made a crystal amplify. Within a decade transistors had replaced vacuum tubes, and the electronics age began.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-23">23 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>13 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 7 of 14)</div>
+  <div class="series-banner-links">
+    <a href="pn-junction-and-diode.html">← Part 6: The p–n Junction: Diodes, LEDs and Solar Cells</a>
+    <a href="the-mosfet.html">Part 8: The MOSFET: How a Voltage Opens a Channel →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. The Invention That Changed Everything</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. The Point-Contact and Junction Transistors</a></li>
+              <li><a class="toc-link" href="#section-4">4. How a Bipolar Transistor Works</a></li>
+              <li><a class="toc-link" href="#section-5">5. Characteristics, Regions and the Load Line</a></li>
+              <li><a class="toc-link" href="#section-6">6. The Transistor as an Amplifier</a></li>
+              <li><a class="toc-link" href="#section-7">7. The Transistor as a Switch: Bipolar Logic</a></li>
+              <li><a class="toc-link" href="#section-8">8. Where Bipolar Transistors Live Today</a></li>
+              <li><a class="toc-link" href="#section-9">9. Worked Problems</a></li>
+              <li><a class="toc-link" href="#section-10">10. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-11">11. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-12">12. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-13">13. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-14">14. People Behind the Ideas</a></li>
+              <li><a class="toc-link" href="#section-15">15. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-16">16. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>In this part:</strong> the first transistors. The point-contact transistor of 1947 and Shockley’s junction transistor; how an npn sandwich lets a small base current control a large collector current; output curves, load lines and the Early effect; the transistor as an amplifier (gain −g<sub>m</sub>R<sub>C</sub>) and as a switch; and why bipolar transistors lost digital logic to CMOS but still rule radio and analogue circuits.</p>
+            <p><strong>You need:</strong> Part 6 (p–n junctions and the diode equation).</p>
+            <p><strong>Try:</strong> four interactive figures, including electrons streaming through a transistor, and five worked problems.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. The Invention That Changed Everything</h2>
+            <p>By the 1940s, telephone networks and the first electronic computers depended on vacuum tubes: glass bulbs with hot filaments that amplified and switched signals. They were bulky, power-hungry and burned out regularly. The ENIAC computer of 1945 had about 17,500 of them. Bell Telephone Laboratories set up a group to find a solid-state replacement, and in December 1947 it succeeded. The <strong>transistor</strong>, a word coined from “transfer resistor”, amplifies and switches with no heater, in a crystal smaller than a grain of rice. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Part 7 introduces the first transistor family.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-el7-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. From gold contacts on germanium to TTL logic, 1947–1964.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. The Point-Contact and Junction Transistors</h2>
+            <p>The Bell Labs group, led by William Shockley, first tried to control a semiconductor’s current with an electric field, as an amplifier would need, and failed: electrons trapped at the surface screened the field. While studying those surface states, John Bardeen and Walter Brattain pressed two closely spaced gold contacts onto a slab of germanium and found that a small current into one contact controlled a larger current through the other. On 16 December 1947 they had a working amplifier, the <strong>point-contact transistor</strong>. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+            <p>Shockley, stung at being left out, worked out a better design within weeks: a sandwich of n-type, p-type and n-type semiconductor, the <strong>bipolar junction transistor</strong> (BJT), so called because both electrons and holes take part. He published its theory in 1949 and, with Morgan Sparks and Gordon Teal, demonstrated working junction transistors in 1951. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>, <a class="cite" href="#ref-4">4</a>]</span> Junction transistors were more reliable and easier to understand than point contacts, and they dominated electronics for the next two decades. The three shared the 1956 Nobel Prize in Physics.</p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. How a Bipolar Transistor Works</h2>
+            <p>An npn transistor has a heavily doped n<sup>+</sup> <strong>emitter</strong>, a thin p-type <strong>base</strong> and an n-type <strong>collector</strong>: two p–n junctions back to back. In normal (“active”) operation:</p>
+            <ul>
+              <li>The base–emitter junction is <strong>forward-biased</strong> (by about 0.6–0.7 V), so the emitter injects a flood of electrons into the base, exponentially in V<sub>BE</sub>, exactly as in a diode.</li>
+              <li>The base is so thin (well under a micrometre in modern devices) that almost all those electrons diffuse across it before they can recombine with holes.</li>
+              <li>The base–collector junction is <strong>reverse-biased</strong>, and its strong field sweeps every electron that reaches it into the collector.</li>
+            </ul>
+            <p>The result is a collector current I<sub>C</sub> = I<sub>S</sub>e<sup>V<sub>BE</sub>/V<sub>T</sub></sup> controlled by the base–emitter voltage, while the base needs only a small current I<sub>B</sub> = I<sub>C</sub>/β to replace holes lost to recombination and to back-injection into the emitter. The <strong>current gain</strong> β is typically 50–300. A tiny base current controls a large collector current: that is amplification. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>, <a class="cite" href="#ref-6">6</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-bjt">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Inside an npn transistor.</strong> Raise the base–emitter voltage to increase the flow of electrons, and widen the base to see more of them lost on the way.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Characteristics, Regions and the Load Line</h2>
+            <p>Plotting collector current against collector–emitter voltage for several base currents gives the transistor’s <strong>output characteristics</strong>. Three regions matter:</p>
+            <ul>
+              <li><strong>Cut-off:</strong> no base current, no collector current. The switch is open.</li>
+              <li><strong>Active:</strong> I<sub>C</sub> ≈ βI<sub>B</sub>, nearly independent of V<sub>CE</sub>. The transistor behaves as a controlled current source and can amplify.</li>
+              <li><strong>Saturation:</strong> both junctions forward-biased; V<sub>CE</sub> falls to about 0.2 V. The switch is closed.</li>
+            </ul>
+            <p>The curves in the active region slope slightly upwards. In 1952 James Early explained why: raising V<sub>CE</sub> widens the collector depletion region, which eats into the base, making it thinner and the gain higher. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> Jewell Ebers and John Moll’s 1954 model, which treats the transistor as two coupled diodes, describes all three regions and is still the basis of circuit simulators. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-bjtcurves">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Output characteristics and the load line.</strong> Change the base current and the load resistor; watch the operating point move between cut-off, the active region and saturation.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-6">
+            <h2>6. The Transistor as an Amplifier</h2>
+            <p>In the <strong>common-emitter amplifier</strong>, a resistor R<sub>C</sub> connects the collector to the supply. A bias network sets a steady collector current; a small signal voltage added to the base then wiggles the collector current, and R<sub>C</sub> converts the wiggle into a large voltage swing. Because I<sub>C</sub> is exponential in V<sub>BE</sub>, its sensitivity, the <strong>transconductance</strong>, is simply g<sub>m</sub> = I<sub>C</sub>/V<sub>T</sub>, and the voltage gain is</p>
+            <p style="text-align:center;"><strong>A<sub>v</sub> = −g<sub>m</sub>R<sub>C</sub> = −I<sub>C</sub>R<sub>C</sub>/V<sub>T</sub></strong></p>
+            <p>The minus sign means the output is inverted. With 1 mA and 5 kΩ the gain is about −190. The first mass-market product built on this was the pocket transistor radio: the Regency TR-1 of 1954 used four germanium transistors and ran on a small battery. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+            <figure class="fig" data-fig="fig-el-amp">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. A common-emitter amplifier.</strong> Change the bias, the collector resistor and the input size; watch the gain, the distortion and the clipping.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-7">
+            <h2>7. The Transistor as a Switch: Bipolar Logic</h2>
+            <p>Driven between cut-off and saturation, a transistor is a switch, and one transistor with two resistors makes an inverter. The first integrated logic families were built this way: resistor-transistor logic (RTL) in Fairchild’s Micrologic chips of 1961, then diode-transistor logic, then <strong>transistor-transistor logic</strong> (TTL), whose 7400-series chips were the standard building blocks of digital systems from the mid-1960s into the 1980s. Emitter-coupled logic (ECL), which never lets its transistors saturate, was the fastest of all and powered mainframes and supercomputers such as the Cray-1. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span></p>
+            <p>But bipolar gates have a fatal flaw for dense chips: a gate with its transistor on draws current from the supply all the time, even when nothing is changing. A few thousand such gates are fine; a billion are not.</p>
+            <figure class="fig" data-fig="fig-el-rtl">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. A bipolar inverter and its power bill.</strong> Change the resistor and the gain; see the transfer curve and the static power it costs.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Where Bipolar Transistors Live Today</h2>
+            <p>From the 1980s, CMOS (Parts 8 and 9) took over digital logic. Bipolar transistors survived wherever their strengths matter: high transconductance per unit current, excellent matching, low noise and very high speed. They are found in precision analogue circuits, voltage references and sensors, and in radio-frequency front ends. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span></p>
+            <p>The fastest are <strong>heterojunction bipolar transistors</strong> (HBTs). In 1957 Herbert Kroemer proposed making the emitter from a semiconductor with a wider band gap than the base, so that holes are blocked from flowing back into the emitter even when the base is heavily doped. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span> Silicon–germanium HBTs reach hundreds of gigahertz and drive car radars and optical links, and gallium arsenide HBTs amplify the signals transmitted by most mobile phones. Kroemer shared the 2000 Nobel Prize in Physics. In power electronics, the insulated-gate bipolar transistor (IGBT) combines a MOSFET input with bipolar conduction to switch the motors of electric trains and cars.</p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Worked Problems</h2>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 1 (easy): currents in a transistor</div>
+              <p>A transistor with β = 100 has a base current of 20 µA in the active region. Find I<sub>C</sub>, I<sub>E</sub> and α = I<sub>C</sub>/I<sub>E</sub>.</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>I<sub>C</sub> = βI<sub>B</sub> = <strong>2.0 mA</strong>. By Kirchhoff’s current law, I<sub>E</sub> = I<sub>C</sub> + I<sub>B</sub> = <strong>2.02 mA</strong>. α = β/(β + 1) = <strong>0.990</strong>: 99% of the electrons the emitter injects reach the collector.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 2 (easy): the exponential law</div>
+              <p>A transistor has I<sub>S</sub> = 10<sup>−15</sup> A. Find I<sub>C</sub> at V<sub>BE</sub> = 0.65 V (V<sub>T</sub> = 25.85 mV), and the change in V<sub>BE</sub> needed to multiply I<sub>C</sub> by 10.</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>I<sub>C</sub> = 10<sup>−15</sup> × e<sup>0.65/0.02585</sup> = 10<sup>−15</sup> × e<sup>25.1</sup> ≈ 10<sup>−15</sup> × 8.3 × 10<sup>10</sup> ≈ <strong>83 µA</strong>. A tenfold increase needs ΔV<sub>BE</sub> = V<sub>T</sub> ln 10 ≈ <strong>60 mV</strong>, the same as for a diode.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 3 (medium): amplifier gain</div>
+              <p>A common-emitter amplifier runs from 10 V with I<sub>C</sub> = 1 mA and R<sub>C</sub> = 5 kΩ. Find the collector voltage, g<sub>m</sub> and the small-signal voltage gain. What output do you expect for a 5 mV peak input?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>V<sub>C</sub> = 10 − 1 mA × 5 kΩ = <strong>5 V</strong>, in the middle of the range, which leaves room to swing both ways. g<sub>m</sub> = 1 mA / 25.85 mV ≈ <strong>38.7 mS</strong>, so A<sub>v</sub> = −g<sub>m</sub>R<sub>C</sub> ≈ <strong>−193</strong>. A 5 mV input gives about 0.97 V peak output, inverted. (Because of the exponential, the actual swing is slightly larger downwards than upwards: some distortion. Real amplifiers use negative feedback, such as an emitter resistor, to trade gain for linearity.)</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 4 (medium): a transistor switch</div>
+              <p>A 3.3 V microcontroller pin must switch a 20 mA LED load through an npn transistor whose β is at least 100. Choose the base resistor so the transistor saturates with a safety factor of 2.</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>The minimum base current is I<sub>C</sub>/β = 20 mA/100 = 0.2 mA; with a factor of 2, aim for 0.4 mA. The resistor drops 3.3 − 0.7 = 2.6 V, so R<sub>B</sub> = 2.6 V / 0.4 mA = <strong>6.5 kΩ</strong>; a standard 6.2 kΩ resistor works. Overdriving the base guarantees saturation (V<sub>CE</sub> ≈ 0.2 V, little power wasted in the transistor) even with a low-gain device.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 5 (harder): how fast can it be?</div>
+              <p>Electrons cross the base by diffusion in an average time τ<sub>B</sub> = W<sub>B</sub>²/(2D<sub>n</sub>). With D<sub>n</sub> = 25 cm²/s, estimate τ<sub>B</sub> and the corresponding frequency limit f ≈ 1/(2πτ<sub>B</sub>) for base widths of 1 µm and 0.1 µm.</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>For W<sub>B</sub> = 1 µm = 10<sup>−4</sup> cm: τ<sub>B</sub> = 10<sup>−8</sup>/50 = <strong>200 ps</strong>, so f ≈ <strong>0.8 GHz</strong>. For 0.1 µm: τ<sub>B</sub> = <strong>2 ps</strong>, f ≈ <strong>80 GHz</strong>. Because τ<sub>B</sub> ∝ W<sub>B</sub>², thinning the base tenfold makes it a hundred times faster. Modern silicon–germanium HBTs have bases a few tens of nanometres thick and also use a germanium gradient to add a built-in drift field, reaching cut-off frequencies of several hundred gigahertz.</p></details>
+            </div>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: terahertz transistors</div>
+              <p>Wireless systems beyond 5G, imaging and sensing are pushing towards frequencies of 100 GHz to 1 THz, where transistors barely have gain. Silicon–germanium and indium phosphide HBTs are competing with high-electron-mobility transistors for this territory. The limits are set not only by base transit time but by parasitic resistances and capacitances of contacts and wiring that become harder to shrink. How far bipolar devices can be pushed, and whether they can be integrated cheaply alongside CMOS, are open engineering questions.</p>
+            </div>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: bipolar transistors</div>
+              <ol>
+                <li>In Figure 3, by how much must V<sub>BE</sub> rise to multiply the collector current by 10? What happens to β as you widen the base?</li>
+                <li>In Figure 4, with R<sub>C</sub> = 2 kΩ, what base current just saturates the transistor? How does it depend on β?</li>
+                <li>In Figure 5, set a 20 mV input. Is the output still a sine wave? Which half is bigger, and why?</li>
+                <li>In Figure 6, what collector resistor brings the billion-gate power below 1 MW? What would that do to speed?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “a transistor amplifies current, so it creates energy”</div>
+              <p><strong>The myth:</strong> a transistor turns a small signal into a big one, so it must be generating power.</p>
+              <p><strong>The reality:</strong> all the output power comes from the supply. The transistor is a valve: the small input controls how much of the supply’s energy reaches the load, and much of the rest is lost as heat in the transistor and resistors. An amplifier is a controlled copier of patterns, not a source of energy.</p>
+              <p><strong>Why it matters:</strong> every amplifier, and every logic gate that restores a weakened signal to a clean 0 or 1, draws power from its supply to do so.</p>
+            </div>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>The point-contact transistor (1947) and the junction transistor (1948–51) replaced vacuum tubes with solid crystals.</li>
+                <li>In an npn transistor, a forward-biased emitter junction injects electrons into a thin base; a reverse-biased collector collects them.</li>
+                <li>I<sub>C</sub> = I<sub>S</sub>e<sup>V<sub>BE</sub>/V<sub>T</sub></sup> and I<sub>B</sub> = I<sub>C</sub>/β; regions are cut-off, active and saturation.</li>
+                <li>Amplifier gain is −g<sub>m</sub>R<sub>C</sub> with g<sub>m</sub> = I<sub>C</sub>/V<sub>T</sub>; large signals distort and clip.</li>
+                <li>Bipolar logic (RTL, TTL, ECL) drew static power, which is why CMOS replaced it; BJTs and HBTs still rule analogue and RF circuits.</li>
+              </ul>
+            </div>
+          </section>
+          <section id="section-14">
+            <h2>14. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John Bardeen</td>
+                <td style="padding:0.6rem 0.8rem;">1908–1991<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Point-contact transistor (1947)</td>
+                <td style="padding:0.6rem 0.8rem;">Co-invented the transistor; later won a second Nobel Prize for superconductivity theory.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Walter Brattain</td>
+                <td style="padding:0.6rem 0.8rem;">1902–1987<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Point-contact transistor (1947)</td>
+                <td style="padding:0.6rem 0.8rem;">Built the first working transistor with Bardeen.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">William Shockley</td>
+                <td style="padding:0.6rem 0.8rem;">1910–1989<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Junction transistor (1948)</td>
+                <td style="padding:0.6rem 0.8rem;">Invented the bipolar junction transistor and its theory.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">James Early</td>
+                <td style="padding:0.6rem 0.8rem;">1922–2004<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Early effect (1952)</td>
+                <td style="padding:0.6rem 0.8rem;">Explained base-width modulation in transistors.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Herbert Kroemer</td>
+                <td style="padding:0.6rem 0.8rem;">1928–2024<br>Germany / USA</td>
+                <td style="padding:0.6rem 0.8rem;">Heterojunction transistor (1957)</td>
+                <td style="padding:0.6rem 0.8rem;">Proposed wide-gap emitters; Nobel Prize 2000.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about bipolar transistors.</p>
+            <figure class="fig" data-fig="fig-quiz-el7">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-16">
+            <h2>16. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Riordan, Michael &amp; Hoddeson, Lillian.</strong> (1997). <em>Crystal Fire: The Birth of the Information Age</em>. New York: W. W. Norton.</li>
+              <li id="ref-2"><strong>Bardeen, J. &amp; Brattain, W. H.</strong> (1948). "The transistor, a semi-conductor triode." <em>Physical Review</em>, 74(2): 230–231.</li>
+              <li id="ref-3"><strong>Shockley, William.</strong> (1949). "The theory of p-n junctions in semiconductors and p-n junction transistors." <em>Bell System Technical Journal</em>, 28(3): 435–489.</li>
+              <li id="ref-4"><strong>Shockley, W., Sparks, M. &amp; Teal, G. K.</strong> (1951). "p-n junction transistors." <em>Physical Review</em>, 83(1): 151–162.</li>
+              <li id="ref-5"><strong>Sedra, Adel S. &amp; Smith, Kenneth C.</strong> (2020). <em>Microelectronic Circuits</em>, 8th edition, chapter 6. New York: Oxford University Press.</li>
+              <li id="ref-6"><strong>Sze, S. M. &amp; Ng, Kwok K.</strong> (2007). <em>Physics of Semiconductor Devices</em>, 3rd edition, chapter 5. Hoboken, NJ: Wiley.</li>
+              <li id="ref-7"><strong>Early, J. M.</strong> (1952). "Effects of space-charge layer widening in junction transistors." <em>Proceedings of the IRE</em>, 40(11): 1401–1406.</li>
+              <li id="ref-8"><strong>Ebers, J. J. &amp; Moll, J. L.</strong> (1954). "Large-signal behavior of junction transistors." <em>Proceedings of the IRE</em>, 42(12): 1761–1772.</li>
+              <li id="ref-9"><strong>Ceruzzi, Paul E.</strong> (2003). <em>A History of Modern Computing</em>, 2nd edition. Cambridge, MA: MIT Press.</li>
+              <li id="ref-10"><strong>Gray, Paul R., Hurst, Paul J., Lewis, Stephen H. &amp; Meyer, Robert G.</strong> (2009). <em>Analysis and Design of Analog Integrated Circuits</em>, 5th edition. Hoboken, NJ: Wiley.</li>
+              <li id="ref-11"><strong>Kroemer, Herbert.</strong> (1957). "Theory of a wide-gap emitter for transistors." <em>Proceedings of the IRE</em>, 45(11): 1535–1537.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/from-switch-to-supercomputer.html">From Switch to Supercomputer</a> (Part 7 of 14)</div>
+  <div class="series-banner-links">
+    <a href="pn-junction-and-diode.html">← Part 6: The p–n Junction: Diodes, LEDs and Solar Cells</a>
+    <a href="the-mosfet.html">Part 8: The MOSFET: How a Voltage Opens a Channel →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/bipolar-transistor.js"></script>
+</body>
+</html>
