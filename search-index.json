@@ -1,5 +1,22 @@
 [
   {
+    "slug": "special-functions-and-their-uses",
+    "url": "articles/special-functions-and-their-uses.html",
+    "title": "Special Functions and Their Uses: Gamma, Bessel, Legendre and Friends",
+    "summary": "Gamma, beta and error functions, Bessel functions and drums, Legendre and Hermite polynomials in physics, Chebyshev approximation, Airy, elliptic, Fresnel and Lambert W, with Python.",
+    "subject": "Science",
+    "tags": [
+      "special-functions",
+      "mathematics",
+      "mathematical-physics",
+      "python",
+      "scipy",
+      "history-of-mathematics"
+    ],
+    "date": "2026-11-24",
+    "type": "tutorial"
+  },
+  {
     "slug": "logarithms-from-basics-to-advanced",
     "url": "articles/logarithms-from-basics-to-advanced.html",
     "title": "Logarithms: From Basics to Advanced",

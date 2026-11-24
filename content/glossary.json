@@ -6975,5 +6975,72 @@
     "term": "Log-sum-exp",
     "definition": "A way of computing log(eᵃ + eᵇ + …) without overflow or underflow, by first subtracting the largest value.",
     "forms": []
+  },
+  {
+    "term": "Special function",
+    "definition": "A function beyond powers, exponentials, logarithms and trigonometric functions that arises so often (from integrals, differential equations or series) that it has a standard name, such as the gamma or Bessel function.",
+    "forms": [
+      "special functions"
+    ]
+  },
+  {
+    "term": "Gamma function",
+    "definition": "Γ(x), the extension of the factorial to non-whole numbers: Γ(n) = (n − 1)! and Γ(x + 1) = x Γ(x).",
+    "forms": []
+  },
+  {
+    "term": "Error function",
+    "definition": "erf(x), the integral of a Gaussian bell from 0 to x scaled so that erf(∞) = 1; it gives areas under the normal curve and diffusion profiles.",
+    "forms": []
+  },
+  {
+    "term": "Bessel function",
+    "definition": "A solution of Bessel’s equation, written Jₙ(x); a slowly decaying wave that describes vibrations and waves in circles and cylinders.",
+    "forms": [
+      "Bessel functions"
+    ]
+  },
+  {
+    "term": "Legendre polynomial",
+    "definition": "One of a family of orthogonal polynomials Pₗ(x) on the interval from −1 to 1, used to describe how quantities vary with angle around an axis.",
+    "forms": [
+      "Legendre polynomials"
+    ]
+  },
+  {
+    "term": "Spherical harmonics",
+    "definition": "Functions on the surface of a sphere, Yₗᵐ(θ, φ), that play the role of a Fourier series there; they give the shapes of atomic orbitals.",
+    "forms": [
+      "spherical harmonic"
+    ]
+  },
+  {
+    "term": "Orthogonal polynomials",
+    "definition": "A family of polynomials whose products integrate to zero (with some weight) unless they are the same, so they can be combined like Fourier modes.",
+    "forms": []
+  },
+  {
+    "term": "Runge’s phenomenon",
+    "definition": "The wild oscillation near the ends of an interval when a high-degree polynomial is fitted through equally spaced points; Chebyshev points avoid it.",
+    "forms": []
+  },
+  {
+    "term": "Elliptic integral",
+    "definition": "An integral involving the square root of a cubic or quartic polynomial, such as the arc length of an ellipse or the exact period of a pendulum.",
+    "forms": [
+      "elliptic integrals"
+    ]
+  },
+  {
+    "term": "Hypergeometric function",
+    "definition": "A power series ₂F₁(a, b; c; z) with a simple ratio between terms; many special functions are special cases of it.",
+    "forms": [
+      "hypergeometric functions"
+    ]
+  },
+  {
+    "term": "Lambert W function",
+    "definition": "The function W(z) that solves w eʷ = z, used for equations that mix a variable with its exponential.",
+    "forms": []
   }
 ]

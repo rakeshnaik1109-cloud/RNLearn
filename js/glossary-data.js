@@ -6977,5 +6977,72 @@ window.RNLEARN_GLOSSARY = [
   "Log-sum-exp",
   "A way of computing log(eᵃ + eᵇ + …) without overflow or underflow, by first subtracting the largest value.",
   []
+ ],
+ [
+  "Special function",
+  "A function beyond powers, exponentials, logarithms and trigonometric functions that arises so often (from integrals, differential equations or series) that it has a standard name, such as the gamma or Bessel function.",
+  [
+   "special functions"
+  ]
+ ],
+ [
+  "Gamma function",
+  "Γ(x), the extension of the factorial to non-whole numbers: Γ(n) = (n − 1)! and Γ(x + 1) = x Γ(x).",
+  []
+ ],
+ [
+  "Error function",
+  "erf(x), the integral of a Gaussian bell from 0 to x scaled so that erf(∞) = 1; it gives areas under the normal curve and diffusion profiles.",
+  []
+ ],
+ [
+  "Bessel function",
+  "A solution of Bessel’s equation, written Jₙ(x); a slowly decaying wave that describes vibrations and waves in circles and cylinders.",
+  [
+   "Bessel functions"
+  ]
+ ],
+ [
+  "Legendre polynomial",
+  "One of a family of orthogonal polynomials Pₗ(x) on the interval from −1 to 1, used to describe how quantities vary with angle around an axis.",
+  [
+   "Legendre polynomials"
+  ]
+ ],
+ [
+  "Spherical harmonics",
+  "Functions on the surface of a sphere, Yₗᵐ(θ, φ), that play the role of a Fourier series there; they give the shapes of atomic orbitals.",
+  [
+   "spherical harmonic"
+  ]
+ ],
+ [
+  "Orthogonal polynomials",
+  "A family of polynomials whose products integrate to zero (with some weight) unless they are the same, so they can be combined like Fourier modes.",
+  []
+ ],
+ [
+  "Runge’s phenomenon",
+  "The wild oscillation near the ends of an interval when a high-degree polynomial is fitted through equally spaced points; Chebyshev points avoid it.",
+  []
+ ],
+ [
+  "Elliptic integral",
+  "An integral involving the square root of a cubic or quartic polynomial, such as the arc length of an ellipse or the exact period of a pendulum.",
+  [
+   "elliptic integrals"
+  ]
+ ],
+ [
+  "Hypergeometric function",
+  "A power series ₂F₁(a, b; c; z) with a simple ratio between terms; many special functions are special cases of it.",
+  [
+   "hypergeometric functions"
+  ]
+ ],
+ [
+  "Lambert W function",
+  "The function W(z) that solves w eʷ = z, used for equations that mix a variable with its exponential.",
+  []
  ]
 ];
