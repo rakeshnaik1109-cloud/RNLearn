@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logarithms: From Basics to Advanced — RNLearn</title>
+  <meta name="description" content="What a logarithm is, its rules, Napier and the slide rule, e, log scales from pH to earthquakes, doubling times, power laws, bits, Benford’s law and logs in code, with Python.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/logarithms-from-basics-to-advanced.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Logarithms: From Basics to Advanced — RNLearn">
+  <meta property="og:description" content="What a logarithm is, its rules, Napier and the slide rule, e, log scales from pH to earthquakes, doubling times, power laws, bits, Benford’s law and logs in code, with Python.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/logarithms-from-basics-to-advanced.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Logarithms: From Basics to Advanced — RNLearn">
+  <meta name="twitter:description" content="What a logarithm is, its rules, Napier and the slide rule, e, log scales from pH to earthquakes, doubling times, power laws, bits, Benford’s law and logs in code, with Python.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Logarithms: From Basics to Advanced",
+    "description": "What a logarithm is, its rules, Napier and the slide rule, e, log scales from pH to earthquakes, doubling times, power laws, bits, Benford’s law and logs in code, with Python.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-24",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/logarithms-from-basics-to-advanced.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/science.html" class="post-subject-tag" data-subject="science">Science</a>
+        </div>
+        <h1 class="article-title">Logarithms: From Basics to Advanced</h1>
+        <p class="article-standfirst">
+          A trick from 1614 for saving astronomers’ labour became one of the most useful ideas in science: in acidity and earthquakes, growth and decay, information, algorithms and machine learning.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-24">24 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>28 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. Why Logarithms?</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. What Is a Logarithm?</a></li>
+              <li><a class="toc-link" href="#section-4">4. The Rules of Logarithms</a></li>
+              <li><a class="toc-link" href="#section-5">5. Napier, Bürgi and Briggs</a></li>
+              <li><a class="toc-link" href="#section-6">6. The Slide Rule</a></li>
+              <li><a class="toc-link" href="#section-7">7. The Natural Logarithm and e</a></li>
+              <li><a class="toc-link" href="#section-8">8. Orders of Magnitude and Log Scales</a></li>
+              <li><a class="toc-link" href="#section-9">9. Doubling Times and Half-Lives</a></li>
+              <li><a class="toc-link" href="#section-10">10. Logarithmic Scales in Science</a></li>
+              <li><a class="toc-link" href="#section-11">11. Perception and the Mind</a></li>
+              <li><a class="toc-link" href="#section-12">12. Log–Log Plots and Power Laws</a></li>
+              <li><a class="toc-link" href="#section-13">13. Information, Entropy and Bits</a></li>
+              <li><a class="toc-link" href="#section-14">14. Logarithms in Computing</a></li>
+              <li><a class="toc-link" href="#section-15">15. Logarithms in Statistics and Machine Learning</a></li>
+              <li><a class="toc-link" href="#section-16">16. Benford’s Law</a></li>
+              <li><a class="toc-link" href="#section-17">17. Logarithms in Calculus</a></li>
+              <li><a class="toc-link" href="#section-18">18. Common Mistakes</a></li>
+              <li><a class="toc-link" href="#section-19">19. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-20">20. People in This Story</a></li>
+              <li><a class="toc-link" href="#section-21">21. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-22">22. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. Why Logarithms?</h2>
+            <p>A whisper and a jet engine differ in sound power by a factor of about a hundred billion. The smallest bacterium and the observable universe differ in size by a factor of about 10<sup>33</sup>. A loan, a bacterial culture or an epidemic can grow from a handful to millions in weeks. Ordinary numbers and ordinary graph paper cannot cope with ranges like these. The <strong>logarithm</strong> can: it measures a number by <em>how many times</em> you must multiply to reach it, so that a factor of a hundred billion becomes a step of just 11.</p>
+            <p>Logarithms began in 1614 as a trick for saving labour, turning the long multiplications of astronomers and navigators into simple additions. They became one of the most useful ideas in science. They run the scales of acidity, loudness, earthquakes and starlight; they describe growth, decay and doubling; they measure information in bits; they make computer algorithms fast and machine learning stable; and they even seem to shape how we perceive the world.</p>
+            <p>This article starts from the definition and works up to logarithms in calculus, statistics, information theory and computing, with interactive figures and short Python snippets you can run yourself.</p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-log-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. Logarithms, 1614–1979.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. What Is a Logarithm?</h2>
+            <p>Start with powers. 10 × 10 × 10 = 1000, which we write 10<sup>3</sup> = 1000. The logarithm asks the reverse question: <em>to what power must 10 be raised to give 1000?</em> The answer, 3, is the logarithm of 1000 to base 10:</p>
+            <div class="eq-box">
+              <div class="eq-name">Definition</div>
+              $$\log_b x = y \quad\Longleftrightarrow\quad b^{\,y} = x \qquad (b > 0,\ b \neq 1,\ x > 0)$$
+            </div>
+            <p>So log<sub>10</sub> 100 = 2, log<sub>2</sub> 8 = 3, and log<sub>10</sub> 0.01 = −2, because 10<sup>−2</sup> = 1/100. Logarithms need not be whole numbers: log<sub>10</sub> 2 ≈ 0.301, because 10<sup>0.301</sup> ≈ 2. A logarithm is simply an exponent, found backwards.</p>
+            <p>Three bases are used almost everywhere:</p>
+            <ul>
+              <li><strong>Base 10, the common logarithm</strong>, written log<sub>10</sub> or just log. It counts factors of ten, matching our decimal number system. Scientific scales such as pH and decibels use it.</li>
+              <li><strong>Base e ≈ 2.71828, the natural logarithm</strong>, written ln. It arises naturally in calculus, growth and decay (Section 7). In most mathematics, physics and programming, “log” with no base means ln.</li>
+              <li><strong>Base 2, the binary logarithm</strong>, written log<sub>2</sub> or lg. It counts doublings and halvings, so it rules computer science and information theory.</li>
+            </ul>
+            <figure class="fig" data-fig="fig-log-explorer">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Exponentials and logarithms are mirror images.</strong> Choose a base and a number x. The logarithm curve is the exponential curve reflected in the line y = x.
+              </figcaption>
+            </figure>
+            <p>Some facts hold for every base. log<sub>b</sub> 1 = 0, because b<sup>0</sup> = 1. log<sub>b</sub> b = 1. Numbers between 0 and 1 have negative logarithms. And the logarithm of zero or of a negative number is undefined among the real numbers: no power of a positive base ever reaches zero or goes below it. The logarithm also grows very slowly. Going from 1 to a million moves log<sub>10</sub> only from 0 to 6.</p>
+            <pre><code class="language-python">import math
+import numpy as np
+
+# The three logarithms you will meet most often
+print(math.log10(1000))      # 3.0   common log, base 10
+print(math.log2(1024))       # 10.0  binary log, base 2
+print(math.log(math.e))      # 1.0   natural log, base e ≈ 2.71828
+print(math.log(81, 3))       # 4.0   any base: math.log(x, base)
+
+# Change of base: log_b(x) = ln(x) / ln(b)
+print(math.log(81) / math.log(3))        # 4.0 again
+
+# NumPy works on whole arrays at once. Careful: np.log is the NATURAL log!
+x = np.array([1, 10, 100, 0.01])
+print(np.log10(x))           # [ 0.  1.  2. -2.]
+print(np.log(x))             # natural logs, not base 10
+
+# Logs undo powers, and powers undo logs
+print(10 ** np.log10(42.0), np.exp(np.log(42.0)))   # 42.0 42.0
+</code></pre>
+          </section>
+
+          <section id="section-4">
+            <h2>4. The Rules of Logarithms</h2>
+            <p>Because logarithms are exponents, they inherit the rules of exponents. Since b<sup>m</sup> × b<sup>n</sup> = b<sup>m+n</sup>, multiplying numbers adds their logarithms. Everything else follows:</p>
+            <div class="eq-box">
+              <div class="eq-name">The rules</div>
+              $$\log(ab) = \log a + \log b \qquad \log\frac{a}{b} = \log a - \log b \qquad \log a^{n} = n\log a$$
+              $$\log_b x = \frac{\log_k x}{\log_k b} \quad \text{(change of base)}$$
+            </div>
+            <p>These four lines are the whole reason logarithms were invented. To multiply 3,456 by 7,891 before calculators, you looked up their logarithms in a table (3.5386 and 3.8971), added them (7.4357), and looked up the number with that logarithm: about 27,270,000. The exact answer is 27,271,296. A square root became a division by 2; a cube root, a division by 3.</p>
+            <p>The change-of-base rule means any base can be computed from any other. Calculators and computers usually compute ln, and get log<sub>10</sub> x as ln x / ln 10 and log<sub>2</sub> x as ln x / ln 2. Logarithms to different bases are all proportional to one another: switching base just rescales them, like converting metres to feet.</p>
+            <div class="callout callout-warn">
+              <div class="callout-header">What the rules do not say</div>
+              <p>There is <strong>no rule for log(a + b)</strong>. log(2 + 8) = log 10 = 1, but log 2 + log 8 = log 16 ≈ 1.204. Likewise (log a)<sup>2</sup> is not log(a<sup>2</sup>) = 2 log a, and log a / log b is not log(a/b).</p>
+            </div>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Napier, Bürgi and Briggs</h2>
+            <p>In the late 1500s astronomy and navigation demanded enormous calculations with trigonometric tables, and mathematicians looked for ways to replace multiplication with addition. The Scottish landowner John Napier spent some twenty years building one. In 1614 he published <em>Mirifici Logarithmorum Canonis Descriptio</em> (A Description of the Wonderful Canon of Logarithms), with 90 pages of tables. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span> He coined the word <em>logarithm</em> from the Greek <em>logos</em> (ratio) and <em>arithmos</em> (number): “ratio-numbers”.</p>
+            <p>Napier pictured two points moving along lines: one at constant speed, the other slowing in proportion to its remaining distance. His logarithms were not to any base in the modern sense; in today’s notation his logarithm of x was 10<sup>7</sup> ln(10<sup>7</sup>/x), chosen so that the sines in his tables, scaled to ten million, gave whole numbers. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span> <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+            <p>Independently, the Swiss clockmaker Jost Bürgi, instrument-maker to the emperor in Prague and a colleague of the astronomer Johannes Kepler, computed a similar table by repeatedly multiplying by 1.0001. He published it only in 1620, after Napier. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+            <p>Henry Briggs, professor of geometry at Gresham College in London, read Napier’s book with delight and travelled to Edinburgh in 1615 to meet him. Together they agreed that tables would be easier to use if the logarithm of 1 were 0 and the logarithm of 10 were 1. Briggs computed these <strong>common logarithms</strong>: first for 1 to 1,000 in 1617, then in his <em>Arithmetica Logarithmica</em> of 1624 for 1 to 20,000 and 90,000 to 100,000, each to 14 decimal places, by hand. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> The gap was filled by the Dutch publisher Adriaan Vlacq in 1628. Kepler used logarithms to compute his <em>Rudolphine Tables</em> of planetary motion, published in 1627, and had earlier praised Napier in a dedicatory letter printed in his <em>Ephemerides</em> for 1620, not knowing that Napier had died in 1617. For the next 350 years, a book of log tables sat on every scientist’s and engineer’s desk.</p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. The Slide Rule</h2>
+            <p>If multiplying numbers means adding logarithms, and adding is just putting lengths end to end, then a ruler marked with numbers placed at distances proportional to their logarithms can multiply. In 1620 Edmund Gunter, professor of astronomy at Gresham College in London, drew such a scale and used it with a pair of dividers. Around 1622 William Oughtred, an English clergyman and mathematician, slid two of Gunter’s scales against each other, inventing the <strong>slide rule</strong>; he described it in print in 1632. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span> <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-slide-rule">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. A slide rule.</strong> The upper (C) scale slides along the lower (D) scale, which here spans 1 to 100. Adding the lengths log a and log b gives the length log(a × b).
+              </figcaption>
+            </figure>
+            <p>On a log scale the distance from 1 to 2 equals the distance from 2 to 4, from 3 to 6 and from 5 to 10: every equal <em>ratio</em> is an equal length. A slide rule gives about three significant figures, and the user must keep track of the decimal point. That was enough to design bridges, aircraft and the Apollo spacecraft. Slide rules were standard equipment for engineers until cheap electronic calculators replaced them in the 1970s.</p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. The Natural Logarithm and e</h2>
+            <p>Why would anyone choose a base as odd as 2.71828…? Because it appears whether you start from money or from geometry.</p>
+            <p><strong>From money.</strong> Invest 1 at 100% interest for a year. Paid once, you end with 2. Paid as 50% twice, (1.5)<sup>2</sup> = 2.25. Paid monthly, (1 + 1/12)<sup>12</sup> ≈ 2.613. Paid ever more often, the total does not grow without limit; it approaches a fixed number. Jacob Bernoulli posed this problem in 1683 and showed the limit lies between 2 and 3. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> Leonhard Euler named it e and, in his <em>Introductio in analysin infinitorum</em> of 1748, defined logarithms as exponents and gave e to 23 decimal places. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span></p>
+            <div class="eq-box">
+              <div class="eq-name">Euler’s number</div>
+              $$e = \lim_{n\to\infty}\left(1 + \frac{1}{n}\right)^{n} = 2.718281828459\ldots$$
+            </div>
+            <p><strong>From geometry.</strong> In 1647 the Flemish Jesuit Grégoire de Saint-Vincent found that the area under the hyperbola y = 1/x grows by equal amounts when x grows by equal <em>ratios</em>: the area from 1 to 2 equals that from 2 to 4 and from 4 to 8. In 1649 his student Alphonse Antonio de Sarasa pointed out that this area therefore behaves exactly like a logarithm. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> It is the natural logarithm: the area from 1 to t is ln t, and it reaches exactly 1 at t = e.</p>
+            <figure class="fig" data-fig="fig-e">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Two roads to e.</strong> Compounding more often approaches e; the area under 1/x from 1 to t is ln t.
+              </figcaption>
+            </figure>
+            <p>The two roads meet because e<sup>x</sup> is the one function that is its own rate of change, and ln is its inverse. That makes e the natural base wherever something changes in proportion to its size: populations, radioactive atoms, interest, cooling coffee, charging capacitors. A quantity growing continuously at rate k is N(t) = N<sub>0</sub>e<sup>kt</sup>, and its logarithm, ln N = ln N<sub>0</sub> + kt, is a straight line in time.</p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Orders of Magnitude and Log Scales</h2>
+            <p>The integer part of log<sub>10</sub> x tells you how many digits a number has, minus one: its <strong>order of magnitude</strong>. A virus (about 10<sup>−7</sup> m) and a person (about 1 m) are seven orders of magnitude apart; a person and the Earth (about 10<sup>7</sup> m) another seven. Scientists think in orders of magnitude to check whether an answer is even roughly right.</p>
+            <p>A <strong>logarithmic axis</strong> places values by their logarithm, so each step along the axis is the same <em>factor</em>, usually ten. It lets one chart show tiny and huge values together and turns exponential growth into a straight line.</p>
+            <figure class="fig" data-fig="fig-log-axis">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Linear and logarithmic axes.</strong> The same synthetic data on two kinds of vertical axis. Switch between them.
+              </figcaption>
+            </figure>
+            <p>A log axis answers different questions from a linear one. It shows growth <em>rates</em> and relative changes: a fall from 1,000 to 500 looks the same as one from 10 to 5. A linear axis shows absolute amounts: 500 extra cases looks bigger than 5. Neither is wrong, but readers must notice which one they are looking at. The plots series covers log axes in charts in more detail in <a href="scientific-plots-and-choosing-the-right-chart.html">Scientific Plots and Choosing the Right Chart</a>.</p>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+things = {"atom": 1e-10, "virus": 1e-7, "cell": 1e-5, "ant": 3e-3, "person": 1.7,
+          "Everest": 8.8e3, "Earth": 1.27e7, "Sun": 1.39e9, "light-year": 9.46e15}
+names, sizes = list(things), np.array(list(things.values()))
+
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(9, 3.6))
+ax1.scatter(sizes, np.zeros_like(sizes))
+ax1.set_title("Linear axis: everything except the last point is squashed at zero")
+ax2.scatter(sizes, np.zeros_like(sizes))
+ax2.set_xscale("log")                                  # one tick per factor of ten
+ax2.set_title("Logarithmic axis: 26 factors of ten fit comfortably")
+for n, s in zip(names, sizes):
+    ax2.annotate(n, (s, 0), textcoords="offset points", xytext=(0, 8), ha="center", fontsize=8)
+for ax in (ax1, ax2):
+    ax.set_yticks([])
+ax2.set_xlabel("Size (metres)")
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Doubling Times and Half-Lives</h2>
+            <p>Whenever a quantity grows or shrinks by a fixed percentage per step, the question “how long until…?” needs a logarithm, because the unknown is in the exponent. Solving (1 + r)<sup>t</sup> = 2 for t by taking logs of both sides gives the <strong>doubling time</strong>:</p>
+            <div class="eq-box">
+              <div class="eq-name">Doubling time and half-life</div>
+              $$t_{\text{double}} = \frac{\ln 2}{\ln(1+r)} \approx \frac{0.693}{r} \qquad\qquad t = T_{1/2}\,\frac{\ln(N_0/N)}{\ln 2}$$
+            </div>
+            <p>Because ln 2 ≈ 0.693 and ln(1 + r) ≈ r for small r, a quantity growing at 7% a year doubles in about 70 / 7 = 10 years: the <strong>rule of 70</strong>. Bankers use 72, which divides evenly by 2, 3, 4, 6, 8, 9 and 12.</p>
+            <figure class="fig" data-fig="fig-doubling">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. Doubling time against growth rate.</strong> The exact curve and the two rules of thumb. The vertical axis is logarithmic.
+              </figcaption>
+            </figure>
+            <p>Decay works the same way in reverse. Carbon-14 has a half-life of about 5,730 years, so a sample with 30% of its original carbon-14 is 5,730 × ln(1/0.3) / ln 2 ≈ 9,950 years old. Doubling time also gives a feel for exponential growth: 10 doublings is a factor of 1,024, and 20 doublings a factor of about a million. A pond weed that doubles daily and covers the pond on day 30 covered half of it on day 29.</p>
+            <pre><code class="language-python">import math
+
+# Money growing at 7% a year: when does it double?
+r = 0.07
+t_exact = math.log(2) / math.log(1 + r)          # solve (1 + r)^t = 2 for t
+print(f"Doubling time at 7%: {t_exact:.2f} years (rule of 70 says {70 / 7:.0f})")
+
+# Radioactive decay: carbon-14 has a half-life of about 5,730 years.
+# A sample has 30% of its original carbon-14 left. How old is it?
+half_life = 5730
+age = half_life * math.log(1 / 0.30) / math.log(2)   # solve (1/2)^(t/T) = 0.30
+print(f"Age: {age:,.0f} years")
+
+# Growth from two measurements: 1,200 cases on day 10, 9,600 on day 25
+k = math.log(9600 / 1200) / (25 - 10)                 # continuous growth rate per day
+print(f"Growth rate: {k:.3f} per day, doubling every {math.log(2) / k:.1f} days")
+</code></pre>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Logarithmic Scales in Science</h2>
+            <p>Several of the best-known scales in science are logarithms in disguise. On each, a step of one means multiplying by a fixed factor, not adding a fixed amount.</p>
+            <ul>
+              <li><strong>pH.</strong> In 1909 the Danish chemist Søren Sørensen, working at the Carlsberg Laboratory, proposed measuring acidity by the negative logarithm of the hydrogen-ion concentration. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span> Pure water has pH 7; lemon juice, about 2.5, has some 30,000 times more hydrogen ions.</li>
+              <li><strong>Decibels.</strong> The Bell Telephone System measured signal loss in units based on the logarithm of the power ratio, and in 1929 named the tenth part of such a unit the decibel, after Alexander Graham Bell. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span> Every 10 dB is a factor of ten in power.</li>
+              <li><strong>Earthquake magnitude.</strong> In 1935 Charles Richter defined the magnitude of Californian earthquakes as the logarithm of the largest amplitude on a standard seismograph at a standard distance. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span> Each step of one is ten times the amplitude and roughly 32 times the energy. Because the original scale saturates for great earthquakes, seismologists now use the <strong>moment magnitude</strong> of Hanks and Kanamori, based on the area and slip of the fault. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span></li>
+              <li><strong>Star magnitudes.</strong> Hipparchus and Ptolemy sorted stars into six classes by brightness. In 1856 Norman Pogson made the scale exact: five magnitudes is a factor of exactly 100 in brightness. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span></li>
+            </ul>
+            <figure class="fig" data-fig="fig-scales">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 7. Four logarithmic scales.</strong> Choose a scale and two values to see the ratio between them.
+              </figcaption>
+            </figure>
+            <p>The danger of these scales is that they hide the size of a change. A magnitude 7 earthquake sounds a little worse than a magnitude 6; it releases about 32 times as much energy. A sound at 90 dB carries 1,000 times the power of one at 60 dB.</p>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Perception and the Mind</h2>
+            <p>In the 1830s the German physiologist Ernst Weber found that the smallest change in weight a person can feel is a fixed <em>fraction</em> of the weight already held: about the same fraction whether it is light or heavy. In 1860 Gustav Fechner built on this to propose that the strength of a sensation grows with the logarithm of the stimulus, so that equal ratios feel like equal steps. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span> The Weber–Fechner law is only an approximation (later psychologists such as S. S. Stevens argued for power laws instead), but it explains why the decibel and star-magnitude scales feel natural: they match how we hear and see.</p>
+            <p>Our sense of number may work the same way. When children are asked to mark numbers on a line from 1 to 100, young ones space small numbers far apart and squash the large ones together, a roughly logarithmic pattern; older children shift towards the accurate linear placement. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span> In 2008 Stanislas Dehaene and colleagues found that adults of the Mundurucu people of the Amazon, whose language has few number words and who had little formal schooling, also placed quantities on a logarithmic line. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span> Linear spacing seems to be something we learn with measurement and schooling.</p>
+            <figure class="fig" data-fig="fig-number-line">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 8. Linear and logarithmic number lines.</strong> Move the slider to see where numbers land under logarithmic intuition.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Log–Log Plots and Power Laws</h2>
+            <p>Many relationships in nature are <strong>power laws</strong>, y = a·x<sup>b</sup>: the area of a circle grows as the radius squared, the period of a planet as its distance to the power 3/2 (Kepler’s third law), and the metabolic rate of mammals roughly as body mass to the power 3/4 (Kleiber’s law). <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span> Taking logs of both sides turns any power law into a straight line:</p>
+            <div class="eq-box">
+              <div class="eq-name">Power law on log–log axes</div>
+              $$y = a\,x^{b} \quad\Longrightarrow\quad \log y = \log a + b\,\log x$$
+            </div>
+            <figure class="fig" data-fig="fig-power-law">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 9. A power law.</strong> Synthetic data on linear and log–log axes. On log–log axes the slope of the line is the exponent b.
+              </figcaption>
+            </figure>
+            <p>So plotting log y against log x, a <strong>log–log plot</strong>, straightens a power law, and the slope of the line is the exponent. An exponential, y = a·e<sup>kx</sup>, is straightened instead by a <strong>semi-log plot</strong> (log y against plain x). Which plot gives a straight line tells you which kind of law you have. Be careful, though: almost any curve looks fairly straight over a short range on log–log axes, and claims of power laws in data such as city sizes or network links need proper statistical tests, not just a ruler.</p>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+rng = np.random.default_rng(1)
+# synthetic animals: metabolic rate follows a power law of body mass, rate ≈ 3.4 · mass^0.75
+mass = np.exp(rng.uniform(np.log(0.02), np.log(4000), 60))      # 20 g to 4 tonnes
+rate = 3.4 * mass**0.75 * np.exp(rng.normal(0, 0.25, 60))
+
+# Taking logs turns y = a·x^b into log y = log a + b·log x: a straight line
+b, log_a = np.polyfit(np.log(mass), np.log(rate), 1)
+print(f"Fitted exponent b = {b:.3f}, coefficient a = {np.exp(log_a):.2f}")
+
+grid = np.logspace(np.log10(0.02), np.log10(4000), 100)
+fig, ax = plt.subplots(figsize=(6, 4.5))
+ax.scatter(mass, rate, s=15)
+ax.plot(grid, np.exp(log_a) * grid**b, color="#D55E00", label=f"rate = {np.exp(log_a):.1f} · mass^{b:.2f}")
+ax.set_xscale("log")
+ax.set_yscale("log")
+ax.set_xlabel("Body mass (kg)")
+ax.set_ylabel("Metabolic rate (W)")
+ax.legend()
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Information, Entropy and Bits</h2>
+            <p>How much information is there in a message? In 1928 the Bell Labs engineer Ralph Hartley argued that it should be measured by the logarithm of the number of possible messages, so that two messages carry twice as much as one, even though the number of possibilities multiplies. <span class="cite-group">[<a class="cite" href="#ref-17">17</a>]</span> In 1948 Claude Shannon extended the idea to messages whose outcomes are not equally likely. <span class="cite-group">[<a class="cite" href="#ref-18">18</a>]</span> The information in an outcome of probability p is −log<sub>2</sub> p, measured in <strong>bits</strong>, a word Shannon credited to his colleague John Tukey. The average over all outcomes is the <strong>entropy</strong>:</p>
+            <div class="eq-box">
+              <div class="eq-name">Shannon entropy</div>
+              $$H = -\sum_i p_i \log_2 p_i \quad \text{bits}$$
+            </div>
+            <figure class="fig" data-fig="fig-entropy">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 10. The entropy of a coin.</strong> Change the probability of heads. A fair coin carries the most information per toss: exactly one bit.
+              </figcaption>
+            </figure>
+            <p>A fair coin gives 1 bit, a fair die log<sub>2</sub> 6 ≈ 2.58 bits, and a random letter from 26 about 4.7 bits. Entropy sets the limit on how far data can be compressed. The same quantity, with natural logs, appears in physics as Boltzmann’s entropy, and in machine learning as the <strong>cross-entropy</strong> loss that trains classifiers (Section 15).</p>
+            <pre><code class="language-python">import numpy as np
+
+def entropy_bits(probs):
+    """Shannon entropy in bits: H = -sum(p log2 p)."""
+    p = np.asarray(probs, dtype=float)
+    p = p[p &gt; 0]                                 # 0 · log 0 is taken as 0
+    return -np.sum(p * np.log2(p))
+
+print(entropy_bits([0.5, 0.5]))                  # 1.0 bit: a fair coin
+print(entropy_bits([0.9, 0.1]))                  # 0.47 bits: a biased coin is more predictable
+print(entropy_bits([1 / 6] * 6))                 # 2.585 bits = log2(6): a fair die
+print(np.log2(26))                               # 4.70 bits to pick one letter out of 26 at random
+
+# Cross-entropy loss used to train classifiers: -log(probability given to the right answer)
+for p_right in [0.99, 0.6, 0.1]:
+    print(f"model gives the correct class p = {p_right}: loss = {-np.log(p_right):.3f}")
+</code></pre>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Logarithms in Computing</h2>
+            <p><strong>Halving and algorithms.</strong> log<sub>2</sub> N is the number of times you can halve N before reaching 1. Any method that cuts a problem in half at each step therefore takes about log<sub>2</sub> N steps. Binary search finds an item in a sorted list of a billion in about 30 comparisons. Balanced search trees, efficient sorting (N log N comparisons), and the fast Fourier transform all owe their speed to logarithms. A number N needs about log<sub>2</sub> N bits to store, which is why 32 bits count to about four billion.</p>
+            <figure class="fig" data-fig="fig-binary-search">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 11. Binary search.</strong> Each step halves the range that can contain the target. Change the list size to see the number of steps grow as log<sub>2</sub> N.
+              </figcaption>
+            </figure>
+            <p><strong>Working in log space.</strong> Computers store numbers with limited range: a standard double-precision number loses precision below about 10<sup>−308</sup> and cannot go below about 10<sup>−324</sup> at all. The probability of a long sequence of events, a product of many small numbers, quickly underflows to zero. Statistics and machine learning software therefore works with <strong>log-probabilities</strong> and adds them instead of multiplying. To add probabilities stored as logs, the <strong>log-sum-exp</strong> trick subtracts the largest value first so that nothing overflows or underflows:</p>
+            <div class="eq-box">
+              <div class="eq-name">Log-sum-exp</div>
+              $$\log\sum_i e^{a_i} = m + \log\sum_i e^{a_i - m}, \qquad m = \max_i a_i$$
+            </div>
+            <pre><code class="language-python">import numpy as np
+from scipy.special import logsumexp
+
+# Multiplying many small probabilities underflows to zero...
+p = np.full(1000, 0.01)
+print(np.prod(p))                          # 0.0  (the true value is 1e-2000)
+
+# ...so work with log-probabilities and ADD them instead
+log_p = np.log(p)
+print(log_p.sum())                         # -4605.17 = log(1e-2000), no problem
+
+# Adding probabilities stored as logs: log(e^a + e^b) without overflow
+a = np.array([-1000.0, -1001.0, -1002.0])
+print(np.log(np.sum(np.exp(a))))           # -inf: exp(-1000) underflows
+print(logsumexp(a))                         # -999.59, correct
+# logsumexp subtracts the maximum first: max + log(sum(exp(a - max)))
+m = a.max()
+print(m + np.log(np.sum(np.exp(a - m))))   # the same trick by hand
+</code></pre>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Logarithms in Statistics and Machine Learning</h2>
+            <p><strong>Log transforms.</strong> Quantities produced by many multiplicative factors (incomes, concentrations, city sizes, reaction times, gene expression) are often strongly right-skewed and roughly <em>log-normal</em>. Taking logs makes them symmetric, so that means, standard deviations, t-tests and regression behave well, and multiplicative effects become additive. The mean of the logs, converted back, is the <strong>geometric mean</strong>.</p>
+            <figure class="fig" data-fig="fig-log-transform">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 12. A log transform.</strong> Synthetic incomes before and after taking logarithms.
+              </figcaption>
+            </figure>
+            <p><strong>Log-odds.</strong> Logistic regression models the <em>log-odds</em> of an event, ln(p / (1 − p)), as a straight line in the predictors. The log-odds run from −∞ to +∞ while p stays between 0 and 1, and each coefficient is a log of an odds ratio.</p>
+            <p><strong>Log-likelihood.</strong> Fitting a model by maximum likelihood means maximising a product of probabilities, one for each observation. Its logarithm, the <strong>log-likelihood</strong>, is a sum, which is easier to differentiate and does not underflow, and it has its maximum in the same place. Information criteria such as AIC and the deviance of generalised linear models are built from it.</p>
+            <p><strong>Cross-entropy.</strong> A classifier that gives probability p to the correct answer is charged −ln p. Confident correct answers cost almost nothing, a probability of 0.1 costs 2.3, and a confident wrong answer costs a great deal. Averaged over a data set, this is the cross-entropy loss used to train most neural networks, including large language models.</p>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Benford’s Law</h2>
+            <p>In 1881 the astronomer Simon Newcomb noticed that the early pages of books of logarithm tables, for numbers beginning with 1, were far more worn than the later ones. He proposed that the first digit d of everyday numbers occurs with probability log<sub>10</sub>(1 + 1/d). <span class="cite-group">[<a class="cite" href="#ref-19">19</a>]</span> In 1938 the physicist Frank Benford, apparently unaware of Newcomb, found the same pattern in 20,229 numbers from river areas, populations, physical constants, newspaper figures and addresses. <span class="cite-group">[<a class="cite" href="#ref-20">20</a>]</span> About 30% of such numbers start with 1, and under 5% with 9.</p>
+            <figure class="fig" data-fig="fig-benford">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 13. Benford’s law.</strong> First-digit frequencies of five sets of numbers compared with the law.
+              </figcaption>
+            </figure>
+            <p>The explanation is logarithmic. Numbers that range over several orders of magnitude and arise from growth or multiplication tend to be spread evenly on a log scale, and on a log scale the stretch from 1 to 2 takes up 30% of each decade. The law is also the only first-digit pattern that stays the same when the units change, from metres to feet or rupees to dollars, and, as the mathematician Theodore Hill showed in 1995, it emerges when numbers are drawn from a random mixture of different distributions, as in a newspaper’s pages. <span class="cite-group">[<a class="cite" href="#ref-21">21</a>]</span> Auditors use departures from Benford’s law to flag possibly invented accounts, though a departure is a reason to look closer, not proof of fraud.</p>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+rng = np.random.default_rng(0)
+# Quantities that grow by multiplying (here, random growth over many years) follow Benford's law
+values = 100 * np.prod(rng.lognormal(0, 0.3, size=(20000, 30)), axis=1)
+first_digit = (values / 10 ** np.floor(np.log10(values))).astype(int)
+
+digits = np.arange(1, 10)
+observed = np.array([(first_digit == d).mean() for d in digits])
+benford = np.log10(1 + 1 / digits)                      # P(d) = log10(1 + 1/d)
+
+fig, ax = plt.subplots(figsize=(7, 4))
+ax.bar(digits, observed, color="#0072B2", alpha=0.7, label="simulated data")
+ax.plot(digits, benford, "o-", color="#D55E00", label="Benford: log10(1 + 1/d)")
+ax.set_xticks(digits)
+ax.set_xlabel("First digit")
+ax.set_ylabel("Share of numbers")
+ax.legend()
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-17">
+            <h2>17. Logarithms in Calculus</h2>
+            <p>The natural logarithm has the simplest possible rate of change:</p>
+            <div class="eq-box">
+              <div class="eq-name">Derivative and integral</div>
+              $$\frac{d}{dx}\ln x = \frac{1}{x} \qquad\qquad \int \frac{1}{x}\,dx = \ln|x| + C$$
+            </div>
+            <p>This fills a famous gap: the power rule ∫x<sup>n</sup> dx = x<sup>n+1</sup>/(n+1) fails for n = −1, and the logarithm is exactly the missing function. For any other base, d/dx log<sub>b</sub> x = 1 / (x ln b); only base e gives a clean 1/x, which is why mathematicians call it natural.</p>
+            <p>Near x = 0, Nicholas Mercator’s series of 1668 gives ln(1 + x) = x − x<sup>2</sup>/2 + x<sup>3</sup>/3 − …, so for small changes, ln(1 + x) ≈ x. That is why small differences of natural logs read as percentage changes.</p>
+            <figure class="fig" data-fig="fig-log-approx">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 14. ln(1 + x) ≈ x.</strong> The log curve and its tangent line at zero. For changes within about ±10% the two agree closely.
+              </figcaption>
+            </figure>
+            <p>Logarithmic differentiation, taking logs before differentiating, turns products and powers into sums and makes messy derivatives easy. The logarithm also measures the slowest kinds of growth that still have no limit: the harmonic series 1 + 1/2 + 1/3 + … + 1/n grows like ln n, and the number of primes up to N is about N / ln N, the prime number theorem.</p>
+          </section>
+
+          <section id="section-18">
+            <h2>18. Common Mistakes</h2>
+            <ul>
+              <li><strong>Mixing up bases in code.</strong> In Python, NumPy, R, Excel’s LN and most programming languages, <code>log</code> means the natural logarithm. Use <code>log10</code> or <code>log2</code> when you need those bases. (Excel’s <code>LOG</code> defaults to base 10, a common source of confusion.)</li>
+              <li><strong>Inventing a rule for log(a + b).</strong> There is none. Only products, quotients and powers simplify.</li>
+              <li><strong>Taking the log of zero or negative values.</strong> They have no real logarithm. Data with zeros are often transformed as log(x + 1), but the result depends on the units, so choose the offset with care, or use a method designed for counts.</li>
+              <li><strong>Reading a log axis as linear.</strong> Equal heights on a log axis are equal ratios. A curve that “levels off” on a log axis may still be growing enormously in absolute terms.</li>
+              <li><strong>Averaging on the wrong scale.</strong> The mean of the logs, converted back, is the geometric mean, which is smaller than the ordinary mean for skewed data. Say which one you report.</li>
+              <li><strong>Forgetting what a log-scale step means.</strong> One pH unit, one earthquake magnitude and 10 dB are each a factor of ten, not a small increment.</li>
+            </ul>
+          </section>
+
+          <section id="section-19">
+            <h2>19. Legend and Record</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: did Napier invent natural logarithms?</div>
+              <p><strong>The legend:</strong> Napier invented natural logarithms, which is why they are sometimes called Napierian logarithms.</p>
+              <p><strong>The record:</strong> Napier’s logarithms decreased as numbers increased and had no base in the modern sense; written in today’s notation they are 10<sup>7</sup> ln(10<sup>7</sup>/x), close to base 1/e after scaling. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span> Logarithms to base e emerged later, from the areas under the hyperbola studied by Saint-Vincent and de Sarasa, and from Mercator’s series, and the number e itself was named by Euler more than a century after Napier. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> Napier’s great idea was the logarithm itself, not its natural base.</p>
+              <p><strong>A second legend:</strong> Frank Benford discovered Benford’s law in 1938. <strong>The record:</strong> Simon Newcomb stated the same law, with the same formula, 57 years earlier, after noticing the worn first pages of logarithm tables. <span class="cite-group">[<a class="cite" href="#ref-19">19</a>]</span> Benford’s contribution was the large body of evidence, and the law took his name. It is a textbook case of what the statistician Stephen Stigler called his “law of eponymy”: no scientific discovery is named after its original discoverer. <span class="cite-group">[<a class="cite" href="#ref-22">22</a>]</span></p>
+            </div>
+          </section>
+
+          <section id="section-20">
+            <h2>20. People in This Story</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John Napier</td>
+                <td style="padding:0.6rem 0.8rem;">1550–1617<br>Scotland</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Mirifici Logarithmorum Canonis Descriptio</em> (1614)</td>
+                <td style="padding:0.6rem 0.8rem;">Invented logarithms and coined the word.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Jost Bürgi</td>
+                <td style="padding:0.6rem 0.8rem;">1552–1632<br>Switzerland and Prague</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Progress Tabulen</em> (1620)</td>
+                <td style="padding:0.6rem 0.8rem;">Computed logarithm tables independently of Napier.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Henry Briggs</td>
+                <td style="padding:0.6rem 0.8rem;">1561–1630<br>England</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Arithmetica Logarithmica</em> (1624)</td>
+                <td style="padding:0.6rem 0.8rem;">Made base 10 the standard and computed the first common log tables.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">William Oughtred</td>
+                <td style="padding:0.6rem 0.8rem;">1574–1660<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">The slide rule (c. 1622)</td>
+                <td style="padding:0.6rem 0.8rem;">Slid two logarithmic scales together to multiply.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Jacob Bernoulli</td>
+                <td style="padding:0.6rem 0.8rem;">1655–1705<br>Basel</td>
+                <td style="padding:0.6rem 0.8rem;">Compound interest (1683)</td>
+                <td style="padding:0.6rem 0.8rem;">Found the limit now called e.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Leonhard Euler</td>
+                <td style="padding:0.6rem 0.8rem;">1707–1783<br>Basel, St Petersburg and Berlin</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Introductio in analysin infinitorum</em> (1748)</td>
+                <td style="padding:0.6rem 0.8rem;">Named e and defined logarithms as exponents.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Gustav Fechner</td>
+                <td style="padding:0.6rem 0.8rem;">1801–1887<br>Leipzig</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Elemente der Psychophysik</em> (1860)</td>
+                <td style="padding:0.6rem 0.8rem;">Proposed that sensation grows with the logarithm of the stimulus.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Simon Newcomb</td>
+                <td style="padding:0.6rem 0.8rem;">1835–1909<br>Canada and USA</td>
+                <td style="padding:0.6rem 0.8rem;">First-digit law (1881)</td>
+                <td style="padding:0.6rem 0.8rem;">Noticed the worn first pages of log tables.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Søren Sørensen</td>
+                <td style="padding:0.6rem 0.8rem;">1868–1939<br>Denmark</td>
+                <td style="padding:0.6rem 0.8rem;">The pH scale (1909)</td>
+                <td style="padding:0.6rem 0.8rem;">Measured acidity with a logarithm.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Charles Richter</td>
+                <td style="padding:0.6rem 0.8rem;">1900–1985<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Earthquake magnitude (1935)</td>
+                <td style="padding:0.6rem 0.8rem;">Put earthquakes on a logarithmic scale.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Claude Shannon</td>
+                <td style="padding:0.6rem 0.8rem;">1916–2001<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">“A Mathematical Theory of Communication” (1948)</td>
+                <td style="padding:0.6rem 0.8rem;">Measured information in bits with logarithms.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-21">
+            <h2>21. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about logarithms.</p>
+            <figure class="fig" data-fig="fig-quiz-log">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-22">
+            <h2>22. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Napier, John.</strong> (1614). <em>Mirifici Logarithmorum Canonis Descriptio</em>. Edinburgh: Andrew Hart.</li>
+              <li id="ref-2"><strong>Cajori, Florian.</strong> (1913). "History of the exponential and logarithmic concepts." <em>The American Mathematical Monthly</em>, 20(1): 5–14 (the first of a series of articles in that volume).</li>
+              <li id="ref-3"><strong>Maor, Eli.</strong> (1994). <em>e: The Story of a Number</em>. Princeton: Princeton University Press.</li>
+              <li id="ref-4"><strong>Bürgi, Jost.</strong> (1620). <em>Arithmetische und Geometrische Progress Tabulen</em>. Prague.</li>
+              <li id="ref-5"><strong>Briggs, Henry.</strong> (1624). <em>Arithmetica Logarithmica</em>. London: William Jones.</li>
+              <li id="ref-6"><strong>Oughtred, William.</strong> (1632). <em>The Circles of Proportion and the Horizontall Instrument</em>. Translated by William Forster. London.</li>
+              <li id="ref-7"><strong>Euler, Leonhard.</strong> (1748). <em>Introductio in analysin infinitorum</em>. 2 vols. Lausanne: Marc-Michel Bousquet.</li>
+              <li id="ref-8"><strong>Sørensen, S. P. L.</strong> (1909). "Enzymstudien. II. Über die Messung und die Bedeutung der Wasserstoffionenkonzentration bei enzymatischen Prozessen." <em>Biochemische Zeitschrift</em>, 21: 131–304.</li>
+              <li id="ref-9"><strong>Martin, W. H.</strong> (1929). "DeciBel—the name for the transmission unit." <em>Bell System Technical Journal</em>, 8(1): 1–2.</li>
+              <li id="ref-10"><strong>Richter, Charles F.</strong> (1935). "An instrumental earthquake magnitude scale." <em>Bulletin of the Seismological Society of America</em>, 25(1): 1–32.</li>
+              <li id="ref-11"><strong>Hanks, Thomas C. &amp; Kanamori, Hiroo.</strong> (1979). "A moment magnitude scale." <em>Journal of Geophysical Research</em>, 84(B5): 2348–2350.</li>
+              <li id="ref-12"><strong>Pogson, N.</strong> (1856). "Magnitudes of thirty-six of the minor planets for the first day of each month of the year 1857." <em>Monthly Notices of the Royal Astronomical Society</em>, 17: 12–15.</li>
+              <li id="ref-13"><strong>Fechner, Gustav Theodor.</strong> (1860). <em>Elemente der Psychophysik</em>. Leipzig: Breitkopf und Härtel.</li>
+              <li id="ref-14"><strong>Siegler, Robert S. &amp; Opfer, John E.</strong> (2003). "The development of numerical estimation: evidence for multiple representations of numerical quantity." <em>Psychological Science</em>, 14(3): 237–243.</li>
+              <li id="ref-15"><strong>Dehaene, Stanislas, Izard, Véronique, Spelke, Elizabeth &amp; Pica, Pierre.</strong> (2008). "Log or linear? Distinct intuitions of the number scale in Western and Amazonian indigene cultures." <em>Science</em>, 320(5880): 1217–1220.</li>
+              <li id="ref-16"><strong>Kleiber, Max.</strong> (1932). "Body size and metabolism." <em>Hilgardia</em>, 6(11): 315–353.</li>
+              <li id="ref-17"><strong>Hartley, R. V. L.</strong> (1928). "Transmission of information." <em>Bell System Technical Journal</em>, 7(3): 535–563.</li>
+              <li id="ref-18"><strong>Shannon, Claude E.</strong> (1948). "A mathematical theory of communication." <em>Bell System Technical Journal</em>, 27: 379–423 and 623–656.</li>
+              <li id="ref-19"><strong>Newcomb, Simon.</strong> (1881). "Note on the frequency of use of the different digits in natural numbers." <em>American Journal of Mathematics</em>, 4(1): 39–40.</li>
+              <li id="ref-20"><strong>Benford, Frank.</strong> (1938). "The law of anomalous numbers." <em>Proceedings of the American Philosophical Society</em>, 78(4): 551–572.</li>
+              <li id="ref-21"><strong>Hill, Theodore P.</strong> (1995). "A statistical derivation of the significant-digit law." <em>Statistical Science</em>, 10(4): 354–363.</li>
+              <li id="ref-22"><strong>Stigler, Stephen M.</strong> (1980). "Stigler’s law of eponymy." <em>Transactions of the New York Academy of Sciences</em>, 39(1): 147–157.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/logarithms-from-basics-to-advanced.js"></script>
+</body>
+</html>

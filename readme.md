@@ -133,6 +133,7 @@ A fourteen-part journey from logic gates to GPUs and beyond, covering both the d
 14. **Part 14**: *Beyond Silicon* (chiplets, accelerators, silicon photonics, neuromorphic chips, quantum computing, a look back)
 
 ### Standalone Tutorials
+- *Logarithms: From Basics to Advanced* (definition & bases, the rules, Napier, Bürgi & Briggs, the slide rule, e & the natural log, log scales, doubling times & half-lives, pH/decibels/earthquakes/star magnitudes, perception, log–log plots & power laws, entropy & bits, binary search & log-sum-exp, log transforms/log-odds/log-likelihood/cross-entropy, Benford’s law, calculus, common mistakes; interactive figures and Python code)
 - *The Riemann Hypothesis, and the Claimed Proof Found with Claude* (primes & Gauss’s estimate, Euler’s product, Riemann’s 1859 paper, zeros & the explicit formula, partial results, formal proofs in Lean, Claude’s two-thirds result of August 2026, and the status of the November 2026 claimed proof)
 - *Who's the Father? How a DNA Paternity Test Works* (DNA basics, inheritance, blood groups & the Chaplin case, Jeffreys, STRs, PCR & capillary electrophoresis, the paternity index & Bayes, tricky cases, Indian law)
 - *Why Is My Laser Spot Grainy? Speckle, Stray Fringes and Other Gremlins of the Optics Lab* (coherence, speckle statistics & reduction, accidental etalons, ghosts & back-reflections, dust rings & spatial filters, fibre noise, vibration, detector artifacts, speckle as a tool, troubleshooting guide)

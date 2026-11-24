@@ -6908,5 +6908,74 @@ window.RNLEARN_GLOSSARY = [
    "control charts",
    "Shewhart chart"
   ]
+ ],
+ [
+  "Logarithm",
+  "The power to which a base must be raised to give a number: the base-10 logarithm of 1000 is 3, because 10³ = 1000. It turns multiplication into addition.",
+  [
+   "logarithms"
+  ]
+ ],
+ [
+  "Natural logarithm",
+  "The logarithm to base e ≈ 2.71828, written ln. Its rate of change is 1/x, and it equals the area under the curve 1/x from 1 to x.",
+  [
+   "natural logarithms"
+  ]
+ ],
+ [
+  "Euler’s number",
+  "The constant e = 2.71828…, the limit of (1 + 1/n)ⁿ as n grows, and the base of natural logarithms.",
+  []
+ ],
+ [
+  "Order of magnitude",
+  "The power of ten nearest to a quantity; two quantities differ by one order of magnitude when one is about ten times the other.",
+  [
+   "orders of magnitude"
+  ]
+ ],
+ [
+  "Slide rule",
+  "A calculating instrument with logarithmic scales that slide against each other, so that adding lengths multiplies numbers.",
+  [
+   "slide rules"
+  ]
+ ],
+ [
+  "Doubling time",
+  "The time a quantity growing by a fixed percentage takes to double: ln 2 divided by the continuous growth rate, roughly 70 divided by the percentage rate.",
+  []
+ ],
+ [
+  "Exponential growth",
+  "Growth by a fixed percentage in each equal step of time, so that the quantity doubles at regular intervals; a straight line on a logarithmic axis.",
+  []
+ ],
+ [
+  "Decibel",
+  "A logarithmic unit for a ratio of powers: ten times the base-10 logarithm of the ratio. Each 10 dB is a factor of ten in power.",
+  [
+   "decibels"
+  ]
+ ],
+ [
+  "Log–log plot",
+  "A graph with logarithmic scales on both axes, on which a power law y = a·xᵇ appears as a straight line of slope b.",
+  [
+   "log–log plots",
+   "log-log plot",
+   "log-log plots"
+  ]
+ ],
+ [
+  "Benford’s law",
+  "The pattern that in many data sets spanning several orders of magnitude, the first digit d occurs with probability log₁₀(1 + 1/d), so about 30% start with 1.",
+  []
+ ],
+ [
+  "Log-sum-exp",
+  "A way of computing log(eᵃ + eᵇ + …) without overflow or underflow, by first subtracting the largest value.",
+  []
  ]
 ];

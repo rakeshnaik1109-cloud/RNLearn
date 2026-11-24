@@ -1,5 +1,22 @@
 [
   {
+    "slug": "logarithms-from-basics-to-advanced",
+    "url": "articles/logarithms-from-basics-to-advanced.html",
+    "title": "Logarithms: From Basics to Advanced",
+    "summary": "What a logarithm is, its rules, Napier and the slide rule, e, log scales from pH to earthquakes, doubling times, power laws, bits, Benford’s law and logs in code, with Python.",
+    "subject": "Science",
+    "tags": [
+      "logarithms",
+      "mathematics",
+      "exponential-growth",
+      "information-theory",
+      "python",
+      "history-of-mathematics"
+    ],
+    "date": "2026-11-24",
+    "type": "tutorial"
+  },
+  {
     "slug": "treemaps-sankeys-and-waterfalls",
     "url": "articles/treemaps-sankeys-and-waterfalls.html",
     "title": "Treemaps, Sankeys and Waterfalls: Charts for Hierarchies, Parts and Flows",
