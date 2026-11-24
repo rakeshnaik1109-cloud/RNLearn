@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heatmaps and Many Variables: Colour Scales, Correlation Matrices and Parallel Coordinates — RNLearn</title>
+  <meta name="description" content="Heatmaps and how to choose a colour scale, correlation matrices and clustered heatmaps, normalising before colouring, parallel coordinates, radar charts and faceting, with Python code.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/heatmaps-and-many-variables.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Heatmaps and Many Variables: Colour Scales, Correlation Matrices and Parallel Coordinates — RNLearn">
+  <meta property="og:description" content="Heatmaps and how to choose a colour scale, correlation matrices and clustered heatmaps, normalising before colouring, parallel coordinates, radar charts and faceting, with Python code.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/heatmaps-and-many-variables.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Heatmaps and Many Variables: Colour Scales, Correlation Matrices and Parallel Coordinates — RNLearn">
+  <meta name="twitter:description" content="Heatmaps and how to choose a colour scale, correlation matrices and clustered heatmaps, normalising before colouring, parallel coordinates, radar charts and faceting, with Python code.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Heatmaps and Many Variables: Colour Scales, Correlation Matrices and Parallel Coordinates",
+    "description": "Heatmaps and how to choose a colour scale, correlation matrices and clustered heatmaps, normalising before colouring, parallel coordinates, radar charts and faceting, with Python code.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-23",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/heatmaps-and-many-variables.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/research.html" class="post-subject-tag" data-subject="research">Research</a>
+        </div>
+        <h1 class="article-title">Heatmaps and Many Variables: Colour Scales, Correlation Matrices and Parallel Coordinates</h1>
+        <p class="article-standfirst">
+          A rainbow colour map that draws boundaries the data never had, a correlation matrix that hides three groups until you reorder it, and radar charts whose winner changes when you shuffle the spokes.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-23">23 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>12 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/reading-the-picture.html">Reading the Picture</a> (Part 8 of 12)</div>
+  <div class="series-banner-links">
+    <a href="error-bars-and-uncertainty.html">← Part 7: Error Bars and Uncertainty: SD, SE, Confidence Intervals and Forest Plots</a>
+    <a href="diagnostic-plots.html">Part 9: Diagnostic Plots: Q–Q Plots, Residuals, Bland–Altman, Funnel and Volcano Plots →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. More Than Two Variables</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. The Heatmap</a></li>
+              <li><a class="toc-link" href="#section-4">4. Choosing a Colour Scale</a></li>
+              <li><a class="toc-link" href="#section-5">5. Correlation Matrices</a></li>
+              <li><a class="toc-link" href="#section-6">6. Clustered Heatmaps</a></li>
+              <li><a class="toc-link" href="#section-7">7. Normalise Before You Colour</a></li>
+              <li><a class="toc-link" href="#section-8">8. Parallel Coordinates</a></li>
+              <li><a class="toc-link" href="#section-9">9. Radar Charts</a></li>
+              <li><a class="toc-link" href="#section-10">10. Small Multiples and Facets</a></li>
+              <li><a class="toc-link" href="#section-11">11. Common Misreadings</a></li>
+              <li><a class="toc-link" href="#section-12">12. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-13">13. People in This Part</a></li>
+              <li><a class="toc-link" href="#section-14">14. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-15">15. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. More Than Two Variables</h2>
+            <p>A scatter plot shows two variables at once; real data often have dozens. A survey has many questions, a gene-expression study thousands of genes, a product catalogue many specifications. This part covers the plots designed for many variables: the <strong>heatmap</strong>, which turns a table into a grid of colours; the <strong>correlation matrix</strong> and the <strong>clustered heatmap</strong>; <strong>parallel coordinates</strong>; <strong>radar charts</strong>; and small multiples split by several variables at once.</p>
+            <p>Because several of these plots use colour to carry numbers, this part also explains how to choose a colour scale, one of the most consequential and most neglected decisions in data visualisation.</p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-p8-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. Picturing many variables, 1873–2015.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. The Heatmap</h2>
+            <p>A heatmap shows a table of numbers as a grid of coloured cells: rows and columns are two categories (days and hours, genes and samples), and the colour of each cell encodes its value. It shows overall patterns, such as daily rhythms, at a glance, but colour is a weak channel for exact values (Part 1), so heatmaps are for patterns, not precise reading. Adding the numbers as labels helps when the grid is small.</p>
+            <figure class="fig" data-fig="fig-heatmap-colors">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. One heatmap, four colour maps.</strong> Website traffic by day and hour (synthetic). Switch colour maps and see how the same numbers change their message.
+              </figcaption>
+            </figure>
+            <div class="callout callout-tip">
+              <div class="callout-header">How to read a heatmap</div>
+              <ol>
+                <li>Read the colour bar first: which end is high, and is the scale linear or logarithmic?</li>
+                <li>Check what the rows and columns are, and whether their order means something (time) or was chosen (clustering).</li>
+                <li>Look for whole rows, columns or blocks that stand out, rather than single cells.</li>
+                <li>Check whether values were standardised per row or column (Section 7).</li>
+              </ol>
+            </div>
+            <pre><code class="language-python">import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+rng = np.random.default_rng(0)
+days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+hours = np.arange(24)
+# synthetic web traffic: morning and evening peaks on weekdays, late mornings at weekends
+base = np.array([[(30 + 60 * np.exp(-((h - 9) / 2.0) ** 2) + 80 * np.exp(-((h - 20) / 2.5) ** 2))
+                  if d &lt; 5 else (25 + 90 * np.exp(-((h - 12) / 3.5) ** 2)) for h in hours] for d in range(7)])
+traffic = pd.DataFrame(base + rng.normal(0, 4, base.shape), index=days, columns=hours)
+
+fig, ax = plt.subplots(figsize=(11, 3.6))
+sns.heatmap(traffic, cmap="viridis", cbar_kws={"label": "visits per minute"}, ax=ax)
+ax.set_xlabel("Hour of day")
+ax.set_ylabel("")
+ax.set_title("Website traffic by day and hour (sequential colour map)")
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Choosing a Colour Scale</h2>
+            <p>There are three kinds of colour scale, matching three kinds of data. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+            <ul>
+              <li><strong>Sequential:</strong> from light to dark (or dark to light) in one or two hues, for quantities that run from low to high, such as counts, temperatures or concentrations. <em>Viridis</em>, designed in 2015 by Stéfan van der Walt and Nathaniel Smith and now matplotlib’s default, changes evenly in perceived lightness, so equal data steps look equal, and it remains readable in greyscale and by most colour-blind people. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></li>
+              <li><strong>Diverging:</strong> two contrasting hues meeting at a light neutral middle, for data with a meaningful centre, such as correlations (centred on 0), changes from a baseline, or deviations from a target.</li>
+              <li><strong>Qualitative:</strong> distinct hues with no order, for categories (Part 1’s Okabe–Ito palette).</li>
+            </ul>
+            <p>Avoid the old <strong>rainbow</strong> colour maps (“jet”), whose uneven brightness creates false boundaries and draws attention to arbitrary values. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> And make sure a diverging scale is centred on the value that is meaningful, not on the middle of the data range.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Correlation Matrices</h2>
+            <p>A correlation matrix shows the correlation (Part 6) between every pair of variables as a coloured cell, with a diverging colour map centred on zero. It is a quick map of which variables move together. Because it is symmetric, it is common to show only the lower triangle, and because the order of the variables is arbitrary, reordering them so that similar variables sit together can reveal hidden groups. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span></p>
+            <figure class="fig" data-fig="fig-corr-order">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Ordering matters.</strong> A correlation matrix of nine synthetic variables. Reorder them by similarity and three groups appear.
+              </figcaption>
+            </figure>
+            <pre><code class="language-python">import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+rng = np.random.default_rng(1)
+n = 300
+f1, f2 = rng.normal(size=n), rng.normal(size=n)            # two hidden factors (synthetic)
+df = pd.DataFrame({
+    "sleep": f1 + rng.normal(0, 0.7, n),
+    "mood": f1 + rng.normal(0, 0.8, n),
+    "energy": f1 + rng.normal(0, 0.9, n),
+    "screen_time": -0.6 * f1 + rng.normal(0, 1, n),
+    "income": f2 + rng.normal(0, 0.7, n),
+    "education": f2 + rng.normal(0, 0.8, n),
+    "commute": 0.5 * f2 + rng.normal(0, 1, n),
+})
+corr = df.corr()
+
+mask = np.triu(np.ones_like(corr, dtype=bool))            # hide the redundant upper triangle
+fig, ax = plt.subplots(figsize=(6.5, 5))
+sns.heatmap(corr, mask=mask, cmap="RdBu_r", vmin=-1, vmax=1, center=0,   # diverging, centred on 0
+            annot=True, fmt=".2f", square=True, cbar_kws={"label": "correlation r"}, ax=ax)
+ax.set_title("Correlation matrix")
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Clustered Heatmaps</h2>
+            <p>A <strong>clustered heatmap</strong> reorders both the rows and the columns of a data table by hierarchical clustering, so that similar rows and similar columns end up next to each other, and draws the clustering as tree diagrams (<strong>dendrograms</strong>) along the edges. Michael Eisen and colleagues made it the standard picture of gene-expression data in 1998, <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> and Leland Wilkinson and Michael Friendly traced its history back more than a century. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span> Seaborn draws one with <code>clustermap</code>:</p>
+            <pre><code class="language-python">import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+rng = np.random.default_rng(2)
+genes = [f"gene{i:02d}" for i in range(30)]
+samples = [f"S{j}" for j in range(12)]
+# synthetic "expression" data: three groups of genes behave differently in two groups of samples
+pattern = np.repeat([[2, -1], [-1.5, 1.5], [0, 0]], 10, axis=0)
+group = np.repeat([0, 1], 6)
+data = pattern[:, group] + rng.normal(0, 0.7, (30, 12))
+order = rng.permutation(30)                                # shuffle rows so the pattern is hidden
+df = pd.DataFrame(data[order], index=np.array(genes)[order], columns=samples)
+
+g = sns.clustermap(df, cmap="RdBu_r", center=0, z_score=0,   # z_score=0: standardise each row
+                   figsize=(7, 8), dendrogram_ratio=0.15, cbar_pos=(0.02, 0.85, 0.03, 0.12))
+g.figure.suptitle("Clustered heatmap: rows and columns reordered by similarity", y=1.01)
+plt.show()
+</code></pre>
+            <p>Read a clustered heatmap from the tree inward: branches that join low down are very similar; branches that join only near the top are different. The order within a branch can be flipped without changing the tree, so the exact left-to-right sequence means less than it seems.</p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Normalise Before You Colour</h2>
+            <p>When the columns of a table have different units or ranges, colouring the raw numbers lets the largest column take over the whole colour scale. Converting each column to <strong>z-scores</strong> (subtract the column mean, divide by its standard deviation) or rescaling it to 0–1 puts them on an equal footing.</p>
+            <figure class="fig" data-fig="fig-normalise">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Raw or standardised?</strong> Specifications of five laptops (synthetic) in mixed units. Compare colouring by raw numbers with colouring by z-scores.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Parallel Coordinates</h2>
+            <p>In <strong>parallel coordinates</strong>, each variable gets its own vertical axis, the axes stand side by side, and each data point becomes a line that crosses every axis at its value. Maurice d’Ocagne described the idea in 1885 as a calculating aid, and Alfred Inselberg developed it as a way to visualise many dimensions in 1985. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span></p>
+            <figure class="fig" data-fig="fig-parallel">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Parallel coordinates.</strong> Ninety objects of three types (synthetic) measured on five variables. Highlight a type and rearrange the axes.
+              </figcaption>
+            </figure>
+            <pre><code class="language-python">import pandas as pd
+import matplotlib.pyplot as plt
+from pandas.plotting import parallel_coordinates
+from sklearn.datasets import load_iris
+
+iris = load_iris(as_frame=True)
+df = iris.frame.drop(columns="target")
+df.columns = [c.replace(" (cm)", "") for c in df.columns]
+scaled = (df - df.min()) / (df.max() - df.min())          # put every axis on 0–1
+scaled["species"] = iris.target_names[iris.target]
+
+fig, ax = plt.subplots(figsize=(8, 4.5))
+parallel_coordinates(scaled, "species", color=["#0072B2", "#E69F00", "#009E73"], alpha=0.5, ax=ax)
+ax.set_ylabel("Scaled value (0 = minimum, 1 = maximum)")
+ax.set_title("Parallel coordinates: each line is one flower")
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Radar Charts</h2>
+            <p>A <strong>radar chart</strong> (spider chart, star plot) arranges the axes like the spokes of a wheel and joins each item’s values into a polygon. Star-shaped charts of this kind go back at least to Georg von Mayr in 1877. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span> Radar charts are eye-catching and popular for profiles, but they have real problems: the area of the polygon, which dominates the impression, depends on the order of the spokes, and values on spokes at different angles are hard to compare.</p>
+            <figure class="fig" data-fig="fig-radar-order">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. A radar chart and its spokes.</strong> Two phones scored on six features (synthetic). Change only the order of the spokes and watch the areas change.
+              </figcaption>
+            </figure>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+labels = ["Speed", "Battery", "Camera", "Storage", "Value", "Screen"]   # try reordering!
+phone_a = [9, 5, 9, 8, 4, 6]                              # synthetic scores out of 10
+phone_b = [6, 9, 6, 5, 7, 8]
+
+angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
+angles += angles[:1]                                      # close the polygon
+
+fig, ax = plt.subplots(figsize=(5, 5), subplot_kw=dict(polar=True))
+for scores, name, col in [(phone_a, "Phone A", "#0072B2"), (phone_b, "Phone B", "#D55E00")]:
+    vals = scores + scores[:1]
+    ax.plot(angles, vals, color=col, label=name)
+    ax.fill(angles, vals, color=col, alpha=0.2)
+ax.set_xticks(angles[:-1], labels)
+ax.set_ylim(0, 10)
+ax.legend(loc="upper right", bbox_to_anchor=(1.25, 1.1))
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Small Multiples and Facets</h2>
+            <p>Often the best way to show four or five variables is not one complex chart but many simple ones. <strong>Faceting</strong> splits a plot into small multiples (Part 2) by the values of one or two categorical variables, with colour for a third, while keeping the axes identical so that the panels can be compared. Seaborn’s <code>relplot</code>, <code>catplot</code> and <code>displot</code> do this with the <code>col</code>, <code>row</code> and <code>hue</code> arguments: <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span></p>
+            <pre><code class="language-python">import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+rng = np.random.default_rng(3)
+rows = []
+for region in ["North", "South", "East", "West"]:
+    for season in ["Winter", "Summer"]:
+        temp = rng.uniform(0, 30, 40)
+        slope = {"North": 2.0, "South": 3.5, "East": 2.5, "West": 1.0}[region]
+        sales = 20 + slope * temp + (15 if season == "Summer" else 0) + rng.normal(0, 8, 40)
+        rows += [{"region": region, "season": season, "temp": t, "sales": s} for t, s in zip(temp, sales)]
+df = pd.DataFrame(rows)
+
+# one panel per region (columns), colour by season: four variables in one figure
+g = sns.relplot(data=df, x="temp", y="sales", hue="season", col="region", col_wrap=2,
+                height=2.6, aspect=1.3, palette=["#0072B2", "#E69F00"], s=20)
+g.set_axis_labels("Temperature (°C)", "Ice cream sales")
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Common Misreadings</h2>
+            <ul>
+              <li><strong>Reading exact values from colours.</strong> Colour is the least precise encoding; use heatmaps for patterns and label cells when numbers matter.</li>
+              <li><strong>Seeing boundaries that a rainbow colour map created.</strong> Sharp colour changes may not be sharp changes in the data.</li>
+              <li><strong>A diverging scale centred in the wrong place.</strong> The neutral colour should mean something, such as zero.</li>
+              <li><strong>Comparing colours across separately scaled panels.</strong> Two heatmaps with their own colour bars cannot be compared cell for cell.</li>
+              <li><strong>Over-reading the order of a clustered heatmap.</strong> Branches can be flipped; only the tree structure is meaningful.</li>
+              <li><strong>Judging radar charts by area.</strong> The area depends on the order of the spokes.</li>
+              <li><strong>Forgetting standardisation.</strong> After z-scoring, “high” means high relative to the others in that column, not high in absolute terms.</li>
+            </ul>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Legend and Record</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: who invented the heatmap?</div>
+              <p><strong>The legend:</strong> heatmaps were invented by genome scientists in the 1990s.</p>
+              <p><strong>The record:</strong> clustered heatmaps became famous with gene-expression studies, but Leland Wilkinson and Michael Friendly traced shaded tables back to 1873, when Toussaint Loua coloured a table of social statistics for the twenty districts of Paris, and found reordered, shaded matrices in the work of statisticians and psychologists through the twentieth century. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span> The term “heat map” itself was trademarked in 1991 by a software developer for a display of financial market data.</p>
+              <p><strong>A second record:</strong> in 1973 Herman Chernoff proposed representing each data point as a cartoon face, with variables mapped to features such as the size of the eyes, the curve of the mouth and the shape of the head, arguing that people are very good at reading faces. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span> <em>Chernoff faces</em> are memorable, but the impression depends heavily on which variable gets which feature, and they are rarely used today except as a lesson in how encodings shape what we see.</p>
+            </div>
+          </section>
+
+          <section id="section-13">
+            <h2>13. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Toussaint Loua</td>
+                <td style="padding:0.6rem 0.8rem;">1824–1907<br>France</td>
+                <td style="padding:0.6rem 0.8rem;">Shaded table of Paris statistics (1873)</td>
+                <td style="padding:0.6rem 0.8rem;">Drew an early ancestor of the heatmap.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Maurice d’Ocagne</td>
+                <td style="padding:0.6rem 0.8rem;">1862–1938<br>France</td>
+                <td style="padding:0.6rem 0.8rem;">Parallel coordinates (1885)</td>
+                <td style="padding:0.6rem 0.8rem;">Invented parallel axes for calculation.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Herman Chernoff</td>
+                <td style="padding:0.6rem 0.8rem;">born 1923<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Chernoff faces (1973)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed how strongly the choice of encoding shapes perception.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Alfred Inselberg</td>
+                <td style="padding:0.6rem 0.8rem;">born 1936<br>Israel and USA</td>
+                <td style="padding:0.6rem 0.8rem;">Parallel coordinates for visualisation (1985)</td>
+                <td style="padding:0.6rem 0.8rem;">Made parallel coordinates a tool for many dimensions.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Michael Eisen</td>
+                <td style="padding:0.6rem 0.8rem;">born 1967<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Clustered heatmaps of gene expression (1998)</td>
+                <td style="padding:0.6rem 0.8rem;">Popularised the clustered heatmap in biology.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Stéfan van der Walt and Nathaniel Smith</td>
+                <td style="padding:0.6rem 0.8rem;">South Africa and USA</td>
+                <td style="padding:0.6rem 0.8rem;">The viridis colour map (2015)</td>
+                <td style="padding:0.6rem 0.8rem;">Gave Python a perceptually uniform default.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about heatmaps and plots of many variables.</p>
+            <figure class="fig" data-fig="fig-quiz-p8">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-15">
+            <h2>15. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Crameri, Fabio, Shephard, Grace E. &amp; Heron, Philip J.</strong> (2020). "The misuse of colour in science communication." <em>Nature Communications</em>, 11: 5444.</li>
+              <li id="ref-2"><strong>van der Walt, Stéfan &amp; Smith, Nathaniel.</strong> (2015). "A better default colormap for matplotlib." Talk at the SciPy 2015 conference, Austin, Texas.</li>
+              <li id="ref-3"><strong>Borland, David &amp; Taylor, Russell M., II.</strong> (2007). "Rainbow color map (still) considered harmful." <em>IEEE Computer Graphics and Applications</em>, 27(2): 14–17.</li>
+              <li id="ref-4"><strong>Friendly, Michael.</strong> (2002). "Corrgrams: Exploratory displays for correlation matrices." <em>The American Statistician</em>, 56(4): 316–324.</li>
+              <li id="ref-5"><strong>Eisen, Michael B., Spellman, Paul T., Brown, Patrick O. &amp; Botstein, David.</strong> (1998). "Cluster analysis and display of genome-wide expression patterns." <em>Proceedings of the National Academy of Sciences</em>, 95(25): 14863–14868.</li>
+              <li id="ref-6"><strong>Wilkinson, Leland &amp; Friendly, Michael.</strong> (2009). "The history of the cluster heat map." <em>The American Statistician</em>, 63(2): 179–184.</li>
+              <li id="ref-7"><strong>Inselberg, Alfred.</strong> (1985). "The plane with parallel coordinates." <em>The Visual Computer</em>, 1(2): 69–91.</li>
+              <li id="ref-8"><strong>Friendly, Michael.</strong> (2008). "A brief history of data visualization." In C. Chen, W. Härdle &amp; A. Unwin (eds.), <em>Handbook of Data Visualization</em>, pp. 15–56. Berlin: Springer.</li>
+              <li id="ref-9"><strong>Waskom, Michael L.</strong> (2021). "seaborn: statistical data visualization." <em>Journal of Open Source Software</em>, 6(60): 3021.</li>
+              <li id="ref-10"><strong>Chernoff, Herman.</strong> (1973). "The use of faces to represent points in k-dimensional space graphically." <em>Journal of the American Statistical Association</em>, 68(342): 361–368.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/reading-the-picture.html">Reading the Picture</a> (Part 8 of 12)</div>
+  <div class="series-banner-links">
+    <a href="error-bars-and-uncertainty.html">← Part 7: Error Bars and Uncertainty: SD, SE, Confidence Intervals and Forest Plots</a>
+    <a href="diagnostic-plots.html">Part 9: Diagnostic Plots: Q–Q Plots, Residuals, Bland–Altman, Funnel and Volcano Plots →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/heatmaps-and-many-variables.js"></script>
+</body>
+</html>

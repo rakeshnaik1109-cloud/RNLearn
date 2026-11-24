@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Error Bars and Uncertainty: SD, SE, Confidence Intervals and Forest Plots — RNLearn</title>
+  <meta name="description" content="What SD, SE and confidence-interval bars mean, when overlapping bars matter, the dance of confidence intervals, forest plots, dumbbell and slope charts, and uncertainty bands, with Python code.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/error-bars-and-uncertainty.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Error Bars and Uncertainty: SD, SE, Confidence Intervals and Forest Plots — RNLearn">
+  <meta property="og:description" content="What SD, SE and confidence-interval bars mean, when overlapping bars matter, the dance of confidence intervals, forest plots, dumbbell and slope charts, and uncertainty bands, with Python code.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/error-bars-and-uncertainty.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Error Bars and Uncertainty: SD, SE, Confidence Intervals and Forest Plots — RNLearn">
+  <meta name="twitter:description" content="What SD, SE and confidence-interval bars mean, when overlapping bars matter, the dance of confidence intervals, forest plots, dumbbell and slope charts, and uncertainty bands, with Python code.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Error Bars and Uncertainty: SD, SE, Confidence Intervals and Forest Plots",
+    "description": "What SD, SE and confidence-interval bars mean, when overlapping bars matter, the dance of confidence intervals, forest plots, dumbbell and slope charts, and uncertainty bands, with Python code.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-23",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/error-bars-and-uncertainty.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/research.html" class="post-subject-tag" data-subject="research">Research</a>
+        </div>
+        <h1 class="article-title">Error Bars and Uncertainty: SD, SE, Confidence Intervals and Forest Plots</h1>
+        <p class="article-standfirst">
+          The same data can carry error bars three times longer or shorter, overlapping bars can still mean a real difference, and 1 in 20 confidence intervals misses. How to read and draw uncertainty.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-23">23 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>12 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/reading-the-picture.html">Reading the Picture</a> (Part 7 of 12)</div>
+  <div class="series-banner-links">
+    <a href="scatter-plots-and-relationships.html">← Part 6: Scatter Plots and Relationships: Correlation, Trend Lines and Hidden Groups</a>
+    <a href="heatmaps-and-many-variables.html">Part 8: Heatmaps and Many Variables: Colour Scales, Correlation Matrices and Parallel Coordinates →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. How Sure Are We?</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. What Does This Error Bar Mean?</a></li>
+              <li><a class="toc-link" href="#section-4">4. When Do Error Bars Overlap?</a></li>
+              <li><a class="toc-link" href="#section-5">5. The Dance of Confidence Intervals</a></li>
+              <li><a class="toc-link" href="#section-6">6. Forest Plots</a></li>
+              <li><a class="toc-link" href="#section-7">7. Before and After: Dumbbells and Slopes</a></li>
+              <li><a class="toc-link" href="#section-8">8. Uncertainty Around a Line</a></li>
+              <li><a class="toc-link" href="#section-9">9. Showing Uncertainty to Everyone</a></li>
+              <li><a class="toc-link" href="#section-10">10. Common Misreadings</a></li>
+              <li><a class="toc-link" href="#section-11">11. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-12">12. People in This Part</a></li>
+              <li><a class="toc-link" href="#section-13">13. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-14">14. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. How Sure Are We?</h2>
+            <p>Every measurement and every average comes with uncertainty. A chart that shows only the averages, without any sign of how much they might change if the experiment were repeated, invites readers to over-interpret small differences. Error bars, confidence intervals and uncertainty bands are the standard ways of showing that uncertainty, and they are among the most misread marks in science.</p>
+            <p>This part explains the three common kinds of error bar, what overlapping bars do and do not tell you, how confidence intervals behave across repeated experiments, how forest plots combine many studies, how to show change with dumbbell and slope charts, and how to draw uncertainty around a fitted line.</p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-p7-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. Showing uncertainty, 1908–2016.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. What Does This Error Bar Mean?</h2>
+            <p>The same symbol, a line with caps through a point, is used for at least three different things. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+            <ul>
+              <li><strong>Standard deviation (SD):</strong> the typical spread of individual values around the mean. It describes the data, and does not get smaller with more observations.</li>
+              <li><strong>Standard error (SE):</strong> the SD divided by the square root of the sample size. It describes how precisely the mean is known, and shrinks as the sample grows. William Gosset, writing as “Student” in 1908, worked out how to use it properly for small samples. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></li>
+              <li><strong>Confidence interval (CI):</strong> usually 95%, roughly the mean ± 2 SE (a little more for small samples). It is a range produced by a method that captures the true mean in 95% of repeated experiments. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></li>
+            </ul>
+            <figure class="fig" data-fig="fig-error-types">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Three kinds of error bar.</strong> The same two groups with SD, SE or 95% CI bars. Change the sample size and see which bars shrink.
+              </figcaption>
+            </figure>
+            <div class="callout callout-tip">
+              <div class="callout-header">How to read error bars</div>
+              <ol>
+                <li>Find out what the bars are: SD, SE, CI, or something else. If the caption does not say, the figure cannot be interpreted.</li>
+                <li>Find the sample size, <em>n</em>. SE and CI bars depend on it.</li>
+                <li>Check whether the groups are independent or the same subjects measured twice; error bars on paired data can hide a consistent effect.</li>
+                <li>Prefer figures that show the individual data points as well as the bars (Part 5).</li>
+              </ol>
+            </div>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from scipy import stats
+
+rng = np.random.default_rng(3)
+groups = {"Control": rng.normal(50, 10, 20), "Treated": rng.normal(58, 10, 20)}   # synthetic
+
+fig, axes = plt.subplots(1, 3, figsize=(12, 4), sharey=True)
+for ax, kind in zip(axes, ["SD", "SE", "95% CI"]):
+    for i, (name, y) in enumerate(groups.items()):
+        n, m, sd = y.size, y.mean(), y.std(ddof=1)
+        se = sd / np.sqrt(n)
+        half = {"SD": sd, "SE": se, "95% CI": stats.t.ppf(0.975, n - 1) * se}[kind]
+        ax.scatter(np.full(n, i) + rng.uniform(-0.08, 0.08, n), y, s=10, color="lightgray")
+        ax.errorbar(i, m, yerr=half, fmt="o", color="#0072B2", capsize=8, lw=2, ms=7)
+    ax.set_xticks([0, 1], groups.keys())
+    ax.set_xlim(-0.6, 1.6)
+    ax.set_title(f"Mean ± {kind}")
+axes[0].set_ylabel("Measurement")
+plt.suptitle("The same data, three different error bars: always say which one you show")
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-4">
+            <h2>4. When Do Error Bars Overlap?</h2>
+            <p>A common shortcut is to judge whether two groups differ by checking whether their error bars overlap. In 2005 Sarah Belia, Fiona Fidler, Jennifer Williams and Geoff Cumming asked hundreds of authors of articles in psychology, behavioural neuroscience and medical journals to adjust two means until they were just significantly different, and found that many misjudged how much overlap was allowed. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> The rules depend on the kind of bar.</p>
+            <figure class="fig" data-fig="fig-overlap">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Overlap and significance.</strong> Move the second mean and compare the overlap of the bars with the result of a t-test, for SE bars and for 95% CIs.
+              </figcaption>
+            </figure>
+            <p>For two independent groups of similar size: 95% CIs that overlap by no more than about half of one arm’s length correspond to p &lt; 0.05, and CIs that just touch to about p ≈ 0.006. SE bars must be separated by a gap of about one SE for p ≈ 0.05. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span> For paired data, none of these rules apply.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. The Dance of Confidence Intervals</h2>
+            <p>A single confidence interval looks solid on a chart, but if the same experiment were repeated, the interval would move. Geoff Cumming popularised the phrase “the dance of the confidence intervals” for this variability. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span></p>
+            <figure class="fig" data-fig="fig-ci-dance">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Repeating the experiment.</strong> Twenty experiments, each with its 95% CI. Red intervals miss the true mean. Run more experiments and watch the long-run miss rate settle.
+              </figcaption>
+            </figure>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from scipy import stats
+
+rng = np.random.default_rng(4)
+true_mean, sd, n, reps = 50, 10, 15, 25
+fig, ax = plt.subplots(figsize=(7, 5))
+missed = 0
+for k in range(reps):                                   # 25 repeats of the same experiment
+    y = rng.normal(true_mean, sd, n)
+    m, se = y.mean(), y.std(ddof=1) / np.sqrt(n)
+    half = stats.t.ppf(0.975, n - 1) * se
+    hit = m - half &lt;= true_mean &lt;= m + half
+    missed += not hit
+    ax.errorbar(m, k, xerr=half, fmt="o", color="#0072B2" if hit else "#D55E00", capsize=3)
+ax.axvline(true_mean, color="black", ls="--")
+ax.set_xlabel("Sample mean with 95% confidence interval")
+ax.set_ylabel("Repeat of the experiment")
+ax.set_title(f"{missed} of {reps} intervals miss the true mean (expected about 5%)")
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Forest Plots</h2>
+            <p>A <strong>forest plot</strong> displays the results of several studies of the same question, each as a point estimate with its confidence interval, together with a pooled estimate from a <em>meta-analysis</em>. It is the standard figure of systematic reviews in medicine. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+            <figure class="fig" data-fig="fig-forest">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. A forest plot.</strong> Six synthetic trials of a treatment, with their pooled risk ratio. Leave out each study in turn to test how robust the conclusion is.
+              </figcaption>
+            </figure>
+            <div class="callout callout-tip">
+              <div class="callout-header">How to read a forest plot</div>
+              <ol>
+                <li>Find the line of no effect: 1 for ratios, 0 for differences. Which side favours the treatment?</li>
+                <li>Each square is a study’s estimate; its size shows the study’s weight. Each line is its confidence interval.</li>
+                <li>The diamond is the pooled estimate; if it does not cross the line of no effect, the combined evidence points one way.</li>
+                <li>Look at the spread of the studies: if they disagree more than their intervals suggest, the pooled estimate may hide real differences (heterogeneity).</li>
+              </ol>
+            </div>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# synthetic studies: log risk ratio and its standard error
+names = ["Study A", "Study B", "Study C", "Study D", "Study E", "Study F"]
+log_rr = np.array([-0.35, -0.10, -0.45, 0.05, -0.25, -0.30])
+se = np.array([0.20, 0.15, 0.30, 0.25, 0.10, 0.18])
+
+w = 1 / se**2                                           # inverse-variance weights (fixed effect)
+pooled = np.sum(w * log_rr) / np.sum(w)
+pooled_se = 1 / np.sqrt(np.sum(w))
+
+fig, ax = plt.subplots(figsize=(7, 4))
+y = np.arange(len(names))[::-1] + 2
+for yi, est, s, wi in zip(y, log_rr, se, w):
+    ax.plot(np.exp([est - 1.96 * s, est + 1.96 * s]), [yi, yi], color="black")
+    ax.plot(np.exp(est), yi, "s", color="#0072B2", ms=4 + 10 * wi / w.max())   # square size ∝ weight
+lo, hi = np.exp(pooled - 1.96 * pooled_se), np.exp(pooled + 1.96 * pooled_se)
+ax.fill([lo, np.exp(pooled), hi, np.exp(pooled)], [0.8, 1.15, 0.8, 0.45], color="#D55E00")  # diamond
+ax.axvline(1, color="gray", ls="--")                    # no effect
+ax.set_xscale("log")
+ticks = [0.4, 0.6, 0.8, 1, 1.25, 1.6]
+ax.set_xticks(ticks, [str(t) for t in ticks])
+ax.minorticks_off()
+ax.set_yticks(list(y) + [0.8], names + ["Pooled"])
+ax.set_xlabel("Risk ratio (log scale): left of 1 favours treatment")
+ax.set_title(f"Forest plot: pooled RR = {np.exp(pooled):.2f} ({lo:.2f} to {hi:.2f})")
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Before and After: Dumbbells and Slopes</h2>
+            <p>When the story is a change between two moments or two conditions, show the change itself. A <strong>dumbbell chart</strong> joins the two values for each item with a line. A <strong>slope chart</strong> (or slopegraph), a design Edward Tufte showed in 1983, puts the two moments in two columns and joins each item’s values, so that rises, falls and changes in rank are obvious. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span></p>
+            <figure class="fig" data-fig="fig-slope">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. Showing change.</strong> Pass rates of six schools before and after a programme (synthetic), as grouped bars, a dumbbell chart and a slope chart.
+              </figcaption>
+            </figure>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+schools = ["Ash", "Birch", "Cedar", "Elm", "Oak", "Pine"]
+before = np.array([62, 55, 71, 48, 66, 58])            # synthetic pass rates (%)
+after = np.array([70, 54, 78, 63, 67, 72])
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4))
+order = np.argsort(after - before)
+for k, i in enumerate(order):                           # dumbbell: one row per school
+    ax1.plot([before[i], after[i]], [k, k], color="lightgray", lw=3)
+    ax1.plot(before[i], k, "o", color="#999999")
+    ax1.plot(after[i], k, "o", color="#0072B2")
+ax1.set_yticks(range(len(schools)), np.array(schools)[order])
+ax1.set_xlabel("Pass rate (%)  grey: before, blue: after")
+ax1.set_title("Dumbbell chart, sorted by change")
+
+for i, s in enumerate(schools):                         # slope chart
+    col = "#0072B2" if after[i] &gt; before[i] else "#D55E00"
+    ax2.plot([0, 1], [before[i], after[i]], color=col, marker="o")
+    ax2.text(1.05, after[i], s, va="center", fontsize=9)
+ax2.set_xticks([0, 1], ["Before", "After"])
+ax2.set_xlim(-0.2, 1.35)
+ax2.set_title("Slope chart")
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Uncertainty Around a Line</h2>
+            <p>A fitted line has two kinds of uncertainty band. The <strong>confidence band</strong> shows where the true average line might be; it is narrowest near the middle of the data. The <strong>prediction band</strong> shows where a new individual observation is likely to fall, and is much wider because it includes the scatter of individual points. Confusing the two makes predictions look far more certain than they are.</p>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+rng = np.random.default_rng(1)
+x = np.sort(rng.uniform(0, 10, 60))
+y = 2 + 0.8 * x + rng.normal(0, 1.5, x.size)
+
+X = np.column_stack([np.ones_like(x), x])
+beta, res, *_ = np.linalg.lstsq(X, y, rcond=None)
+n, p = X.shape
+s = np.sqrt(res[0] / (n - p))                           # residual standard deviation
+grid = np.linspace(0, 10, 100)
+G = np.column_stack([np.ones_like(grid), grid])
+XtX_inv = np.linalg.inv(X.T @ X)
+se_mean = s * np.sqrt(np.sum(G @ XtX_inv * G, axis=1))  # uncertainty of the fitted line
+se_pred = np.sqrt(se_mean**2 + s**2)                     # ...plus the scatter of new points
+fit = G @ beta
+t = 2.0                                                  # about the 95% t value for n = 60
+
+fig, ax = plt.subplots(figsize=(7, 4.5))
+ax.fill_between(grid, fit - t * se_pred, fit + t * se_pred, color="#56B4E9", alpha=0.2,
+                label="95% prediction band (new observations)")
+ax.fill_between(grid, fit - t * se_mean, fit + t * se_mean, color="#0072B2", alpha=0.4,
+                label="95% confidence band (the line)")
+ax.plot(grid, fit, color="#0072B2")
+ax.scatter(x, y, s=12, color="black")
+ax.legend(loc="upper left")
+plt.tight_layout()
+plt.show()
+</code></pre>
+            <p>Seaborn’s <code>regplot</code> draws the confidence band by default. Always say which band you show, and at what level.</p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Showing Uncertainty to Everyone</h2>
+            <p>Error bars are a specialist’s tool. For general audiences, other designs work better. Since 1996 the Bank of England has published its inflation forecasts as <strong>fan charts</strong>, with darker bands for more likely outcomes fading into lighter ones. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span> Matthew Kay and colleagues found that <strong>quantile dot plots</strong>, which show, say, twenty equally likely outcomes as twenty dots, helped people decide when to leave for a bus better than a density curve or an interval did. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span> Animations that show many possible outcomes one after another, called hypothetical outcome plots, make the same point: uncertainty is easier to grasp as a set of possibilities than as a bar.</p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Common Misreadings</h2>
+            <ul>
+              <li><strong>Not knowing what the bars are.</strong> SD, SE and CI bars for the same data differ several-fold in length.</li>
+              <li><strong>“The bars overlap, so there is no difference.”</strong> 95% CIs can overlap and still indicate a significant difference.</li>
+              <li><strong>“The bars don’t overlap, so the difference is significant.”</strong> SE bars that just fail to overlap mean p ≈ 0.16.</li>
+              <li><strong>Reading a 95% CI as containing 95% of the data.</strong> That is roughly ±2 SD, not ±2 SE.</li>
+              <li><strong>Saying “95% probability the true value is in this interval”.</strong> Strictly, the 95% describes the method across repeated experiments.</li>
+              <li><strong>Using independent-group bars for paired data.</strong> A consistent improvement in every subject can look like nothing.</li>
+              <li><strong>Treating a confidence band as a prediction band.</strong> Individual outcomes are far more variable than the average line.</li>
+            </ul>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Legend and Record</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: forests and logos</div>
+              <p><strong>The legend:</strong> the forest plot is named after a researcher called Forrest.</p>
+              <p><strong>The record:</strong> Steff Lewis and Mike Clarke traced the history of the name in 2001. Plots of this kind appeared in the 1970s and 1980s, and the name “forest plot” was in use by the early 1990s; they noted the story about a researcher named Forrest but found no evidence for it, and the obvious explanation is the resemblance of the many lines to a forest of trees. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+              <p><strong>A second record:</strong> the logo of the Cochrane Collaboration, founded in 1993 to produce systematic reviews of medical evidence, is a forest plot. It shows trials of giving corticosteroids to women about to give birth prematurely. Each trial alone was inconclusive, but together they showed that the treatment reduced deaths of premature babies, a result that took years to be widely adopted because nobody had combined the evidence. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+            </div>
+          </section>
+
+          <section id="section-12">
+            <h2>12. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">William Sealy Gosset (“Student”)</td>
+                <td style="padding:0.6rem 0.8rem;">1876–1937<br>Guinness brewery, Dublin</td>
+                <td style="padding:0.6rem 0.8rem;">“The probable error of a mean” (1908)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed how to handle the uncertainty of small samples.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Jerzy Neyman</td>
+                <td style="padding:0.6rem 0.8rem;">1894–1981<br>Poland, London and Berkeley</td>
+                <td style="padding:0.6rem 0.8rem;">Theory of confidence intervals (1937)</td>
+                <td style="padding:0.6rem 0.8rem;">Defined what a confidence interval means.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Geoff Cumming</td>
+                <td style="padding:0.6rem 0.8rem;">Australia</td>
+                <td style="padding:0.6rem 0.8rem;">“Error bars in experimental biology” (2007, with Fidler and Vaux); <em>the new statistics</em></td>
+                <td style="padding:0.6rem 0.8rem;">Taught researchers to read and use intervals.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Edward Tufte</td>
+                <td style="padding:0.6rem 0.8rem;">born 1942<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Slopegraphs (1983)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed how to display change directly.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Matthew Kay</td>
+                <td style="padding:0.6rem 0.8rem;">USA</td>
+                <td style="padding:0.6rem 0.8rem;">Quantile dot plots (2016, with colleagues)</td>
+                <td style="padding:0.6rem 0.8rem;">Studied how ordinary people read uncertainty.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about error bars and uncertainty.</p>
+            <figure class="fig" data-fig="fig-quiz-p7">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-14">
+            <h2>14. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Cumming, Geoff, Fidler, Fiona &amp; Vaux, David L.</strong> (2007). "Error bars in experimental biology." <em>Journal of Cell Biology</em>, 177(1): 7–11.</li>
+              <li id="ref-2"><strong>Student [Gosset, W. S.].</strong> (1908). "The probable error of a mean." <em>Biometrika</em>, 6(1): 1–25.</li>
+              <li id="ref-3"><strong>Neyman, Jerzy.</strong> (1937). "Outline of a theory of statistical estimation based on the classical theory of probability." <em>Philosophical Transactions of the Royal Society of London A</em>, 236: 333–380.</li>
+              <li id="ref-4"><strong>Belia, Sarah, Fidler, Fiona, Williams, Jennifer &amp; Cumming, Geoff.</strong> (2005). "Researchers misunderstand confidence intervals and standard error bars." <em>Psychological Methods</em>, 10(4): 389–396.</li>
+              <li id="ref-5"><strong>Cumming, Geoff.</strong> (2014). "The new statistics: Why and how." <em>Psychological Science</em>, 25(1): 7–29.</li>
+              <li id="ref-6"><strong>Lewis, Steff &amp; Clarke, Mike.</strong> (2001). "Forest plots: trying to see the wood and the trees." <em>BMJ</em>, 322: 1479–1480.</li>
+              <li id="ref-7"><strong>Tufte, Edward R.</strong> (1983). <em>The Visual Display of Quantitative Information</em>. Cheshire, CT: Graphics Press.</li>
+              <li id="ref-8"><strong>Britton, Erik, Fisher, Paul &amp; Whitley, John.</strong> (1998). "The Inflation Report projections: understanding the fan chart." <em>Bank of England Quarterly Bulletin</em>, 38(1): 30–37.</li>
+              <li id="ref-9"><strong>Kay, Matthew, Kola, Tara, Hullman, Jessica R. &amp; Munson, Sean A.</strong> (2016). "When (ish) is my bus? User-centered visualizations of uncertainty in everyday, mobile predictive systems." <em>Proceedings of the 2016 CHI Conference on Human Factors in Computing Systems</em>: 5092–5103.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/reading-the-picture.html">Reading the Picture</a> (Part 7 of 12)</div>
+  <div class="series-banner-links">
+    <a href="scatter-plots-and-relationships.html">← Part 6: Scatter Plots and Relationships: Correlation, Trend Lines and Hidden Groups</a>
+    <a href="heatmaps-and-many-variables.html">Part 8: Heatmaps and Many Variables: Colour Scales, Correlation Matrices and Parallel Coordinates →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/error-bars-and-uncertainty.js"></script>
+</body>
+</html>

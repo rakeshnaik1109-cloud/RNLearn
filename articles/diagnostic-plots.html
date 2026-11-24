@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagnostic Plots: Q–Q Plots, Residuals, Bland–Altman, Funnel and Volcano Plots — RNLearn</title>
+  <meta name="description" content="Plots that check an analysis: Q–Q plots, residual plots, leverage and Cook’s distance, Bland–Altman agreement, funnel plots for publication bias and volcano plots, with Python code.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/diagnostic-plots.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Diagnostic Plots: Q–Q Plots, Residuals, Bland–Altman, Funnel and Volcano Plots — RNLearn">
+  <meta property="og:description" content="Plots that check an analysis: Q–Q plots, residual plots, leverage and Cook’s distance, Bland–Altman agreement, funnel plots for publication bias and volcano plots, with Python code.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/diagnostic-plots.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Diagnostic Plots: Q–Q Plots, Residuals, Bland–Altman, Funnel and Volcano Plots — RNLearn">
+  <meta name="twitter:description" content="Plots that check an analysis: Q–Q plots, residual plots, leverage and Cook’s distance, Bland–Altman agreement, funnel plots for publication bias and volcano plots, with Python code.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Diagnostic Plots: Q–Q Plots, Residuals, Bland–Altman, Funnel and Volcano Plots",
+    "description": "Plots that check an analysis: Q–Q plots, residual plots, leverage and Cook’s distance, Bland–Altman agreement, funnel plots for publication bias and volcano plots, with Python code.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-23",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/diagnostic-plots.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/research.html" class="post-subject-tag" data-subject="research">Research</a>
+        </div>
+        <h1 class="article-title">Diagnostic Plots: Q–Q Plots, Residuals, Bland–Altman, Funnel and Volcano Plots</h1>
+        <p class="article-standfirst">
+          Two instruments that correlate at r = 0.99 and still disagree, one point that swings a whole regression line, and a literature missing its disappointing studies. The plots that check whether an analysis can be trusted.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-23">23 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>11 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/reading-the-picture.html">Reading the Picture</a> (Part 9 of 12)</div>
+  <div class="series-banner-links">
+    <a href="heatmaps-and-many-variables.html">← Part 8: Heatmaps and Many Variables: Colour Scales, Correlation Matrices and Parallel Coordinates</a>
+    <a href="treemaps-sankeys-and-waterfalls.html">Part 10: Treemaps, Sankeys and Waterfalls: Charts for Hierarchies, Parts and Flows →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. Plots That Check Your Assumptions</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. The Q–Q Plot</a></li>
+              <li><a class="toc-link" href="#section-4">4. Residual Plots</a></li>
+              <li><a class="toc-link" href="#section-5">5. Influential Points</a></li>
+              <li><a class="toc-link" href="#section-6">6. Bland–Altman Plots</a></li>
+              <li><a class="toc-link" href="#section-7">7. Funnel Plots</a></li>
+              <li><a class="toc-link" href="#section-8">8. Volcano Plots</a></li>
+              <li><a class="toc-link" href="#section-9">9. Common Misreadings</a></li>
+              <li><a class="toc-link" href="#section-10">10. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-11">11. People in This Part</a></li>
+              <li><a class="toc-link" href="#section-12">12. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-13">13. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. Plots That Check Your Assumptions</h2>
+            <p>Most of the plots in this series are for exploring data or presenting results. This part is about a different family: <strong>diagnostic plots</strong>, which check whether an analysis is trustworthy. Is the distribution close enough to normal for a t-test? Does the straight line really fit? Is one data point steering the whole result? Do two instruments agree? Are studies missing from a literature review? Which of thousands of genes really changed?</p>
+            <p>Diagnostic plots are rarely published, but every careful analyst makes them. Learning to read them is also the best way to read other people’s analyses critically.</p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-p9-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. Diagnostic plots, 1963 to the 2000s.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. The Q–Q Plot</h2>
+            <p>Many statistical methods assume that data, or a model’s errors, follow a normal distribution. A histogram is a poor judge of this, because it depends on the bin width (Part 4) and the eye is bad at comparing curves. A <strong>quantile–quantile (Q–Q) plot</strong>, set out by Martin Wilk and Ram Gnanadesikan in 1968, is better: it sorts the data and plots each value against where it would fall if the data were perfectly normal. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span> Normal data lie on a straight line; deviations show exactly how the shape differs.</p>
+            <figure class="fig" data-fig="fig-qq">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Reading Q–Q plots.</strong> Six distributions, each shown as a histogram and as a normal Q–Q plot. Change the sample size to see how much normal data wobble.
+              </figcaption>
+            </figure>
+            <div class="callout callout-tip">
+              <div class="callout-header">How to read a Q–Q plot</div>
+              <ul>
+                <li><strong>Straight line:</strong> consistent with the reference distribution.</li>
+                <li><strong>Curve bending up (convex):</strong> right skew; <strong>bending down (concave):</strong> left skew.</li>
+                <li><strong>S-shape, steep at the ends:</strong> heavy tails; <strong>flat at the ends:</strong> light tails.</li>
+                <li><strong>Steps or a flat stretch:</strong> rounding, ties or a gap between clusters.</li>
+                <li><strong>A few points off at the very ends:</strong> often just chance, especially in small samples.</li>
+              </ul>
+            </div>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from scipy import stats
+
+rng = np.random.default_rng(0)
+samples = {
+    "Normal": rng.normal(0, 1, 200),
+    "Right-skewed": rng.lognormal(0, 0.6, 200),
+    "Heavy-tailed (t, 3 df)": rng.standard_t(3, 200),
+}
+
+fig, axes = plt.subplots(2, 3, figsize=(12, 6.5))
+for j, (name, x) in enumerate(samples.items()):
+    axes[0, j].hist(x, bins=30, color="#0072B2", edgecolor="white")
+    axes[0, j].set_title(name)
+    stats.probplot(x, dist="norm", plot=axes[1, j])        # sample quantiles vs normal quantiles
+    axes[1, j].set_title("Normal Q–Q plot")
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Residual Plots</h2>
+            <p>After fitting a model, the <strong>residuals</strong>, the differences between the observed values and the model’s predictions, contain everything the model failed to explain. Plotting them against the fitted values magnifies problems that are hard to see in the original data. Frank Anscombe and John Tukey made the examination of residuals a standard practice in 1963. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-residuals">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Residual plots.</strong> A straight line fitted to four synthetic data sets. The residual plot shows what the fit missed.
+              </figcaption>
+            </figure>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+rng = np.random.default_rng(1)
+x = rng.uniform(0, 10, 100)
+cases = {
+    "Good fit": 2 + 1.0 * x + rng.normal(0, 1, 100),
+    "Missed curve": 2 + 0.15 * x**2 + rng.normal(0, 1, 100),
+    "Growing spread": 2 + 1.0 * x + rng.normal(0, 0.25 * x + 0.2, 100),
+}
+
+fig, axes = plt.subplots(2, 3, figsize=(12, 6.5))
+for j, (name, y) in enumerate(cases.items()):
+    b, a = np.polyfit(x, y, 1)                             # straight-line fit
+    fitted = a + b * x
+    resid = y - fitted
+    axes[0, j].scatter(x, y, s=10)
+    axes[0, j].plot(np.sort(x), a + b * np.sort(x), color="#D55E00")
+    axes[0, j].set_title(name)
+    axes[1, j].scatter(fitted, resid, s=10, color="#009E73")
+    axes[1, j].axhline(0, color="gray", lw=1)
+    axes[1, j].set_xlabel("Fitted value")
+    axes[1, j].set_ylabel("Residual")
+plt.tight_layout()
+plt.show()
+</code></pre>
+            <p>A good residual plot is boring: a horizontal band of random scatter around zero. Patterns mean the model is wrong in a specific way: a curve (wrong shape), a fan (non-constant spread), clusters (a missing grouping variable) or isolated points (outliers).</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Influential Points</h2>
+            <p>Not all points matter equally to a fitted line. A point far out along the x-axis has high <strong>leverage</strong>: like a long lever, it can tip the line. Whether it does depends on whether it agrees with the rest. <strong>Cook’s distance</strong>, proposed by R. Dennis Cook in 1977, measures how much the fitted values would change if a point were removed. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+            <figure class="fig" data-fig="fig-influence">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Leverage and influence.</strong> Move one extra point around and watch the regression line (solid) compared with the line without it (dashed).
+              </figcaption>
+            </figure>
+            <pre><code class="language-python"># pip install statsmodels
+import numpy as np
+import matplotlib.pyplot as plt
+import statsmodels.api as sm
+
+rng = np.random.default_rng(2)
+x = rng.uniform(0, 10, 30)
+y = 3 + 0.5 * x + rng.normal(0, 1, 30)
+x = np.append(x, 20)                                       # one far-out point...
+y = np.append(y, 2)                                        # ...that disagrees with the rest
+
+model = sm.OLS(y, sm.add_constant(x)).fit()
+cooks = model.get_influence().cooks_distance[0]
+print("Largest Cook's distance:", cooks.max().round(2), "at point", cooks.argmax())
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4))
+ax1.scatter(x, y, c=cooks, cmap="viridis", s=30)
+grid = np.array([0, 20])
+ax1.plot(grid, model.params[0] + model.params[1] * grid, color="#D55E00", label="with the point")
+m2 = sm.OLS(y[:-1], sm.add_constant(x[:-1])).fit()
+ax1.plot(grid, m2.params[0] + m2.params[1] * grid, color="gray", ls="--", label="without it")
+ax1.legend()
+sm.graphics.influence_plot(model, ax=ax2, criterion="cooks")   # leverage vs studentised residual
+plt.tight_layout()
+plt.show()
+</code></pre>
+            <p>An influential point is not necessarily wrong. It may be a data error, or the most informative observation in the study. The right response is to check it and to report results with and without it, not to delete it quietly.</p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Bland–Altman Plots</h2>
+            <p>When a new instrument is compared with an established one, researchers often report a high correlation as proof that they agree. In 1986 Martin Bland and Douglas Altman showed in <em>The Lancet</em> why this is wrong: correlation measures whether two methods rise and fall together, not whether they give the same numbers. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> Their plot of the <strong>difference</strong> between methods against their <strong>average</strong> is now standard in medicine and measurement science, and their paper became one of the most cited in the medical literature.</p>
+            <figure class="fig" data-fig="fig-bland-altman">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Agreement is not correlation.</strong> Two methods measuring the same quantity (synthetic). Add a constant or proportional bias to method B and compare the correlation with the Bland–Altman plot.
+              </figcaption>
+            </figure>
+            <div class="callout callout-tip">
+              <div class="callout-header">How to read a Bland–Altman plot</div>
+              <ol>
+                <li>The solid line is the mean difference: the average <strong>bias</strong> of one method relative to the other.</li>
+                <li>The dashed lines are the 95% <strong>limits of agreement</strong>: most individual differences fall between them. Are they narrow enough for practical use?</li>
+                <li>A slope in the points means the bias depends on the size of the measurement.</li>
+                <li>A spread that widens to the right suggests the error is proportional; analyse percentage differences instead.</li>
+              </ol>
+            </div>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+rng = np.random.default_rng(3)
+true = rng.uniform(80, 180, 60)                           # e.g. blood pressure (synthetic)
+method_a = true + rng.normal(0, 4, 60)
+method_b = 1.12 * true - 14 + rng.normal(0, 4, 60)        # biased, and more so at high values
+
+mean_ab = (method_a + method_b) / 2
+diff = method_b - method_a
+bias, sd = diff.mean(), diff.std(ddof=1)
+print(f"r = {np.corrcoef(method_a, method_b)[0, 1]:.3f} (high, but says nothing about agreement)")
+
+fig, ax = plt.subplots(figsize=(7, 4.5))
+ax.scatter(mean_ab, diff, s=18, color="#0072B2")
+ax.axhline(bias, color="black", label=f"mean difference (bias) = {bias:.1f}")
+for k in (-1.96, 1.96):
+    ax.axhline(bias + k * sd, color="#D55E00", ls="--")
+ax.axhline(0, color="gray", lw=0.8)
+ax.set_xlabel("Mean of the two methods")
+ax.set_ylabel("Difference (B − A)")
+ax.set_title("Bland–Altman plot with 95% limits of agreement")
+ax.legend(loc="upper left")
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Funnel Plots</h2>
+            <p>A meta-analysis (Part 7) can only combine the studies it can find. If studies with disappointing results are less likely to be published, the published evidence is biased. Richard Light and David Pillemer suggested in 1984 plotting each study’s estimate against its size or precision. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> Small studies scatter widely and large ones cluster near the truth, so the points should form a symmetrical, inverted funnel; a missing corner suggests missing studies. Matthias Egger and colleagues gave a statistical test for this asymmetry in 1997. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+            <figure class="fig" data-fig="fig-funnel">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. A funnel plot.</strong> Ninety synthetic studies of an effect whose true size is 0.2. Switch between all studies and only those that would have been published.
+              </figcaption>
+            </figure>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+rng = np.random.default_rng(4)
+true_effect = 0.2
+se = rng.uniform(0.05, 0.5, 80)                           # small studies have large standard errors
+est = rng.normal(true_effect, se)
+published = (est / se &gt; 1.0) | (se &lt; 0.15)                # small, unimpressive studies stay in the drawer
+
+fig, ax = plt.subplots(figsize=(6.5, 5))
+ax.scatter(est[~published], se[~published], facecolors="none", edgecolors="gray", label="unpublished")
+ax.scatter(est[published], se[published], color="#0072B2", label="published")
+s = np.linspace(0, 0.55, 50)
+ax.plot(true_effect - 1.96 * s, s, color="black", lw=0.8)  # funnel: 95% of studies expected inside
+ax.plot(true_effect + 1.96 * s, s, color="black", lw=0.8)
+ax.axvline(true_effect, color="black", ls="--")
+ax.invert_yaxis()                                         # most precise studies at the top
+ax.set_xlabel("Estimated effect")
+ax.set_ylabel("Standard error")
+ax.set_title("Funnel plot: missing studies make it lopsided")
+ax.legend()
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Volcano Plots</h2>
+            <p>Modern biology often tests thousands of genes or proteins at once. A <strong>volcano plot</strong> shows every test in one picture: the size of the change on the horizontal axis (usually log₂ fold change) and the strength of the evidence on the vertical axis (−log₁₀ of the p-value), so that the most interesting results erupt into the upper corners. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span></p>
+            <figure class="fig" data-fig="fig-volcano">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 7. A volcano plot.</strong> Two thousand synthetic genes, of which 5% truly change. Move the thresholds and count the false positives.
+              </figcaption>
+            </figure>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from scipy import stats
+
+rng = np.random.default_rng(5)
+n_genes, n = 3000, 6
+effect = np.where(rng.random(n_genes) &lt; 0.05, rng.normal(0, 2, n_genes), 0)   # 5% truly change
+a = rng.normal(0, 1, (n_genes, n))
+b = rng.normal(effect[:, None], 1, (n_genes, n))
+log2fc = b.mean(1) - a.mean(1)                            # log2 fold change (synthetic)
+p = stats.ttest_ind(b, a, axis=1).pvalue
+
+hit = (np.abs(log2fc) &gt; 1) &amp; (p &lt; 0.01)
+fig, ax = plt.subplots(figsize=(7, 5))
+ax.scatter(log2fc[~hit], -np.log10(p[~hit]), s=6, color="lightgray")
+ax.scatter(log2fc[hit], -np.log10(p[hit]), s=10, color=np.where(log2fc[hit] &gt; 0, "#D55E00", "#0072B2"))
+ax.axhline(-np.log10(0.01), color="gray", ls="--", lw=1)
+for v in (-1, 1):
+    ax.axvline(v, color="gray", ls="--", lw=1)
+ax.set_xlabel("log₂ fold change")
+ax.set_ylabel("−log₁₀ p-value")
+ax.set_title(f"Volcano plot: {hit.sum()} genes pass both thresholds")
+plt.tight_layout()
+plt.show()
+</code></pre>
+            <p>A related plot, the <em>Manhattan plot</em>, shows −log₁₀ p against position along the genome in genome-wide association studies, so that strong signals rise like skyscrapers.</p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Common Misreadings</h2>
+            <ul>
+              <li><strong>Demanding perfect Q–Q lines.</strong> Small samples wobble; many methods are robust to mild non-normality, especially with large samples.</li>
+              <li><strong>Checking the normality of the raw data instead of the residuals.</strong> Regression assumes normal errors, not normal variables.</li>
+              <li><strong>Deleting influential points to tidy a result.</strong> Investigate, then report with and without them.</li>
+              <li><strong>Treating high correlation as agreement.</strong> Use Bland–Altman limits of agreement.</li>
+              <li><strong>Reading every funnel asymmetry as fraud or bias.</strong> Small studies may genuinely differ, for example in their patients or methods.</li>
+              <li><strong>Trusting every dot above a volcano threshold.</strong> With thousands of tests, many “hits” are false positives unless the p-values are corrected.</li>
+            </ul>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Legend and Record</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: statistics in measurement</div>
+              <p><strong>The legend:</strong> if two methods correlate at r = 0.99, they can be used interchangeably.</p>
+              <p><strong>The record:</strong> Bland and Altman pointed out that correlation depends on the range of the samples: measure a wide enough range of people and almost any two methods correlate highly, even if they disagree by clinically important amounts for individuals. A method that always reads twice the true value correlates perfectly with the truth. Their 1986 paper was written to stop this misuse. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span></p>
+              <p><strong>A second legend:</strong> if a Q–Q plot is not straight, a test cannot be used. <strong>The record:</strong> the t-test and regression are fairly robust to non-normality, especially with large, similar-sized groups, thanks to the central limit theorem. What matters more is often independence of the observations and outliers, which residual and influence plots reveal.</p>
+            </div>
+          </section>
+
+          <section id="section-11">
+            <h2>11. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John Tukey and Frank Anscombe</td>
+                <td style="padding:0.6rem 0.8rem;">1915–2000 and 1918–2001<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">“The examination and analysis of residuals” (1963)</td>
+                <td style="padding:0.6rem 0.8rem;">Made residual analysis routine.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Martin Wilk and Ram Gnanadesikan</td>
+                <td style="padding:0.6rem 0.8rem;">Canada and USA</td>
+                <td style="padding:0.6rem 0.8rem;">Probability plotting methods (1968)</td>
+                <td style="padding:0.6rem 0.8rem;">Set out the Q–Q plot.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">R. Dennis Cook</td>
+                <td style="padding:0.6rem 0.8rem;">born 1944<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Cook’s distance (1977)</td>
+                <td style="padding:0.6rem 0.8rem;">Gave a measure of each point’s influence.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Martin Bland and Douglas Altman</td>
+                <td style="padding:0.6rem 0.8rem;">1947– and 1948–2018<br>UK</td>
+                <td style="padding:0.6rem 0.8rem;">Agreement between methods of measurement (1986)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed why correlation is not agreement.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Richard Light and David Pillemer</td>
+                <td style="padding:0.6rem 0.8rem;">USA</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Summing Up</em> (1984)</td>
+                <td style="padding:0.6rem 0.8rem;">Proposed the funnel plot.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Matthias Egger</td>
+                <td style="padding:0.6rem 0.8rem;">born 1956<br>Switzerland and UK</td>
+                <td style="padding:0.6rem 0.8rem;">Test for funnel-plot asymmetry (1997)</td>
+                <td style="padding:0.6rem 0.8rem;">Made publication bias testable.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about diagnostic plots.</p>
+            <figure class="fig" data-fig="fig-quiz-p9">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-13">
+            <h2>13. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Wilk, M. B. &amp; Gnanadesikan, R.</strong> (1968). "Probability plotting methods for the analysis of data." <em>Biometrika</em>, 55(1): 1–17.</li>
+              <li id="ref-2"><strong>Anscombe, F. J. &amp; Tukey, John W.</strong> (1963). "The examination and analysis of residuals." <em>Technometrics</em>, 5(2): 141–160.</li>
+              <li id="ref-3"><strong>Cook, R. Dennis.</strong> (1977). "Detection of influential observation in linear regression." <em>Technometrics</em>, 19(1): 15–18.</li>
+              <li id="ref-4"><strong>Bland, J. Martin &amp; Altman, Douglas G.</strong> (1986). "Statistical methods for assessing agreement between two methods of clinical measurement." <em>The Lancet</em>, 327(8476): 307–310.</li>
+              <li id="ref-5"><strong>Light, Richard J. &amp; Pillemer, David B.</strong> (1984). <em>Summing Up: The Science of Reviewing Research</em>. Cambridge, MA: Harvard University Press.</li>
+              <li id="ref-6"><strong>Egger, Matthias, Davey Smith, George, Schneider, Martin &amp; Minder, Christoph.</strong> (1997). "Bias in meta-analysis detected by a simple, graphical test." <em>BMJ</em>, 315: 629–634.</li>
+              <li id="ref-7"><strong>Cui, Xiangqin &amp; Churchill, Gary A.</strong> (2003). "Statistical tests for differential expression in cDNA microarray experiments." <em>Genome Biology</em>, 4: 210.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/reading-the-picture.html">Reading the Picture</a> (Part 9 of 12)</div>
+  <div class="series-banner-links">
+    <a href="heatmaps-and-many-variables.html">← Part 8: Heatmaps and Many Variables: Colour Scales, Correlation Matrices and Parallel Coordinates</a>
+    <a href="treemaps-sankeys-and-waterfalls.html">Part 10: Treemaps, Sankeys and Waterfalls: Charts for Hierarchies, Parts and Flows →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/diagnostic-plots.js"></script>
+</body>
+</html>

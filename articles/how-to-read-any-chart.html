@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Read Any Chart: Anatomy, Scales and the Lessons of Anscombe’s Quartet — RNLearn</title>
+  <meta name="description" content="The parts of a chart, five questions to ask of any plot, Anscombe’s quartet, linear versus log scales, truncated axes, what the eye reads best, colour, and Python code for each.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/how-to-read-any-chart.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="How to Read Any Chart: Anatomy, Scales and the Lessons of Anscombe’s Quartet — RNLearn">
+  <meta property="og:description" content="The parts of a chart, five questions to ask of any plot, Anscombe’s quartet, linear versus log scales, truncated axes, what the eye reads best, colour, and Python code for each.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/how-to-read-any-chart.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How to Read Any Chart: Anatomy, Scales and the Lessons of Anscombe’s Quartet — RNLearn">
+  <meta name="twitter:description" content="The parts of a chart, five questions to ask of any plot, Anscombe’s quartet, linear versus log scales, truncated axes, what the eye reads best, colour, and Python code for each.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "How to Read Any Chart: Anatomy, Scales and the Lessons of Anscombe’s Quartet",
+    "description": "The parts of a chart, five questions to ask of any plot, Anscombe’s quartet, linear versus log scales, truncated axes, what the eye reads best, colour, and Python code for each.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-23",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/how-to-read-any-chart.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/research.html" class="post-subject-tag" data-subject="research">Research</a>
+        </div>
+        <h1 class="article-title">How to Read Any Chart: Anatomy, Scales and the Lessons of Anscombe’s Quartet</h1>
+        <p class="article-standfirst">
+          Four data sets with identical statistics and completely different pictures. An 8% difference that looks threefold. A slowdown that looks like an explosion. Before learning any particular plot, learn how to read a chart.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-23">23 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>15 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/reading-the-picture.html">Reading the Picture</a> (Part 1 of 12)</div>
+  <div class="series-banner-links">
+    <span>First part</span>
+    <a href="bars-dots-and-pies.html">Part 2: Bars, Dots and Pies: Charts for Comparing Categories →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. Why Plot Data at All?</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. The Anatomy of a Chart</a></li>
+              <li><a class="toc-link" href="#section-4">4. Five Questions to Ask of Any Chart</a></li>
+              <li><a class="toc-link" href="#section-5">5. Anscombe’s Quartet</a></li>
+              <li><a class="toc-link" href="#section-6">6. Same Statistics, Different Pictures</a></li>
+              <li><a class="toc-link" href="#section-7">7. Linear and Logarithmic Scales</a></li>
+              <li><a class="toc-link" href="#section-8">8. Where Should the Axis Start?</a></li>
+              <li><a class="toc-link" href="#section-9">9. What the Eye Reads Best</a></li>
+              <li><a class="toc-link" href="#section-10">10. Colour, Shape and Clutter</a></li>
+              <li><a class="toc-link" href="#section-11">11. Your Plotting Toolkit</a></li>
+              <li><a class="toc-link" href="#section-12">12. Common Misreadings</a></li>
+              <li><a class="toc-link" href="#section-13">13. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-14">14. People in This Part</a></li>
+              <li><a class="toc-link" href="#section-15">15. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-16">16. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. Why Plot Data at All?</h2>
+            <p>A table of numbers can hold everything there is to know about a data set and still tell you almost nothing at a glance. A good plot turns the same numbers into a picture that your visual system can read in a second: a trend, a gap, a cluster, an outlier. A bad plot can just as quickly mislead you. This series is a field guide to the plots used in science, engineering, business and machine learning: what each one shows, how to read it, when to use it, how it can fool you, and how to make it yourself in Python.</p>
+            <p>This first part covers the skills that apply to every chart: reading its anatomy, asking the right questions, understanding scales, and knowing what the eye judges well and badly. Later parts go plot by plot, from bar charts and histograms to box plots, heatmaps, diagnostic plots and the plots of machine learning. Every Python example uses made-up (synthetic) data generated in the code itself, so you can copy it, run it and change it.</p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Charts are younger than you might think. Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-p1-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. A short history of statistical graphics, 1644–2017.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. The Anatomy of a Chart</h2>
+            <p>Almost every chart has the same parts: a title, axes with labels and units, tick marks that set the scale, the data marks themselves (points, lines or bars), a legend that identifies groups, perhaps gridlines and annotations, and a note of where the data came from. Before you look at the data, read this frame.</p>
+            <figure class="fig" data-fig="fig-anatomy">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. The anatomy of a chart.</strong> Choose a part to highlight it and read what it is for.
+              </figcaption>
+            </figure>
+            <p>In Python, the most widely used plotting library is <strong>matplotlib</strong>. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span> Here is how to make the chart above, with every part labelled. Each line that sets a part of the frame has a comment.</p>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+rng = np.random.default_rng(1)                      # synthetic data, reproducible
+months = np.arange(1, 13)
+site_a = 18 + 8 * np.sin((months - 4) * np.pi / 6) + rng.normal(0, 0.8, 12)
+site_b = 15 + 7 * np.sin((months - 4) * np.pi / 6) + rng.normal(0, 0.8, 12)
+
+fig, ax = plt.subplots(figsize=(7, 4.2))
+ax.plot(months, site_a, marker="o", label="Site A")
+ax.plot(months, site_b, marker="s", label="Site B")
+
+ax.set_title("Average monthly temperature at two sites")   # say what is shown
+ax.set_xlabel("Month")                                      # what the x-axis is
+ax.set_ylabel("Temperature (°C)")                           # quantity AND unit
+ax.set_xticks(months, ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"])
+ax.grid(alpha=0.3)                                          # light grid helps reading values
+ax.legend(title="Location")                                 # which line is which
+peak = site_a.argmax()
+ax.annotate("warmest month", xy=(months[peak], site_a[peak]),
+            xytext=(months[peak] + 1.5, site_a[peak] - 4),
+            arrowprops=dict(arrowstyle="-&gt;"))               # point out what matters
+fig.text(0.01, 0.01, "Source: synthetic data for illustration", fontsize=8, color="gray")
+plt.tight_layout()
+fig.savefig("temperature.png", dpi=300)                     # high resolution for print
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Five Questions to Ask of Any Chart</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">How to read any chart</div>
+              <ol>
+                <li><strong>What is being measured, and in what units?</strong> Read the title and both axis labels. If a unit is missing, be suspicious.</li>
+                <li><strong>What is the scale?</strong> Where does each axis start? Are the steps equal (linear) or multiplying (logarithmic)? Are two panels on the same scale?</li>
+                <li><strong>What does each mark represent?</strong> One person, an average, a total? Do error bars show the spread of the data or the uncertainty of an average (Part 7)?</li>
+                <li><strong>What is the main pattern, and what breaks it?</strong> Look for the overall trend first, then for exceptions: outliers, gaps, clusters, sudden changes.</li>
+                <li><strong>What is missing?</strong> Who chose the data and the time window? What comparison would change the story?</li>
+              </ol>
+            </div>
+            <p>The statistician John Tukey, whose box plot is the subject of Part 5, made this kind of looking a discipline in its own right: <em>exploratory data analysis</em>, which comes before any formal test. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Anscombe’s Quartet</h2>
+            <p>In 1973 the statistician Francis Anscombe published four small data sets, each with eleven pairs of numbers. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> They have the same mean of <em>x</em>, the same mean of <em>y</em>, the same variances, the same correlation and the same best-fitting straight line. Judged by their statistics, they are identical. Then look at them.</p>
+            <figure class="fig" data-fig="fig-anscombe">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Anscombe’s quartet.</strong> Start with the statistics, then reveal the plots. Four very different data sets share the same summary numbers.
+              </figcaption>
+            </figure>
+            <p>Anscombe’s point was that statistics and graphs are partners: numbers are precise, but a plot shows the shape of the data, and that shape decides which numbers make sense. A straight-line fit is reasonable for set I, wrong for set II, distorted by one point in III and meaningless in IV. This code draws the quartet and prints its statistics:</p>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# Anscombe's quartet (1973): four data sets with nearly identical summary statistics
+x = [10, 8, 13, 9, 11, 14, 6, 4, 12, 7, 5]
+data = {
+    "I":   (x, [8.04, 6.95, 7.58, 8.81, 8.33, 9.96, 7.24, 4.26, 10.84, 4.82, 5.68]),
+    "II":  (x, [9.14, 8.14, 8.74, 8.77, 9.26, 8.10, 6.13, 3.10, 9.13, 7.26, 4.74]),
+    "III": (x, [7.46, 6.77, 12.74, 7.11, 7.81, 8.84, 6.08, 5.39, 8.15, 6.42, 5.73]),
+    "IV":  ([8, 8, 8, 8, 8, 8, 8, 19, 8, 8, 8],
+            [6.58, 5.76, 7.71, 8.84, 8.47, 7.04, 5.25, 12.50, 5.56, 7.91, 6.89]),
+}
+
+fig, axes = plt.subplots(2, 2, figsize=(8, 6), sharex=True, sharey=True)
+for ax, (name, (xs, ys)) in zip(axes.flat, data.items()):
+    xs, ys = np.array(xs), np.array(ys)
+    slope, intercept = np.polyfit(xs, ys, 1)
+    r = np.corrcoef(xs, ys)[0, 1]
+    print(f"{name}: mean x={xs.mean():.2f}, mean y={ys.mean():.2f}, "
+          f"var y={ys.var(ddof=1):.2f}, r={r:.3f}, fit y={intercept:.2f}+{slope:.3f}x")
+    ax.scatter(xs, ys)
+    grid = np.array([3, 20])
+    ax.plot(grid, intercept + slope * grid, color="gray", lw=1)
+    ax.set_title(f"Data set {name}")
+fig.supxlabel("x")
+fig.supylabel("y")
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Same Statistics, Different Pictures</h2>
+            <p>Anscombe’s data were built by hand. In 2017 Justin Matejka and George Fitzmaurice showed that any shape can be given the same statistics: their “Datasaurus Dozen” includes a dinosaur, a star, circles and stripes, all with the same means, standard deviations and correlation. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> The figure below does the same with a simple trick: each shape is stretched and sheared until its summary numbers match exactly.</p>
+            <figure class="fig" data-fig="fig-same-stats">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Same statistics, different pictures.</strong> Every shape has identical means, standard deviations and correlation. Only the plot tells them apart.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Linear and Logarithmic Scales</h2>
+            <p>On an ordinary <strong>linear</strong> axis, equal distances mean equal differences: 0, 10, 20, 30. On a <strong>logarithmic</strong> axis, equal distances mean equal ratios: 1, 10, 100, 1,000. Log scales are the right choice when values span several orders of magnitude, or when what matters is the rate of growth, because anything growing by a constant percentage, such as money with compound interest or an epidemic in its early stage, becomes a straight line.</p>
+            <figure class="fig" data-fig="fig-log-scale">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. The same data on two scales.</strong> A count doubles every week, then every 20 days from day 60. Switch scales and see which one shows the slowdown.
+              </figcaption>
+            </figure>
+            <p>The two views answer different questions. The linear plot shows how large the numbers are now; the log plot shows how fast they are growing. A common misreading is to see the steep end of a linear curve as “acceleration” when the growth rate has actually fallen.</p>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+days = np.arange(0, 120)
+# synthetic growth: doubles every 7 days, then every 20 days after day 60
+rate = np.where(days &lt; 60, np.log(2) / 7, np.log(2) / 20)
+cases = 10 * np.exp(np.cumsum(rate))
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))
+ax1.plot(days, cases)
+ax1.set_title("Linear scale")
+ax2.plot(days, cases)
+ax2.set_yscale("log")                    # equal steps now mean equal *ratios*
+ax2.set_title("Logarithmic scale")
+for ax in (ax1, ax2):
+    ax.set_xlabel("Day")
+    ax.set_ylabel("Count")
+    ax.axvline(60, color="gray", ls="--", lw=1)
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Where Should the Axis Start?</h2>
+            <p>A bar represents a quantity by its length, so a bar chart whose axis does not start at zero distorts the comparison. Edward Tufte defined the <strong>lie factor</strong> as the size of an effect shown in a graphic divided by its size in the data: an honest chart has a lie factor of 1. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span></p>
+            <figure class="fig" data-fig="fig-axis-start">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. The truncated axis.</strong> Move the start of the vertical axis and watch an 8% difference turn into what looks like a threefold one.
+              </figcaption>
+            </figure>
+            <p>The rule is different for line charts and dot plots, which encode values by position rather than length. There, zooming in on the range of the data is often the right thing to do, so that real variation is visible, provided the axis is clearly labelled. The question to ask is always: <em>does the eye read this mark as a length, or as a position?</em></p>
+            <pre><code class="language-python">import matplotlib.pyplot as plt
+
+labels = ["Product A", "Product B"]
+values = [50, 54]                        # B is 8% larger than A
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8, 3.5))
+ax1.bar(labels, values, color=["#0072B2", "#E69F00"])
+ax1.set_ylim(48, 55)                     # truncated: B looks 3 times taller
+ax1.set_title("Axis starts at 48 (misleading)")
+ax2.bar(labels, values, color=["#0072B2", "#E69F00"])
+ax2.set_ylim(0, 60)                      # bars should start at zero
+ax2.set_title("Axis starts at 0 (honest)")
+for ax in (ax1, ax2):
+    ax.set_ylabel("Sales (thousand units)")
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-9">
+            <h2>9. What the Eye Reads Best</h2>
+            <p>Some ways of encoding a number are easier to read than others. In 1984 William Cleveland and Robert McGill asked people to compare pairs of values shown in different ways and measured their errors. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span> People were most accurate judging <strong>positions along a common scale</strong>, followed by positions on separate but identical scales, then lengths, then angles and slopes, then areas, then volumes and colour shading. Test yourself:</p>
+            <figure class="fig" data-fig="fig-perception">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 7. A perception experiment.</strong> Estimate what percentage the smaller value is of the larger, for each kind of encoding, and compare your average errors.
+              </figcaption>
+            </figure>
+            <p>This ranking explains much of the advice in this series. Dot plots and bar charts use position and length, so they are read accurately. Pie charts use angle and area, and bubble charts use area, so small differences get lost. Colour is best kept for showing categories, or for heatmaps where approximate values are enough.</p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Colour, Shape and Clutter</h2>
+            <p><strong>Colour.</strong> About one man in twelve and one woman in two hundred has some form of colour-vision deficiency, most often difficulty telling red from green. Use a palette designed to stay distinguishable, such as the Okabe–Ito palette, <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> and do not rely on colour alone: add labels, line styles or marker shapes. For continuous values, use a perceptually uniform colour map such as <em>viridis</em>, in which equal steps in the data look like equal steps in colour; the old “rainbow” map creates false boundaries. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span></p>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# Okabe–Ito colours: distinguishable by people with common colour-vision deficiencies
+okabe_ito = ["#0072B2", "#E69F00", "#009E73", "#D55E00", "#CC79A7", "#56B4E9", "#F0E442"]
+
+rng = np.random.default_rng(3)
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))
+for i, colour in enumerate(okabe_ito[:5]):
+    ax1.plot(np.cumsum(rng.normal(0, 1, 50)) + 4 * i, color=colour, label=f"Group {i + 1}")
+ax1.legend(fontsize=8)
+ax1.set_title("Categories: a colour-blind-safe palette")
+
+z = np.outer(np.linspace(0, 1, 50), np.linspace(0, 1, 50))
+im = ax2.imshow(z, cmap="viridis", origin="lower")   # perceptually uniform colour map
+fig.colorbar(im, ax=ax2, label="value")
+ax2.set_title("Continuous values: viridis")
+plt.tight_layout()
+plt.show()
+</code></pre>
+            <p><strong>Aspect ratio.</strong> The shape of a line chart changes how steep its slopes look. Cleveland suggested choosing the aspect ratio so that the important line segments are tilted at about 45°, where differences in slope are easiest to see, a rule called <em>banking to 45°</em>. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span></p>
+            <p><strong>Clutter.</strong> Tufte urged chart makers to maximise the share of ink that shows data, and to remove “chartjunk”: heavy gridlines, 3D effects, decorative pictures and shading that carry no information. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> Later research found that some decoration can make a chart more memorable without making it less accurate, <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span> so the rule is not absolute, but 3D bar and pie charts genuinely distort values and are best avoided.</p>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Your Plotting Toolkit</h2>
+            <p>All the Python examples in this series use three libraries. <strong>matplotlib</strong> draws everything and gives full control. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span> <strong>seaborn</strong>, built on matplotlib, makes statistical plots such as box plots, violin plots and heatmaps in one line. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span> <strong>plotly</strong> makes interactive charts for the web, and is used for a few plots such as Sankey diagrams. Install them once with <code>pip install numpy matplotlib seaborn plotly</code>.</p>
+            <p>In matplotlib, a <em>Figure</em> is the whole image and an <em>Axes</em> is one plot inside it, with its own x-axis and y-axis. The pattern <code>fig, ax = plt.subplots()</code> creates both, and almost everything else is a method of <code>ax</code>:</p>
+            <pre><code class="language-python"># Install once:  pip install numpy matplotlib seaborn
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.arange(1, 11)
+y = x ** 1.5
+
+fig, ax = plt.subplots(figsize=(6, 4))   # a Figure (the page) holding one Axes (the plot)
+ax.plot(x, y, marker="o")                 # draw on the Axes
+ax.set_xlabel("x")
+ax.set_ylabel("y")
+ax.set_title("My first plot")
+plt.tight_layout()                        # stop labels from being cut off
+plt.show()
+</code></pre>
+            <p>Each example in this series is complete: copy it into a file or a Jupyter notebook and run it. Change the numbers and see what happens; that is the fastest way to learn what each setting does.</p>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Common Misreadings</h2>
+            <ul>
+              <li><strong>Reading the shape without the scale.</strong> Two charts that look alike may have very different axes. Check the labels and the ranges.</li>
+              <li><strong>Mistaking a log scale for a linear one.</strong> A log-scale line that rises gently can represent enormous growth. Look for gridlines like 1, 10, 100.</li>
+              <li><strong>Trusting the summary over the picture.</strong> As Anscombe showed, a correlation or an average can hide curves, outliers and clusters.</li>
+              <li><strong>Treating a truncated bar chart as honest.</strong> Bars that do not start at zero exaggerate differences.</li>
+              <li><strong>Over-reading colour and area.</strong> People judge areas and shades poorly; do not draw precise conclusions from bubble sizes or colour intensity.</li>
+              <li><strong>Forgetting what is not shown.</strong> The chosen time window, the groups left out and the missing data can matter more than the plotted points.</li>
+            </ul>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Legend and Record</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: where charts came from</div>
+              <p><strong>The legend:</strong> graphs are as old as mathematics.</p>
+              <p><strong>The record:</strong> statistical charts are surprisingly recent. In 1644 Michael Florent van Langren plotted twelve estimates of the longitude difference between Toledo and Rome along a line, showing their spread. The Scottish engineer William Playfair invented the line chart and the bar chart in his <em>Commercial and Political Atlas</em> of 1786, and the pie chart in his <em>Statistical Breviary</em> of 1801. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>, <a class="cite" href="#ref-13">13</a>]</span></p>
+              <p><strong>A second legend:</strong> Florence Nightingale invented the pie chart. <strong>The record:</strong> Playfair drew pie charts more than fifty years earlier. Nightingale’s famous diagrams of 1858 are polar area diagrams: each month is a wedge with the same angle, and the area of each coloured segment shows how many soldiers died of disease, of wounds or of other causes. They showed that most British soldiers who died in the Crimean War were killed by preventable disease, and helped persuade the government to reform army hospitals. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span></p>
+              <p><strong>A third:</strong> Charles Joseph Minard’s 1869 map of Napoleon’s Russian campaign, showing the size of the army, its route, the dates and the falling temperature on the retreat, has been called one of the best statistical graphics ever drawn. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span></p>
+            </div>
+          </section>
+
+          <section id="section-14">
+            <h2>14. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">William Playfair</td>
+                <td style="padding:0.6rem 0.8rem;">1759–1823<br>Scotland, London and Paris</td>
+                <td style="padding:0.6rem 0.8rem;"><em>The Commercial and Political Atlas</em> (1786); <em>Statistical Breviary</em> (1801)</td>
+                <td style="padding:0.6rem 0.8rem;">Invented the line chart, the bar chart and the pie chart.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Florence Nightingale</td>
+                <td style="padding:0.6rem 0.8rem;">1820–1910<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Polar area diagrams of army mortality (1858)</td>
+                <td style="padding:0.6rem 0.8rem;">Used charts to change public policy on health.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Charles Joseph Minard</td>
+                <td style="padding:0.6rem 0.8rem;">1781–1870<br>France</td>
+                <td style="padding:0.6rem 0.8rem;">Map of Napoleon’s Russian campaign (1869)</td>
+                <td style="padding:0.6rem 0.8rem;">Combined many variables in one celebrated graphic.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Francis Anscombe</td>
+                <td style="padding:0.6rem 0.8rem;">1918–2001<br>England and USA</td>
+                <td style="padding:0.6rem 0.8rem;">“Graphs in statistical analysis” (1973)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed with his quartet why data must be plotted.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John Tukey</td>
+                <td style="padding:0.6rem 0.8rem;">1915–2000<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Exploratory Data Analysis</em> (1977)</td>
+                <td style="padding:0.6rem 0.8rem;">Made looking at data a discipline; invented the box plot.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">William Cleveland</td>
+                <td style="padding:0.6rem 0.8rem;">born 1943<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Graphical perception experiments with Robert McGill (1984)</td>
+                <td style="padding:0.6rem 0.8rem;">Measured which visual encodings people read best.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Edward Tufte</td>
+                <td style="padding:0.6rem 0.8rem;">born 1942<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;"><em>The Visual Display of Quantitative Information</em> (1983)</td>
+                <td style="padding:0.6rem 0.8rem;">Popularised data-ink, the lie factor and the fight against chartjunk.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about reading charts.</p>
+            <figure class="fig" data-fig="fig-quiz-p1">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-16">
+            <h2>16. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Hunter, John D.</strong> (2007). "Matplotlib: A 2D graphics environment." <em>Computing in Science &amp; Engineering</em>, 9(3): 90–95.</li>
+              <li id="ref-2"><strong>Tukey, John W.</strong> (1977). <em>Exploratory Data Analysis</em>. Reading, MA: Addison-Wesley.</li>
+              <li id="ref-3"><strong>Anscombe, F. J.</strong> (1973). "Graphs in statistical analysis." <em>The American Statistician</em>, 27(1): 17–21.</li>
+              <li id="ref-4"><strong>Matejka, Justin &amp; Fitzmaurice, George.</strong> (2017). "Same stats, different graphs: Generating datasets with varied appearance and identical statistics through simulated annealing." <em>Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems</em>: 1290–1294.</li>
+              <li id="ref-5"><strong>Tufte, Edward R.</strong> (1983). <em>The Visual Display of Quantitative Information</em>. Cheshire, CT: Graphics Press.</li>
+              <li id="ref-6"><strong>Cleveland, William S. &amp; McGill, Robert.</strong> (1984). "Graphical perception: Theory, experimentation, and application to the development of graphical methods." <em>Journal of the American Statistical Association</em>, 79(387): 531–554.</li>
+              <li id="ref-7"><strong>Okabe, Masataka &amp; Ito, Kei.</strong> (2008). <em>Color Universal Design (CUD): How to make figures and presentations that are friendly to colorblind people</em>. Online publication, J*Fly.</li>
+              <li id="ref-8"><strong>Crameri, Fabio, Shephard, Grace E. &amp; Heron, Philip J.</strong> (2020). "The misuse of colour in science communication." <em>Nature Communications</em>, 11: 5444.</li>
+              <li id="ref-9"><strong>Cleveland, William S., McGill, Marylyn E. &amp; McGill, Robert.</strong> (1988). "The shape parameter of a two-variable graph." <em>Journal of the American Statistical Association</em>, 83(402): 289–300.</li>
+              <li id="ref-10"><strong>Bateman, Scott, et al.</strong> (2010). "Useful junk? The effects of visual embellishment on comprehension and memorability of charts." <em>Proceedings of the SIGCHI Conference on Human Factors in Computing Systems</em>: 2573–2582.</li>
+              <li id="ref-11"><strong>Waskom, Michael L.</strong> (2021). "seaborn: statistical data visualization." <em>Journal of Open Source Software</em>, 6(60): 3021.</li>
+              <li id="ref-12"><strong>Playfair, William.</strong> (1786). <em>The Commercial and Political Atlas</em>. London: Debrett, Robinson and Sewell. (And <em>The Statistical Breviary</em>, London: Wallis, 1801.)</li>
+              <li id="ref-13"><strong>Friendly, Michael.</strong> (2008). "A brief history of data visualization." In C. Chen, W. Härdle &amp; A. Unwin (eds.), <em>Handbook of Data Visualization</em>, pp. 15–56. Berlin: Springer.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/reading-the-picture.html">Reading the Picture</a> (Part 1 of 12)</div>
+  <div class="series-banner-links">
+    <span>First part</span>
+    <a href="bars-dots-and-pies.html">Part 2: Bars, Dots and Pies: Charts for Comparing Categories →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/how-to-read-any-chart.js"></script>
+</body>
+</html>

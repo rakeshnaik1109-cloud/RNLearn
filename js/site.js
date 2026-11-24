@@ -391,6 +391,61 @@
     }
   }
 
+
+  /* Code blocks: Python syntax colouring and a copy button */
+  function highlightPython(src) {
+    var KW = /^(False|None|True|and|as|assert|async|await|break|class|continue|def|del|elif|else|except|finally|for|from|global|if|import|in|is|lambda|nonlocal|not|or|pass|raise|return|try|while|with|yield)$/;
+    var BI = /^(print|range|len|zip|enumerate|list|dict|set|tuple|int|float|str|abs|min|max|sum|sorted|round|open|map|filter|any|all|isinstance)$/;
+    var re = /(#[^\n]*)|([rbfRBF]{0,2}(?:"""[\s\S]*?"""|'''[\s\S]*?'''|"(?:\\.|[^"\\\n])*"|'(?:\\.|[^'\\\n])*'))|(\b\d+(?:\.\d*)?(?:[eE][+-]?\d+)?j?\b|\.\d+\b)|(@[A-Za-z_][\w.]*)|([A-Za-z_]\w*)/g;
+    var out = '', last = 0, m;
+    function esc(t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+    while ((m = re.exec(src))) {
+      out += esc(src.slice(last, m.index));
+      var t = m[0], cls = null;
+      if (m[1]) cls = 'c'; else if (m[2]) cls = 's'; else if (m[3]) cls = 'n'; else if (m[4]) cls = 'd';
+      else if (m[5]) { if (KW.test(t)) cls = 'k'; else if (BI.test(t)) cls = 'b'; else if (src.charAt(re.lastIndex) === '(') cls = 'f'; }
+      out += cls ? '<span class="tok-' + cls + '">' + esc(t) + '</span>' : esc(t);
+      last = re.lastIndex;
+    }
+    return out + esc(src.slice(last));
+  }
+
+  function initCodeBlocks() {
+    var blocks = document.querySelectorAll('pre > code[class*="language-"], .article-cite pre > code');
+    Array.prototype.forEach.call(blocks, function (code) {
+      var pre = code.parentNode;
+      if (pre.parentNode && pre.parentNode.classList && pre.parentNode.classList.contains('code-block')) return;
+      var lang = (code.className.match(/language-(\w+)/) || [])[1] || '';
+      var raw = code.textContent;
+      if (lang === 'python') code.innerHTML = highlightPython(raw);
+      var wrap = document.createElement('div');
+      wrap.className = 'code-block';
+      var head = document.createElement('div');
+      head.className = 'code-head';
+      var label = document.createElement('span');
+      label.textContent = lang === 'python' ? 'Python' : (lang || 'BibTeX');
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'code-copy';
+      b.textContent = 'Copy';
+      b.setAttribute('aria-label', 'Copy code to clipboard');
+      b.addEventListener('click', function () {
+        function done(ok) { b.textContent = ok ? 'Copied' : 'Press Ctrl+C'; setTimeout(function () { b.textContent = 'Copy'; }, 1600); }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(raw).then(function () { done(true); }, function () { done(false); });
+        } else {
+          var r = document.createRange(); r.selectNodeContents(code);
+          var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+          var ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
+          done(ok);
+        }
+      });
+      head.appendChild(label); head.appendChild(b);
+      pre.parentNode.insertBefore(wrap, pre);
+      wrap.appendChild(head); wrap.appendChild(pre);
+    });
+  }
+
   /* Initialize on DOMContentLoaded */
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () {
@@ -402,6 +457,7 @@
       initMobileTOC();
       initBackToTop();
       initKaTeXEngine();
+      initCodeBlocks();
     });
   } else {
     initThemeToggle();
@@ -412,5 +468,6 @@
     initMobileTOC();
     initBackToTop();
     initKaTeXEngine();
+    initCodeBlocks();
   }
 })();

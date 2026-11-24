@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scatter Plots and Relationships: Correlation, Trend Lines and Hidden Groups — RNLearn</title>
+  <meta name="description" content="Reading scatter plots, guessing correlation, straight and LOWESS trend lines, Simpson’s paradox, overplotting and hexbins, bubble charts and scatter-plot matrices, with Python code.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/scatter-plots-and-relationships.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Scatter Plots and Relationships: Correlation, Trend Lines and Hidden Groups — RNLearn">
+  <meta property="og:description" content="Reading scatter plots, guessing correlation, straight and LOWESS trend lines, Simpson’s paradox, overplotting and hexbins, bubble charts and scatter-plot matrices, with Python code.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/scatter-plots-and-relationships.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Scatter Plots and Relationships: Correlation, Trend Lines and Hidden Groups — RNLearn">
+  <meta name="twitter:description" content="Reading scatter plots, guessing correlation, straight and LOWESS trend lines, Simpson’s paradox, overplotting and hexbins, bubble charts and scatter-plot matrices, with Python code.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Scatter Plots and Relationships: Correlation, Trend Lines and Hidden Groups",
+    "description": "Reading scatter plots, guessing correlation, straight and LOWESS trend lines, Simpson’s paradox, overplotting and hexbins, bubble charts and scatter-plot matrices, with Python code.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-23",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/scatter-plots-and-relationships.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/research.html" class="post-subject-tag" data-subject="research">Research</a>
+        </div>
+        <h1 class="article-title">Scatter Plots and Relationships: Correlation, Trend Lines and Hidden Groups</h1>
+        <p class="article-standfirst">
+          A perfect curve with zero correlation, a treatment that looks harmful until you split the data, and a cluster hidden among 40,000 points. How to read the plots that relate one variable to another.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-23">23 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>11 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/reading-the-picture.html">Reading the Picture</a> (Part 6 of 12)</div>
+  <div class="series-banner-links">
+    <a href="box-plots-violins-and-ecdfs.html">← Part 5: Box Plots, Violins and ECDFs: Summarising and Comparing Distributions</a>
+    <a href="error-bars-and-uncertainty.html">Part 7: Error Bars and Uncertainty: SD, SE, Confidence Intervals and Forest Plots →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. Two Variables at Once</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. The Scatter Plot</a></li>
+              <li><a class="toc-link" href="#section-4">4. Reading Correlation</a></li>
+              <li><a class="toc-link" href="#section-5">5. Trend Lines, Straight and Smooth</a></li>
+              <li><a class="toc-link" href="#section-6">6. Lurking Variables and Simpson’s Paradox</a></li>
+              <li><a class="toc-link" href="#section-7">7. Too Many Points</a></li>
+              <li><a class="toc-link" href="#section-8">8. Bubble Charts: A Third Variable</a></li>
+              <li><a class="toc-link" href="#section-9">9. Scatter-Plot Matrices</a></li>
+              <li><a class="toc-link" href="#section-10">10. Common Misreadings</a></li>
+              <li><a class="toc-link" href="#section-11">11. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-12">12. People in This Part</a></li>
+              <li><a class="toc-link" href="#section-13">13. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-14">14. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. Two Variables at Once</h2>
+            <p>Does more study time go with higher exam scores? Do heavier cars use more fuel? Does a drug’s effect grow with its dose? Questions about how two quantities relate are answered first by a <strong>scatter plot</strong>: one dot per case, placed by its value on each variable. It is perhaps the most useful plot in science, and also the one most often over-interpreted.</p>
+            <p>This part covers reading scatter plots and the correlation coefficient, adding trend lines, the trap of lurking variables, what to do when there are too many points, bubble charts that add a third variable, and scatter-plot matrices for many variables.</p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-p6-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. Scatter plots and correlation, 1833–1987.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. The Scatter Plot</h2>
+            <p>By convention, the <strong>explanatory</strong> variable (the one we think may influence the other, or that we control) goes on the horizontal axis, and the <strong>response</strong> on the vertical axis. Each dot is one case: one student, one car, one patient.</p>
+            <figure class="fig" data-fig="fig-scatter-read">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Patterns in scatter plots.</strong> Seven synthetic data sets. Compare what you see with the correlation and the straight-line fit.
+              </figcaption>
+            </figure>
+            <div class="callout callout-tip">
+              <div class="callout-header">How to read a scatter plot</div>
+              <ol>
+                <li><strong>Direction:</strong> does y tend to rise or fall as x increases?</li>
+                <li><strong>Form:</strong> is the pattern straight, curved, or made of clusters?</li>
+                <li><strong>Strength:</strong> how closely do the points follow the form?</li>
+                <li><strong>Exceptions:</strong> outliers, subgroups, or a spread that changes along the axis.</li>
+                <li><strong>Explanation:</strong> what else could link the two variables?</li>
+              </ol>
+            </div>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+rng = np.random.default_rng(21)
+hours = rng.uniform(0, 10, 80)                               # synthetic: hours of study
+score = 45 + 4.5 * hours + rng.normal(0, 7, 80)              # exam score
+
+r = np.corrcoef(hours, score)[0, 1]
+fig, ax = plt.subplots(figsize=(6, 4.5))
+ax.scatter(hours, score, s=25, alpha=0.8, color="#0072B2", edgecolor="white", linewidth=0.5)
+ax.set_xlabel("Hours of study per week")                     # explanatory variable on x
+ax.set_ylabel("Exam score")                                  # response variable on y
+ax.set_title(f"Study time and exam score (r = {r:.2f})")
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Reading Correlation</h2>
+            <p>The <strong>correlation coefficient</strong> <em>r</em>, given its modern form by Karl Pearson in 1896 after Francis Galton’s work, measures how closely points follow a straight line, from −1 to +1. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span> It has no units, does not change if you swap the axes or rescale them, and is easy to misjudge by eye.</p>
+            <figure class="fig" data-fig="fig-guess-r">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Guess the correlation.</strong> Estimate r for a few random plots and see how close you get.
+              </figcaption>
+            </figure>
+            <p>Remember three facts. First, <em>r</em> measures only <em>linear</em> association: a perfect curve can have r near zero, as Anscombe’s quartet showed (Part 1). <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span> Second, a single outlier can drag r a long way. Third, r² is the fraction of the variance in y accounted for by a straight line in x, so r = 0.5 accounts for only a quarter.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Trend Lines, Straight and Smooth</h2>
+            <p>A trend line summarises the relationship. The most common is the least-squares straight line, which minimises the sum of squared vertical distances from the points. When the relationship may be curved, a <strong>smoother</strong> lets the data choose the shape. The best known is LOWESS (locally weighted scatter-plot smoothing), published by William Cleveland in 1979: around each point it fits a straight line to the nearby points, giving closer points more weight, and joins the results. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+            <figure class="fig" data-fig="fig-trend-lines">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Choosing a trend line.</strong> A saturating dose–response curve (synthetic) with a straight line, a quadratic or a LOWESS smoother. Change the LOWESS span.
+              </figcaption>
+            </figure>
+            <pre><code class="language-python"># pip install numpy matplotlib statsmodels
+import numpy as np
+import matplotlib.pyplot as plt
+from statsmodels.nonparametric.smoothers_lowess import lowess
+
+rng = np.random.default_rng(5)
+dose = np.sort(rng.uniform(0, 10, 120))
+effect = 10 * dose / (2 + dose) + rng.normal(0, 0.9, dose.size)   # saturating curve (synthetic)
+
+slope, intercept = np.polyfit(dose, effect, 1)                   # straight line (least squares)
+smooth = lowess(effect, dose, frac=0.4)                         # LOWESS: local weighted fits
+
+fig, ax = plt.subplots(figsize=(7, 4.5))
+ax.scatter(dose, effect, s=15, color="gray", alpha=0.7)
+ax.plot(dose, intercept + slope * dose, color="#D55E00", label="straight line")
+ax.plot(smooth[:, 0], smooth[:, 1], color="#0072B2", lw=2.5, label="LOWESS (frac = 0.4)")
+ax.set_xlabel("Dose")
+ax.set_ylabel("Effect")
+ax.legend()
+plt.tight_layout()
+plt.show()
+</code></pre>
+            <p>Seaborn’s <code>regplot</code> and <code>lmplot</code> add a fitted line with a shaded confidence band in one call; with <code>lowess=True</code> they draw a smoother instead.</p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Lurking Variables and Simpson’s Paradox</h2>
+            <p>A scatter plot shows association, not cause. Two variables can move together because one causes the other, because the cause runs the other way, by coincidence, or because a third variable drives both. In 1951 Edward Simpson described an extreme case, now called <strong>Simpson’s paradox</strong>: a relationship in combined data can reverse within every subgroup. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span></p>
+            <figure class="fig" data-fig="fig-simpson">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Simpson’s paradox.</strong> Recovery against treatment dose in three hospital wards (synthetic). Colour the points by ward and watch the trend reverse.
+              </figcaption>
+            </figure>
+            <p>The lesson for reading scatter plots: whenever you see a relationship, ask what grouping variable might be hiding inside it, and colour or facet by it if you can.</p>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+rng = np.random.default_rng(9)
+xs, ys, gs = [], [], []
+for g, (x0, y0) in enumerate([(2, 9), (5, 6), (8, 3)]):        # three groups (synthetic)
+    x = x0 + rng.normal(0, 0.8, 40)
+    y = y0 + 0.8 * (x - x0) + rng.normal(0, 0.5, 40)            # positive trend WITHIN each group
+    xs.append(x); ys.append(y); gs += [g] * 40
+x, y, g = np.concatenate(xs), np.concatenate(ys), np.array(gs)
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4), sharey=True)
+ax1.scatter(x, y, color="gray", s=15)
+b, a = np.polyfit(x, y, 1)
+ax1.plot([0, 10], [a, a + 10 * b], color="black")
+ax1.set_title(f"All together: slope {b:.2f}")
+colours = ["#0072B2", "#E69F00", "#009E73"]
+for k in range(3):
+    m = g == k
+    bk, ak = np.polyfit(x[m], y[m], 1)
+    ax2.scatter(x[m], y[m], color=colours[k], s=15, label=f"group {k + 1}")
+    ax2.plot([x[m].min(), x[m].max()], [ak + bk * x[m].min(), ak + bk * x[m].max()], color=colours[k])
+ax2.set_title("By group: every slope is positive")
+ax2.legend()
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Too Many Points</h2>
+            <p>With thousands of points, markers pile on top of one another, a problem called <strong>overplotting</strong>. Dense and sparse regions look the same, and small clusters vanish. Remedies include smaller, semi-transparent markers, and <strong>hexagonal binning</strong>, proposed by Daniel Carr and colleagues in 1987, which counts points in a grid of hexagons and colours each by its count. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span></p>
+            <figure class="fig" data-fig="fig-overplot">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. Overplotting.</strong> Up to 40,000 synthetic points, with a small cluster hidden among them. Which display reveals it?
+              </figcaption>
+            </figure>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+rng = np.random.default_rng(0)
+n = 50_000
+x = rng.normal(0, 1, n)
+y = 0.6 * x + rng.normal(0, 0.8, n)
+x[:3000] = rng.normal(-1.8, 0.25, 3000)                      # a small second cluster,
+y[:3000] = rng.normal(1.5, 0.25, 3000)                       # hidden inside the blob
+
+fig, axes = plt.subplots(1, 3, figsize=(13, 4), sharex=True, sharey=True)
+axes[0].scatter(x, y, s=4)
+axes[0].set_title("Plain scatter: a solid blob")
+axes[1].scatter(x, y, s=2, alpha=0.05)                       # transparency reveals density
+axes[1].set_title("Small, transparent points")
+hb = axes[2].hexbin(x, y, gridsize=45, cmap="viridis", mincnt=1, bins="log")
+fig.colorbar(hb, ax=axes[2], label="points per hexagon (log)")
+axes[2].set_title("Hexagonal binning")
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Bubble Charts: A Third Variable</h2>
+            <p>A scatter plot can carry a third variable by colour (for categories) or by the size of the marker, making a <strong>bubble chart</strong>. Bubble charts of countries’ income, life expectancy and population became famous through Hans Rosling’s animated presentations. Size is the least accurate of these encodings (Part 1), and it must be scaled by area, not radius.</p>
+            <figure class="fig" data-fig="fig-bubble-scale">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 7. Bubbles scaled by area or radius.</strong> Populations of 10,000, 40,000 and 90,000. Which scaling tells the truth?
+              </figcaption>
+            </figure>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+rng = np.random.default_rng(14)
+n = 25
+income = rng.lognormal(9.3, 0.9, n)                          # synthetic countries
+life = 52 + 6 * np.log(income / 1000) + rng.normal(0, 2.5, n)
+population = rng.lognormal(16.5, 1.2, n)
+region = rng.integers(0, 4, n)
+colours = np.array(["#0072B2", "#E69F00", "#009E73", "#CC79A7"])[region]
+
+fig, ax = plt.subplots(figsize=(8, 5))
+# matplotlib's s is the marker AREA, so area is proportional to population (correct)
+ax.scatter(income, life, s=population / population.max() * 1500, c=colours,
+           alpha=0.6, edgecolor="white")
+ax.set_xscale("log")
+ax.set_xlabel("Income per person (log scale)")
+ax.set_ylabel("Life expectancy (years)")
+ax.set_title("Bubble chart: size = population, colour = region")
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Scatter-Plot Matrices</h2>
+            <p>With several variables, a <strong>scatter-plot matrix</strong> shows every pair in a grid, with each variable’s distribution on the diagonal. Popularised by John Chambers, William Cleveland, Beat Kleiner and Paul Tukey in 1983, <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span> it is one of the first plots to make with a new data set. Seaborn’s <code>pairplot</code> draws one in a single line; here it is with Ronald Fisher’s classic iris measurements, which come bundled with scikit-learn. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span></p>
+            <pre><code class="language-python"># pip install seaborn scikit-learn
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.datasets import load_iris
+
+iris = load_iris(as_frame=True)                    # Fisher's classic iris measurements (bundled, no download)
+df = iris.frame.rename(columns=lambda c: c.replace(" (cm)", ""))
+df["species"] = iris.target_names[iris.target]
+df = df.drop(columns="target")
+
+g = sns.pairplot(df, hue="species", corner=True,   # corner=True: lower triangle only
+                 plot_kws=dict(s=15, alpha=0.7), height=1.8)
+g.figure.suptitle("Scatter-plot matrix of the iris data", y=1.02)
+plt.show()
+</code></pre>
+            <p>Read it row by row: each panel shows the variable on its row against the variable on its column. Look for strong pairs, curved relationships and groups that separate, and remember that a pattern seen only in two dimensions may hide structure in others.</p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Common Misreadings</h2>
+            <ul>
+              <li><strong>Correlation as causation.</strong> Ice-cream sales and drownings rise together because of summer weather, not because one causes the other.</li>
+              <li><strong>Judging strength by slope.</strong> A steep line can have weak correlation, and a gentle line a strong one; slope depends on units, r does not.</li>
+              <li><strong>Ignoring the range.</strong> A relationship seen over a narrow range may not hold beyond it. Do not extrapolate a trend line past the data.</li>
+              <li><strong>Missing subgroups.</strong> Clusters and Simpson’s paradox can make or reverse a trend.</li>
+              <li><strong>Trusting r from a few points or with outliers.</strong> One point can create a “strong” correlation.</li>
+              <li><strong>Reading density from an overplotted blob.</strong> Without transparency or binning, you cannot see where most of the data are.</li>
+              <li><strong>Ecological fallacy.</strong> A correlation between averages of groups (countries, schools) need not hold for individuals within them.</li>
+            </ul>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Legend and Record</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: who made the first scatter plot?</div>
+              <p><strong>The legend:</strong> Francis Galton invented the scatter plot to study heredity.</p>
+              <p><strong>The record:</strong> Galton made scatter plots famous, plotting the heights of adult children against the average height of their parents in 1886 and discovering what he called “regression towards mediocrity”: children of very tall parents tend to be tall, but less extreme than their parents. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span> But the historians Michael Friendly and Daniel Denis argue that the first true scatter plot was drawn by the astronomer John Herschel in 1833, who plotted the measured position angles of a double star against the dates of observation and drew a smooth curve through them by hand, to work out its orbit. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span></p>
+              <p><strong>A second legend:</strong> regression to the mean is a biological law. <strong>The record:</strong> it is a statistical effect that appears whenever two measurements are imperfectly correlated: students with the highest scores on one test tend to score a little lower on the next, not because they got worse, but because luck played a part in their first result.</p>
+            </div>
+          </section>
+
+          <section id="section-12">
+            <h2>12. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John Herschel</td>
+                <td style="padding:0.6rem 0.8rem;">1792–1871<br>England and the Cape</td>
+                <td style="padding:0.6rem 0.8rem;">Orbit of a double star from plotted positions (1833)</td>
+                <td style="padding:0.6rem 0.8rem;">Drew what may be the first scatter plot.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Francis Galton</td>
+                <td style="padding:0.6rem 0.8rem;">1822–1911<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Regression towards mediocrity (1886); correlation (1888)</td>
+                <td style="padding:0.6rem 0.8rem;">Made scatter plots a tool for studying relationships.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Karl Pearson</td>
+                <td style="padding:0.6rem 0.8rem;">1857–1936<br>London</td>
+                <td style="padding:0.6rem 0.8rem;">The correlation coefficient (1896)</td>
+                <td style="padding:0.6rem 0.8rem;">Gave r its mathematical form.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Edward Simpson</td>
+                <td style="padding:0.6rem 0.8rem;">1922–2019<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Interpretation of interaction in contingency tables (1951)</td>
+                <td style="padding:0.6rem 0.8rem;">Described the paradox that bears his name.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">William Cleveland</td>
+                <td style="padding:0.6rem 0.8rem;">born 1943<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">LOWESS (1979); <em>Graphical Methods for Data Analysis</em> (1983)</td>
+                <td style="padding:0.6rem 0.8rem;">Developed smoothers and scatter-plot matrices.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Daniel Carr</td>
+                <td style="padding:0.6rem 0.8rem;">USA</td>
+                <td style="padding:0.6rem 0.8rem;">Hexagon binning (1987, with colleagues)</td>
+                <td style="padding:0.6rem 0.8rem;">Made scatter plots of huge data sets readable.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about scatter plots and correlation.</p>
+            <figure class="fig" data-fig="fig-quiz-p6">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-14">
+            <h2>14. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Pearson, Karl.</strong> (1896). "Mathematical contributions to the theory of evolution. III. Regression, heredity, and panmixia." <em>Philosophical Transactions of the Royal Society of London A</em>, 187: 253–318.</li>
+              <li id="ref-2"><strong>Anscombe, F. J.</strong> (1973). "Graphs in statistical analysis." <em>The American Statistician</em>, 27(1): 17–21.</li>
+              <li id="ref-3"><strong>Cleveland, William S.</strong> (1979). "Robust locally weighted regression and smoothing scatterplots." <em>Journal of the American Statistical Association</em>, 74(368): 829–836.</li>
+              <li id="ref-4"><strong>Simpson, E. H.</strong> (1951). "The interpretation of interaction in contingency tables." <em>Journal of the Royal Statistical Society B</em>, 13(2): 238–241.</li>
+              <li id="ref-5"><strong>Carr, D. B., Littlefield, R. J., Nicholson, W. L. &amp; Littlefield, J. S.</strong> (1987). "Scatterplot matrix techniques for large N." <em>Journal of the American Statistical Association</em>, 82(398): 424–436.</li>
+              <li id="ref-6"><strong>Chambers, John M., Cleveland, William S., Kleiner, Beat &amp; Tukey, Paul A.</strong> (1983). <em>Graphical Methods for Data Analysis</em>. Belmont, CA: Wadsworth.</li>
+              <li id="ref-7"><strong>Fisher, R. A.</strong> (1936). "The use of multiple measurements in taxonomic problems." <em>Annals of Eugenics</em>, 7(2): 179–188.</li>
+              <li id="ref-8"><strong>Galton, Francis.</strong> (1886). "Regression towards mediocrity in hereditary stature." <em>Journal of the Anthropological Institute of Great Britain and Ireland</em>, 15: 246–263.</li>
+              <li id="ref-9"><strong>Friendly, Michael &amp; Denis, Daniel.</strong> (2005). "The early origins and development of the scatterplot." <em>Journal of the History of the Behavioral Sciences</em>, 41(2): 103–130.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/reading-the-picture.html">Reading the Picture</a> (Part 6 of 12)</div>
+  <div class="series-banner-links">
+    <a href="box-plots-violins-and-ecdfs.html">← Part 5: Box Plots, Violins and ECDFs: Summarising and Comparing Distributions</a>
+    <a href="error-bars-and-uncertainty.html">Part 7: Error Bars and Uncertainty: SD, SE, Confidence Intervals and Forest Plots →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/scatter-plots-and-relationships.js"></script>
+</body>
+</html>

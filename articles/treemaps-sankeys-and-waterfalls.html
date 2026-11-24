@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Treemaps, Sankeys and Waterfalls: Charts for Hierarchies, Parts and Flows — RNLearn</title>
+  <meta name="description" content="Treemaps and squarified layouts, sunbursts, mosaic plots for tables of counts, waterfall charts from revenue to profit, and Sankey diagrams of flows, with Python code.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/treemaps-sankeys-and-waterfalls.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Treemaps, Sankeys and Waterfalls: Charts for Hierarchies, Parts and Flows — RNLearn">
+  <meta property="og:description" content="Treemaps and squarified layouts, sunbursts, mosaic plots for tables of counts, waterfall charts from revenue to profit, and Sankey diagrams of flows, with Python code.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/treemaps-sankeys-and-waterfalls.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Treemaps, Sankeys and Waterfalls: Charts for Hierarchies, Parts and Flows — RNLearn">
+  <meta name="twitter:description" content="Treemaps and squarified layouts, sunbursts, mosaic plots for tables of counts, waterfall charts from revenue to profit, and Sankey diagrams of flows, with Python code.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Treemaps, Sankeys and Waterfalls: Charts for Hierarchies, Parts and Flows",
+    "description": "Treemaps and squarified layouts, sunbursts, mosaic plots for tables of counts, waterfall charts from revenue to profit, and Sankey diagrams of flows, with Python code.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-23",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/treemaps-sankeys-and-waterfalls.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/research.html" class="post-subject-tag" data-subject="research">Research</a>
+        </div>
+        <h1 class="article-title">Treemaps, Sankeys and Waterfalls: Charts for Hierarchies, Parts and Flows</h1>
+        <p class="article-standfirst">
+          A budget squeezed into a rectangle, a survey that looks like a brick wall when nothing is going on, a profit bridge and an energy balance. Charts for wholes, their parts and the flows between them.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-23">23 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>10 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/reading-the-picture.html">Reading the Picture</a> (Part 10 of 12)</div>
+  <div class="series-banner-links">
+    <a href="diagnostic-plots.html">← Part 9: Diagnostic Plots: Q–Q Plots, Residuals, Bland–Altman, Funnel and Volcano Plots</a>
+    <a href="plots-for-machine-learning.html">Part 11: Plots for Machine Learning: Learning Curves, Confusion Matrices, Calibration and Embeddings →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. Wholes, Parts and Flows</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Treemaps</a></li>
+              <li><a class="toc-link" href="#section-4">4. Sunburst Charts</a></li>
+              <li><a class="toc-link" href="#section-5">5. Mosaic Plots</a></li>
+              <li><a class="toc-link" href="#section-6">6. Waterfall Charts</a></li>
+              <li><a class="toc-link" href="#section-7">7. Sankey Diagrams</a></li>
+              <li><a class="toc-link" href="#section-8">8. Which One Should I Use?</a></li>
+              <li><a class="toc-link" href="#section-9">9. Common Misreadings</a></li>
+              <li><a class="toc-link" href="#section-10">10. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-11">11. People in This Part</a></li>
+              <li><a class="toc-link" href="#section-12">12. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-13">13. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. Wholes, Parts and Flows</h2>
+            <p>Some data are about how a whole divides and where things go: how a budget splits into departments and programmes, how survey answers depend on age, how revenue turns into profit, how energy flows from fuels to homes and losses. Part 2 covered the simplest part-to-whole charts, pies and stacked bars. This part covers charts for richer structures: <strong>treemaps</strong> and <strong>sunbursts</strong> for hierarchies, <strong>mosaic plots</strong> for tables of counts, <strong>waterfall charts</strong> for step-by-step changes, and <strong>Sankey diagrams</strong> for flows.</p>
+            <p>All of them use area or width to show size, which makes them vivid but imprecise. They are best for showing structure and the biggest pieces, not for exact comparisons.</p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-p10-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. Flows, mosaics and treemaps, 1869–2000.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Treemaps</h2>
+            <p>In 1990 the computer scientist Ben Shneiderman wanted to know which files were filling his laboratory’s hard disk. His answer, published in 1992, was the <strong>treemap</strong>: a rectangle divided into smaller rectangles whose areas are proportional to size, nested to show the hierarchy of folders and files. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span> The original “slice-and-dice” layout produced long thin slivers; in 2000 Mark Bruls, Kees Huizing and Jarke van Wijk proposed <strong>squarified</strong> treemaps, which keep rectangles close to square so that their areas are easier to compare. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-treemap">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. A budget as a treemap and a sunburst.</strong> A synthetic city budget with five sectors and their items. Compare squarified and slice-and-dice treemaps with a sunburst.
+              </figcaption>
+            </figure>
+            <div class="callout callout-tip">
+              <div class="callout-header">How to read a treemap</div>
+              <ol>
+                <li>Find the biggest rectangles first: they are the largest items.</li>
+                <li>Use the borders and colours to see the groups (sectors) and the items inside them.</li>
+                <li>Do not try to compare areas precisely, especially between rectangles of different shapes; read the labels.</li>
+                <li>Check whether colour shows a second variable, such as growth or profit, as it often does in financial “market maps”.</li>
+              </ol>
+            </div>
+            <p>The <em>squarify</em> package draws simple treemaps with matplotlib:</p>
+            <pre><code class="language-python"># pip install matplotlib squarify
+import matplotlib.pyplot as plt
+import squarify
+
+# synthetic city budget (millions)
+items = {"Schools": 420, "Hospitals": 310, "Roads": 180, "Police": 150, "Parks": 60,
+         "Libraries": 35, "Housing": 140, "Transit": 120, "Admin": 45}
+items = dict(sorted(items.items(), key=lambda kv: -kv[1]))   # largest first gives tidier layouts
+colours = ["#0072B2", "#E69F00", "#009E73", "#D55E00", "#CC79A7", "#56B4E9", "#F0E442", "#999999", "#000000"]
+labels = [f"{k}\n{v}" for k, v in items.items()]
+
+fig, ax = plt.subplots(figsize=(8, 5))
+squarify.plot(sizes=list(items.values()), label=labels, color=colours, alpha=0.8,
+              text_kwargs=dict(color="white", fontsize=9), pad=True, ax=ax)
+ax.axis("off")
+ax.set_title("City budget (millions): area is proportional to spending")
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Sunburst Charts</h2>
+            <p>A <strong>sunburst</strong> shows the same hierarchy as a set of rings: the centre is the whole, the first ring the main groups, and each further ring subdivides its parent, with angles proportional to size. John Stasko and Eugene Zhang studied these radial, space-filling displays in 2000. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> Sunbursts make the levels of a hierarchy easy to follow and look striking, but outer segments are stretched and inner ones squeezed, so sizes are even harder to compare than in a treemap. Interactive versions, which zoom into a segment when you click it, work best. Plotly makes both:</p>
+            <pre><code class="language-python"># pip install plotly pandas
+import pandas as pd
+import plotly.express as px
+
+df = pd.DataFrame({                                       # synthetic budget with two levels
+    "sector": ["Education", "Education", "Health", "Health", "Transport", "Transport", "Other", "Other"],
+    "item": ["Schools", "Libraries", "Hospitals", "Clinics", "Roads", "Transit", "Parks", "Admin"],
+    "millions": [420, 35, 310, 90, 180, 120, 60, 45],
+})
+
+fig = px.sunburst(df, path=["sector", "item"], values="millions")    # inner ring: sector
+fig.update_layout(title="Budget as a sunburst (click a sector to zoom)")
+fig.show()          # opens in a browser or notebook; px.treemap(...) works the same way
+</code></pre>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Mosaic Plots</h2>
+            <p>A <strong>mosaic plot</strong>, described by John Hartigan and Beat Kleiner in 1981, <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> shows a table of counts for two or more categorical variables. The width of each column is proportional to the size of a group; each column is then split vertically by the shares of the second variable. Every tile’s area is proportional to its count, and the pattern of the tiles shows whether the variables are related. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span></p>
+            <figure class="fig" data-fig="fig-mosaic">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. A mosaic plot.</strong> How people of three age groups read the news (synthetic survey). Compare data in which preference depends on age with data in which it does not.
+              </figcaption>
+            </figure>
+            <pre><code class="language-python"># pip install statsmodels pandas matplotlib
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from statsmodels.graphics.mosaicplot import mosaic
+
+rng = np.random.default_rng(6)
+age = rng.choice(["18–34", "35–54", "55+"], 600, p=[0.35, 0.4, 0.25])
+prefs = {"18–34": [0.6, 0.3, 0.1], "35–54": [0.35, 0.45, 0.2], "55+": [0.15, 0.35, 0.5]}
+choice = [rng.choice(["Phone", "Laptop", "Paper"], p=prefs[a]) for a in age]   # synthetic survey
+df = pd.DataFrame({"age": age, "reads news on": choice})
+ages, media = ["18–34", "35–54", "55+"], ["Phone", "Laptop", "Paper"]
+counts = df.value_counts()                                # count each (age, medium) pair
+data = {(a, m): counts.get((a, m), 0) for a in ages for m in media}   # fixes the order
+
+colours = {"Phone": "#0072B2", "Laptop": "#E69F00", "Paper": "#009E73"}
+fig, ax = plt.subplots(figsize=(7, 5))
+mosaic(data, ax=ax, gap=0.02,
+       properties=lambda key: {"color": colours[key[1]]},
+       labelizer=lambda key: "")                          # widths: age groups; heights: shares
+ax.set_title("Mosaic plot: how people read news, by age")
+handles = [plt.Rectangle((0, 0), 1, 1, color=c) for c in colours.values()]
+ax.legend(handles, colours.keys(), loc="upper right", bbox_to_anchor=(1.25, 1))
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Waterfall Charts</h2>
+            <p>A <strong>waterfall chart</strong>, or bridge chart, explains how one total becomes another through a series of increases and decreases. Each step is a floating bar that starts where the previous one ended: green for additions, red for subtractions, with the start and end totals drawn from zero. It is a staple of financial reporting and consulting, used to explain changes in profit, cash flow or headcount.</p>
+            <figure class="fig" data-fig="fig-waterfall">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. From revenue to profit.</strong> A synthetic company’s profit bridge. Increase the cost of goods and watch the profit turn into a loss.
+              </figcaption>
+            </figure>
+            <p>Matplotlib has no waterfall function, but stacking each bar on a computed “bottom” builds one in a few lines:</p>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+steps = [("Revenue", 500), ("Cost of goods", -210), ("Salaries", -120), ("Rent", -40),
+         ("Marketing", -35), ("Other income", 15), ("Tax", -30)]       # synthetic, thousands
+labels = [s[0] for s in steps] + ["Profit"]
+vals = np.array([s[1] for s in steps])
+running = np.concatenate([[0], np.cumsum(vals)])          # level before each step
+bottoms = np.where(vals &gt;= 0, running[:-1], running[1:])
+colours = ["#0072B2"] + ["#009E73" if v &gt; 0 else "#D55E00" for v in vals[1:]]
+
+fig, ax = plt.subplots(figsize=(9, 4.5))
+ax.bar(labels[:-1], np.abs(vals), bottom=bottoms, color=colours)
+ax.bar("Profit", running[-1], color="#555555")            # final total from zero
+for i, (b, v) in enumerate(zip(bottoms, vals)):
+    ax.text(i, b + abs(v) + 6, f"{v:+d}" if i else str(v), ha="center", fontsize=9)
+    if i &lt; len(vals):                                     # connector lines between bars
+        ax.plot([i + 0.4, i + 0.6], [running[i + 1]] * 2, color="gray", lw=0.8)
+ax.text(len(vals), running[-1] + 6, str(running[-1]), ha="center", fontsize=9)
+ax.set_ylabel("Thousands")
+ax.set_title("Waterfall chart: from revenue to profit")
+ax.tick_params(axis="x", rotation=25)
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Sankey Diagrams</h2>
+            <p>In 1898 the Irish engineer Captain Matthew Sankey published a diagram of the energy flowing through a steam engine, in which arrows split and narrowed in proportion to the heat going to useful work and to the various losses. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span> <strong>Sankey diagrams</strong> are now used for energy balances, material flows, budgets, website journeys and migration. The rule is simple: the width of each band is proportional to the quantity flowing, and at each intermediate node, inflow equals outflow.</p>
+            <figure class="fig" data-fig="fig-sankey">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Energy flows.</strong> A synthetic energy balance from sources, through electricity and heating, to homes, industry, transport and losses. Highlight a node to follow its flows.
+              </figcaption>
+            </figure>
+            <div class="callout callout-tip">
+              <div class="callout-header">How to read a Sankey diagram</div>
+              <ol>
+                <li>Follow the direction of flow, usually left to right.</li>
+                <li>Compare band widths to see where most of the quantity goes; check the units.</li>
+                <li>Look at what comes out of each node: big “loss” or “other” bands are often the story.</li>
+                <li>Beware of crossing bands and colours that do not match; with many nodes, Sankeys become tangled.</li>
+              </ol>
+            </div>
+            <pre><code class="language-python"># pip install plotly
+import plotly.graph_objects as go
+
+nodes = ["Coal", "Gas", "Renewables", "Nuclear",          # sources (synthetic energy flows)
+         "Electricity", "Heating",
+         "Homes", "Industry", "Transport", "Losses"]
+links = [  # (source index, target index, amount)
+    (0, 4, 20), (1, 4, 25), (1, 5, 20), (2, 4, 30), (3, 4, 15),
+    (4, 6, 30), (4, 7, 25), (4, 8, 5), (4, 9, 30),
+    (5, 6, 14), (5, 7, 4), (5, 9, 2),
+]
+fig = go.Figure(go.Sankey(
+    node=dict(label=nodes, pad=18, thickness=16),
+    link=dict(source=[l[0] for l in links], target=[l[1] for l in links], value=[l[2] for l in links]),
+))
+fig.update_layout(title="Sankey diagram: widths are proportional to energy", font_size=12)
+fig.show()
+</code></pre>
+            <p>Closely related <em>alluvial diagrams</em> show how individuals move between categories over several time points, such as voters switching parties between elections.</p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Which One Should I Use?</h2>
+            <div class="table-container" style="overflow-x:auto; margin:1.5rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.93rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.5rem 0.6rem;">You want to show…</th>
+                    <th style="padding:0.5rem 0.6rem;">Good choice</th>
+                    <th style="padding:0.5rem 0.6rem;">Watch out for</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem 0.6rem;">A large hierarchy and its biggest parts</td><td style="padding:0.5rem 0.6rem;">Treemap</td><td style="padding:0.5rem 0.6rem;">Imprecise areas; tiny items unlabelled</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem 0.6rem;">The levels of a hierarchy</td><td style="padding:0.5rem 0.6rem;">Sunburst (interactive)</td><td style="padding:0.5rem 0.6rem;">Distorted outer rings</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem 0.6rem;">A table of counts for two or three categories</td><td style="padding:0.5rem 0.6rem;">Mosaic plot</td><td style="padding:0.5rem 0.6rem;">Hard to read with many levels</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem 0.6rem;">How one total becomes another</td><td style="padding:0.5rem 0.6rem;">Waterfall chart</td><td style="padding:0.5rem 0.6rem;">Steps in an arbitrary order</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem 0.6rem;">Flows between stages</td><td style="padding:0.5rem 0.6rem;">Sankey diagram</td><td style="padding:0.5rem 0.6rem;">Tangles with many nodes</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem 0.6rem;">A few parts of one whole</td><td style="padding:0.5rem 0.6rem;">Bar chart or stacked bar (Part 2)</td><td style="padding:0.5rem 0.6rem;">Using a treemap where a bar chart would do</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Common Misreadings</h2>
+            <ul>
+              <li><strong>Comparing areas precisely.</strong> A treemap rectangle twice as large may not look it, especially if the shapes differ.</li>
+              <li><strong>Reading position as meaning in a treemap.</strong> Layout algorithms place rectangles to fit, not in any meaningful order.</li>
+              <li><strong>Judging sunburst segments by their outer length.</strong> Outer rings are stretched; compare angles.</li>
+              <li><strong>Missing the column widths in a mosaic.</strong> Small groups get narrow columns; their percentages may be unreliable.</li>
+              <li><strong>Forgetting that waterfall steps can be reordered.</strong> The order chosen can change which step looks decisive.</li>
+              <li><strong>Assuming a Sankey shows causation.</strong> It shows accounting flows, not why they happen.</li>
+            </ul>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Legend and Record</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: who drew the first flow diagram?</div>
+              <p><strong>The legend:</strong> Matthew Sankey invented flow diagrams with proportional widths.</p>
+              <p><strong>The record:</strong> Sankey’s 1898 steam-engine diagram gave the diagrams their name, <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span> but the idea is older. Charles Joseph Minard used bands of proportional width in the mid-nineteenth century to map the flows of goods and travellers, and in his famous 1869 map of Napoleon’s Russian campaign, the shrinking band shows the army dwindling from more than 400,000 men to about 10,000. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span></p>
+              <p><strong>A second record:</strong> treemaps were invented for a practical problem, not as an art form. Shneiderman’s laboratory disk was always full, and existing tree diagrams of folders could not show which branches were large. Squeezing the tree into a rectangle used every pixel to show size, an idea now found in disk-usage tools on most operating systems. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+            </div>
+          </section>
+
+          <section id="section-11">
+            <h2>11. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Charles Joseph Minard</td>
+                <td style="padding:0.6rem 0.8rem;">1781–1870<br>France</td>
+                <td style="padding:0.6rem 0.8rem;">Flow maps (1840s–1869)</td>
+                <td style="padding:0.6rem 0.8rem;">Drew flows with bands of proportional width.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Matthew Sankey</td>
+                <td style="padding:0.6rem 0.8rem;">1853–1925<br>Ireland and England</td>
+                <td style="padding:0.6rem 0.8rem;">Steam-engine energy diagram (1898)</td>
+                <td style="padding:0.6rem 0.8rem;">Gave his name to flow diagrams.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John Hartigan and Beat Kleiner</td>
+                <td style="padding:0.6rem 0.8rem;">USA</td>
+                <td style="padding:0.6rem 0.8rem;">Mosaic displays (1981)</td>
+                <td style="padding:0.6rem 0.8rem;">Created a picture for tables of counts.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Ben Shneiderman</td>
+                <td style="padding:0.6rem 0.8rem;">born 1947<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Treemaps (1992)</td>
+                <td style="padding:0.6rem 0.8rem;">Invented space-filling displays of hierarchies.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Jarke van Wijk</td>
+                <td style="padding:0.6rem 0.8rem;">born 1959<br>Netherlands</td>
+                <td style="padding:0.6rem 0.8rem;">Squarified treemaps (2000, with Bruls and Huizing)</td>
+                <td style="padding:0.6rem 0.8rem;">Made treemaps easier to read.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John Stasko</td>
+                <td style="padding:0.6rem 0.8rem;">USA</td>
+                <td style="padding:0.6rem 0.8rem;">Sunburst displays (2000, with Eugene Zhang)</td>
+                <td style="padding:0.6rem 0.8rem;">Studied radial displays of hierarchies.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about charts for hierarchies, parts and flows.</p>
+            <figure class="fig" data-fig="fig-quiz-p10">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-13">
+            <h2>13. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Shneiderman, Ben.</strong> (1992). "Tree visualization with tree-maps: 2-d space-filling approach." <em>ACM Transactions on Graphics</em>, 11(1): 92–99.</li>
+              <li id="ref-2"><strong>Bruls, Mark, Huizing, Kees &amp; van Wijk, Jarke J.</strong> (2000). "Squarified treemaps." In <em>Data Visualization 2000: Proceedings of the Joint Eurographics and IEEE TCVG Symposium on Visualization</em>, pp. 33–42. Vienna: Springer.</li>
+              <li id="ref-3"><strong>Stasko, John &amp; Zhang, Eugene.</strong> (2000). "Focus+context display and navigation techniques for enhancing radial, space-filling hierarchy visualizations." <em>Proceedings of the IEEE Symposium on Information Visualization 2000</em>: 57–65.</li>
+              <li id="ref-4"><strong>Hartigan, J. A. &amp; Kleiner, B.</strong> (1981). "Mosaics for contingency tables." In <em>Computer Science and Statistics: Proceedings of the 13th Symposium on the Interface</em>, pp. 268–273. New York: Springer.</li>
+              <li id="ref-5"><strong>Friendly, Michael.</strong> (1994). "Mosaic displays for multi-way contingency tables." <em>Journal of the American Statistical Association</em>, 89(425): 190–200.</li>
+              <li id="ref-6"><strong>Sankey, H. R.</strong> (1898). "Introductory note on the thermal efficiency of steam-engines." <em>Minutes of Proceedings of the Institution of Civil Engineers</em>, 134: 278–283.</li>
+              <li id="ref-7"><strong>Tufte, Edward R.</strong> (1983). <em>The Visual Display of Quantitative Information</em>. Cheshire, CT: Graphics Press.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/reading-the-picture.html">Reading the Picture</a> (Part 10 of 12)</div>
+  <div class="series-banner-links">
+    <a href="diagnostic-plots.html">← Part 9: Diagnostic Plots: Q–Q Plots, Residuals, Bland–Altman, Funnel and Volcano Plots</a>
+    <a href="plots-for-machine-learning.html">Part 11: Plots for Machine Learning: Learning Curves, Confusion Matrices, Calibration and Embeddings →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/treemaps-sankeys-and-waterfalls.js"></script>
+</body>
+</html>

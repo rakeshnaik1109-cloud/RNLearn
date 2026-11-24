@@ -51,6 +51,21 @@ A 12-part series on how people measured the Earth, the Moon, the Sun, light, gra
 11. **Part 11**: *Counting the Cosmos: How Many Stars and Galaxies, and the Matter We Cannot See* (sampling & Kapteyn’s Selected Areas, weighing the Milky Way, Gaia’s census, the Hubble Deep Fields, two trillion or fewer, Zwicky, Vera Rubin, the Bullet Cluster & dark matter)
 12. **Part 12**: *Measuring the Very Small: Oil Films, Jiggling Grains and the Charge of an Electron* (Franklin’s pond, Rayleigh & Pockels, Loschmidt, Einstein & Perrin’s Brownian motion, Millikan’s oil drops, seeing atoms, the 2019 kilogram)
 
+### New Series: *Reading the Picture*
+A 12-part field guide to plots and charts, from the basics to advanced, with interactive figures and tested Python (matplotlib, seaborn, plotly, scikit-learn) code for every plot:
+1. **Part 1**: *How to Read Any Chart: Anatomy, Scales and the Lessons of Anscombe’s Quartet* (anatomy of a chart, five questions, Anscombe & the Datasaurus, log scales, truncated axes, Cleveland–McGill perception, colour & clutter, the Python toolkit)
+2. **Part 2**: *Bars, Dots and Pies: Charts for Comparing Categories* (sorted bars, grouped & stacked bars, dot plots & lollipops, diverging Likert bars, Pareto charts, pies, donuts & waffles)
+3. **Part 3**: *Lines and Time: Reading Time Series, Trends, Seasons and Smoothing* (line charts, decomposition & STL, moving averages, spaghetti & small multiples, stacked areas, index charts, dual axes, sparklines, cherry-picked windows)
+4. **Part 4**: *Histograms and Density Plots: Seeing the Shape of Your Data* (bin widths & rules, shapes of distributions, KDE & bandwidth, rug/strip/dot plots, stem-and-leaf, ridgelines)
+5. **Part 5**: *Box Plots, Violins and ECDFs: Summarising and Comparing Distributions* (box-plot anatomy, what boxes hide, notches, violins, beeswarms & rainclouds, dynamite plots, ECDFs)
+6. **Part 6**: *Scatter Plots and Relationships: Correlation, Trend Lines and Hidden Groups* (reading scatter plots, guessing r, LOWESS, Simpson’s paradox, overplotting & hexbins, bubble charts, pair plots)
+7. **Part 7**: *Error Bars and Uncertainty: SD, SE, Confidence Intervals and Forest Plots* (SD vs SE vs CI, overlap rules, the dance of CIs, forest plots, dumbbell & slope charts, confidence vs prediction bands, fan charts)
+8. **Part 8**: *Heatmaps and Many Variables: Colour Scales, Correlation Matrices and Parallel Coordinates* (heatmaps, choosing colour maps, correlation matrices, clustered heatmaps, normalising, parallel coordinates, radar charts, faceting)
+9. **Part 9**: *Diagnostic Plots: Q–Q Plots, Residuals, Bland–Altman, Funnel and Volcano Plots* (Q–Q plots, residual plots, leverage & Cook’s distance, Bland–Altman, funnel plots, volcano plots)
+10. **Part 10**: *Treemaps, Sankeys and Waterfalls: Charts for Hierarchies, Parts and Flows* (squarified treemaps, sunbursts, mosaic plots, waterfall charts, Sankey diagrams)
+11. **Part 11**: *Plots for Machine Learning: Learning Curves, Confusion Matrices, Calibration and Embeddings* (learning & loss curves, confusion matrices, ROC & PR, reliability diagrams, decision boundaries, PCA/t-SNE/UMAP, permutation importance)
+12. **Part 12**: *Scientific Plots and Choosing the Right Chart: Log–Log, Contours, Survival and Control Charts* (log–log & semi-log, contours, polar plots & spectrograms, Kaplan–Meier, control charts, a chart chooser, a misleading-chart checklist, publication figures)
+
 ### New Series: *Making Sense of Data*
 A nine-part series on the statistics used in real experiments:
 1. **Part 1**: *Describing Data: Averages, Spread and the Shape of Your Measurements* (levels of measurement, histograms, mean/median/mode, geometric/harmonic/trimmed/weighted means, variance & SD with Bessel’s correction, MAD, CV, quartiles & box plots, skewness & kurtosis, Anscombe’s quartet, outliers, reporting)

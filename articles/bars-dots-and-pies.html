@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bars, Dots and Pies: Charts for Comparing Categories — RNLearn</title>
+  <meta name="description" content="Bar charts and how to sort them, grouped and stacked bars, dot plots and lollipops, diverging bars for surveys, Pareto charts, pies, donuts and waffles, with Python code for each.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/bars-dots-and-pies.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Bars, Dots and Pies: Charts for Comparing Categories — RNLearn">
+  <meta property="og:description" content="Bar charts and how to sort them, grouped and stacked bars, dot plots and lollipops, diverging bars for surveys, Pareto charts, pies, donuts and waffles, with Python code for each.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/bars-dots-and-pies.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bars, Dots and Pies: Charts for Comparing Categories — RNLearn">
+  <meta name="twitter:description" content="Bar charts and how to sort them, grouped and stacked bars, dot plots and lollipops, diverging bars for surveys, Pareto charts, pies, donuts and waffles, with Python code for each.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Bars, Dots and Pies: Charts for Comparing Categories",
+    "description": "Bar charts and how to sort them, grouped and stacked bars, dot plots and lollipops, diverging bars for surveys, Pareto charts, pies, donuts and waffles, with Python code for each.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-23",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/bars-dots-and-pies.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/research.html" class="post-subject-tag" data-subject="research">Research</a>
+        </div>
+        <h1 class="article-title">Bars, Dots and Pies: Charts for Comparing Categories</h1>
+        <p class="article-standfirst">
+          An 8% difference can look threefold, five similar slices of a pie are almost impossible to rank, and the first bar chart was invented by accident. How to choose and read the charts that compare categories.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-23">23 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>14 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/reading-the-picture.html">Reading the Picture</a> (Part 2 of 12)</div>
+  <div class="series-banner-links">
+    <a href="how-to-read-any-chart.html">← Part 1: How to Read Any Chart: Anatomy, Scales and the Lessons of Anscombe’s Quartet</a>
+    <a href="lines-and-time.html">Part 3: Lines and Time: Reading Time Series, Trends, Seasons and Smoothing →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. Comparing Categories</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Bar Charts</a></li>
+              <li><a class="toc-link" href="#section-4">4. Grouped and Stacked Bars</a></li>
+              <li><a class="toc-link" href="#section-5">5. Dot Plots and Lollipops</a></li>
+              <li><a class="toc-link" href="#section-6">6. Diverging Bars for Surveys</a></li>
+              <li><a class="toc-link" href="#section-7">7. Pareto Charts</a></li>
+              <li><a class="toc-link" href="#section-8">8. Pie and Donut Charts</a></li>
+              <li><a class="toc-link" href="#section-9">9. Waffle Charts and Other Unit Charts</a></li>
+              <li><a class="toc-link" href="#section-10">10. Which One Should I Use?</a></li>
+              <li><a class="toc-link" href="#section-11">11. Common Misreadings</a></li>
+              <li><a class="toc-link" href="#section-12">12. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-13">13. People in This Part</a></li>
+              <li><a class="toc-link" href="#section-14">14. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-15">15. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. Comparing Categories</h2>
+            <p>Many questions in analysis are comparisons between categories: which product sells most, which region is healthiest, which cause produces most defects, what share of energy comes from each source. The data are a few numbers, one per category, and the job of the chart is to make the comparison effortless. Part 1 showed that the eye judges <strong>positions and lengths</strong> best and <strong>angles and areas</strong> worst. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span> That one fact explains most of the advice in this part.</p>
+            <p>We will cover the bar chart and its relatives (grouped, stacked, diverging and Pareto charts), the dot plot and lollipop, and the much-debated pie chart, with Python code for each.</p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-p2-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. Bars, pies and dots, 1786–2014.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Bar Charts</h2>
+            <p>A bar chart shows one number per category as the length of a bar. It is the workhorse of business and science because lengths on a common baseline are easy to compare. William Playfair drew the first one in 1786, showing Scotland’s imports and exports with seventeen countries for a single year, because he did not have the year-by-year figures he needed for a line chart. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+            <figure class="fig" data-fig="fig-bar-sort">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Order and orientation.</strong> The same ten numbers, in three orders and two orientations. Which version makes the ranking easiest to read?
+              </figcaption>
+            </figure>
+            <div class="callout callout-tip">
+              <div class="callout-header">How to read (and make) a bar chart</div>
+              <ol>
+                <li>Check that the bars start at zero. If they do not, the lengths are misleading (Part 1).</li>
+                <li>Read the order: sorted by value, alphabetical, or a natural order such as months?</li>
+                <li>Compare lengths, not the positions of the bar tops on different axes.</li>
+                <li>Ask what each bar is: a count, a total, a mean? A mean deserves an indication of uncertainty (Part 7).</li>
+              </ol>
+            </div>
+            <p>This code makes a sorted horizontal bar chart with values written on the bars:</p>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+fruits = ["Apple", "Banana", "Cherry", "Grape", "Mango", "Orange", "Pear"]
+votes = np.array([42, 67, 18, 25, 51, 39, 12])          # synthetic survey counts
+
+order = np.argsort(votes)                               # sort so the ranking is easy to read
+fig, ax = plt.subplots(figsize=(6, 4))
+ax.barh(np.array(fruits)[order], votes[order], color="#0072B2")
+ax.set_xlabel("Number of votes")
+ax.set_title("Favourite fruit (horizontal bars, sorted)")
+for y, v in enumerate(votes[order]):                    # label the bars directly
+    ax.text(v + 1, y, str(v), va="center", fontsize=9)
+ax.set_xlim(0, votes.max() * 1.12)                      # bars start at zero
+ax.spines[["top", "right"]].set_visible(False)          # remove clutter
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Grouped and Stacked Bars</h2>
+            <p>When each category is split into subgroups, such as sales by region and quarter, there are three common layouts. <strong>Grouped</strong> bars place the subgroups side by side; <strong>stacked</strong> bars pile them on top of each other so that the bar’s height is the total; <strong>100% stacked</strong> bars stretch every bar to the same height to show shares.</p>
+            <figure class="fig" data-fig="fig-stacked">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. Grouped, stacked and 100% stacked.</strong> The same sales figures in three layouts. Each makes a different comparison easy.
+              </figcaption>
+            </figure>
+            <p>The key question is which segments share a baseline. In a grouped chart, all of them do. In a stacked chart only the bottom segment does, so it is hard to tell whether the middle segment is growing. Choose the layout for the comparison your reader most needs, and if you need several comparisons, draw several charts.</p>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+quarters = ["Q1", "Q2", "Q3", "Q4"]
+sales = {                                               # synthetic sales by region
+    "North": np.array([20, 24, 30, 28]),
+    "South": np.array([15, 18, 16, 22]),
+    "West":  np.array([10, 14, 19, 25]),
+}
+colours = ["#0072B2", "#E69F00", "#009E73"]
+x = np.arange(len(quarters))
+
+fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(13, 4))
+
+# 1. Grouped: compare regions within each quarter
+width = 0.27
+for i, (region, vals) in enumerate(sales.items()):
+    ax1.bar(x + (i - 1) * width, vals, width, label=region, color=colours[i])
+ax1.set_title("Grouped")
+
+# 2. Stacked: see the total and its make-up
+bottom = np.zeros(len(quarters))
+for i, (region, vals) in enumerate(sales.items()):
+    ax2.bar(x, vals, bottom=bottom, label=region, color=colours[i])
+    bottom += vals
+ax2.set_title("Stacked")
+
+# 3. 100% stacked: compare shares, not sizes
+total = sum(sales.values())
+bottom = np.zeros(len(quarters))
+for i, (region, vals) in enumerate(sales.items()):
+    share = 100 * vals / total
+    ax3.bar(x, share, bottom=bottom, label=region, color=colours[i])
+    bottom += share
+ax3.set_title("100% stacked")
+ax3.set_ylabel("Share of sales (%)")
+
+for ax in (ax1, ax2, ax3):
+    ax.set_xticks(x, quarters)
+ax1.set_ylabel("Sales (thousand units)")
+ax1.legend()
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Dot Plots and Lollipops</h2>
+            <p>William Cleveland proposed the <strong>dot chart</strong> in 1984: each category gets a row, and its value is a dot on a common scale. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> Because a dot encodes a value by its position rather than a length, the axis does not need to start at zero, so the dot plot can zoom in on small but important differences, such as life expectancies between 71 and 84 years. A <strong>lollipop chart</strong> is a hybrid: a thin line ending in a dot.</p>
+            <figure class="fig" data-fig="fig-dot-lollipop">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Bars, dots and lollipops.</strong> Life expectancy in twelve regions (synthetic data). Compare honest bars, distorted bars, a dot plot and a lollipop chart.
+              </figcaption>
+            </figure>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+rng = np.random.default_rng(7)
+places = [f"Region {c}" for c in "ABCDEFGHIJKL"]
+life = np.round(rng.uniform(71, 84, len(places)), 1)    # synthetic life expectancy (years)
+order = np.argsort(life)
+names, vals = np.array(places)[order], life[order]
+y = np.arange(len(names))
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4.5), sharey=True)
+
+# Cleveland dot plot: position on a common scale, no need to start at zero
+ax1.plot(vals, y, "o", color="#0072B2")
+ax1.grid(axis="y", alpha=0.3)
+ax1.set_title("Dot plot")
+
+# Lollipop: a thin stem from a baseline, lighter than a full bar
+ax2.hlines(y, 70, vals, color="#999999", lw=1.5)
+ax2.plot(vals, y, "o", color="#D55E00")
+ax2.set_title("Lollipop (baseline 70)")
+
+ax1.set_yticks(y, names)
+for ax in (ax1, ax2):
+    ax.set_xlabel("Life expectancy (years)")
+    ax.set_xlim(70, 85)
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Diverging Bars for Surveys</h2>
+            <p>Survey questions often ask people to agree or disagree on a five-point scale, a <strong>Likert scale</strong>. The answers are ordered, with a natural middle. Richard Heiberger and Naomi Robbins recommended <strong>diverging stacked bars</strong> for such data: each bar is shifted so that the middle of the neutral category sits on a central line, with disagreement extending left and agreement right. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span></p>
+            <figure class="fig" data-fig="fig-likert">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Survey responses.</strong> Switch between an ordinary 100% stacked chart and a diverging chart centred on “Neutral”, and see which makes the balance of opinion clearer.
+              </figcaption>
+            </figure>
+            <p>Diverging bars are also used for any values with a meaningful centre, such as profits and losses, or changes above and below a target, with one colour for each direction.</p>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+questions = ["Easy to use", "Good value", "Fast delivery", "Helpful staff", "Would recommend"]
+labels = ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]
+# synthetic percentages of respondents for each answer (rows add up to 100)
+pct = np.array([[5, 10, 15, 45, 25],
+                [15, 25, 20, 30, 10],
+                [10, 15, 30, 30, 15],
+                [3, 7, 10, 40, 40],
+                [8, 12, 20, 35, 25]])
+colours = ["#B2182B", "#EF8A62", "#CCCCCC", "#67A9CF", "#2166AC"]
+
+# start each row so that the middle of "Neutral" sits at zero
+left = -(pct[:, 0] + pct[:, 1] + pct[:, 2] / 2)
+fig, ax = plt.subplots(figsize=(9, 3.8))
+for j in range(5):
+    ax.barh(questions, pct[:, j], left=left, color=colours[j], label=labels[j])
+    left = left + pct[:, j]
+ax.axvline(0, color="black", lw=0.8)
+ax.set_xlabel("Percentage of respondents (negative to the left, positive to the right)")
+ax.legend(ncol=5, bbox_to_anchor=(0.5, -0.25), loc="upper center", fontsize=8, frameon=False)
+ax.invert_yaxis()                                       # first question at the top
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Pareto Charts</h2>
+            <p>In 1896 the economist Vilfredo Pareto observed that land and wealth in Italy and elsewhere were concentrated in a small fraction of the population. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> The quality engineer Joseph Juran generalised the idea in his <em>Quality Control Handbook</em> of 1951: a few causes usually account for most of the problems, “the vital few and the trivial many”, and he named it after Pareto. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span> A <strong>Pareto chart</strong> sorts categories from largest to smallest and adds a line showing the cumulative percentage.</p>
+            <figure class="fig" data-fig="fig-pareto">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. A Pareto chart of defect causes.</strong> Choose a target share of all defects and see how few causes you need to fix to reach it.
+              </figcaption>
+            </figure>
+            <p>The “80/20 rule” is a tendency, not a law: in some data the top 20% of causes account for 95% of the effect, in others for barely half. The chart lets you see which is the case.</p>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+causes = ["Scratches", "Misalignment", "Loose screws", "Paint drips", "Cracks", "Wrong label", "Other"]
+counts = np.array([142, 96, 51, 24, 15, 9, 13])        # synthetic defect counts
+
+order = np.argsort(counts[:-1])[::-1]                   # largest first...
+order = np.append(order, len(counts) - 1)               # ...but keep "Other" at the end
+causes, counts = np.array(causes)[order], counts[order]
+cum = 100 * np.cumsum(counts) / counts.sum()
+
+fig, ax = plt.subplots(figsize=(8, 4.2))
+ax.bar(causes, counts, color="#0072B2")
+ax.set_ylabel("Number of defects")
+ax.tick_params(axis="x", rotation=30)
+
+ax2 = ax.twinx()                                        # second y-axis for the cumulative %
+ax2.plot(causes, cum, color="#D55E00", marker="o")
+ax2.axhline(80, color="gray", ls="--", lw=1)
+ax2.set_ylim(0, 105)
+ax2.set_ylabel("Cumulative percentage (%)")
+ax.set_title("Pareto chart of defect causes")
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Pie and Donut Charts</h2>
+            <p>Playfair also invented the pie chart, in 1801. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>, <a class="cite" href="#ref-7">7</a>]</span> It shows parts of a whole as slices of a circle, so the reader must compare angles, arc lengths and areas, the encodings that Cleveland and McGill found least accurate. A <strong>donut chart</strong> is a pie with the centre removed, which hides the angles at the centre and leaves only arc lengths.</p>
+            <figure class="fig" data-fig="fig-pie-vs-bar">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 7. Pie, donut or bar?</strong> Five similar shares. Try to rank them from the pie, then switch to the bar chart.
+              </figcaption>
+            </figure>
+            <div class="callout callout-tip">
+              <div class="callout-header">If you must use a pie chart</div>
+              <ul>
+                <li>Use it only for parts of a single whole that add up to 100%.</li>
+                <li>Keep to two or three slices, or five at most; group the small ones into “Other”.</li>
+                <li>Start at 12 o’clock and order the slices by size, clockwise.</li>
+                <li>Label the slices directly, with percentages, and never use 3D, which distorts the slices nearest the viewer.</li>
+                <li>Do not compare several pies side by side; use stacked bars instead.</li>
+              </ul>
+            </div>
+            <pre><code class="language-python">import matplotlib.pyplot as plt
+
+labels = ["A", "B", "C", "D", "E"]
+shares = [22, 21, 20, 19, 18]                           # close values: hard to rank in a pie
+colours = ["#0072B2", "#E69F00", "#009E73", "#D55E00", "#CC79A7"]
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))
+ax1.pie(shares, labels=labels, colors=colours, startangle=90, counterclock=False,
+        wedgeprops=dict(width=0.45, edgecolor="white"))  # width &lt; 1 makes a donut
+ax1.set_title("Donut chart: which is largest?")
+ax2.bar(labels, shares, color=colours)
+ax2.set_ylabel("Share (%)")
+ax2.set_title("Bar chart: now it is easy")
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Waffle Charts and Other Unit Charts</h2>
+            <p>A <strong>waffle chart</strong> shows a part-to-whole split as a grid of 100 squares, one per percentage point. It is easier to read than a pie, because counting or estimating squares is easier than judging angles, and it suits audiences who find percentages abstract. Related <em>unit charts</em> and <em>pictograms</em> use one icon per person or per thousand people. Matplotlib has no built-in waffle chart, but drawing one takes only a few lines:</p>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# A waffle (unit) chart: 100 squares, one per percentage point
+groups = {"Renewables": 31, "Gas": 38, "Coal": 19, "Nuclear": 12}   # synthetic shares, sum to 100
+colours = ["#009E73", "#56B4E9", "#555555", "#E69F00"]
+
+cells = np.concatenate([[i] * n for i, n in enumerate(groups.values())])
+fig, ax = plt.subplots(figsize=(5, 5))
+for k, g in enumerate(cells):
+    row, col = divmod(k, 10)
+    ax.add_patch(plt.Rectangle((col, 9 - row), 0.9, 0.9, color=colours[g]))
+handles = [plt.Rectangle((0, 0), 1, 1, color=c) for c in colours]
+ax.legend(handles, [f"{k} ({v}%)" for k, v in groups.items()],
+          loc="upper center", bbox_to_anchor=(0.5, -0.02), ncol=2, frameon=False)
+ax.set_xlim(0, 10)
+ax.set_ylim(0, 10)
+ax.set_aspect("equal")
+ax.axis("off")
+ax.set_title("Electricity sources: each square is 1%")
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Which One Should I Use?</h2>
+            <div class="table-container" style="overflow-x:auto; margin:1.5rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.93rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.5rem 0.6rem;">You want to show…</th>
+                    <th style="padding:0.5rem 0.6rem;">Good choice</th>
+                    <th style="padding:0.5rem 0.6rem;">Avoid</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem 0.6rem;">Counts or totals for a few categories</td><td style="padding:0.5rem 0.6rem;">Bar chart, sorted</td><td style="padding:0.5rem 0.6rem;">3D bars, truncated axes</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem 0.6rem;">Values for many categories, or small differences</td><td style="padding:0.5rem 0.6rem;">Dot plot</td><td style="padding:0.5rem 0.6rem;">Bars starting above zero</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem 0.6rem;">Subgroups within categories</td><td style="padding:0.5rem 0.6rem;">Grouped bars (or small multiples)</td><td style="padding:0.5rem 0.6rem;">Stacks with many segments</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem 0.6rem;">Totals and their make-up</td><td style="padding:0.5rem 0.6rem;">Stacked bars</td><td style="padding:0.5rem 0.6rem;">Several pies</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem 0.6rem;">Shares of a whole</td><td style="padding:0.5rem 0.6rem;">100% stacked bar, waffle, or a pie with 2–3 slices</td><td style="padding:0.5rem 0.6rem;">Pies with many similar slices</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem 0.6rem;">Agree–disagree survey answers</td><td style="padding:0.5rem 0.6rem;">Diverging stacked bars</td><td style="padding:0.5rem 0.6rem;">Separate pies per question</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem 0.6rem;">Which causes matter most</td><td style="padding:0.5rem 0.6rem;">Pareto chart</td><td style="padding:0.5rem 0.6rem;">Unsorted bars</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>When categories are many and subgroups more than a few, consider <strong>small multiples</strong>: a grid of small charts with the same axes, one for each subgroup. Part 3 returns to this idea for time series. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span></p>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Common Misreadings</h2>
+            <ul>
+              <li><strong>Bars that do not start at zero.</strong> The lengths, and so the visual differences, are exaggerated.</li>
+              <li><strong>Reading a middle segment of a stacked bar as a trend.</strong> Its baseline moves with the segments below it.</li>
+              <li><strong>Comparing slices across two pies.</strong> Pies of different totals cannot be compared slice by slice; the same angle may mean very different amounts.</li>
+              <li><strong>Mistaking an average for a count.</strong> A bar showing a mean hides how much individual values vary; look for error bars or, better, the data points (Parts 5 and 7).</li>
+              <li><strong>Over-reading the 80/20 rule.</strong> The Pareto principle describes a common pattern, not a guarantee.</li>
+              <li><strong>Ignoring the denominator.</strong> A region with more cases may simply have more people; check whether bars show counts or rates.</li>
+            </ul>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Legend and Record</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: are pie charts always bad?</div>
+              <p><strong>The legend:</strong> pie charts are always wrong, and experts never use them.</p>
+              <p><strong>The record:</strong> pies are poor for ranking or comparing similar values, as Cleveland and McGill’s experiments suggest. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span> But in 1991 Ian Spence and Stephan Lewandowsky found that for judging what proportion of the whole a part represents, pie charts were about as accurate as bar charts, and sometimes better, perhaps because the whole is always visible. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span> The designer Stephen Few, a strong critic, summarised the case against them in an essay titled “Save the pies for dessert”. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span> The fair conclusion: a pie with two or three slices showing parts of a whole is fine; a pie with ten similar slices is not.</p>
+              <p><strong>A second legend:</strong> the bar chart was invented to show change over time. <strong>The record:</strong> Playfair’s first bar chart showed a single year, with a bar for each trading partner. He apologised for it, explaining that he lacked the data for a proper time series, and so invented the chart for comparing categories almost by accident. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>, <a class="cite" href="#ref-11">11</a>]</span></p>
+            </div>
+          </section>
+
+          <section id="section-13">
+            <h2>13. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">William Playfair</td>
+                <td style="padding:0.6rem 0.8rem;">1759–1823<br>Scotland and London</td>
+                <td style="padding:0.6rem 0.8rem;">First bar chart (1786) and pie chart (1801)</td>
+                <td style="padding:0.6rem 0.8rem;">Invented the main charts for comparing categories.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Vilfredo Pareto</td>
+                <td style="padding:0.6rem 0.8rem;">1848–1923<br>France, Italy and Switzerland</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Cours d’économie politique</em> (1896–97)</td>
+                <td style="padding:0.6rem 0.8rem;">Observed that wealth is concentrated in a few hands.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Joseph Juran</td>
+                <td style="padding:0.6rem 0.8rem;">1904–2008<br>Romania and USA</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Quality Control Handbook</em> (1951)</td>
+                <td style="padding:0.6rem 0.8rem;">Named the Pareto principle and made the Pareto chart a quality tool.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">William Cleveland</td>
+                <td style="padding:0.6rem 0.8rem;">born 1943<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Dot charts (1984); graphical perception</td>
+                <td style="padding:0.6rem 0.8rem;">Showed why dots and bars beat pies and bubbles.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Ian Spence</td>
+                <td style="padding:0.6rem 0.8rem;">born 1944<br>Canada</td>
+                <td style="padding:0.6rem 0.8rem;">Experiments on pie charts (1991); history of the pie chart</td>
+                <td style="padding:0.6rem 0.8rem;">Showed that pies are not always worse than bars.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Naomi Robbins</td>
+                <td style="padding:0.6rem 0.8rem;">USA</td>
+                <td style="padding:0.6rem 0.8rem;">Diverging stacked bar charts (2014, with Richard Heiberger)</td>
+                <td style="padding:0.6rem 0.8rem;">Promoted clear designs for survey data.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about charts for comparing categories.</p>
+            <figure class="fig" data-fig="fig-quiz-p2">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-15">
+            <h2>15. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Cleveland, William S. &amp; McGill, Robert.</strong> (1984). "Graphical perception: Theory, experimentation, and application to the development of graphical methods." <em>Journal of the American Statistical Association</em>, 79(387): 531–554.</li>
+              <li id="ref-2"><strong>Playfair, William.</strong> (1786). <em>The Commercial and Political Atlas</em>. London: Debrett, Robinson and Sewell. (And <em>The Statistical Breviary</em>, London: Wallis, 1801.)</li>
+              <li id="ref-3"><strong>Cleveland, William S.</strong> (1984). "Graphical methods for data presentation: Full scale breaks, dot charts, and multibased logging." <em>The American Statistician</em>, 38(4): 270–280.</li>
+              <li id="ref-4"><strong>Heiberger, Richard M. &amp; Robbins, Naomi B.</strong> (2014). "Design of diverging stacked bar charts for Likert scales and other applications." <em>Journal of Statistical Software</em>, 57(5): 1–32.</li>
+              <li id="ref-5"><strong>Pareto, Vilfredo.</strong> (1896–1897). <em>Cours d’économie politique</em>. 2 vols. Lausanne: F. Rouge.</li>
+              <li id="ref-6"><strong>Juran, Joseph M. (ed.)</strong> (1951). <em>Quality Control Handbook</em>. New York: McGraw-Hill.</li>
+              <li id="ref-7"><strong>Spence, Ian.</strong> (2005). "No humble pie: The origins and usage of a statistical chart." <em>Journal of Educational and Behavioral Statistics</em>, 30(4): 353–368.</li>
+              <li id="ref-8"><strong>Wilke, Claus O.</strong> (2019). <em>Fundamentals of Data Visualization</em>. Sebastopol, CA: O’Reilly Media.</li>
+              <li id="ref-9"><strong>Spence, Ian &amp; Lewandowsky, Stephan.</strong> (1991). "Displaying proportions and percentages." <em>Applied Cognitive Psychology</em>, 5(1): 61–77.</li>
+              <li id="ref-10"><strong>Few, Stephen.</strong> (2007). "Save the pies for dessert." <em>Visual Business Intelligence Newsletter</em>, August 2007. Perceptual Edge.</li>
+              <li id="ref-11"><strong>Friendly, Michael.</strong> (2008). "A brief history of data visualization." In C. Chen, W. Härdle &amp; A. Unwin (eds.), <em>Handbook of Data Visualization</em>, pp. 15–56. Berlin: Springer.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/reading-the-picture.html">Reading the Picture</a> (Part 2 of 12)</div>
+  <div class="series-banner-links">
+    <a href="how-to-read-any-chart.html">← Part 1: How to Read Any Chart: Anatomy, Scales and the Lessons of Anscombe’s Quartet</a>
+    <a href="lines-and-time.html">Part 3: Lines and Time: Reading Time Series, Trends, Seasons and Smoothing →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/bars-dots-and-pies.js"></script>
+</body>
+</html>

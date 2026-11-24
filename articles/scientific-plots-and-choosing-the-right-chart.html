@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scientific Plots and Choosing the Right Chart: Log–Log, Contours, Survival and Control Charts — RNLearn</title>
+  <meta name="description" content="Log–log and semi-log plots, contours, polar plots and spectrograms, Kaplan–Meier survival curves, control charts, a chart chooser, a checklist of misleading charts, and publication tips.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/scientific-plots-and-choosing-the-right-chart.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Scientific Plots and Choosing the Right Chart: Log–Log, Contours, Survival and Control Charts — RNLearn">
+  <meta property="og:description" content="Log–log and semi-log plots, contours, polar plots and spectrograms, Kaplan–Meier survival curves, control charts, a chart chooser, a checklist of misleading charts, and publication tips.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/scientific-plots-and-choosing-the-right-chart.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Scientific Plots and Choosing the Right Chart: Log–Log, Contours, Survival and Control Charts — RNLearn">
+  <meta name="twitter:description" content="Log–log and semi-log plots, contours, polar plots and spectrograms, Kaplan–Meier survival curves, control charts, a chart chooser, a checklist of misleading charts, and publication tips.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Scientific Plots and Choosing the Right Chart: Log–Log, Contours, Survival and Control Charts",
+    "description": "Log–log and semi-log plots, contours, polar plots and spectrograms, Kaplan–Meier survival curves, control charts, a chart chooser, a checklist of misleading charts, and publication tips.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-23",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/scientific-plots-and-choosing-the-right-chart.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/research.html" class="post-subject-tag" data-subject="research">Research</a>
+        </div>
+        <h1 class="article-title">Scientific Plots and Choosing the Right Chart: Log–Log, Contours, Survival and Control Charts</h1>
+        <p class="article-standfirst">
+          Curves that straighten on the right axes, survival curves that collapse when censored patients are ignored, and a one-page memo that founded quality control. Then: how to choose the right chart, and how charts mislead.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-23">23 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>13 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/reading-the-picture.html">Reading the Picture</a> (Part 12 of 12)</div>
+  <div class="series-banner-links">
+    <a href="plots-for-machine-learning.html">← Part 11: Plots for Machine Learning: Learning Curves, Confusion Matrices, Calibration and Embeddings</a>
+    <span>Final part</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. The Last Part</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Log–Log and Semi-Log Plots</a></li>
+              <li><a class="toc-link" href="#section-4">4. Contour and Surface Plots</a></li>
+              <li><a class="toc-link" href="#section-5">5. Polar Plots and Spectrograms</a></li>
+              <li><a class="toc-link" href="#section-6">6. Survival Curves</a></li>
+              <li><a class="toc-link" href="#section-7">7. Control Charts</a></li>
+              <li><a class="toc-link" href="#section-8">8. Choosing the Right Chart</a></li>
+              <li><a class="toc-link" href="#section-9">9. How Charts Mislead: A Checklist</a></li>
+              <li><a class="toc-link" href="#section-10">10. Figures for Publication</a></li>
+              <li><a class="toc-link" href="#section-11">11. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-12">12. The Series in One Picture</a></li>
+              <li><a class="toc-link" href="#section-13">13. People in This Part</a></li>
+              <li><a class="toc-link" href="#section-14">14. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-15">15. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. The Last Part</h2>
+            <p>This final part of the series covers a handful of plots that every scientist and engineer meets sooner or later: <strong>log–log and semi-log plots</strong> that reveal growth laws, <strong>contour plots</strong> of surfaces, <strong>polar plots</strong> and <strong>spectrograms</strong>, <strong>survival curves</strong> from medicine and engineering, and <strong>control charts</strong> from quality control. Then it pulls the whole series together: how to choose the right chart for a question, a checklist of the ways charts mislead, and how to prepare figures for publication.</p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-p12-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. Scientific graphics, 1701–1999.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Log–Log and Semi-Log Plots</h2>
+            <p>Logarithmic axes (Part 1) are not just a way to fit large ranges onto a page; they are a test of the law behind the data. On a <strong>semi-log</strong> plot, with a logarithmic vertical axis, exponential growth or decay becomes a straight line. On a <strong>log–log</strong> plot, with both axes logarithmic, a <strong>power law</strong> y = a·xᵇ becomes a straight line whose slope is the exponent b. Vilfredo Pareto used a log–log plot in 1896 to show that the number of people with incomes above a given level followed a power law. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+            <figure class="fig" data-fig="fig-loglog">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Straightening curves.</strong> Plot a power law or an exponential on linear, semi-log and log–log axes, and see which axes make each one straight.
+              </figcaption>
+            </figure>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(1, 100, 200)
+power = 2 * x**1.5                                   # power law: y = a x^b
+expo = 2 * np.exp(0.08 * x)                          # exponential: y = a e^(kx)
+
+fig, axes = plt.subplots(1, 3, figsize=(13, 3.8))
+for ax, (xs, ys, title) in zip(axes, [("linear", "linear", "Linear axes"),
+                                      ("linear", "log", "Semi-log (log y)"),
+                                      ("log", "log", "Log–log")]):
+    ax.plot(x, power, label="power law  2x^1.5")
+    ax.plot(x, expo, label="exponential  2e^(0.08x)")
+    ax.set_xscale(xs)
+    ax.set_yscale(ys)
+    ax.set_title(title)
+axes[0].legend()
+plt.tight_layout()
+plt.show()
+# On semi-log axes the exponential is straight; on log–log axes the power law is straight,
+# with slope equal to its exponent: fit it with np.polyfit(np.log(x), np.log(y), 1).
+</code></pre>
+            <p>A caution: almost any smooth curve looks fairly straight on log–log axes over a small range, and claims of power laws in data have often been overstated. Aaron Clauset, Cosma Shalizi and Mark Newman showed that many published power laws do not survive careful statistical tests. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span></p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Contour and Surface Plots</h2>
+            <p>A quantity that varies over two dimensions, such as height over a landscape, temperature over a region or a function of two parameters, can be shown as a <strong>contour plot</strong>: lines joining points of equal value. Edmond Halley’s 1701 chart of the Atlantic, with lines of equal magnetic compass variation, was one of the first to show a measured quantity this way. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+            <figure class="fig" data-fig="fig-contour">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. A contour map.</strong> A surface with two peaks. Change the number of levels, with and without colour fill.
+              </figcaption>
+            </figure>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(-3, 3, 200)
+y = np.linspace(-2, 2, 150)
+X, Y = np.meshgrid(x, y)
+Z = np.exp(-((X - 1) ** 2 + Y**2)) + 0.8 * np.exp(-((X + 1.2) ** 2 + (Y - 0.5) ** 2) / 0.5)  # two "hills"
+
+fig = plt.figure(figsize=(12, 4))
+ax1 = fig.add_subplot(1, 3, 1)
+cs = ax1.contour(X, Y, Z, levels=8, colors="black", linewidths=0.8)
+ax1.clabel(cs, fontsize=7)                          # label the contour lines
+ax1.set_title("Contour lines")
+ax2 = fig.add_subplot(1, 3, 2)
+cf = ax2.contourf(X, Y, Z, levels=15, cmap="viridis")
+fig.colorbar(cf, ax=ax2)
+ax2.set_title("Filled contours")
+ax3 = fig.add_subplot(1, 3, 3, projection="3d")
+ax3.plot_surface(X, Y, Z, cmap="viridis", linewidth=0)
+ax3.set_title("Surface (hard to read exactly)")
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Polar Plots and Spectrograms</h2>
+            <p>Some data are naturally circular: wind directions, compass bearings, times of day, months of the year. A <strong>polar plot</strong> puts angle around a circle, so that north and the end of the year join up with their neighbours; a <strong>wind rose</strong> is a polar bar chart of how often the wind blows from each direction. Polar plots share the weaknesses of pie and radar charts (Parts 2 and 8): areas grow with the square of the radius, and values at different angles are hard to compare.</p>
+            <p>A <strong>spectrogram</strong> shows how the frequencies in a signal, such as speech, music, bird song or vibration, change over time: time runs along the horizontal axis, frequency up the vertical axis, and colour shows the strength of each frequency at each moment. The sound spectrograph was described by engineers at Bell Telephone Laboratories in 1946. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> SciPy computes spectrograms directly: <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span></p>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from scipy import signal
+
+rng = np.random.default_rng(0)
+fig = plt.figure(figsize=(12, 4.5))
+
+# 1. Polar bar chart (a simple wind rose): direction is naturally circular
+ax1 = fig.add_subplot(1, 2, 1, projection="polar")
+directions = np.deg2rad(np.arange(0, 360, 30))
+counts = np.array([5, 8, 12, 20, 26, 18, 10, 6, 4, 3, 3, 4])      # synthetic wind counts
+ax1.bar(directions, counts, width=np.deg2rad(28), color="#0072B2", alpha=0.8)
+ax1.set_theta_zero_location("N")                    # north at the top
+ax1.set_theta_direction(-1)                         # clockwise, like a compass
+ax1.set_title("Wind rose: where the wind comes from")
+
+# 2. Spectrogram: frequency content of a signal over time
+fs = 2000
+t = np.arange(0, 3, 1 / fs)
+chirp = signal.chirp(t, f0=50, f1=600, t1=3) + 0.3 * rng.normal(size=t.size)   # rising tone + noise
+f, tt, S = signal.spectrogram(chirp, fs=fs, nperseg=256)
+ax2 = fig.add_subplot(1, 2, 2)
+ax2.pcolormesh(tt, f, 10 * np.log10(S + 1e-12), cmap="magma", shading="auto")
+ax2.set_ylim(0, 800)
+ax2.set_xlabel("Time (s)")
+ax2.set_ylabel("Frequency (Hz)")
+ax2.set_title("Spectrogram of a rising tone")
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Survival Curves</h2>
+            <p>In medical studies and reliability engineering, the question is often <em>how long until something happens</em>: death, relapse, the failure of a component. Some subjects are <strong>censored</strong>: the study ends, or they leave it, before the event. Simply ignoring them, or treating their last contact as an event, biases the result. In 1958 Edward Kaplan and Paul Meier published a method that uses each subject’s information for as long as they were observed, producing the staircase-shaped <strong>Kaplan–Meier curve</strong>. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+            <figure class="fig" data-fig="fig-km">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Kaplan–Meier curves.</strong> Relapse-free survival under two treatments (synthetic). Tick marks are censored patients. Compare the proper method with simply ignoring censored patients.
+              </figcaption>
+            </figure>
+            <div class="callout callout-tip">
+              <div class="callout-header">How to read a survival curve</div>
+              <ol>
+                <li>Each step down is an event; tick marks are censored subjects.</li>
+                <li>The median survival time is where the curve crosses 50%.</li>
+                <li>The right-hand end rests on few subjects and is very uncertain; look for the number still at risk, often printed below the plot.</li>
+                <li>Curves that cross suggest a treatment that helps some patients or periods and not others.</li>
+              </ol>
+            </div>
+            <p>The <em>lifelines</em> library provides Kaplan–Meier estimates with confidence bands; the method itself is short enough to write by hand:</p>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+def kaplan_meier(time, event):
+    """Return times and survival probabilities; event=1 means the event happened, 0 means censored."""
+    order = np.argsort(time)
+    time, event = time[order], event[order]
+    at_risk, surv = len(time), 1.0
+    ts, ss = [0.0], [1.0]
+    for t in np.unique(time):
+        d = np.sum((time == t) &amp; (event == 1))          # events at this time
+        if d:
+            surv *= 1 - d / at_risk
+            ts.append(t); ss.append(surv)
+        at_risk -= np.sum(time == t)                     # events and censored leave the risk set
+    return np.array(ts), np.array(ss)
+
+rng = np.random.default_rng(2)
+fig, ax = plt.subplots(figsize=(7, 4.5))
+for name, scale, col in [("Standard treatment", 10, "#D55E00"), ("New treatment", 24, "#0072B2")]:
+    t_event = rng.exponential(scale, 100)               # synthetic months to relapse
+    t_censor = rng.uniform(6, 36, 100)                   # end of follow-up
+    time = np.minimum(t_event, t_censor)
+    event = (t_event &lt;= t_censor).astype(int)
+    ts, ss = kaplan_meier(time, event)
+    ax.step(ts, ss, where="post", color=col, label=name)
+ax.set_xlabel("Months since treatment")
+ax.set_ylabel("Proportion still relapse-free")
+ax.set_ylim(0, 1.02)
+ax.legend()
+ax.set_title("Kaplan–Meier survival curves")
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Control Charts</h2>
+            <p>On 16 May 1924 Walter Shewhart, an engineer at Bell Telephone Laboratories, sketched the first <strong>control chart</strong> in a short memo, and he set out the method fully in 1931. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> A control chart plots a process measurement over time, with a centre line and control limits, usually three standard deviations either side. Variation within the limits is the normal noise of the process; a point outside them, or a suspicious pattern, signals a cause worth finding.</p>
+            <figure class="fig" data-fig="fig-control">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. A Shewhart control chart.</strong> Fill weights from a packing machine (synthetic). Introduce a drift and see how long the chart takes to detect it.
+              </figcaption>
+            </figure>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+rng = np.random.default_rng(5)
+weights = rng.normal(500, 2, 60)                        # synthetic fill weights (g)
+weights[40:] += 3                                        # the machine drifts after sample 40
+
+baseline = weights[:20]                                  # limits from an in-control period
+centre, sigma = baseline.mean(), baseline.std(ddof=1)
+ucl, lcl = centre + 3 * sigma, centre - 3 * sigma
+
+out = (weights &gt; ucl) | (weights &lt; lcl)
+fig, ax = plt.subplots(figsize=(9, 4))
+ax.plot(weights, "o-", color="#0072B2", ms=4)
+ax.plot(np.where(out)[0], weights[out], "o", color="#D55E00", ms=8, label="outside limits")
+for level, style in [(centre, "-"), (ucl, "--"), (lcl, "--")]:
+    ax.axhline(level, color="gray", ls=style)
+ax.set_xlabel("Sample number")
+ax.set_ylabel("Fill weight (g)")
+ax.set_title("Shewhart control chart: centre line and ±3σ limits")
+ax.legend()
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Choosing the Right Chart</h2>
+            <p>Across this series, one principle keeps returning: start from the question, not from the chart type. What comparison should the reader make first? Then choose the visual encoding the eye reads most accurately for that comparison: position on a common scale where possible, then length, and only then angle, area or colour (Part 1). Leland Wilkinson’s <em>grammar of graphics</em>, which describes any chart as data mapped to marks, scales and coordinates, underlies modern plotting tools and makes this way of thinking natural. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span></p>
+            <figure class="fig" data-fig="fig-chooser">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. Which chart should I use?</strong> Choose what you want to show to see the usual best choices, with links to the parts of this series that cover them.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-9">
+            <h2>9. How Charts Mislead: A Checklist</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Before you trust a chart, check…</div>
+              <ol>
+                <li><strong>The axes.</strong> Do bars start at zero? Is the scale linear or logarithmic? Are panels on the same scale? (Part 1)</li>
+                <li><strong>The window.</strong> Why does the time axis start and end where it does? (Part 3)</li>
+                <li><strong>Two y-axes.</strong> Could the scales have been chosen to make lines look related? (Part 3)</li>
+                <li><strong>The bins and smoothing.</strong> Would another bin width or bandwidth tell a different story? (Part 4)</li>
+                <li><strong>The summary.</strong> Do bars of means or box plots hide clusters, outliers or tiny samples? (Parts 4 and 5)</li>
+                <li><strong>The error bars.</strong> Are they SD, SE or CI, and what is n? (Part 7)</li>
+                <li><strong>Hidden groups.</strong> Could a lurking variable reverse the pattern? (Part 6)</li>
+                <li><strong>Areas and colours.</strong> Are bubbles scaled by area? Is the colour map uniform and centred sensibly? (Parts 6 and 8)</li>
+                <li><strong>3D and decoration.</strong> Do perspective or ornaments distort the values? (Part 1)</li>
+                <li><strong>The denominator.</strong> Counts or rates? Per person, per year, per test? (Part 2)</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Figures for Publication</h2>
+            <p>A figure in a paper or report must survive being shrunk to a column width, printed in greyscale and read by someone in a hurry. Set the figure size to its final printed size (a single journal column is about 8–9 cm, or 3.5 inches, wide) so that fonts appear at their intended size; use fonts no smaller than about 7 points; save line art in a vector format (PDF or SVG) and photographs at 300 dots per inch or more; use colour-blind-safe palettes; and write a caption that says what is plotted, what the error bars are, and how many observations there are. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span> Matplotlib’s <code>rcParams</code> set these defaults once for a whole project:</p>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+plt.rcParams.update({                     # set once at the top of a script or notebook
+    "font.size": 9,                       # match the journal's body text
+    "axes.spines.top": False,
+    "axes.spines.right": False,
+    "savefig.dpi": 300,
+    "savefig.bbox": "tight",
+})
+
+rng = np.random.default_rng(1)
+x = np.linspace(0, 10, 30)
+fig, ax = plt.subplots(figsize=(3.5, 2.6))   # 3.5 inches ≈ one journal column wide
+ax.errorbar(x, np.sin(x) + rng.normal(0, 0.1, x.size), yerr=0.1, fmt="o", ms=3, capsize=2,
+            color="black", label="measured (mean ± SD, n = 5)")
+ax.plot(x, np.sin(x), color="#0072B2", label="model")
+ax.set_xlabel("Time (s)")
+ax.set_ylabel("Signal (mV)")
+ax.legend(frameon=False, fontsize=7, loc="lower center", bbox_to_anchor=(0.5, 1.0), ncol=2)
+fig.savefig("figure1.pdf")                  # vector format for print: PDF or SVG
+fig.savefig("figure1.png")                  # raster at 300 dpi for slides and web
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Legend and Record</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: a one-page memo</div>
+              <p><strong>The legend:</strong> quality control began with complex statistical theory.</p>
+              <p><strong>The record:</strong> it began with a picture. Shewhart’s memo of May 1924 to his manager at the Western Electric Company was less than a page long, and about a third of it was a diagram of what became the control chart. The insight was to separate “common causes” of variation, which are built into a process and should be left alone, from “assignable causes” that can be found and fixed, and to let a simple chart tell them apart. His colleague W. Edwards Deming later carried these ideas to Japanese industry after the Second World War. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span></p>
+              <p><strong>A second record:</strong> Halley’s 1701 magnetic chart was made for navigation, not science: sailors could estimate their longitude by comparing the compass variation they measured with the lines on the chart. It is one of the earliest maps of a measured quantity drawn with isolines. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span></p>
+            </div>
+          </section>
+
+          <section id="section-12">
+            <h2>12. The Series in One Picture</h2>
+            <p>Over twelve parts, this series has moved from the anatomy of a chart to the plots of machine learning. The same handful of ideas run through every part: read the frame before the data; choose encodings the eye reads well; show the data, not just summaries; make uncertainty visible; beware of scales, windows and hidden groups chosen by someone else; and check your own analyses with diagnostic plots before trusting them. Every plot here can be made with a few lines of Python. The best way to learn is to take a data set you care about and try several of them: the plot that surprises you is usually the one worth keeping.</p>
+          </section>
+
+          <section id="section-13">
+            <h2>13. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Edmond Halley</td>
+                <td style="padding:0.6rem 0.8rem;">1656–1742<br>England</td>
+                <td style="padding:0.6rem 0.8rem;">Chart of magnetic variation (1701)</td>
+                <td style="padding:0.6rem 0.8rem;">Drew one of the first isoline maps of a measured quantity.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Vilfredo Pareto</td>
+                <td style="padding:0.6rem 0.8rem;">1848–1923<br>Italy and Switzerland</td>
+                <td style="padding:0.6rem 0.8rem;">Log–log plot of incomes (1896)</td>
+                <td style="padding:0.6rem 0.8rem;">Revealed a power law in economic data.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Walter Shewhart</td>
+                <td style="padding:0.6rem 0.8rem;">1891–1967<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">The control chart (1924, 1931)</td>
+                <td style="padding:0.6rem 0.8rem;">Founded statistical quality control.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Edward Kaplan and Paul Meier</td>
+                <td style="padding:0.6rem 0.8rem;">1920–2006 and 1924–2011<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Estimation from incomplete observations (1958)</td>
+                <td style="padding:0.6rem 0.8rem;">Made survival curves with censored data possible.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Leland Wilkinson</td>
+                <td style="padding:0.6rem 0.8rem;">1944–2021<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;"><em>The Grammar of Graphics</em> (1999)</td>
+                <td style="padding:0.6rem 0.8rem;">Gave charts a systematic grammar used by modern tools.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about scientific plots and choosing charts.</p>
+            <figure class="fig" data-fig="fig-quiz-p12">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-15">
+            <h2>15. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Pareto, Vilfredo.</strong> (1896–1897). <em>Cours d’économie politique</em>. 2 vols. Lausanne: F. Rouge.</li>
+              <li id="ref-2"><strong>Clauset, Aaron, Shalizi, Cosma Rohilla &amp; Newman, M. E. J.</strong> (2009). "Power-law distributions in empirical data." <em>SIAM Review</em>, 51(4): 661–703.</li>
+              <li id="ref-3"><strong>Friendly, Michael.</strong> (2008). "A brief history of data visualization." In C. Chen, W. Härdle &amp; A. Unwin (eds.), <em>Handbook of Data Visualization</em>, pp. 15–56. Berlin: Springer.</li>
+              <li id="ref-4"><strong>Koenig, W., Dunn, H. K. &amp; Lacy, L. Y.</strong> (1946). "The sound spectrograph." <em>Journal of the Acoustical Society of America</em>, 18(1): 19–49.</li>
+              <li id="ref-5"><strong>Virtanen, Pauli, et al.</strong> (2020). "SciPy 1.0: Fundamental algorithms for scientific computing in Python." <em>Nature Methods</em>, 17: 261–272.</li>
+              <li id="ref-6"><strong>Kaplan, E. L. &amp; Meier, Paul.</strong> (1958). "Nonparametric estimation from incomplete observations." <em>Journal of the American Statistical Association</em>, 53(282): 457–481.</li>
+              <li id="ref-7"><strong>Shewhart, W. A.</strong> (1931). <em>Economic Control of Quality of Manufactured Product</em>. New York: D. Van Nostrand.</li>
+              <li id="ref-8"><strong>Wilkinson, Leland.</strong> (1999). <em>The Grammar of Graphics</em>. New York: Springer.</li>
+              <li id="ref-9"><strong>Rougier, Nicolas P., Droettboom, Michael &amp; Bourne, Philip E.</strong> (2014). "Ten simple rules for better figures." <em>PLOS Computational Biology</em>, 10(9): e1003833.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/reading-the-picture.html">Reading the Picture</a> (Part 12 of 12)</div>
+  <div class="series-banner-links">
+    <a href="plots-for-machine-learning.html">← Part 11: Plots for Machine Learning: Learning Curves, Confusion Matrices, Calibration and Embeddings</a>
+    <span>Final part</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/scientific-plots-and-choosing-the-right-chart.js"></script>
+</body>
+</html>

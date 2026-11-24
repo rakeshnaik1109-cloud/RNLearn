@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Histograms and Density Plots: Seeing the Shape of Your Data — RNLearn</title>
+  <meta name="description" content="Histograms and bin widths, Sturges, Scott and Freedman–Diaconis, shapes of distributions, kernel density estimates, rug, strip and dot plots, stem-and-leaf and ridgelines, with Python code.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/histograms-and-density-plots.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Histograms and Density Plots: Seeing the Shape of Your Data — RNLearn">
+  <meta property="og:description" content="Histograms and bin widths, Sturges, Scott and Freedman–Diaconis, shapes of distributions, kernel density estimates, rug, strip and dot plots, stem-and-leaf and ridgelines, with Python code.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/histograms-and-density-plots.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Histograms and Density Plots: Seeing the Shape of Your Data — RNLearn">
+  <meta name="twitter:description" content="Histograms and bin widths, Sturges, Scott and Freedman–Diaconis, shapes of distributions, kernel density estimates, rug, strip and dot plots, stem-and-leaf and ridgelines, with Python code.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Histograms and Density Plots: Seeing the Shape of Your Data",
+    "description": "Histograms and bin widths, Sturges, Scott and Freedman–Diaconis, shapes of distributions, kernel density estimates, rug, strip and dot plots, stem-and-leaf and ridgelines, with Python code.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-23",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/histograms-and-density-plots.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/research.html" class="post-subject-tag" data-subject="research">Research</a>
+        </div>
+        <h1 class="article-title">Histograms and Density Plots: Seeing the Shape of Your Data</h1>
+        <p class="article-standfirst">
+          The same 500 numbers can show one peak or two, depending only on the width of the bars. How to read histograms and density curves, and how to see every data point when it matters.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-23">23 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>11 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/reading-the-picture.html">Reading the Picture</a> (Part 4 of 12)</div>
+  <div class="series-banner-links">
+    <a href="lines-and-time.html">← Part 3: Lines and Time: Reading Time Series, Trends, Seasons and Smoothing</a>
+    <a href="box-plots-violins-and-ecdfs.html">Part 5: Box Plots, Violins and ECDFs: Summarising and Comparing Distributions →</a>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. What Is a Distribution?</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. The Histogram</a></li>
+              <li><a class="toc-link" href="#section-4">4. How Many Bins?</a></li>
+              <li><a class="toc-link" href="#section-5">5. Shapes of Distributions</a></li>
+              <li><a class="toc-link" href="#section-6">6. Density Curves</a></li>
+              <li><a class="toc-link" href="#section-7">7. Seeing Every Point: Rug, Strip and Dot Plots</a></li>
+              <li><a class="toc-link" href="#section-8">8. Comparing Several Distributions</a></li>
+              <li><a class="toc-link" href="#section-9">9. Common Misreadings</a></li>
+              <li><a class="toc-link" href="#section-10">10. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-11">11. People in This Part</a></li>
+              <li><a class="toc-link" href="#section-12">12. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-13">13. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. What Is a Distribution?</h2>
+            <p>Ask how long customers wait, how tall people are, or how exam scores came out, and a single number is not enough. The answers vary, and the pattern of that variation, which values are common, which are rare, how spread out they are, whether there are two kinds of answer, is called the <strong>distribution</strong>. Seeing a distribution is often the most important step in any analysis, because it decides which summaries make sense and which tests are valid.</p>
+            <p>This part covers the plots for one variable: the histogram, the density curve, and plots that show every individual value. Part 5 continues with box plots, violin plots and their relatives, which summarise and compare distributions.</p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-p4-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. Picturing distributions, 1895–1999.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. The Histogram</h2>
+            <p>A histogram divides the range of the data into intervals called <strong>bins</strong> and draws a bar for each, whose height is the number of values in that bin. Unlike a bar chart, the bars touch, because the bins cover a continuous scale. Karl Pearson introduced the word in lectures around 1891 and used it in print in 1895. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span></p>
+            <figure class="fig" data-fig="fig-hist-bins">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Bin width changes the story.</strong> 500 waiting times (synthetic) from two kinds of customer. Change the bin width, and shift the bin edges, and watch the shape change.
+              </figcaption>
+            </figure>
+            <div class="callout callout-tip">
+              <div class="callout-header">How to read a histogram</div>
+              <ol>
+                <li><strong>Centre:</strong> where is the bulk of the data?</li>
+                <li><strong>Spread:</strong> how wide is it, and are there values far from the rest?</li>
+                <li><strong>Shape:</strong> one peak or more? Symmetric or skewed? Flat?</li>
+                <li><strong>Gaps and spikes:</strong> do values cluster at round numbers, or is there a cliff where a limit was applied?</li>
+                <li><strong>The vertical axis:</strong> counts, percentages or density? With unequal bin widths, only density is honest.</li>
+              </ol>
+            </div>
+            <p>In matplotlib, <code>ax.hist</code> takes the data and the number of bins (or their edges). With <code>density=True</code> the bars are rescaled so that their total area is 1, which allows histograms of different sample sizes to be compared:</p>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+rng = np.random.default_rng(42)
+# synthetic waiting times (minutes) from two kinds of customer: a bimodal mixture
+times = np.concatenate([rng.normal(12, 3, 300), rng.normal(25, 4, 200)])
+
+fig, axes = plt.subplots(1, 3, figsize=(12, 3.6), sharey=False)
+for ax, bins in zip(axes, [5, 25, 120]):
+    ax.hist(times, bins=bins, color="#0072B2", edgecolor="white")
+    ax.set_title(f"{bins} bins")
+    ax.set_xlabel("Waiting time (minutes)")
+axes[0].set_ylabel("Number of customers")
+plt.tight_layout()
+plt.show()
+
+# density=True rescales so the total area is 1 (needed when bins have unequal widths)
+fig2, ax = plt.subplots(figsize=(6, 3.6))
+ax.hist(times, bins="fd", density=True, color="#0072B2", edgecolor="white")
+ax.set_xlabel("Waiting time (minutes)")
+ax.set_ylabel("Density (per minute)")
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-4">
+            <h2>4. How Many Bins?</h2>
+            <p>There is no single right bin width, but there are good starting points. <strong>Sturges’ rule</strong> (1926) uses log<sub>2</sub>(<em>n</em>) + 1 bins for <em>n</em> observations; <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span> it works for small, bell-shaped samples but uses too few bins for large or skewed ones. <strong>Scott’s rule</strong> (1979) sets the width from the standard deviation, <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> and the <strong>Freedman–Diaconis rule</strong> (1981) uses the interquartile range, which is not thrown off by outliers. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> NumPy offers all of them, and its default <code>bins="auto"</code> picks between Sturges and Freedman–Diaconis.</p>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+rng = np.random.default_rng(1)
+x = rng.lognormal(mean=3, sigma=0.5, size=800)          # skewed synthetic data
+
+rules = ["sturges", "scott", "fd"]                       # three classic rules
+fig, axes = plt.subplots(1, 3, figsize=(12, 3.5), sharey=True)
+for ax, rule in zip(axes, rules):
+    edges = np.histogram_bin_edges(x, bins=rule)
+    ax.hist(x, bins=edges, color="#009E73", edgecolor="white")
+    ax.set_title(f"{rule}: {len(edges) - 1} bins")
+    ax.set_xlabel("Value")
+axes[0].set_ylabel("Count")
+plt.tight_layout()
+plt.show()
+</code></pre>
+            <p>Treat these rules as a first guess. Then try a width half as big and one twice as big; a feature that survives all three is probably real.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Shapes of Distributions</h2>
+            <p>A few shapes come up again and again, and recognising them tells you a lot about the process behind the data.</p>
+            <figure class="fig" data-fig="fig-shapes">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. A gallery of shapes.</strong> Choose a shape and compare the mean (dashed) with the median (solid).
+              </figcaption>
+            </figure>
+            <p>Strongly right-skewed data, such as incomes, city sizes or file sizes, crowd into the left of a histogram with a long tail to the right. Plotting them on a logarithmic axis with bins that are equally spaced on that axis spreads out the crowded part and often reveals a bell shape (Part 1 explains log scales):</p>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+rng = np.random.default_rng(11)
+income = rng.lognormal(mean=10.3, sigma=0.8, size=5000)   # synthetic, strongly right-skewed
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 3.8))
+ax1.hist(income, bins=60, color="#CC79A7", edgecolor="white")
+ax1.axvline(np.mean(income), color="black", ls="--", label=f"mean {np.mean(income):,.0f}")
+ax1.axvline(np.median(income), color="black", label=f"median {np.median(income):,.0f}")
+ax1.legend()
+ax1.set_title("Linear axis: a long right tail")
+bins = np.logspace(np.log10(income.min()), np.log10(income.max()), 50)   # equal steps in log
+ax2.hist(income, bins=bins, color="#CC79A7", edgecolor="white")
+ax2.set_xscale("log")
+ax2.set_title("Log axis with log-spaced bins")
+for ax in (ax1, ax2):
+    ax.set_xlabel("Annual income")
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Density Curves</h2>
+            <p>A <strong>kernel density estimate</strong> (KDE) is a smooth alternative to the histogram, proposed by Murray Rosenblatt in 1956 and developed by Emanuel Parzen in 1962. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>, <a class="cite" href="#ref-6">6</a>]</span> It places a small, smooth bump (the kernel, usually a bell curve) on every observation and adds them up. The width of the bumps, the <strong>bandwidth</strong>, controls the smoothness in the same way as the bin width of a histogram. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span></p>
+            <figure class="fig" data-fig="fig-kde">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. Building a density curve.</strong> Each tick is an observation and each faint bump its kernel; the thick curve is their sum. Change the bandwidth and the sample size.
+              </figcaption>
+            </figure>
+            <p>Density curves are easier to overlay than histograms and do not depend on where bins start. Two cautions: the vertical axis is a density, not a count or a probability (the <em>area</em> under the curve between two values is the probability), and the curve can spill beyond natural limits, such as negative waiting times. The code below uses <em>seaborn</em> and <em>SciPy</em>: <span class="cite-group">[<a class="cite" href="#ref-8">8</a>, <a class="cite" href="#ref-9">9</a>]</span></p>
+            <pre><code class="language-python"># pip install numpy scipy matplotlib seaborn
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy.stats import gaussian_kde
+
+rng = np.random.default_rng(42)
+times = np.concatenate([rng.normal(12, 3, 300), rng.normal(25, 4, 200)])
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 3.8))
+
+# seaborn: histogram with a density curve on top
+sns.histplot(times, stat="density", bins=30, color="#CCCCCC", ax=ax1)
+sns.kdeplot(times, color="#0072B2", lw=2, ax=ax1)
+ax1.set_title("Histogram + kernel density estimate")
+
+# scipy: compare bandwidths (bw_method scales the default bandwidth)
+grid = np.linspace(0, 40, 400)
+for bw, col in [(0.1, "#D55E00"), (None, "#0072B2"), (1.0, "#009E73")]:
+    kde = gaussian_kde(times, bw_method=bw)
+    ax2.plot(grid, kde(grid), color=col, label=f"bw_method={bw}")
+ax2.legend()
+ax2.set_title("Too narrow, default, too wide")
+for ax in (ax1, ax2):
+    ax.set_xlabel("Waiting time (minutes)")
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-7">
+            <h2>7. Seeing Every Point: Rug, Strip and Dot Plots</h2>
+            <p>Histograms and densities summarise; sometimes it is better to show every observation. A <strong>rug plot</strong> draws a tick for each value along the axis. A <strong>strip plot</strong> draws a dot for each value, with a little random vertical <em>jitter</em> so that ties do not hide each other. A <strong>dot plot</strong> in Leland Wilkinson’s sense stacks dots like a histogram made of individual observations. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span></p>
+            <figure class="fig" data-fig="fig-strip">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Showing every value.</strong> Exam scores (synthetic, whole numbers). Compare a rug, a jittered strip and a stacked dot plot, and change the number of students.
+              </figcaption>
+            </figure>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+rng = np.random.default_rng(3)
+scores = np.round(rng.normal(65, 12, 150))              # synthetic exam scores (whole numbers)
+
+fig, axes = plt.subplots(3, 1, figsize=(8, 5), sharex=True)
+axes[0].plot(scores, np.zeros_like(scores), "|", ms=25, color="#0072B2")   # rug plot
+axes[0].set_title("Rug plot: one tick per value (ties hide each other)")
+axes[1].scatter(scores, rng.uniform(-0.3, 0.3, scores.size), s=12, alpha=0.6)
+axes[1].set_title("Strip plot with jitter (random vertical offset)")
+sns.swarmplot(x=scores, ax=axes[2], size=3.5)              # beeswarm: no overlap
+axes[2].set_title("Beeswarm (more in Part 5)")
+for ax in axes:
+    ax.set_yticks([])
+axes[2].set_xlabel("Score")
+plt.tight_layout()
+plt.show()
+</code></pre>
+            <p>John Tukey’s <strong>stem-and-leaf display</strong> goes further: it is a histogram written with the data’s own digits, so that every value can be read back. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span> It needs no graphics at all:</p>
+            <pre><code class="language-python">import numpy as np
+
+rng = np.random.default_rng(5)
+ages = np.sort(np.round(rng.normal(38, 11, 40)).astype(int))   # synthetic ages
+
+# Tukey's stem-and-leaf display: stem = tens digit, leaves = units digits
+stems = {}
+for a in ages:
+    stems.setdefault(a // 10, []).append(a % 10)
+for stem in range(min(stems), max(stems) + 1):
+    leaves = "".join(str(d) for d in stems.get(stem, []))
+    print(f"{stem:&gt;2} | {leaves}")
+print("Key: 3 | 7 means 37")
+</code></pre>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Comparing Several Distributions</h2>
+            <p>Comparing the distributions of several groups is one of the most common tasks in analysis. Overlaid histograms work for two groups; beyond that, colours mix and lines tangle. Small multiples (Part 2) and <strong>ridgeline plots</strong>, which stack density curves with a slight overlap, scale much better. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span></p>
+            <figure class="fig" data-fig="fig-compare-hist">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. Four groups, four layouts.</strong> Waiting times at four times of day (synthetic). Which layout makes the differences easiest to see?
+              </figcaption>
+            </figure>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import gaussian_kde
+
+rng = np.random.default_rng(7)
+months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+# synthetic daily maximum temperatures for each month
+temps = [rng.normal(8 + 10 * np.sin((m - 3) * np.pi / 6), 3, 31) for m in range(12)]
+
+grid = np.linspace(-10, 35, 300)
+fig, ax = plt.subplots(figsize=(7, 6))
+for i, (name, t) in enumerate(zip(months, temps)):
+    y = gaussian_kde(t)(grid)
+    offset = (11 - i) * 0.08                             # January at the top
+    colour = plt.cm.coolwarm((t.mean() + 2) / 20)        # colour by warmth
+    ax.fill_between(grid, offset, offset + y, color=colour, alpha=0.85, lw=0)
+    ax.plot(grid, offset + y, color="white", lw=1)
+    ax.text(-11, offset + 0.005, name, ha="right", va="bottom", fontsize=9)
+ax.set_yticks([])
+ax.set_xlabel("Daily maximum temperature (°C)")
+ax.set_title("Ridgeline plot: one density per month")
+for side in ("left", "right", "top"):
+    ax.spines[side].set_visible(False)
+plt.tight_layout()
+plt.show()
+</code></pre>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Common Misreadings</h2>
+            <ul>
+              <li><strong>Trusting one bin width.</strong> Peaks and gaps can be artefacts of the bins. Try several widths.</li>
+              <li><strong>Reading a density as a probability.</strong> A density curve can exceed 1; probabilities are areas under the curve.</li>
+              <li><strong>Comparing count histograms of different-sized groups.</strong> A group with twice as many observations has bars twice as tall. Use percentages or densities.</li>
+              <li><strong>Using the mean of a skewed or bimodal distribution as “typical”.</strong> The median, or a description of each peak, is often more honest.</li>
+              <li><strong>Mistaking heaping for real peaks.</strong> People report round numbers (ages ending in 0 or 5, weights of 70 kg), which creates spikes in fine histograms.</li>
+              <li><strong>Over-trusting a smooth curve from few points.</strong> A KDE of ten observations looks authoritative but is mostly the shape of the kernel.</li>
+            </ul>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Legend and Record</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: histograms and album covers</div>
+              <p><strong>The legend:</strong> the word “histogram” comes from “history”, because it shows the history of a variable.</p>
+              <p><strong>The record:</strong> nobody knows for certain. Pearson introduced the word in his lectures in 1891 and used it in a paper in 1895; it is usually traced to the Greek <em>histos</em>, something set upright such as a ship’s mast or a loom’s beam, plus <em>-gram</em>, something drawn. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span> Pearson did not explain his choice.</p>
+              <p><strong>A second legend:</strong> the famous image on the cover of the band Joy Division’s 1979 album <em>Unknown Pleasures</em> is abstract art. <strong>The record:</strong> it is a stack of line plots of successive radio pulses from the first pulsar discovered, CP 1919, drawn for Harold Craft’s 1970 doctoral thesis at Cornell University and later reproduced in astronomy books. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span> Ridgeline plots are sometimes nicknamed “joyplots” after it.</p>
+            </div>
+          </section>
+
+          <section id="section-11">
+            <h2>11. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Karl Pearson</td>
+                <td style="padding:0.6rem 0.8rem;">1857–1936<br>London</td>
+                <td style="padding:0.6rem 0.8rem;">Coined “histogram” (1891; in print 1895)</td>
+                <td style="padding:0.6rem 0.8rem;">Founded much of modern statistics and its graphics.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Herbert Sturges</td>
+                <td style="padding:0.6rem 0.8rem;">1882–1958<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">“The choice of a class interval” (1926)</td>
+                <td style="padding:0.6rem 0.8rem;">Proposed the first widely used bin rule.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Murray Rosenblatt</td>
+                <td style="padding:0.6rem 0.8rem;">1926–2019<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Kernel density estimation (1956)</td>
+                <td style="padding:0.6rem 0.8rem;">Introduced smooth density estimates.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Emanuel Parzen</td>
+                <td style="padding:0.6rem 0.8rem;">1929–2016<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Density estimation (1962)</td>
+                <td style="padding:0.6rem 0.8rem;">Developed the theory of kernel density estimates.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John Tukey</td>
+                <td style="padding:0.6rem 0.8rem;">1915–2000<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Stem-and-leaf display (<em>Exploratory Data Analysis</em>, 1977)</td>
+                <td style="padding:0.6rem 0.8rem;">Made looking at every data point respectable.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">David Scott</td>
+                <td style="padding:0.6rem 0.8rem;">born 1950<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Optimal histogram bin widths (1979)</td>
+                <td style="padding:0.6rem 0.8rem;">Gave bin widths a statistical basis.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Leland Wilkinson</td>
+                <td style="padding:0.6rem 0.8rem;">1944–2021<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Dot plots (1999); <em>The Grammar of Graphics</em></td>
+                <td style="padding:0.6rem 0.8rem;">Shaped how modern plotting software is designed.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about histograms and density plots.</p>
+            <figure class="fig" data-fig="fig-quiz-p4">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-13">
+            <h2>13. References &amp; Further Reading</h2>
+            <p>The facts, dates and quotations in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Pearson, Karl.</strong> (1895). "Contributions to the mathematical theory of evolution. II. Skew variation in homogeneous material." <em>Philosophical Transactions of the Royal Society of London A</em>, 186: 343–414.</li>
+              <li id="ref-2"><strong>Sturges, Herbert A.</strong> (1926). "The choice of a class interval." <em>Journal of the American Statistical Association</em>, 21(153): 65–66.</li>
+              <li id="ref-3"><strong>Scott, David W.</strong> (1979). "On optimal and data-based histograms." <em>Biometrika</em>, 66(3): 605–610.</li>
+              <li id="ref-4"><strong>Freedman, David &amp; Diaconis, Persi.</strong> (1981). "On the histogram as a density estimator: L<sub>2</sub> theory." <em>Zeitschrift für Wahrscheinlichkeitstheorie und verwandte Gebiete</em>, 57: 453–476.</li>
+              <li id="ref-5"><strong>Rosenblatt, Murray.</strong> (1956). "Remarks on some nonparametric estimates of a density function." <em>Annals of Mathematical Statistics</em>, 27(3): 832–837.</li>
+              <li id="ref-6"><strong>Parzen, Emanuel.</strong> (1962). "On estimation of a probability density function and mode." <em>Annals of Mathematical Statistics</em>, 33(3): 1065–1076.</li>
+              <li id="ref-7"><strong>Silverman, B. W.</strong> (1986). <em>Density Estimation for Statistics and Data Analysis</em>. London: Chapman and Hall.</li>
+              <li id="ref-8"><strong>Waskom, Michael L.</strong> (2021). "seaborn: statistical data visualization." <em>Journal of Open Source Software</em>, 6(60): 3021.</li>
+              <li id="ref-9"><strong>Virtanen, Pauli, et al.</strong> (2020). "SciPy 1.0: Fundamental algorithms for scientific computing in Python." <em>Nature Methods</em>, 17: 261–272.</li>
+              <li id="ref-10"><strong>Wilkinson, Leland.</strong> (1999). "Dot plots." <em>The American Statistician</em>, 53(3): 276–281.</li>
+              <li id="ref-11"><strong>Tukey, John W.</strong> (1977). <em>Exploratory Data Analysis</em>. Reading, MA: Addison-Wesley.</li>
+              <li id="ref-12"><strong>Wilke, Claus O.</strong> (2019). <em>Fundamentals of Data Visualization</em>. Sebastopol, CA: O’Reilly Media.</li>
+              <li id="ref-13"><strong>Craft, Harold D., Jr.</strong> (1970). <em>Radio Observations of the Pulse Profiles and Dispersion Measures of Twelve Pulsars</em>. PhD thesis, Cornell University.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/reading-the-picture.html">Reading the Picture</a> (Part 4 of 12)</div>
+  <div class="series-banner-links">
+    <a href="lines-and-time.html">← Part 3: Lines and Time: Reading Time Series, Trends, Seasons and Smoothing</a>
+    <a href="box-plots-violins-and-ecdfs.html">Part 5: Box Plots, Violins and ECDFs: Summarising and Comparing Distributions →</a>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/histograms-and-density-plots.js"></script>
+</body>
+</html>

@@ -68,6 +68,12 @@ SERIES = {
         "label": "ML Part",
         "lede": "A ten-part series on how machine learning works, from learning from data and classical algorithms to activation and loss functions, optimisers, deep architectures and choosing a model, with interactive playgrounds in every part.",
     },
+    "reading-the-picture": {
+        "title": "Reading the Picture",
+        "parts": 12,
+        "label": "Plot Part",
+        "lede": "A twelve-part field guide to plots and charts, from bar charts and histograms to box plots, heatmaps, diagnostic plots and machine-learning plots: how to read each one, when to use it, how it can mislead, and Python code to make it yourself.",
+    },
     "from-switch-to-supercomputer": {
         "title": "From Switch to Supercomputer",
         "parts": 14,
@@ -441,6 +447,9 @@ def build_site(root_dir, check_mode=False):
                 lede += " Inside the Machine: a ten-part series on how machine learning works, with interactive playgrounds."
             if any((x.get("series") or {}).get("id") == "one-word-at-a-time" for x in posts):
                 lede += " One Word at a Time: a six-part series on how large language models work and why they are accurate."
+        elif subj == "Research" and any((x.get("series") or {}).get("id") == "reading-the-picture" for x in posts):
+            eyebrow = "Subject Archive • Series"
+            lede = "Reading the Picture: a twelve-part field guide to plots and charts, from the basics to advanced diagnostic and machine-learning plots, with interactive figures and Python code for every plot."
         elif subj == "Electronics & Computing" and any((x.get("series") or {}).get("id") == "from-switch-to-supercomputer" for x in posts):
             eyebrow = "Subject Archive • Series"
             lede = "From Switch to Supercomputer: a fourteen-part series on electronics, from logic gates and Boolean algebra through semiconductor physics, diodes and transistors to CMOS chips, processors and GPUs, with interactive figures and worked problems."

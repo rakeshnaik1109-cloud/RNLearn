@@ -1147,3 +1147,61 @@ figure[data-fig] figcaption,
 .timeline-panel a { font-size: 0.84rem; }
 figure[data-fig="fig-human-timeline"] g[role="button"]:focus { outline: none; }
 figure[data-fig="fig-human-timeline"] g[role="button"]:focus-visible circle { stroke-width: 3; }
+
+/* Code blocks with syntax colouring and a copy button */
+.code-block {
+  margin: 1.25rem 0 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-raised);
+  overflow: hidden;
+}
+.code-block .code-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.35rem 0.6rem 0.35rem 0.9rem;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  letter-spacing: 0.02em;
+}
+.code-block .code-copy {
+  font: inherit;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.65rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--ink-secondary);
+  cursor: pointer;
+}
+.code-block .code-copy:hover, .code-block .code-copy:focus-visible { color: var(--accent); border-color: var(--accent); }
+.code-block pre, .article-cite .code-block pre {
+  margin: 0;
+  padding: 0.8rem 0.95rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  overflow-x: auto;
+}
+.code-block code { display: block; background: none; border: 0; box-shadow: none; padding: 0; font-family: var(--font-mono); font-variant-ligatures: none; color: var(--ink); white-space: pre; }
+.tok-c { color: #6b7280; font-style: italic; }
+.tok-s { color: #047857; }
+.tok-n { color: #b45309; }
+.tok-k { color: #7c3aed; font-weight: 600; }
+.tok-b { color: #0e7490; }
+.tok-f { color: #1d4ed8; }
+.tok-d { color: #be185d; }
+[data-theme="dark"] .tok-c { color: #8b93a5; }
+[data-theme="dark"] .tok-s { color: #6ee7b7; }
+[data-theme="dark"] .tok-n { color: #fbbf24; }
+[data-theme="dark"] .tok-k { color: #c4b5fd; }
+[data-theme="dark"] .tok-b { color: #67e8f9; }
+[data-theme="dark"] .tok-f { color: #93c5fd; }
+[data-theme="dark"] .tok-d { color: #f9a8d4; }
+@media print { .code-block .code-copy { display: none; } }

@@ -1,5 +1,317 @@
 [
   {
+    "slug": "scientific-plots-and-choosing-the-right-chart",
+    "title": "Scientific Plots and Choosing the Right Chart: Log–Log, Contours, Survival and Control Charts",
+    "summary": "Log–log and semi-log plots, contours, polar plots and spectrograms, Kaplan–Meier survival curves, control charts, a chart chooser, a checklist of misleading charts, and publication tips.",
+    "subject": "Research",
+    "tags": [
+      "data-visualization",
+      "plots",
+      "survival-analysis",
+      "quality-control",
+      "python",
+      "scientific-computing"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 13,
+    "series": {
+      "id": "reading-the-picture",
+      "part": 12
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "plots-for-machine-learning",
+    "title": "Plots for Machine Learning: Learning Curves, Confusion Matrices, Calibration and Embeddings",
+    "summary": "Learning and loss curves, confusion matrices, ROC and precision–recall curves, reliability diagrams, decision boundaries, PCA, t-SNE and UMAP maps, and feature importance, with Python code.",
+    "subject": "Research",
+    "tags": [
+      "data-visualization",
+      "plots",
+      "machine-learning",
+      "scikit-learn",
+      "python",
+      "model-evaluation"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 12,
+    "series": {
+      "id": "reading-the-picture",
+      "part": 11
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "treemaps-sankeys-and-waterfalls",
+    "title": "Treemaps, Sankeys and Waterfalls: Charts for Hierarchies, Parts and Flows",
+    "summary": "Treemaps and squarified layouts, sunbursts, mosaic plots for tables of counts, waterfall charts from revenue to profit, and Sankey diagrams of flows, with Python code.",
+    "subject": "Research",
+    "tags": [
+      "data-visualization",
+      "plots",
+      "treemaps",
+      "sankey-diagrams",
+      "python",
+      "plotly"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 10,
+    "series": {
+      "id": "reading-the-picture",
+      "part": 10
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "diagnostic-plots",
+    "title": "Diagnostic Plots: Q–Q Plots, Residuals, Bland–Altman, Funnel and Volcano Plots",
+    "summary": "Plots that check an analysis: Q–Q plots, residual plots, leverage and Cook’s distance, Bland–Altman agreement, funnel plots for publication bias and volcano plots, with Python code.",
+    "subject": "Research",
+    "tags": [
+      "data-visualization",
+      "plots",
+      "regression",
+      "diagnostics",
+      "python",
+      "statistics"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 11,
+    "series": {
+      "id": "reading-the-picture",
+      "part": 9
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "heatmaps-and-many-variables",
+    "title": "Heatmaps and Many Variables: Colour Scales, Correlation Matrices and Parallel Coordinates",
+    "summary": "Heatmaps and how to choose a colour scale, correlation matrices and clustered heatmaps, normalising before colouring, parallel coordinates, radar charts and faceting, with Python code.",
+    "subject": "Research",
+    "tags": [
+      "data-visualization",
+      "plots",
+      "heatmaps",
+      "colour",
+      "python",
+      "seaborn"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 12,
+    "series": {
+      "id": "reading-the-picture",
+      "part": 8
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "error-bars-and-uncertainty",
+    "title": "Error Bars and Uncertainty: SD, SE, Confidence Intervals and Forest Plots",
+    "summary": "What SD, SE and confidence-interval bars mean, when overlapping bars matter, the dance of confidence intervals, forest plots, dumbbell and slope charts, and uncertainty bands, with Python code.",
+    "subject": "Research",
+    "tags": [
+      "data-visualization",
+      "plots",
+      "error-bars",
+      "confidence-intervals",
+      "python",
+      "statistics"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 12,
+    "series": {
+      "id": "reading-the-picture",
+      "part": 7
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "scatter-plots-and-relationships",
+    "title": "Scatter Plots and Relationships: Correlation, Trend Lines and Hidden Groups",
+    "summary": "Reading scatter plots, guessing correlation, straight and LOWESS trend lines, Simpson’s paradox, overplotting and hexbins, bubble charts and scatter-plot matrices, with Python code.",
+    "subject": "Research",
+    "tags": [
+      "data-visualization",
+      "plots",
+      "scatter-plots",
+      "correlation",
+      "python",
+      "statistics"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 11,
+    "series": {
+      "id": "reading-the-picture",
+      "part": 6
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "box-plots-violins-and-ecdfs",
+    "title": "Box Plots, Violins and ECDFs: Summarising and Comparing Distributions",
+    "summary": "How to read every part of a box plot, what it hides, notches, violin, beeswarm and raincloud plots, why dynamite plots mislead, and empirical CDFs, with Python code.",
+    "subject": "Research",
+    "tags": [
+      "data-visualization",
+      "plots",
+      "box-plots",
+      "distributions",
+      "python",
+      "statistics"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 11,
+    "series": {
+      "id": "reading-the-picture",
+      "part": 5
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "histograms-and-density-plots",
+    "title": "Histograms and Density Plots: Seeing the Shape of Your Data",
+    "summary": "Histograms and bin widths, Sturges, Scott and Freedman–Diaconis, shapes of distributions, kernel density estimates, rug, strip and dot plots, stem-and-leaf and ridgelines, with Python code.",
+    "subject": "Research",
+    "tags": [
+      "data-visualization",
+      "plots",
+      "histograms",
+      "distributions",
+      "python",
+      "statistics"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 11,
+    "series": {
+      "id": "reading-the-picture",
+      "part": 4
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "lines-and-time",
+    "title": "Lines and Time: Reading Time Series, Trends, Seasons and Smoothing",
+    "summary": "Line charts, trend, seasonality and noise, moving averages, spaghetti charts and small multiples, stacked areas, index charts, dual axes, sparklines and cherry-picked windows, with Python code.",
+    "subject": "Research",
+    "tags": [
+      "data-visualization",
+      "plots",
+      "time-series",
+      "python",
+      "pandas",
+      "data-analysis"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 13,
+    "series": {
+      "id": "reading-the-picture",
+      "part": 3
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "bars-dots-and-pies",
+    "title": "Bars, Dots and Pies: Charts for Comparing Categories",
+    "summary": "Bar charts and how to sort them, grouped and stacked bars, dot plots and lollipops, diverging bars for surveys, Pareto charts, pies, donuts and waffles, with Python code for each.",
+    "subject": "Research",
+    "tags": [
+      "data-visualization",
+      "plots",
+      "bar-charts",
+      "python",
+      "matplotlib",
+      "data-analysis"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 14,
+    "series": {
+      "id": "reading-the-picture",
+      "part": 2
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
+    "slug": "how-to-read-any-chart",
+    "title": "How to Read Any Chart: Anatomy, Scales and the Lessons of Anscombe’s Quartet",
+    "summary": "The parts of a chart, five questions to ask of any plot, Anscombe’s quartet, linear versus log scales, truncated axes, what the eye reads best, colour, and Python code for each.",
+    "subject": "Research",
+    "tags": [
+      "data-visualization",
+      "plots",
+      "statistics",
+      "python",
+      "matplotlib",
+      "data-analysis"
+    ],
+    "date": "2026-11-23",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 15,
+    "series": {
+      "id": "reading-the-picture",
+      "part": 1
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
     "slug": "the-riemann-hypothesis-and-the-claimed-ai-proof",
     "title": "The Riemann Hypothesis, and the Claimed Proof Found with Claude",
     "summary": "What the Riemann hypothesis says and why primes care, 165 years of partial progress, and what has and has not been checked in the November 2026 claim of a proof found with Claude.",

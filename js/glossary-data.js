@@ -6545,5 +6545,368 @@ window.RNLEARN_GLOSSARY = [
   [
    "proof assistants"
   ]
+ ],
+ [
+  "Logarithmic scale",
+  "An axis on which equal distances represent equal ratios (1, 10, 100, …) rather than equal differences; constant percentage growth appears as a straight line.",
+  [
+   "log scale",
+   "logarithmic axis",
+   "log axis"
+  ]
+ ],
+ [
+  "Lie factor",
+  "Tufte’s measure of distortion in a graphic: the size of an effect shown in the chart divided by its size in the data; 1 means honest.",
+  []
+ ],
+ [
+  "Chartjunk",
+  "Tufte’s term for decoration in a chart that carries no information, such as 3D effects, heavy gridlines and ornamental pictures.",
+  []
+ ],
+ [
+  "Dot plot",
+  "A chart showing one value per category as a dot on a common scale (Cleveland’s dot chart); because it encodes position, its axis need not start at zero.",
+  [
+   "dot plots",
+   "dot chart",
+   "dot charts"
+  ]
+ ],
+ [
+  "Pareto chart",
+  "A bar chart with categories sorted from largest to smallest and a line showing the cumulative percentage, used to find the few causes behind most problems.",
+  [
+   "Pareto charts"
+  ]
+ ],
+ [
+  "Likert scale",
+  "A survey answer scale with ordered options such as strongly disagree, disagree, neutral, agree and strongly agree.",
+  []
+ ],
+ [
+  "Stacked bar chart",
+  "A bar chart in which subgroups are piled on top of one another, so that the bar’s height is the total; only the bottom segment shares a baseline.",
+  [
+   "stacked bars",
+   "stacked bar charts"
+  ]
+ ],
+ [
+  "Small multiples",
+  "A grid of small charts with the same axes and design, one for each group or time, so that they can be compared at a glance.",
+  []
+ ],
+ [
+  "Time series",
+  "A sequence of measurements of the same quantity taken at successive times, such as daily temperatures or monthly sales.",
+  [
+   "time-series"
+  ]
+ ],
+ [
+  "Seasonality",
+  "A pattern in a time series that repeats with a fixed period, such as every year, week or day.",
+  [
+   "seasonal pattern"
+  ]
+ ],
+ [
+  "Moving average",
+  "A smoothed series in which each value is replaced by the mean of a window of neighbouring values; a trailing window lags behind changes.",
+  [
+   "moving averages",
+   "rolling average"
+  ]
+ ],
+ [
+  "Index chart",
+  "A chart in which each series is divided by its value on a base date and multiplied by 100, so that all series show relative change from the same start.",
+  []
+ ],
+ [
+  "Sparkline",
+  "A tiny, word-sized line chart without axes, used inline in text or tables to show the shape of a recent history.",
+  [
+   "sparklines"
+  ]
+ ],
+ [
+  "Kernel density estimate",
+  "A smooth curve estimating a distribution, made by placing a small bump (kernel) on every observation and adding them up; its bandwidth controls the smoothness.",
+  [
+   "kernel density estimation",
+   "KDE"
+  ]
+ ],
+ [
+  "Bimodal",
+  "Having two distinct peaks; a bimodal distribution often means two groups have been mixed together.",
+  []
+ ],
+ [
+  "Ridgeline plot",
+  "A plot that stacks the density curves of several groups with a slight vertical overlap, for compact comparison.",
+  [
+   "ridgeline plots",
+   "joyplot"
+  ]
+ ],
+ [
+  "Stem-and-leaf display",
+  "Tukey’s text histogram in which each value is split into a stem (leading digits) and a leaf (last digit), so every value can be read back.",
+  [
+   "stem-and-leaf plot"
+  ]
+ ],
+ [
+  "Violin plot",
+  "A plot that shows a group’s distribution as a mirrored density curve, often with a box plot or quartile lines inside.",
+  [
+   "violin plots"
+  ]
+ ],
+ [
+  "Beeswarm plot",
+  "A plot showing every observation as a dot, shifted sideways just enough that no dots overlap.",
+  [
+   "beeswarm",
+   "swarm plot"
+  ]
+ ],
+ [
+  "Raincloud plot",
+  "A plot combining a half-violin density (the cloud), a slim box plot and jittered raw points (the rain).",
+  [
+   "raincloud plots"
+  ]
+ ],
+ [
+  "Empirical cumulative distribution function",
+  "A step curve showing, for each value x, the proportion of observations less than or equal to x; abbreviated ECDF.",
+  [
+   "ECDF"
+  ]
+ ],
+ [
+  "Overplotting",
+  "Points in a plot hiding behind other points, so that dense regions and small clusters cannot be seen.",
+  []
+ ],
+ [
+  "LOWESS",
+  "Locally weighted scatter-plot smoothing: a smooth trend line made by fitting weighted straight lines to the neighbourhood of each point.",
+  [
+   "LOESS"
+  ]
+ ],
+ [
+  "Hexagonal binning",
+  "Counting the points of a scatter plot in a grid of hexagons and colouring each by its count, a two-dimensional histogram for large data.",
+  [
+   "hexbin"
+  ]
+ ],
+ [
+  "Bubble chart",
+  "A scatter plot in which marker size represents a third variable; size should be proportional to area.",
+  [
+   "bubble charts"
+  ]
+ ],
+ [
+  "Error bar",
+  "A line through a plotted point showing variability or uncertainty, such as ±1 SD, ±1 SE or a 95% confidence interval; the caption must say which.",
+  [
+   "error bars"
+  ]
+ ],
+ [
+  "Forest plot",
+  "A chart showing the estimates and confidence intervals of several studies, with a pooled estimate (diamond) from a meta-analysis.",
+  [
+   "forest plots"
+  ]
+ ],
+ [
+  "Slope chart",
+  "A chart joining each item’s values at two times or conditions with a line, making changes and rank swaps easy to see.",
+  [
+   "slopegraph",
+   "slope charts"
+  ]
+ ],
+ [
+  "Fan chart",
+  "A forecast chart with bands of decreasing shading showing ranges of increasingly unlikely outcomes.",
+  [
+   "fan charts"
+  ]
+ ],
+ [
+  "Heatmap",
+  "A grid of coloured cells representing a table of numbers, with colour encoding each value.",
+  [
+   "heat map",
+   "heatmaps",
+   "heat maps"
+  ]
+ ],
+ [
+  "Sequential colour map",
+  "A colour scale running from light to dark (or the reverse) for quantities that go from low to high.",
+  [
+   "sequential colour scale"
+  ]
+ ],
+ [
+  "Diverging colour map",
+  "A colour scale with two contrasting hues meeting at a neutral middle, for data with a meaningful centre such as zero.",
+  [
+   "diverging colour scale"
+  ]
+ ],
+ [
+  "Dendrogram",
+  "A tree diagram showing how items were grouped by hierarchical clustering; branches joining lower down are more similar.",
+  [
+   "dendrograms"
+  ]
+ ],
+ [
+  "Parallel coordinates",
+  "A plot with one vertical axis per variable, in which each data point is a line crossing every axis at its value.",
+  []
+ ],
+ [
+  "Radar chart",
+  "A chart with variables on spokes radiating from a centre, each item drawn as a polygon; also called a spider or star chart.",
+  [
+   "radar charts",
+   "spider chart"
+  ]
+ ],
+ [
+  "Bland–Altman plot",
+  "A plot of the difference between two measurement methods against their average, with the mean bias and 95% limits of agreement.",
+  [
+   "Bland-Altman plot"
+  ]
+ ],
+ [
+  "Funnel plot",
+  "A plot of study effect estimates against their precision; asymmetry can indicate publication bias.",
+  [
+   "funnel plots"
+  ]
+ ],
+ [
+  "Volcano plot",
+  "A plot of the size of change (fold change) against the strength of evidence (−log₁₀ p) for many tests at once.",
+  [
+   "volcano plots"
+  ]
+ ],
+ [
+  "Treemap",
+  "A rectangle divided into nested smaller rectangles whose areas are proportional to the sizes of the items in a hierarchy.",
+  [
+   "treemaps",
+   "tree-map"
+  ]
+ ],
+ [
+  "Sunburst chart",
+  "A hierarchy drawn as concentric rings, each divided into segments whose angles are proportional to size.",
+  [
+   "sunburst"
+  ]
+ ],
+ [
+  "Mosaic plot",
+  "A display of a table of counts in which tile areas are proportional to counts; misaligned divisions show association between the variables.",
+  [
+   "mosaic plots",
+   "mosaic display"
+  ]
+ ],
+ [
+  "Waterfall chart",
+  "A chart showing how a starting total changes through a series of positive and negative steps to a final total; also called a bridge chart.",
+  [
+   "waterfall charts",
+   "bridge chart"
+  ]
+ ],
+ [
+  "Sankey diagram",
+  "A flow diagram in which the width of each band is proportional to the quantity flowing between stages.",
+  [
+   "Sankey diagrams",
+   "Sankey"
+  ]
+ ],
+ [
+  "Reliability diagram",
+  "A calibration plot comparing predicted probabilities with the observed frequency of the event in bins of predictions.",
+  [
+   "reliability diagrams",
+   "calibration plot"
+  ]
+ ],
+ [
+  "t-SNE",
+  "t-distributed stochastic neighbour embedding: a method for mapping high-dimensional data to two dimensions that keeps similar points close together.",
+  []
+ ],
+ [
+  "UMAP",
+  "Uniform manifold approximation and projection: a fast method for mapping high-dimensional data to two or three dimensions.",
+  []
+ ],
+ [
+  "Power law",
+  "A relationship of the form y = a·xᵇ, which appears as a straight line with slope b on log–log axes.",
+  [
+   "power laws"
+  ]
+ ],
+ [
+  "Contour plot",
+  "A map of a surface drawn with lines joining points of equal value; closely spaced lines mean steep change.",
+  [
+   "contour plots",
+   "contour map"
+  ]
+ ],
+ [
+  "Spectrogram",
+  "A plot of how the frequency content of a signal changes over time, with colour showing intensity.",
+  [
+   "spectrograms"
+  ]
+ ],
+ [
+  "Kaplan–Meier curve",
+  "A step-shaped estimate of the proportion of subjects who have not yet had an event over time, which correctly handles censored observations.",
+  [
+   "Kaplan-Meier curve",
+   "Kaplan–Meier estimator"
+  ]
+ ],
+ [
+  "Censored observation",
+  "In survival analysis, a subject whose event had not happened when follow-up ended, so that only a lower bound on their time is known.",
+  []
+ ],
+ [
+  "Control chart",
+  "A plot of a process measurement over time with a centre line and control limits, used to tell ordinary variation from special causes.",
+  [
+   "control charts",
+   "Shewhart chart"
+  ]
  ]
 ];
