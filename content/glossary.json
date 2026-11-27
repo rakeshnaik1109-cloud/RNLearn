@@ -7042,5 +7042,79 @@
     "term": "Lambert W function",
     "definition": "The function W(z) that solves w eʷ = z, used for equations that mix a variable with its exponential.",
     "forms": []
+  },
+  {
+    "term": "CPU",
+    "definition": "Central processing unit: the general-purpose processor that runs the operating system and most programs, designed to finish each task with low latency.",
+    "forms": [
+      "CPUs"
+    ]
+  },
+  {
+    "term": "Microprocessor",
+    "definition": "A complete central processor on a single chip; the first commercial one was the Intel 4004 of 1971.",
+    "forms": [
+      "microprocessors"
+    ]
+  },
+  {
+    "term": "x86",
+    "definition": "The instruction set that began with Intel’s 8086 of 1978 and, extended to 64 bits, runs most PCs and servers.",
+    "forms": []
+  },
+  {
+    "term": "RISC-V",
+    "definition": "An open, licence-free instruction set begun at the University of California, Berkeley, in 2010.",
+    "forms": []
+  },
+  {
+    "term": "Superscalar",
+    "definition": "A processor design that can start more than one instruction in the same clock cycle.",
+    "forms": []
+  },
+  {
+    "term": "Shader",
+    "definition": "A small program that a GPU runs for every vertex or pixel; programmable shaders made GPUs usable for general computing.",
+    "forms": [
+      "shaders"
+    ]
+  },
+  {
+    "term": "CUDA",
+    "definition": "Nvidia’s platform, released in 2007, for writing general-purpose programs that run on its GPUs.",
+    "forms": []
+  },
+  {
+    "term": "High-bandwidth memory",
+    "definition": "Memory chips stacked vertically and placed beside a processor, giving very high data rates; used in AI GPUs.",
+    "forms": [
+      "HBM"
+    ]
+  },
+  {
+    "term": "Exaflop",
+    "definition": "A rate of 10¹⁸ (a billion billion) floating-point operations per second.",
+    "forms": [
+      "exaflops"
+    ]
+  },
+  {
+    "term": "NPU",
+    "definition": "Neural processing unit: a small, power-efficient accelerator for neural networks in phones and laptops.",
+    "forms": [
+      "NPUs"
+    ]
+  },
+  {
+    "term": "Unified memory",
+    "definition": "A design in which the CPU and GPU share one pool of memory, so data need not be copied between them.",
+    "forms": []
+  },
+  {
+    "term": "System-on-chip",
+    "definition": "A single chip that combines CPU cores, a GPU and other units such as memory controllers and accelerators.",
+    "forms": [
+      "SoC"
+    ]
   }
 ]

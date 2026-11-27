@@ -7044,5 +7044,79 @@ window.RNLEARN_GLOSSARY = [
   "Lambert W function",
   "The function W(z) that solves w eʷ = z, used for equations that mix a variable with its exponential.",
   []
+ ],
+ [
+  "CPU",
+  "Central processing unit: the general-purpose processor that runs the operating system and most programs, designed to finish each task with low latency.",
+  [
+   "CPUs"
+  ]
+ ],
+ [
+  "Microprocessor",
+  "A complete central processor on a single chip; the first commercial one was the Intel 4004 of 1971.",
+  [
+   "microprocessors"
+  ]
+ ],
+ [
+  "x86",
+  "The instruction set that began with Intel’s 8086 of 1978 and, extended to 64 bits, runs most PCs and servers.",
+  []
+ ],
+ [
+  "RISC-V",
+  "An open, licence-free instruction set begun at the University of California, Berkeley, in 2010.",
+  []
+ ],
+ [
+  "Superscalar",
+  "A processor design that can start more than one instruction in the same clock cycle.",
+  []
+ ],
+ [
+  "Shader",
+  "A small program that a GPU runs for every vertex or pixel; programmable shaders made GPUs usable for general computing.",
+  [
+   "shaders"
+  ]
+ ],
+ [
+  "CUDA",
+  "Nvidia’s platform, released in 2007, for writing general-purpose programs that run on its GPUs.",
+  []
+ ],
+ [
+  "High-bandwidth memory",
+  "Memory chips stacked vertically and placed beside a processor, giving very high data rates; used in AI GPUs.",
+  [
+   "HBM"
+  ]
+ ],
+ [
+  "Exaflop",
+  "A rate of 10¹⁸ (a billion billion) floating-point operations per second.",
+  [
+   "exaflops"
+  ]
+ ],
+ [
+  "NPU",
+  "Neural processing unit: a small, power-efficient accelerator for neural networks in phones and laptops.",
+  [
+   "NPUs"
+  ]
+ ],
+ [
+  "Unified memory",
+  "A design in which the CPU and GPU share one pool of memory, so data need not be copied between them.",
+  []
+ ],
+ [
+  "System-on-chip",
+  "A single chip that combines CPU cores, a GPU and other units such as memory controllers and accelerators.",
+  [
+   "SoC"
+  ]
  ]
 ];

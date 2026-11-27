@@ -1,5 +1,22 @@
 [
   {
+    "slug": "cpus-and-gpus-generation-by-generation",
+    "url": "articles/cpus-and-gpus-generation-by-generation.html",
+    "title": "CPUs and GPUs, Generation by Generation: From the 4004 to Exascale AI",
+    "summary": "Fifty years of CPUs and GPUs side by side: the megahertz race, the power wall, multicore, shaders, CUDA, tensor cores and AI chips, with the numbers, interactive charts and Python.",
+    "subject": "Electronics & Computing",
+    "tags": [
+      "cpu",
+      "gpu",
+      "computer-architecture",
+      "history-of-computing",
+      "artificial-intelligence",
+      "python"
+    ],
+    "date": "2026-11-27",
+    "type": "tutorial"
+  },
+  {
     "slug": "special-functions-and-their-uses",
     "url": "articles/special-functions-and-their-uses.html",
     "title": "Special Functions and Their Uses: Gamma, Bessel, Legendre and Friends",

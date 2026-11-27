@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CPUs and GPUs, Generation by Generation: From the 4004 to Exascale AI — RNLearn</title>
+  <meta name="description" content="Fifty years of CPUs and GPUs side by side: the megahertz race, the power wall, multicore, shaders, CUDA, tensor cores and AI chips, with the numbers, interactive charts and Python.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/cpus-and-gpus-generation-by-generation.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="CPUs and GPUs, Generation by Generation: From the 4004 to Exascale AI — RNLearn">
+  <meta property="og:description" content="Fifty years of CPUs and GPUs side by side: the megahertz race, the power wall, multicore, shaders, CUDA, tensor cores and AI chips, with the numbers, interactive charts and Python.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/cpus-and-gpus-generation-by-generation.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CPUs and GPUs, Generation by Generation: From the 4004 to Exascale AI — RNLearn">
+  <meta name="twitter:description" content="Fifty years of CPUs and GPUs side by side: the megahertz race, the power wall, multicore, shaders, CUDA, tensor cores and AI chips, with the numbers, interactive charts and Python.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "CPUs and GPUs, Generation by Generation: From the 4004 to Exascale AI",
+    "description": "Fifty years of CPUs and GPUs side by side: the megahertz race, the power wall, multicore, shaders, CUDA, tensor cores and AI chips, with the numbers, interactive charts and Python.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-27",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/cpus-and-gpus-generation-by-generation.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/electronics-computing.html" class="post-subject-tag" data-subject="electronics-computing">Electronics &amp; Computing</a>
+        </div>
+        <h1 class="article-title">CPUs and GPUs, Generation by Generation: From the 4004 to Exascale AI</h1>
+        <p class="article-standfirst">
+          One chip finishes a single task as fast as possible; the other finishes millions at once. How the CPU and the GPU grew up, generation by generation, and what each can do today.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-27">27 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>24 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. Two Kinds of Processor</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Latency and Throughput: What Each Is Built For</a></li>
+              <li><a class="toc-link" href="#section-4">4. The First Microprocessors, 1971–1985</a></li>
+              <li><a class="toc-link" href="#section-5">5. The Megahertz Race, 1985–2004</a></li>
+              <li><a class="toc-link" href="#section-6">6. The Power Wall and the Multicore Turn, 2004–2016</a></li>
+              <li><a class="toc-link" href="#section-7">7. The Modern CPU, 2017–2026</a></li>
+              <li><a class="toc-link" href="#section-8">8. Instruction Sets: x86, Arm and RISC-V</a></li>
+              <li><a class="toc-link" href="#section-9">9. Before the GPU: Graphics Chips, 1980s–1999</a></li>
+              <li><a class="toc-link" href="#section-10">10. Programmable Shaders, 2001–2006</a></li>
+              <li><a class="toc-link" href="#section-11">11. Unified Shaders and CUDA, 2006–2012</a></li>
+              <li><a class="toc-link" href="#section-12">12. GPUs Become AI Engines, 2012–2026</a></li>
+              <li><a class="toc-link" href="#section-13">13. Generation by Generation in Numbers</a></li>
+              <li><a class="toc-link" href="#section-14">14. Head to Head: Compare Two Chips</a></li>
+              <li><a class="toc-link" href="#section-15">15. Smaller Numbers, Faster Answers</a></li>
+              <li><a class="toc-link" href="#section-16">16. Supercomputers: From Teraflops to Exaflops</a></li>
+              <li><a class="toc-link" href="#section-17">17. What They Can Do Today</a></li>
+              <li><a class="toc-link" href="#section-18">18. Beyond CPU and GPU</a></li>
+              <li><a class="toc-link" href="#section-19">19. Common Misconceptions</a></li>
+              <li><a class="toc-link" href="#section-20">20. Legend and Record</a></li>
+              <li><a class="toc-link" href="#section-21">21. People in This Story</a></li>
+              <li><a class="toc-link" href="#section-22">22. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-23">23. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <section id="section-1">
+            <h2>1. Two Kinds of Processor</h2>
+            <p>Every computer, from a phone to a supercomputer, now contains two very different kinds of processor. The <strong>CPU</strong> (central processing unit) runs the operating system, your browser and almost every program you have ever written. The <strong>GPU</strong> (graphics processing unit) began as a helper for drawing 3D games and has become the engine of modern science and artificial intelligence.</p>
+            <p>They are built from the same transistors on the same factory lines, but designed around opposite goals. A CPU tries to finish <em>one</em> task as quickly as possible. A GPU tries to finish <em>millions</em> of small, similar tasks in the least total time. In fifty years the CPU has gone from 2,300 transistors to tens of billions; the GPU, in twenty-five years, from a games accessory to chips with over 200 billion transistors that train large language models.</p>
+            <p>This article follows both, generation by generation: what changed, why, and what each can do today. The inner workings (pipelines, caches, warps and the roofline model) are explained in the Electronics series, in <a href="the-processor.html">The Processor</a> and <a href="gpus-and-parallel-computing.html">GPUs and Parallel Computing</a>; here the focus is on the story and the numbers.</p>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-cg-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. CPUs and GPUs, 1971–2024.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Latency and Throughput: What Each Is Built For</h2>
+            <p>Imagine a restaurant. A CPU is a small team of brilliant chefs, each able to cook any dish quickly, improvise, and handle orders that depend on each other. A GPU is a huge kitchen of line cooks who each do one simple step, all at the same time. For a banquet of 10,000 identical plates, the huge kitchen wins easily. For one complicated meal where every step depends on the last, the brilliant chefs win.</p>
+            <p>Engineers call these two goals <strong>latency</strong> (how long one task takes) and <strong>throughput</strong> (how many tasks finish per second). A modern CPU spends most of its transistors on reducing latency: large caches so that data is close at hand, branch predictors that guess which way a program will go, and out-of-order execution that finds independent work to do while waiting. A GPU spends its transistors on arithmetic units, thousands of them, and hides the delay of fetching data by switching between many threads.</p>
+            <figure class="fig" data-fig="fig-paint">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. Few fast workers against many slow ones.</strong> Both processors paint the same 1,440-pixel picture. Choose a job and press Start.
+              </figcaption>
+            </figure>
+            <p>The limit on the GPU’s advantage is the part of a job that cannot be split up. Gene Amdahl pointed out in 1967 that if even 5% of a program must run in sequence, no number of processors can make it more than 20 times faster. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span> So the two chips are partners, not rivals: the CPU runs the program and hands the massively parallel parts to the GPU.</p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. The First Microprocessors, 1971–1985</h2>
+            <p>In 1969 the Japanese calculator company Busicom asked Intel to design a set of chips. Ted Hoff proposed instead a general-purpose processor that could be programmed for each task, and Federico Faggin, with Masatoshi Shima and Stanley Mazor, turned the idea into silicon. The <strong>Intel 4004</strong>, announced in November 1971, put a whole 4-bit processor on one chip: 2,300 transistors made with 10-micrometre features, running at up to 740 kHz. <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span> Adding two numbers took it about ten millionths of a second.</p>
+            <p>Six years earlier, Gordon Moore had noticed that the number of components on a chip was doubling every year and predicted it would continue. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> In 1975 he revised the pace to a doubling every two years, <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> and “Moore’s law” held, give or take, for half a century.</p>
+            <p>The 1970s brought 8-bit chips that started the personal computer: the Intel 8080 (1974), the cheap MOS Technology 6502 (1975), which with its variants ran the Apple II, Commodore 64 and Nintendo Entertainment System, and the Zilog Z80 (1976). Intel’s 16-bit <strong>8086</strong> of 1978 defined the <strong>x86</strong> instruction set; a variant, the 8088, went into the IBM PC in 1981, and programs written for it can still run on today’s PCs. Motorola’s 68000 (1979) powered the first Macintosh. The <strong>Intel 386</strong> of 1985, with 275,000 transistors, brought 32-bit computing and paged virtual memory, the foundation of modern operating systems.</p>
+            <p>These chips executed instructions one at a time, each taking several clock cycles. Floating-point arithmetic, if needed, required a separate maths coprocessor chip.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. The Megahertz Race, 1985–2004</h2>
+            <p>For the next twenty years, CPUs got faster in two ways at once: smaller transistors switched faster, allowing higher clock speeds, and the extra transistors were spent on doing more work per tick.</p>
+            <ul>
+              <li><strong>Intel 486 (1989):</strong> 1.2 million transistors, with the floating-point unit and a cache built onto the chip, and a pipeline that finished about one instruction per cycle.</li>
+              <li><strong>Pentium (1993):</strong> 3.1 million transistors and <em>superscalar</em>: two pipelines, so two instructions per cycle.</li>
+              <li><strong>Pentium Pro (1995)</strong> and AMD’s competing designs: <em>out-of-order execution</em>, reordering instructions on the fly to keep the units busy.</li>
+              <li><strong>MMX (1997) and SSE (1999):</strong> SIMD (single instruction, multiple data) instructions that apply one operation to several numbers at once, for multimedia.</li>
+              <li><strong>1 GHz (2000):</strong> AMD’s Athlon reached a billion cycles per second in March 2000, two days ahead of Intel’s Pentium III.</li>
+              <li><strong>Pentium 4 (2000–2004):</strong> a very deep pipeline (20 stages, later 31) designed for clock speed, reaching 3.8 GHz in 2004.</li>
+              <li><strong>AMD64 (2003):</strong> AMD extended x86 to 64 bits with its Opteron and Athlon 64; Intel adopted the same extension, which every PC and x86 server uses today.</li>
+            </ul>
+            <figure class="fig" data-fig="fig-clock-wall">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. The clock-speed wall.</strong> Fastest desktop clock speed and the largest core count in desktop and workstation chips, on a logarithmic scale. Move the year.
+              </figcaption>
+            </figure>
+            <p>Users could feel each generation: software simply ran faster on a new machine, without any change. That “free lunch” was about to end.</p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. The Power Wall and the Multicore Turn, 2004–2016</h2>
+            <p>In 1974 Robert Dennard and colleagues at IBM showed that as transistors shrink, their voltage and current shrink too, so power per unit area stays constant. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> This <strong>Dennard scaling</strong> is why chips could get faster without getting hotter. By the mid-2000s it had broken down: transistors were so small that they leaked current even when switched off, and voltages could no longer fall. Pushing the clock higher made chips too hot to cool. In May 2004 Intel cancelled the successors to the Pentium 4, and clock speeds have stayed between about 3 and 6 GHz ever since.</p>
+            <p>The industry turned to putting several processor <strong>cores</strong> on one chip. IBM’s POWER4 server chip had two cores in 2001; in 2005 AMD and Intel brought dual-core processors to desktops, and quad-cores followed in 2006. In 2005 Herb Sutter warned programmers that “the free lunch is over”: from now on, software would only get faster if it was written to use many cores at once. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span></p>
+            <p>The following decade refined the multicore CPU. Intel’s Core 2 (2006) put efficiency ahead of clock speed. Memory controllers moved onto the processor (AMD in 2003, Intel’s Nehalem in 2008), cutting the time to reach memory. Sandy Bridge (2011) added a GPU on the same chip and 256-bit AVX vector instructions. Vector units kept widening because they deliver more arithmetic per watt than extra cores. Researchers warned of <strong>dark silicon</strong>: chips with more transistors than could be powered at once. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> Progress slowed: Intel was stuck on its 14 nm process from 2014 until 2019, and for several years new desktop CPUs were only modestly faster than the last.</p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. The Modern CPU, 2017–2026</h2>
+            <p>Competition returned in 2017 with AMD’s <strong>Zen</strong> architecture (Ryzen and EPYC). Its second generation (2019) introduced <strong>chiplets</strong>: instead of one large die, a processor is assembled from several small compute dies around an input/output die. Small dies are cheaper to make without defects, and the approach let AMD offer 64 cores in 2019 and 192 in its EPYC 9005 server chips of 2024.</p>
+            <p>In November 2020 Apple replaced Intel processors in the Mac with its own <strong>M1</strong>, an Arm-based system-on-chip with 16 billion transistors made on a 5 nm process. It combined high-performance and high-efficiency cores, a GPU, a neural-network engine and <em>unified memory</em> shared by all of them, and set a new standard for performance per watt in laptops. Intel’s Alder Lake (2021) adopted a similar mix of performance and efficiency cores for x86. AMD’s 3D V-Cache (2022) stacked an extra layer of cache memory on top of the processor, which proved especially effective in games.</p>
+            <p>Arm also entered the data centre. Amazon’s Graviton chips (from 2018) run a large share of its cloud servers, and Nvidia pairs its Grace Arm CPU with its GPUs. Today’s flagship CPUs offer:</p>
+            <ul>
+              <li><strong>Desktops and laptops:</strong> 8 to 24 cores at up to about 6 GHz, with peak vector arithmetic of one to a few teraflops (trillion floating-point operations per second).</li>
+              <li><strong>Servers:</strong> up to 192 cores in one socket, twelve channels of DDR5 memory delivering over 500 GB/s, and hundreds of megabytes of cache.</li>
+              <li><strong>Phones:</strong> 6 to 8 Arm cores in a chip that uses a few watts, faster than desktop PCs of a decade earlier.</li>
+            </ul>
+            <p>The transistors themselves keep changing: FinFETs replaced flat transistors around 2011–2012, and gate-all-around transistors are arriving with the 2 nm generation, as described in <a href="modern-transistors.html">Modern Transistors</a>. Process names such as “3 nm” no longer measure any physical feature; they are labels for generations.</p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Instruction Sets: x86, Arm and RISC-V</h2>
+            <p>An instruction set is the vocabulary a processor understands. Three matter today.</p>
+            <ul>
+              <li><strong>x86</strong>, from the 8086 of 1978, has hundreds of complex, variable-length instructions. Intel and AMD processors translate them internally into simpler operations. It dominates PCs and servers, largely because of the vast amount of software written for it.</li>
+              <li><strong>Arm</strong> follows the RISC (reduced instruction set computer) idea that David Patterson, John Hennessy and others argued for around 1980: a small set of simple, regular instructions that are easy to pipeline. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span> The first ARM chip was designed at Acorn Computers in Cambridge by Sophie Wilson and Steve Furber and ran in 1985. Its low power made Arm the choice for mobile devices; nearly every smartphone uses it, as do Apple’s Macs and a growing number of servers.</li>
+              <li><strong>RISC-V</strong>, begun at Berkeley in 2010, is an open standard that anyone can use without a licence. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>]</span> It is spreading in microcontrollers, storage devices and research chips, and is starting to appear in larger processors.</li>
+            </ul>
+            <p>Hennessy and Patterson, who shared the 2017 Turing Award, argue that with transistor scaling slowing, the biggest gains will now come from specialised designs and open instruction sets, a “new golden age for computer architecture”. <span class="cite-group">[<a class="cite" href="#ref-10">10</a>]</span> The rise of GPUs and AI accelerators is that prediction coming true.</p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Before the GPU: Graphics Chips, 1980s–1999</h2>
+            <p>Drawing a 3D scene means repeating the same small calculations for every vertex of every triangle and every pixel on the screen, tens of millions of times a second. In the 1980s this was done by expensive workstations such as those of Silicon Graphics, and by special chips in arcade machines. Texas Instruments’ TMS34010 of 1986 was one of the first programmable graphics processors on a single chip.</p>
+            <p>Cheap 3D arrived on the PC with the <strong>3dfx Voodoo</strong> card in 1996, which drew textured triangles while the CPU did the geometry. Nvidia, founded in 1993, followed with the RIVA 128 (1997) and, in August 1999, the <strong>GeForce 256</strong>, which it marketed as “the world’s first GPU”. Its advance was hardware <em>transform and lighting</em>: the chip itself now positioned and lit the vertices, taking that load off the CPU. ATI (bought by AMD in 2006) competed with its Radeon line from 2000.</p>
+            <p>These early GPUs were <em>fixed-function</em>: they could do only the operations built into them, in a fixed order called the graphics pipeline.</p>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Programmable Shaders, 2001–2006</h2>
+            <p>The <strong>GeForce 3</strong> of 2001 let programmers replace parts of that pipeline with small programs called <strong>shaders</strong>: a <em>vertex shader</em> runs once for each vertex, a <em>pixel shader</em> once for each pixel. ATI’s Radeon 9700 (2002) added floating-point arithmetic in its pixel shaders. Suddenly a games chip could be programmed to do arithmetic on large arrays of numbers, very fast.</p>
+            <p>Researchers noticed. By disguising their data as images and their calculations as shaders, they ran fluid simulations, linear algebra and database searches on graphics cards, a movement called GPGPU (general-purpose computing on GPUs). In 2004 Ian Buck and colleagues at Stanford released <strong>Brook</strong>, a language that hid the graphics details and let programmers write “stream” programs directly. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span> Buck then joined Nvidia.</p>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Unified Shaders and CUDA, 2006–2012</h2>
+            <p>Early GPUs had separate units for vertices and pixels, so one kind often sat idle. ATI’s Xenos chip for the Xbox 360 (2005) introduced <strong>unified shaders</strong>, processors that could do either job. Nvidia’s <strong>GeForce 8800 GTX</strong> of November 2006 (the G80, or “Tesla” architecture) took the idea to PCs with 128 unified scalar cores, designed from the start for general computing as well as graphics. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span></p>
+            <p>With it came <strong>CUDA</strong>, released in 2007: a way to program the GPU in an extended version of C, launching thousands of threads that each handle one piece of data. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span> For the first time, scientists could use a cheap graphics card as a parallel computer without pretending to draw pictures. The open standard <strong>OpenCL</strong> followed at the end of 2008. Nvidia’s Fermi architecture (2010) added the features scientists needed: fast double-precision arithmetic, caches and error-correcting memory. In 2012 the Titan supercomputer at Oak Ridge used 18,688 GPUs, and GPUs began to fill the lists of the world’s fastest machines.</p>
+          </section>
+
+          <section id="section-12">
+            <h2>12. GPUs Become AI Engines, 2012–2026</h2>
+            <p>In 2012 Alex Krizhevsky, Ilya Sutskever and Geoffrey Hinton trained a deep neural network, now called AlexNet, on two Nvidia GeForce GTX 580 gaming cards over about a week. It won the ImageNet image-recognition contest with an error rate far below any rival. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span> Training neural networks is mostly multiplying large matrices, exactly what GPUs do best, and deep learning took off. Each GPU generation since has been designed more and more around AI.</p>
+            <ul>
+              <li><strong>Pascal P100 (2016):</strong> stacked high-bandwidth memory (HBM2) and NVLink connections between GPUs.</li>
+              <li><strong>Volta V100 (2017):</strong> the first <strong>tensor cores</strong>, units that multiply small matrices in low precision, giving 125 teraflops for neural networks against 15.7 for ordinary arithmetic.</li>
+              <li><strong>Turing (2018):</strong> RT cores for real-time ray tracing in games, and AI-based upscaling (DLSS).</li>
+              <li><strong>Ampere A100 (2020):</strong> 54 billion transistors and new number formats (TF32, BF16) for training.</li>
+              <li><strong>Hopper H100 (2022):</strong> 80 billion transistors, 8-bit floating point (FP8) and a “Transformer Engine” for language models, 3.35 TB/s of memory bandwidth.</li>
+              <li><strong>AMD Instinct MI300X (2023):</strong> 153 billion transistors in a stack of chiplets, with 192 GB of HBM3 memory.</li>
+              <li><strong>Blackwell B200 (2024):</strong> two dies acting as one GPU, 208 billion transistors, 4-bit arithmetic, 8 TB/s of memory bandwidth, and racks of 72 GPUs linked as one system.</li>
+            </ul>
+            <p>Google took a different route with its <strong>Tensor Processing Unit</strong>, a chip built only for neural networks, deployed in its data centres from 2015. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span> Today’s largest AI models are trained on tens of thousands of accelerators at once: Meta, for example, reported training its Llama 3 models on up to 16,384 H100 GPUs. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span> Gaming GPUs share the same architectures: the GeForce RTX 5090 of 2025 has 92 billion transistors, 21,760 shader cores and about 105 teraflops of FP32 arithmetic: more, even at that lower precision, than the roughly 7 teraflops of 64-bit arithmetic of the fastest supercomputer of 2001.</p>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Generation by Generation in Numbers</h2>
+            <p>The explorer below collects published figures for landmark chips. Because the numbers span many orders of magnitude, the vertical axis is logarithmic: each grid line is ten times the one below, and steady exponential growth appears as a straight line.</p>
+            <figure class="fig" data-fig="fig-explorer">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. CPUs and GPUs by generation.</strong> Choose a measure; move the slider to read the details of each chip.
+              </figcaption>
+            </figure>
+            <p>Three trends stand out. Transistor counts have doubled roughly every two years for both kinds of chip. GPUs passed CPUs in raw arithmetic around 2006 and have pulled far ahead, because they spend their transistors on arithmetic rather than on latency-reducing machinery. And memory bandwidth, the rate at which data can be fed to the cores, has become as important as arithmetic: an H100 moves data from memory about forty times faster than a desktop CPU.</p>
+            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# Transistor counts of some landmark chips (manufacturers' published figures)
+cpus = {1971: 2_300, 1978: 29_000, 1985: 275_000, 1989: 1_200_000, 1993: 3_100_000,
+        2000: 42_000_000, 2006: 291_000_000, 2008: 731_000_000, 2011: 1_160_000_000,
+        2020: 16_000_000_000, 2023: 92_000_000_000}
+gpus = {2001: 57_000_000, 2006: 681_000_000, 2010: 3_000_000_000, 2016: 7_200_000_000,
+        2017: 21_100_000_000, 2020: 54_200_000_000, 2022: 80_000_000_000,
+        2023: 153_000_000_000, 2024: 208_000_000_000}
+
+fig, ax = plt.subplots(figsize=(7, 4.5))
+for name, d, m in [("CPUs", cpus, "o"), ("GPUs", gpus, "s")]:
+    years, counts = np.array(list(d)), np.array(list(d.values()))
+    slope, intercept = np.polyfit(years, np.log2(counts), 1)     # straight line in log2 space
+    print(f"{name}: transistor count doubles every {1 / slope:.2f} years")
+    ax.scatter(years, counts, marker=m, label=f"{name} (doubling every {1 / slope:.1f} years)")
+    ax.plot(years, 2 ** (intercept + slope * years), lw=1)
+ax.set_yscale("log")
+ax.set_xlabel("Year")
+ax.set_ylabel("Transistors per chip")
+ax.legend()
+plt.tight_layout()
+plt.show()</code></pre>
+          </section>
+
+          <section id="section-14">
+            <h2>14. Head to Head: Compare Two Chips</h2>
+            <p>Pick any two chips from the list to see how they compare. Try the Intel 4004 against the RTX 5090, a Pentium against an H100, or a desktop CPU against a gaming GPU of the same year.</p>
+            <figure class="fig" data-fig="fig-compare">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. Compare two chips.</strong> Bars show how many times larger chip B is than chip A on each measure.
+              </figcaption>
+            </figure>
+            <p>Peak numbers flatter both kinds of chip. A CPU reaches its peak only with carefully vectorised code; a GPU only when there is enough parallel work and the data arrives fast enough. Real programs often achieve a fraction of the peak, and the fraction depends on the program far more than on the chip.</p>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Smaller Numbers, Faster Answers</h2>
+            <p>Much of the recent leap in AI performance comes not from more transistors but from smaller numbers. Scientific computing traditionally used 64-bit floating point (FP64). Graphics used 32 bits. Neural networks turned out to work with far less precision, and each halving of the bits roughly doubles how many numbers a chip can move and multiply per second.</p>
+            <figure class="fig" data-fig="fig-formats">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. Floating-point formats.</strong> How many bits each format spends on range and precision, and how it stores the chosen number.
+              </figcaption>
+            </figure>
+            <p>This is why AI accelerators quote several performance figures. An H100 offers about 67 teraflops in FP32 but nearly 1,000 in FP16 on its tensor cores and about 2,000 in FP8; Blackwell adds FP4. Scientific simulations that need FP64 benefit far less. When comparing chips, always check which precision a number refers to, and whether it assumes “sparsity” (skipping zeros), which doubles the advertised figure.</p>
+            <pre><code class="language-python">import numpy as np
+
+# Fewer bits per number means more numbers per second, but less precision and range
+x = 1 / 3
+for dtype in [np.float64, np.float32, np.float16]:
+    info = np.finfo(dtype)
+    print(f"{np.dtype(dtype).name:&gt;8}: 1/3 = {str(dtype(x)):&lt;20} largest = {info.max:.3g}, "
+          f"about {info.precision} decimal digits")
+
+# float16 overflows easily, one reason AI training uses bfloat16 or careful scaling
+with np.errstate(over="ignore"):
+    print(np.float16(300) * np.float16(300))  # inf: 90,000 is beyond float16's maximum of 65,504
+
+# Rounding errors build up: add 0.1 ten thousand times (the answer should be 1000)
+for dtype in [np.float16, np.float32]:
+    total = dtype(0)
+    for _ in range(10_000):
+        total = dtype(total + dtype(0.1))
+    print(f"{np.dtype(dtype).name}: {total}")   # float16 gets stuck at 256: the gap between numbers there is 0.25</code></pre>
+          </section>
+
+          <section id="section-16">
+            <h2>16. Supercomputers: From Teraflops to Exaflops</h2>
+            <p>The TOP500 list, published twice a year since 1993, ranks supercomputers by how fast they solve a large system of linear equations. <span class="cite-group">[<a class="cite" href="#ref-17">17</a>]</span> Its milestones show the shift from CPUs to GPUs:</p>
+            <ul>
+              <li><strong>1997, one teraflop:</strong> ASCI Red at Sandia, built from thousands of Intel Pentium Pro processors.</li>
+              <li><strong>2008, one petaflop:</strong> Roadrunner at Los Alamos, combining AMD Opteron CPUs with IBM Cell processors.</li>
+              <li><strong>2012:</strong> Titan at Oak Ridge, with Nvidia GPUs doing most of the work.</li>
+              <li><strong>2020:</strong> Fugaku in Japan, a rare CPU-only leader, built from Fujitsu’s Arm-based A64FX chips with wide vector units.</li>
+              <li><strong>2022, one exaflop:</strong> Frontier at Oak Ridge, with AMD CPUs and GPUs, the first machine measured above 10<sup>18</sup> operations per second.</li>
+              <li><strong>2024:</strong> El Capitan at Lawrence Livermore, about 1.7 exaflops, using AMD MI300A chips that combine CPU and GPU cores in one package.</li>
+            </ul>
+            <p>A million-fold increase in 25 years. A single B200 GPU now offers, at low precision, more arithmetic than the whole of the fastest supercomputer of 2008, although for the FP64 work that supercomputers are ranked on, the comparison is far less dramatic.</p>
+          </section>
+
+          <section id="section-17">
+            <h2>17. What They Can Do Today</h2>
+            <p>As of late 2026, a rough guide to which processor does what:</p>
+            <div class="table-container" style="overflow-x:auto; margin:1.5rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.93rem; line-height:1.5;">
+                <thead><tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;"><th style="padding:0.5rem;">Task</th><th style="padding:0.5rem;">Best suited</th><th style="padding:0.5rem;">Why</th></tr></thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Operating system, browser, office work</td><td style="padding:0.5rem;">CPU</td><td style="padding:0.5rem;">Branchy, varied code where latency matters</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Compiling software, databases, web servers</td><td style="padding:0.5rem;">CPU (many cores)</td><td style="padding:0.5rem;">Many independent but irregular tasks</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">3D games, ray tracing</td><td style="padding:0.5rem;">GPU</td><td style="padding:0.5rem;">Millions of pixels and rays in parallel; the CPU runs game logic</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Video encoding and editing</td><td style="padding:0.5rem;">Dedicated media engines on GPUs and SoCs</td><td style="padding:0.5rem;">Fixed-function hardware is fastest and most efficient</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Training AI models</td><td style="padding:0.5rem;">GPU or AI accelerator clusters</td><td style="padding:0.5rem;">Huge matrix multiplications at low precision</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Running AI models on a laptop or phone</td><td style="padding:0.5rem;">GPU or NPU</td><td style="padding:0.5rem;">Limited mainly by memory size and bandwidth</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Scientific simulation (weather, fluids, molecules)</td><td style="padding:0.5rem;">GPUs, with CPUs for irregular parts</td><td style="padding:0.5rem;">Large grids updated in parallel</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem;">Small data analysis, spreadsheets, scripts</td><td style="padding:0.5rem;">CPU</td><td style="padding:0.5rem;">Copying data to a GPU costs more than it saves</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>You can explore your own machine with Python. First, what is there?</p>
+            <pre><code class="language-python">import os
+import platform
+
+# What processor is this code running on?
+print("Machine:", platform.machine())              # e.g. x86_64 or arm64
+print("Processor:", platform.processor() or "unknown")
+print("Logical CPU cores:", os.cpu_count())
+
+# Is there a GPU that Python can use? Try PyTorch, the most common route.
+try:
+    import torch
+    if torch.cuda.is_available():
+        print("CUDA GPU:", torch.cuda.get_device_name(0))
+    elif torch.backends.mps.is_available():
+        print("Apple GPU available through Metal (MPS)")
+    else:
+        print("PyTorch is installed but sees no GPU")
+except ImportError:
+    print("PyTorch not installed; cannot check for a GPU this way")</code></pre>
+            <p>Even on a CPU, doing arithmetic on whole arrays at once uses its SIMD units and is many times faster than a Python loop:</p>
+            <pre><code class="language-python">import time
+import numpy as np
+
+n = 2_000_000
+a = np.random.default_rng(0).random(n)
+b = np.random.default_rng(1).random(n)
+
+# One element at a time, like a single simple core
+t = time.perf_counter()
+c = [a[i] * b[i] + 1.0 for i in range(n)]
+t_loop = time.perf_counter() - t
+
+# Whole arrays at once: NumPy runs compiled loops that use the CPU's SIMD units
+t = time.perf_counter()
+c2 = a * b + 1.0
+t_vec = time.perf_counter() - t
+
+print(f"Python loop: {t_loop:.3f} s")
+print(f"NumPy:       {t_vec:.4f} s  ({t_loop / t_vec:.0f}x faster)")
+print("Same answer:", np.allclose(c, c2))</code></pre>
+            <p>Independent work spreads across cores. On a 4-core laptop, four workers finish this job about four times faster than one:</p>
+            <pre><code class="language-python">import os
+import time
+from concurrent.futures import ProcessPoolExecutor
+
+def count_primes(limit):
+    """Deliberately slow, CPU-bound work: count primes below limit by trial division."""
+    count = 0
+    for n in range(2, limit):
+        if all(n % d for d in range(2, int(n ** 0.5) + 1)):
+            count += 1
+    return count
+
+if __name__ == "__main__":
+    jobs = [60_000] * 8                      # eight independent chunks of work
+    for workers in sorted({1, 2, 4, os.cpu_count()}):
+        t = time.perf_counter()
+        with ProcessPoolExecutor(max_workers=workers) as pool:
+            results = list(pool.map(count_primes, jobs))
+        print(f"{workers:&gt;2} worker(s): {time.perf_counter() - t:.2f} s")</code></pre>
+            <p>Large matrix multiplication is the most efficient thing a processor can do, because each number fetched from memory is used many times. A modern laptop CPU typically reaches a few hundred GFLOPS here, a few percent of what a gaming GPU manages:</p>
+            <pre><code class="language-python">import time
+import numpy as np
+
+# Measure how many floating-point operations per second this CPU achieves on matrix multiplication
+for n in [256, 512, 1024, 2048]:
+    a = np.random.rand(n, n).astype(np.float32)
+    b = np.random.rand(n, n).astype(np.float32)
+    a @ b                                    # warm up
+    reps = max(1, int(2e9 / n**3))
+    t = time.perf_counter()
+    for _ in range(reps):
+        a @ b
+    dt = (time.perf_counter() - t) / reps
+    flops = 2 * n**3                         # n^3 multiply-adds = 2 n^3 operations
+    print(f"n = {n:&gt;4}: {flops / dt / 1e9:7.1f} GFLOPS")
+
+# For comparison, an RTX 5090's peak is about 105,000 GFLOPS at FP32,
+# and an H100 reaches about 989,000 GFLOPS on FP16 tensor cores.</code></pre>
+            <p>Simple array operations, by contrast, are limited by memory bandwidth, not arithmetic. A laptop moves something like 10–100 GB/s; a data-centre GPU, several thousand:</p>
+            <pre><code class="language-python">import time
+import numpy as np
+
+# A STREAM-style "triad": c = a + s*b reads two arrays and writes one.
+n = 20_000_000                               # 20 million float64 = 160 MB per array
+a = np.ones(n)
+b = np.ones(n)
+c = np.empty(n)
+best = float("inf")
+for _ in range(5):
+    t = time.perf_counter()
+    np.multiply(b, 3.0, out=c)
+    np.add(a, c, out=c)
+    best = min(best, time.perf_counter() - t)
+moved = 4 * n * 8                            # bytes read and written by the two NumPy passes
+print(f"Memory bandwidth: about {moved / best / 1e9:.1f} GB/s")
+print(f"Arithmetic intensity: {2 * n / moved:.3f} FLOP per byte (memory-bound)")</code></pre>
+            <p>If you have PyTorch and a GPU (Nvidia through CUDA, or Apple silicon through Metal), the same matrix multiplication shows the difference directly:</p>
+            <pre><code class="language-python">import time
+
+try:
+    import torch
+except ImportError:
+    torch = None
+
+if torch is None:
+    print("Install PyTorch (pytorch.org) to run this comparison.")
+else:
+    device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
+    print("Using device:", device)
+    n = 4096
+    for dev in ["cpu", device] if device != "cpu" else ["cpu"]:
+        a = torch.randn(n, n, device=dev)
+        b = torch.randn(n, n, device=dev)
+        a @ b                                         # warm up (first GPU call is slow)
+        if dev == "cuda":
+            torch.cuda.synchronize()                  # GPU work is asynchronous: wait for it
+        t = time.perf_counter()
+        for _ in range(10):
+            c = a @ b
+        if dev == "cuda":
+            torch.cuda.synchronize()
+        dt = (time.perf_counter() - t) / 10
+        print(f"{dev:&gt;4}: {2 * n**3 / dt / 1e12:.2f} TFLOPS")</code></pre>
+          </section>
+
+          <section id="section-18">
+            <h2>18. Beyond CPU and GPU</h2>
+            <ul>
+              <li><strong>NPUs.</strong> Phones and laptops now include neural processing units, small accelerators for AI that use far less power than a GPU for tasks such as speech recognition and photo processing. Apple’s Neural Engine first appeared in 2017.</li>
+              <li><strong>Custom AI chips.</strong> Google’s TPUs, Amazon’s Trainium and others trade generality for efficiency at neural-network arithmetic.</li>
+              <li><strong>CPU and GPU together.</strong> The boundary is blurring: Apple’s M-series share one pool of memory between CPU and GPU, AMD’s MI300A combines both in one package, and Nvidia’s Grace Hopper and Grace Blackwell “superchips” link an Arm CPU to GPUs with a fast connection.</li>
+              <li><strong>Packaging.</strong> Chiplets, stacked memory (HBM) placed beside the processor, and 3D-stacked cache now matter as much as transistor size. Advanced packaging capacity has itself become a bottleneck for AI chips.</li>
+              <li><strong>Energy.</strong> A rack of 72 Blackwell GPUs draws over 100 kilowatts, and AI data centres are now planned around their power supply. Performance per watt has become the measure that matters most.</li>
+            </ul>
+            <p>Where the industry goes next, including new materials and new kinds of computing, is discussed in <a href="beyond-silicon.html">Beyond Silicon</a>.</p>
+          </section>
+
+          <section id="section-19">
+            <h2>19. Common Misconceptions</h2>
+            <ul>
+              <li><strong>“More gigahertz means faster.”</strong> A 2024 core at 5 GHz does several times more work per cycle than a 2004 Pentium 4 at 3.8 GHz.</li>
+              <li><strong>“More cores always means faster.”</strong> Only if the software can use them; many programs depend mostly on one core’s speed.</li>
+              <li><strong>“A GPU could replace the CPU.”</strong> GPUs are poor at branchy, sequential code, and they depend on a CPU to run the operating system and launch their work.</li>
+              <li><strong>“Teraflops tell you everything.”</strong> Check the precision (FP64, FP32, FP16, FP8, FP4), whether sparsity is assumed, and whether the job is limited by memory bandwidth instead.</li>
+              <li><strong>“3 nm means transistors are 3 nm wide.”</strong> Process names stopped matching physical sizes decades ago.</li>
+              <li><strong>“Moving work to the GPU always helps.”</strong> Copying data across costs time; small jobs are often faster on the CPU.</li>
+            </ul>
+          </section>
+
+          <section id="section-20">
+            <h2>20. Legend and Record</h2>
+            <div class="callout callout-history">
+              <div class="callout-header">Legend and Record: was the GeForce 256 the first GPU?</div>
+              <p><strong>The legend:</strong> Nvidia invented the GPU with the GeForce 256 in 1999.</p>
+              <p><strong>The record:</strong> Nvidia did popularise the term with that chip, which was the first consumer graphics chip to do transform and lighting in hardware. But programmable graphics processors existed earlier, such as Texas Instruments’ TMS34010 of 1986, and Sony had already called the graphics chip of its 1994 PlayStation a “GPU”. What changed in 1999 was how much of the 3D pipeline moved off the CPU.</p>
+              <p><strong>A second legend:</strong> Moore’s law says computing power doubles every 18 months. <strong>The record:</strong> Moore’s 1965 paper predicted that the number of components on a chip would double every year; in 1975 he revised this to every two years. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> The “18 months” figure is usually credited to his Intel colleague David House, who estimated how fast <em>performance</em> would grow when faster transistors were added to the count. Moore himself said he never predicted 18 months.</p>
+            </div>
+          </section>
+          <section id="section-21">
+            <h2>21. People in This Story</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Gordon Moore</td>
+                <td style="padding:0.6rem 0.8rem;">1929–2023<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">“Cramming more components onto integrated circuits” (1965)</td>
+                <td style="padding:0.6rem 0.8rem;">Predicted the doubling of transistors per chip; co-founded Intel.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Federico Faggin, Ted Hoff, Masatoshi Shima and Stanley Mazor</td>
+                <td style="padding:0.6rem 0.8rem;">Intel and Busicom, 1969–1971</td>
+                <td style="padding:0.6rem 0.8rem;">The Intel 4004</td>
+                <td style="padding:0.6rem 0.8rem;">Designed the first commercial microprocessor.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Robert Dennard</td>
+                <td style="padding:0.6rem 0.8rem;">1932–2024<br>IBM, USA</td>
+                <td style="padding:0.6rem 0.8rem;">DRAM (1966); scaling rules (1974)</td>
+                <td style="padding:0.6rem 0.8rem;">Explained why smaller transistors could be faster without running hotter.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Sophie Wilson and Steve Furber</td>
+                <td style="padding:0.6rem 0.8rem;">Acorn Computers, Cambridge</td>
+                <td style="padding:0.6rem 0.8rem;">The ARM1 (1985)</td>
+                <td style="padding:0.6rem 0.8rem;">Designed the processor family inside nearly every smartphone.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">John Hennessy and David Patterson</td>
+                <td style="padding:0.6rem 0.8rem;">Stanford and Berkeley</td>
+                <td style="padding:0.6rem 0.8rem;">RISC; <em>Computer Architecture: A Quantitative Approach</em></td>
+                <td style="padding:0.6rem 0.8rem;">Shaped how processors are designed and taught; 2017 Turing Award.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Jensen Huang</td>
+                <td style="padding:0.6rem 0.8rem;">born 1963<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Co-founded Nvidia (1993)</td>
+                <td style="padding:0.6rem 0.8rem;">Led Nvidia from graphics cards to AI computing.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Ian Buck</td>
+                <td style="padding:0.6rem 0.8rem;">Stanford and Nvidia</td>
+                <td style="padding:0.6rem 0.8rem;">Brook (2004); CUDA (2007)</td>
+                <td style="padding:0.6rem 0.8rem;">Made GPUs programmable for general computing.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Lisa Su</td>
+                <td style="padding:0.6rem 0.8rem;">born 1969<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">CEO of AMD from 2014</td>
+                <td style="padding:0.6rem 0.8rem;">Led AMD’s revival with Zen CPUs, chiplets and Instinct GPUs.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Alex Krizhevsky, Ilya Sutskever and Geoffrey Hinton</td>
+                <td style="padding:0.6rem 0.8rem;">University of Toronto</td>
+                <td style="padding:0.6rem 0.8rem;">AlexNet (2012)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed that GPUs could train deep neural networks at scale.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-22">
+            <h2>22. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about CPUs and GPUs.</p>
+            <figure class="fig" data-fig="fig-quiz-cg">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-23">
+            <h2>23. References &amp; Further Reading</h2>
+            <p>The facts, dates and figures in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Amdahl, Gene M.</strong> (1967). "Validity of the single processor approach to achieving large scale computing capabilities." <em>AFIPS Conference Proceedings</em>, 30: 483–485.</li>
+              <li id="ref-2"><strong>Faggin, Federico, Hoff, Marcian E., Mazor, Stanley &amp; Shima, Masatoshi.</strong> (1996). "The history of the 4004." <em>IEEE Micro</em>, 16(6): 10–20.</li>
+              <li id="ref-3"><strong>Moore, Gordon E.</strong> (1965). "Cramming more components onto integrated circuits." <em>Electronics</em>, 38(8): 114–117.</li>
+              <li id="ref-4"><strong>Moore, Gordon E.</strong> (1975). "Progress in digital integrated electronics." <em>Technical Digest of the International Electron Devices Meeting</em>, 11–13.</li>
+              <li id="ref-5"><strong>Dennard, Robert H., Gaensslen, Fritz H., Yu, Hwa-Nien, Rideout, V. Leo, Bassous, Ernest &amp; LeBlanc, Andre R.</strong> (1974). "Design of ion-implanted MOSFET’s with very small physical dimensions." <em>IEEE Journal of Solid-State Circuits</em>, 9(5): 256–268.</li>
+              <li id="ref-6"><strong>Sutter, Herb.</strong> (2005). "The free lunch is over: a fundamental turn toward concurrency in software." <em>Dr. Dobb’s Journal</em>, 30(3).</li>
+              <li id="ref-7"><strong>Esmaeilzadeh, Hadi, Blem, Emily, St. Amant, Renée, Sankaralingam, Karthikeyan &amp; Burger, Doug.</strong> (2011). "Dark silicon and the end of multicore scaling." <em>Proceedings of the 38th International Symposium on Computer Architecture (ISCA)</em>, 365–376.</li>
+              <li id="ref-8"><strong>Patterson, David A. &amp; Ditzel, David R.</strong> (1980). "The case for the reduced instruction set computer." <em>ACM SIGARCH Computer Architecture News</em>, 8(6): 25–33.</li>
+              <li id="ref-9"><strong>Asanović, Krste &amp; Patterson, David A.</strong> (2014). "Instruction sets should be free: the case for RISC-V." Technical Report UCB/EECS-2014-146, University of California, Berkeley.</li>
+              <li id="ref-10"><strong>Hennessy, John L. &amp; Patterson, David A.</strong> (2019). "A new golden age for computer architecture." <em>Communications of the ACM</em>, 62(2): 48–60.</li>
+              <li id="ref-11"><strong>Buck, Ian, Foley, Tim, Horn, Daniel, Sugerman, Jeremy, Fatahalian, Kayvon, Houston, Mike &amp; Hanrahan, Pat.</strong> (2004). "Brook for GPUs: stream computing on graphics hardware." <em>ACM Transactions on Graphics</em>, 23(3): 777–786.</li>
+              <li id="ref-12"><strong>Lindholm, Erik, Nickolls, John, Oberman, Stuart &amp; Montrym, John.</strong> (2008). "NVIDIA Tesla: a unified graphics and computing architecture." <em>IEEE Micro</em>, 28(2): 39–55.</li>
+              <li id="ref-13"><strong>Nickolls, John, Buck, Ian, Garland, Michael &amp; Skadron, Kevin.</strong> (2008). "Scalable parallel programming with CUDA." <em>ACM Queue</em>, 6(2): 40–53.</li>
+              <li id="ref-14"><strong>Krizhevsky, Alex, Sutskever, Ilya &amp; Hinton, Geoffrey E.</strong> (2012). "ImageNet classification with deep convolutional neural networks." <em>Advances in Neural Information Processing Systems</em>, 25: 1097–1105.</li>
+              <li id="ref-15"><strong>Jouppi, Norman P., et al.</strong> (2017). "In-datacenter performance analysis of a tensor processing unit." <em>Proceedings of the 44th International Symposium on Computer Architecture (ISCA)</em>, 1–12.</li>
+              <li id="ref-16"><strong>Llama Team, AI @ Meta.</strong> (2024). "The Llama 3 herd of models." arXiv:2407.21783.</li>
+              <li id="ref-17"><strong>TOP500 Project.</strong> TOP500 lists of the world’s fastest supercomputers, published each June and November since 1993. top500.org.</li>
+            </ol>
+          </section>
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/cpus-and-gpus-generation-by-generation.js"></script>
+</body>
+</html>
