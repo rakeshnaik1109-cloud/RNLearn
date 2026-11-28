@@ -1,5 +1,31 @@
 [
   {
+    "slug": "what-is-memory",
+    "title": "What Is Memory? Stable States, Energy Barriers and the Price of a Bit",
+    "summary": "What a brain, a clay tablet, a magnet and a memory chip share: distinguishable states, energy barriers against heat, writing and reading, bits, and the energy cost of erasing one.",
+    "subject": "Science",
+    "tags": [
+      "memory",
+      "physics",
+      "neuroscience",
+      "thermodynamics",
+      "information-theory",
+      "electronics"
+    ],
+    "date": "2026-11-28",
+    "updated": null,
+    "type": "tutorial",
+    "readingMinutes": 22,
+    "series": {
+      "id": "memory-from-synapse-to-silicon",
+      "part": 1
+    },
+    "featured": false,
+    "draft": false,
+    "interactive": true,
+    "math": true
+  },
+  {
     "slug": "cpus-and-gpus-generation-by-generation",
     "title": "CPUs and GPUs, Generation by Generation: From the 4004 to Exascale AI",
     "summary": "Fifty years of CPUs and GPUs side by side: the megahertz race, the power wall, multicore, shaders, CUDA, tensor cores and AI chips, with the numbers, interactive charts and Python.",

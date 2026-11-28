@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What Is Memory? Stable States, Energy Barriers and the Price of a Bit — RNLearn</title>
+  <meta name="description" content="What a brain, a clay tablet, a magnet and a memory chip share: distinguishable states, energy barriers against heat, writing and reading, bits, and the energy cost of erasing one.">
+  <meta name="author" content="Rakesh Naik">
+  <link rel="canonical" href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/what-is-memory.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="What Is Memory? Stable States, Energy Barriers and the Price of a Bit — RNLearn">
+  <meta property="og:description" content="What a brain, a clay tablet, a magnet and a memory chip share: distinguishable states, energy barriers against heat, writing and reading, bits, and the energy cost of erasing one.">
+  <meta property="og:url" content="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/what-is-memory.html">
+  <meta property="og:site_name" content="RNLearn">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="What Is Memory? Stable States, Energy Barriers and the Price of a Bit — RNLearn">
+  <meta name="twitter:description" content="What a brain, a clay tablet, a magnet and a memory chip share: distinguishable states, energy barriers against heat, writing and reading, bits, and the energy cost of erasing one.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/article.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="window.renderAllMath && window.renderAllMath()"></script>
+
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "What Is Memory? Stable States, Energy Barriers and the Price of a Bit",
+    "description": "What a brain, a clay tablet, a magnet and a memory chip share: distinguishable states, energy barriers against heat, writing and reading, bits, and the energy cost of erasing one.",
+    "author": {
+      "@type": "Person",
+      "name": "Rakesh Naik",
+      "url": "https://rakeshnaik1109-cloud.github.io/RakeshNaik/"
+    },
+    "datePublished": "2026-11-28",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://rakeshnaik1109-cloud.github.io/RNLearn/articles/what-is-memory.html"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="site-brand" href="../index.html" aria-label="RNLearn Home">
+        <span class="site-brand-badge">RN</span>
+        <span>RNLearn</span>
+        <span class="site-brand-tagline">Long-form learning & essays</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../index.html">Home</a></li>
+          <li><a class="nav-link" href="../search.html">Search</a></li>
+          <li><a class="nav-link" href="../glossary.html">Glossary</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../search.html" class="btn-icon" aria-label="Search articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </a>
+        <button id="theme-toggle" class="btn-icon" aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress-bar" aria-hidden="true"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="container container-wide">
+      <header class="article-header">
+        <div class="article-eyebrow">
+          <a href="../subjects/science.html" class="post-subject-tag" data-subject="science">Science</a>
+        </div>
+        <h1 class="article-title">What Is Memory? Stable States, Energy Barriers and the Price of a Bit</h1>
+        <p class="article-standfirst">
+          A knot in a handkerchief, a strengthened synapse and a few thousand electrons on a capacitor all remember for the same physical reasons. Every memory must hold still against the constant jiggling of heat, and even forgetting has a price.
+        </p>
+        <div class="article-meta">
+          <span style="text-transform: capitalize;">tutorial</span>
+          <span class="article-meta-sep">•</span>
+          <time datetime="2026-11-28">28 November 2026</time>
+          <span class="article-meta-sep">•</span>
+          <span>22 min read</span>
+          <span class="article-meta-sep">•</span>
+          <span>By Rakesh Naik</span>
+        </div>
+      </header>
+
+      <!-- build:start series-top -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/memory-from-synapse-to-silicon.html">Memory, from Synapse to Silicon</a> (Part 1 of 8)</div>
+  <div class="series-banner-links">
+    <span>First part</span>
+    <span>Part 2 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-top -->
+
+      <div class="article-layout">
+        <!-- Sticky Left Sidebar with Table of Contents -->
+        <aside class="article-sidebar" aria-label="Table of contents">
+          <div class="article-toc">
+            <h2 class="toc-title">On this page</h2>
+            <ul class="toc-list" id="toc-list">
+              <li><a class="toc-link" href="#section-1">1. A Knot in a Handkerchief</a></li>
+              <li><a class="toc-link" href="#section-2">2. The Story at a Glance</a></li>
+              <li><a class="toc-link" href="#section-3">3. Four Things Every Memory Needs</a></li>
+              <li><a class="toc-link" href="#section-4">4. Counting States: Bits and Noise</a></li>
+              <li><a class="toc-link" href="#section-5">5. Holding Still: Barriers Against the Heat</a></li>
+              <li><a class="toc-link" href="#section-6">6. Writing and Reading: Tilting the Landscape</a></li>
+              <li><a class="toc-link" href="#section-7">7. The Price of a Bit: Landauer’s Principle</a></li>
+              <li><a class="toc-link" href="#section-8">8. Fast and Slow: Many Memories, One Pattern</a></li>
+              <li><a class="toc-link" href="#section-9">9. Worked Problems</a></li>
+              <li><a class="toc-link" href="#section-10">10. Open Questions</a></li>
+              <li><a class="toc-link" href="#section-11">11. Try It Yourself</a></li>
+              <li><a class="toc-link" href="#section-12">12. Myth vs Reality</a></li>
+              <li><a class="toc-link" href="#section-13">13. Key Takeaways</a></li>
+              <li><a class="toc-link" href="#section-14">14. People in This Part</a></li>
+              <li><a class="toc-link" href="#section-15">15. Test Yourself</a></li>
+              <li><a class="toc-link" href="#section-16">16. References &amp; Further Reading</a></li>
+              <li><a class="toc-link" href="#corrections">Corrections</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="article-content">
+          <div class="callout callout-info">
+            <div class="callout-header">At a glance</div>
+            <p><strong>In this part:</strong> what memory is, whatever it is made of. A brain, a clay tablet, a magnet and a memory chip all solve the same four problems: they need states that can be told apart, a way to keep those states from being shaken loose by heat, a way to write them and a way to read them. We count how much a memory can hold, see why an energy barrier of about forty times the thermal energy keeps a bit for ten years, find the smallest energy needed to erase a bit, and compare the short and long memories of brains and computers.</p>
+            <p><strong>You need:</strong> nothing beyond school physics. Exponentials and logarithms help (see <a href="logarithms-from-basics-to-advanced.html">Logarithms: From Basics to Advanced</a>).</p>
+            <p><strong>Try:</strong> seven interactive figures, including a particle hopping between two energy wells, a write pulse that tilts the landscape, and a ruler of how long memories last, plus five worked problems.</p>
+          </div>
+
+          <section id="section-1">
+            <h2>1. A Knot in a Handkerchief</h2>
+            <p>Before paper diaries and phone reminders, people tied a knot in a handkerchief to remember an errand. The knot did not know anything about the errand. It was simply a change in the cloth that was caused by an event (deciding to buy milk), that stayed put afterwards, and that could later be noticed and acted on. A footprint in dried mud, a scratch on a vinyl record, a scar, a strengthened connection between two neurons and a few thousand electrons held on a capacitor inside a memory chip all share those three features.</p>
+            <p>That gives us a working definition for the whole series. <strong>A memory is a physical state, changed by an event, that persists after the event and can later be read out or can influence what happens next.</strong> The word <em>physical</em> matters. As the IBM physicist Rolf Landauer liked to put it, information is physical: it is always carried by something, whether ink, charge, magnetisation or molecules, and so it obeys the laws of physics. <span class="cite-group">[<a class="cite" href="#ref-1">1</a>]</span> Those laws decide how much a memory can hold, how long it lasts, how fast it can be changed and how much energy that costs.</p>
+            <p>This series follows memory from biology to silicon. Parts 2 and 3 look at how brains remember, from the patient who could not form new memories to the molecules at a single synapse. Part 4 looks at the materials that remember: magnets, trapped charges and hysteresis. Parts 5 to 8 open up the memory chips in every phone and computer, how they are built, and the new kinds of memory that try to behave a little more like synapses. This first part lays the foundation that all of them share.</p>
+            <figure class="fig" data-fig="fig-mem-map">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 1. The map of the series.</strong> Part 1 sets out the physics that every kind of memory, living or electronic, has to obey. Tap a part to see what it covers.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-2">
+            <h2>2. The Story at a Glance</h2>
+            <p>Tap any point on the timeline to read about it.</p>
+            <figure class="fig" data-fig="fig-mem1-timeline">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 2. From clay tablets to a measured limit, c. 3200 BCE – 2012.</strong> The points are in order but not to scale.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section id="section-3">
+            <h2>3. Four Things Every Memory Needs</h2>
+            <p>Look closely at any working memory and you find four ingredients.</p>
+            <ol>
+              <li><strong>Distinguishable states.</strong> There must be at least two different conditions the system can be in, and they must be different enough to tell apart: a knot or no knot, a mark or no mark, a charged or an empty capacitor.</li>
+              <li><strong>Stability.</strong> Once set, a state must stay set for as long as it is needed, despite vibration, chemical change and, above all, the constant random jiggling of atoms that we call heat.</li>
+              <li><strong>A way to write.</strong> Something must be able to put the system into the chosen state on purpose, and only when wanted.</li>
+              <li><strong>A way to read.</strong> Something must be able to sense the state later, ideally without destroying it.</li>
+            </ol>
+            <p>Large memories need a fifth: <strong>addressing</strong>, a way to find one particular stored item among billions. A library has shelf numbers; a memory chip has rows and columns of wires; a brain, as we will see in Part 2, seems to find memories by their content instead of by their location.</p>
+            <p>The oldest surviving written records show all four ingredients clearly. From about 3200 BCE, scribes in the Mesopotamian city of Uruk pressed marks into wet clay with a reed stylus (writing), let the clay dry or baked it hard (stability), and read the marks by eye (non-destructive reading). <span class="cite-group">[<a class="cite" href="#ref-2">2</a>]</span> Many of those tablets can still be read today, five thousand years later. A DRAM chip in a laptop solves the same four problems with a capacitor and a transistor, but its states last only a fraction of a second unless they are constantly rewritten. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> The engineering is different; the checklist is the same.</p>
+            <figure class="fig" data-fig="fig-mem-four">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 3. The four ingredients in seven memories.</strong> Choose a memory to see how it provides states, stability, writing and reading. Notice which ones keep their state passively and which must actively maintain it.
+              </figcaption>
+            </figure>
+            <p>Figure 3 shows a split that will come up again and again in this series. Some memories are <strong>passively stable</strong>: a baked tablet or a magnetised grain stays put with no effort at all. Others are <strong>actively maintained</strong>: SRAM holds its bit only while power flows through its feedback loop, DRAM must be refreshed every few milliseconds, and a synapse in your brain holds its strength only because molecular machinery keeps rebuilding it. Engineers call the first kind <strong>non-volatile</strong> (it survives losing power) and the second <strong>volatile</strong>.</p>
+          </section>
+
+          <section id="section-4">
+            <h2>4. Counting States: Bits and Noise</h2>
+            <p>How much can a memory hold? In 1948 Claude Shannon gave the answer that underlies all of information technology. A system that can be in one of $N$ equally likely, distinguishable states holds</p>
+            <p>$$I = \log_2 N \ \text{bits}.$$</p>
+            <p>The word <em>bit</em>, short for <em>binary digit</em>, was suggested by the statistician John Tukey, and Shannon made it the unit of information. <span class="cite-group">[<a class="cite" href="#ref-4">4</a>]</span> Two states (knot or no knot) hold 1 bit. Four states hold 2 bits, which is why each base of DNA, one of A, C, G or T, can carry 2 bits. Sixteen states hold 4 bits, and that is exactly what a modern “QLC” flash memory cell does: it stores one of sixteen different amounts of charge to hold 4 bits in a single transistor. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span> A collection of $n$ separate 1-bit cells has $2^n$ joint states and so holds $n$ bits: capacity adds up cell by cell.</p>
+            <p>Why not store a thousand levels in one cell and get 10 bits? Because every physical quantity is noisy. If a stored voltage wobbles with a random spread (standard deviation) $\sigma$, and two neighbouring levels are separated by $d$, a reader that puts its decision threshold halfway between them will misread the level whenever the noise pushes it more than $d/2$ the wrong way. For bell-shaped (Gaussian) noise the chance of that is</p>
+            <p>$$P_\text{error} = Q\!\left(\frac{d}{2\sigma}\right), \qquad Q(z) = \tfrac{1}{2}\,\mathrm{erfc}\!\left(\frac{z}{\sqrt 2}\right),$$</p>
+            <p>where $Q(z)$ is the probability that a Gaussian variable lies more than $z$ standard deviations above its mean. With the levels 2σ apart ($d/2\sigma = 1$) about one read in six goes wrong. With them 6σ apart ($d/2\sigma = 3$) the error rate is about 1 in 740; at 12σ apart it falls to about one in a billion. Squeezing more levels into the same voltage window shrinks $d$ and the errors climb steeply. Real multi-level flash pays for its extra bits with stronger error-correcting codes, slower and more careful writing, and shorter life. <span class="cite-group">[<a class="cite" href="#ref-5">5</a>]</span></p>
+            <figure class="fig" data-fig="fig-mem-levels">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 4. More levels, more bits, more errors.</strong> A cell stores one of several voltage levels inside a fixed window. Add levels or noise and watch the bell curves overlap; the readout gives the bits per cell and the chance of misreading a level.
+              </figcaption>
+            </figure>
+            <p>So the first limit on a memory is not size but <strong>distinguishability</strong>: how many states can be told apart reliably, given the noise. A synapse is thought to hold only a handful of distinguishable strengths, perhaps around 26 in one careful study of rat hippocampus (about 4.7 bits), not an exact analogue number. <span class="cite-group">[<a class="cite" href="#ref-6">6</a>]</span> We return to that in Part 3.</p>
+          </section>
+
+          <section id="section-5">
+            <h2>5. Holding Still: Barriers Against the Heat</h2>
+            <p>Every object at a temperature above absolute zero is full of motion. Atoms vibrate, molecules collide, electrons rattle. The typical energy of this random motion, per degree of freedom, is of order $k_\mathrm{B}T$, where $k_\mathrm{B} = 1.380\,649 \times 10^{-23}\ \mathrm{J\,K^{-1}}$ is Boltzmann’s constant (exact since the 2019 redefinition of the SI units) and $T$ is the absolute temperature. <span class="cite-group">[<a class="cite" href="#ref-7">7</a>]</span> At room temperature (300 K),</p>
+            <p>$$k_\mathrm{B}T \approx 4.14 \times 10^{-21}\ \text{J} \approx 0.0259\ \text{eV}.$$</p>
+            <p>That is tiny, but it never stops. A memory state must survive trillions upon trillions of these thermal kicks. The universal way to do it is to put an <strong>energy barrier</strong> between the states. Picture a ball in a landscape with two valleys separated by a hill: the left valley is “0”, the right valley is “1”. The ball rattles around at the bottom of its valley. Only if a rare run of kicks lifts it all the way over the hill, an energy $\Delta E$ above the valley floor, does it fall into the other valley and the bit flips. A system with two such stable states is called <strong>bistable</strong>.</p>
+            <p>How often does that happen? Statistical physics says that the chance of the ball having an extra energy $\Delta E$ at any moment is proportional to the <strong>Boltzmann factor</strong> $e^{-\Delta E/k_\mathrm{B}T}$. The ball “attempts” the climb at some natural rate set by how fast it rattles, so the mean time between flips is</p>
+            <p>$$\tau = \tau_0 \, e^{\Delta E / k_\mathrm{B} T}.$$</p>
+            <p>The Swedish chemist Svante Arrhenius found this form in 1889 by measuring how fast sugar breaks down in acid at different temperatures; it is now called the <strong>Arrhenius law</strong>. <span class="cite-group">[<a class="cite" href="#ref-8">8</a>]</span> In 1940 the Dutch physicist Hendrik Kramers derived it from first principles for a particle jostled by random forces in a double-well landscape, and worked out the attempt time $\tau_0$ from the shape of the wells. <span class="cite-group">[<a class="cite" href="#ref-9">9</a>, <a class="cite" href="#ref-10">10</a>]</span> In 1949 the French physicist Louis Néel applied the same idea to tiny magnetic grains, explaining how rocks and baked clay can keep a record of the Earth’s magnetic field for millions of years; for such grains $\tau_0$ is around a nanosecond. <span class="cite-group">[<a class="cite" href="#ref-11">11</a>]</span></p>
+            <figure class="fig" data-fig="fig-mem-well">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 5. A bit in a double well.</strong> A particle jostled by thermal noise sits in one of two valleys. Raise the barrier or cool the system and it stays put for much longer; lower the barrier and the stored bit is soon lost. The trace below records which valley it was in over time.
+              </figcaption>
+            </figure>
+            <p>The exponential makes memory possible. Each extra $k_\mathrm{B}T$ of barrier multiplies the retention time by $e \approx 2.7$, and every $2.3\,k_\mathrm{B}T$ multiplies it by ten. With $\tau_0 = 1$ ns:</p>
+            <div class="table-container" style="overflow-x:auto; margin:1.5rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.5rem 0.8rem;">Barrier $\Delta E / k_\mathrm{B}T$</th>
+                    <th style="padding:0.5rem 0.8rem;">Mean retention time $\tau$</th>
+                    <th style="padding:0.5rem 0.8rem;">Good enough for…</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem 0.8rem;">10</td><td style="padding:0.5rem 0.8rem;">22 microseconds</td><td style="padding:0.5rem 0.8rem;">Nothing useful</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem 0.8rem;">20</td><td style="padding:0.5rem 0.8rem;">0.5 seconds</td><td style="padding:0.5rem 0.8rem;">A very short scratchpad</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem 0.8rem;">30</td><td style="padding:0.5rem 0.8rem;">3 hours</td><td style="padding:0.5rem 0.8rem;">A working day, if refreshed</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem 0.8rem;">40</td><td style="padding:0.5rem 0.8rem;">7.5 years</td><td style="padding:0.5rem 0.8rem;">One bit of long-term storage</td></tr>
+                  <tr style="border-bottom:1px solid var(--color-border, #eee);"><td style="padding:0.5rem 0.8rem;">60</td><td style="padding:0.5rem 0.8rem;">3.6 billion years</td><td style="padding:0.5rem 0.8rem;">A billion bits, all kept for years</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>This is why magnetic and spin-based memories are designed with a thermal stability factor $\Delta E/k_\mathrm{B}T$ of roughly 40 to 60 or more. The higher figure is needed because a memory has many bits and must keep <em>all</em> of them: with $N$ bits, the first flip comes after roughly $\tau/N$, so a billion bits need about $\ln(10^9) \approx 21$ more $k_\mathrm{B}T$ than one bit does. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span> It is also why heat is the enemy of stored data. The barrier $\Delta E$ is fixed by the material, but $k_\mathrm{B}T$ grows with temperature, so a warm memory forgets faster. Manufacturers use this deliberately: they bake chips at high temperature to speed up years of data loss into days, and use the Arrhenius law to translate back. The JEDEC standard for solid-state drives, for instance, only asks a worn-out consumer drive to keep data unpowered for one year at 30 °C. <span class="cite-group">[<a class="cite" href="#ref-13">13</a>]</span></p>
+            <figure class="fig" data-fig="fig-mem-retention">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 6. How tall must the barrier be?</strong> Mean retention time against barrier height on a logarithmic scale. Set the temperature, the attempt time and the number of bits that must all survive, and read off the barrier needed for ten years.
+              </figcaption>
+            </figure>
+            <p>Shrinking a memory makes this harder. In a magnetic grain the barrier is roughly the grain’s volume times a material constant, so smaller grains have lower barriers. Below a certain size, thermal energy flips the grain’s magnetisation on its own and it can no longer remember. This <strong>superparamagnetic limit</strong> has shaped hard-disk design for decades, as we will see in Part 4. <span class="cite-group">[<a class="cite" href="#ref-12">12</a>]</span></p>
+            <p>There is a second strategy, which avoids the need for a tall barrier: <strong>keep repairing the state</strong>. DRAM’s charge leaks away within milliseconds, so the chip reads every row and writes it back before it fades, every 64 milliseconds in the standard design. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> Living cells do the same thing on longer timescales. The proteins at a synapse are replaced over days to weeks, yet some memories last a lifetime, so the brain must be rebuilding the stored state continually. How it does so is one of the central questions of Part 3. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span></p>
+          </section>
+
+          <section id="section-6">
+            <h2>6. Writing and Reading: Tilting the Landscape</h2>
+            <p>A tall barrier keeps a bit safe, but it also makes the bit hard to change on purpose. To write, we must push the system over the same barrier that protects it. The usual way is to <strong>tilt the landscape</strong>: apply a force (a magnetic field to a magnet, a voltage to a stored charge, a chemical signal to a synapse) that lowers the energy of the desired valley and raises the other. For a simple double well with an added tilt $F$,</p>
+            <p>$$U(x) = \Delta E_0\,(x^2 - 1)^2 - F x,$$</p>
+            <p>the barrier seen from the unwanted valley shrinks as $F$ grows, and at a critical tilt it disappears entirely; the system then rolls downhill into the new state at once. Since the switching time still follows $\tau_0 e^{\Delta E_\text{eff}/k_\mathrm{B}T}$, writing quickly needs the effective barrier $\Delta E_\text{eff}$ to be pushed down to a few $k_\mathrm{B}T$ or to zero.</p>
+            <figure class="fig" data-fig="fig-mem-tilt">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 7. Writing by tilting.</strong> Increase the write force and the barrier protecting the old state shrinks until it vanishes. A small read force must leave the barrier almost untouched, or reading will disturb the bit.
+              </figcaption>
+            </figure>
+            <p>This is the <strong>write–retention dilemma</strong>, and every memory technology is a different answer to it. The taller the barrier, the longer the data lasts, but the stronger, slower or more energetic each write must be. Engineers escape it by changing the barrier only while writing. Flash memory uses a high voltage that thins the insulating barrier so that electrons can tunnel through it, and at normal voltages the barrier is again effectively impassable. Newer hard drives briefly heat each tiny spot with a laser so that its magnetic barrier drops while the head writes, then let it cool and lock. Brains appear to use chemical “gates” that open only when two neurons are active together, as we will see in Part 3.</p>
+            <p>Reading has the opposite requirement. The reader must sense the state while disturbing it as little as possible; in Figure 7 that means a read force far too small to tip the ball over. Some memories cannot manage it. Magnetic-core memory, used in computers from the 1950s to the 1970s, read a bit by trying to write a 0 and seeing whether anything changed, and then had to write the bit back. A DRAM read similarly drains the tiny stored charge onto a long wire, so every read is followed by a rewrite. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> Even biological memory is altered by recall: experiments on rats showed in 2000 that a recalled fear memory becomes fragile again and has to be re-stored, a process called <strong>reconsolidation</strong>. <span class="cite-group">[<a class="cite" href="#ref-15">15</a>]</span></p>
+          </section>
+
+          <section id="section-7">
+            <h2>7. The Price of a Bit: Landauer’s Principle</h2>
+            <p>Is there a minimum energy needed to use a memory? The question has its roots in a puzzle from 1867. James Clerk Maxwell imagined a tiny being, later called <strong>Maxwell’s demon</strong>, that watches molecules at a trapdoor between two boxes of gas and lets only the fast ones through one way. Without doing any work, it would make one side hot and the other cold, apparently breaking the second law of thermodynamics. <span class="cite-group">[<a class="cite" href="#ref-16">16</a>]</span> In 1929 Leo Szilard reduced the demon to a single molecule and showed that the key is information: knowing which side the molecule is on, one bit, is worth at most $k_\mathrm{B}T \ln 2$ of work. <span class="cite-group">[<a class="cite" href="#ref-17">17</a>]</span></p>
+            <p>The resolution came from memory. In 1961 Landauer argued that what costs energy is not measuring or computing as such but <strong>erasing</strong>: resetting a bit to a standard state whatever its previous value. Erasure throws away information, which reduces the entropy of the memory by $k_\mathrm{B}\ln 2$ per bit, and the second law demands that at least this much entropy be passed to the surroundings as heat. <span class="cite-group">[<a class="cite" href="#ref-18">18</a>]</span> So erasing one bit must release at least</p>
+            <p>$$E_\text{min} = k_\mathrm{B} T \ln 2 \approx 2.9 \times 10^{-21}\ \text{J} \quad \text{at 300 K}.$$</p>
+            <p>In 1982 Charles Bennett used this to exorcise the demon: to keep working, the demon must eventually erase its memory of the molecules it has sorted, and that erasure pays back all the entropy it seemed to remove. <span class="cite-group">[<a class="cite" href="#ref-19">19</a>]</span> In 2012 a team in Lyon and Augsburg finally measured the limit. They trapped a glass bead about two micrometres across in a double-well potential made with laser light (a real version of Figure 5), erased its “bit” by tilting and lowering the barrier, and measured the heat. When the erasure was done slowly the heat approached $k_\mathrm{B}T\ln 2$, and never fell below it. <span class="cite-group">[<a class="cite" href="#ref-20">20</a>]</span></p>
+            <figure class="fig" data-fig="fig-mem-energy">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 8. Energy per bit, from the Landauer limit to a memory chip.</strong> Rough orders of magnitude on a logarithmic scale. Tap a bar for details. Every practical memory, living or electronic, works far above the limit.
+              </figcaption>
+            </figure>
+            <p>Figure 8 shows how far real memories are from that floor. The energy stored in a single DRAM cell is millions of times $k_\mathrm{B}T\ln 2$, and reading a bit from a DRAM chip outside the processor costs about a billion times the limit, mostly in driving the wires. A synapse is not much thriftier: releasing one packet of neurotransmitter and restoring the balance afterwards costs on the order of $10^5$ molecules of the cell’s fuel, ATP. <span class="cite-group">[<a class="cite" href="#ref-21">21</a>]</span> There are good reasons for the gap. The barrier must be 40 or more $k_\mathrm{B}T$ to keep data safe, writes must be fast, and reads must be reliable despite noise. The Landauer limit applies to slow, perfect erasure; doing things quickly and reliably costs more.</p>
+          </section>
+
+          <section id="section-8">
+            <h2>8. Fast and Slow: Many Memories, One Pattern</h2>
+            <p>The first person to measure memory as a physicist measures a rate was the German psychologist Hermann Ebbinghaus. Working alone between 1879 and 1885, he memorised lists of nonsense syllables such as “DAX” and “BOK” (chosen so that no meaning would help), then timed how long it took to relearn them after delays from twenty minutes to a month. <span class="cite-group">[<a class="cite" href="#ref-22">22</a>]</span> The time saved in relearning measured how much remained. His <strong>forgetting curve</strong> fell steeply at first and then levelled off: he saved about 58 % of the learning time after 20 minutes, 44 % after an hour, 34 % after a day and 21 % after a month. A careful replication in 2015 found nearly the same curve. <span class="cite-group">[<a class="cite" href="#ref-23">23</a>]</span></p>
+            <p>Later psychologists found that human memory is not one store but several, with very different lifetimes. In 1960 George Sperling showed that a glimpse of a grid of letters leaves a detailed visual trace that fades in well under a second. <span class="cite-group">[<a class="cite" href="#ref-24">24</a>]</span> In 1959 Lloyd and Margaret Peterson showed that if people are stopped from rehearsing three letters, most are forgotten within about 18 seconds. <span class="cite-group">[<a class="cite" href="#ref-25">25</a>]</span> Short-term memory also holds only a few items at once, famously “seven, plus or minus two” according to George Miller in 1956, and closer to four meaningful chunks by later estimates. <span class="cite-group">[<a class="cite" href="#ref-26">26</a>, <a class="cite" href="#ref-27">27</a>]</span> Long-term memories, by contrast, can last a lifetime. In 1968 Richard Atkinson and Richard Shiffrin combined these findings into a model of sensory, short-term and long-term stores, with information passed from one to the next. <span class="cite-group">[<a class="cite" href="#ref-28">28</a>]</span></p>
+            <p>Computers arrived at a strikingly similar design for engineering reasons. A processor keeps the few values it is working on in registers and fast SRAM caches, which are small and lose everything when power is cut. Behind them sits main memory (DRAM), larger and slower and refreshed every 64 ms. Behind that sits flash or disk storage, vast, slow and lasting for years. <span class="cite-group">[<a class="cite" href="#ref-3">3</a>]</span> In both brains and computers, small, fast, short-lived stores sit in front of large, slow, durable ones, because no single physical mechanism is fast, dense, durable and cheap at the same time.</p>
+            <p>Nature’s own long-term stores outlast all of these. DNA has been recovered and read from Greenland sediments about two million years old, <span class="cite-group">[<a class="cite" href="#ref-34">34</a>]</span> and magnetic grains in South African rocks still record the Earth’s magnetic field from 3.4 to 3.45 billion years ago, held in place by exactly the kind of barrier Néel described. <span class="cite-group">[<a class="cite" href="#ref-35">35</a>]</span></p>
+            <figure class="fig" data-fig="fig-mem-timescales">
+              <div class="fig-container"></div>
+              <figcaption>
+                <strong>Figure 9. How long memories last.</strong> A logarithmic ruler from milliseconds to billions of years. Tap a marker to read about each memory and where its lifetime comes from.
+              </figcaption>
+            </figure>
+            <p>The similarities should not be pushed too far. A computer finds data by its <em>address</em>, a number that says where it is stored; a brain retrieves memories by their <em>content</em>, so that a smell can bring back a whole afternoon. A computer stores and processes in separate places and shuttles data between them; in a brain, the connections that store memories are the same ones that do the computing. And computer memory is meant to return exactly what was stored, while human memory, as section 12 explains, rebuilds the past each time. These differences are why engineers are now trying to build memory chips that compute where the data lives, the subject of Part 8.</p>
+          </section>
+
+          <section id="section-9">
+            <h2>9. Worked Problems</h2>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 1 (easy): bits per cell</div>
+              <p>A QLC flash cell stores one of 16 charge levels. (a) How many bits does it hold? (b) How many levels would a 5-bit (“PLC”) cell need? (c) A hypothetical cell can reliably hold 6 levels. How many bits is that?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>(a) $\log_2 16 = $ <strong>4 bits</strong>. (b) $2^5 = $ <strong>32 levels</strong>, twice as many squeezed into the same voltage window, so each gap is about half as wide. (c) $\log_2 6 \approx $ <strong>2.58 bits</strong>. Information need not come in whole bits; a pair of such cells has 36 joint states, enough to store 5 bits ($2^5 = 32 \le 36$).</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 2 (easy): the information in a genome</div>
+              <p>One copy of the human genome has about $3.1 \times 10^9$ base pairs. Each position holds one of four bases. How much information is that, in megabytes (1 byte = 8 bits)?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>Four states give $\log_2 4 = 2$ bits per base pair, so $3.1 \times 10^9 \times 2 = 6.2 \times 10^9$ bits $= 7.75 \times 10^8$ bytes $\approx$ <strong>775 MB</strong>, about the size of one CD-ROM. Each of your cells carries two copies, one from each parent. This is an upper limit: real DNA has patterns and repeats, so it can be compressed further.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 3 (medium): a barrier for ten years</div>
+              <p>A magnetic bit has an attempt time $\tau_0 = 1$ ns. (a) What barrier $\Delta E/k_\mathrm{B}T$ gives a mean retention time of 10 years? Express it in electronvolts at 300 K. (b) A chip has $10^9$ such bits and must keep every one for ten years. Roughly what barrier is needed?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>(a) Ten years is $3.16 \times 10^8$ s. From $\tau = \tau_0 e^{\Delta E/k_\mathrm{B}T}$, $\Delta E/k_\mathrm{B}T = \ln(\tau/\tau_0) = \ln(3.16 \times 10^{17}) \approx$ <strong>40.3</strong>. At 300 K, $k_\mathrm{B}T = 0.0259$ eV, so $\Delta E \approx$ <strong>1.04 eV</strong>. (b) With $N$ independent bits the first flip comes after about $\tau/N$, so we need $\tau/N \gtrsim 10$ years: add $\ln(10^9) \approx 20.7$, giving about <strong>61 $k_\mathrm{B}T$ (1.6 eV)</strong>. Requiring a small probability of even one loss, rather than just the average, pushes it a little higher. This is why stability factors of about 60 appear in memory specifications.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 4 (medium): data in a hot car</div>
+              <p>The bit of Problem 3(a), with $\Delta E = 40.3\,k_\mathrm{B}T$ at 300 K, is left at 85 °C (358 K). What is its mean retention time now?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>The barrier energy is fixed, but $k_\mathrm{B}T$ grows in proportion to $T$, so $\Delta E/k_\mathrm{B}T = 40.3 \times 300/358 \approx 33.8$. Then $\tau = 10^{-9}\ \text{s} \times e^{33.8} \approx 4.6 \times 10^5$ s, about <strong>5 days</strong> instead of 10 years. A 19 % rise in absolute temperature cut the retention time by a factor of about 700. This exponential sensitivity is why chips are tested by baking them, and why storage drives should not be left in hot places.</p></details>
+            </div>
+            <div class="callout callout-method">
+              <div class="callout-header">Problem 5 (harder): a DRAM cell against the Landauer limit</div>
+              <p>A DRAM cell is a capacitor of about $C = 20$ fF charged to $V = 1$ V. (a) How many electrons does it store? (b) What energy is stored? (c) How many times larger is that than $k_\mathrm{B}T \ln 2$ at 300 K?</p>
+              <details><summary style="cursor:pointer;font-weight:600;">Solution</summary>
+              <p>(a) $Q = CV = 2 \times 10^{-14}$ C. Dividing by the electron charge $1.602 \times 10^{-19}$ C gives about <strong>125,000 electrons</strong>. (b) $E = \tfrac12 CV^2 = \tfrac12 \times 2 \times 10^{-14} \times 1^2 =$ <strong>$1 \times 10^{-14}$ J</strong>. Charging the capacitor through a transistor wastes about as much again as heat. (c) $10^{-14} / 2.87 \times 10^{-21} \approx$ <strong>3.5 million</strong>. The excess buys speed and a clear signal: the stored charge must still be readable after leakage and after being shared with a long bit line, as Part 5 will show.</p></details>
+            </div>
+          </section>
+
+          <section id="section-10">
+            <h2>10. Open Questions</h2>
+            <div class="callout callout-evidence">
+              <div class="callout-header">Open questions: where is a memory, and how does it last?</div>
+              <p>In 1950 the American psychologist Karl Lashley summed up thirty years of cutting into rats’ brains in a paper called “In search of the engram”, the physical trace of a memory. He could not find it in any one place, and joked that the conclusion seemed to be that learning was not possible. <span class="cite-group">[<a class="cite" href="#ref-29">29</a>]</span> In 2012 a team led by Susumu Tonegawa labelled the neurons active while mice learned a fear, and later made the mice freeze by switching those neurons on with light, strong evidence that a memory lives in a specific, distributed set of cells. <span class="cite-group">[<a class="cite" href="#ref-30">30</a>]</span> But how those cells keep a memory for decades, when their molecules are replaced every few weeks, is still debated; Francis Crick posed the puzzle in 1984. <span class="cite-group">[<a class="cite" href="#ref-14">14</a>]</span></p>
+              <p>On the physics side, the Landauer limit is reachable only for slow erasure. How close a fast, reliable memory can come to it, and whether computing could avoid erasure altogether by being logically reversible, as Bennett showed is possible in principle, remain active research questions. <span class="cite-group">[<a class="cite" href="#ref-19">19</a>]</span></p>
+            </div>
+          </section>
+
+          <section id="section-11">
+            <h2>11. Try It Yourself</h2>
+            <div class="callout callout-tip">
+              <div class="callout-header">Try it yourself: memory and physics</div>
+              <ol>
+                <li>In Figure 4, keep the noise fixed and add levels one at a time. At what number of levels does the error rate first exceed 1 in 1,000? How many bits is that?</li>
+                <li>In Figure 5, set the barrier to 3 $k_\mathrm{B}T$ and count the hops for twenty seconds. Then set it to 6. Is the hopping rate about $e^3 \approx 20$ times lower, as the Arrhenius law predicts?</li>
+                <li>In Figure 5, set a tall barrier and press “Write” to flip the bit on purpose. Why does the write still work when thermal noise alone almost never flips it?</li>
+                <li>In Figure 6, raise the temperature from 300 K to 400 K. How much taller must the barrier be, in electronvolts, to keep ten-year retention?</li>
+                <li>Repeat Ebbinghaus’s experiment on yourself: make a list of 15 three-letter nonsense syllables, learn it until you can recite it perfectly once, and test yourself after 20 minutes, 1 hour and 1 day. Does your forgetting curve look like his?</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="section-12">
+            <h2>12. Myth vs Reality</h2>
+            <div class="callout callout-legend">
+              <div class="callout-header">Myth vs Reality: “memories are recordings that play back what happened”</div>
+              <p><strong>The myth:</strong> human memory works like a video camera, storing events faithfully so that remembering simply replays the tape.</p>
+              <p><strong>The reality:</strong> remembering is reconstruction. In 1932 Frederic Bartlett asked English students to retell a Native American folk tale, “The War of the Ghosts”, and found that with each retelling they shortened it and reshaped unfamiliar details to fit their own expectations. <span class="cite-group">[<a class="cite" href="#ref-31">31</a>]</span> In 1974 Elizabeth Loftus and John Palmer showed people a film of a car crash; those asked how fast the cars were going when they “smashed” into each other gave higher speeds, and a week later were more likely to “remember” broken glass that was not in the film, than those asked about cars that “hit” each other. <span class="cite-group">[<a class="cite" href="#ref-32">32</a>]</span> Each recall can rewrite the memory, as reconsolidation (section 6) suggests at the level of cells.</p>
+              <p><strong>A second myth:</strong> “computer memory is perfect.” It is not. Bits in DRAM are occasionally flipped by electrical noise or cosmic-ray particles; a large field study at Google found errors in about a third of its servers each year, corrected by error-correcting codes. <span class="cite-group">[<a class="cite" href="#ref-33">33</a>]</span></p>
+              <p><strong>Why it matters:</strong> no physical memory is a perfect record. Brains trade accuracy for meaning and flexibility; computers buy their near-perfection with error-correcting codes, refresh and margins far above the noise.</p>
+            </div>
+          </section>
+
+          <section id="section-13">
+            <h2>13. Key Takeaways</h2>
+            <div class="callout callout-key">
+              <div class="callout-header">Key takeaways</div>
+              <ul>
+                <li>A memory is a physical state, changed by an event, that persists and can later be read. It needs distinguishable states, stability, a way to write and a way to read (and, when large, addressing).</li>
+                <li>$N$ distinguishable states hold $\log_2 N$ bits. Noise limits how many levels a cell can hold reliably.</li>
+                <li>Thermal energy $k_\mathrm{B}T \approx 0.026$ eV at room temperature constantly tries to erase stored states. An energy barrier protects them, with retention time $\tau = \tau_0 e^{\Delta E/k_\mathrm{B}T}$.</li>
+                <li>About $40\,k_\mathrm{B}T$ keeps one bit for ten years; a billion bits need about $60\,k_\mathrm{B}T$. Heat shortens retention exponentially.</li>
+                <li>Memories are either passively stable (a tall barrier) or actively maintained (refresh and repair).</li>
+                <li>Writing must overcome the barrier that protects the data, by tilting or temporarily lowering it; reading must not disturb it.</li>
+                <li>Erasing a bit costs at least $k_\mathrm{B}T\ln 2 \approx 2.9 \times 10^{-21}$ J (Landauer). Real memories, living and electronic, use millions of times more.</li>
+                <li>Brains and computers both use a hierarchy of small fast stores in front of large slow durable ones.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="section-14">
+            <h2>14. People in This Part</h2>
+            <div class="table-container" style="overflow-x:auto; margin:2rem 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem; line-height:1.5;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--color-border, #ddd); text-align:left;">
+                    <th style="padding:0.6rem 0.8rem;">Person</th>
+                    <th style="padding:0.6rem 0.8rem;">When and where</th>
+                    <th style="padding:0.6rem 0.8rem;">Key work</th>
+                    <th style="padding:0.6rem 0.8rem;">Why they matter</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Hermann Ebbinghaus</td>
+                <td style="padding:0.6rem 0.8rem;">1850–1909<br>Germany</td>
+                <td style="padding:0.6rem 0.8rem;"><em>Über das Gedächtnis</em> (1885)</td>
+                <td style="padding:0.6rem 0.8rem;">First to measure memory and forgetting quantitatively.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Svante Arrhenius</td>
+                <td style="padding:0.6rem 0.8rem;">1859–1927<br>Sweden</td>
+                <td style="padding:0.6rem 0.8rem;">Rate law (1889)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed that rates rise exponentially with temperature over an energy barrier.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Leo Szilard</td>
+                <td style="padding:0.6rem 0.8rem;">1898–1964<br>Hungary, Germany, USA</td>
+                <td style="padding:0.6rem 0.8rem;">One-molecule engine (1929)</td>
+                <td style="padding:0.6rem 0.8rem;">Linked one bit of information to $k_\mathrm{B}T\ln 2$ of energy.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Hendrik Kramers</td>
+                <td style="padding:0.6rem 0.8rem;">1894–1952<br>Netherlands</td>
+                <td style="padding:0.6rem 0.8rem;">Escape over a barrier (1940)</td>
+                <td style="padding:0.6rem 0.8rem;">Derived the Arrhenius law for a particle jostled by thermal noise.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Claude Shannon</td>
+                <td style="padding:0.6rem 0.8rem;">1916–2001<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Information theory (1948)</td>
+                <td style="padding:0.6rem 0.8rem;">Defined the bit and the limits that noise sets on information.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Louis Néel</td>
+                <td style="padding:0.6rem 0.8rem;">1904–2000<br>France</td>
+                <td style="padding:0.6rem 0.8rem;">Thermal relaxation of magnetic grains (1949)</td>
+                <td style="padding:0.6rem 0.8rem;">Explained how tiny magnets remember, and when they forget.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Rolf Landauer</td>
+                <td style="padding:0.6rem 0.8rem;">1927–1999<br>Germany, USA</td>
+                <td style="padding:0.6rem 0.8rem;">Landauer’s principle (1961)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed that erasing information has a minimum energy cost.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border, #eee);">
+                <td style="padding:0.6rem 0.8rem; font-weight:600;">Charles Bennett</td>
+                <td style="padding:0.6rem 0.8rem;">Born 1943<br>USA</td>
+                <td style="padding:0.6rem 0.8rem;">Reversible computing; the demon exorcised (1973, 1982)</td>
+                <td style="padding:0.6rem 0.8rem;">Showed that erasing memory is what saves the second law.</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="section-15">
+            <h2>15. Test Yourself</h2>
+            <p>Ten quick questions to check what you remember about the physics of memory.</p>
+            <figure class="fig" data-fig="fig-quiz-mem1">
+              <div class="fig-container"></div>
+            </figure>
+          </section>
+
+          <section id="section-16">
+            <h2>16. References &amp; Further Reading</h2>
+            <p>The facts, dates and figures in this article come from these sources:</p>
+            <ol class="references-list" style="font-size:0.9rem; line-height:1.6;">
+              <li id="ref-1"><strong>Landauer, Rolf.</strong> (1991). "Information is physical." <em>Physics Today</em>, 44(5): 23–29.</li>
+              <li id="ref-2"><strong>Schmandt-Besserat, Denise.</strong> (1996). <em>How Writing Came About</em>. Austin: University of Texas Press.</li>
+              <li id="ref-3"><strong>Jacob, Bruce, Ng, Spencer W. &amp; Wang, David T.</strong> (2008). <em>Memory Systems: Cache, DRAM, Disk</em>. Burlington, MA: Morgan Kaufmann.</li>
+              <li id="ref-4"><strong>Shannon, Claude E.</strong> (1948). "A mathematical theory of communication." <em>Bell System Technical Journal</em>, 27: 379–423, 623–656.</li>
+              <li id="ref-5"><strong>Micheloni, Rino, Crippa, Luca &amp; Marelli, Alessia.</strong> (2010). <em>Inside NAND Flash Memories</em>. Dordrecht: Springer.</li>
+              <li id="ref-6"><strong>Bartol, Thomas M., Bromer, Cailey, Kinney, Justin, Chirillo, Michael A., Bourne, Jennifer N., Harris, Kristen M. &amp; Sejnowski, Terrence J.</strong> (2015). "Nanoconnectomic upper bound on the variability of synaptic plasticity." <em>eLife</em>, 4: e10778.</li>
+              <li id="ref-7"><strong>Bureau International des Poids et Mesures.</strong> (2019). <em>The International System of Units (SI)</em>, 9th edition. Sèvres: BIPM.</li>
+              <li id="ref-8"><strong>Arrhenius, Svante.</strong> (1889). "Über die Reaktionsgeschwindigkeit bei der Inversion von Rohrzucker durch Säuren." <em>Zeitschrift für physikalische Chemie</em>, 4: 226–248.</li>
+              <li id="ref-9"><strong>Kramers, Hendrik A.</strong> (1940). "Brownian motion in a field of force and the diffusion model of chemical reactions." <em>Physica</em>, 7(4): 284–304.</li>
+              <li id="ref-10"><strong>Hänggi, Peter, Talkner, Peter &amp; Borkovec, Michal.</strong> (1990). "Reaction-rate theory: fifty years after Kramers." <em>Reviews of Modern Physics</em>, 62(2): 251–341.</li>
+              <li id="ref-11"><strong>Néel, Louis.</strong> (1949). "Théorie du traînage magnétique des ferromagnétiques en grains fins avec applications aux terres cuites." <em>Annales de Géophysique</em>, 5: 99–136.</li>
+              <li id="ref-12"><strong>Weller, Dieter &amp; Moser, Andreas.</strong> (1999). "Thermal effect limits in ultrahigh-density magnetic recording." <em>IEEE Transactions on Magnetics</em>, 35(6): 4423–4439.</li>
+              <li id="ref-13"><strong>JEDEC Solid State Technology Association.</strong> (2016). <em>JESD218B: Solid-State Drive (SSD) Requirements and Endurance Test Method</em>. Arlington, VA: JEDEC.</li>
+              <li id="ref-14"><strong>Crick, Francis.</strong> (1984). "Memory and molecular turnover." <em>Nature</em>, 312: 101.</li>
+              <li id="ref-15"><strong>Nader, Karim, Schafe, Glenn E. &amp; LeDoux, Joseph E.</strong> (2000). "Fear memories require protein synthesis in the amygdala for reconsolidation after retrieval." <em>Nature</em>, 406: 722–726.</li>
+              <li id="ref-16"><strong>Maxwell, James Clerk.</strong> (1871). <em>Theory of Heat</em>. London: Longmans, Green.</li>
+              <li id="ref-17"><strong>Szilard, Leo.</strong> (1929). "Über die Entropieverminderung in einem thermodynamischen System bei Eingriffen intelligenter Wesen." <em>Zeitschrift für Physik</em>, 53: 840–856.</li>
+              <li id="ref-18"><strong>Landauer, Rolf.</strong> (1961). "Irreversibility and heat generation in the computing process." <em>IBM Journal of Research and Development</em>, 5(3): 183–191.</li>
+              <li id="ref-19"><strong>Bennett, Charles H.</strong> (1982). "The thermodynamics of computation: a review." <em>International Journal of Theoretical Physics</em>, 21(12): 905–940.</li>
+              <li id="ref-20"><strong>Bérut, Antoine, Arakelyan, Artak, Petrosyan, Artyom, Ciliberto, Sergio, Dillenschneider, Raoul &amp; Lutz, Eric.</strong> (2012). "Experimental verification of Landauer’s principle linking information and thermodynamics." <em>Nature</em>, 483: 187–189.</li>
+              <li id="ref-21"><strong>Attwell, David &amp; Laughlin, Simon B.</strong> (2001). "An energy budget for signaling in the grey matter of the brain." <em>Journal of Cerebral Blood Flow &amp; Metabolism</em>, 21(10): 1133–1145.</li>
+              <li id="ref-22"><strong>Ebbinghaus, Hermann.</strong> (1885). <em>Über das Gedächtnis</em>. Leipzig: Duncker &amp; Humblot. English translation (1913), <em>Memory: A Contribution to Experimental Psychology</em>. New York: Teachers College, Columbia University.</li>
+              <li id="ref-23"><strong>Murre, Jaap M. J. &amp; Dros, Joeri.</strong> (2015). "Replication and analysis of Ebbinghaus’ forgetting curve." <em>PLoS ONE</em>, 10(7): e0120644.</li>
+              <li id="ref-24"><strong>Sperling, George.</strong> (1960). "The information available in brief visual presentations." <em>Psychological Monographs</em>, 74(11): 1–29.</li>
+              <li id="ref-25"><strong>Peterson, Lloyd R. &amp; Peterson, Margaret J.</strong> (1959). "Short-term retention of individual verbal items." <em>Journal of Experimental Psychology</em>, 58(3): 193–198.</li>
+              <li id="ref-26"><strong>Miller, George A.</strong> (1956). "The magical number seven, plus or minus two: some limits on our capacity for processing information." <em>Psychological Review</em>, 63(2): 81–97.</li>
+              <li id="ref-27"><strong>Cowan, Nelson.</strong> (2001). "The magical number 4 in short-term memory: a reconsideration of mental storage capacity." <em>Behavioral and Brain Sciences</em>, 24(1): 87–114.</li>
+              <li id="ref-28"><strong>Atkinson, Richard C. &amp; Shiffrin, Richard M.</strong> (1968). "Human memory: a proposed system and its control processes." In K. W. Spence &amp; J. T. Spence (eds.), <em>The Psychology of Learning and Motivation</em>, vol. 2, pp. 89–195. New York: Academic Press.</li>
+              <li id="ref-29"><strong>Lashley, Karl S.</strong> (1950). "In search of the engram." <em>Symposia of the Society for Experimental Biology</em>, 4: 454–482.</li>
+              <li id="ref-30"><strong>Liu, Xu, Ramirez, Steve, Pang, Petti T., Puryear, Corey B., Govindarajan, Arvind, Deisseroth, Karl &amp; Tonegawa, Susumu.</strong> (2012). "Optogenetic stimulation of a hippocampal engram activates fear memory recall." <em>Nature</em>, 484: 381–385.</li>
+              <li id="ref-31"><strong>Bartlett, Frederic C.</strong> (1932). <em>Remembering: A Study in Experimental and Social Psychology</em>. Cambridge: Cambridge University Press.</li>
+              <li id="ref-32"><strong>Loftus, Elizabeth F. &amp; Palmer, John C.</strong> (1974). "Reconstruction of automobile destruction: an example of the interaction between language and memory." <em>Journal of Verbal Learning and Verbal Behavior</em>, 13(5): 585–589.</li>
+              <li id="ref-33"><strong>Schroeder, Bianca, Pinheiro, Eduardo &amp; Weber, Wolf-Dietrich.</strong> (2009). "DRAM errors in the wild: a large-scale field study." <em>Proceedings of ACM SIGMETRICS 2009</em>, pp. 193–204.</li>
+              <li id="ref-34"><strong>Kjær, Kurt H. et al.</strong> (2022). "A 2-million-year-old ecosystem in Greenland uncovered by environmental DNA." <em>Nature</em>, 612: 283–291.</li>
+              <li id="ref-35"><strong>Tarduno, John A. et al.</strong> (2010). "Geodynamo, solar wind, and magnetopause 3.4 to 3.45 billion years ago." <em>Science</em>, 327: 1238–1240.</li>
+            </ol>
+          </section>
+
+          <!-- build:start cite -->
+<section class="article-cite" id="cite">
+            <h3>How to Cite This Article</h3>
+            <p>You are free to share and adapt this article, its figures and its interactive simulations, for any purpose, provided you give appropriate credit. Please cite it as:</p>
+            <p class="cite-text">Naik, Rakesh (2026). “What Is Memory? Stable States, Energy Barriers and the Price of a Bit.” <em>RNLearn</em>, 28 November 2026. <a href="https://rakeshnaik1109-cloud.github.io/RNLearn/articles/what-is-memory.html">https://rakeshnaik1109-cloud.github.io/RNLearn/articles/what-is-memory.html</a></p>
+            <details>
+              <summary>BibTeX</summary>
+<pre><code>@misc{naik2026what,
+  author = {Naik, Rakesh},
+  title  = {What Is Memory? Stable States, Energy Barriers and the Price of a Bit},
+  year   = {2026},
+  howpublished = {RNLearn},
+  url    = {https://rakeshnaik1109-cloud.github.io/RNLearn/articles/what-is-memory.html},
+  note   = {Licensed under CC BY 4.0}
+}</code></pre>
+            </details>
+            <p class="cite-license">Licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">Creative Commons Attribution 4.0 International (CC BY 4.0)</a>.</p>
+          </section>
+<!-- build:end cite -->
+
+          <!-- Corrections Section -->
+          <section class="article-corrections" id="corrections">
+            <h3>Corrections & Feedback</h3>
+            <p>
+              Accuracy is paramount. If you spot an error of fact, dating, attribution, or calculation in this article,
+              please write directly to <a href="mailto:rakesh_n@cpqct.iitr.ac.in">rakesh_n@cpqct.iitr.ac.in</a>.
+              Corrections are acknowledged publicly in this section.
+            </p>
+          </section>
+        </article>
+      </div>
+
+      <!-- build:start series-bottom -->
+<div class="series-banner">
+  <div class="series-banner-title">Series: <a href="../series/memory-from-synapse-to-silicon.html">Memory, from Synapse to Silicon</a> (Part 1 of 8)</div>
+  <div class="series-banner-links">
+    <span>First part</span>
+    <span>Part 2 coming soon</span>
+  </div>
+</div>
+<!-- build:end series-bottom -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">RNLearn</h2>
+          <p style="font-size:0.9rem; max-width:38ch; margin-bottom:1rem;">
+            A static notebook for long-form learning articles, derivations, and essays across science, economics, and history.
+          </p>
+          <p style="font-size:0.82rem; color:var(--ink-muted);">
+            Written and maintained by Rakesh Naik.
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-title">Explore</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="../index.html">Home</a></li>
+            <li><a class="footer-link" href="../search.html">Search</a></li>
+            <li><a class="footer-link" href="../glossary.html">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">More</h2>
+          <ul class="footer-links">
+            <li><a class="footer-link" href="https://rakeshnaik1109-cloud.github.io/RakeshNaik/">Author Homepage ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Rakesh Naik. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: free to use with attribution.</div>
+        <div>Zero tracking · Zero ads · Pure static HTML/CSS/JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+  <script defer src="../js/glossary-data.js"></script>
+  <script defer src="../js/glossary.js"></script>
+  <script defer src="../js/fig-core.js"></script>
+  <script defer src="../js/figs/what-is-memory.js"></script>
+</body>
+</html>

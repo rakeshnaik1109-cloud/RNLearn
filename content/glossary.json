@@ -7116,5 +7116,97 @@
     "forms": [
       "SoC"
     ]
+  },
+  {
+    "term": "Bistable",
+    "definition": "Having two stable states, like a light switch or a magnet that can point either way. A bistable system can store one bit.",
+    "forms": [
+      "bistability"
+    ]
+  },
+  {
+    "term": "Energy barrier",
+    "definition": "An energy hill that a system must climb to change from one state to another. Taller barriers make states last longer.",
+    "forms": [
+      "energy barriers"
+    ]
+  },
+  {
+    "term": "Boltzmann constant",
+    "definition": "k_B = 1.380649 × 10⁻²³ J/K, which links temperature to energy. At room temperature k_BT ≈ 0.026 eV.",
+    "forms": [
+      "Boltzmann’s constant",
+      "Boltzmann's constant"
+    ]
+  },
+  {
+    "term": "Boltzmann factor",
+    "definition": "The factor e^(−E/k_BT) giving the relative chance that a system at temperature T has an extra energy E.",
+    "forms": []
+  },
+  {
+    "term": "Arrhenius law",
+    "definition": "The rule that the rate of crossing an energy barrier ΔE rises as e^(−ΔE/k_BT), so a state lasts τ = τ₀e^(ΔE/k_BT).",
+    "forms": [
+      "Arrhenius equation"
+    ]
+  },
+  {
+    "term": "Retention time",
+    "definition": "How long a memory keeps its stored state before it is lost or must be refreshed.",
+    "forms": [
+      "retention times"
+    ]
+  },
+  {
+    "term": "Landauer’s principle",
+    "definition": "Erasing one bit of information must release at least k_BT ln 2 of heat, about 2.9 × 10⁻²¹ J at room temperature.",
+    "forms": [
+      "Landauer's principle",
+      "Landauer limit"
+    ]
+  },
+  {
+    "term": "Volatile memory",
+    "definition": "Memory that loses its contents when power is removed, such as SRAM and DRAM.",
+    "forms": []
+  },
+  {
+    "term": "Non-volatile memory",
+    "definition": "Memory that keeps its contents without power, such as flash, magnetic disks and ROM.",
+    "forms": [
+      "nonvolatile memory"
+    ]
+  },
+  {
+    "term": "Superparamagnetic limit",
+    "definition": "The size below which thermal energy flips a magnetic grain’s magnetisation on its own, so it can no longer store a bit.",
+    "forms": [
+      "superparamagnetism"
+    ]
+  },
+  {
+    "term": "Forgetting curve",
+    "definition": "The fall in remembered material with time, first measured by Ebbinghaus in 1885: steep at first, then levelling off.",
+    "forms": []
+  },
+  {
+    "term": "Reconsolidation",
+    "definition": "The re-storing of a memory after it is recalled, during which it can be weakened, strengthened or changed.",
+    "forms": []
+  },
+  {
+    "term": "Engram",
+    "definition": "The physical trace of a memory in the brain, thought to be a set of neurons and the connections between them.",
+    "forms": [
+      "engrams"
+    ]
+  },
+  {
+    "term": "Maxwell’s demon",
+    "definition": "An imagined being that sorts fast and slow molecules and seems to break the second law of thermodynamics.",
+    "forms": [
+      "Maxwell's demon"
+    ]
   }
 ]

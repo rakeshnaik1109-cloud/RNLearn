@@ -92,6 +92,12 @@ SERIES = {
         "label": "Minds Part",
         "lede": "A twelve-part series on the scientists and philosophers who changed how we know, told in pairs and groups around one big question each, from Socrates, Plato and Aristotle to Popper, Kuhn and Turing.",
     },
+    "memory-from-synapse-to-silicon": {
+        "title": "Memory, from Synapse to Silicon",
+        "parts": 8,
+        "label": "Memory Part",
+        "lede": "An eight-part series on memory, from the physics every memory must obey, through how brains and synapses remember, to the materials and chips that store our data and the new memories that try to work like synapses, with interactive figures and worked problems in every part.",
+    },
 }
 
 def series_meta(s_id, n_posts=0):
@@ -437,6 +443,8 @@ def build_site(root_dir, check_mode=False):
             lede = "How We Measured the Universe: a twelve-part series on how people measured the Earth, the Moon, the Sun, the stars, light, time and atoms, with experiments you can try yourself."
             if any((x.get("series") or {}).get("id") == "making-sense-of-data" for x in posts):
                 lede += " Making Sense of Data: a nine-part series on the statistics used in real experiments."
+            if any((x.get("series") or {}).get("id") == "memory-from-synapse-to-silicon" for x in posts):
+                lede += " Memory, from Synapse to Silicon: an eight-part series on how memory works, from the physics of stable states through brains and synapses to memory chips."
         elif subj == "Philosophy & Ideas" and any((x.get("series") or {}).get("id") == "minds-that-changed-how-we-know" for x in posts):
             eyebrow = "Subject Archive • Series"
             lede = "Minds That Changed How We Know: a twelve-part series on scientists and philosophers, from Socrates, Plato and Aristotle to Popper, Kuhn and Turing, with interactive figures that let you try their ideas."

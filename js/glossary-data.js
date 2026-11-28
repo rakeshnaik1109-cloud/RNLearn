@@ -7118,5 +7118,97 @@ window.RNLEARN_GLOSSARY = [
   [
    "SoC"
   ]
+ ],
+ [
+  "Bistable",
+  "Having two stable states, like a light switch or a magnet that can point either way. A bistable system can store one bit.",
+  [
+   "bistability"
+  ]
+ ],
+ [
+  "Energy barrier",
+  "An energy hill that a system must climb to change from one state to another. Taller barriers make states last longer.",
+  [
+   "energy barriers"
+  ]
+ ],
+ [
+  "Boltzmann constant",
+  "k_B = 1.380649 × 10⁻²³ J/K, which links temperature to energy. At room temperature k_BT ≈ 0.026 eV.",
+  [
+   "Boltzmann’s constant",
+   "Boltzmann's constant"
+  ]
+ ],
+ [
+  "Boltzmann factor",
+  "The factor e^(−E/k_BT) giving the relative chance that a system at temperature T has an extra energy E.",
+  []
+ ],
+ [
+  "Arrhenius law",
+  "The rule that the rate of crossing an energy barrier ΔE rises as e^(−ΔE/k_BT), so a state lasts τ = τ₀e^(ΔE/k_BT).",
+  [
+   "Arrhenius equation"
+  ]
+ ],
+ [
+  "Retention time",
+  "How long a memory keeps its stored state before it is lost or must be refreshed.",
+  [
+   "retention times"
+  ]
+ ],
+ [
+  "Landauer’s principle",
+  "Erasing one bit of information must release at least k_BT ln 2 of heat, about 2.9 × 10⁻²¹ J at room temperature.",
+  [
+   "Landauer's principle",
+   "Landauer limit"
+  ]
+ ],
+ [
+  "Volatile memory",
+  "Memory that loses its contents when power is removed, such as SRAM and DRAM.",
+  []
+ ],
+ [
+  "Non-volatile memory",
+  "Memory that keeps its contents without power, such as flash, magnetic disks and ROM.",
+  [
+   "nonvolatile memory"
+  ]
+ ],
+ [
+  "Superparamagnetic limit",
+  "The size below which thermal energy flips a magnetic grain’s magnetisation on its own, so it can no longer store a bit.",
+  [
+   "superparamagnetism"
+  ]
+ ],
+ [
+  "Forgetting curve",
+  "The fall in remembered material with time, first measured by Ebbinghaus in 1885: steep at first, then levelling off.",
+  []
+ ],
+ [
+  "Reconsolidation",
+  "The re-storing of a memory after it is recalled, during which it can be weakened, strengthened or changed.",
+  []
+ ],
+ [
+  "Engram",
+  "The physical trace of a memory in the brain, thought to be a set of neurons and the connections between them.",
+  [
+   "engrams"
+  ]
+ ],
+ [
+  "Maxwell’s demon",
+  "An imagined being that sorts fast and slow molecules and seems to break the second law of thermodynamics.",
+  [
+   "Maxwell's demon"
+  ]
  ]
 ];

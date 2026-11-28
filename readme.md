@@ -132,6 +132,10 @@ A fourteen-part journey from logic gates to GPUs and beyond, covering both the d
 13. **Part 13**: *GPUs and Parallel Computing* (Amdahl and Gustafson, SIMD/SIMT, warps and latency hiding, the roofline model, tensor cores)
 14. **Part 14**: *Beyond Silicon* (chiplets, accelerators, silicon photonics, neuromorphic chips, quantum computing, a look back)
 
+### New Series: *Memory, from Synapse to Silicon* (subject: Science)
+An eight-part series on memory, from the physics that every memory must obey, through brains and synapses, to the materials and chips that store our data, with interactive figures and worked problems in every part:
+1. **Part 1**: *What Is Memory? Stable States, Energy Barriers and the Price of a Bit* (the four ingredients of memory, bits and noise, energy barriers and the Arrhenius law, the write–retention dilemma, Landauer’s principle, the forgetting curve and memory hierarchies)
+
 ### Standalone Tutorials
 - *CPUs and GPUs, Generation by Generation: From the 4004 to Exascale AI* (latency vs throughput, the first microprocessors, the megahertz race, the power wall & multicore, chiplets/Apple silicon/hybrid cores, x86 vs Arm vs RISC-V, early graphics chips, programmable shaders, unified shaders & CUDA, tensor cores & AI GPUs, numbers by generation, low-precision formats, supercomputers to exascale, what each does today, NPUs & packaging; interactive charts and Python code)
 - *Logarithms: From Basics to Advanced* (definition & bases, the rules, Napier, Bürgi & Briggs, the slide rule, e & the natural log, log scales, doubling times & half-lives, pH/decibels/earthquakes/star magnitudes, perception, log–log plots & power laws, entropy & bits, binary search & log-sum-exp, log transforms/log-odds/log-likelihood/cross-entropy, Benford’s law, calculus, common mistakes; interactive figures and Python code)
